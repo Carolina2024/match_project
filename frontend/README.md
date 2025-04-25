@@ -1,8 +1,24 @@
-# React + Vite
+# 🐾 Patas Pirque — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido al frontend de **Patas Pirque**! Esta es la interfaz de usuario de nuestra plataforma.
 
-Currently, two official plugins are available:
+## 🚀 Comenzando
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Sigue estos pasos para levantar el servidor de desarrollo:
+
+### 1️⃣ Clona el repositorio
+```bash
+git clone URL repositorio
+```
+### 2️⃣ Accede a la carpeta del frontend
+```bash
+cd patas-pirque/frontend
+```
+### 3️⃣ Instala las dependencias
+```bash
+npm install
+```
+### 4️⃣ Inicia el servidor de desarrollo
+```bash
+npm run dev
+```

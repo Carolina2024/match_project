@@ -53,3 +53,57 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Despliegue del Frontend en Vercel
+
+Este proyecto está desplegado en [Vercel](https://vercel.com), una plataforma de despliegue y hosting para aplicaciones web estáticas y dinámicas.
+
+### Pasos para el despliegue
+
+1. **Crear una cuenta en Vercel**:
+   - Dirígete a [Vercel](https://vercel.com) y crea una cuenta si no tienes una.
+   - Puedes registrarte con tu cuenta de GitHub, GitLab o con tu correo electrónico.
+
+2. **Conectar el repositorio de GitHub a Vercel**:
+   - Inicia sesión en Vercel y haz clic en **New Project**.
+   - Selecciona la opción de conectar con tu repositorio de **GitHub**.
+   - Vercel pedirá acceso a tus repositorios. Asegúrate de otorgar los permisos necesarios para acceder al repositorio que contiene tu proyecto.
+   
+3. **Seleccionar el proyecto**:
+   - Una vez conectado tu cuenta de GitHub, selecciona el repositorio de tu proyecto.
+   - Vercel automáticamente detectará el tipo de proyecto (por ejemplo, un proyecto con React, Next.js, etc.) y ajustará la configuración de despliegue en función de esto.
+
+4. **Configuración de ramas**:
+   - Si estás usando la rama **`main`**, asegúrate de que Vercel esté configurado para desplegar desde esa rama. Rama de producción.
+   
+5. **Comandos de Build**:
+   - **Build Command**: En el campo "Build Command", generalmente Vercel detecta el comando adecuado automáticamente para frameworks comunes (por ejemplo, `npm run build` para proyectos de React).
+   - **Publish Directory**: En el campo "Publish Directory", asegúrate de que esté configurado como la carpeta que contiene los archivos estáticos de producción. Para proyectos de React, por ejemplo, será `frontend/build` o `frontend/dist` dependiendo de la configuración de tu proyecto.
+
+6. **Desplegar el proyecto**:
+   - Haz clic en **Deploy**. Vercel comenzará a crear el build de tu proyecto y lo desplegará en el dominio asignado (por ejemplo, `your-project.vercel.app`).
+   - Si todo va bien, el sitio estará en línea y accesible a través de este subdominio de Vercel.
+   
+7. **Personalización del dominio (opcional)**:
+   - Si deseas utilizar un dominio personalizado (por ejemplo, `www.tusitio.com`), puedes añadirlo en la sección **Domains** en la configuración de Vercel.
+
+### Archivos importantes
+
+- **`package.json`**: Contiene los scripts de `build` y otras configuraciones importantes para el despliegue.
+  
+### URL del proyecto
+
+Una vez desplegado, tu sitio estará disponible en una URL proporcionada por Vercel, por ejemplo:
+
+- **`https://your-project.vercel.app`**
+
+Y si configuraste un dominio personalizado, estará disponible en:
+
+- **`https://www.tusitio.com`** (Dependiendo de la configuración del dominio).
+
+### Notas adicionales
+
+- Vercel realiza despliegues automáticos cada vez que realices un `push` a tu repositorio en GitHub.
+- Puedes monitorear el estado de los despliegues, revisar los registros de la consola y obtener detalles sobre el estado de la construcción y el despliegue desde el panel de control de Vercel.
+
+¡Con estos pasos, el Frontend estará desplegado y funcionando en Vercel!

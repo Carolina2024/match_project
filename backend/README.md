@@ -1,6 +1,8 @@
 ## Match Project
 
-Pasos para levantar el servidor de forma local:
+### Pasos para levantar el servidor de forma local:
+
+<strong>Nota:</strong> Como requisitos previos a estos pasos, se requiere tener instalado *NestJS* en el computador y levantar una base de datos *PostgreSQL*
 
 1. Clonar el repositorio
 2. Acceder a la carpeta `backend`

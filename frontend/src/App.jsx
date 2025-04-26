@@ -6,6 +6,7 @@ import Login from './views/Login';
 import Register from './views/Register';
 import QuienesSomos from './views/QuienesSomos';
 import Adoptar from './views/Adoptar';
+import AdminPanel from './views/AdminPanel';
 import CuidadorPanel from './views/CuidadorPanel';
 
 function App() {

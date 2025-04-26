@@ -3,3 +3,5 @@ function AdminPanel() {
         <h1>AdminPanel</h1>
     )
 }
+
+export default AdminPanel;

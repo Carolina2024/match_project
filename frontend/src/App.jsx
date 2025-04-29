@@ -7,7 +7,6 @@ import Register from './views/Register';
 import QuienesSomos from './views/QuienesSomos';
 import Adoptar from './views/Adoptar';
 import AdminPanel from './views/AdminPanel';
-import CuidadorPanel from './views/CuidadorPanel';
 
 function App() {
 
@@ -21,7 +20,6 @@ function App() {
           <Route element={<QuienesSomos/>} path='QuienesSomos'/>
           <Route element={<Adoptar/>} path='Adoptar' />
           <Route element={<AdminPanel/>} path='Admin' />
-          <Route element={<CuidadorPanel/>} path='/Cuidador' />
         </Route>
       </Routes>
     </Router>

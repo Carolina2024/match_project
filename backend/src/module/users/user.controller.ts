@@ -1,6 +1,7 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiTags, ApiQuery, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { QueryUsersDto } from './dtos/query-user.dto';
 
 @ApiTags('Users')
 @Controller('users')
@@ -8,9 +9,13 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
+  @ApiQuery({ name: 'fullname', required: false })
+  @ApiQuery({ name: 'isActive', required: false })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
   @ApiResponse({ status: 200, description: 'Lista de usuarios' })
-  getAllUsers() {
-    return this.usersService.findAll();
+  getAllUsers(@Query() query: QueryUsersDto) {
+    return this.usersService.findAll(query);
   }
 
   @Get(':id')

@@ -5,6 +5,7 @@ import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { register } from 'module';
+import { QueryUsersDto } from './dtos/query-user.dto';
 
 
 @Injectable()
@@ -30,10 +31,27 @@ export class UsersService {
         return user;
      }
 
-     async findAll(): Promise<Users[]> {
-      return this.userRepository.find();
+     async findAll(query: QueryUsersDto) {
+      const { page = 1, limit = 10, fullname, isActive } = query;
+  
+      const where: any = {};
+      if (fullname) where.fullname = Like(`%${fullname}%`);
+      if (isActive !== undefined) where.isActive = isActive === 'true';
+  
+      const [users, total] = await this.userRepository.findAndCount({
+        where,
+        take: limit,
+        skip: (page - 1) * limit,
+        order: { fullname: 'ASC' },
+      });
+  
+      return {
+        data: users,
+        total,
+        page,
+        limit,
+      };
     }
-
       async findOneById(id: string): Promise<Users> {
          const user = await this.userRepository.findOne({ where: { id } });
          if (!user) {

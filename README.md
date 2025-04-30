@@ -31,10 +31,13 @@ responsables.
 
 ## 🔗 Enlaces Importantes
 
-- 🚀 **Despliegue del Frontend**  
+- 🎨 **Diseño en Figma**
+  El prototipo del diseño está disponible en [Figma](https://www.figma.com/design/dN3davcQ3IP9DaeAhdDiDM/PATAS-PIRQUE?node-id=256-358&p=f&t=GOCqtQvAxNCN418f-0).
+
+- 🚀 **Despliegue del Frontend**
   El frontend está desplegado y disponible en [Vercel](https://match-adopcion-mascotas.vercel.app/).
 
-- 📄 **Swagger del Backend**  
+- 📄 **Swagger del Backend**
   Accede a la documentación de la API del backend a través de [Swagger](https://match-project.onrender.com/api)
 
 🗂️ Gestión de Ramas y Commits

@@ -26,7 +26,6 @@ export class PetService {
     const queryBuilder = this.petRepository.createQueryBuilder('pet')
       .where('pet.isActive = :isActive', { isActive: true });
 
-    // Aplicar filtros si existen
     if (filterDto) {
       if (filterDto.species) {
         queryBuilder.andWhere('pet.species = :species', { species: filterDto.species });
@@ -36,6 +35,22 @@ export class PetService {
       }
       if (filterDto.age) {
         queryBuilder.andWhere('pet.age = :age', { age: filterDto.age });
+      }
+      if (filterDto.sex) {
+        queryBuilder.andWhere('pet.sex = :sex', { sex: filterDto.sex });
+      }
+      if (filterDto.energy) {
+        queryBuilder.andWhere('pet.energy = :energy', { energy: filterDto.energy });
+      }
+      if (filterDto.breed) {
+        queryBuilder.andWhere('pet.breed ILIKE :breed', { breed: `%${filterDto.breed}%` });
+      }
+      
+      if (filterDto.search) {
+        queryBuilder.andWhere(
+          '(pet.name ILIKE :search OR pet.breed ILIKE :search OR pet.story ILIKE :search)',
+          { search: `%${filterDto.search}%` }
+        );
       }
     }
 
@@ -54,8 +69,7 @@ export class PetService {
     const queryBuilder = this.petRepository.createQueryBuilder('pet')
       .select(['pet.id', 'pet.name', 'pet.isActive', 'pet.photoUrls'])
       .where('pet.isActive = :isActive', { isActive: true });
-
-    // Aplicar filtros si existen
+  
     if (filterDto) {
       if (filterDto.species) {
         queryBuilder.andWhere('pet.species = :species', { species: filterDto.species });
@@ -65,6 +79,22 @@ export class PetService {
       }
       if (filterDto.age) {
         queryBuilder.andWhere('pet.age = :age', { age: filterDto.age });
+      }
+      if (filterDto.sex) {
+        queryBuilder.andWhere('pet.sex = :sex', { sex: filterDto.sex });
+      }
+      if (filterDto.energy) {
+        queryBuilder.andWhere('pet.energy = :energy', { energy: filterDto.energy });
+      }
+      if (filterDto.breed) {
+        queryBuilder.andWhere('pet.breed ILIKE :breed', { breed: `%${filterDto.breed}%` });
+      }
+      
+      if (filterDto.search) {
+        queryBuilder.andWhere(
+          '(pet.name ILIKE :search OR pet.breed ILIKE :search)',
+          { search: `%${filterDto.search}%` }
+        );
       }
     }
 
@@ -97,13 +127,21 @@ export class PetService {
     }
   }
 
-  async findCompatiblePets(userId: string, paginationDto: PaginationDto): Promise<{ items: Pet[], total: number }> {
+  async findCompatiblePets(userId: string, paginationDto: PaginationDto, filterDto: PetFilterDto): Promise<{ items: Pet[], total: number }> {
     const { page = 1, limit = 10 } = paginationDto;
     const skip = (page - 1) * limit;
     
     const queryBuilder = this.petRepository.createQueryBuilder('pet')
       .where('pet.isActive = :isActive', { isActive: true });
-  
+    
+    
+    if (PetFilterDto && PetFilterDto.search) {
+      queryBuilder.andWhere(
+        '(pet.name ILIKE :search OR pet.breed ILIKE :search OR pet.story ILIKE :search)',
+        { search: `%${PetFilterDto.search}%` }
+      );
+    }
+
     const [items, total] = await queryBuilder
       .skip(skip)
       .take(limit)

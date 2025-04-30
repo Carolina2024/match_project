@@ -43,9 +43,10 @@ export class PetController {
   @Get('users/:userId')
   findCompatible(
     @Param('userId', ParseUUIDPipe) userId: string,
-    @Query() paginationDto: PaginationDto
+    @Query() paginationDto: PaginationDto,
+    @Query() filterDto: PetFilterDto
   ) {
-    return this.petService.findCompatiblePets(userId, paginationDto);
+    return this.petService.findCompatiblePets(userId, paginationDto, filterDto);
   }
 
   @Get(':id')

@@ -25,4 +25,9 @@ export class PetFilterDto {
   @IsOptional()
   @IsString({ message: 'La raza debe ser una cadena de texto' })
   breed?: string;
+
+  @IsOptional()
+  @IsString({ message: 'El término de búsqueda debe ser una cadena de texto' })
+  search?: string;
+  static search: typeof PetFilterDto;
 }

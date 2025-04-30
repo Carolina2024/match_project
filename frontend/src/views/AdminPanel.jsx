@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Pets from "../componets/Pets";
 import PetList from "../componets/PetList";
+import UserProfiles from "../componets/UserProfiles";
 
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState(null);
@@ -38,6 +39,18 @@ const AdminPanel = () => {
       tamano: "Grande",
     },
   ]);
+
+  const [users] = useState([
+    { id: 1, name: "Vanessa Montero", email: "vane@example.com", role: "Adoptante" },
+    {
+      id: 2,
+      name: "Carlos Riquelme",
+      email: "admin@example.com",
+      role: "Administrador",
+    },
+    { id: 3, name: "Francisca Merino", email: "fca@example.com", role: "Adoptante" },
+  ]);
+
   const [editingPet, setEditingPet] = useState(null);
 
   const handleDeletePet = (id) => {
@@ -67,6 +80,8 @@ const AdminPanel = () => {
             editingPet={editingPet}
           />
         );
+      case "userProfiles":
+        return <UserProfiles users={users} />;
       default:
         return null;
     }
@@ -87,6 +102,12 @@ const AdminPanel = () => {
           className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
         >
           Listado de Mascotas
+        </button>
+        <button
+          onClick={() => setActiveView("userProfiles")}
+          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
+        >
+          Listado de Perfiles
         </button>
       </div>
 

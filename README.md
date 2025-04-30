@@ -1,4 +1,5 @@
 # Bienvenidos a Proyecto Patas Pirque
+
   <p align="center">
     <img src="https://i.imgur.com/mtQDDC9.png" alt="gestION Logo"  style="border-radius: 10px;">
     <p align="center">¡AYÚDANOS A DARLES UN HOGAR!</p>
@@ -7,7 +8,6 @@
 ## 📄 Descripción
 
 Este repositorio contiene la implementación de una aplicacion Patas Pirque es una plataforma web innovadora que conecta a personas comprometidas con la adopción responsable de animales. Con una interfaz intuitiva y funcionalidades específicas, la aplicación optimiza el proceso de búsqueda, facilitando el acceso a información sobre mascotas rescatadas y rehabilitadas.
-
 
 ## 🎯 Objetivo Principal
 
@@ -22,91 +22,122 @@ responsables.
 
 ## 🛠️ Tecnologías utilizadas
 
-| **Front-End**       | **Back-End**       | **UX/UI**       | **Base de datos** | **Gestión** |
-|---------------------|--------------------|-----------------|-------------------|-------------|
-| React               | TypeScript         | Figma           | PostgreSQL        | Git         |
-| JavaScript          | Node.js            |                 |                   |             |
-| CSS                 | Nest               |                 |                   |             |
-| Tailwind            |                    |                 |                   |             |
+| **Front-End** | **Back-End** | **UX/UI** | **Base de datos** | **Gestión** |
+| ------------- | ------------ | --------- | ----------------- | ----------- |
+| React         | TypeScript   | Figma     | PostgreSQL        | Git         |
+| JavaScript    | Node.js      |           |                   | ClickUp     |
+| CSS           | NestJS       |           |                   |             |
+| Tailwind      |              |           |                   |             |
 
 ## 🔗 Enlaces Importantes
 
-- 🚀 **Despliegue del Frontend**  
+- 🎨 **Diseño en Figma**
+  El prototipo del diseño está disponible en [Figma](https://www.figma.com/design/dN3davcQ3IP9DaeAhdDiDM/PATAS-PIRQUE?node-id=256-358&p=f&t=GOCqtQvAxNCN418f-0).
+
+- 🚀 **Despliegue del Frontend**
   El frontend está desplegado y disponible en [Vercel](https://match-adopcion-mascotas.vercel.app/).
 
-- 📄 **Swagger del Backend**  
-  Accede a la documentación de la API del backend a través de [xxxxx]()
-
+- 📄 **Swagger del Backend**
+  Accede a la documentación de la API del backend a través de [Swagger](https://match-project.onrender.com/api)
 
 🗂️ Gestión de Ramas y Commits
 
 🔀 Rama base
 
-  - La rama principal para el desarrollo será develop.
-  - Todas las nuevas funcionalidades, correcciones o mejoras deben desarrollarse en ramas derivadas de develop.
+- La rama principal para el desarrollo será develop.
+- Todas las nuevas funcionalidades, correcciones o mejoras deben desarrollarse en ramas derivadas de develop.
 
 🌿 Ramas por funcionalidad
 
-## Convenciones de Nombres de Ramas
+## 📌 Convenciones de Nombres de Ramas
 
 Para mantener la consistencia en el nombrado de las ramas, seguimos los prefijos estándar para diferentes tipos de tareas:
 
-| Prefijo       | Descripción                                                       |
-|---------------|-------------------------------------------------------------------|
-| **`feature/`** | Para nuevas funcionalidades o características.                    |
-| **`fix/`**     | Para correcciones de errores.                                     |
-| **`hotfix/`**  | Para correcciones urgentes en producción.                         |
-| **`docs/`**    | Para cambios relacionados con la documentación.                   |
-| **`refactor/`**| Para mejoras en la estructura del código sin cambiar su comportamiento. |
-| **`test/`**    | Para añadir o modificar pruebas.                                  |
-| **`chore/`**   | Para tareas de mantenimiento o configuraciones que no añaden funcionalidad. |
+| Prefijo         | Descripción                                                                 |
+| --------------- | --------------------------------------------------------------------------- |
+| **`feature/`**  | Para nuevas funcionalidades o características.                              |
+| **`fix/`**      | Para correcciones de errores.                                               |
+| **`hotfix/`**   | Para correcciones urgentes en producción.                                   |
+| **`docs/`**     | Para cambios relacionados con la documentación.                             |
+| **`refactor/`** | Para mejoras en la estructura del código sin cambiar su comportamiento.     |
+| **`test/`**     | Para añadir o modificar pruebas.                                            |
+| **`chore/`**    | Para tareas de mantenimiento o configuraciones que no añaden funcionalidad. |
 
-  - Formato sugerido para nombres de ramas:
+- Formato sugerido para nombres de ramas:
 
-    - feature/user-authentication
-    - fix/login-button-not-working
-    - hotfix/fix-crash-on-start
-    - docs/update-readme
-    - refactor/clean-up-authentication-code
-    - test/add-login-tests
-    - chore/update-dependencies
+  - feature/user-authentication
+  - fix/login-button-not-working
+  - hotfix/fix-crash-on-start
+  - docs/update-readme
+  - refactor/clean-up-authentication-code
+  - test/add-login-tests
+  - chore/update-dependencies
 
 ✅ Commits ordenados
 
-  Los mensajes de commit deben seguir un formato claro y conciso, que facilite el historial del proyecto.
+Los mensajes de commit deben seguir un formato claro y conciso, que facilite el historial del proyecto.
 
-  Tipos de commit sugeridos:
+Tipos de commit sugeridos:
 
-  - feat: Nueva funcionalidad
-  - fix: Corrección de errores
-  - docs: Cambios en la documentación
-  - style: Cambios de estilo
+- feat: Nueva funcionalidad
+- fix: Corrección de errores
+- docs: Cambios en la documentación
+- style: Cambios de estilo
 
 🔄 Flujo general
 
-  1. Crear un nueva rama desde develop.
-  2. Realizar los cambios necesarios y hacer commits con mensajes claros.
-  3. Hacer push de la rama al repositorio remoto.
-  4. Crear un Pull Request hacia develop.
+1. Crear un nueva rama desde develop.
+2. Realizar los cambios necesarios y hacer commits con mensajes claros.
+3. Hacer push de la rama al repositorio remoto.
+4. Crear un Pull Request hacia develop.
 
 ## 🧑‍🤝‍🧑 Equipo de Trabajo
 
 ### ⚛️ Frontend
 
-| Nombre            | GitHub                                                                                  | LinkedIn                                                                                      |
-|-------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| Carolina Castillo | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/Carolina2024)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Ingrid Chaves     | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/paochaves )   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Luis Angel        | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/LuiangDev)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Eduardo Ismael    | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/Ismael-dev-v2)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Christian Martínez| [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/Xhan88 )   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
+| Nombre             | GitHub                                                                                                                | LinkedIn                                                                                                                                            |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Carolina Castillo  | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/Carolina2024)  | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                         |
+| Ingrid Chaves      | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/paochaves)     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                         |
+| Luis Angel         | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/LuiangDev)     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                         |
+| Eduardo Ismael     | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/Ismael-dev-v2) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                         |
+| Christian Martínez | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/Xhan88)        | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/christianmartínezquezadapro/) |
 
-### ⚛️ Backend
+### 🔒 Backend
 
-| Nombre            | GitHub                                                                                  | LinkedIn                                                                                      |
-|-------------------|-----------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
-| Miriam Bautista   | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/anibau )   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Diana Mayorga    | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/diana180102)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Angel Añez        | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/AngelAnez)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Ricardo Quejuan   | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/quejuan52)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
-| Sonny Pimente     | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/spimentel1201)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()   |
+| Nombre          | GitHub                                                                                                                | LinkedIn                                                                                                                                       |
+| --------------- | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Miriam Bautista | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/anibau)        | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/miriam-bautista-torres/) |
+| Diana Mayorga   | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/diana180102)   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                    |
+| Angel Añez      | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/AngelAnez)     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/angel-anez/)             |
+| Ricardo Quejuan | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/quejuan52)     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                    |
+| Sonny Pimentel  | [![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/spimentel1201) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                                    |
+
+### 🎨 UX/UI
+
+| Nombre            | LinkedIn                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------- |
+| Anabel Somoza     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |
+| Feliangela García | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |
+| Daniela López     | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |
+| Camila Schamun    | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |
+| Nayely Rodríguez  | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |
+
+### ✅ QA
+
+| Nombre         | LinkedIn                                                                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Gabriela Pardo | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]()                                           |
+| David Zabala   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/davidstzabala/) |
+
+### 📝 Analista Funcional
+
+| Nombre       | LinkedIn                                                                                    |
+| ------------ | ------------------------------------------------------------------------------------------- |
+| Juan Aguilar | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |
+
+### 🔔 Project Manager
+
+| Nombre         | LinkedIn                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------- |
+| Claudia Campos | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)]() |

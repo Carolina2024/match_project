@@ -3,63 +3,63 @@ import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetTrait } from '../../
 import { Type } from 'class-transformer';
 
 export class CreatePetDto {
-    @IsString()
-    @Matches(/^[a-zA-Z\s]+$/, { message: 'Name must contain only letters' })
+    @IsString({ message: 'El nombre debe ser una cadena de texto' })
+    @Matches(/^[a-zA-Z\s]+$/, { message: 'El nombre debe contener solo letras' })
     name: string;
 
-    @IsEnum(PetSize)
+    @IsEnum(PetSize, { message: 'El tamaño debe ser un valor válido' })
     size: PetSize;
 
-    @IsDate()
+    @IsDate({ message: 'La fecha de nacimiento debe ser una fecha válida' })
     @Type(() => Date)
     birthDate: Date;
 
-    @IsEnum(PetSex)
+    @IsEnum(PetSex, { message: 'El sexo debe ser un valor válido' })
     sex: PetSex;
 
-    @IsEnum(PetAge)
+    @IsEnum(PetAge, { message: 'La edad debe ser un valor válido' })
     age: PetAge;
 
-    @IsEnum(PetSpecies)
+    @IsEnum(PetSpecies, { message: 'La especie debe ser un valor válido' })
     species: PetSpecies;
 
-    @IsEnum(PetEnergy)
+    @IsEnum(PetEnergy, { message: 'El nivel de energía debe ser un valor válido' })
     energy: PetEnergy;
 
-    @IsString()
-    @Matches(/^[a-zA-Z\s]+$/, { message: 'Breed must contain only letters' })
+    @IsString({ message: 'La raza debe ser una cadena de texto' })
+    @Matches(/^[a-zA-Z\s]+$/, { message: 'La raza debe contener solo letras' })
     breed: string;
 
-    @IsNumber()
-    @Min(0)
-    @Max(100)
+    @IsNumber({}, { message: 'El peso debe ser un número' })
+    @Min(0, { message: 'El peso no puede ser negativo' })
+    @Max(100, { message: 'El peso no puede ser mayor a 100 kg' })
     kg: number;
 
-    @IsBoolean()
+    @IsBoolean({ message: 'El campo de vacunación debe ser un valor booleano' })
     isVaccinated: boolean;
 
-    @IsBoolean()
+    @IsBoolean({ message: 'El campo de esterilización debe ser un valor booleano' })
     isSterilized: boolean;
 
-    @IsBoolean()
+    @IsBoolean({ message: 'El campo de desparasitación debe ser un valor booleano' })
     isDewormed: boolean;
 
-    @IsBoolean()
+    @IsBoolean({ message: 'El campo de microchip debe ser un valor booleano' })
     hasMicrochip: boolean;
 
-    @IsString()
-    @Matches(/^[a-zA-Z0-9\s.,!?()-]+$/, { message: 'Story contains invalid characters' })
+    @IsString({ message: 'La historia debe ser una cadena de texto' })
+    @Matches(/^[a-zA-Z0-9\s.,!?()-]+$/, { message: 'La historia contiene caracteres inválidos' })
     story: string;
 
-    @IsArray()
-    @IsEnum(PetTrait, { each: true })
+    @IsArray({ message: 'Los rasgos deben ser un arreglo' })
+    @IsEnum(PetTrait, { each: true, message: 'Cada rasgo debe ser un valor válido' })
     traits: PetTrait[];
 
-    @IsDate()
+    @IsDate({ message: 'La fecha de admisión debe ser una fecha válida' })
     @Type(() => Date)
     admissionDate: Date;
 
-    @IsArray()
-    @IsUrl({}, { each: true })
+    @IsArray({ message: 'Las URLs de fotos deben ser un arreglo' })
+    @IsUrl({}, { each: true, message: 'Cada URL de foto debe tener un formato válido' })
     photoUrls: string[];
 }

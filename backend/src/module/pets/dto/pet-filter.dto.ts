@@ -3,28 +3,26 @@ import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies } from '../../../common/
 
 export class PetFilterDto {
   @IsOptional()
-  @IsEnum(PetSpecies)
+  @IsEnum(PetSpecies, { message: 'La especie debe ser un valor válido' })
   species?: PetSpecies;
 
   @IsOptional()
-  @IsEnum(PetSize)
+  @IsEnum(PetSize, { message: 'El tamaño debe ser un valor válido' })
   size?: PetSize;
 
   @IsOptional()
-  @IsEnum(PetAge)
+  @IsEnum(PetAge, { message: 'La edad debe ser un valor válido' })
   age?: PetAge;
 
   @IsOptional()
-  @IsEnum(PetSex)
+  @IsEnum(PetSex, { message: 'El sexo debe ser un valor válido' })
   sex?: PetSex;
 
   @IsOptional()
-  @IsEnum(PetEnergy)
+  @IsEnum(PetEnergy, { message: 'El nivel de energía debe ser un valor válido' })
   energy?: PetEnergy;
 
   @IsOptional()
-  @IsString()
+  @IsString({ message: 'La raza debe ser una cadena de texto' })
   breed?: string;
-
-  // Puedes añadir más filtros según sea necesario
 }

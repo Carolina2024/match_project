@@ -1,4 +1,3 @@
-import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PublicLayout from './componets/PublicLayout';
 import Home from './views/Home';
@@ -7,12 +6,15 @@ import Register from './views/Register';
 import QuienesSomos from './views/QuienesSomos';
 import Adoptar from './views/Adoptar';
 import AdminPanel from './views/AdminPanel';
+import Navbar from "./layout/Navbar";
 
 function App() {
 
   return (
     <Router>
+      <Navbar/>
       <Routes>
+        
         <Route element={<PublicLayout/>} >
           <Route element={<Home/> } path='/'/>
           <Route element={<Login/>} path='/Login'/>

@@ -1,4 +1,4 @@
-const PetList = ({ pets, setActiveView, setEditingPet }) => {
+const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
   const handleEdit = (pet) => {
     setEditingPet(pet);
     setActiveView("editPet");
@@ -29,12 +29,20 @@ const PetList = ({ pets, setActiveView, setEditingPet }) => {
               <td className="border px-4 py-2">{pet.especie}</td>
               <td className="border px-4 py-2">{pet.tamano}</td>
               <td className="border px-4 py-2">
+                <div className="flex justify-center gap-2">
                 <button
                   onClick={() => handleEdit(pet)}
                   className="bg-blue-400 hover:bg-blue-500 text-white py-1 px-4 rounded"
                 >
                   Editar
                 </button>
+                <button
+                  onClick={() => handleDeletePet(pet.id)}
+                  className="bg-red-400 hover:bg-red-500 text-white py-1 px-4 rounded"
+                >
+                  Eliminar
+                </button>
+                </div>
               </td>
             </tr>
           ))}

@@ -23,5 +23,8 @@ export class Users {
   isActive!: boolean;
 
   @OneToOne(() => Adopters , adopter => adopter.user)
-  adopter: Adopters
+  adopter?: Adopters
+
+  // @OneToOne(() => Admins , admin => admin.user)
+  // admin?: Admins
 }

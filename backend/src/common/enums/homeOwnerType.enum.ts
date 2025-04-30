@@ -1,4 +1,4 @@
 export enum HomeOwnerType {
-    OWNED = 'Propia',
-    RENTED = 'Alquilada '
+  OWNED = 'Propia',
+  RENTED = 'Alquilada',
 }

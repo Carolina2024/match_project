@@ -2,7 +2,6 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { RegisterDto } from './dtos/register.dto';
 import { UsersService } from '../users/users.service';
 import { AdoptersService } from '../adopters/adopters.service';
-import { UserRole } from 'src/common/enums/userRole.enum';
 import { mapAdopter } from './utils/auth.utils';
 import { JwtPayload } from './interfaces/jwt.payload.interface';
 import { JwtService } from '@nestjs/jwt';
@@ -12,7 +11,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly adoptersService: AdoptersService,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   async register(registerDto: RegisterDto) {
@@ -33,26 +32,24 @@ export class AuthService {
 
     const newUser = await this.usersService.create(registerDto);
 
-    if (registerDto.role == UserRole.ADOPTERS) {
-      const adopterData = mapAdopter(registerDto, newUser);
+    const adopterData = mapAdopter(registerDto, newUser);
 
-      await this.adoptersService.create(adopterData);
-    }
+    await this.adoptersService.create(adopterData);
 
-    const payload:JwtPayload = { 
-        id: newUser.id,
-        email:newUser.email,
-        role: newUser.role
-    }
+    const payload: JwtPayload = {
+      id: newUser.id,
+      email: newUser.email,
+      role: newUser.role,
+    };
 
     return {
-        message: 'Usuario registrado exitoxamente',
-        user: newUser,
-        token: this.getJwtToken(payload)
-    }
+      message: 'Usuario registrado exitosamente',
+      //user: newUser,
+      token: this.getJwtToken(payload),
+    };
   }
 
-  private getJwtToken (payload: JwtPayload) {
+  private getJwtToken(payload: JwtPayload) {
     return this.jwtService.sign(payload);
   }
 }

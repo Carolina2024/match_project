@@ -1,7 +1,8 @@
 export enum PetSize {
     SMALL = 'Pequeño',
     MEDIUM = 'Mediano',
-    LARGE = 'Grande'
+    LARGE = 'Grande',
+    EXTRA_LARGE = "Extra Grande"
 }
 
 export enum PetSex {

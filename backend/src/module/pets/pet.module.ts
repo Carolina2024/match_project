@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PetController } from './pet.controller';
 import { PetService } from './pet.service';
 import { Pet } from './entities/pet.entity';
+import { Users } from '../users/entities/users.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Pet])],
+  imports: [TypeOrmModule.forFeature([Pet, Users])],
   controllers: [PetController],
   providers: [PetService],
   exports: [PetService],

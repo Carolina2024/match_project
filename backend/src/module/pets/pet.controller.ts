@@ -31,6 +31,8 @@ import {
   ApiBody 
 } from '@nestjs/swagger';
 import { Pet } from './entities/pet.entity';
+import { UserRole } from 'src/common/enums/userRole.enum';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @ApiTags('Mascotas')
 @ApiBearerAuth()
@@ -46,6 +48,7 @@ export class PetController {
   @ApiBadRequestResponse({ description: 'Datos de entrada inválidos' })
   @ApiUnauthorizedResponse({ description: 'No autorizado' })
   @ApiInternalServerErrorResponse({ description: 'Error interno del servidor' })
+  @Auth(UserRole.ADMIN)
   create(@Body() createPetDto: CreatePetDto) {
     return this.petService.create(createPetDto);
   }
@@ -75,6 +78,7 @@ export class PetController {
   @ApiOkResponse({ description: 'Lista completa de mascotas obtenida exitosamente' })
   @ApiUnauthorizedResponse({ description: 'No autorizado' })
   @ApiInternalServerErrorResponse({ description: 'Error interno del servidor' })
+  @Auth(UserRole.ADMIN)
   findAll(
     @Query() paginationDto: PaginationDto,
     @Query() filterDto: PetFilterDto
@@ -93,6 +97,7 @@ export class PetController {
   @ApiUnauthorizedResponse({ description: 'No autorizado' })
   @ApiNotFoundResponse({ description: 'Usuario no encontrado' })
   @ApiInternalServerErrorResponse({ description: 'Error interno del servidor' })
+  @Auth(UserRole.ADOPTERS)
   findCompatible(
     @Param('userId', ParseUUIDPipe) userId: string,
     @Query() paginationDto: PaginationDto,
@@ -110,6 +115,7 @@ export class PetController {
   @ApiUnauthorizedResponse({ description: 'No autorizado' })
   @ApiNotFoundResponse({ description: 'Mascota no encontrada' })
   @ApiInternalServerErrorResponse({ description: 'Error interno del servidor' })
+  @Auth()
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.petService.findOne(id);
   }
@@ -124,13 +130,14 @@ export class PetController {
   @ApiUnauthorizedResponse({ description: 'No autorizado' })
   @ApiNotFoundResponse({ description: 'Mascota no encontrada' })
   @ApiInternalServerErrorResponse({ description: 'Error interno del servidor' })
+  @Auth(UserRole.ADMIN)
   update(
     @Param('id', ParseUUIDPipe) id: string, 
     @Body() updatePetDto: UpdatePetDto
   ) {
     return this.petService.update(id, updatePetDto);
   }
-
+  @Auth(UserRole.ADMIN)
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Eliminar una mascota', description: 'Realiza una eliminación lógica de una mascota' })

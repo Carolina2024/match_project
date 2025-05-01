@@ -1,71 +1,72 @@
-import { HomeOwnerType } from "src/common/enums/homeOwnerType.enum";
-import { AdopterHomeType} from "src/common/enums/adopterHomeType.enum";
-import { Users } from "src/module/users/entities/users.entity";
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { HomeOwnerType } from 'src/common/enums/homeOwnerType.enum';
+import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
+import { Users } from 'src/module/users/entities/users.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Entity('Adopters')
+@Entity('adopters')
 export class Adopters {
-    
-    @PrimaryGeneratedColumn('uuid')
-    id:string;
-    
-    @Column()
-    run: string;
+  @PrimaryGeneratedColumn('uuid')
+  id?: string;
 
-    @Column()
-    birthDate:string;
+  @Column()
+  run: string;
 
-    @Column()
-    address:string;
-    
-    @Column({default: AdopterHomeType.APARTAMENT, type: 'enum', enum: AdopterHomeType})
-    homeType: AdopterHomeType
+  @Column()
+  birthDate: string;
 
-    @Column({default: HomeOwnerType.OWNED, type: 'enum', enum: HomeOwnerType })
-    homeOwner: HomeOwnerType 
+  @Column()
+  address: string;
 
-    @Column({default:true})
-    allowsPets: boolean;
+  @Column({
+    default: AdopterHomeType.BIG_APARTMENT,
+    type: 'enum',
+    enum: AdopterHomeType,
+  })
+  homeType: AdopterHomeType;
 
-    @Column({default: false})
-    hasDogs: boolean; 
+  @Column({ default: true })
+  allowsPets: boolean;
 
-    @Column({default: false})
-    hasCats: boolean;
+  @Column({ default: false })
+  hasDogs: boolean;
 
-    @Column({default:true})
-    hasChildren: boolean;
+  @Column({ default: false })
+  hasCats: boolean;
 
-    @Column()
-    petsExperience: boolean;
+  @Column({ default: true })
+  hasChildren: boolean;
 
-    
-    @Column({default:true})
-    isVaccinated: boolean;
+  @Column()
+  petsExperience: boolean;
 
-    @Column({default: true})  
-    isSterilized: boolean;
+  @Column({ default: true })
+  isVaccinated: boolean;
 
-    @Column()
-    hoursAlone: number;
+  @Column({ default: true })
+  isSterilized: boolean;
 
-    @Column()
-    petDestroy: string;
+  @Column()
+  hoursAlone: number;
 
-    @Column({default:true})
-    hasVeterinarian: boolean;
-    
-    @Column({default:true})
-    allowsVisit:boolean;
-    
-    @Column({default:true})
-    isResponsibleAdoption: boolean;
+  @Column()
+  petDestroy: string;
 
-    @OneToOne(() => Users, 
-     {onDelete: 'CASCADE'}
-    )
-    @JoinColumn()
-    user:Users
-    
-    
+  @Column({ default: true })
+  hasVeterinarian: boolean;
+
+  @Column({ default: true })
+  allowsVisit: boolean;
+
+  @Column({ default: true })
+  isResponsibleAdoption: boolean;
+
+  @OneToOne(() => Users, { onDelete: 'CASCADE' })
+  @JoinColumn()
+  user: Users;
 }

@@ -18,8 +18,8 @@ export const SWAGGER_OPTIONS = new DocumentBuilder()
     description: 'Ocurre un error en el servidor',
     example: {
       message: 'Error en el servidor',
-      statusCode: 500,
       error: 'Internal server error',
+      statusCode: 500,
     },
   })
 

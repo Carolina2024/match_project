@@ -11,7 +11,7 @@ export class AdoptersService {
     private readonly adoptersRepository: Repository<Adopters>,
   ) {}
 
-  async create(createAdoptersDto: CreateAdopterDto): Promise<Adopters> {
+  async create(createAdoptersDto: Adopters): Promise<Adopters> {
     const adopter = this.adoptersRepository.create(createAdoptersDto);
     return this.adoptersRepository.save(adopter);
   }

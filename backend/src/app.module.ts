@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DB_CONFIG } from './config/typeorm.config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AuthModule } from './module/auth/auth.module';
 import { UsersModule } from './module/users/users.module';
 import { AdoptersModule } from './module/adopters/adopters.module';
@@ -18,7 +16,5 @@ import { PetModule } from './module/pets/pet.module';
     AdoptersModule,
     PetModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

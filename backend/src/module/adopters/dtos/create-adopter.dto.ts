@@ -4,13 +4,9 @@ import {
   IsEnum,
   IsInt,
   IsNotEmpty,
-  IsNumber,
-  IsNumberString,
   IsString,
-  Length,
   Matches,
 } from 'class-validator';
-import { HomeOwnerType } from 'src/common/enums/homeOwnerType.enum';
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -35,8 +31,7 @@ export class CreateAdopterDto {
     type: 'string',
   })
   @Matches(/^([1-9]|[1-9]\d|[1-9]\d{2})((\.\d{3})*|(\d{3})*)\-(\d|k|K)$/, {
-    message:
-      'Ingrese un RUN válido siguiendo el siguiente formato: 12345678-9',
+    message: 'Ingrese un RUN válido siguiendo el siguiente formato: 12345678-9',
   })
   @IsNotEmpty({ message: 'El RUN es requerido' })
   run: string;
@@ -69,11 +64,11 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Se permiten mascotas en el hogar del adoptante?" debe ser verdadero o falso',
+      'La respuesta a ¿Se permiten mascotas en el hogar del adoptante? debe ser verdadero o falso',
   })
   @IsNotEmpty({
     message:
-      'La respuesta a "¿Se permiten mascotas en el hogar del adoptante?" es requerida',
+      'La respuesta a ¿Se permiten mascotas en el hogar del adoptante? es requerida',
   })
   allowsPets: boolean;
 
@@ -84,10 +79,10 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Tiene perros en su hogar?" debe ser verdadero o falso',
+      'La respuesta a ¿Tiene perros en su hogar? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a "¿Tiene perros en su hogar?" es requerida',
+    message: 'La respuesta a ¿Tiene perros en su hogar? es requerida',
   })
   hasDogs: boolean;
 
@@ -98,10 +93,10 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Tiene gatos en su hogar?" debe ser verdadero o falso',
+      'La respuesta a ¿Tiene gatos en su hogar? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a "¿Tiene gatos en su hogar?" es requerida',
+    message: 'La respuesta a ¿Tiene gatos en su hogar? es requerida',
   })
   hasCats: boolean;
 
@@ -112,10 +107,10 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Tiene niños en su hogar?" debe ser verdadero o falso',
+      'La respuesta a ¿Tiene niños en su hogar? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a "¿Tiene niños en su hogar?" es requerida',
+    message: 'La respuesta a ¿Tiene niños en su hogar? es requerida',
   })
   hasChildren: boolean;
 
@@ -126,11 +121,11 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Tiene experiencia cuidando mascotas?" debe ser verdadero o falso',
+      'La respuesta a ¿Tiene experiencia cuidando mascotas? debe ser verdadero o falso',
   })
   @IsNotEmpty({
     message:
-      'La respuesta a "¿Tiene experiencia cuidando mascotas?" es requerida',
+      'La respuesta a ¿Tiene experiencia cuidando mascotas? es requerida',
   })
   petsExperience: boolean;
 
@@ -141,10 +136,10 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Sus mascotas están vacunadas?" debe ser verdadero o falso',
+      'La respuesta a ¿Sus mascotas están vacunadas? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a "¿Sus mascotas están vacunadas?" es requerida',
+    message: 'La respuesta a ¿Sus mascotas están vacunadas? es requerida',
   })
   isVaccinated: boolean;
 
@@ -155,10 +150,10 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Sus mascotas están esterilizadas?" debe ser verdadero o falso',
+      'La respuesta a ¿Sus mascotas están esterilizadas? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a "¿Sus mascotas están esterilizadas?" es requerida',
+    message: 'La respuesta a ¿Sus mascotas están esterilizadas? es requerida',
   })
   isSterilized: boolean;
 
@@ -183,11 +178,11 @@ export class CreateAdopterDto {
   })
   @IsString({
     message:
-      'La respuesta a "¿Que harás si la mascota destruye algo?" debe ser una cadena de caracteres',
+      'La respuesta a ¿Que harás si la mascota destruye algo? debe ser una cadena de caracteres',
   })
   @IsNotEmpty({
     message:
-      'La respuesta a "¿Que harás si la mascota destruye algo?" es requerida',
+      'La respuesta a ¿Que harás si la mascota destruye algo? es requerida',
   })
   petDestroy: string;
 
@@ -198,11 +193,11 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Te comprometes a llevar a la mascota al veterinario?" debe ser verdadero o falso',
+      'La respuesta a ¿Te comprometes a llevar a la mascota al veterinario? debe ser verdadero o falso',
   })
   @IsNotEmpty({
     message:
-      'La respuesta a "¿Te comprometes a llevar a la mascota al veterinario?" es requerida',
+      'La respuesta a ¿Te comprometes a llevar a la mascota al veterinario? es requerida',
   })
   hasVeterinarian: boolean;
 
@@ -213,11 +208,11 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Permitirías recibir visitas de la fundación?" debe ser verdadero o falso',
+      'La respuesta a ¿Permitirías recibir visitas de la fundación? debe ser verdadero o falso',
   })
   @IsNotEmpty({
     message:
-      'La respuesta a "¿Permitirías recibir visitas de la fundación?" es requerida',
+      'La respuesta a ¿Permitirías recibir visitas de la fundación? es requerida',
   })
   allowsVisit: boolean;
 
@@ -228,11 +223,11 @@ export class CreateAdopterDto {
   })
   @IsBoolean({
     message:
-      'La respuesta a "¿Te comprometes a una adopción responsable?" debe ser verdadero o falso',
+      'La respuesta a ¿Te comprometes a una adopción responsable? debe ser verdadero o falso',
   })
   @IsNotEmpty({
     message:
-      'La respuesta a "¿Te comprometes a una adopción responsable?" es requerida',
+      'La respuesta a ¿Te comprometes a una adopción responsable? es requerida',
   })
   isResponsibleAdoption: boolean;
 }

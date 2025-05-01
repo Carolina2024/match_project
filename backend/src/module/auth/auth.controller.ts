@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import {
   ApiBadRequestResponse,
   ApiConflictResponse,
+  ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
@@ -18,6 +19,40 @@ export class AuthController {
   @ApiOperation({
     summary: 'Registrar un usuario adoptante',
     description: 'Permite registrar a un usuario con el rol de Adoptante',
+  })
+  @ApiCreatedResponse({
+    description: 'El usuario se registra exitosamente',
+    example: {
+      message: 'Usuario registrado exitosamente',
+      token:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU2ZjIxZDY3LTZkNzMtNGM2YabcdefghiYyMjQ2OWMyNzQzNSIsImVtYWlsIjoianVhbkBleGFtcGxlLmNvbSIsInMyHeartiJhZG9wdGFudGUiLCJpYXQiOjE3NDYxMDc0NTEsImVaguasMTc0NjExNDY1MX0.RxSnt2VA-HK7zjSinJJtCa3jpbLeeJvN_cv6LH6qW00',
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'El usuario ingresa un dato con un formato inválido',
+    example: {
+      message: [
+        'La respuesta a ¿Que harás si la mascota destruye algo? es requerida',
+        'La respuesta a ¿Que harás si la mascota destruye algo? debe ser una cadena de caracteres',
+        'La respuesta a ¿Te comprometes a llevar a la mascota al veterinario? es requerida',
+        'La respuesta a ¿Te comprometes a llevar a la mascota al veterinario? debe ser verdadero o falso',
+        'La respuesta a ¿Permitirías recibir visitas de la fundación? es requerida',
+        'La respuesta a ¿Permitirías recibir visitas de la fundación? debe ser verdadero o falso',
+        'La respuesta a ¿Te comprometes a una adopción responsable? es requerida',
+        'La respuesta a ¿Te comprometes a una adopción responsable? debe ser verdadero o falso',
+      ],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+  })
+  @ApiConflictResponse({
+    description:
+      'El correo o el RUN ingresados por el usuario ya se encuentran registrados',
+    example: {
+      message: 'El correo o el RUN ya se encuentran registrados',
+      error: 'Conflict',
+      statusCode: 409,
+    },
   })
   @Post('register')
   @HttpCode(HttpStatus.CREATED)

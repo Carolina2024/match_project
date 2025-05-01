@@ -26,11 +26,6 @@ export class QueryUsersDto {
   @IsString({ message: 'El nombre completo debe ser una cadena de caracteres' })
   fullname?: string;
 
-  @ApiPropertyOptional({ description: 'Buscar por rol' })
-  @IsOptional()
-  @IsEnum(UserRole, { message: 'El rol debe ser adoptante o admin' })
-  role?: UserRole;
-
   @ApiPropertyOptional({ description: 'Buscar por email' })
   @IsOptional()
   @IsString({ message: 'El correo debe ser una cadena de caracteres' })

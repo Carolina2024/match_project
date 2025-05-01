@@ -45,6 +45,9 @@ export class PetService {
       if (filterDto.breed) {
         queryBuilder.andWhere('pet.breed ILIKE :breed', { breed: `%${filterDto.breed}%` });
       }
+      if (filterDto.status) {
+        queryBuilder.andWhere('pet.status ILIKE :status', { status: `%${filterDto.status}%` });
+      }
       
       if (filterDto.search) {
         queryBuilder.andWhere(
@@ -88,6 +91,9 @@ export class PetService {
       }
       if (filterDto.breed) {
         queryBuilder.andWhere('pet.breed ILIKE :breed', { breed: `%${filterDto.breed}%` });
+      }
+      if (filterDto.status) {
+        queryBuilder.andWhere('pet.status ILIKE :status', { status: `%${filterDto.status}%` });
       }
       
       if (filterDto.search) {
@@ -134,7 +140,6 @@ export class PetService {
     const queryBuilder = this.petRepository.createQueryBuilder('pet')
       .where('pet.isActive = :isActive', { isActive: true });
     
-    // Aplicar filtros si existen
     if (filterDto) {
       if (filterDto.species) {
         queryBuilder.andWhere('pet.species = :species', { species: filterDto.species });

@@ -1,5 +1,5 @@
 import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies } from '../../../common/enums/pet.enum';
+import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetStatus } from '../../../common/enums/pet.enum';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PetFilterDto {
@@ -61,6 +61,16 @@ export class PetFilterDto {
   @IsOptional()
   @IsString({ message: 'La raza debe ser una cadena de texto' })
   breed?: string;
+
+  @ApiProperty({ 
+    description: 'Filtrar por el estado en el que se encuentra la mascota', 
+    enum: PetStatus, 
+    required: false,
+    example: PetStatus.ADOPTED 
+  })
+  @IsOptional()
+  @IsEnum(PetStatus, { message: 'El estado de las mascota debe ser un valor válido' })
+  status?: PetStatus;
 
   @ApiProperty({ 
     description: 'Buscar por nombre, raza o historia', 

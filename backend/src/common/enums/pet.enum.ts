@@ -36,3 +36,9 @@ export enum PetTrait {
     PET_FRIENDLY = 'Amigable con otras mascotas',
     LIKES_WALKS = 'Me gusta pasear'
 }
+
+export enum PetStatus {
+    AVAILABLE = 'Disponible',
+    ADOPTED = 'Adoptado',
+    PENDING = 'Pendiente'
+}

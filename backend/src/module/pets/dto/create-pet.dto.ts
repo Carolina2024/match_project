@@ -1,5 +1,5 @@
 import { IsArray, IsBoolean, IsDate, IsEnum, IsNumber, IsString, IsUrl, Matches, Max, Min } from 'class-validator';
-import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetTrait } from '../../../common/enums/pet.enum';
+import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetStatus, PetTrait } from '../../../common/enums/pet.enum';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -100,6 +100,14 @@ export class CreatePetDto {
     @IsDate({ message: 'La fecha de admisión debe ser una fecha válida' })
     @Type(() => Date)
     admissionDate: Date;
+
+    @ApiProperty({ 
+      description: 'Estado actual de la mascota', 
+      enum: PetStatus,
+      example: PetStatus.ADOPTED 
+    })
+    @IsEnum(PetStatus, { message: 'El esta en el que se encuentra la msacota debe ser un valor válido' })
+    status: PetStatus;
 
     @ApiProperty({ 
       description: 'URLs de las fotos de la mascota', 

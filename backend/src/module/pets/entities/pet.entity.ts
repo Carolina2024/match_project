@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetTrait } from '../../../common/enums/pet.enum';
+import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetStatus, PetTrait } from '../../../common/enums/pet.enum';
 import { IsArray, IsBoolean, IsDate, IsEnum, IsNumber, IsString, IsUrl, Matches, Max, Min } from 'class-validator';
 
 @Entity('pets')
@@ -100,6 +100,14 @@ export class Pet {
     @IsArray()
     @IsUrl({}, { each: true, message: 'Las URLs de fotos deben ser válidas' })
     photoUrls: string[];
+
+    @Column({
+        type: 'enum',
+        enum: PetStatus,
+        default: PetStatus.AVAILABLE
+    })
+    @IsEnum(PetStatus)
+    status: PetStatus;
     
     @Column({ default: true })
     @IsBoolean()

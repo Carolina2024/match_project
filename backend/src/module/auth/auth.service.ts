@@ -28,12 +28,14 @@ export class AuthService {
     );
 
     if (existingUser) {
-      throw new ConflictException('El correo ya esta registrado');
+      throw new ConflictException(
+        'El correo o el RUN ya se encuentran registrados',
+      );
     }
 
     if (existingAdopter) {
       throw new ConflictException(
-        'Usted ya se encuentra registrado en la base de datos',
+        'El correo o el RUN ya se encuentran registrados',
       );
     }
 

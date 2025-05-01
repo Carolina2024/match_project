@@ -56,7 +56,7 @@ export class CreatePetDto {
 
     @ApiProperty({ description: 'Raza de la mascota', example: 'Labrador' })
     @IsString({ message: 'La raza debe ser una cadena de texto' })
-    @Matches(/^[a-zA-Z\s]+$/, { message: 'La raza debe contener solo letras' })
+    @Matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, { message: 'La raza debe contener solo letras' })
     breed: string;
 
     @ApiProperty({ description: 'Peso en kilogramos', example: 15.5 })
@@ -83,7 +83,7 @@ export class CreatePetDto {
 
     @ApiProperty({ description: 'Historia de la mascota', example: 'Fue rescatado de la calle hace 2 meses.' })
     @IsString({ message: 'La historia debe ser una cadena de texto' })
-    @Matches(/^[a-zA-Z0-9\s.,!?()-]+$/, { message: 'La historia contiene caracteres inválidos' })
+    @Matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s.,!?()-]+$/, { message: 'La historia contiene caracteres inválidos' })
     story: string;
 
     @ApiProperty({ 

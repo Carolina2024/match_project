@@ -30,7 +30,7 @@ export class PetService {
 
     const queryBuilder = this.petRepository.createQueryBuilder('pet')
       .where('pet.isActive = :isActive', { isActive: true });
-
+    
     if (filterDto) {
       if (filterDto.species) {
         queryBuilder.andWhere('pet.species = :species', { species: filterDto.species });

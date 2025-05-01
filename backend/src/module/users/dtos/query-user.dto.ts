@@ -1,25 +1,48 @@
-import { IsOptional, IsString, IsBooleanString } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsBooleanString,
+  IsEnum,
+  IsEmail,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
+import { UserRole } from 'src/common/enums/userRole.enum';
 
 export class QueryUsersDto {
-  @ApiPropertyOptional({ example: 'Ricardo', description: 'Buscar por nombre' })
-  @IsOptional()
-  @IsString()
-  fullname?: string;
-
-  @ApiPropertyOptional({ example: 'true', description: 'si el usuario está activo' })
-  @IsOptional()
-  @IsBooleanString()
-  isActive?: string;
-
-  @ApiPropertyOptional({ example: 1, description: 'Número de página' })
+  @ApiPropertyOptional({ description: 'Número de página' })
   @IsOptional()
   @Type(() => Number)
   page?: number;
 
-  @ApiPropertyOptional({ example: 10, description: 'Cantidad de usuarios por página' })
+  @ApiPropertyOptional({
+    description: 'Cantidad de usuarios por página',
+  })
   @IsOptional()
   @Type(() => Number)
   limit?: number;
+
+  @ApiPropertyOptional({ description: 'Buscar por nombre' })
+  @IsOptional()
+  @IsString({ message: 'El nombre completo debe ser una cadena de caracteres' })
+  fullname?: string;
+
+  @ApiPropertyOptional({ description: 'Buscar por rol' })
+  @IsOptional()
+  @IsEnum(UserRole, { message: 'El rol debe ser adoptante o admin' })
+  role?: UserRole;
+
+  @ApiPropertyOptional({ description: 'Buscar por email' })
+  @IsOptional()
+  @IsString({ message: 'El correo debe ser una cadena de caracteres' })
+  email?: string;
+
+  @ApiPropertyOptional({
+    description: 'Filtrar por usuarios activos',
+  })
+  @IsOptional()
+  @IsBooleanString({
+    message: 'isActive debe ser un booleano válido en formato string',
+  })
+  isActive?: string;
 }

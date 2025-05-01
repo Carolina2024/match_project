@@ -232,7 +232,7 @@ export class PetService {
     
     // ===== FILTROS BASADOS EN RESPONSABILIDAD DEL ADOPTANTE =====
     
-    // Si el adoptante no tiene veterinario, priorizar mascotas saludables
+    // Si el adoptante no tiene veterinario o no lo llevará al veterinario, priorizar mascotas saludables, vacunadas o esterilizadas
     if (!adopter.hasVeterinarian) {
       queryBuilder.andWhere('pet.isVaccinated = :isVaccinated', { isVaccinated: true });
       queryBuilder.andWhere('pet.isDewormed = :isDewormed', { isDewormed: true });

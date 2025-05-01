@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './entities/users.entity';
 import { Like, Repository } from 'typeorm';
@@ -80,5 +80,22 @@ export class UsersService {
     } catch (error) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
+  }
+
+
+  async restore(id:string){
+      const user = await this.findOneById(id);
+      if(!user.isActive) throw new BadRequestException('El usuario ya esta activo');
+
+      await this.userRepository.update(id, {isActive:true});
+
+      return { message: 'Usuario activado correctamente'}
+
+  }
+
+  async remove(id: string) {
+    await this.findOneById(id);
+    await this.userRepository.update(id, { isActive: false });
+    return {message: 'La cuenta del usuario ha sido desactivada exitosamente' }
   }
 }

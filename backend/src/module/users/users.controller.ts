@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import {
   ApiParam,
@@ -132,7 +132,25 @@ export class UsersController {
     },
   })
   @Get(':id')
-  getUserById(@Param('id') id: string) {
+  getUserById(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.findOneById(id);
+  }
+  
+  @ApiOperation({
+    summary: 'Activa la cuenta del usuario por su ID',
+    description: 'Retorna un mensaje indicando que la cuenta del usuario se ha usuario activado correctamente'
+  })
+  @Patch(':id/restore')
+  restore( @Param('id', ParseUUIDPipe) id:string) {
+    return this.usersService.restore(id);
+  }
+  
+  @ApiOperation({
+    summary: 'Desactiva la cuenta del usuario por su ID',
+    description: 'Retorna un mensaje indicando que la cuenta del usuario se ha desactivado exitosamente'
+  })
+  @Delete(':id')
+  remove(@Param('id', ParseUUIDPipe) id: string){ 
+    return this.usersService.remove(id);
   }
 }

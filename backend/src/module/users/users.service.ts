@@ -31,9 +31,8 @@ export class UsersService {
   async findAll(query: QueryUsersDto) {
     const { page = 1, limit = 10, ...filters } = query;
 
-    const where: any = {};
+    const where: any = { role: 'adoptante' };
     if (filters.fullname) where.fullname = Like(`%${filters.fullname}%`);
-    if (filters.role) where.role = filters.role;
     if (filters.email) where.email = Like(`%${filters.email}%`);
     if (filters.isActive) where.isActive = filters.isActive;
 
@@ -49,6 +48,7 @@ export class UsersService {
         id: true,
         isActive: true,
         role: true,
+        adopter: true,
       },
     });
 

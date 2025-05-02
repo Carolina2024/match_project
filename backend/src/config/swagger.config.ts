@@ -15,7 +15,7 @@ export const SWAGGER_OPTIONS = new DocumentBuilder()
   .addBearerAuth()
   .addGlobalResponse({
     status: 500,
-    description: 'Ocurre un error en el servidor',
+    description: 'Error interno del servidor',
     example: {
       message: 'Error en el servidor',
       error: 'Internal server error',

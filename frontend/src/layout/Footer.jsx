@@ -1,12 +1,13 @@
-import {FaTiktok, FaInstagram } from "react-icons/fa";
+import { FaTiktok, FaInstagram } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
+import logo from "../assets/logo.png"; // Asegúrate de que la ruta sea correcta
 
 const Footer = () => {
   return (
     <footer className="bg-primary py-8 px-4 rounded-t-3xl flex flex-col items-center justify-center">
       {/* Logo */}
       <img
-        src="src/assets/logo.png"
+        src={logo}
         alt="Logo Patas Pirque"
         className="w-16 h-16 rounded-full object-cover mb-4"
       />

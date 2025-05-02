@@ -10,6 +10,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { QueryUsersDto } from './dtos/query-user.dto';
 import { UserRole } from 'src/common/enums/userRole.enum';
+import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
 
 @Injectable()
 export class UsersService {
@@ -33,7 +34,7 @@ export class UsersService {
     return user;
   }
 
-  async findAll(query: QueryUsersDto) {
+  async findAll(query: QueryUsersDto): Promise<PaginationInterface<Users>> {
     const { page = 1, limit = 10, ...filters } = query;
 
     const where: any = { role: 'adoptante' };
@@ -58,10 +59,10 @@ export class UsersService {
     });
 
     return {
-      data: users,
+      items: users,
       total,
-      page,
-      limit,
+      page: +page,
+      limit: +limit,
       totalPages: Math.ceil(total / limit),
     };
   }
@@ -93,7 +94,7 @@ export class UsersService {
   //   return { message: 'Usuario activado correctamente' };
   // }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<{ message: string }> {
     const user = await this.findOneById(id);
     if (!user.isActive)
       throw new BadRequestException('El usuario ya está eliminado');

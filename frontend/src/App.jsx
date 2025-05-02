@@ -8,6 +8,7 @@ import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
+import PetsHome from "./componets/PetsHome";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route element={<QuienesSomos />} path="QuienesSomos" />
           <Route element={<Adoptar />} path="Adoptar" />
           <Route element={<AdminPanel />} path="Admin" />
+          <Route element={<PetsHome />} path="Mascotas" />
         </Route>
 
       </Routes>

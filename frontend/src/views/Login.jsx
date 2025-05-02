@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../api/user";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
@@ -24,14 +27,24 @@ const Login = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log("Email:", email);
-      console.log("Password:", password);
+      setLoading(true);
+
+      try {
+        const data = await loginUser({ email, password });
+        localStorage.setItem("token", data.token);
+
+        navigate("/");
+      } catch (error) {
+        console.error("Error al iniciar sesión:", error.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -51,7 +64,7 @@ const Login = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': 'rgba(244, 164, 112, 1)' }}
+              style={{ "--tw-ring-color": "rgba(244, 164, 112, 1)" }}
             />
             {errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
@@ -66,7 +79,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-              style={{ '--tw-ring-color': 'rgba(244, 164, 112, 1)' }}
+              style={{ "--tw-ring-color": "rgba(244, 164, 112, 1)" }}
             />
             {errors.password && (
               <p className="text-red-500 text-sm mt-1">{errors.password}</p>

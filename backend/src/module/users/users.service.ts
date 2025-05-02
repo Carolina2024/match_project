@@ -1,10 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './entities/users.entity';
 import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { QueryUsersDto } from './dtos/query-user.dto';
+import { UserRole } from 'src/common/enums/userRole.enum';
 
 @Injectable()
 export class UsersService {
@@ -61,24 +66,47 @@ export class UsersService {
     };
   }
   async findOneById(id: string): Promise<Users> {
-    try {
-      const user = await this.userRepository.findOne({
-        where: { id },
-        relations: ['adopter'],
-        select: {
-          id: true,
-          fullname: true,
-          email: true,
-          role: true,
-          isActive: true,
-        },
-      });
-      if (!user) {
-        throw new NotFoundException(`Usuario con id ${id} no encontrado`);
-      }
-      return user;
-    } catch (error) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['adopter'],
+      select: {
+        id: true,
+        fullname: true,
+        email: true,
+        role: true,
+        isActive: true,
+      },
+    });
+    if (!user) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
+    return user;
+  }
+
+  // async restore(id: string) {
+  //   const user = await this.findOneById(id);
+  //   if (user.isActive)
+  //     throw new BadRequestException('El usuario ya esta activo');
+
+  //   await this.userRepository.update(id, { isActive: true });
+
+  //   return { message: 'Usuario activado correctamente' };
+  // }
+
+  async remove(id: string) {
+    const user = await this.findOneById(id);
+    if (!user.isActive)
+      throw new BadRequestException('El usuario ya está eliminado');
+
+    if (user.role === UserRole.ADMIN)
+      throw new BadRequestException(
+        'No se puede eliminar la cuenta de un administrador',
+      );
+
+    await this.userRepository.update(id, { isActive: false });
+
+    return {
+      message: 'La cuenta del usuario ha sido eliminada exitosamente',
+    };
   }
 }

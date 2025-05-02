@@ -30,7 +30,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     if (!user.isActive) {
       throw new UnauthorizedException(
-        'Usuario inactivo, habla con un administrador',
+        'Usuario eliminado. Para más información, póngase en contacto con un administrador',
       );
     }
 

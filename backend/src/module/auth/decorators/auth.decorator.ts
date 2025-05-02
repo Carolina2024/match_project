@@ -15,7 +15,7 @@ export function Auth(...roles: UserRole[]) {
     UseGuards(AuthGuard(), UserRoleGuard),
     ApiBearerAuth(),
     ApiUnauthorizedResponse({
-      description: 'El usuario no se autenticó',
+      description: 'El usuario no está autenticado',
       example: {
         message: 'Unauthorized',
         statusCode: 401,

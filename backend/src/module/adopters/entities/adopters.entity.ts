@@ -1,4 +1,3 @@
-import { HomeOwnerType } from 'src/common/enums/homeOwnerType.enum';
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
 import { Users } from 'src/module/users/entities/users.entity';
 import {

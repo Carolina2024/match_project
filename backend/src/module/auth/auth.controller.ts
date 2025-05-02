@@ -98,10 +98,10 @@ export class AuthController {
     },
   })
   @ApiConflictResponse({
-    description: 'El usuario ha sido bloqueado por un Administrador',
+    description: 'El usuario ha sido eliminado por un Administrador',
     example: {
       message:
-        'Usuario bloqueado. Para más información, póngase en contacto con un administrador',
+        'Usuario eliminado. Para más información, póngase en contacto con un administrador',
       error: 'Conflict',
       statusCode: 409,
     },

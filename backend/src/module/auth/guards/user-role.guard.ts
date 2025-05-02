@@ -33,12 +33,6 @@ export class UserRoleGuard implements CanActivate {
       throw new UnauthorizedException('Usuario inválido');
     }
 
-    if (!user.isActive) {
-      throw new UnauthorizedException(
-        'Usuario inactivo, habla con un administrador',
-      );
-    }
-
     if (validRoles.some((role) => role === user.role)) return true;
 
     throw new ForbiddenException('Usuario sin permisos suficientes');

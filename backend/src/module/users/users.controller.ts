@@ -1,6 +1,13 @@
-
-import { Controller, Delete, Get, Param, ParseUUIDPipe, Patch, Query, UseGuards } from '@nestjs/common';
-
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 
 import { UsersService } from './users.service';
 import {
@@ -10,6 +17,7 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
   ApiBearerAuth,
+  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 import { QueryUsersDto } from './dtos/query-user.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -133,7 +141,7 @@ export class UsersController {
     },
   })
   @ApiUnauthorizedResponse({
-    description: 'El usuario no se autenticó',
+    description: 'El usuario no está autenticado',
     example: {
       message: 'Unauthorized',
       statusCode: 401,
@@ -161,22 +169,72 @@ export class UsersController {
   getUserById(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.findOneById(id);
   }
-  
+
+  // @ApiOperation({
+  //   summary: 'Activa la cuenta del usuario por su ID',
+  //   description:
+  //     'Retorna un mensaje indicando que la cuenta del usuario se ha activado correctamente',
+  // })
+  // @ApiOkResponse({
+  //   description: 'El usuario es activado exitosamente',
+  //   example: {
+  //     message: 'Usuario activado correctamente',
+  //   },
+  // })
+  // @ApiBadRequestResponse({
+  //   description: 'Se intenta restaurar un usuario activo',
+  //   example: {
+  //     message: 'El usuario ya esta activo',
+  //     error: 'Bad Request',
+  //     statusCode: 400,
+  //   },
+  // })
+  // @ApiNotFoundResponse({
+  //   description: 'No se encuentra el usuario con el ID',
+  //   example: {
+  //     message:
+  //       'Usuario con id 639dcdc7-a635-48d4-b641-2c74d0878bbd no encontrado',
+  //     error: 'Not Found',
+  //     statusCode: 404,
+  //   },
+  // })
+  // @Auth(UserRole.ADMIN)
+  // @Patch('restore/:id')
+  // restore(@Param('id', ParseUUIDPipe) id: string) {
+  //   return this.usersService.restore(id);
+  // }
+
   @ApiOperation({
-    summary: 'Activa la cuenta del usuario por su ID',
-    description: 'Retorna un mensaje indicando que la cuenta del usuario se ha usuario activado correctamente'
+    summary: 'Elimina la cuenta del usuario por su ID',
+    description:
+      'Retorna un mensaje indicando que la cuenta del usuario se ha eliminado exitosamente',
   })
-  @Patch(':id/restore')
-  restore( @Param('id', ParseUUIDPipe) id:string) {
-    return this.usersService.restore(id);
-  }
-  
-  @ApiOperation({
-    summary: 'Desactiva la cuenta del usuario por su ID',
-    description: 'Retorna un mensaje indicando que la cuenta del usuario se ha desactivado exitosamente'
+  @ApiOkResponse({
+    description: 'Se elimina la cuenta del usuario con el ID',
+    example: {
+      message: 'La cuenta del usuario ha sido eliminada exitosamente',
+    },
   })
+  @ApiBadRequestResponse({
+    description: 'El usuario ya se encuentra eliminado',
+    example: {
+      message: 'El usuario ya está eliminado',
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+  })
+  @ApiNotFoundResponse({
+    description: 'No se encuentra el usuario con el ID',
+    example: {
+      message:
+        'Usuario con id 639dcdc7-a635-48d4-b641-2c74d0878bbd no encontrado',
+      error: 'Not Found',
+      statusCode: 404,
+    },
+  })
+  @Auth(UserRole.ADMIN)
   @Delete(':id')
-  remove(@Param('id', ParseUUIDPipe) id: string){ 
+  remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.remove(id);
   }
 }

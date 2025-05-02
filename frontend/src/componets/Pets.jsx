@@ -3,11 +3,21 @@ import { useState, useEffect } from "react";
 const Pets = ({ setActiveView, setPets, editingPet }) => {
   const [formData, setFormData] = useState({
     nombre: "",
-    raza: "",
     edad: "",
-    especie: "",
-    tamano: "",
+    estado: "",
+    fotoUrl: "", 
   });
+ 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prev) => ({ ...prev, fotoUrl: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   useEffect(() => {
     if (editingPet) {
@@ -30,7 +40,7 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
       );
     } else {
       const newPet = {
-        id: Date.now(), // id falso
+        id: Date.now(),
         ...formData,
       };
       setPets((prev) => [...prev, newPet]);
@@ -45,6 +55,38 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
         {editingPet ? "Editar Mascota" : "Crear Mascota"}
       </h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
+        
+        <div className="mb-4">
+  <label className="block mb-2 font-medium">Foto de la mascota</label>
+
+  <div className="relative w-fit">
+    <input
+      id="foto"
+      type="file"
+      accept="image/*"
+      onChange={handleImageChange}
+      className="hidden"
+    />
+    <label
+      htmlFor="foto"
+      className="cursor-pointer bg-orange-400 text-white px-4 py-2 rounded hover:bg-orange-500 transition"
+    >
+      Seleccionar archivo
+    </label>
+  </div>
+
+  {formData.fotoUrl && (
+    <img
+      src={formData.fotoUrl}
+      alt="Vista previa"
+      className="mt-4 w-32 h-32 object-cover rounded border"
+    />
+  )}
+</div>
+
+
+
+        
         <input
           type="text"
           name="nombre"
@@ -53,14 +95,8 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
-        <input
-          type="text"
-          name="raza"
-          placeholder="Raza"
-          value={formData.raza}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-        />
+
+        
         <select
           name="edad"
           value={formData.edad}
@@ -72,28 +108,20 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
           <option value="Adulto">Adulto</option>
           <option value="Senior">Senior</option>
         </select>
+
+       
         <select
-          name="especie"
-          value={formData.especie}
+          name="estado"
+          value={formData.estado}
           onChange={handleChange}
           className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
         >
-          <option value="">Selecciona especie</option>
-          <option value="Perro">Perro</option>
-          <option value="Gato">Gato</option>
-          <option value="Otro">Otro</option>
+          <option value="">Selecciona estado</option>
+          <option value="Disponible">Disponible</option>
+          <option value="Perdido">Perdido</option>
+          <option value="Adoptado">Adoptado</option>
         </select>
-        <select
-          name="tamano"
-          value={formData.tamano}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
-        >
-          <option value="">Selecciona tamaño</option>
-          <option value="Pequeño">Pequeño</option>
-          <option value="Mediano">Mediano</option>
-          <option value="Grande">Grande</option>
-        </select>
+
         <div className="flex justify-center space-x-4 pt-6">
           <button
             type="submit"
@@ -104,7 +132,7 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
           <button
             type="button"
             className="bg-gray-300 text-gray-800 px-6 py-3 rounded hover:bg-gray-400 cursor-pointer"
-            onClick={() => setActiveView(null)} // <-- esto oculta todo
+            onClick={() => setActiveView(null)}
           >
             Cancelar
           </button>

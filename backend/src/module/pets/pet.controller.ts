@@ -39,66 +39,63 @@ import {
 } from 'src/common/enums/pet.enum';
 
 @ApiTags('Mascotas')
-@ApiBearerAuth()
 @Controller('pets')
 export class PetController {
   constructor(private readonly petService: PetService) {}
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  @ApiOperation({
-    summary: 'Crear una nueva mascota',
-    description: 'Crea un nuevo registro de mascota en el sistema',
-  })
-  @ApiBody({ type: CreatePetDto, description: 'Datos de la mascota a crear' })
-  @ApiCreatedResponse({
-    description: 'La mascota ha sido creada exitosamente',
-    type: Pet,
-    example: {
-      id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
-      name: 'Firulais',
-      species: 'perro',
-      breed: 'Mestizo',
-      age: 'adulto',
-      size: 'mediano',
-      sex: 'macho',
-      energy: 'alta',
-      kg: 15.5,
-      isVaccinated: true,
-      isSterilized: true,
-      isDewormed: true,
-      hasMicrochip: false,
-      story: 'Fue rescatado de la calle hace 2 meses.',
-      traits: ['cariñoso', 'juguetón'],
-      status: 'disponible',
-      isActive: true,
-      photoUrls: [
-        'https://example.com/image1.jpg',
-        'https://example.com/image2.jpg',
-      ],
-      createdAt: '2023-05-15T10:30:00Z',
-      updatedAt: '2023-05-15T10:30:00Z',
-    },
-  })
-  @ApiBadRequestResponse({
-    description: 'Datos de entrada inválidos',
-    example: {
-      message: [
-        'El nombre debe ser una cadena de texto',
-        'El tamaño debe ser un valor válido',
-        'La fecha de nacimiento debe ser una fecha válida',
-      ],
-      error: 'Bad Request',
-      statusCode: 400,
-    },
-  })
-  @Auth(UserRole.ADMIN)
-  create(@Body() createPetDto: CreatePetDto) {
-    return this.petService.create(createPetDto);
-  }
+  // @Post()
+  // @HttpCode(HttpStatus.CREATED)
+  // @ApiOperation({
+  //   summary: 'Crear una nueva mascota',
+  //   description: 'Crea un nuevo registro de mascota en el sistema',
+  // })
+  // @ApiBody({ type: CreatePetDto, description: 'Datos de la mascota a crear' })
+  // @ApiCreatedResponse({
+  //   description: 'La mascota ha sido creada exitosamente',
+  //   type: Pet,
+  //   example: {
+  //     id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
+  //     name: 'Firulais',
+  //     species: 'perro',
+  //     breed: 'Mestizo',
+  //     age: 'adulto',
+  //     size: 'mediano',
+  //     sex: 'macho',
+  //     energy: 'alta',
+  //     kg: 15.5,
+  //     isVaccinated: true,
+  //     isSterilized: true,
+  //     isDewormed: true,
+  //     hasMicrochip: false,
+  //     story: 'Fue rescatado de la calle hace 2 meses.',
+  //     traits: ['cariñoso', 'juguetón'],
+  //     status: 'disponible',
+  //     isActive: true,
+  //     photoUrls: [
+  //       'https://example.com/image1.jpg',
+  //       'https://example.com/image2.jpg',
+  //     ],
+  //     createdAt: '2023-05-15T10:30:00Z',
+  //     updatedAt: '2023-05-15T10:30:00Z',
+  //   },
+  // })
+  // @ApiBadRequestResponse({
+  //   description: 'Datos de entrada inválidos',
+  //   example: {
+  //     message: [
+  //       'El nombre debe ser una cadena de texto',
+  //       'El tamaño debe ser un valor válido',
+  //       'La fecha de nacimiento debe ser una fecha válida',
+  //     ],
+  //     error: 'Bad Request',
+  //     statusCode: 400,
+  //   },
+  // })
+  // @Auth(UserRole.ADMIN)
+  // create(@Body() createPetDto: CreatePetDto) {
+  //   return this.petService.create(createPetDto);
+  // }
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Obtener lista de mascotas con información limitada',
     description:
@@ -169,25 +166,69 @@ export class PetController {
     example: {
       items: [
         {
-          id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
-          name: 'Firulais',
-          isActive: true,
-          photoUrls: ['https://example.com/image1.jpg'],
+          id: '497fe8df-f6d9-438d-9c33-437d7a46d318',
+          name: 'Duke',
+          photoUrls: ['https://example.com/dog13.jpg'],
         },
         {
-          id: '739dcdc7-a635-48d4-a641-2c74d0878bbe',
-          name: 'Luna',
-          isActive: true,
-          photoUrls: ['https://example.com/image2.jpg'],
+          id: 'e1a1ba4b-0bd2-47c2-8be3-86f2b55ea161',
+          name: 'Shadow',
+          photoUrls: ['https://example.com/cat8.jpg'],
+        },
+        {
+          id: 'd3872fad-5fc7-4c8c-b58b-26b462c4a64e',
+          name: 'Toby',
+          photoUrls: ['https://example.com/dog11.jpg'],
+        },
+        {
+          id: 'c6307986-6099-418d-be38-c51030324588',
+          name: 'Zeus',
+          photoUrls: ['https://example.com/dog10.jpg'],
+        },
+        {
+          id: '41460e38-f029-49ea-b7cc-c900dd64317b',
+          name: 'Bruno',
+          photoUrls: ['https://example.com/dog9.jpg'],
+        },
+        {
+          id: 'c9033b03-61f8-4331-a3b6-e5785ee1e757',
+          name: 'Max',
+          photoUrls: ['https://example.com/dog8.jpg'],
+        },
+        {
+          id: '596b9ca9-986f-4781-94c3-9ea18611332e',
+          name: 'Oliver',
+          photoUrls: ['https://example.com/cat4.jpg'],
+        },
+        {
+          id: '0da4f991-7647-46a9-ab23-60c6279fc687',
+          name: 'Rocky',
+          photoUrls: ['https://example.com/dog6.jpg'],
+        },
+        {
+          id: 'a7a952c8-78db-44d8-8a62-37580f35de29',
+          name: 'Thor',
+          photoUrls: ['https://example.com/dog5.jpg'],
+        },
+        {
+          id: '44887a05-7c72-491c-a8f4-2e5d0812c040',
+          name: 'Simba',
+          photoUrls: ['https://example.com/cat2.jpg'],
         },
       ],
-      total: 2,
+      total: 13,
+      page: 1,
+      limit: 10,
+      totalPages: 2,
     },
   })
+  @Get()
+  @HttpCode(HttpStatus.OK)
   findAllLimited(@Query() queryParams) {
     const { page, limit, ...filterParams } = queryParams;
     return this.petService.findAllLimited({ page, limit }, filterParams);
   }
+
   @Get('complete')
   @ApiOperation({
     summary: 'Obtener lista completa de mascotas',
@@ -259,51 +300,94 @@ export class PetController {
     example: {
       items: [
         {
-          id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
-          name: 'Firulais',
-          species: 'perro',
-          breed: 'Mestizo',
-          age: 'adulto',
-          size: 'mediano',
-          sex: 'macho',
-          energy: 'alta',
-          kg: 15.5,
-          isVaccinated: true,
-          isSterilized: true,
-          isDewormed: true,
-          hasMicrochip: false,
-          story: 'Fue rescatado de la calle hace 2 meses.',
-          traits: ['cariñoso', 'juguetón'],
-          status: 'disponible',
-          isActive: true,
-          photoUrls: ['https://example.com/image1.jpg'],
-          createdAt: '2023-05-15T10:30:00Z',
-          updatedAt: '2023-05-15T10:30:00Z',
-        },
-        {
-          id: '739dcdc7-a635-48d4-a641-2c74d0878bbe',
-          name: 'Luna',
-          species: 'gato',
-          breed: 'Siamés',
-          age: 'joven',
-          size: 'pequeño',
-          sex: 'hembra',
-          energy: 'moderada',
-          kg: 3.5,
+          id: '497fe8df-f6d9-438d-9c33-437d7a46d318',
+          name: 'Duke',
+          size: 'Grande',
+          birthDate: '2016-07-03',
+          sex: 'Macho',
+          age: 'Adulto Mayor',
+          species: 'Perro',
+          energy: 'Tranquilo',
+          breed: 'Labrador',
+          kg: '35.00',
           isVaccinated: true,
           isSterilized: true,
           isDewormed: true,
           hasMicrochip: true,
-          story: 'Fue encontrada abandonada en un parque.',
-          traits: ['independiente', 'tranquila'],
-          status: 'disponible',
-          isActive: true,
-          photoUrls: ['https://example.com/image2.jpg'],
-          createdAt: '2023-06-20T14:15:00Z',
-          updatedAt: '2023-06-20T14:15:00Z',
+          story: 'Dulce y tranquilo, perfecto compañero para personas mayores.',
+          traits: ['Juguetón', 'Cariñoso'],
+          admissionDate: '2022-12-19',
+          photoUrls: ['https://example.com/dog13.jpg'],
+          status: 'Disponible',
+        },
+        {
+          id: 'e1a1ba4b-0bd2-47c2-8be3-86f2b55ea161',
+          name: 'Shadow',
+          size: 'Mediano',
+          birthDate: '2018-10-11',
+          sex: 'Macho',
+          age: 'Adulto',
+          species: 'Gato',
+          energy: 'Tranquilo',
+          breed: 'Negro Mestizo',
+          kg: '4.80',
+          isVaccinated: true,
+          isSterilized: true,
+          isDewormed: true,
+          hasMicrochip: true,
+          story: 'Misterioso y elegante, le encanta observar desde lo alto.',
+          traits: ['Independiente', 'Protector'],
+          admissionDate: '2023-01-24',
+          photoUrls: ['https://example.com/cat8.jpg'],
+          status: 'Disponible',
+        },
+        {
+          id: '22f0f615-8552-4113-a8f0-bd0375083390',
+          name: 'Chloe',
+          size: 'Pequeño',
+          birthDate: '2022-02-13',
+          sex: 'Hembra',
+          age: 'Cachorro',
+          species: 'Perro',
+          energy: 'Muy Activo',
+          breed: 'Dachshund',
+          kg: '3.00',
+          isVaccinated: true,
+          isSterilized: false,
+          isDewormed: true,
+          hasMicrochip: false,
+          story: 'Pequeña pero llena de energía, muy cariñosa.',
+          traits: ['Cariñoso', 'Juguetón'],
+          admissionDate: '2023-05-09',
+          photoUrls: ['https://example.com/dog12.jpg'],
+          status: 'Disponible',
+        },
+        {
+          id: 'd3872fad-5fc7-4c8c-b58b-26b462c4a64e',
+          name: 'Toby',
+          size: 'Mediano',
+          birthDate: '2019-08-29',
+          sex: 'Macho',
+          age: 'Adulto',
+          species: 'Perro',
+          energy: 'Muy Activo',
+          breed: 'Border Collie',
+          kg: '18.00',
+          isVaccinated: true,
+          isSterilized: false,
+          isDewormed: true,
+          hasMicrochip: true,
+          story: 'Inteligente y activo, necesita mucho ejercicio mental.',
+          traits: ['Juguetón', 'Amigable con otras mascotas'],
+          admissionDate: '2023-04-04',
+          photoUrls: ['https://example.com/dog11.jpg'],
+          status: 'Disponible',
         },
       ],
-      total: 2,
+      total: 21,
+      limit: 4,
+      page: 1,
+      totalPages: 6,
     },
   })
   @Auth(UserRole.ADMIN)
@@ -494,8 +578,6 @@ export class PetController {
     return this.petService.findOne(id);
   }
 
-  @Patch(':id')
-  @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Actualizar una mascota',
     description: 'Actualiza los datos de una mascota existente',
@@ -557,18 +639,19 @@ export class PetController {
     },
   })
   @Auth(UserRole.ADMIN)
+  @Patch(':id')
+  @HttpCode(HttpStatus.OK)
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updatePetDto: UpdatePetDto,
   ) {
     return this.petService.update(id, updatePetDto);
   }
-  @Auth(UserRole.ADMIN)
-  @Delete(':id')
-  @HttpCode(HttpStatus.OK)
+
   @ApiOperation({
     summary: 'Eliminar una mascota',
-    description: 'Realiza una eliminación lógica de una mascota',
+    description:
+      'Realiza la eliminación de la información de mascota con el ID indicado',
   })
   @ApiParam({ name: 'id', description: 'ID de la mascota', type: String })
   @ApiOkResponse({
@@ -595,6 +678,9 @@ export class PetController {
       statusCode: 404,
     },
   })
+  @Auth(UserRole.ADMIN)
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.petService.remove(id);
   }

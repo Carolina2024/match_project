@@ -66,7 +66,7 @@ export class AuthService {
 
     if (!user.isActive) {
       throw new ConflictException(
-        'Usuario bloqueado. Para más información, póngase en contacto con un administrador',
+        'Usuario eliminado. Para más información, póngase en contacto con un administrador',
       );
     }
 

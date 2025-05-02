@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import logo from "../assets/logo.png"; // Asegúrate de que la ruta sea correcta
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center space-x-2">
         <img
-          src="src/assets/logo.png"
+          src={logo}
           alt="Logo Patas Pirque"
           className="w-[60px] h-[60px] rounded-full object-cover"
         />

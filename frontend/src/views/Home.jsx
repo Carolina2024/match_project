@@ -6,6 +6,8 @@ import image5 from "../assets/image5.png";
 import slider1 from "../assets/slider1.png";
 import slider2 from "../assets/slider2.png";
 import slider3 from "../assets/slider3.png";
+import image from "../assets/image.png";
+
 
 const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -24,7 +26,7 @@ const Home = () => {
       {/* Hero */}
       <div className="relative w-full max-w-4xl overflow-hidden">
         <img
-          src="src/assets/image.png"
+          src={image}
           alt="Perro mirando"
           className="w-full h-auto object-cover rounded-2xl"
         />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 
@@ -248,7 +248,7 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
           className="input"
         />
 
-       {/*  <div>
+        <div>
           <p>Fotos:</p>
           {photos.map((url, i) => (
             <div key={i} className="flex gap-2 items-center">
@@ -270,7 +270,7 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
           <button type="button" onClick={addPhoto}>
             Agregar Foto
           </button>
-        </div> */}
+        </div>
 
         <select {...register("status", { required: true })} className="input">
           <option value="">Estado</option>

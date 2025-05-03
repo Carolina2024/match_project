@@ -1,9 +1,8 @@
 import { FaRegSave, FaPen } from "react-icons/fa";
 import PropTypes from "prop-types";
 
-
 // OPCIÓN DE MASCOTAS PERFIL ADMINISTRADOR
-const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
+const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet, handleSavePet }) => {
   const handleEdit = (pet) => {
     setEditingPet(pet);
     setActiveView("editPet");
@@ -31,12 +30,11 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
         <p className="font-bold">Filtrar mascotas por estado:</p>
         <button className="flex items-center gap-1 bg-white text-black border border-gray-400 px-8 py-2 rounded hover:bg-gray-100 transition cursor-pointer ">
           Publicadas
-          <span className="text-xs">&#9660;</span>
+          <p className="text-xs">&#9660;</p>
         </button>
       </div>
 
       <table className="w-full table-auto border-collapse">
-
         <thead>
           <tr className="bg-white-400 text-black border border-gray-400 bg-white-100">
             <th className="px-4 py-2 ">Foto</th>
@@ -62,7 +60,7 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
               <td className="px-4 py-2">
                 <div className="flex justify-center gap-4 text-xl">
                   <button
-                    onClick={() => handleDeletePet(pet.id)}
+                    onClick={() => handleSavePet(pet.id)}
                     className="text-black hover:text-red-700"
                     title="Guardar"
                   >
@@ -83,9 +81,7 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
         </tbody>
       </table>
     </div>
-    
   );
-  
 };
 PetList.propTypes = {
   pets: PropTypes.arrayOf(

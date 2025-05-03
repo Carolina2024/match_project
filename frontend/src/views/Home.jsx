@@ -21,51 +21,53 @@ const Home = () => {
   }, [sliders.length]);
 
   return (
-    <section className="w-full py-10 px-4 flex flex-col justify-center items-center">
+    <section className="w-full py-8 px-4 flex flex-col justify-center items-center">
       {/* Hero */}
-      <div className="relative w-full max-w-4xl overflow-hidden">
+      <div className="relative w-full max-w-6xl overflow-hidden">
         <img
           src={image}
           alt="Perro mirando"
-          className="w-full h-auto object-cover rounded-2xl"
+          className="w-full h-auto object-cover rounded-t-2xl"
         />
-        <div className="absolute top-6 left-6 md:top-10 md:left-10 text-left">
-          <h2 className="text-primary text-4xl md:text-6xl font-bold leading-tight">
+        <div className="absolute top-6 left-6 md:top-10 md:left-10 text-left mt-6">
+          <h2 className="text-primary text-4xl md:text-5xl font-bold font-secundary leading-tight mb-4">
             Matcheá con
-            <br />
+          </h2>
+          <h2 className="text-primary text-4xl md:text-5xl font-bold font-secundary leading-tight mb-4">
             tu futura
-            <br />
+          </h2>
+          <h2 className="text-primary text-4xl md:text-5xl font-bold font-secundary leading-tight mb-4">
             mascota
           </h2>
         </div>
       </div>
 
       {/* Mini galería */}
-      <section className="py-10 px-4 flex justify-center mt-10 w-full">
-        <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-5xl">
+      <section className="py-10 px-4 flex justify-center mt-32 w-full">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-6xl">
           {[image2, image3, image4, image5].map((image, index) => (
             <img
               key={index}
               src={image}
               alt={`Perrito ${index + 1}`}
-              className="w-32 h-32 md:w-44 md:h-44 object-cover hover:scale-105 transition"
+              className="w-42 h-42 md:w-54 md:h-54 object-cover hover:scale-105 transition"
             />
           ))}
         </div>
       </section>
 
       {/* Botón */}
-      <button className="bg-white text-primary font-semibold px-8 py-2 m-20 text-lg md:text-2xl rounded-full shadow-lg hover:bg-gray-100 transition cursor-pointer">
+      <button className="bg-white text-primary font-bold px-14 py-3 m-22 text-lg md:text-3xl rounded-full shadow-md/30 hover:bg-gray-100 transition cursor-pointer">
         Regístrate para Adoptar
       </button>
 
       {/* Pasos */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
-        <h2 className="text-2xl md:text-3xl font-normal text-center text-black">
-          Adopta una mascota en <br />
-          <span className="text-primary font-bold text-2xl">
-            3 simples pasos
-          </span>
+        <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
+          Adopta una mascota en
+        </h2>
+        <h2 className="text-primary font-extrabold text-2xl font-tertiary">
+          3 simples pasos
         </h2>
 
         {/* Líneas curvas SVG entre los pasos */}
@@ -95,8 +97,8 @@ const Home = () => {
         {/* Contenedores de pasos */}
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-50 relative w-full max-w-6xl z-10">
           {/* Paso 1 */}
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md px-2 py-6 flex flex-col items-center text-center w-full md:w-[250px] h-[240px] relative">
-            <div className="absolute -top-5 bg-primary text-[#2E256F] w-10 h-10 flex items-center justify-center rounded-full font-bold">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+            <div className="absolute -top-5 bg-primary text-[#2E256F] font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               1
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
@@ -129,14 +131,14 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-sm text-[#0C0C0C]">
+            <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
               Completar el formulario de registro en unos minutos
             </p>
           </div>
 
           {/* Paso 2 */}
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md px-2 py-6 flex flex-col items-center text-center w-full md:w-[250px] h-[240px] relative">
-            <div className="absolute -top-5 bg-primary text-[#2E256F] w-10 h-10 flex items-center justify-center rounded-full font-bold">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+            <div className="absolute -top-5 bg-primary font-tertiary text-[#2E256F] w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               2
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
@@ -169,15 +171,15 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-sm text-[#0C0C0C]">
+            <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
               Describí tu hogar y tus preferencias para que Patas Pirque pueda
               encontrar tu mascota ideal
             </p>
           </div>
 
           {/* Paso 3 */}
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md px-6 py-6 flex flex-col items-center text-center w-full md:w-[250px] h-[240px] relative">
-            <div className="absolute -top-5 bg-primary text-[#2E256F] w-10 h-10 flex items-center justify-center rounded-full font-bold">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+            <div className="absolute -top-5 bg-primary font-tertiary text-[#2E256F] w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               3
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
@@ -198,7 +200,9 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-sm text-[#0C0C0C]">Encontrar a tu Match</p>
+            <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
+              Encontrar a tu Match
+            </p>
           </div>
         </div>
       </section>
@@ -206,19 +210,19 @@ const Home = () => {
       {/* Historias de adopción */}
       <section className="w-full px-4 flex flex-col justify-center items-center">
         <div className="py-10 text-center mt-12 w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-22 px-4 md:px-20 text-left ">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-28 px-4 md:px-20 text-left ">
             Historias de adopción
           </h2>
 
           {/* Slider funcional automático */}
-          <div className="max-w-3xl mx-auto mb-6 px-4 ">
+          <div className="max-w-4xl mx-auto mb-6 px-4 ">
             <img
               src={sliders[activeSlide]}
               alt={`Slide ${activeSlide + 1}`}
               className="shadow-lg w-full h-auto object-cover rounded-4xl"
             />
 
-            <div className="flex justify-center space-x-2 -mt-10 mb-28">
+            <div className="flex justify-center space-x-3 -mt-8 mb-28">
               {sliders.map((_, i) => (
                 <button
                   key={i}
@@ -232,33 +236,27 @@ const Home = () => {
           </div>
 
           {/* Testimonios */}
-          <div className="max-w-3xl mx-auto space-y-10 mt-10 text-sm md:text-base text-black font-extralight px-4">
+          <div className="max-w-4xl mx-auto space-y-10 mt-32 text-sm md:text-xl text-black font-extralight px-4">
             <div className="text-left">
               <p className="italic">
                 “Nunca pensé que un perro podía cambiar tanto mi vida. Rocky me
                 hace compañía, me escucha sin decir nada, y siempre está ahí.
                 Adoptarlo fue la mejor decisión. Ahora tengo un amigo que me
-                espera todos los días con la cola moviéndose como loco!”
+                espera todos los días con la cola moviéndose como loco.”
               </p>
-              <p className="mt-2 font-semibold text-right">Mateo Perez</p>
+              <p className="mt-5 font-semibold text-right">Mateo Perez</p>
             </div>
             <div className="text-left">
               <p className="italic">
-                “Nos eligió mirando cómo iba la situación. Luno con Tomi, pero
-                desde el primer día fue puro amor. Juegan, se cuidan y hasta
-                duermen juntos. Adoptar fue como sumar a un hermano peludo a la
-                familia. ¡No sé cómo vivíamos sin él!”
+                “Nos daba miedo cómo iba a reaccionar Luna con Tomi, pero desde el primer día fue puro amor. Juegan, se cuidan y hasta duermen juntos. Adoptar fue como sumar una hermana peluda a la familia. No sé cómo vivíamos sin ella.”
               </p>
-              <p className="mt-2 font-semibold text-right">Leonardo Gomez</p>
+              <p className="mt-5 font-semibold text-right">Leonardo Gomez</p>
             </div>
             <div className="text-left">
               <p className="italic">
-                “Teníamos miedo de cómo iba a reaccionar Toby con un gato en
-                casa, pero fue todo lo contrario. Se hicieron amigos desde el
-                primer día. Ver el respeto y los juegos de los dos nos llena de
-                emoción. Adoptar a Nilo nos cambió como familia.”
+                “Teníamos miedo de cómo iba a reaccionar Toby con un gato en casa, pero fue todo lo contrario. Se hicieron amigos desde el primer día. Ver a nuestros hijos jugando con los dos nos derrite el corazón. Adoptar a Mía nos completó como familia.”
               </p>
-              <p className="mt-2 font-semibold text-right">Sandra Lopez</p>
+              <p className="mt-5 font-semibold text-right">Sandra Lopez</p>
             </div>
           </div>
         </div>

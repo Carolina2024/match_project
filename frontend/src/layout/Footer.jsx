@@ -6,8 +6,8 @@ import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#F9F9F9] text-black">
-      <div className="flex flex-col md:flex-row justify-between items-center px-12 py-10 gap-6">
+    <footer className="bg-[#F9F9F9] text-black mt-24">
+      <div className="flex flex-col md:flex-row justify-between items-center px-12 py-14 gap-6 font-tertiary">
         {/* Logo */}
         <div>
           <img
@@ -19,17 +19,17 @@ const Footer = () => {
 
         {/* Contacto */}
         <div className="text-center md:text-left md:mr-32">
-          <h3 className="font-semibold text-primary mb-3">Contactanos</h3>
+          <h3 className="font-bold text-primary mb-3 text-xl">Contactanos</h3>
           <ul className="space-y-1 text-sm">
-            <li className="flex items-center  gap-2 text-left mb-3">
+            <li className="flex items-center  gap-2 text-left mb-3 font-normal text-base">
               <FaMapMarkerAlt className="text-primary text-lg" />
               <span>Calle 123, Santiago, Chile</span>
             </li>
-            <li className="flex items-center gap-2 text-left mb-3">
+            <li className="flex items-center gap-2 text-left mb-3 font-normal text-base">
               <FaPhoneAlt className="text-primary text-lg" />
               <span>+1 (555) 123-4567</span>
             </li>
-            <li className="flex items-center  gap-2 text-left ">
+            <li className="flex items-center  gap-2 text-left font-normal text-base">
               <IoMdMail className="text-primary text-lg" />
               <span>pataspirque@gmail.com</span>
             </li>
@@ -38,11 +38,11 @@ const Footer = () => {
       </div>
 
       {/* Barra inferior */}
-      <div className="bg-primary text-black  flex flex-col md:flex-row justify-between items-center px-16 py-6 rounded-t-4xl">
-        <span className="text-base font-medium">&copy;2025 Pataspirque.cl</span>
+      <div className="bg-primary text-black  flex flex-col md:flex-row justify-between items-center px-16 py-8 rounded-t-4xl">
+        <span className="text-base font-medium font-tertiary">&copy;2025 Pataspirque.cl</span>
 
         {/* Redes Sociales */}
-        <div className="flex space-x-4 text-2xl mt-2 md:mt-0">
+        <div className="flex space-x-4 text-3xl mt-2 md:mt-0">
           <a
             href="https://facebook.com"
             target="_blank"

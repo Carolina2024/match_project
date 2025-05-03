@@ -54,6 +54,7 @@ export class AuthService {
     return {
       message: 'Usuario registrado exitosamente',
       token: this.getJwtToken(payload),
+      id: newUser.id
     };
   }
 
@@ -85,7 +86,7 @@ export class AuthService {
     };
     const token = await this.jwtService.signAsync(payload);
 
-    return { message: 'Se ha iniciado sesión exitosamente', token };
+    return { message: 'Se ha iniciado sesión exitosamente', token, id: user.id };
   }
 
   private getJwtToken(payload: JwtPayload) {

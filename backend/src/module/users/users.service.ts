@@ -9,14 +9,22 @@ import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { QueryUsersDto } from './dtos/query-user.dto';
+import { use } from 'passport';
+import { mapAdopter } from '../auth/utils/auth.utils';
+import { AdoptersService } from '../adopters/adopters.service';
+import { RegisterDto } from '../auth/dtos/register.dto';
+import { Adopters } from '../adopters/entities/adopters.entity';
+import { CreateAdopterDto } from '../adopters/dtos/create-adopter.dto';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
+
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
+    private readonly adoptersService: AdoptersService,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<Users> {
@@ -109,5 +117,29 @@ export class UsersService {
     return {
       message: 'La cuenta del usuario ha sido eliminada exitosamente',
     };
+  }
+
+  async updateUserById(id: string, updateUserDto) {
+    const user = await this.userRepository.findOne({where: {id}, relations: ['adopter']});
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }  
+    const{fullname, email, password, ...adopterdto}= updateUserDto;
+
+    const userUpdated = await this.userRepository.update(id, {fullname, email, password} );
+    if(userUpdated.affected === 0){
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+    if(user.role === 'adoptante' && user.adopter?.id && adopterdto){
+      const adopterData = mapAdopter(adopterdto, user);
+      await this.adoptersService.updateAdopter(user.adopter.id, {...adopterData, id:user.adopter.id});
+    }
+    return this.userRepository.findOne({where:{id}, relations: ['adopter'], select: {
+      id: true,
+      fullname: true,
+      email: true,
+      role: true,
+      isActive: true,
+    }});
   }
 }

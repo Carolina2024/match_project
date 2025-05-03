@@ -24,6 +24,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { OwnerOrAdminGuard } from '../auth/guards/owner-or-admin.guard';
+import { CreateUserDto } from './dtos/create-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -168,6 +169,11 @@ export class UsersController {
   @Get(':id')
   getUserById(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.findOneById(id);
+  } 
+
+  @Put(':id')
+  updateUserById(@Param('id') id: string, @Body() updateUserDto) {
+    return this.usersService.updateUserById(id, updateUserDto);
   }
 
   // @ApiOperation({

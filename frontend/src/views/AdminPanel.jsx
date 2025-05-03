@@ -2,6 +2,7 @@ import { useState } from "react";
 import Pets from "../componets/Pets";
 import PetList from "../componets/PetList";
 import UserProfiles from "../componets/UserProfiles";
+import AdoptionApllication from "../componets/AdoptionApllication";
 import Sidebar from "../componets/Sidebar";
 import AdminHome from "../componets/AdminHome";
 
@@ -126,12 +127,37 @@ const AdminPanel = () => {
           />
         );
       default:
-        return <div className="w-3/4 p-10">Vista no implementada</div>;
+          return <div className="w-3/4 p-10">Vista no implementada</div>;
+
+        case "AdoptionApllication":
+          return <AdoptionApllication />
     }
   };
 
   return (
     <div className="flex h-screen">
+      <div className="w-1/4 bg-[var(--color-primary)] p-6 text-white space-y-6">
+        <h2 className="text-2xl font-bold mb-8">Administrador</h2>
+
+        <button
+          onClick={() => setActiveView("listPets")}
+          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
+        >
+          Mascotas
+        </button>
+        <button
+          onClick={() => setActiveView("userProfiles")}
+          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
+        >
+          Listado de Perfiles
+        </button>
+        <button
+          onClick={() => setActiveView("AdoptionApllication")}
+          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
+        >
+          Solicitudes de Adopción
+        </button>
+      </div>
       <Sidebar onSelect={setActiveView} activeView={activeView} />
 
       <div className="w-3/4 p-10 overflow-y-auto">{renderView()}</div>

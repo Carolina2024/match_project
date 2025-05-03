@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 
 //AL CREAR NUEVA MASCOTA CON EL FORMULARIO CON VALIDACIONES CLIC + NUEVA MASCOTA
@@ -304,4 +305,17 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
   );
 };
 
+Pets.propTypes = {
+  setActiveView: PropTypes.func.isRequired,
+  setPets: PropTypes.func.isRequired,
+  editingPet: PropTypes.shape({
+    id: PropTypes.number,
+    nombre: PropTypes.string,
+    edad: PropTypes.string,
+    estado: PropTypes.string,
+    fotoUrl: PropTypes.string,
+  }),
+};
+
 export default Pets;
+

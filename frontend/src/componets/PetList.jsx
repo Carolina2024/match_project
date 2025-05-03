@@ -1,4 +1,6 @@
 import { FaRegSave, FaPen } from "react-icons/fa";
+import PropTypes from "prop-types";
+
 
 // OPCIÓN DE MASCOTAS PERFIL ADMINISTRADOR
 const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
@@ -34,6 +36,7 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
       </div>
 
       <table className="w-full table-auto border-collapse">
+
         <thead>
           <tr className="bg-white-400 text-black border border-gray-400 bg-white-100">
             <th className="px-4 py-2 ">Foto</th>
@@ -80,7 +83,23 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
         </tbody>
       </table>
     </div>
+    
   );
+  
+};
+PetList.propTypes = {
+  pets: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      nombre: PropTypes.string.isRequired,
+      edad: PropTypes.string.isRequired,
+      estado: PropTypes.string.isRequired,
+      fotoUrl: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setActiveView: PropTypes.func.isRequired,
+  setEditingPet: PropTypes.func.isRequired,
+  handleDeletePet: PropTypes.func.isRequired,
 };
 
 export default PetList;

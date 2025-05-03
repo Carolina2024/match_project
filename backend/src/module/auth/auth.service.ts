@@ -23,19 +23,19 @@ export class AuthService {
 
   async register(registerDto: RegisterDto) {
     const existingUser = await this.usersService.findByEmail(registerDto.email);
-    const existingAdopter = await this.adoptersService.findByRun(
-      registerDto.run as string,
-    );
-
     if (existingUser) {
       throw new ConflictException(
-        'El correo o el RUN ya se encuentran registrados',
+        'El correo electrónico ya se encuentra registrado',
       );
     }
 
+    const existingAdopter = await this.adoptersService.findByIdentityDocument(
+      registerDto.identityDocument as string,
+    );
+
     if (existingAdopter) {
       throw new ConflictException(
-        'El correo o el RUN ya se encuentran registrados',
+        'El Documento de Identidad ya se encuentra registrado',
       );
     }
 
@@ -53,8 +53,8 @@ export class AuthService {
 
     return {
       message: 'Usuario registrado exitosamente',
-      //user: newUser,
       token: this.getJwtToken(payload),
+      id: newUser.id
     };
   }
 
@@ -86,7 +86,7 @@ export class AuthService {
     };
     const token = await this.jwtService.signAsync(payload);
 
-    return { message: 'Se ha iniciado sesión exitosamente', token };
+    return { message: 'Se ha iniciado sesión exitosamente', token, id: user.id };
   }
 
   private getJwtToken(payload: JwtPayload) {

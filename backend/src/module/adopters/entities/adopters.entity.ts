@@ -1,4 +1,5 @@
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
+import { PetEnergy, PetTrait } from 'src/common/enums/pet.enum';
 import { Users } from 'src/module/users/entities/users.entity';
 import {
   Column,
@@ -14,10 +15,10 @@ export class Adopters {
   id?: string;
 
   @Column()
-  run: string;
+  birthDate: string;
 
   @Column()
-  birthDate: string;
+  identityDocument: string;
 
   @Column()
   address: string;
@@ -33,22 +34,13 @@ export class Adopters {
   allowsPets: boolean;
 
   @Column({ default: false })
-  hasDogs: boolean;
-
-  @Column({ default: false })
-  hasCats: boolean;
+  hadPets: boolean;
 
   @Column({ default: true })
-  hasChildren: boolean;
-
-  @Column()
-  petsExperience: boolean;
+  hadPetsVaccinated: boolean;
 
   @Column({ default: true })
-  isVaccinated: boolean;
-
-  @Column({ default: true })
-  isSterilized: boolean;
+  hadPetsCastrated: boolean;
 
   @Column()
   hoursAlone: number;
@@ -57,13 +49,32 @@ export class Adopters {
   petDestroy: string;
 
   @Column({ default: true })
-  hasVeterinarian: boolean;
+  preparedToVisitVeterinarian: boolean;
 
   @Column({ default: true })
   allowsVisit: boolean;
 
   @Column({ default: true })
   isResponsibleAdoption: boolean;
+
+  @Column({ default: PetEnergy.MODERATE, type: 'enum', enum: PetEnergy })
+  userPreferenceEnergy: PetEnergy;
+
+  @Column({
+    type: 'enum',
+    enum: PetTrait,
+    array: true,
+  })
+  userPreferenceTraits: PetTrait[];
+
+  @Column({ default: false })
+  userPreferenceDogs: boolean;
+
+  @Column({ default: false })
+  userPreferenceCats: boolean;
+
+  @Column({ default: true })
+  userPreferenceChildren: boolean;
 
   @OneToOne(() => Users, { onDelete: 'CASCADE' })
   @JoinColumn()

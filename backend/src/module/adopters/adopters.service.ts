@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Adopters } from './entities/adopters.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -16,8 +16,18 @@ export class AdoptersService {
     return this.adoptersRepository.save(adopter);
   }
 
-  async findByRun(run: string) {
-    const adopter = this.adoptersRepository.findOne({ where: { run } });
+  async findByIdentityDocument(identityDocument: string) {
+    const adopter = this.adoptersRepository.findOne({ where: { identityDocument } });
     return adopter;
+  }
+
+  async updateAdopter(id: string, updateAdopterDto: Partial<Adopters>): Promise<Adopters|null> {
+    const adopterUpdated = await this.adoptersRepository.update(id, updateAdopterDto);
+    if (adopterUpdated.affected=== 0) {
+      throw new NotFoundException(`Adopter con id ${id} no encontrado`);
+    } 
+    
+   return this.adoptersRepository.findOne({where:{id}});
+    
   }
 }

@@ -30,13 +30,4 @@ export class QueryUsersDto {
   @IsOptional()
   @IsString({ message: 'El correo debe ser una cadena de caracteres' })
   email?: string;
-
-  @ApiPropertyOptional({
-    description: 'Filtrar por usuarios activos',
-  })
-  @IsOptional()
-  @IsBooleanString({
-    message: 'isActive debe ser un booleano válido en formato string',
-  })
-  isActive?: string;
 }

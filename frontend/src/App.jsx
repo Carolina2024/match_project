@@ -9,6 +9,7 @@ import AdminPanel from "./views/AdminPanel";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import PetsHome from "./componets/PetsHome";
+import CuidadosMascota from "./views/CuidadosMascota";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
           <Route element={<Home />} path="/" />
           <Route element={<Login />} path="/Login" />
           <Route element={<Register />} path="/Register" />
-          <Route element={<QuienesSomos />} path="QuienesSomos" />
-          <Route element={<Adoptar />} path="Adoptar" />
-          <Route element={<AdminPanel />} path="Admin" />
-          <Route element={<PetsHome />} path="Mascotas" />
+          <Route element={<QuienesSomos />} path="/QuienesSomos" />
+          <Route element={<CuidadosMascota />} path="/CuidadosMascota" />
+          <Route element={<Adoptar />} path="/Adoptar" />
+          <Route element={<AdminPanel />} path="/Admin" />
+          <Route element={<PetsHome />} path="/Mascotas" />
         </Route>
 
       </Routes>

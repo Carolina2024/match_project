@@ -1,4 +1,6 @@
 import { FaRegSave, FaPen } from "react-icons/fa";
+import PropTypes from "prop-types";
+
 
 const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
   const handleEdit = (pet) => {
@@ -60,6 +62,15 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
       <td className="border px-4 py-2">{pet.estado}</td>
       <td className="border px-4 py-2">
         <div className="flex justify-center gap-4 text-xl">
+
+        <button
+            onClick={() => handleDeletePet(pet.id)}
+            className="text-red-500 hover:text-red-700"
+            title="Eliminar"
+          >
+            <FaRegSave />
+          </button>
+
           <button
             onClick={() => handleEdit(pet)}
             className="text-blue-500 hover:text-blue-700"
@@ -67,13 +78,7 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
           >
             <FaPen />
           </button>
-          <button
-            onClick={() => handleDeletePet(pet.id)}
-            className="text-red-500 hover:text-red-700"
-            title="Eliminar"
-          >
-            <FaRegSave />
-          </button>
+
         </div>
       </td>
     </tr>
@@ -82,7 +87,23 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleDeletePet }) => {
 
 </table>
     </div>
+    
   );
+  
+};
+PetList.propTypes = {
+  pets: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      nombre: PropTypes.string.isRequired,
+      edad: PropTypes.string.isRequired,
+      estado: PropTypes.string.isRequired,
+      fotoUrl: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  setActiveView: PropTypes.func.isRequired,
+  setEditingPet: PropTypes.func.isRequired,
+  handleDeletePet: PropTypes.func.isRequired,
 };
 
 export default PetList;

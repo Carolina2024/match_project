@@ -2,6 +2,8 @@ import { useState } from "react";
 import Pets from "../componets/Pets";
 import PetList from "../componets/PetList";
 import UserProfiles from "../componets/UserProfiles";
+import AdoptionApllication from "../componets/AdoptionApllication";
+
 
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState(null);
@@ -84,12 +86,16 @@ const AdminPanel = () => {
         return <UserProfiles users={users} />;
       default:
         return null;
+
+        case "AdoptionApllication":
+          return <AdoptionApllication />;
+
     }
   };
 
   return (
     <div className="flex h-screen">
-      <div className="w-1/4 bg-orange-400 p-6 text-white space-y-6">
+      <div className="w-1/4 bg-[var(--color-primary)] p-6 text-white space-y-6">
         <h2 className="text-2xl font-bold mb-8">Administrador</h2>
 
         <button
@@ -103,6 +109,12 @@ const AdminPanel = () => {
           className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
         >
           Listado de Perfiles
+        </button>
+        <button
+          onClick={() => setActiveView("AdoptionApllication")}
+          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
+        >
+          Solicitudes de Adopción
         </button>
       </div>
 

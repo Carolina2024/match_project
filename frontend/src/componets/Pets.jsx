@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const Pets = ({ setActiveView, setPets, editingPet }) => {
   const [formData, setFormData] = useState({
@@ -140,6 +141,18 @@ const Pets = ({ setActiveView, setPets, editingPet }) => {
       </form>
     </div>
   );
+};
+
+Pets.propTypes = {
+  setActiveView: PropTypes.func.isRequired,
+  setPets: PropTypes.func.isRequired,
+  editingPet: PropTypes.shape({
+    id: PropTypes.number,
+    nombre: PropTypes.string,
+    edad: PropTypes.string,
+    estado: PropTypes.string,
+    fotoUrl: PropTypes.string,
+  }),
 };
 
 export default Pets;

@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-//import { useNavigate } from "react-router-dom";
-//import { loginUser } from "../api/user";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/user";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
- // const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const validateField = (name, value) => {
     switch (name) {
@@ -41,7 +41,7 @@ const Login = () => {
     );
   };
 
- /*  const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "email") setEmail(value);
     if (name === "password") setPassword(value);
@@ -51,12 +51,7 @@ const Login = () => {
       ...prev,
       [name]: errorMsg,
     }));
-  }; */
-
-  
-
-    return newErrors;
-};  
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,7 +92,8 @@ const Login = () => {
                   type="email"
                   placeholder="Email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={handleChange}
+                  name="email"
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-300"
                 />
               </div>
@@ -185,6 +181,5 @@ const Login = () => {
     </div>
   );
 };
-
 
 export default Login;

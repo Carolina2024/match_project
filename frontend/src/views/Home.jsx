@@ -222,7 +222,7 @@ const Home = () => {
               {sliders.map((_, i) => (
                 <button
                   key={i}
-                  className={`w-3 h-3 rounded-full ${
+                  className={`w-2 h-2 rounded-full ${
                     activeSlide === i ? "bg-white" : "bg-white"
                   }`}
                   onClick={() => setActiveSlide(i)}

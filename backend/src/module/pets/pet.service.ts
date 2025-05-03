@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Pet } from './entities/pet.entity';
@@ -256,6 +260,13 @@ export class PetService {
 
     const adopter = user.adopter;
 
+    // Si el adoptante no permite mascotas, no mostrar ninguna (esto debería ser validado antes)
+    if (!adopter.allowsPets) {
+      throw new ConflictException(
+        `El edificio o condominio del adoptante no permite mascotas en su hogar`,
+      );
+    }
+
     const queryBuilder = this.petRepository
       .createQueryBuilder('pet')
       .where('pet.isActive = :isActive', { isActive: true })
@@ -265,15 +276,15 @@ export class PetService {
 
     // ===== FILTROS DE COMPATIBILIDAD CRÍTICOS =====
 
-    // Si el adoptante tiene hijos, solo mostrar mascotas amigables con niños
-    if (adopter.hasChildren) {
+    // Si el adoptante desea compatibilidad con niños, solo mostrar mascotas amigables con niños
+    if (adopter.userPreferenceChildren) {
       queryBuilder.andWhere(':childFriendly = ANY(pet.traits)', {
         childFriendly: PetTrait.CHILD_FRIENDLY,
       });
     }
 
-    // Si el adoptante tiene perros o gatos, solo mostrar mascotas amigables con otras mascotas
-    if (adopter.hasDogs || adopter.hasCats) {
+    // Si el adoptante desea compatibilidad con perros o gatos, solo mostrar mascotas amigables con otras mascotas
+    if (adopter.userPreferenceDogs || adopter.userPreferenceCats) {
       queryBuilder.andWhere(':petFriendly = ANY(pet.traits)', {
         petFriendly: PetTrait.PET_FRIENDLY,
       });
@@ -302,13 +313,6 @@ export class PetService {
       );
     }
 
-    // Si el adoptante no permite mascotas, no mostrar ninguna (esto debería ser validado antes)
-    if (!adopter.allowsPets) {
-      throw new NotFoundException(
-        `El adoptante no permite mascotas en su hogar`,
-      );
-    }
-
     // ===== FILTROS PARA TIPO DE VIVIENDA =====
 
     // Para departamentos pequeños, limitar el tamaño de las mascotas
@@ -324,8 +328,8 @@ export class PetService {
 
     // ===== FILTROS BASADOS EN EXPERIENCIA DEL ADOPTANTE =====
 
-    // Si el adoptante no tiene experiencia con mascotas, sugerir mascotas más fáciles de cuidar
-    if (!adopter.petsExperience) {
+    // Si el adoptante no ha tenido mascotas antes, sugerir mascotas más fáciles de cuidar
+    if (!adopter.hadPets) {
       queryBuilder.andWhere(
         '(:easygoing = ANY(pet.traits) OR :adaptable = ANY(pet.traits))',
         {
@@ -338,7 +342,7 @@ export class PetService {
     // ===== FILTROS BASADOS EN RESPONSABILIDAD DEL ADOPTANTE =====
 
     // Si el adoptante no tiene veterinario o no lo llevará al veterinario, priorizar mascotas saludables, vacunadas o esterilizadas
-    if (!adopter.hasVeterinarian) {
+    if (!adopter.preparedToVisitVeterinarian) {
       queryBuilder.andWhere('pet.isVaccinated = :isVaccinated', {
         isVaccinated: true,
       });
@@ -397,7 +401,7 @@ export class PetService {
       // Factores de compatibilidad con ponderaciones
 
       // 1. Compatibilidad con niños (20 puntos)
-      if (adopter.hasChildren) {
+      if (adopter.userPreferenceChildren) {
         if (pet.traits.includes(PetTrait.CHILD_FRIENDLY)) {
           score += 20;
         }
@@ -406,7 +410,7 @@ export class PetService {
       }
 
       // 2. Compatibilidad con otras mascotas (15 puntos)
-      if (adopter.hasDogs || adopter.hasCats) {
+      if (adopter.userPreferenceDogs || adopter.userPreferenceCats) {
         if (pet.traits.includes(PetTrait.PET_FRIENDLY)) {
           score += 15;
         }
@@ -458,7 +462,7 @@ export class PetService {
       }
 
       // 5. Experiencia con mascotas (10 puntos)
-      if (adopter.petsExperience) {
+      if (adopter.hadPets) {
         score += 10;
       } else {
         if (

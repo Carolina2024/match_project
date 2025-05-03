@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsBoolean,
   IsDateString,
   IsEnum,
@@ -6,9 +7,13 @@ import {
   IsNotEmpty,
   IsString,
   Matches,
+  Max,
+  Min,
 } from 'class-validator';
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsAdult } from '../decorators/is-adult.validator';
+import { PetEnergy, PetTrait } from 'src/common/enums/pet.enum';
 
 export class CreateAdopterDto {
   @ApiProperty({
@@ -23,18 +28,20 @@ export class CreateAdopterDto {
     },
   )
   @IsNotEmpty({ message: 'La fecha de nacimiento es requerida' })
+  @IsAdult()
   birthDate: string;
 
   @ApiProperty({
-    description: 'RUN del adoptante',
+    description: 'Documento de Identidad del adoptante',
     example: '12345678-9',
     type: 'string',
   })
   @Matches(/^([1-9]|[1-9]\d|[1-9]\d{2})((\.\d{3})*|(\d{3})*)\-(\d|k|K)$/, {
-    message: 'Ingrese un RUN válido siguiendo el siguiente formato: 12345678-9',
+    message:
+      'Ingrese un Documento de Identidad válido en Chile siguiendo el siguiente formato: 12345678-9',
   })
-  @IsNotEmpty({ message: 'El RUN es requerido' })
-  run: string;
+  @IsNotEmpty({ message: 'El Documento de Identidad es requerido' })
+  identityDocument: string;
 
   @ApiProperty({
     description: 'La dirección de residencia del adoptante',
@@ -73,92 +80,50 @@ export class CreateAdopterDto {
   allowsPets: boolean;
 
   @ApiProperty({
-    description: '¿Tiene perros en su hogar?',
+    description: '¿Ha tenido mascotas antes?',
     example: true,
     type: 'boolean',
   })
   @IsBoolean({
     message:
-      'La respuesta a ¿Tiene perros en su hogar? debe ser verdadero o falso',
+      'La respuesta a ¿Ha tenido mascotas antes? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a ¿Tiene perros en su hogar? es requerida',
+    message: 'La respuesta a ¿Ha tenido mascotas antes? es requerida',
   })
-  hasDogs: boolean;
+  hadPets: boolean;
 
   @ApiProperty({
-    description: '¿Tiene gatos en su hogar?',
+    description: '¿Sus mascotas estaban vacunadas?',
     example: true,
     type: 'boolean',
   })
   @IsBoolean({
     message:
-      'La respuesta a ¿Tiene gatos en su hogar? debe ser verdadero o falso',
+      'La respuesta a ¿Sus mascotas estaban vacunadas? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a ¿Tiene gatos en su hogar? es requerida',
+    message: 'La respuesta a ¿Sus mascotas estaban vacunadas? es requerida',
   })
-  hasCats: boolean;
+  hadPetsVaccinated: boolean;
 
   @ApiProperty({
-    description: '¿Tiene niños en su hogar?',
+    description: '¿Sus mascotas estaban castradas?',
     example: true,
     type: 'boolean',
   })
   @IsBoolean({
     message:
-      'La respuesta a ¿Tiene niños en su hogar? debe ser verdadero o falso',
+      'La respuesta a ¿Sus mascotas estaban castradas? debe ser verdadero o falso',
   })
   @IsNotEmpty({
-    message: 'La respuesta a ¿Tiene niños en su hogar? es requerida',
+    message: 'La respuesta a ¿Sus mascotas estaban castradas? es requerida',
   })
-  hasChildren: boolean;
+  hadPetsCastrated: boolean;
 
   @ApiProperty({
-    description: '¿Tiene experiencia cuidando mascotas?',
-    example: true,
-    type: 'boolean',
-  })
-  @IsBoolean({
-    message:
-      'La respuesta a ¿Tiene experiencia cuidando mascotas? debe ser verdadero o falso',
-  })
-  @IsNotEmpty({
-    message:
-      'La respuesta a ¿Tiene experiencia cuidando mascotas? es requerida',
-  })
-  petsExperience: boolean;
-
-  @ApiProperty({
-    description: '¿Sus mascotas están vacunadas?',
-    example: true,
-    type: 'boolean',
-  })
-  @IsBoolean({
-    message:
-      'La respuesta a ¿Sus mascotas están vacunadas? debe ser verdadero o falso',
-  })
-  @IsNotEmpty({
-    message: 'La respuesta a ¿Sus mascotas están vacunadas? es requerida',
-  })
-  isVaccinated: boolean;
-
-  @ApiProperty({
-    description: '¿Sus mascotas están esterilizadas?',
-    example: true,
-    type: 'boolean',
-  })
-  @IsBoolean({
-    message:
-      'La respuesta a ¿Sus mascotas están esterilizadas? debe ser verdadero o falso',
-  })
-  @IsNotEmpty({
-    message: 'La respuesta a ¿Sus mascotas están esterilizadas? es requerida',
-  })
-  isSterilized: boolean;
-
-  @ApiProperty({
-    description: 'Cantidad de horas que pasará sola la mascota',
+    description:
+      'Cantidad de horas que pasará sola la mascota entre 0-23 horas',
     example: '3',
     type: 'number',
   })
@@ -169,6 +134,8 @@ export class CreateAdopterDto {
   @IsNotEmpty({
     message: 'La cantidad de horas que pasará sola la mascota es requerida',
   })
+  @Min(0, { message: 'El valor minimo permitido es 0' })
+  @Max(23, { message: 'El valor maximo permitido es 23' })
   hoursAlone: number;
 
   @ApiProperty({
@@ -199,7 +166,7 @@ export class CreateAdopterDto {
     message:
       'La respuesta a ¿Te comprometes a llevar a la mascota al veterinario? es requerida',
   })
-  hasVeterinarian: boolean;
+  preparedToVisitVeterinarian: boolean;
 
   @ApiProperty({
     description: '¿Permitirías recibir visitas de la fundación?',
@@ -230,4 +197,77 @@ export class CreateAdopterDto {
       'La respuesta a ¿Te comprometes a una adopción responsable? es requerida',
   })
   isResponsibleAdoption: boolean;
+
+  @ApiProperty({
+    description:
+      'Determina las preferencias del usuario sobre el nivel de energía de la mascota',
+    enum: PetEnergy,
+    example: PetEnergy.MODERATE,
+  })
+  @IsEnum(PetEnergy, {
+    message: 'El nivel de energía debe ser un valor válido',
+  })
+  userPreferenceEnergy: PetEnergy;
+
+  @ApiProperty({
+    description:
+      'Preferencias del usuario sobre los rasgos de personalidad de la mascota',
+    enum: PetTrait,
+    isArray: true,
+    example: [PetTrait.AFFECTIONATE, PetTrait.PLAYFUL],
+  })
+  @IsArray({ message: 'Los rasgos deben ser un arreglo' })
+  @IsEnum(PetTrait, {
+    each: true,
+    message: 'Cada rasgo debe ser un valor válido',
+  })
+  userPreferenceTraits: PetTrait[];
+
+  @ApiProperty({
+    description:
+      'Preferencias del usuario con una mascota con compatibilidad con los perros',
+    example: true,
+    type: 'boolean',
+  })
+  @IsBoolean({
+    message:
+      'La preferencia del usuario por la compatiblidad con los perros debe ser verdadero o falso',
+  })
+  @IsNotEmpty({
+    message:
+      'La preferencia del usuario por la compatiblidad con los perros es requerida',
+  })
+  userPreferenceDogs: boolean;
+
+  @ApiProperty({
+    description:
+      'Preferencias del usuario con una mascota con compatibilidad con los gatos',
+    example: true,
+    type: 'boolean',
+  })
+  @IsBoolean({
+    message:
+      'La preferencia del usuario por la compatiblidad con los gatos debe ser verdadero o falso',
+  })
+  @IsNotEmpty({
+    message:
+      'La preferencia del usuario por la compatiblidad con los gatos es requerida',
+  })
+  userPreferenceCats: boolean;
+
+  @ApiProperty({
+    description:
+      'Preferencias del usuario con una mascota con compatibilidad con los niños',
+    example: true,
+    type: 'boolean',
+  })
+  @IsBoolean({
+    message:
+      'La preferencia del usuario por la compatiblidad con los niños debe ser verdadero o falso',
+  })
+  @IsNotEmpty({
+    message:
+      'La preferencia del usuario por la compatiblidad con los niños es requerida',
+  })
+  userPreferenceChildren: boolean;
 }

@@ -47,9 +47,9 @@ export class AuthController {
   })
   @ApiConflictResponse({
     description:
-      'El correo o el RUN ingresados por el usuario ya se encuentran registrados',
+      'El correo o el documento de identidad ingresados por el usuario ya se encuentran registrados',
     example: {
-      message: 'El correo o el RUN ya se encuentran registrados',
+      message: 'El correo electrónico ya se encuentra registrado',
       error: 'Conflict',
       statusCode: 409,
     },
@@ -76,7 +76,7 @@ export class AuthController {
   @ApiBadRequestResponse({
     description: 'El usuario ingresa un dato en un formato inválido',
     example: {
-      message: ['Ingrese un correo electrónico válido'],
+      message: 'Ingrese un correo electrónico válido',
       error: 'Bad Request',
       statusCode: 400,
     },

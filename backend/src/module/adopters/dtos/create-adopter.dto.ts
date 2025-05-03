@@ -6,11 +6,15 @@ import {
   IsNotEmpty,
   IsString,
   Matches,
+  Max,
+  Min,
 } from 'class-validator';
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsAdult } from '../decorators/is-adult.validator';
 
 export class CreateAdopterDto {
+ 
   @ApiProperty({
     description: 'Fecha de nacimiento del adoptante',
     example: '1998-09-21',
@@ -23,7 +27,10 @@ export class CreateAdopterDto {
     },
   )
   @IsNotEmpty({ message: 'La fecha de nacimiento es requerida' })
+  @IsAdult()
   birthDate: string;
+
+
 
   @ApiProperty({
     description: 'RUN del adoptante',
@@ -158,7 +165,7 @@ export class CreateAdopterDto {
   isSterilized: boolean;
 
   @ApiProperty({
-    description: 'Cantidad de horas que pasará sola la mascota',
+    description: 'Cantidad de horas que pasará sola la mascota entre 0-23 horas',
     example: '3',
     type: 'number',
   })
@@ -169,6 +176,8 @@ export class CreateAdopterDto {
   @IsNotEmpty({
     message: 'La cantidad de horas que pasará sola la mascota es requerida',
   })
+  @Min(0, {message: 'El valor minimo permitido es 0'})
+  @Max(23, {message: 'El valor maximo permitido es 23'})
   hoursAlone: number;
 
   @ApiProperty({
@@ -230,4 +239,18 @@ export class CreateAdopterDto {
       'La respuesta a ¿Te comprometes a una adopción responsable? es requerida',
   })
   isResponsibleAdoption: boolean;
+
+  @ApiProperty({
+    description: ' Acepto términos y condiciones ',
+    example: true,
+    type: 'boolean'
+  }) 
+  @IsBoolean({
+    message: ` 'Aceptar términos y condiciones' debe ser verdadero o falso `
+  })
+  @IsNotEmpty({
+    message:
+      `La respuesta a 'Aceptar términos y condiciones' es requerida`,
+  })
+  acceptedTerms:boolean;
 }

@@ -65,6 +65,9 @@ export class Adopters {
   @Column({ default: true })
   isResponsibleAdoption: boolean;
 
+  @Column({ default:false })
+  acceptedTerms: boolean;
+
   @OneToOne(() => Users, { onDelete: 'CASCADE' })
   @JoinColumn()
   user: Users;

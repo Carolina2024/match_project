@@ -16,8 +16,8 @@ export class AdoptersService {
     return this.adoptersRepository.save(adopter);
   }
 
-  async findByRun(run: string) {
-    const adopter = this.adoptersRepository.findOne({ where: { run } });
+  async findByIdentityDocument(identityDocument: string) {
+    const adopter = this.adoptersRepository.findOne({ where: { identityDocument } });
     return adopter;
   }
 

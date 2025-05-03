@@ -44,7 +44,6 @@ export class UsersService {
     const where: any = { role: 'adoptante' };
     if (filters.fullname) where.fullname = Like(`%${filters.fullname}%`);
     if (filters.email) where.email = Like(`%${filters.email}%`);
-    if (filters.isActive) where.isActive = filters.isActive;
 
     const [users, total] = await this.userRepository.findAndCount({
       where,
@@ -56,7 +55,7 @@ export class UsersService {
         email: true,
         fullname: true,
         id: true,
-        isActive: true,
+        isActive: false,
         role: true,
         adopter: true,
       },
@@ -89,7 +88,13 @@ export class UsersService {
   }
 
   async remove(id: string): Promise<{ message: string }> {
-    const user = await this.findOneById(id);
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['adopter'],
+    });
+    if (!user){
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`)
+    }
     if (!user.isActive)
       throw new BadRequestException('El usuario ya está eliminado');
 
@@ -138,10 +143,17 @@ export class UsersService {
     }
 
     if (user.role === 'adoptante' && user.adopter?.id && adopterdto) {
-      if (adopterdto.run && user.adopter.run !== adopterdto.run) {
-        const userExists = await this.adoptersService.findByRun(adopterdto.run);
+      if (
+        adopterdto.identityDocument &&
+        user.adopter.identityDocument !== adopterdto.identityDocument
+      ) {
+        const userExists = await this.adoptersService.findByIdentityDocument(
+          adopterdto.identityDocument,
+        );
         if (userExists) {
-          throw new ConflictException('Ya existe un usuario con ese RUN');
+          throw new ConflictException(
+            'Ya existe un usuario con ese Documento de Identidad',
+          );
         }
       }
       await this.adoptersService.updateAdopter(user.adopter.id, {

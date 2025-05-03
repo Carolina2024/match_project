@@ -10,6 +10,9 @@ import {
   ParseUUIDPipe,
   HttpStatus,
   HttpCode,
+  UseInterceptors,
+  UploadedFiles,
+  BadRequestException,
 } from '@nestjs/common';
 import { PetService } from './pet.service';
 import { CreatePetDto } from './dto/create-pet.dto';
@@ -25,6 +28,7 @@ import {
   ApiParam,
   ApiQuery,
   ApiBody,
+  ApiConsumes,
 } from '@nestjs/swagger';
 import { Pet } from './entities/pet.entity';
 import { UserRole } from 'src/common/enums/userRole.enum';
@@ -37,13 +41,16 @@ import {
   PetSpecies,
   PetStatus,
 } from 'src/common/enums/pet.enum';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Mascotas')
 @Controller('pets')
 export class PetController {
   constructor(private readonly petService: PetService) {}
 
-  // @Post()
+  @Post()
+  @UseInterceptors(FilesInterceptor('photos'))
+  @ApiConsumes('multipart/form-data')
   // @HttpCode(HttpStatus.CREATED)
   // @ApiOperation({
   //   summary: 'Crear una nueva mascota',
@@ -91,10 +98,16 @@ export class PetController {
   //     statusCode: 400,
   //   },
   // })
-  // @Auth(UserRole.ADMIN)
-  // create(@Body() createPetDto: CreatePetDto) {
-  //   return this.petService.create(createPetDto);
-  // }
+  //@Auth(UserRole.ADMIN)
+  
+  create(@Body() createPetDto: CreatePetDto, @UploadedFiles() files: Express.Multer.File[]) {
+    try{
+      return this.petService.create(createPetDto, files);
+
+    } catch (error) {
+      throw new BadRequestException('Error al crear la mascota '+error)
+    }
+  }
 
   @ApiOperation({
     summary: 'Obtener lista de mascotas con información limitada',
@@ -683,5 +696,5 @@ export class PetController {
   @HttpCode(HttpStatus.OK)
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.petService.remove(id);
-  }
+  } 
 }

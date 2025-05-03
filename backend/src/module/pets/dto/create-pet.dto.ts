@@ -1,6 +1,6 @@
-import { IsArray, IsBoolean, IsDate, IsEnum, IsNumber, IsString, IsUrl, Matches, Max, Min } from 'class-validator';
+import { IsArray, IsBoolean, IsDate, IsEnum, IsNumber, IsNumberString, IsString, IsUrl, Matches, Max, Min } from 'class-validator';
 import { PetAge, PetEnergy, PetSex, PetSize, PetSpecies, PetStatus, PetTrait } from '../../../common/enums/pet.enum';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePetDto {
@@ -60,24 +60,60 @@ export class CreatePetDto {
     breed: string;
 
     @ApiProperty({ description: 'Peso en kilogramos', example: 15.5 })
+    @Transform(({value})=>{
+        const valor = Number(value);
+        if (isNaN(valor)) {
+            throw new Error('El peso debe ser un número');
+        }
+        return valor;
+    })
     @IsNumber({}, { message: 'El peso debe ser un número' })
     @Min(0, { message: 'El peso no puede ser negativo' })
     @Max(100, { message: 'El peso no puede ser mayor a 100 kg' })
     kg: number;
 
     @ApiProperty({ description: 'Indica si la mascota está vacunada', example: true })
+    @Transform(({value})=>{
+        const valor = Boolean(value);
+        if (typeof valor !== 'boolean') {
+            throw new Error('El campo de vacunación debe ser un valor booleano');
+        }
+        return valor;
+    })
     @IsBoolean({ message: 'El campo de vacunación debe ser un valor booleano' })
+    @Type(() => Boolean)
     isVaccinated: boolean;
 
     @ApiProperty({ description: 'Indica si la mascota está esterilizada', example: true })
+    @Transform(({value})=>{
+        const valor = Boolean(value);
+        if (typeof valor !== 'boolean') {
+            throw new Error('El campo de vacunación debe ser un valor booleano');
+        }
+        return valor;
+    })
     @IsBoolean({ message: 'El campo de esterilización debe ser un valor booleano' })
     isSterilized: boolean;
 
     @ApiProperty({ description: 'Indica si la mascota está desparasitada', example: true })
+    @Transform(({value})=>{
+        const valor = Boolean(value);
+        if (typeof valor !== 'boolean') {
+            throw new Error('El campo de vacunación debe ser un valor booleano');
+        }
+        return valor;
+    })
     @IsBoolean({ message: 'El campo de desparasitación debe ser un valor booleano' })
     isDewormed: boolean;
 
     @ApiProperty({ description: 'Indica si la mascota tiene microchip', example: false })
+    @Transform(({value})=>{
+        const valor = Boolean(value);
+        if (typeof valor !== 'boolean') {
+            throw new Error('El campo de vacunación debe ser un valor booleano');
+        }
+        return valor;
+    })
     @IsBoolean({ message: 'El campo de microchip debe ser un valor booleano' })
     hasMicrochip: boolean;
 
@@ -109,12 +145,12 @@ export class CreatePetDto {
     @IsEnum(PetStatus, { message: 'El esta en el que se encuentra la msacota debe ser un valor válido' })
     status: PetStatus;
 
-    @ApiProperty({ 
-      description: 'URLs de las fotos de la mascota', 
-      isArray: true,
-      example: ['https://example.com/pet1.jpg', 'https://example.com/pet2.jpg'] 
-    })
-    @IsArray({ message: 'Las URLs de fotos deben ser un arreglo' })
-    @IsUrl({}, { each: true, message: 'Cada URL de foto debe tener un formato válido' })
-    photoUrls: string[];
+    // @ApiProperty({ 
+    //  description: 'URLs de las fotos de la mascota', 
+    //   isArray: true,
+    //   example: ['https://example.com/pet1.jpg', 'https://example.com/pet2.jpg'] 
+    // })
+    // @IsArray({ message: 'Las URLs de fotos deben ser un arreglo' })
+    // @IsUrl({}, { each: true, message: 'Cada URL de foto debe tener un formato válido' })
+    // photoUrls: string[];
 }

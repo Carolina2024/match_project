@@ -1,10 +1,12 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
   Param,
   ParseUUIDPipe,
   Patch,
+  Put,
   Query,
   UseGuards,
 } from '@nestjs/common';
@@ -25,6 +27,7 @@ import { Auth } from '../auth/decorators/auth.decorator';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { OwnerOrAdminGuard } from '../auth/guards/owner-or-admin.guard';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -169,46 +172,74 @@ export class UsersController {
   @Get(':id')
   getUserById(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.findOneById(id);
-  } 
-
-  @Put(':id')
-  updateUserById(@Param('id') id: string, @Body() updateUserDto) {
-    return this.usersService.updateUserById(id, updateUserDto);
   }
 
-  // @ApiOperation({
-  //   summary: 'Activa la cuenta del usuario por su ID',
-  //   description:
-  //     'Retorna un mensaje indicando que la cuenta del usuario se ha activado correctamente',
-  // })
-  // @ApiOkResponse({
-  //   description: 'El usuario es activado exitosamente',
-  //   example: {
-  //     message: 'Usuario activado correctamente',
-  //   },
-  // })
-  // @ApiBadRequestResponse({
-  //   description: 'Se intenta restaurar un usuario activo',
-  //   example: {
-  //     message: 'El usuario ya esta activo',
-  //     error: 'Bad Request',
-  //     statusCode: 400,
-  //   },
-  // })
-  // @ApiNotFoundResponse({
-  //   description: 'No se encuentra el usuario con el ID',
-  //   example: {
-  //     message:
-  //       'Usuario con id 639dcdc7-a635-48d4-b641-2c74d0878bbd no encontrado',
-  //     error: 'Not Found',
-  //     statusCode: 404,
-  //   },
-  // })
-  // @Auth(UserRole.ADMIN)
-  // @Patch('restore/:id')
-  // restore(@Param('id', ParseUUIDPipe) id: string) {
-  //   return this.usersService.restore(id);
-  // }
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Actualizar un usuario por su ID',
+    description: 'Permite actualizar uno o más campos de un usuario por su ID',
+  })
+  @ApiOkResponse({
+    description: 'Se actualiza el usuario exitosamente',
+    example: {
+      id: '4c504ba1-e303-4f3f-b465-1280c30c2ba8',
+      fullname: 'John Miguel Doe',
+      email: 'john@example.com',
+      role: 'adoptante',
+      adopter: {
+        id: '65d58002-746e-4342-ad65-bd6cfc3d7ab6',
+        run: '12345678-9',
+        birthDate: '1998-09-21',
+        address:
+          'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
+        homeType: 'Departamento grande',
+        allowsPets: true,
+        hasDogs: true,
+        hasCats: true,
+        hasChildren: true,
+        petsExperience: true,
+        isVaccinated: true,
+        isSterilized: true,
+        hoursAlone: 3,
+        petDestroy: 'Lo educaré para que no vuelva a repetir esa acción',
+        hasVeterinarian: true,
+        allowsVisit: true,
+        isResponsibleAdoption: true,
+      },
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'El usuario no está autenticado',
+    example: {
+      message: 'Unauthorized',
+      statusCode: 401,
+    },
+  })
+  @ApiForbiddenResponse({
+    description: 'Usuario sin permisos para acceder al recurso',
+    example: {
+      message: 'Usuario sin permisos suficientes',
+      error: 'Forbidden',
+      statusCode: 403,
+    },
+  })
+  @ApiNotFoundResponse({
+    description: 'No se ha encontrado un usuario con el ID indicado',
+    example: {
+      message:
+        'Usuario con id 639dcdc7-a635-48d4-a641-2c74d0878cbd no encontrado',
+      error: 'Not Found',
+      statusCode: 404,
+    },
+  })
+  @UseGuards(AuthGuard(), OwnerOrAdminGuard)
+  @Patch(':id')
+  updateUserById(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return this.usersService.updateUserById(id, updateUserDto);
+  }
 
   @ApiOperation({
     summary: 'Elimina la cuenta del usuario por su ID',

@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -9,15 +10,10 @@ import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { QueryUsersDto } from './dtos/query-user.dto';
-import { use } from 'passport';
-import { mapAdopter } from '../auth/utils/auth.utils';
 import { AdoptersService } from '../adopters/adopters.service';
-import { RegisterDto } from '../auth/dtos/register.dto';
-import { Adopters } from '../adopters/entities/adopters.entity';
-import { CreateAdopterDto } from '../adopters/dtos/create-adopter.dto';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
-
+import { UpdateUserDto } from './dtos/update-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -83,7 +79,7 @@ export class UsersService {
         fullname: true,
         email: true,
         role: true,
-        isActive: true,
+        isActive: false,
       },
     });
     if (!user) {
@@ -91,16 +87,6 @@ export class UsersService {
     }
     return user;
   }
-
-  // async restore(id: string) {
-  //   const user = await this.findOneById(id);
-  //   if (user.isActive)
-  //     throw new BadRequestException('El usuario ya esta activo');
-
-  //   await this.userRepository.update(id, { isActive: true });
-
-  //   return { message: 'Usuario activado correctamente' };
-  // }
 
   async remove(id: string): Promise<{ message: string }> {
     const user = await this.findOneById(id);
@@ -119,27 +105,60 @@ export class UsersService {
     };
   }
 
-  async updateUserById(id: string, updateUserDto) {
-    const user = await this.userRepository.findOne({where: {id}, relations: ['adopter']});
+  async updateUserById(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      relations: ['adopter'],
+    });
     if (!user) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
-    }  
-    const{fullname, email, password, ...adopterdto}= updateUserDto;
+    }
+    const { fullname, email, password, ...adopterdto } = updateUserDto;
 
-    const userUpdated = await this.userRepository.update(id, {fullname, email, password} );
-    if(userUpdated.affected === 0){
-      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    if (email && email !== user.email) {
+      const userExists = await this.findByEmail(email);
+      if (userExists)
+        throw new ConflictException('Ya existe un usuario con ese correo');
     }
-    if(user.role === 'adoptante' && user.adopter?.id && adopterdto){
-      const adopterData = mapAdopter(adopterdto, user);
-      await this.adoptersService.updateAdopter(user.adopter.id, {...adopterData, id:user.adopter.id});
+
+    let newPassword = password;
+    if (password) {
+      newPassword = await bcrypt.hash(password, 10);
     }
-    return this.userRepository.findOne({where:{id}, relations: ['adopter'], select: {
-      id: true,
-      fullname: true,
-      email: true,
-      role: true,
-      isActive: true,
-    }});
+
+    if (fullname || email || password) {
+      const userUpdated = await this.userRepository.update(id, {
+        fullname,
+        email,
+        password: newPassword,
+      });
+      if (userUpdated.affected === 0) {
+        throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+      }
+    }
+
+    if (user.role === 'adoptante' && user.adopter?.id && adopterdto) {
+      if (adopterdto.run && user.adopter.run !== adopterdto.run) {
+        const userExists = await this.adoptersService.findByRun(adopterdto.run);
+        if (userExists) {
+          throw new ConflictException('Ya existe un usuario con ese RUN');
+        }
+      }
+      await this.adoptersService.updateAdopter(user.adopter.id, {
+        ...adopterdto,
+        id: user.adopter.id,
+      });
+    }
+    return this.userRepository.findOne({
+      where: { id },
+      relations: ['adopter'],
+      select: {
+        id: true,
+        fullname: true,
+        email: true,
+        role: true,
+        isActive: false,
+      },
+    });
   }
 }

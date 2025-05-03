@@ -91,17 +91,12 @@ const AdminPanel = () => {
     <div className="flex h-screen">
       <div className="w-1/4 bg-orange-400 p-6 text-white space-y-6">
         <h2 className="text-2xl font-bold mb-8">Administrador</h2>
-        <button
-          onClick={() => setActiveView("createPet")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Crear Mascota
-        </button>
+
         <button
           onClick={() => setActiveView("listPets")}
           className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
         >
-          Listado de Mascotas
+          Mascotas
         </button>
         <button
           onClick={() => setActiveView("userProfiles")}

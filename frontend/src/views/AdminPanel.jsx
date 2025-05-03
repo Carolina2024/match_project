@@ -48,33 +48,12 @@ const AdminPanel = () => {
     },
   ]);
 
-  const [users] = useState([
-    {
-      id: 1,
-      name: "Vanessa Montero",
-      email: "vane@example.com",
-      role: "Adoptante",
-    },
-    {
-      id: 2,
-      name: "Carlos Riquelme",
-      email: "admin@example.com",
-      role: "Administrador",
-    },
-    {
-      id: 3,
-      name: "Francisca Merino",
-      email: "fca@example.com",
-      role: "Adoptante",
-    },
-  ]);
-
   console.log(activeView);
 
   const [editingPet, setEditingPet] = useState(null);
 
-  const handleDeletePet = (id) => {
-    if (window.confirm("¿Estás seguro de eliminar esta mascota?")) {
+  const handleSavePet = (id) => {
+    if (window.confirm("¿Estás seguro de guardar esta mascota?")) {
       setPets((prevPets) => prevPets.filter((pet) => pet.id !== id));
     }
   };
@@ -96,20 +75,15 @@ const AdminPanel = () => {
             pets={pets}
             setActiveView={setActiveView}
             setEditingPet={setEditingPet}
-            handleDeletePet={handleDeletePet}
+            handleSavePet={handleSavePet}
           />
         );
 
-      /*
-      case "userProfiles":
-        return <UserProfiles users={users} />;
-      default:
-        return null; */
-
       case "SOLICITUDES DE ADOPCIÓN":
-        return <div className="w-3/4 p-10">Solicitudes (pendiente)</div>;
+        return <AdoptionApllication />;
+
       case "USUARIOS":
-        return <UserProfiles users={users} />;
+        return <UserProfiles />;
       case "editPet":
         return (
           <Pets
@@ -118,6 +92,7 @@ const AdminPanel = () => {
             editingPet={editingPet}
           />
         );
+
       case "createPet":
         return (
           <Pets
@@ -127,37 +102,12 @@ const AdminPanel = () => {
           />
         );
       default:
-          return <div className="w-3/4 p-10">Vista no implementada</div>;
-
-        case "AdoptionApllication":
-          return <AdoptionApllication />
+        return <div className="w-3/4 p-10">Vista no implementada</div>;
     }
   };
 
   return (
     <div className="flex h-screen">
-      <div className="w-1/4 bg-[var(--color-primary)] p-6 text-white space-y-6">
-        <h2 className="text-2xl font-bold mb-8">Administrador</h2>
-
-        <button
-          onClick={() => setActiveView("listPets")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Mascotas
-        </button>
-        <button
-          onClick={() => setActiveView("userProfiles")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Listado de Perfiles
-        </button>
-        <button
-          onClick={() => setActiveView("AdoptionApllication")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Solicitudes de Adopción
-        </button>
-      </div>
       <Sidebar onSelect={setActiveView} activeView={activeView} />
 
       <div className="w-3/4 p-10 overflow-y-auto">{renderView()}</div>

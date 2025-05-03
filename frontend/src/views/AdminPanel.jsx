@@ -107,7 +107,8 @@ const AdminPanel = () => {
         return null; */
 
       case "SOLICITUDES DE ADOPCIÓN":
-        return <div className="w-3/4 p-10">Solicitudes (pendiente)</div>;
+        return <AdoptionApllication />;
+
       case "USUARIOS":
         return <UserProfiles users={users} />;
       case "editPet":
@@ -136,28 +137,6 @@ const AdminPanel = () => {
 
   return (
     <div className="flex h-screen">
-      <div className="w-1/4 bg-[var(--color-primary)] p-6 text-white space-y-6">
-        <h2 className="text-2xl font-bold mb-8">Administrador</h2>
-
-        <button
-          onClick={() => setActiveView("listPets")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Mascotas
-        </button>
-        <button
-          onClick={() => setActiveView("userProfiles")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Listado de Perfiles
-        </button>
-        <button
-          onClick={() => setActiveView("AdoptionApllication")}
-          className="block w-full text-left py-2 px-4 hover:bg-orange-500 rounded cursor-pointer"
-        >
-          Solicitudes de Adopción
-        </button>
-      </div>
       <Sidebar onSelect={setActiveView} activeView={activeView} />
 
       <div className="w-3/4 p-10 overflow-y-auto">{renderView()}</div>

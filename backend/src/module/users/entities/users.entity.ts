@@ -1,6 +1,6 @@
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { Adopters } from 'src/module/adopters/entities/adopters.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class Users {
@@ -21,6 +21,9 @@ export class Users {
 
   @Column({ default: true })
   isActive!: boolean;
+  
+  @CreateDateColumn()
+  createdAt:Date;
 
   @OneToOne(() => Adopters , adopter => adopter.user)
   adopter?: Adopters

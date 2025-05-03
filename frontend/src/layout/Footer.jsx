@@ -1,36 +1,70 @@
 import { FaTiktok, FaInstagram } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
-import logo from "../assets/logo.png"; // Asegúrate de que la ruta sea correcta
+import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
+import { IoMdMail } from "react-icons/io";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary py-8 px-4 rounded-t-3xl flex flex-col items-center justify-center">
-      {/* Logo */}
-      <img
-        src={logo}
-        alt="Logo Patas Pirque"
-        className="w-16 h-16 rounded-full object-cover mb-4"
-      />
+    <footer className="bg-[#F9F9F9] text-black mt-24">
+      <div className="flex flex-col md:flex-row justify-between items-center px-12 py-14 gap-6 font-tertiary">
+        {/* Logo */}
+        <div>
+          <img
+            src={logo}
+            alt="Logo Patas Pirque"
+            className="w-38 h-38  rounded-full"
+          />
+        </div>
 
-      {/* Íconos Sociales */}
-      <div className="flex space-x-6 text-black text-xl">
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FiFacebook className="hover:text-white transition" />
-        </a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
-          <FaTiktok className="hover:text-white transition" />
-        </a>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaInstagram className="hover:text-white transition" />
-        </a>
+        {/* Contacto */}
+        <div className="text-center md:text-left md:mr-32">
+          <h3 className="font-bold text-primary mb-3 text-xl">Contactanos</h3>
+          <ul className="space-y-1 text-sm">
+            <li className="flex items-center  gap-2 text-left mb-3 font-normal text-base">
+              <FaMapMarkerAlt className="text-primary text-lg" />
+              <span>Calle 123, Santiago, Chile</span>
+            </li>
+            <li className="flex items-center gap-2 text-left mb-3 font-normal text-base">
+              <FaPhoneAlt className="text-primary text-lg" />
+              <span>+1 (555) 123-4567</span>
+            </li>
+            <li className="flex items-center  gap-2 text-left font-normal text-base">
+              <IoMdMail className="text-primary text-lg" />
+              <span>pataspirque@gmail.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Barra inferior */}
+      <div className="bg-primary text-black  flex flex-col md:flex-row justify-between items-center px-16 py-8 rounded-t-4xl">
+        <span className="text-base font-medium font-tertiary">&copy;2025 Pataspirque.cl</span>
+
+        {/* Redes Sociales */}
+        <div className="flex space-x-4 text-3xl mt-2 md:mt-0">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FiFacebook className="hover:text-white transition" />
+          </a>
+          <a
+            href="https://tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTiktok className="hover:text-white transition" />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram className="hover:text-white transition" />
+          </a>
+        </div>
       </div>
     </footer>
   );

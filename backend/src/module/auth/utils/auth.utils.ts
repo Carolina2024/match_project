@@ -19,6 +19,7 @@ export function mapAdopter(registerDto: RegisterDto, user: Users): Adopters {
     isVaccinated,
     petDestroy,
     petsExperience,
+    acceptedTerms,
     run,
   } = registerDto;
 
@@ -39,6 +40,7 @@ export function mapAdopter(registerDto: RegisterDto, user: Users): Adopters {
     hasVeterinarian,
     allowsVisit,
     isResponsibleAdoption,
+    acceptedTerms,
     user,
   };
 }

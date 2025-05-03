@@ -15,7 +15,7 @@ const Navbar = () => {
         <img
           src={logo}
           alt="Logo Patas Pirque"
-          className="w-[60px] h-[60px] rounded-full object-cover"
+          className="w-[60px] h-[60px] rounded-full"
         />
       </div>
 

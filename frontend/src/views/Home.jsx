@@ -8,7 +8,6 @@ import slider2 from "../assets/slider2.png";
 import slider3 from "../assets/slider3.png";
 import image from "../assets/image.png";
 
-
 const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const sliders = [slider1, slider2, slider3];
@@ -60,20 +59,47 @@ const Home = () => {
         Regístrate para Adoptar
       </button>
 
-      <section className="py-12 px-4 flex flex-col items-center">
+      {/* Pasos */}
+      <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-normal text-center text-black">
           Adopta una mascota en <br />
-          <span className="text-primary font-bold text-2xl">3 simples pasos</span>
+          <span className="text-primary font-bold text-2xl">
+            3 simples pasos
+          </span>
         </h2>
 
-        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-8 relative w-full max-w-5xl">
+        {/* Líneas curvas SVG entre los pasos */}
+        <div className="absolute top-50 left-0 right-0 flex justify-center">
+          <svg
+            width="650"
+            height="104"
+            viewBox="0 0 690 104"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.02832 2.06604C76.3448 -5.06727 64.2133 95.8158 211.308 102.185"
+              stroke="#F4A470"
+              strokeWidth="2"
+              strokeDasharray="10 5"
+            />
+            <path
+              d="M689.896 2.06604C614.58 -5.06727 626.712 95.8158 479.617 102.185"
+              stroke="#F4A470"
+              strokeWidth="2"
+              strokeDasharray="10 5"
+            />
+          </svg>
+        </div>
+
+        {/* Contenedores de pasos */}
+        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-50 relative w-full max-w-6xl z-10">
           {/* Paso 1 */}
-          <div className="rounded-3xl border-[#DFDFDF] border-1 shadow-md px-6 py-8 flex flex-col items-center text-center w-full md:w-1/4 relative">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md px-2 py-6 flex flex-col items-center text-center w-full md:w-[250px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-[#2E256F] w-10 h-10 flex items-center justify-center rounded-full font-bold">
               1
             </div>
-            {/* Icono 1 */}
-            <div className="mt-6 mb-4">
+            <div className="mt-10 flex items-center justify-center h-20">
               <svg
                 width="80"
                 height="55"
@@ -103,21 +129,17 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="text-sm text-gray-800">
+            <p className="mt-4 text-sm text-[#0C0C0C]">
               Completar el formulario de registro en unos minutos
             </p>
           </div>
 
-          {/* Línea curva */}
-          <div className="hidden md:block absolute top-1/2 left-1/3 w-1/3 border-dashed border-t-2 border-[#F2994A] z-0 transform -translate-y-1/2"></div>
-
           {/* Paso 2 */}
-          <div className="rounded-3xl shadow-md border-[#DFDFDF] border-1  px-6 py-8 flex flex-col items-center text-center w-full md:w-1/4 relative z-10">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md px-2 py-6 flex flex-col items-center text-center w-full md:w-[250px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-[#2E256F] w-10 h-10 flex items-center justify-center rounded-full font-bold">
               2
             </div>
-            {/* Icono 2 */}
-            <div className="mt-6 mb-4">
+            <div className="mt-10 flex items-center justify-center h-20">
               <svg
                 width="74"
                 height="61"
@@ -147,22 +169,18 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="text-sm text-gray-800">
+            <p className="mt-4 text-sm text-[#0C0C0C]">
               Describí tu hogar y tus preferencias para que Patas Pirque pueda
               encontrar tu mascota ideal
             </p>
           </div>
 
-          {/* Línea curva */}
-          <div className="hidden md:block absolute top-1/2 left-2/3 w-1/3 border-dashed border-t-2 border-[#F2994A] z-0 transform -translate-y-1/2"></div>
-
           {/* Paso 3 */}
-          <div className="rounded-3xl shadow-md border-[#DFDFDF] border-1  px-6 py-8 flex flex-col items-center text-center w-full md:w-1/4 relative z-10">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md px-6 py-6 flex flex-col items-center text-center w-full md:w-[250px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-[#2E256F] w-10 h-10 flex items-center justify-center rounded-full font-bold">
               3
             </div>
-            {/* Icono 3 */}
-            <div className="mt-6 mb-4">
+            <div className="mt-10 flex items-center justify-center h-20">
               <svg
                 width="68"
                 height="75"
@@ -180,7 +198,7 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="text-sm text-gray-800">Encontrar a tu Match</p>
+            <p className="mt-4 text-sm text-[#0C0C0C]">Encontrar a tu Match</p>
           </div>
         </div>
       </section>
@@ -188,23 +206,24 @@ const Home = () => {
       {/* Historias de adopción */}
       <section className="w-full px-4 flex flex-col justify-center items-center">
         <div className="py-10 text-center mt-12 w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-10 px-4 md:px-20">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-22 px-4 md:px-20 text-left ">
             Historias de adopción
           </h2>
 
           {/* Slider funcional automático */}
-          <div className="max-w-3xl mx-auto mb-6 px-4">
+          <div className="max-w-3xl mx-auto mb-6 px-4 ">
             <img
               src={sliders[activeSlide]}
               alt={`Slide ${activeSlide + 1}`}
-              className="shadow-lg w-full h-auto object-cover"
+              className="shadow-lg w-full h-auto object-cover rounded-4xl"
             />
-            <div className="flex justify-center mt-4 space-x-2">
+
+            <div className="flex justify-center space-x-2 -mt-10 mb-28">
               {sliders.map((_, i) => (
                 <button
                   key={i}
                   className={`w-3 h-3 rounded-full ${
-                    activeSlide === i ? "bg-black" : "bg-gray-300"
+                    activeSlide === i ? "bg-white" : "bg-white"
                   }`}
                   onClick={() => setActiveSlide(i)}
                 />

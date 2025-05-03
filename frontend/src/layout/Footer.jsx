@@ -2,7 +2,7 @@ import { FaTiktok, FaInstagram } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
 import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
-import logo2 from "../assets/logo2.jpg";
+import logo from "../assets/logo.png";
 
 const Footer = () => {
   return (
@@ -11,26 +11,26 @@ const Footer = () => {
         {/* Logo */}
         <div>
           <img
-            src={logo2}
+            src={logo}
             alt="Logo Patas Pirque"
-            className="w-28 h-28 object-contain"
+            className="w-38 h-38  rounded-full"
           />
         </div>
 
         {/* Contacto */}
-        <div className="text-left mr-4">
-          <h3 className="font-semibold text-primary mb-2">Contactanos</h3>
+        <div className="text-center md:text-left md:mr-32">
+          <h3 className="font-semibold text-primary mb-3">Contactanos</h3>
           <ul className="space-y-1 text-sm">
-            <li className="flex items-center  gap-2 text-left">
-              <FaMapMarkerAlt className="text-primary" />
+            <li className="flex items-center  gap-2 text-left mb-3">
+              <FaMapMarkerAlt className="text-primary text-lg" />
               <span>Calle 123, Santiago, Chile</span>
             </li>
-            <li className="flex items-center gap-2 text-left">
-              <FaPhoneAlt className="text-primary" />
+            <li className="flex items-center gap-2 text-left mb-3">
+              <FaPhoneAlt className="text-primary text-lg" />
               <span>+1 (555) 123-4567</span>
             </li>
-            <li className="flex items-center  gap-2 text-left">
-              <IoMdMail className="text-primary" />
+            <li className="flex items-center  gap-2 text-left ">
+              <IoMdMail className="text-primary text-lg" />
               <span>pataspirque@gmail.com</span>
             </li>
           </ul>

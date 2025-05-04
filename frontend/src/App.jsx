@@ -11,6 +11,7 @@ import PetsHome from "./components/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
 import Nosotros from "./views/Nosotros";
 import Contacto from "./views/Contacto";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -23,12 +24,20 @@ function App() {
           <Route element={<Register />} path="/Register" />
           <Route element={<Nosotros />} path="/nosotros" />
           <Route element={<CuidadosMascota />} path="/cuidadosmascota" />
-          <Route element={<Contacto/>} path="/contacto" />
+          <Route element={<Contacto />} path="/contacto" />
           <Route element={<Adoptar />} path="/Adoptar" />
-          <Route element={<AdminPanel />} path="/Admin" />
           <Route element={<PetsHome />} path="/Mascotas" />
         </Route>
 
+        {/* Ruta protegida para admin */}
+        <Route
+          path="/Admin"
+          element={
+            <PrivateRoute>
+              <AdminPanel />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Footer />
     </Router>

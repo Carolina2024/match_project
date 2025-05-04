@@ -11,7 +11,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
-  const [showPassword, setShowPassword] = useState(false); // 👈 Nuevo estado
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const LoginModal = ({ isOpen, onClose }) => {
             value
           )
         ) {
-          return "Debe tener mínimo 6 caracteres, letras, números y símbolos. Ej: hola123!";
+          return "Debe tener mínimo 6 caracteres, letras,\nnúmeros y símbolos. Ej: hola123!";
         }
         return "";
       default:
@@ -101,6 +101,7 @@ const LoginModal = ({ isOpen, onClose }) => {
         confirmButtonColor: "#FAAB75",
       }).then((result) => {
         if (result.isConfirmed) {
+            onClose();  // Cerrar el modal al hacer clic en "Aceptar"
           if (role === "admin") {
             navigate("/Admin");
           } else {
@@ -124,7 +125,7 @@ const LoginModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
       <div className="flex items-center justify-center my-14">
-        <div className="bg-[#F9F9F9] rounded-2xl shadow-xl w-full max-w-4xl flex overflow-hidden relative border border-[#CBCBCB]">
+        <div className="bg-[#F9F9F9] rounded-2xl shadow-xl w-full md:max-w-4xl max-w-md flex overflow-hidden relative border border-[#CBCBCB]">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-primary hover:text-tertiary text-2xl cursor-pointer"
@@ -152,6 +153,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                   <svg
                     width="14"
                     height="14"
+                    className="absolute top-3 left-4"
                     viewBox="0 0 14 14"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -183,6 +185,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                   <svg
                     width="20"
                     height="12"
+                    className="absolute top-3 left-4"
                     viewBox="0 0 20 12"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -210,6 +213,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                     <svg
                       width="20"
                       height="16"
+                      className="absolute top-3 right-4"
                       viewBox="0 0 20 16"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -223,6 +227,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                     <svg
                       width="22"
                       height="20"
+                      className="absolute top-3 right-4"
                       viewBox="0 0 22 20"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -236,7 +241,9 @@ const LoginModal = ({ isOpen, onClose }) => {
                   )}
                 </span>
                 {errors.password && (
-                  <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+                  <p className="text-red-500 text-sm mt-1 md:whitespace-pre-line">
+                    {errors.password}
+                  </p>
                 )}
               </div>
 
@@ -272,11 +279,12 @@ const LoginModal = ({ isOpen, onClose }) => {
 
           {/* IMAGEN */}
           <div className="w-auto flex justify-center items-center">
-            <div className="flex flex-col">
+            <div className="flex flex-col  ">
               {/* SVG de fondo */}
               <svg
                 width="208"
                 height="247"
+                className=""
                 viewBox="0 0 208 247"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -318,7 +326,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                 src="src/assets/logo.png"
                 srcSet="src/assets/logo@2x.png 2x, src/assets/logo@3x.png 3x"
                 alt="Patas Pirque Logo"
-                className="w-50 h-auto drop-shadow-xl rounded-full absolute top-0 left-90 right-0 bottom-0 m-auto"
+                className=" md:w-50 w-32 h-auto drop-shadow-xl rounded-full absolute top-0 md:left-97 left-70 right-0 bottom-0 m-auto"
               />
               {/* SVG de fondo */}
               <svg

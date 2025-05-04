@@ -102,7 +102,7 @@ const Login = () => {
       }).then((result) => {
         //PARA INGRESAR POR ROL ADMIN
         if (result.isConfirmed) {
-         /*  navigate("/dashboard"); */
+          /*  navigate("/dashboard"); */
           if (role === "admin") {
             console.log("Redirigiendo a:", role === "admin" ? "/Admin" : "/");
             navigate("/Admin");

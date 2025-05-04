@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../assets/logo.png";
+import LoginModal from "../components/modals/LoginModal";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
@@ -33,18 +35,18 @@ const Navbar = () => {
           Inicio
         </Link>
         <span className="border-r border-2 h-10 border-primary" />
-        <Link to="/nosotros" className="hover:text-primary transition">
+        <Link to="/Nosotros" className="hover:text-primary transition">
           Nosotros
         </Link>
         <span className="border-r border-2 h-10 border-primary" />
         <Link
-          to="/cuidadosmascota"
+          to="/CuidadosMascota"
           className="hover:text-primary transition text-center w-[130px]"
         >
           Cuidados de tu mascota
         </Link>
         <span className="border-r border-2 h-10 border-primary" />
-        <Link to="/contacto" className="hover:text-primary transition">
+        <Link to="/Contacto" className="hover:text-primary transition">
           Contacto
         </Link>
         <span className="border-r border-2 h-10 border-primary" />
@@ -52,10 +54,14 @@ const Navbar = () => {
 
       {/* Botón sesión Desktop */}
       <div className="hidden md:block">
-        <button className="ml-4 border border-primary text-black font-bold px-4 py-2 rounded-full hover:bg-orange-100 transition cursor-pointer">
+        <button 
+        onClick={() => setShowLoginModal(true)}
+        className="ml-4 border border-primary text-black font-bold px-4 py-2 rounded-full hover:bg-orange-100 transition cursor-pointer">
           Iniciar sesión
         </button>
       </div>
+
+
 
       {/* Menú Mobile */}
       {menuOpen && (
@@ -63,23 +69,32 @@ const Navbar = () => {
           <Link to="/" className="hover:text-primary transition">
             Inicio
           </Link>
-          <Link to="/nosotros" className="hover:text-primary transition">
+          <Link to="/Nosotros" className="hover:text-primary transition">
             Nosotros
           </Link>
           <Link
-            to="/cuidadosmascota"
+            to="/CuidadosMascota"
             className="hover:text-primary transition text-center"
           >
             Cuidados de tu mascota
           </Link>
-          <Link to="/contacto" className="hover:text-primary transition">
+          <Link to="/Contacto" className="hover:text-primary transition">
             Contacto
           </Link>
-          <button className="mt-2 border border-primary text-black font-bold px-4 py-2 rounded-full hover:bg-orange-100 transition cursor-pointer">
+          <button 
+          onClick={() => setShowLoginModal(true)}
+          className="mt-2 border border-primary text-black font-bold px-4 py-2 rounded-full hover:bg-orange-100 transition cursor-pointer">
             Iniciar sesión
           </button>
         </div>
       )}
+
+      {/* Renderizar el modal */}
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
+
     </header>
   );
 };

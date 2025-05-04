@@ -89,7 +89,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Renderizar el modal */}
+      {/* Renderizamos el modal */}
       <LoginModal
         isOpen={showLoginModal}
         onClose={() => setShowLoginModal(false)}

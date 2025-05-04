@@ -54,7 +54,7 @@ const Home = () => {
         <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
           <div>
             <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
-              <span className="text-primary">Matcheá</span>
+              <span className="text-primary">Matchea</span>
               <br />
               <span className="text-tertiary">con tu futura</span>
               <br />
@@ -195,7 +195,7 @@ const Home = () => {
               </svg>
             </div>
             <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
-              Describí tu hogar y tus preferencias para que Patas Pirque pueda
+              Describir tu hogar y tus preferencias para que Patas Pirque pueda
               encontrar tu mascota ideal
             </p>
           </div>

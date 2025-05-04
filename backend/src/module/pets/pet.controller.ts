@@ -10,12 +10,14 @@ import {
   ParseUUIDPipe,
   HttpStatus,
   HttpCode,
+  UseInterceptors,
+  UploadedFiles,
+  BadRequestException,
 } from '@nestjs/common';
 import { PetService } from './pet.service';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
 import {
-  ApiBearerAuth,
   ApiTags,
   ApiOperation,
   ApiOkResponse,
@@ -25,6 +27,7 @@ import {
   ApiParam,
   ApiQuery,
   ApiBody,
+  ApiConsumes,
 } from '@nestjs/swagger';
 import { Pet } from './entities/pet.entity';
 import { UserRole } from 'src/common/enums/userRole.enum';
@@ -36,65 +39,185 @@ import {
   PetSize,
   PetSpecies,
   PetStatus,
+  PetTrait,
 } from 'src/common/enums/pet.enum';
+import { FilesInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Mascotas')
 @Controller('pets')
 export class PetController {
   constructor(private readonly petService: PetService) {}
 
-  // @Post()
-  // @HttpCode(HttpStatus.CREATED)
-  // @ApiOperation({
-  //   summary: 'Crear una nueva mascota',
-  //   description: 'Crea un nuevo registro de mascota en el sistema',
-  // })
-  // @ApiBody({ type: CreatePetDto, description: 'Datos de la mascota a crear' })
-  // @ApiCreatedResponse({
-  //   description: 'La mascota ha sido creada exitosamente',
-  //   type: Pet,
-  //   example: {
-  //     id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
-  //     name: 'Firulais',
-  //     species: 'perro',
-  //     breed: 'Mestizo',
-  //     age: 'adulto',
-  //     size: 'mediano',
-  //     sex: 'macho',
-  //     energy: 'alta',
-  //     kg: 15.5,
-  //     isVaccinated: true,
-  //     isSterilized: true,
-  //     isDewormed: true,
-  //     hasMicrochip: false,
-  //     story: 'Fue rescatado de la calle hace 2 meses.',
-  //     traits: ['cariñoso', 'juguetón'],
-  //     status: 'disponible',
-  //     isActive: true,
-  //     photoUrls: [
-  //       'https://example.com/image1.jpg',
-  //       'https://example.com/image2.jpg',
-  //     ],
-  //     createdAt: '2023-05-15T10:30:00Z',
-  //     updatedAt: '2023-05-15T10:30:00Z',
-  //   },
-  // })
-  // @ApiBadRequestResponse({
-  //   description: 'Datos de entrada inválidos',
-  //   example: {
-  //     message: [
-  //       'El nombre debe ser una cadena de texto',
-  //       'El tamaño debe ser un valor válido',
-  //       'La fecha de nacimiento debe ser una fecha válida',
-  //     ],
-  //     error: 'Bad Request',
-  //     statusCode: 400,
-  //   },
-  // })
-  // @Auth(UserRole.ADMIN)
-  // create(@Body() createPetDto: CreatePetDto) {
-  //   return this.petService.create(createPetDto);
-  // }
+  @Post()
+  @UseInterceptors(FilesInterceptor('photos'))
+  @ApiConsumes('multipart/form-data')
+  @HttpCode(HttpStatus.CREATED)
+  @ApiOperation({
+    summary: 'Crear una nueva mascota',
+    description: 'Crea un nuevo registro de mascota en el sistema',
+  })
+  @ApiBody({
+    description: 'Datos de la mascota a crear',
+    schema: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Firulais',
+          description: 'Nombre de la mascota',
+        },
+        size: {
+          type: 'string',
+          enum: Object.values(PetSize),
+          example: PetSize.MEDIUM,
+          description: 'Tamaño de la mascota',
+        },
+        birthDate: {
+          type: 'string',
+          format: 'date',
+          example: '2020-01-01',
+          description: 'Fecha de nacimiento de la mascota',
+        },
+        sex: {
+          type: 'string',
+          enum: Object.values(PetSex),
+          example: PetSex.MALE,
+          description: 'Sexo de la mascota',
+        },
+        age: {
+          type: 'string',
+          enum: Object.values(PetAge),
+          example: PetAge.YOUNG,
+          description: 'Edad de la mascota',
+        },
+        species: {
+          type: 'string',
+          enum: Object.values(PetSpecies),
+          example: PetSpecies.DOG,
+          description: 'Especie de la mascota',
+        },
+        energy: {
+          type: 'string',
+          enum: Object.values(PetEnergy),
+          example: PetEnergy.MODERATE,
+          description: 'Nivel de energía de la mascota',
+        },
+        breed: {
+          type: 'string',
+          example: 'Labrador',
+          description: 'Raza de la mascota',
+        },
+        kg: {
+          type: 'number',
+          example: 15.5,
+          description: 'Peso en Kilogramos de la mascota',
+        },
+        isVaccinated: {
+          type: 'boolean',
+          example: true,
+          description: '¿La mascota está vacunada?',
+        },
+        isSterilized: {
+          type: 'boolean',
+          example: true,
+          description: '¿La mascota está estirilizada?',
+        },
+        isDewormed: {
+          type: 'boolean',
+          example: true,
+          description: '¿La mascota está desparasitada?',
+        },
+        hasMicrochip: {
+          type: 'boolean',
+          example: false,
+          description: '¿La mascota tiene un microchip?',
+        },
+        story: {
+          type: 'string',
+          example: 'Fue rescatado de la calle hace 2 meses.',
+          description: 'Historia de la mascota',
+        },
+        traits: {
+          type: 'array',
+          items: { type: 'string', enum: Object.values(PetTrait) },
+          example: [PetTrait.AFFECTIONATE, PetTrait.CHILD_FRIENDLY],
+          description: 'Rasgos de la personalidad de la mascota',
+        },
+        admissionDate: {
+          type: 'string',
+          format: 'date',
+          example: '2023-01-15',
+          description: 'Fecha de rescate de la mascota',
+        },
+        status: {
+          type: 'string',
+          enum: Object.values(PetStatus),
+          example: PetStatus.AVAILABLE,
+          description: 'Estado de disponibilidad de la mascota',
+        },
+
+        photos: {
+          type: 'array',
+          items: {
+            type: 'string',
+            format: 'binary',
+          },
+          description: 'Imágenes de la mascota',
+        },
+      },
+    },
+  })
+  @ApiCreatedResponse({
+    description: 'La mascota ha sido creada exitosamente',
+    type: Pet,
+    example: {
+      id: '083c7750-63e8-4a2c-a1f1-bd8c8fbc9cea',
+      name: 'Firulais',
+      size: 'Mediano',
+      birthDate: '2020-01-01T00:00:00.000Z',
+      sex: 'Macho',
+      age: 'Joven',
+      species: 'Perro',
+      energy: 'Moderado',
+      breed: 'Labrador',
+      kg: 15.5,
+      isVaccinated: true,
+      isSterilized: true,
+      isDewormed: true,
+      hasMicrochip: true,
+      story: 'Fue rescatado de la calle hace 2 meses.',
+      traits: ['Cariñoso', 'Amigable con niños'],
+      admissionDate: '2023-01-15T00:00:00.000Z',
+      photoUrls: [
+        'https://res.cloudinary.com/asdfabh/image/upload/v1746324642/pets/exwybso4iyqxkv5xsezh.jpg',
+      ],
+      status: 'Disponible',
+      isActive: true,
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Datos de entrada inválidos',
+    example: {
+      message: [
+        'El nombre debe ser una cadena de texto',
+        'El tamaño debe ser un valor válido',
+        'La fecha de nacimiento debe ser una fecha válida',
+      ],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+  })
+  @Auth(UserRole.ADMIN)
+  create(
+    @UploadedFiles() files: Express.Multer.File[],
+    @Body() createPetDto: CreatePetDto,
+  ) {
+    try {
+      return this.petService.create(createPetDto, files);
+    } catch (error) {
+      throw new BadRequestException('Error al crear la mascota ' + error);
+    }
+  }
 
   @ApiOperation({
     summary: 'Obtener lista de mascotas con información limitada',

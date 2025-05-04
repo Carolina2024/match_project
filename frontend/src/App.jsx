@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PublicLayout from "./componets/PublicLayout";
+import PublicLayout from "./components/PublicLayout";
 import Home from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
@@ -7,7 +7,7 @@ import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
-import PetsHome from "./componets/PetsHome";
+import PetsHome from "./components/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
 import Nosotros from "./views/Nosotros";
 import Contacto from "./views/Contacto";

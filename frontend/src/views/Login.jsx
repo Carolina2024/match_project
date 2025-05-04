@@ -84,6 +84,10 @@ const Login = () => {
       const payload = JSON.parse(atob(data.token.split(".")[1]));
       console.log("Payload decodificado:", payload);
 
+      //PARA INGRESAR POR ROL ADMIN
+      const role = payload.role || data.user?.role;
+      console.log("Rol del usuario:", role);
+
       setErrors({});
       setEmail("");
       setPassword("");
@@ -96,8 +100,15 @@ const Login = () => {
         confirmButtonText: "Aceptar",
         confirmButtonColor: "#FAAB75",
       }).then((result) => {
+        //PARA INGRESAR POR ROL ADMIN
         if (result.isConfirmed) {
-          navigate("/dashboard");
+         /*  navigate("/dashboard"); */
+          if (role === "admin") {
+            console.log("Redirigiendo a:", role === "admin" ? "/Admin" : "/");
+            navigate("/Admin");
+          } else {
+            navigate("/");
+          }
         }
       });
     } catch (err) {

@@ -9,10 +9,10 @@ const Footer = () => {
       <div className="text-center text-primary font-semibold italic text-2xl pt-6 pb-2">
         Un hogar para cada patita
       </div>
-      <hr className="border-t border-1 border-primary mx-12 mb-6" />
+      <hr className="border-t border-1 border-primary mx-14 mb-6" />
 
       {/* Contenido principal */}
-      <div className="flex flex-col md:flex-row justify-between items-center px-8 md:px-38 py-10 text-sm md:text-base gap-8">
+      <div className="flex flex-col md:flex-row justify-between items-center px-8 md:px-40 pt-4 pb-10 text-sm md:text-base gap-8">
         {/* Menú principal */}
         <div className="text-center text-xl md:text-left font-primary">
           <h3 className="font-bold mb-3 text-black">Menú principal</h3>
@@ -25,7 +25,7 @@ const Footer = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex flex-col items-center justify-center gap-10">
+        <div className="flex flex-col items-center justify-center gap-8">
           <img
             src={logo}
             alt="Logo Patas Pirque"

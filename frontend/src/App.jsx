@@ -3,13 +3,13 @@ import PublicLayout from "./componets/PublicLayout";
 import Home from "./views/Home";
 import Login from "./views/Login";
 import Register from "./views/Register";
-import QuienesSomos from "./views/QuienesSomos";
 import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
 import Navbar from "./layout/Navbar";
 import Footer from "./layout/Footer";
 import PetsHome from "./componets/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
+import Nosotros from "./views/Nosotros";
 
 function App() {
   return (
@@ -20,8 +20,8 @@ function App() {
           <Route element={<Home />} path="/" />
           <Route element={<Login />} path="/Login" />
           <Route element={<Register />} path="/Register" />
-          <Route element={<QuienesSomos />} path="/QuienesSomos" />
-          <Route element={<CuidadosMascota />} path="/CuidadosMascota" />
+          <Route element={<Nosotros />} path="/nosotros" />
+          <Route element={<CuidadosMascota />} path="/cuidadosmascota" />
           <Route element={<Adoptar />} path="/Adoptar" />
           <Route element={<AdminPanel />} path="/Admin" />
           <Route element={<PetsHome />} path="/Mascotas" />

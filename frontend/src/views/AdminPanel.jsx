@@ -5,7 +5,7 @@ import UserProfiles from "../components/UserProfiles";
 import AdoptionApllication from "../components/AdoptionApllication";
 import Sidebar from "../components/Sidebar";
 import AdminHome from "../components/AdminHome";
-import Pets from "../components/pets";
+import Pets from "../components/Pets";
 import { getAllPets } from "../api/petService";
 
 //VISTA DE PERFIL ADMINISTRADOR

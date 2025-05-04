@@ -37,11 +37,6 @@ export class CreatePetDto {
   @IsEnum(PetSize, { message: 'El tamaño debe ser un valor válido' })
   size: PetSize;
 
-  @ApiProperty({ description: 'Fecha de nacimiento', example: '2020-01-01' })
-  @IsDate({ message: 'La fecha de nacimiento debe ser una fecha válida' })
-  @Type(() => Date)
-  birthDate: Date;
-
   @ApiProperty({
     description: 'Sexo de la mascota',
     enum: PetSex,

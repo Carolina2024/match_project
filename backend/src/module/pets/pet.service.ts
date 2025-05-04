@@ -67,7 +67,6 @@ export class PetService {
         'pet.id',
         'pet.name',
         'pet.size',
-        'pet.birthDate',
         'pet.sex',
         'pet.age',
         'pet.species',

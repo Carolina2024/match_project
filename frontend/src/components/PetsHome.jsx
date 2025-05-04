@@ -1,5 +1,5 @@
 import { useState } from "react";
-import mascotas from "./pets";
+import mascotas from "./petsData";
 import { FaCheckCircle, FaHeart } from 'react-icons/fa';
 console.log(mascotas);
 function PetsHome() {

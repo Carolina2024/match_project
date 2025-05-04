@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -12,11 +13,15 @@ import { JwtPayload } from './interfaces/jwt.payload.interface';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dtos/login.dto';
 import * as bcrypt from 'bcrypt';
+import { MailService } from '../mail/mail.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
+    private readonly configService: ConfigService,
     private readonly usersService: UsersService,
+    private readonly mailService: MailService,
     private readonly adoptersService: AdoptersService,
     private readonly jwtService: JwtService,
   ) {}
@@ -92,4 +97,42 @@ export class AuthService {
   private getJwtToken(payload: JwtPayload) {
     return this.jwtService.sign(payload);
   }
+
+
+  async recoverPassword(email: string): Promise<{ message: string }> {
+    const user = await this.usersService.findByEmail(email);
+    if (!user) throw new NotFoundException('Usuario no encontrado');
+
+    const ttlMinutes = this.configService.get<number>('RECOVERY_CODE_TTL_MINUTES', 15);
+
+    const Token = this.jwtService.sign(
+      { sub: user.id, purpose: 'password_recovery' },
+      { expiresIn: `${ttlMinutes}m` },
+    );
+
+    await this.mailService.sendRecoveryCode(user.email, Token);
+
+    return { message: 'Código de recuperación enviado al correo electrónico' };
+  }
+
+
+  async resetPassword(token: string, newPassword: string) {
+    let payload: { sub: string; purpose: string };
+    try {
+      payload = this.jwtService.verify(token);
+    } catch (err) {
+      throw new BadRequestException('Token inválido o expirado');
+    }
+  
+    if (payload.purpose !== 'password_recovery') {
+      throw new BadRequestException('Token no válido para recuperación');
+    }
+  
+    const user = await this.usersService.findOneById(payload.sub);
+    user.password = await bcrypt.hash(newPassword, 10);
+    await this.usersService.updatePassword(user.id, user.password);
+  
+    return { message: 'Contraseña actualizada exitosamente' };
+  }
+
 }

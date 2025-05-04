@@ -173,4 +173,8 @@ export class UsersService {
       },
     });
   }
+
+  async updatePassword(id: string, newHashedPassword: string): Promise<void> {
+    await this.userRepository.update(id, { password: newHashedPassword });
+  }
 }

@@ -1,5 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterDto } from './dtos/register.dto';
+import { RecoverPasswordDto } from './dtos/recover-password.dto';
 import { AuthService } from './auth.service';
 import {
   ApiBadRequestResponse,
@@ -11,6 +12,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { LoginDto } from './dtos/login.dto';
+import { ResetPasswordDto } from './dtos/reset-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -111,4 +113,48 @@ export class AuthController {
   async login(@Body() loginDto: LoginDto) {
     return await this.authService.login(loginDto);
   }
+
+  @ApiOperation({
+    summary: 'Recuperar contraseña',
+    description:
+      'Envía un código de recuperación al correo con validez de 15 minutos',
+  })
+  @ApiOkResponse({
+    description: 'Código enviado al correo electrónico',
+    example: { message: 'Código enviado al correo' },
+  })
+  @ApiBadRequestResponse({
+    description: 'Email con formato inválido',
+    example: {
+      message: 'Ingrese un correo electrónico válido',
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+  })
+  @ApiNotFoundResponse({
+    description: 'El correo no está registrado',
+    example: {
+      message: 'Usuario no encontrado',
+      error: 'Not Found',
+      statusCode: 404,
+    },
+  })
+  @Post('recover-password')
+  @HttpCode(HttpStatus.OK)
+  async recoverPassword(
+    @Body() dto: RecoverPasswordDto,
+  ): Promise<{ message: string }> {
+    return this.authService.recoverPassword(dto.email);
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Resetear contraseña con código JWT' })
+  @ApiOkResponse({ description: 'Contraseña actualizada exitosamente' })
+  @ApiBadRequestResponse({ description: 'Token inválido o expirado' })
+  async resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPassword(dto.token, dto.password);
+  }
+  
+
 }

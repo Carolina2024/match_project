@@ -1,26 +1,6 @@
 import { useState } from "react";
 
-/*const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
-    birthDate: "",
-    run: "",
-    address: "",
-    homeType: "",
-    allowsPets: "",
-    hasDogs: "",
-    hasCats: "",
-    hasChildren: "",
-    petsExperience: "",
-    isVaccinated: "",
-    isSterilized: "",
-    hoursAlone: "",
-    petDestroy: "",
-    hasVeterinarian: "",
-    allowsVisit: "",
-    isResponsibleAdoption: "",
-  }); */
+
 
 const opciones = [
   "Departamento pequeño/mediano",
@@ -29,12 +9,68 @@ const opciones = [
 ];
 
 const Register = () => {
+  
   const [selected, setSelected] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    birthDate: "",
+    email: "",
+    password: "",
+    run: "",
+    address: "",
+    allowsPets: "",
+    hasPets: "",
+    isVaccinated: "",
+    isSterilized: "",
+    hoursAlone: "",
+    petDestroy: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const [formVisible, setFormVisible] = useState(true);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.fullName.trim()) newErrors.fullName = "Nombre y apellido son requeridos";
+    if (!formData.birthDate) newErrors.birthDate = "Fecha requerida";
+    if (!formData.email) newErrors.email = "Correo requerido";
+    if (!formData.address) newErrors.address = "Dirección requerido";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Correo inválido";
+    if (!formData.password) newErrors.password = "Contraseña requerida";
+    if (!formData.run) newErrors.run = "Documento requerido";
+    if (!selected) newErrors.homeType = "Seleccione una opción";
+    if (!formData.allowsPets) newErrors.allowsPets = "Seleccione una opción";
+    if (!formData.hasPets) newErrors.hasPets = "Seleccione una opción";
+    if (!formData.isVaccinated) newErrors.isVaccinated = "Seleccione una opción";
+    if (!formData.isSterilized) newErrors.isSterilized = "Seleccione una opción";
+    if (!formData.hoursAlone) newErrors.hoursAlone = "Campo requerido";
+    if (!formData.petDestroy.trim()) newErrors.petDestroy = "Campo requerido";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      alert("Formulario válido y enviado");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   return (
-    <div className="max-w-3xl mx-auto my-7 p-6 bg-secundary rounded-2xl shadow-2xl">
+    <>
+    {formVisible && (
+    <div className="max-w-3xl mx-auto my-7 p-6 bg-white/90 rounded-2xl shadow-2xl">
       <div className="flex justify-end">
-        <button className="text-[#595146] focus:outline-none">
+        <button type="button"
+          onClick={() => setFormVisible(false)} 
+          className="text-[#595146] focus:outline-none">
           <svg
             className="h-6 w-6"
             fill="none"
@@ -57,9 +93,9 @@ const Register = () => {
         />
         <div className="text-black justify-center text-center text-lg mt-1 ">
           Queremos saber
-          <strong>
+          <strong>{" "}
             qué tipo de compañero estás buscando y qué te motiva a adoptar.
-          </strong>
+          </strong>{" "}
           Así podemos asegurarnos de que haya una buena conexión entre ustedes.
         </div>
         <h2 className="text-2xl font-semibold text-primary mt-1 mb-2">
@@ -72,70 +108,66 @@ const Register = () => {
         </div>
       </div>
 
-      <form className="space-y-6 px-7">
+      <form onSubmit={handleSubmit} className="space-y-6 px-7">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label htmlFor="fullName" className="block font-medium">
-              Nombre y Apellido
+              Nombre y Apellido*
             </label>
             <input
               name="fullName"
               type="text"
-              className="w-full rounded-3xl p-2  border-primary border-1 focus:outline-none focus:border-primary"
+              value={formData.fullName}
+              onChange={handleChange} 
+              className="w-full rounded-3xl p-2 bg-white/75 border-primary border-1 focus:outline-none focus:border-primary"
             />
+            {errors.fullName && <p className="text-red-500">{errors.fullName}</p>}
           </div>
 
           <div>
             <label htmlFor="birthDate" className="block font-medium">
-              Fecha de nacimiento
+              Fecha de nacimiento*
             </label>
             <div className="relative">
               <input
                 name="birthDate"
                 type="date"
-                className="w-full border border-primary rounded-3xl p-2 pr-12 text-[#595146] focus:outline-none focus:border-primary appearance-none"
+                value={formData.birthDate}
+                onChange={handleChange} 
+                className=" border border-primary bg-white/75 rounded-3xl p-2 pr-12 text-[#595146] focus:outline-none focus:border-primary appearance-none"
               />
-              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <svg
-                  width="25"
-                  height="24"
-                  viewBox="0 0 25 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M8.04468 7V3M16.0447 7V3M7.04468 11H17.0447M5.04468 21H19.0447C19.5751 21 20.0838 20.7893 20.4589 20.4142C20.834 20.0391 21.0447 19.5304 21.0447 19V7C21.0447 6.46957 20.834 5.96086 20.4589 5.58579C20.0838 5.21071 19.5751 5 19.0447 5H5.04468C4.51424 5 4.00554 5.21071 3.63046 5.58579C3.25539 5.96086 3.04468 6.46957 3.04468 7V19C3.04468 19.5304 3.25539 20.0391 3.63046 20.4142C4.00554 20.7893 4.51424 21 5.04468 21Z"
-                    stroke="#F4A470"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
+              {errors.birthDate && <p className="text-red-500">{errors.birthDate}</p>}
             </div>
           </div>
 
           <div>
             <label htmlFor="email" className="block font-medium">
-              Correo Electrónico
+              Correo Electrónico*
             </label>
             <input
               name="email"
               type="email"
-              className="w-full border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
+              value={formData.email}
+              onChange={handleChange} 
+              className="w-full border-primary bg-white/75 border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
             />
+            {errors.email && <p className="text-red-500">{errors.email}</p>}
           </div>
 
           <div>
             <label htmlFor="password" className="block font-medium">
-              Contraseña
+              Contraseña*
             </label>
             <div className="relative">
               <input
                 id="password"
                 name="password"
                 type="password"
-                className="w-full border border-primary rounded-3xl p-2 pr-12 focus:outline-none focus:border-primary"
+                value={formData.password}
+                onChange={handleChange} 
+                className="w-full border bg-white/75 border-primary rounded-3xl p-2 pr-12 focus:outline-none focus:border-primary"
               />
+              {errors.password && <p className="text-red-500">{errors.password}</p>}
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                 <svg
                   width="25"
@@ -156,13 +188,16 @@ const Register = () => {
 
           <div>
             <label htmlFor="run" className="block font-medium">
-              Documento de identidad
+              Documento de identidad*
             </label>
             <input
               name="run"
               type="text"
-              className="w-full  border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
+              value={formData.run}
+              onChange={handleChange} 
+              className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
             />
+            {errors.run && <p className="text-red-500">{errors.run}</p>}
           </div>
 
           <div>
@@ -172,14 +207,17 @@ const Register = () => {
             <input
               name="address"
               type="text"
-              className="w-full  border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
+              value={formData.address}
+              onChange={handleChange} 
+              className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
             />
+            {errors.address && <p className="text-red-500">{errors.address}</p>}
           </div>
         </div>
 
         <div>
           <label htmlFor="homeType" className="block font-medium mb-2">
-            ¿Qué espacio tiene disponible para su nuevo compañero?
+            ¿Qué espacio tienes disponible para tu nuevo compañero?*
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             {opciones.map((opcion) => (
@@ -187,125 +225,174 @@ const Register = () => {
                 name="homeType"
                 key={opcion}
                 type="button"
+                value={formData.homeType}
+                onChange={handleChange} 
                 onClick={() => setSelected(opcion)}
                 className={`px-4 py-1 rounded-2xl border-1 ${
                   selected === opcion
-                    ? "bg-primary border-primary"
-                    : "border-primary text-[#595146] hover:bg-primary"
+                    ? "bg-[#767575] border-primary text-white"
+                    : "border-primary text-[#aaaaaa] bg-white/75"
                 }`}>
                 {opcion}
               </button>
             ))}
           </div>
+          {errors.homeType && <p className="text-red-500">{errors.homeType}</p>}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div>
             <label className="block font-medium">
-              ¿Su condominio o edificio permite mascotas?
+              ¿Tu condominio o edificio permite mascotas?*
             </label>
-            <div className="flex gap-4 mt-1">
+            <div className="flex gap-4 mt-1 mb-3">
               <label
                 htmlFor="allowsPetsYes"
-                className="flex items-center border-1 border-primary rounded-3xl px-2 gap-5">
+                className="flex items-center bg-white/75 border-1 border-primary rounded-3xl px-2 gap-5">
                 Si
                 <input
                   type="radio"
                   name="allowsPets"
                   value="true"
-                  className="accent-black"
+                  checked={formData.allowsPets === "true"}
+                  onChange={handleChange}
+                  className="accent-[#767575] bg-white/75"
                 />{" "}
               </label>
               <label
                 htmlFor="allowsPetsNo"
-                className="flex items-center border-1 border-primary rounded-3xl px-2 gap-5">
+                className="flex items-center bg-white/75 border-1 border-primary rounded-3xl px-2 gap-5">
                 No
                 <input
                   type="radio"
                   name="allowsPets"
                   value="false"
-                  className="accent-black"
+                  checked={formData.allowsPets === "false"}
+                  onChange={handleChange}
+                  className="accent-[#767575] bg-white/75"
                 />{" "}
               </label>
             </div>
+            {errors.allowsPets && <p className="text-red-500">{errors.allowsPets}</p>}
           </div>
 
           <div>
             <label className="block font-medium">
-              ¿Has tenido mascotas antes?
+              ¿Has tenido mascotas antes?*
             </label>
-            <div className="flex gap-4 mt-1">
-              <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
+            <div className="flex gap-4 mt-1 mb-3">
+              <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 gap-5">
                 Si
                 <input
+                  value="true"
                   type="radio"
-                  name="tenidoPerros"
-                  className="accent-black"
+                  name="hasPets"
+                  checked={formData.hasPets === "true"}
+                  onChange={handleChange}
+                  className="accent-[#767575]"
                 />
               </label>
-              <label className="flex items-center  border-primary border-1 rounded-3xl px-2 gap-5">
+              <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 gap-5">
                 No
                 <input
+                  value="false"
                   type="radio"
-                  name="tenidoPerros"
-                  className="accent-black border rounded-3xl px-2 gap-5"
+                  name="hasPets"
+                  checked={formData.hasPets === "false"}
+                  onChange={handleChange}
+                  className="accent-[#767575] border rounded-3xl px-2 gap-5"
                 />
               </label>
             </div>
+            {errors.hasPets && <p className="text-red-500">{errors.hasPets}</p>}
           </div>
 
           <div>
             <label className="block font-medium">¿Están vacunadas?</label>
-            <div className="flex gap-4 mt-1">
-              <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
+            <div className="flex gap-4 mt-1 mb-3">
+              <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 gap-5">
                 Si
-                <input type="radio" name="vacunadas" className="accent-black" />
+                <input 
+                value="true"
+                type="radio" 
+                name="isVaccinated" 
+                checked={formData.isVaccinated === "true"}
+                onChange={handleChange}
+                className="accent-[#767575]" />
               </label>
-              <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
+              <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 gap-5">
                 No
-                <input type="radio" name="vacunadas" className="accent-black" />
+                <input 
+                value="false"
+                type="radio" 
+                name="isVaccinated" 
+                checked={formData.isVaccinated === "false"}
+                onChange={handleChange}
+                className="accent-[#767575]" />
               </label>
             </div>
+            {errors.isVaccinated && <p className="text-red-500">{errors.isVaccinated}</p>}
           </div>
 
           <div>
-            <label className="block font-medium">¿Están esterilizadas?</label>
-            <div className="flex gap-4 mt-1">
-              <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
+            <label className="block font-medium">¿Están castradas?</label>
+            <div className="flex gap-4 mt-1 mb-3">
+              <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 gap-5">
                 Si
-                <input type="radio" name="castradas" className="accent-black" />
+                <input 
+                value="true"
+                type="radio" 
+                name="isSterilized" 
+                checked={formData.isSterilized === "true"}
+                onChange={handleChange}
+                className="accent-[#767575]" />
               </label>
-              <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
+              <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 gap-5">
                 No
-                <input type="radio" name="castradas" className="accent-black" />
+                <input 
+                value="false"
+                type="radio" 
+                name="isSterilized" 
+                checked={formData.isSterilized === "false"}
+                onChange={handleChange}
+                className="accent-[#767575]" />
               </label>
             </div>
+            {errors.isSterilized && <p className="text-red-500">{errors.isSterilized}</p>}
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block font-medium">
-              ¿Cuántas horas al día estará sola la mascota?
+            <label className="block font-medium ">
+              ¿Cuántas horas al día estará sola la mascota?*
             </label>
             <input
               type="number"
               min="1"
               max="24"
               step="1"
-              className="w-auto border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
+              name="hoursAlone"
+              checked={formData.hoursAlone}
+              onChange={handleChange}
+              className="w-auto bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
             />
+            {errors.hoursAlone && <p className="text-red-500">{errors.hoursAlone}</p>}
           </div>
 
           <div>
             <label className="block font-medium">
-              ¿Qué haría si la mascota rompe algo o tiene problemas de
-              comportamiento?
+              ¿Qué harías si la mascota rompe algo o tiene problemas de
+              comportamiento?*
             </label>
             <input
+              name="petDestroy"
+              checked={formData.petDestroy}
+              onChange={handleChange}
               type="text"
-              className="w-full border-1 border-primary rounded-2xl p-2 h-18 focus:outline-none focus:border-primary"
+              className="w-full border-1 bg-white/75 border-primary rounded-2xl p-2 h-18 focus:outline-none focus:border-primary"
             />
+            {errors.petDestroy && <p className="text-red-500">{errors.petDestroy}</p>}
           </div>
         </div>
 
@@ -318,32 +405,91 @@ const Register = () => {
         </div>
       </form>
     </div>
+    )}
+  </>
 
-    //PAGINA DOS*****************
+//PAGINA DOS**************************************************************************************************************
 
-    /*const opcionesTamaño = ["Chico", "Mediano", "Grande"];
-const opcionesEdad = ["Joven", "Adulto", "Sin preferencia"];
+
+
+/*const opcionesEnergia = ["Tranquilo", "Moderado", "Muy activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
 const opcionesPreferencia = ["Con niños", "Con perros", "Con gatos"];
 
 const Register = () => {
-  const [tamañoSeleccionado, setTamañoSeleccionado] = useState("");
-  const [edadSeleccionada, setEdadSeleccionada] = useState("");
-  const [seleccionadas, setSeleccionadas] = useState([]);
-  const [seleccion, setSeleccion] = useState("");
+  const [formData, setFormData] = useState({
+    hasVeterinarian: "",
+    allowsVisit: "",
+    isResponsibleAdoption: "",
+    energy: "",
+    character: [],
+    compatibility: "",
+  });
+
+  const [errores, setErrores] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: type === 'checkbox' ? checked : value,
+    }));
+  };
+
+  const handleEnergySelect = (energy) => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      energy: energy,
+    }));
+  };
 
   const toggleSeleccion = (opcion) => {
-    setSeleccionadas(
-      (prev) =>
-        prev.includes(opcion)
-          ? prev.filter((item) => item !== opcion) // quitar si ya está
-          : [...prev, opcion] // agregar si no está
-    );
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      character: prevFormData.character.includes(opcion)
+        ? prevFormData.character.filter((item) => item !== opcion)
+        : [...prevFormData.character, opcion],
+    }));
+   
   };
+
+  const handleCompatibilitySelect = (opcion) => {
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      compatibility: opcion,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const nuevosErrores = {};
+    if (!formData.hasVeterinarian) nuevosErrores.hasVeterinarian = "Selecciona una opción.";
+    if (!formData.allowsVisit) nuevosErrores.allowsVisit = "Selecciona una opción.";
+    if (!formData.isResponsibleAdoption)
+      nuevosErrores.isResponsibleAdoption = "Debes aceptar el compromiso.";
+    if (!formData.energy) nuevosErrores.energy = "Selecciona una energía.";
+    if (formData.character.length === 0) nuevosErrores.character = "Selecciona al menos un carácter.";
+    if (!formData.compatibility) nuevosErrores.compatibility = "Selecciona una preferencia.";
+
+    setErrores(nuevosErrores);
+
+  };
+  const [formVisible, setFormVisible] = useState(true);
+
+  const handleCloseForm = () => {
+    setFormVisible(false);
+  };
+
   return (
-    <form className="max-w-3xl mx-auto my-7 px-12 py-6 bg-secundary  rounded-2xl shadow-md">
-      <div className="flex justify-end px-7">
-        <button className="text-[#595146] focus:outline-none">
+    <>
+   {formVisible && (
+    <form onSubmit={handleSubmit} className="max-w-3xl mx-auto my-7 p-6 bg-white/90 rounded-2xl shadow-2xl">
+      <div className="flex justify-end">
+        <button 
+        type="button"
+        className="text-[#595146] focus:outline-none"
+        onClick={handleCloseForm}>
           <svg
             className="h-6 w-6"
             fill="none"
@@ -365,137 +511,168 @@ const Register = () => {
           className="mx-auto mb-4 h-20 w-auto"
         />
         <div className="text-black justify-center text-center text-lg mt-1 ">
-          Queremos saber 
+          Queremos saber
           <strong>
+            {" "}
             qué tipo de compañero estás buscando y qué te motiva a adoptar.
-          </strong>
+          </strong>{" "}
           Así podemos asegurarnos de que haya una buena conexión entre ustedes.
         </div>
         <h2 className="text-2xl font-semibold text-primary mt-1 mb-2">
           Crear Cuenta
         </h2>
         <div className="flex justify-center items-center space-x-2 mb-6">
-        <div className=" w-3 h-3 rounded-full border border-gray-800" />
-        <div className="border-t border-gray-800 w-6" />
-        <div className="w-3 h-3 rounded-full  bg-primary" />
+          <div className=" w-3 h-3 rounded-full border border-gray-800" />
+          <div className="border-t border-gray-800 w-6" />
+          <div className="w-3 h-3 rounded-full  bg-primary" />
+        </div>
       </div>
-      </div>   
 
       <div className="px-7 text-base">
-        <div className="mb-4">
-          <label className="block mb-2">
-            ¿Está dispuesto/a a llevarlo al veterinario cuando sea necesario?
-            (vacunarlo y desparasitarlo regularmente, castrarlo o esterilizar)?
-          </label>
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
-              Si
-              <input
-                type="radio"
-                name="tenidoPerros"
-                className="accent-black"
-              />
-            </label>
-            <label className="flex items-center  border-primary border-1 rounded-3xl px-2 gap-5">
-              No
-              <input
-                type="radio"
-                name="tenidoPerros"
-                className="accent-black border rounded-3xl px-2 gap-5"
-              />
-            </label>
-          </div>
-        </div>
+      <div className="mb-4">
+      <label className="block mb-2">
+        ¿Estás dispuesto/a a llevarlo al veterinario cuando sea necesario?
+        (vacunarlo, desparasitarlo regularmente, castrarlo o esterilizar)?
+      </label>
+      <div className="flex items-center space-x-4">
+        <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+          <input
+            type="radio"
+            name="hasVeterinarian"
+            value="true"
+            checked={formData.hasVeterinarian === "true"}
+            onChange={handleChange}
+            className="accent-[#767575]"
+          />
+          Si
+        </label>
+
+        <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+          <input
+            type="radio"
+            name="hasVeterinarian"
+            value="false"
+            checked={formData.hasVeterinarian === "false"}
+            onChange={handleChange}
+            className="accent-[#767575]"
+          />
+          No
+        </label>
+      </div>
+      {errores.hasVeterinarian && (
+    <p className="text-red-600 text-sm mt-1">{errores.hasVeterinarian}</p>
+  )}
+    </div>
+
+    <div className="mb-4">
+      <label className="block mb-2">
+        ¿Estás dispuesto/a recibir una visita o llamado de seguimiento después de la adopción?
+      </label>
+      <div className="flex items-center space-x-4">
+        <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+          <input
+            type="radio"
+            name="allowsVisit"
+            value="true"
+            checked={formData.allowsVisit === "true"}
+            onChange={handleChange}
+            className="accent-[#767575]"
+          />
+          Si
+        </label>
+
+        <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+          <input
+            type="radio"
+            name="allowsVisit"
+            value="false"
+            checked={formData.allowsVisit === "false"}
+            onChange={handleChange}
+            className="accent-[#767575]"
+          />
+          No
+        </label>
+      </div>
+      {errores.allowsVisit && (
+        <p className="text-red-500 text-sm mt-1">{errores.allowsVisit}</p>
+      )}
+    </div>
+
+    <div className="mb-4">
+      <label className="block mb-2">
+        ¿Estás dispuesto/a firmar un compromiso de adopción responsable?*
+      </label>
+      <div className="flex items-center space-x-4">
+        <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+          <input
+            type="radio"
+            name="isResponsibleAdoption"
+            value="true"
+            checked={formData.isResponsibleAdoption === "true"}
+            onChange={handleChange}
+            className="accent-[#767575]"
+          />
+          Si
+        </label>
+
+        <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+          <input
+            type="radio"
+            name="isResponsibleAdoption"
+            value="false"
+            checked={formData.isResponsibleAdoption === "false"}
+            onChange={handleChange}
+            className="accent-[#767575]"
+          />
+          No
+        </label>
+      </div>
+      {errores.isResponsibleAdoption && (
+    <p className="text-red-600 text-sm mt-1">{errores.isResponsibleAdoption}</p>
+  )}
+    </div>
 
         <div className="mb-4">
           <label className="block mb-2">
-            ¿Está dispuesto/a a recibir una visita o llamado de seguimiento
-            después de la adopción?
-          </label>
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
-              Si
-              <input
-                type="radio"
-                name="tenidoPerros"
-                className="accent-black"
-              />
-            </label>
-            <label className="flex items-center  border-primary border-1 rounded-3xl px-2 gap-5">
-              No
-              <input
-                type="radio"
-                name="tenidoPerros"
-                className="accent-black border rounded-3xl px-2 gap-5"
-              />
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-2">
-            ¿Está dispuesto/a a firmar un compromiso de adopción responsable?
-          </label>
-          <div className="flex items-center space-x-4">
-            <label className="flex items-center border-primary border-1 rounded-3xl px-2 gap-5">
-              Si
-              <input
-                type="radio"
-                name="tenidoPerros"
-                className="accent-black"
-              />
-            </label>
-            <label className="flex items-center  border-primary border-1 rounded-3xl px-2 gap-5">
-              No
-              <input
-                type="radio"
-                name="tenidoPerros"
-                className="accent-black border rounded-3xl px-2 gap-5"
-              />
-            </label>
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block mb-2">
-            ¿Qué tipo de mascota está buscando?
+            ¿Qué tipo de mascota estás buscando?*
           </label>
           <div className="mb-2">
-            <label className="block font-bold mb-1">Tamaño</label>
+            <label className="block font-bold mb-1">Energia</label>
             <div className="flex space-x-2">
-              {opcionesTamaño.map((tamaño) => (
+              {opcionesEnergia.map((energy) => (
                 <button
-                  key={tamaño}
+                name="energy"
+                  key={energy}
                   type="button"
-                  onClick={() => setTamañoSeleccionado(tamaño)}
-                  className={`px-4 py-1 rounded-full border-1 ${
-                    tamañoSeleccionado === tamaño
-                      ? "bg-primary border-primary"
-                      : "border-primary hover:bg-primary"
+                  onClick={() => handleEnergySelect(energy)}
+                  className={`flex items-center px-4 py-1 rounded-full border-1 ${
+                    formData.energy === energy
+                      ? "bg-[#767575] text-white border-primary"
+                      : "border-primary bg-white/75 hover:bg-[#767575]"
                   }`}>
-                  {tamaño}
+                  {formData.energy === energy && (
+                    <svg
+                      width="17"
+                      height="10"
+                      viewBox="0 0 17 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M15.6453 0.225837C15.8505 0.393738 15.9807 0.636286 16.0071 0.90014C16.0336 1.16399 15.9541 1.42755 15.7863 1.63284L6.78629 12.6328C6.69783 12.741 6.58769 12.8294 6.46297 12.8923C6.33826 12.9553 6.20174 12.9914 6.0622 12.9984C5.92267 13.0054 5.78323 12.983 5.65286 12.9328C5.52249 12.8826 5.40409 12.8056 5.30529 12.7068L0.305288 7.70684C0.209778 7.61459 0.133596 7.50425 0.0811869 7.38224C0.0287779 7.26024 0.00119157 7.12902 3.77571e-05 6.99624C-0.00111606 6.86346 0.0241854 6.73178 0.0744663 6.60888C0.124747 6.48599 0.199 6.37434 0.292893 6.28044C0.386786 6.18655 0.498438 6.1123 0.621334 6.06202C0.744231 6.01173 0.87591 5.98643 1.00869 5.98759C1.14147 5.98874 1.27269 6.01633 1.39469 6.06874C1.5167 6.12114 1.62704 6.19733 1.71929 6.29284L5.93829 10.5118L14.2383 0.366838C14.4062 0.161587 14.6487 0.0314286 14.9126 0.00498697C15.1764 -0.0214547 15.44 0.0579856 15.6453 0.225837Z"
+                        fill="white"
+                      />
+                    </svg>
+                  )}
+                  {energy}
                 </button>
               ))}
             </div>
-          </div>
-
-          <div className="mb-2">
-            <label className="block font-bold mb-1">Edad</label>
-            <div className="flex space-x-2">
-              {opcionesEdad.map((opcion) => (
-                <button
-                  key={opcion}
-                  type="button"
-                  onClick={() => setEdadSeleccionada(opcion)}
-                  className={`px-4 py-1 rounded-full border-1 ${
-                    edadSeleccionada === opcion
-                      ? "bg-primary border-primary"
-                      : "border-primary hover:bg-primary"
-                  }`}>
-                  {opcion}
-                </button>
-              ))}
-            </div>
+            {errores.energy && (
+              <p className="text-red-600 text-sm mt-1">{errores.energy}</p>
+            )}
           </div>
 
           <div className="mb-2">
@@ -503,18 +680,38 @@ const Register = () => {
             <div className="flex flex-wrap gap-2">
               {opcionesCaracter.map((opcion) => (
                 <button
+                name="character"
                   key={opcion}
                   type="button"
                   onClick={() => toggleSeleccion(opcion)}
-                  className={`px-4 py-1 rounded-full border-1 ${
-                    seleccionadas.includes(opcion)
-                      ? "bg-primary border-primary"
-                      : "border-primary hover:bg-primary"
+                  className={`flex items-center px-4 py-1 rounded-full border-1 ${
+                    formData.character.includes(opcion)
+                      ? "bg-[#767575] text-white border-primary"
+                      : "border-primary bg-white/75 hover:bg-[#767575]"
                   }`}>
+                  {formData.character.includes(opcion) && (
+                    <svg
+                      width="17"
+                      height="10"
+                      viewBox="0 0 17 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M15.6453 0.225837C15.8505 0.393738 15.9807 0.636286 16.0071 0.90014C16.0336 1.16399 15.9541 1.42755 15.7863 1.63284L6.78629 12.6328C6.69783 12.741 6.58769 12.8294 6.46297 12.8923C6.33826 12.9553 6.20174 12.9914 6.0622 12.9984C5.92267 13.0054 5.78323 12.983 5.65286 12.9328C5.52249 12.8826 5.40409 12.8056 5.30529 12.7068L0.305288 7.70684C0.209778 7.61459 0.133596 7.50425 0.0811869 7.38224C0.0287779 7.26024 0.00119157 7.12902 3.77571e-05 6.99624C-0.00111606 6.86346 0.0241854 6.73178 0.0744663 6.60888C0.124747 6.48599 0.199 6.37434 0.292893 6.28044C0.386786 6.18655 0.498438 6.1123 0.621334 6.06202C0.744231 6.01173 0.87591 5.98643 1.00869 5.98759C1.14147 5.98874 1.27269 6.01633 1.39469 6.06874C1.5167 6.12114 1.62704 6.19733 1.71929 6.29284L5.93829 10.5118L14.2383 0.366838C14.4062 0.161587 14.6487 0.0314286 14.9126 0.00498697C15.1764 -0.0214547 15.44 0.0579856 15.6453 0.225837Z"
+                        fill="white"
+                      />
+                    </svg>
+                  )}
                   {opcion}
                 </button>
               ))}
             </div>
+            {errores.character && (
+              <p className="text-red-600 text-sm mt-1">{errores.character}</p>
+            )}
           </div>
 
           <div className="mb-2">
@@ -522,26 +719,46 @@ const Register = () => {
             <div className="flex space-x-2">
               {opcionesPreferencia.map((opcion) => (
                 <button
+                name="compatibility"
                   key={opcion}
                   type="button"
-                  onClick={() => setSeleccion(opcion)}
-                  className={`px-4 py-1 rounded-full border-1 ${
-                    seleccion === opcion
-                      ? "bg-primary border-primary"
-                      : "border-primary hover:bg-primary"
+                  onClick={() => handleCompatibilitySelect(opcion)}
+                  className={`flex items-center px-4 py-1 rounded-full border border-primary transition-colors ${
+                    formData.compatibility === opcion
+                      ? "bg-[#767575] text-white border-primary"
+                      : "bg-white/75 hover:bg-[#767575]"
                   }`}>
+                  {formData.compatibility === opcion && (
+                    <svg
+                      width="17"
+                      height="10"
+                      viewBox="0 0 17 13"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M15.6453 0.225837C15.8505 0.393738 15.9807 0.636286 16.0071 0.90014C16.0336 1.16399 15.9541 1.42755 15.7863 1.63284L6.78629 12.6328C6.69783 12.741 6.58769 12.8294 6.46297 12.8923C6.33826 12.9553 6.20174 12.9914 6.0622 12.9984C5.92267 13.0054 5.78323 12.983 5.65286 12.9328C5.52249 12.8826 5.40409 12.8056 5.30529 12.7068L0.305288 7.70684C0.209778 7.61459 0.133596 7.50425 0.0811869 7.38224C0.0287779 7.26024 0.00119157 7.12902 3.77571e-05 6.99624C-0.00111606 6.86346 0.0241854 6.73178 0.0744663 6.60888C0.124747 6.48599 0.199 6.37434 0.292893 6.28044C0.386786 6.18655 0.498438 6.1123 0.621334 6.06202C0.744231 6.01173 0.87591 5.98643 1.00869 5.98759C1.14147 5.98874 1.27269 6.01633 1.39469 6.06874C1.5167 6.12114 1.62704 6.19733 1.71929 6.29284L5.93829 10.5118L14.2383 0.366838C14.4062 0.161587 14.6487 0.0314286 14.9126 0.00498697C15.1764 -0.0214547 15.44 0.0579856 15.6453 0.225837Z"
+                        fill="white"
+                      />
+                    </svg>
+                  )}
                   {opcion}
                 </button>
               ))}
             </div>
           </div>
+          {errores.compatibility && (
+              <p className="text-red-600 text-sm mt-1">{errores.compatibility}</p>
+            )}
         </div>
 
         <div className="mb-6">
           <label className="inline-flex items-center">
             <input
-              type="checkbox"
-              className="form-checkbox h-5 w-5 accent-primary"
+              type="radio"
+              className="form-radio h-5 w-5 accent-[#767575] bg-[#767575]"
               name="termsAccepted"
             />
             <span className="ml-2 text-sm">
@@ -552,19 +769,23 @@ const Register = () => {
 
         <div className="flex items-center justify-between">
           <button
-            className="bg-transparent hover:bg-gray-300 text-gray-700  py-1 px-10 border-1 border-primary rounded-3xl focus:outline-none focus:shadow-primary"
+            className="bg-white/75 hover:bg-[#767575] text-primary  py-1 px-10 border-1 border-primary rounded-3xl focus:outline-none focus:shadow-primary"
             type="button">
             Atrás
           </button>
           <button
-            className="bg-primary hover:bg-gray-500  text-white font-semibold py-2 px-6 rounded-3xl"
+            className="bg-primary hover:bg-[#767575]  text-white font-semibold py-1 px-10 rounded-3xl"
             type="submit">
-            Enviar
+            Finalizar
           </button>
         </div>
       </div>
-    </form>*/
+    </form>
+  )}
+</> */
+     
   );
 };
+
 
 export default Register;

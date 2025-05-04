@@ -10,6 +10,7 @@ import Footer from "./layout/Footer";
 import PetsHome from "./componets/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
 import Nosotros from "./views/Nosotros";
+import Contacto from "./views/Contacto";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route element={<Register />} path="/Register" />
           <Route element={<Nosotros />} path="/nosotros" />
           <Route element={<CuidadosMascota />} path="/cuidadosmascota" />
+          <Route element={<Contacto/>} path="/contacto" />
           <Route element={<Adoptar />} path="/Adoptar" />
           <Route element={<AdminPanel />} path="/Admin" />
           <Route element={<PetsHome />} path="/Mascotas" />

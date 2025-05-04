@@ -7,7 +7,7 @@ import paso5 from "../assets/cuidados5.jpg";
 const CuidadosMascota = () => {
   return (
     <section className=" px-4 max-w-7xl mx-auto space-y-24 mt-14 bg-[#F9F9F9] pt-20 rounded-4xl shadow-md">
-      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-10">
+      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-8">
         <svg
           width="733"
           height="1693"
@@ -104,7 +104,7 @@ const CuidadosMascota = () => {
       </div>
 
       {/* SECCIÓN 2 */}
-      <div className="flex flex-col md:flex-row-reverse items-center gap-60">
+      <div className="flex flex-col md:flex-row-reverse items-center gap-60 -mt-24">
         {/* Imagen derecha */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
@@ -139,9 +139,9 @@ const CuidadosMascota = () => {
         </div>
       </div>
       {/* SECCIÓN 3 */}
-      <div className="flex flex-col md:flex-row items-center gap-46">
+      <div className="flex flex-col md:flex-row items-center gap-46 -mt-10">
         {/* Imagen izquierda */}
-        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
+        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
             src={paso3}
             alt="Persona paseando con mascota"
@@ -176,19 +176,19 @@ const CuidadosMascota = () => {
       </div>
 
       {/* SECCIÓN 4 */}
-      <div className="flex flex-col md:flex-row-reverse items-start gap-6">
+      <div className="flex flex-col md:flex-row-reverse items-center gap-60 -mt-24">
         {/* Imagen derecha */}
-        <div className="w-full md:w-1/3 flex justify-center">
+        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
             src={paso4}
             alt="Veterinario cuidando a mascota"
-            className="max-w-xs w-full h-auto"
+            className="w-auto h-full object-cover transform -translate-y-12"
           />
         </div>
 
         {/* Texto izquierda */}
-        <div className="md:w-2/3">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="md:w-2/4 md:-translate-y-10">
+          <div className="flex items-center mb-4">
             <h2 className="text-3xl font-bold text-primary">Salud</h2>
           </div>
 
@@ -207,13 +207,13 @@ const CuidadosMascota = () => {
       </div>
 
       {/* SECCIÓN 5 */}
-      <div className="flex flex-col md:flex-row items-center gap-46">
+      <div className="flex flex-col md:flex-row items-center gap-46 -mt-20">
         {/* Imagen izquierda */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
           <img
             src={paso5}
             alt="Niña demostrando amor a su mascota"
-            className="w-auto h-full object-cover transform -translate-y-14"
+            className="w-auto h-full object-cover transform -translate-y-14 "
           />
         </div>
 

@@ -94,7 +94,7 @@ const Footer = () => {
         {/* Contacto */}
         <div className="text-center md:text-left">
           <h3 className="font-bold text-primary text-xl mb-1 font-primary">
-            Contactanos
+            Contáctanos
           </h3>
           <div className="flex items-center justify-center md:justify-end gap-2 mb-2">
             <FiMail className="text-primary text-xl" />

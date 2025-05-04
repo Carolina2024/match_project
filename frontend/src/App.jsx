@@ -21,7 +21,7 @@ function App() {
           <Route element={<Login />} path="/Login" />
           <Route element={<Register />} path="/Register" />
           <Route element={<QuienesSomos />} path="/QuienesSomos" />
-          <Route element={<CuidadosMascota />} path="/CuidadosMascota" />
+          <Route element={<CuidadosMascota />} path="/cuidadosmascota" />
           <Route element={<Adoptar />} path="/Adoptar" />
           <Route element={<AdminPanel />} path="/Admin" />
           <Route element={<PetsHome />} path="/Mascotas" />

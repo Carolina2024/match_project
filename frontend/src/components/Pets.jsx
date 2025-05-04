@@ -1,231 +1,272 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { createPet, getAllPets } from "../api/petService";
-
-
 
 const initialFormState = {
   name: "",
-  size: "",
-  birthDate: "",
-  sex: "",
-  age: "",
-  species: "",
-  energy: "",
-  breed: "",
-  kg: "",
-  isVaccinated: false,
-  isSterilized: false,
-  isDewormed: false,
-  hasMicrochip: false,
-  story: "",
-  traits: [],
   admissionDate: "",
-  photo: [""],
+  species: "",
+  breed: "",
+  age: "",
+  sex: "",
+  energy: "",
+  kg: "",
+  size: "",
   status: "",
-  isActive: true,
+  traits: [],
+  delivery: [],
+  story: "",
+  photoUrls: [null, null, null],
 };
 
 const enumOptions = {
-  size: ["Pequeño", "Mediano", "Grande"],
-  sex: ["Macho", "Hembra"],
-  age: ["Cachorro", "Joven", "Adulto", "Adulto Mayor"],
   species: ["Perro", "Gato"],
-  energy: ["Tranquilo", "Moderado", "Muy Activo"],
+  age: ["Cachorro", "Adulto", "Senior"],
+  sex: ["Macho", "Hembra"],
+  energy: ["Alto", "Medio", "Bajo"],
+  size: ["Pequeño", "Mediano", "Grande"],
+  status: ["Disponible", "En Proceso", "Adoptada"],
   traits: [
-    "Cariñoso",
-    "Independiente",
-    "Juguetón",
-    "Protector",
-    "Amigable con niños",
-    "Amigable con otras mascotas",
-    "Me gusta pasear",
-    "Me gustan los espacios abiertos",
+    "Cariñoso", "Independiente", "Juguetón", "Protector",
+    "Amigable con niños", "Amigable con mascotas",
+    "Amigable con otras personas", "Me gusta pasear",
+    "Me gustan espacios abiertos"
   ],
-  status: ["Disponible", "Adoptada", "En Proceso"],
+  delivery: ["Desparasitado", "Con chip", "Vacuando", "Esterilizado"]
 };
 
-const Pets = ({ setActiveView, setPets, editingPet, addPet }) => {
+const Pets = ({ setActiveView, addPet }) => {
   const {
     register,
     handleSubmit,
-    reset,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm({ defaultValues: initialFormState });
 
   const traits = watch("traits");
-  const photos = watch("photo");
+  const delivery = watch("delivery");
+  const photoUrls = watch("photoUrls");
 
   useEffect(() => {
-    if (editingPet) {
-      reset({
-        ...editingPet,
-        traits: editingPet.traits || [],
-        photo: editingPet.photo || [""],
-      });
-    } else {
-      reset(initialFormState);
-    }
-  }, [editingPet, reset]);
+    reset(initialFormState);
+  }, [reset]);
 
-  const addPhoto = () => {
-    setValue("photo", [...photos, ""]);
+  const toggleCheckbox = (field, value) => {
+    const current = watch(field);
+    const updated = current.includes(value)
+      ? current.filter((v) => v !== value)
+      : [...current, value];
+    setValue(field, updated);
   };
 
-  const removePhoto = (index) => {
-    const updated = [...photos];
-    updated.splice(index, 1);
-    setValue("photo", updated);
+  const handleFileChange = (index, file) => {
+    const updated = [...photoUrls];
+    updated[index] = file;
+    setValue("photoUrls", updated);
   };
 
-  const handleTraitToggle = (trait) => {
-    const updated = traits.includes(trait)
-      ? traits.filter((t) => t !== trait)
-      : [...traits, trait];
-    setValue("traits", updated);
+  const onSubmit = (data) => {
+    const newPet = {
+      id: Date.now(),
+      ...data,
+    };
+
+    console.log("🐾 Nueva mascota enviada:", newPet);
+    addPet(newPet);
+    setActiveView("MASCOTAS");
   };
 
- 
+  const [isVisible, setIsVisible] = useState(false);
 
-  const onSubmit = async (data) => {
-    try {
-      if (editingPet) {
-        console.warn("Edición aún no implementada.");
-      } else {
-        await createPet(data); // crea en backend
-        const updatedList = await getAllPets(); // vuelve a traer la lista
-        setPets(updatedList.items); // actualiza el estado
-      }
-  
-      setActiveView("MASCOTAS");
-    } catch (error) {
-      console.error("Error al guardar mascota:", error.message);
-      alert("Ocurrió un error al guardar la mascota.");
-    }
-  };
-  
-  
-  
-    // if (editingPet) {
-    //   setPets((prev) =>
-    //     prev.map((p) => (p.id === editingPet.id ? newPet : p))
-    //   );
-    // } else {
-    //   addPet(newPet); // importante para que aparezca en AdminPanel
-    // }
-
+useEffect(() => {
+  // Lanza la animación al montar el componente
+  const timeout = setTimeout(() => setIsVisible(true), 50);
+  return () => clearTimeout(timeout);
+}, []);
 
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold text-orange-400 mb-8">
-        {editingPet ? "Editar Mascota" : "Crear Mascota"}
-      </h2>
-      <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name", { required: "El nombre es requerido" })} placeholder="Nombre" className="input" />
-        {errors.name && <span>{errors.name.message}</span>}
+    <div className="fixed inset-0 z-50 flex justify-end">
+      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setActiveView('MASCOTAS')} />
+      <div className={`relative w-full max-w-lg bg-white h-full shadow-xl z-50 p-8 overflow-y-auto rounded-xl transform transition-transform duration-700 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}>
+  
+      <h2 className="text-center text-2xl font-bold mb-4">Nueva Mascota</h2>
+      <p className="text-center text-sm mb-6">Completa el formulario para agregar una mascota al refugio.</p>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <div className="grid grid-cols-2 gap-4">
+      <div className="flex flex-col">
+  <label className="text-sm font-semibold mb-1">Nombre</label>
+  <input
+    {...register("name", { required: "El nombre es obligatorio" })}
+    placeholder="Nombre de la mascota"
+    className="border p-2 rounded w-full placeholder-gray-400"
+  />
+  {errors.name && (
+    <span className="text-red-500 text-sm mt-1">{errors.name.message}</span>
+  )}
+</div>
 
-        <select {...register("size", { required: true })} className="input">
-          <option value="">Tamaño</option>
-          {enumOptions.size.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+<div className="flex flex-col">
+  <label className="text-sm font-semibold mb-1">Fecha de ingreso</label>
+  <input
+    type="date"
+    {...register("admissionDate", { required: "La fecha de ingreso es requerida" })}
+    className="border p-2 rounded w-full"
+  />
+  {errors.admissionDate && (
+    <span className="text-red-500 text-sm mt-1">
+      {errors.admissionDate.message}
+    </span>
+  )}
+</div>
 
-        <input type="date" {...register("birthDate", { required: true })} className="input" />
-        <select {...register("sex", { required: true })} className="input">
-          <option value="">Sexo</option>
-          {enumOptions.sex.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+<div className="flex flex-col">
+  <label className="text-sm font-semibold mb-1">Especie</label>
+  <select
+    {...register("species", { required: "La especie es obligatoria" })}
+    className="border p-2 rounded w-full"
+  >
+    <option value="">Selecciona especie</option>
+    <option value="Perro">Perro</option>
+    <option value="Gato">Gato</option>
+  </select>
+  {errors.species && (
+    <span className="text-red-500 text-sm mt-1">
+      {errors.species.message}
+    </span>
+  )}
+</div>
 
-        <select {...register("age", { required: true })} className="input">
-          <option value="">Edad</option>
-          {enumOptions.age.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
 
-        <select {...register("species", { required: true })} className="input">
-          <option value="">Especie</option>
-          {enumOptions.species.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+  <div className="flex flex-col">
+    <label htmlFor="breed" className="text-sm font-medium mb-1">Raza</label>
+    <input {...register("breed", { required: true })} id="breed" placeholder="Raza de la mascota" className="border p-2 rounded w-full placeholder:text-gray-400" />
+  </div>
 
-        <select {...register("energy", { required: true })} className="input">
-          <option value="">Nivel de energía</option>
-          {enumOptions.energy.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+  <div className="flex flex-col">
+    <label htmlFor="age" className="text-sm font-medium mb-1">Edad</label>
+    <select {...register("age", { required: true })} id="age" className="border p-2 rounded w-full text-gray-600">
+      <option value="">Elegir edad</option>
+      {enumOptions.age.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+  </div>
 
-        <input {...register("breed")} placeholder="Raza" className="input" />
-        <input type="number" step="0.1" {...register("kg", { required: true })} placeholder="Peso (kg)" className="input" />
+  <div className="flex flex-col">
+    <label htmlFor="sex" className="text-sm font-medium mb-1">Sexo</label>
+    <select {...register("sex", { required: true })} id="sex" className="border p-2 rounded w-full text-gray-600">
+      <option value="">Elegir sexo</option>
+      {enumOptions.sex.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+  </div>
 
-        <label><input type="checkbox" {...register("isVaccinated")} /> Vacunado</label>
-        <label><input type="checkbox" {...register("isSterilized")} /> Esterilizado</label>
-        <label><input type="checkbox" {...register("isDewormed")} /> Desparasitado</label>
-        <label><input type="checkbox" {...register("hasMicrochip")} /> Microchip</label>
+  <div className="flex flex-col">
+    <label htmlFor="energy" className="text-sm font-medium mb-1">Nivel de actividad</label>
+    <select {...register("energy", { required: true })} id="energy" className="border p-2 rounded w-full text-gray-600">
+      <option value="">Elegir nivel</option>
+      {enumOptions.energy.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+  </div>
 
-        <textarea {...register("story")} placeholder="Historia" className="input" />
+  <div className="flex flex-col">
+    <label htmlFor="kg" className="text-sm font-medium mb-1">Peso</label>
+    <input {...register("kg", { required: true })} id="kg" type="number" step="0.1" placeholder="Añadir peso" className="border p-2 rounded w-full placeholder:text-gray-400" />
+  </div>
+
+  <div className="flex flex-col">
+    <label htmlFor="size" className="text-sm font-medium mb-1">Tamaño</label>
+    <select {...register("size", { required: true })} id="size" className="border p-2 rounded w-full text-gray-600">
+      <option value="">Elegir tamaño</option>
+      {enumOptions.size.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+  </div>
+
+  <div className="flex flex-col">
+    <label htmlFor="status" className="text-sm font-medium mb-1">Estado</label>
+    <select {...register("status", { required: true })} id="status" className="border p-2 rounded w-full text-gray-600">
+      <option value="">Elegir estado</option>
+      {enumOptions.status.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
+    </select>
+  </div>
+</div>
+
+
         <div>
-          <p>Características:</p>
-          {enumOptions.traits.map((trait) => (
-            <label key={trait}>
-              <input type="checkbox" checked={traits.includes(trait)} onChange={() => handleTraitToggle(trait)} />
-              {trait}
-            </label>
-          ))}
+          <p className="text-sm font-semibold mb-2">Rasgos:</p>
+          <div className="grid grid-cols-2 gap-2">
+            {enumOptions.traits.map((trait) => (
+              <button
+                key={trait}
+                type="button"
+                onClick={() => toggleCheckbox("traits", trait)}
+                className={`w-full text-left px-4 py-2 rounded border ${traits.includes(trait) ? "bg-black text-white" : "bg-white text-black"}`}
+              >
+                {trait}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <input type="date" {...register("admissionDate", { required: true })} className="input" />
-
         <div>
-          <p>Fotos:</p>
-          {photos.map((url, i) => (
-            <div key={i} className="flex gap-2 items-center">
-              <input value={url} onChange={(e) => {
-                const updated = [...photos];
-                updated[i] = e.target.value;
-                setValue("photo", updated);
-              }} className="input" placeholder="URL de la foto" />
-              <button type="button" onClick={() => removePhoto(i)}>Eliminar</button>
-            </div>
-          ))}
-          <button type="button" onClick={addPhoto}>Agregar Foto</button>
+          <p className="text-sm font-semibold mb-2">Entrega:</p>
+          <div className="grid grid-cols-2 gap-2">
+            {enumOptions.delivery.map((item) => (
+              <button
+                key={item}
+                type="button"
+                onClick={() => toggleCheckbox("delivery", item)}
+                className={`w-full text-left px-4 py-2 rounded border ${delivery.includes(item) ? "bg-black text-white" : "bg-white text-black"}`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <select {...register("status", { required: true })} className="input">
-          <option value="">Estado</option>
-          {enumOptions.status.map((opt) => (
-            <option key={opt} value={opt}>{opt}</option>
-          ))}
-        </select>
+        <div>
+          <label className="text-sm font-semibold mb-2 block">Historia:</label>
+          <textarea {...register("story")} rows="4" className="border p-2 rounded w-full" placeholder="Escribe la historia de la mascota"></textarea>
+        </div>
 
-        <label><input type="checkbox" {...register("isActive")} /> ¿Está activa?</label>
+        <div>
+          <p className="text-sm font-semibold mb-2">Agregar 3 fotos:</p>
+          <div className="grid grid-cols-3 gap-4">
+            {photoUrls.map((_, index) => (
+              <label key={index} className="border p-4 text-center rounded cursor-pointer hover:bg-gray-100">
+                Subir foto
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(index, e.target.files[0])}
+                  className="hidden"
+                />
+              </label>
+            ))}
+          </div>
+        </div>
 
-        <div className="flex justify-center space-x-4 pt-6">
-          <button type="submit" className="bg-orange-400 text-white px-6 py-3 rounded hover:bg-orange-500 cursor-pointer">
-            {editingPet ? "Guardar Cambios" : "Crear Mascota"}
-          </button>
-          <button type="button" className="bg-gray-300 text-gray-800 px-6 py-3 rounded hover:bg-gray-400 cursor-pointer" onClick={() => setActiveView("MASCOTAS")}>
+        <div className="grid grid-cols-2 gap-4 pt-6">
+          <button  type="button" onClick={() => setActiveView("MASCOTAS")}
+           className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer"
+           >
             Cancelar
+           </button>
+           <button
+            type="submit"
+            className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
+          >
+            Guardar
           </button>
         </div>
       </form>
+      </div>
     </div>
   );
 };
 
 Pets.propTypes = {
   setActiveView: PropTypes.func.isRequired,
-  setPets: PropTypes.func.isRequired,
-  editingPet: PropTypes.object,
   addPet: PropTypes.func.isRequired,
 };
 

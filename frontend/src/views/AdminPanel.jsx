@@ -8,8 +8,7 @@ import AdminHome from "../components/AdminHome";
 import Pets from "../components/Pets";
 import { getAllPets } from "../api/petService";
 
-//VISTA DE PERFIL ADMINISTRADOR
-
+// VISTA DE PERFIL ADMINISTRADOR
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState("INICIO");
   const [pets, setPets] = useState([]);
@@ -19,61 +18,49 @@ const AdminPanel = () => {
     const fetchPets = async () => {
       try {
         const response = await getAllPets();
-        setPets(response.items || []); // asegúrate que usas `.items`
+        setPets(response.items || []);
       } catch (error) {
         console.error("Error al cargar mascotas:", error.message);
       }
     };
-  
+
     fetchPets();
   }, []);
-  
-  
-
-  console.log(activeView);
-
-
 
   const handleDeletePet = (id) => {
     const confirm = window.confirm("¿Estás seguro de eliminar esta mascota?");
     if (confirm) {
-      setPets((prev) => prev.filter((pet) => pet.id !== id));
+      setPets((prev) => prev.filter((pet) => pet.id !== id && pet._id !== id));
     }
   };
-  
 
   const handleSavePet = (id) => {
     if (window.confirm("¿Estás seguro de guardar esta mascota?")) {
-      setPets((prevPets) => prevPets.filter((pet) => pet.id !== id));
+      setPets((prevPets) => prevPets.filter((pet) => pet.id !== id && pet._id !== id));
     }
   };
 
-  /* const stats = {
-    publicadas: pets.length,
-    enAdopcion:
-      pets.filter((p) => p.estado && p.estado === "en adopción").length || 3,
-    usuarios: users.length,
-  }; */
+  // ✅ NUEVO: Agrega mascota directamente al estado local
+  const addPet = (newPet) => {
+    setPets((prev) => [...prev, newPet]);
+  };
 
   const renderView = () => {
     switch (activeView) {
       case "INICIO":
-        return <AdminHome /* stats={stats} */ />;
+        return <AdminHome />;
       case "MASCOTAS":
         return (
-<PetList
-  pets={pets}
-  setActiveView={setActiveView}
-  setEditingPet={setEditingPet}
-  handleSavePet={handleSavePet}
-  handleDeletePet={handleDeletePet}
-/>
-
+          <PetList
+            pets={pets}
+            setActiveView={setActiveView}
+            setEditingPet={setEditingPet}
+            handleSavePet={handleSavePet}
+            handleDeletePet={handleDeletePet}
+          />
         );
-
       case "SOLICITUDES DE ADOPCIÓN":
         return <AdoptionApllication />;
-
       case "USUARIOS":
         return <UserProfiles />;
       case "editPet":
@@ -83,9 +70,9 @@ const AdminPanel = () => {
             setPets={setPets}
             editingPet={editingPet}
             handleSavePet={handleSavePet}
+            addPet={addPet}
           />
         );
-
       case "createPet":
         return (
           <Pets
@@ -93,6 +80,7 @@ const AdminPanel = () => {
             setPets={setPets}
             editingPet={null}
             handleSavePet={handleSavePet}
+            addPet={addPet} // ✅ necesario aquí
           />
         );
       default:
@@ -103,7 +91,6 @@ const AdminPanel = () => {
   return (
     <div className="flex h-screen">
       <Sidebar onSelect={setActiveView} activeView={activeView} />
-
       <div className="w-3/4 p-10 overflow-y-auto">{renderView()}</div>
     </div>
   );

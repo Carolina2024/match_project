@@ -6,8 +6,8 @@ import paso5 from "../assets/cuidados5.jpg";
 
 const CuidadosMascota = () => {
   return (
-    <section className=" px-4 max-w-7xl mx-auto space-y-24 mt-14 bg-[#F9F9F9] pt-20 rounded-4xl shadow-md">
-      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-8">
+    <section className=" px-4 max-w-7xl mx-auto space-y-24 mt-14 bg-[#F9F9F9] pt-20 pb-4 rounded-4xl shadow-md">
+      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-12">
         <svg
           width="733"
           height="1693"

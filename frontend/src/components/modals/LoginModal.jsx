@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { loginUser } from "../../api/user";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
 
 const LoginModal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
@@ -101,7 +102,7 @@ const LoginModal = ({ isOpen, onClose }) => {
         confirmButtonColor: "#FAAB75",
       }).then((result) => {
         if (result.isConfirmed) {
-            onClose();  // Cerrar el modal al hacer clic en "Aceptar"
+          onClose(); // Cerrar el modal al hacer clic en "Aceptar"
           if (role === "admin") {
             navigate("/Admin");
           } else {
@@ -323,11 +324,11 @@ const LoginModal = ({ isOpen, onClose }) => {
               </svg>
 
               <img
-                src="src/assets/logo.png"
-                srcSet="src/assets/logo@2x.png 2x, src/assets/logo@3x.png 3x"
-                alt="Patas Pirque Logo"
+                src={logo}
+                alt="Logo Patas Pirque"
                 className=" md:w-50 w-32 h-auto drop-shadow-xl rounded-full absolute top-0 md:left-97 left-70 right-0 bottom-0 m-auto"
               />
+
               {/* SVG de fondo */}
               <svg
                 width="288"

@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PublicLayout from "./components/PublicLayout";
 import Home from "./views/Home";
-import Login from "./views/Login";
 import Register from "./views/Register";
 import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
@@ -20,11 +19,10 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route element={<Home />} path="/" />
-          <Route element={<Login />} path="/Login" />
           <Route element={<Register />} path="/Register" />
-          <Route element={<Nosotros />} path="/nosotros" />
-          <Route element={<CuidadosMascota />} path="/cuidadosmascota" />
-          <Route element={<Contacto />} path="/contacto" />
+          <Route element={<Nosotros />} path="/Nosotros" />
+          <Route element={<CuidadosMascota />} path="/CuidadosMascota" />
+          <Route element={<Contacto />} path="/Contacto" />
           <Route element={<Adoptar />} path="/Adoptar" />
           <Route element={<PetsHome />} path="/Mascotas" />
         </Route>

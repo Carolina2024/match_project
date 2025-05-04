@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { FaPaw } from "react-icons/fa";
+import "react-phone-input-2/lib/style.css";
+import PhoneInput from "react-phone-input-2";
 
 const Contacto = () => {
+  const [phone, setPhone] = useState("");
+
   return (
     <section className="max-w-3xl mx-auto flex flex-col items-center pb-22 pt-16 px-4 mt-14 bg-[#F9F9F9] rounded-4xl">
       {/* Título */}
@@ -47,11 +52,40 @@ const Contacto = () => {
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Número de teléfono
             </label>
-            <select className="w-full px-4 py-2 border border-primary rounded-full placeholder-[#CBCBCB] font-medium text-sm outline-none">
-              <option>Ch +56 ...</option>
-              <option>Ar +54 ...</option>
-              <option>Pe +51 ...</option>
-            </select>
+            <PhoneInput
+              country={"cl"}
+              value={phone}
+              onChange={(value) => setPhone(value)}
+              inputStyle={{
+                width: "100%",
+                height: "40px",
+                borderRadius: "9999px",
+                border: "1px solid #F4A470",
+                fontSize: "0.875rem",
+                fontWeight: "500",
+                outline: "none",
+                color: "#0C0C0C",
+                backgroundColor: "white",
+                paddingLeft: "48px",
+              }}
+              buttonStyle={{
+                height: "40px",
+                borderTopLeftRadius: "9999px",
+                borderBottomLeftRadius: "9999px",
+                borderRight: "none",
+                border: "1px solid #F4A470",
+                backgroundColor: "white",
+                boxShadow: "none",
+                cursor: "pointer",
+              }}
+              containerStyle={{ width: "100%" }}
+              dropdownStyle={{
+                borderRadius: "12px",
+                zIndex: 100,
+              }}
+              inputClass="placeholder-[#CBCBCB]"
+              placeholder="Tu número"
+            />
           </div>
 
           {/* Mensaje */}

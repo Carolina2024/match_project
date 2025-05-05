@@ -7,7 +7,7 @@ import { loginUser } from "../../api/user";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
-const LoginModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -269,12 +269,16 @@ const LoginModal = ({ isOpen, onClose }) => {
 
             <p className="text-sm text-center font-medium text-[#767575] mt-12">
               ¿Todavía no te registraste?{" "}
-              <Link
-                to="#"
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenRegister();
+                }}
                 className="text-primary text-sm font-bold hover:underline"
               >
                 Regístrate
-              </Link>
+              </button>
             </p>
           </div>
 
@@ -375,9 +379,12 @@ const LoginModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default LoginModal;
-
 LoginModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onOpenRegister: PropTypes.func.isRequired,
 };
+
+export default LoginModal;
+
+

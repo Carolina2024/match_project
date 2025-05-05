@@ -77,6 +77,7 @@ const Login = () => {
       const data = await loginUser({ email, password });
 
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.id)
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
       }

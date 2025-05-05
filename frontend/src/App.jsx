@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PublicLayout from "./components/PublicLayout";
 import Home from "./views/Home";
-import Register from "./views/Register";
 import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
 import Navbar from "./layout/Navbar";
@@ -19,7 +18,6 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route element={<Home />} path="/" />
-          <Route element={<Register />} path="/Register" />
           <Route element={<Nosotros />} path="/Nosotros" />
           <Route element={<CuidadosMascota />} path="/CuidadosMascota" />
           <Route element={<Contacto />} path="/Contacto" />

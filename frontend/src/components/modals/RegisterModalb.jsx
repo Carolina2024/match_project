@@ -71,7 +71,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <>
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
       {formVisible && (
         <form
           onSubmit={handleSubmit}
@@ -398,7 +398,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
           </div>
         </form>
       )}
-    </>
+    </div>
   );
 };
 

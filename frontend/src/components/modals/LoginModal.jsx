@@ -275,7 +275,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
                   onClose();
                   onOpenRegister();
                 }}
-                className="text-primary text-sm font-bold hover:underline"
+                className="text-primary text-sm font-bold hover:underline cursor-pointer"
               >
                 Regístrate
               </button>

@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { FaPen, FaRegSave, FaTrash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
+
 
 const PetList = ({ pets, setActiveView, setEditingPet, handleSavePet, handleDeletePet }) => {
   const handleEdit = (pet) => {
@@ -18,8 +20,7 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleSavePet, handleDele
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold text-gray-800">Gestiona las mascotas</h2>
+      <div className="flex justify-end mb-6">
         <button
           onClick={() => setActiveView("createPet")}
           className="bg-[#f4a470] text-white px-4 py-2 rounded hover:bg-[#e78b52] transition-colors duration-300 cursor-pointer"
@@ -63,10 +64,10 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleSavePet, handleDele
                   <div className="flex gap-2 text-gray-600 text-lg">
                     <button
                       onClick={() => handleSavePet(pet.id || pet._id)}
-                      title="Guardar"
+                      title="Visualizar"
                       className="hover:text-green-600"
                     >
-                      <FaRegSave />
+                      <FaEye />
                     </button>
                     <button
                       onClick={() => handleEdit(pet)}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import logo from "../../assets/logo.png";
 
 const opcionesEnergia = ["Tranquilo", "Moderado", "Muy activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
@@ -75,24 +76,21 @@ const RegisterModalb = ({ isOpen, onClose }) => {
       {formVisible && (
         <form
           onSubmit={handleSubmit}
-          className="max-w-3xl mx-auto my-7 p-6 bg-white/90 rounded-2xl shadow-2xl"
-        >
+          className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
           <div className="flex justify-end">
             <button
               type="button"
-              className="text-[#595146] focus:outline-none"
-              onClick={onClose}
-            >
+              className="text-[#595146] focus:outline-none cursor-pointer"
+              onClick={onClose}>
               <svg
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+                stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth="2"
+                  strokeWidth="3"
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
@@ -100,11 +98,11 @@ const RegisterModalb = ({ isOpen, onClose }) => {
           </div>
           <div className="text-center mb-6 mt-1 px-20">
             <img
-              src="src/assets/logo.png"
+              src={logo}
               alt="Logo Patas Pirque"
-              className="mx-auto mb-4 h-20 w-auto"
+              className="mx-auto mb-7 h-36 w-auto rounded-full"
             />
-            <div className="text-black justify-center text-center text-lg mt-1 ">
+            <div className="text-black justify-center text-center text-xl mt-1 mb-4 mx-16 ">
               Queremos saber
               <strong>
                 {" "}
@@ -113,46 +111,46 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               Así podemos asegurarnos de que haya una buena conexión entre
               ustedes.
             </div>
-            <h2 className="text-2xl font-semibold text-primary mt-1 mb-2">
+            <h2 className="text-3xl font-bold text-primary mt-1 mb-4">
               Crear Cuenta
             </h2>
-            <div className="flex justify-center items-center space-x-2 mb-6">
-              <div className=" w-3 h-3 rounded-full border border-gray-800" />
-              <div className="border-t border-gray-800 w-6" />
-              <div className="w-3 h-3 rounded-full  bg-primary" />
+            <div className="flex justify-center items-center space-x-4 mb-6">
+              <div className="w-5 h-5 rounded-full border border-[#1C1B1F]" />
+              <div className="border-t border-[#1C1B1F] w-6" />
+              <div className="w-5 h-5 rounded-full bg-primary" />
             </div>
           </div>
 
-          <div className="px-7 text-base">
-            <div className="mb-4">
+          <div className="px-7 text-xl text-[#000000]">
+            <div className="mb-7">
               <label className="block mb-2">
-                ¿Estás dispuesto/a a llevarlo al veterinario cuando sea
+                ¿Estás dispuesto/a llevarlo al veterinario cuando sea
                 necesario? (vacunarlo, desparasitarlo regularmente, castrarlo o
                 esterilizar)?
               </label>
               <div className="flex items-center space-x-4">
-                <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+                <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
+                Si
                   <input
                     type="radio"
                     name="hasVeterinarian"
                     value="true"
                     checked={formData.hasVeterinarian === "true"}
                     onChange={handleChange}
-                    className="accent-[#767575]"
+                    className="accent-[#767575] w-4 h-4 border-2"
                   />
-                  Si
                 </label>
 
-                <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
-                  <input
+                <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
+                No
+                <input
                     type="radio"
                     name="hasVeterinarian"
                     value="false"
                     checked={formData.hasVeterinarian === "false"}
                     onChange={handleChange}
-                    className="accent-[#767575]"
+                    className="accent-[#767575] w-4 h-4 border-2"
                   />
-                  No
                 </label>
               </div>
               {errores.hasVeterinarian && (
@@ -162,34 +160,34 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               )}
             </div>
 
-            <div className="mb-4">
+            <div className="mb-7">
               <label className="block mb-2">
                 ¿Estás dispuesto/a recibir una visita o llamado de seguimiento
                 después de la adopción?
               </label>
               <div className="flex items-center space-x-4">
-                <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+                <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
+                Si
                   <input
                     type="radio"
                     name="allowsVisit"
                     value="true"
                     checked={formData.allowsVisit === "true"}
                     onChange={handleChange}
-                    className="accent-[#767575]"
+                    className="accent-[#767575] w-4 h-4 border-2"
                   />
-                  Si
                 </label>
 
-                <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
-                  <input
+                <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
+                No 
+                 <input
                     type="radio"
                     name="allowsVisit"
                     value="false"
                     checked={formData.allowsVisit === "false"}
                     onChange={handleChange}
-                    className="accent-[#767575]"
+                    className="accent-[#767575] w-4 h-4 border-2"
                   />
-                  No
                 </label>
               </div>
               {errores.allowsVisit && (
@@ -199,34 +197,34 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               )}
             </div>
 
-            <div className="mb-4">
+            <div className="mb-7">
               <label className="block mb-2">
                 ¿Estás dispuesto/a firmar un compromiso de adopción
                 responsable?*
               </label>
               <div className="flex items-center space-x-4">
-                <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+                <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
+                Si
                   <input
                     type="radio"
                     name="isResponsibleAdoption"
                     value="true"
                     checked={formData.isResponsibleAdoption === "true"}
                     onChange={handleChange}
-                    className="accent-[#767575]"
+                    className="accent-[#767575] w-4 h-4 border-2"
                   />
-                  Si
                 </label>
 
-                <label className="flex items-center gap-2 px-3 py-1 border border-primary rounded-3xl bg-white/75">
+                <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
+                No
                   <input
                     type="radio"
                     name="isResponsibleAdoption"
                     value="false"
                     checked={formData.isResponsibleAdoption === "false"}
                     onChange={handleChange}
-                    className="accent-[#767575]"
+                    className="accent-[#767575] w-4 h-4 border-2"
                   />
-                  No
                 </label>
               </div>
               {errores.isResponsibleAdoption && (
@@ -249,12 +247,11 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                       key={energy}
                       type="button"
                       onClick={() => handleEnergySelect(energy)}
-                      className={`flex items-center px-4 py-1 rounded-full border-1 ${
+                      className={`flex items-center px-4 py-1 rounded-full border-2 ${
                         formData.energy === energy
-                          ? "bg-[#767575] text-white border-primary"
-                          : "border-primary bg-white/75 hover:bg-[#767575]"
-                      }`}
-                    >
+                          ? "bg-[#767575] text-white"
+                          : "border-primary bg-white/75 text-[#595146]"
+                      }`}>
                       {formData.energy === energy && (
                         <svg
                           width="17"
@@ -262,8 +259,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                           viewBox="0 0 17 13"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mr-2"
-                        >
+                          className="mr-2">
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -290,12 +286,11 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                       key={opcion}
                       type="button"
                       onClick={() => toggleSeleccion(opcion)}
-                      className={`flex items-center px-4 py-1 rounded-full border-1 ${
+                      className={`flex items-center px-4 py-1 rounded-full border-2 ${
                         formData.character.includes(opcion)
-                          ? "bg-[#767575] text-white border-primary"
-                          : "border-primary bg-white/75 hover:bg-[#767575]"
-                      }`}
-                    >
+                           ? "bg-[#767575] text-white"
+                          : "border-primary bg-white/75 text-[#595146]"
+                      }`}>
                       {formData.character.includes(opcion) && (
                         <svg
                           width="17"
@@ -303,8 +298,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                           viewBox="0 0 17 13"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mr-2"
-                        >
+                          className="mr-2">
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -333,12 +327,11 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                       key={opcion}
                       type="button"
                       onClick={() => handleCompatibilitySelect(opcion)}
-                      className={`flex items-center px-4 py-1 rounded-full border border-primary transition-colors ${
+                      className={`flex items-center px-4 py-1 rounded-full border-2 transition-colors ${
                         formData.compatibility === opcion
-                          ? "bg-[#767575] text-white border-primary"
-                          : "bg-white/75 hover:bg-[#767575]"
-                      }`}
-                    >
+                           ? "bg-[#767575] text-white"
+                          : "border-primary bg-white/75 text-[#595146]"
+                      }`}>
                       {formData.compatibility === opcion && (
                         <svg
                           width="17"
@@ -346,8 +339,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                           viewBox="0 0 17 13"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mr-2"
-                        >
+                          className="mr-2">
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -368,7 +360,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               )}
             </div>
 
-            <div className="mb-6">
+            <div className="my-10">
               <label className="inline-flex items-center">
                 <input
                   type="radio"
@@ -383,15 +375,13 @@ const RegisterModalb = ({ isOpen, onClose }) => {
 
             <div className="flex items-center justify-between">
               <button
-                className="bg-white/75 hover:bg-[#767575] text-primary  py-1 px-10 border-1 border-primary rounded-3xl focus:outline-none focus:shadow-primary"
-                type="button"
-              >
+                className="bg-white/75 hover:bg-[#767575] text-primary py-1 px-12 border-2 border-primary rounded-3xl focus:outline-none focus:shadow-primary"
+                type="button">
                 Atrás
               </button>
               <button
-                className="bg-primary hover:bg-[#767575]  text-white font-semibold py-1 px-10 rounded-3xl"
-                type="submit"
-              >
+                className="bg-primary hover:bg-[#767575] text-white font-semibold py-1 px-12 rounded-3xl"
+                type="submit">
                 Finalizar
               </button>
             </div>

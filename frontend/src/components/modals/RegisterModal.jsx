@@ -293,7 +293,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                 <div className="flex gap-4 mt-1 mb-3">
                   <label
                     htmlFor="allowsPetsYes"
-                    className="flex items-center bg-white/75 border-1 border-primary rounded-3xl px-2 py-1 gap-10"
+                    className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10"
                   >
                     Si
                     <input
@@ -302,12 +302,12 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       value="true"
                       checked={formData.allowsPets === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575] bg-white/75"
+                      className="accent-[#767575] bg-white/75 w-4 h-4 border-2"
                     />{" "}
                   </label>
                   <label
                     htmlFor="allowsPetsNo"
-                    className="flex items-center bg-white/75 border-1 border-primary rounded-3xl px-2 py-1 gap-10"
+                    className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10"
                   >
                     No
                     <input
@@ -316,7 +316,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       value="false"
                       checked={formData.allowsPets === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575] bg-white/75"
+                      className="accent-[#767575] bg-white/75 w-4 h-4 border-2"
                     />{" "}
                   </label>
                 </div>
@@ -330,7 +330,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                   ¿Has tenido mascotas antes?*
                 </label>
                 <div className="flex gap-4 mt-1 mb-3">
-                  <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 py-1 gap-10">
+                  <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
                     Si
                     <input
                       value="true"
@@ -338,10 +338,10 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="hasPets"
                       checked={formData.hasPets === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575]"
+                      className="accent-[#767575] w-4 h-4 border-2"
                     />
                   </label>
-                  <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 py-1 gap-10">
+                  <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
                     No
                     <input
                       value="false"
@@ -349,7 +349,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="hasPets"
                       checked={formData.hasPets === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575] border rounded-3xl px-2 py-1 gap-10"
+                      className="accent-[#767575] rounded-3xl px-2 py-1 gap-10 w-4 h-4 border-2"
                     />
                   </label>
                 </div>
@@ -361,7 +361,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
               <div>
                 <label className="block font-medium">¿Están vacunadas?</label>
                 <div className="flex gap-4 mt-1 mb-3">
-                  <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 py-1 gap-10">
+                  <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
                     Si
                     <input
                       value="true"
@@ -369,10 +369,10 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isVaccinated"
                       checked={formData.isVaccinated === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575]"
+                      className="accent-[#767575] w-4 h-4 border-2"
                     />
                   </label>
-                  <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 py-1 gap-10">
+                  <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
                     No
                     <input
                       value="false"
@@ -380,7 +380,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isVaccinated"
                       checked={formData.isVaccinated === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575]"
+                      className="accent-[#767575] w-4 h-4 border-2"
                     />
                   </label>
                 </div>
@@ -392,7 +392,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
               <div>
                 <label className="block font-medium">¿Están castradas?</label>
                 <div className="flex gap-4 mt-1 mb-3">
-                  <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 py-1 gap-10">
+                  <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
                     Si
                     <input
                       value="true"
@@ -400,10 +400,10 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isSterilized"
                       checked={formData.isSterilized === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575]"
+                      className="accent-[#767575] w-4 h-4 border-2"
                     />
                   </label>
-                  <label className="flex items-center bg-white/75 border-primary border-1 rounded-3xl px-2 py-1 gap-10">
+                  <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
                     No
                     <input
                       value="false"
@@ -411,7 +411,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isSterilized"
                       checked={formData.isSterilized === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575]"
+                      className="accent-[#767575] w-4 h-4 border-2"
                     />
                   </label>
                 </div>
@@ -434,7 +434,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                   name="hoursAlone"
                   checked={formData.hoursAlone}
                   onChange={handleChange}
-                  className="w-auto bg-white/75 border-primary px-6 py-1 border-1 rounded-3xl focus:outline-none focus:border-primary"
+                  className="w-auto bg-white/75 border-primary px-6 py-1 border-2 rounded-3xl focus:outline-none focus:border-primary"
                 />
                 {errors.hoursAlone && (
                   <p className="text-red-500">{errors.hoursAlone}</p>
@@ -451,7 +451,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                   checked={formData.petDestroy}
                   onChange={handleChange}
                   type="text"
-                  className="w-full border-1 bg-white/75 border-primary rounded-3xl p-2 h-24 mb-6 focus:outline-none focus:border-primary"
+                  className="w-full border-2 bg-white/75 border-primary rounded-3xl p-2 h-24 mb-6 focus:outline-none focus:border-primary"
                 />
                 {errors.petDestroy && (
                   <p className="text-red-500">{errors.petDestroy}</p>

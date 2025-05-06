@@ -1,4 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import {
   PetAge,
   PetEnergy,
@@ -37,10 +43,6 @@ export class Pet {
   })
   @IsEnum(PetSize)
   size: PetSize;
-
-  @Column({ type: 'date' })
-  @IsDate()
-  birthDate: Date;
 
   @Column({
     type: 'enum',
@@ -133,4 +135,17 @@ export class Pet {
   @Column({ default: true })
   @IsBoolean()
   isActive: boolean;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  created_at: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updated_at: Date;
 }

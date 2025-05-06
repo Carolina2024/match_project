@@ -1,74 +1,54 @@
-import { useState } from "react";
-import Pets from "../componets/Pets";
-import PetList from "../componets/PetList";
-import UserProfiles from "../componets/UserProfiles";
-import AdoptionApllication from "../componets/AdoptionApllication";
-import Sidebar from "../componets/Sidebar";
-import AdminHome from "../componets/AdminHome";
+import { useEffect, useState } from "react";
 
-//VISTA DE PERFIL ADMINISTRADOR
+import PetList from "../components/PetList";
+import UserProfiles from "../components/UserProfiles";
+import AdoptionApllication from "../components/AdoptionApllication";
+import Sidebar from "../components/Sidebar";
+import AdminHome from "../components/AdminHome";
+import Pets from "../components/Pets";
+import { getAllPets } from "../api/petService";
+
+// VISTA DE PERFIL ADMINISTRADOR
 const AdminPanel = () => {
   const [activeView, setActiveView] = useState("INICIO");
-  const [pets, setPets] = useState([
-    {
-      id: 1,
-      nombre: "Firulais",
-      raza: "Labrador",
-      edad: "Adulto",
-      especie: "Perro",
-      tamano: "Grande",
-      estado: "en adopción",
-    },
-    {
-      id: 2,
-      nombre: "Michi",
-      raza: "Siames",
-      edad: "Cachorro",
-      especie: "Gato",
-      tamano: "Pequeño",
-      estado: "en adopción",
-    },
-    {
-      id: 3,
-      nombre: "Rex",
-      raza: "Pastor Alemán",
-      edad: "Adulto",
-      especie: "Perro",
-      tamano: "Grande",
-      estado: "en adopción",
-    },
-    {
-      id: 4,
-      nombre: "Chileno",
-      raza: "Sin raza",
-      edad: "Adulto",
-      especie: "Perro",
-      tamano: "Grande",
-      estado: "en adopción",
-    },
-  ]);
-
-  console.log(activeView);
-
+  const [pets, setPets] = useState([]);
   const [editingPet, setEditingPet] = useState(null);
 
-  const handleSavePet = (id) => {
-    if (window.confirm("¿Estás seguro de guardar esta mascota?")) {
-      setPets((prevPets) => prevPets.filter((pet) => pet.id !== id));
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await getAllPets();
+        setPets(response.items || []);
+      } catch (error) {
+        console.error("Error al cargar mascotas:", error.message);
+      }
+    };
+
+    fetchPets();
+  }, []);
+
+  const handleDeletePet = (id) => {
+    const confirm = window.confirm("¿Estás seguro de eliminar esta mascota?");
+    if (confirm) {
+      setPets((prev) => prev.filter((pet) => pet.id !== id && pet._id !== id));
     }
   };
 
-  /* const stats = {
-    publicadas: pets.length,
-    enAdopcion:
-      pets.filter((p) => p.estado && p.estado === "en adopción").length || 3,
-    usuarios: users.length,
-  }; */
+  const handleSavePet = (id) => {
+    if (window.confirm("¿Estás seguro de guardar esta mascota?")) {
+      setPets((prevPets) => prevPets.filter((pet) => pet.id !== id && pet._id !== id));
+    }
+  };
+
+  // ✅ NUEVO: Agrega mascota directamente al estado local
+  const addPet = (newPet) => {
+    setPets((prev) => [...prev, newPet]);
+  };
 
   const renderView = () => {
     switch (activeView) {
       case "INICIO":
-        return <AdminHome /* stats={stats} */ />;
+        return <AdminHome />;
       case "MASCOTAS":
         return (
           <PetList
@@ -76,12 +56,11 @@ const AdminPanel = () => {
             setActiveView={setActiveView}
             setEditingPet={setEditingPet}
             handleSavePet={handleSavePet}
+            handleDeletePet={handleDeletePet}
           />
         );
-
       case "SOLICITUDES DE ADOPCIÓN":
         return <AdoptionApllication />;
-
       case "USUARIOS":
         return <UserProfiles />;
       case "editPet":
@@ -90,15 +69,18 @@ const AdminPanel = () => {
             setActiveView={setActiveView}
             setPets={setPets}
             editingPet={editingPet}
+            handleSavePet={handleSavePet}
+            addPet={addPet}
           />
         );
-
       case "createPet":
         return (
           <Pets
             setActiveView={setActiveView}
             setPets={setPets}
             editingPet={null}
+            handleSavePet={handleSavePet}
+            addPet={addPet} // ✅ necesario aquí
           />
         );
       default:
@@ -109,7 +91,6 @@ const AdminPanel = () => {
   return (
     <div className="flex h-screen">
       <Sidebar onSelect={setActiveView} activeView={activeView} />
-
       <div className="w-3/4 p-10 overflow-y-auto">{renderView()}</div>
     </div>
   );

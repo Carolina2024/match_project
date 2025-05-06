@@ -21,29 +21,57 @@ const Home = () => {
   }, [sliders.length]);
 
   return (
-    <section className="w-full py-8 px-4 flex flex-col justify-center items-center">
+    <section className="w-full flex flex-col justify-center items-center">
       {/* Hero */}
-      <div className="relative w-full max-w-6xl overflow-hidden">
-        <img
-          src={image}
-          alt="Perro mirando"
-          className="w-full h-auto object-cover rounded-t-2xl"
-        />
-        <div className="absolute top-6 left-6 md:top-10 md:left-10 text-left mt-6">
-          <h2 className="text-primary text-4xl md:text-5xl font-bold font-secundary leading-tight mb-4">
-            Matcheá con
-          </h2>
-          <h2 className="text-primary text-4xl md:text-5xl font-bold font-secundary leading-tight mb-4">
-            tu futura
-          </h2>
-          <h2 className="text-primary text-4xl md:text-5xl font-bold font-secundary leading-tight mb-4">
-            mascota
-          </h2>
+      <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex flex-raw items-center md:ml-10">
+        {/* SVG de fondo */}
+        <svg
+          width="1030"
+          height="745"
+          viewBox="0 0 1218 745"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            width="1218"
+            height="745"
+            rx="260"
+            fill="#F4A470"
+            fillOpacity="0.17"
+          />
+        </svg>
+
+        {/* Imagen del perro alineada al borde derecho, centrada verticalmente */}
+        <div className="absolute inset-y-0 right-0 flex items-center">
+          <img
+            src={image}
+            alt="Perro mirando"
+            className="w-[300px] md:w-[640px] object-cover -mt-10 "
+          />
+        </div>
+
+        {/* Texto alineado al centro vertical y separado del borde izquierdo */}
+        <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
+          <div>
+            <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
+              <span className="text-primary">Matchea</span>
+              <br />
+              <span className="text-tertiary">con tu futura</span>
+              <br />
+              <span className="text-primary">mascota</span>
+            </h2>
+            {/* Botón */}
+            <button className="bg-white text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition cursor-pointer">
+              Regístrate para Adoptar
+            </button>
+          </div>
         </div>
       </div>
-
+      <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary md:mb-10 text-center md:mt-16 mt-0">
+        Conoce a quienes esperan un hogar
+      </h2>
       {/* Mini galería */}
-      <section className="py-10 px-4 flex justify-center mt-32 w-full">
+      <section className="py-10 px-4 flex justify-center w-full">
         <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-6xl">
           {[image2, image3, image4, image5].map((image, index) => (
             <img
@@ -55,11 +83,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
-      {/* Botón */}
-      <button className="bg-white text-primary font-bold px-14 py-3 m-22 text-lg md:text-3xl rounded-full shadow-md/30 hover:bg-gray-100 transition cursor-pointer">
-        Regístrate para Adoptar
-      </button>
 
       {/* Pasos */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
@@ -95,7 +118,7 @@ const Home = () => {
         </div>
 
         {/* Contenedores de pasos */}
-        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-50 relative w-full max-w-6xl z-10">
+        <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
           {/* Paso 1 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-[#2E256F] font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
@@ -172,7 +195,7 @@ const Home = () => {
               </svg>
             </div>
             <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
-              Describí tu hogar y tus preferencias para que Patas Pirque pueda
+              Describir tu hogar y tus preferencias para que Patas Pirque pueda
               encontrar tu mascota ideal
             </p>
           </div>
@@ -210,7 +233,7 @@ const Home = () => {
       {/* Historias de adopción */}
       <section className="w-full px-4 flex flex-col justify-center items-center">
         <div className="py-10 text-center mt-12 w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-28 px-4 md:px-20 text-left ">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-28 px-4 md:px-20 text-center ">
             Historias de adopción
           </h2>
 
@@ -248,13 +271,19 @@ const Home = () => {
             </div>
             <div className="text-left">
               <p className="italic">
-                “Nos daba miedo cómo iba a reaccionar Luna con Tomi, pero desde el primer día fue puro amor. Juegan, se cuidan y hasta duermen juntos. Adoptar fue como sumar una hermana peluda a la familia. No sé cómo vivíamos sin ella.”
+                “Nos daba miedo cómo iba a reaccionar Luna con Tomi, pero desde
+                el primer día fue puro amor. Juegan, se cuidan y hasta duermen
+                juntos. Adoptar fue como sumar una hermana peluda a la familia.
+                No sé cómo vivíamos sin ella.”
               </p>
               <p className="mt-5 font-semibold text-right">Leonardo Gomez</p>
             </div>
             <div className="text-left">
               <p className="italic">
-                “Teníamos miedo de cómo iba a reaccionar Toby con un gato en casa, pero fue todo lo contrario. Se hicieron amigos desde el primer día. Ver a nuestros hijos jugando con los dos nos derrite el corazón. Adoptar a Mía nos completó como familia.”
+                “Teníamos miedo de cómo iba a reaccionar Toby con un gato en
+                casa, pero fue todo lo contrario. Se hicieron amigos desde el
+                primer día. Ver a nuestros hijos jugando con los dos nos derrite
+                el corazón. Adoptar a Mía nos completó como familia.”
               </p>
               <p className="mt-5 font-semibold text-right">Sandra Lopez</p>
             </div>

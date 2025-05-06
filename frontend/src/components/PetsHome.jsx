@@ -4,7 +4,6 @@ import { FaCheckCircle, FaHeart } from "react-icons/fa";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-
 function PetsHome() {
   const [seleccionada, setSeleccionada] = useState(null);
   const [mascotas, setMascotas] = useState([]);
@@ -16,7 +15,6 @@ function PetsHome() {
         const data = await getCompatiblePets(userId);
         const pets = data.items;
         setMascotas(pets);
-        console.log(mascotas);
       } catch (error) {
         console.error(error.message);
       }

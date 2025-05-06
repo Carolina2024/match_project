@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { ConflictException, BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Pet } from './entities/pet.entity';
@@ -19,6 +15,7 @@ import {
 } from '../../common/enums/pet.enum';
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
+import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class PetService {
@@ -27,10 +24,33 @@ export class PetService {
     private petRepository: Repository<Pet>,
     @InjectRepository(Users)
     private userRepository: Repository<Users>,
+    private readonly filesService: FilesService,
   ) {}
 
-  async create(createPetDto: CreatePetDto): Promise<Pet> {
-    const pet = this.petRepository.create(createPetDto);
+  async create(createPetDto: CreatePetDto, files: Express.Multer.File[]): Promise<Pet> {
+    if (!files || files.length === 0) {
+      throw new BadRequestException('Debe subir al menos una imagen');
+    }
+
+    if (files.length > 5) {
+      throw new BadRequestException('No se pueden subir más de 5 imágenes');
+    }
+
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    for (const file of files) {
+      if (!allowedTypes.includes(file.mimetype)) {
+        throw new BadRequestException('Solo se permiten imágenes JPG/JPEG/PNG');
+      }
+      if(file.size > 5*1024*1024){
+        throw new BadRequestException('La imagen debe pesar menos de 5MB');
+      }
+    }
+
+    const photoUrls = await Promise.all(
+      files.map((file) => this.filesService.uploadImageToCloudinary(file)),
+    );
+
+    const pet = this.petRepository.create({...createPetDto, photoUrls});
     return await this.petRepository.save(pet);
   }
 
@@ -47,7 +67,6 @@ export class PetService {
         'pet.id',
         'pet.name',
         'pet.size',
-        'pet.birthDate',
         'pet.sex',
         'pet.age',
         'pet.species',
@@ -182,32 +201,32 @@ export class PetService {
       limit: +limit,
       totalPages: Math.ceil(total / limit),
     };
-  }
+  } 
 
   async findOne(id: string): Promise<Pet> {
     const pet = await this.petRepository.findOne({
       where: { id, isActive: true },
-      select: {
-        id: true,
-        name: true,
-        size: true,
-        birthDate: true,
-        sex: true,
-        age: true,
-        species: true,
-        energy: true,
-        breed: true,
-        kg: true,
-        isVaccinated: true,
-        isSterilized: true,
-        isDewormed: true,
-        hasMicrochip: true,
-        story: true,
-        traits: true,
-        admissionDate: true,
-        photoUrls: true,
-        status: true,
-      },
+      // select: {
+      //   id: true,
+      //   name: true,
+      //   size: true,
+      //   birthDate: true,
+      //   sex: true,
+      //   age: true,
+      //   species: true,
+      //   energy: true,
+      //   breed: true,
+      //   kg: true,
+      //   isVaccinated: true,
+      //   isSterilized: true,
+      //   isDewormed: true,
+      //   hasMicrochip: true,
+      //   story: true,
+      //   traits: true,
+      //   admissionDate: true,
+      //   photoUrls: true,
+      //   status: true,
+      // },
     });
     if (!pet) {
       throw new NotFoundException(

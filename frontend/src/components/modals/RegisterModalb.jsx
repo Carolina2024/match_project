@@ -395,13 +395,11 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish }) => {
               <button
                 className="bg-primary hover:bg-tertiary shadow-lg/20 text-white font-semibold py-1 px-12 rounded-3xl cursor-pointer"
                 type="submit"
-              
-                onClick=
-                {() => {
+                onClick={() => {
                   // … lógica de envío / API …
                   onFinish();
                 }}
-                >
+              >
                 Finalizar
               </button>
             </div>

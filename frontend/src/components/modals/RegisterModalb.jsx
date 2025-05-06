@@ -6,7 +6,7 @@ const opcionesEnergia = ["Tranquilo", "Moderado", "Muy activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
 const opcionesPreferencia = ["Con niños", "Con perros", "Con gatos"];
 
-const RegisterModalb = ({ isOpen, onClose }) => {
+const RegisterModalb = ({ isOpen, onClose, onBack, onFinish }) => {
   const [formData, setFormData] = useState({
     hasVeterinarian: "",
     allowsVisit: "",
@@ -76,17 +76,20 @@ const RegisterModalb = ({ isOpen, onClose }) => {
       {formVisible && (
         <form
           onSubmit={handleSubmit}
-          className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
+          className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]"
+        >
           <div className="flex justify-end">
             <button
               type="button"
               className="text-[#595146] focus:outline-none cursor-pointer"
-              onClick={onClose}>
+              onClick={onClose}
+            >
               <svg
                 className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
+                stroke="currentColor"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -124,32 +127,32 @@ const RegisterModalb = ({ isOpen, onClose }) => {
           <div className="px-7 text-xl text-[#000000]">
             <div className="mb-7">
               <label className="block mb-2">
-                ¿Estás dispuesto/a llevarlo al veterinario cuando sea
-                necesario? (vacunarlo, desparasitarlo regularmente, castrarlo o
+                ¿Estás dispuesto/a llevarlo al veterinario cuando sea necesario?
+                (vacunarlo, desparasitarlo regularmente, castrarlo o
                 esterilizar)?
               </label>
               <div className="flex items-center space-x-4">
                 <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                Si
+                  Si
                   <input
                     type="radio"
                     name="hasVeterinarian"
                     value="true"
                     checked={formData.hasVeterinarian === "true"}
                     onChange={handleChange}
-                    className="accent-[#767575] w-4 h-4 border-2"
+                    className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                   />
                 </label>
 
                 <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                No
-                <input
+                  No
+                  <input
                     type="radio"
                     name="hasVeterinarian"
                     value="false"
                     checked={formData.hasVeterinarian === "false"}
                     onChange={handleChange}
-                    className="accent-[#767575] w-4 h-4 border-2"
+                    className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                   />
                 </label>
               </div>
@@ -167,26 +170,26 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               </label>
               <div className="flex items-center space-x-4">
                 <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                Si
+                  Si
                   <input
                     type="radio"
                     name="allowsVisit"
                     value="true"
                     checked={formData.allowsVisit === "true"}
                     onChange={handleChange}
-                    className="accent-[#767575] w-4 h-4 border-2"
+                    className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                   />
                 </label>
 
                 <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                No 
-                 <input
+                  No
+                  <input
                     type="radio"
                     name="allowsVisit"
                     value="false"
                     checked={formData.allowsVisit === "false"}
                     onChange={handleChange}
-                    className="accent-[#767575] w-4 h-4 border-2"
+                    className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                   />
                 </label>
               </div>
@@ -204,26 +207,26 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               </label>
               <div className="flex items-center space-x-4">
                 <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                Si
+                  Si
                   <input
                     type="radio"
                     name="isResponsibleAdoption"
                     value="true"
                     checked={formData.isResponsibleAdoption === "true"}
                     onChange={handleChange}
-                    className="accent-[#767575] w-4 h-4 border-2"
+                    className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                   />
                 </label>
 
                 <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                No
+                  No
                   <input
                     type="radio"
                     name="isResponsibleAdoption"
                     value="false"
                     checked={formData.isResponsibleAdoption === "false"}
                     onChange={handleChange}
-                    className="accent-[#767575] w-4 h-4 border-2"
+                    className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                   />
                 </label>
               </div>
@@ -239,7 +242,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                 ¿Qué tipo de mascota estás buscando?*
               </label>
               <div className="mb-2">
-                <label className="block font-bold mb-1">Energia</label>
+                <label className="block font-semibold mb-1">Energia</label>
                 <div className="flex space-x-2">
                   {opcionesEnergia.map((energy) => (
                     <button
@@ -247,11 +250,12 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                       key={energy}
                       type="button"
                       onClick={() => handleEnergySelect(energy)}
-                      className={`flex items-center px-4 py-1 rounded-full border-2 ${
+                      className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
                         formData.energy === energy
                           ? "bg-[#767575] text-white"
                           : "border-primary bg-white/75 text-[#595146]"
-                      }`}>
+                      }`}
+                    >
                       {formData.energy === energy && (
                         <svg
                           width="17"
@@ -259,7 +263,8 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                           viewBox="0 0 17 13"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mr-2">
+                          className="mr-2"
+                        >
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -278,7 +283,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block font-bold mb-1">Carácter</label>
+                <label className="block font-semibold mb-1">Carácter</label>
                 <div className="flex flex-wrap gap-2">
                   {opcionesCaracter.map((opcion) => (
                     <button
@@ -286,11 +291,12 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                       key={opcion}
                       type="button"
                       onClick={() => toggleSeleccion(opcion)}
-                      className={`flex items-center px-4 py-1 rounded-full border-2 ${
+                      className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
                         formData.character.includes(opcion)
-                           ? "bg-[#767575] text-white"
+                          ? "bg-[#767575] text-white"
                           : "border-primary bg-white/75 text-[#595146]"
-                      }`}>
+                      }`}
+                    >
                       {formData.character.includes(opcion) && (
                         <svg
                           width="17"
@@ -298,7 +304,8 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                           viewBox="0 0 17 13"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mr-2">
+                          className="mr-2"
+                        >
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -319,7 +326,9 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               </div>
 
               <div className="mb-2">
-                <label className="block font-bold mb-1">Compatibilidad</label>
+                <label className="block font-semibold mb-1">
+                  Compatibilidad
+                </label>
                 <div className="flex space-x-2">
                   {opcionesPreferencia.map((opcion) => (
                     <button
@@ -327,11 +336,12 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                       key={opcion}
                       type="button"
                       onClick={() => handleCompatibilitySelect(opcion)}
-                      className={`flex items-center px-4 py-1 rounded-full border-2 transition-colors ${
+                      className={`flex items-center px-4 py-1 rounded-full border-2 transition-colors cursor-pointer ${
                         formData.compatibility === opcion
-                           ? "bg-[#767575] text-white"
+                          ? "bg-[#767575] text-white"
                           : "border-primary bg-white/75 text-[#595146]"
-                      }`}>
+                      }`}
+                    >
                       {formData.compatibility === opcion && (
                         <svg
                           width="17"
@@ -339,7 +349,8 @@ const RegisterModalb = ({ isOpen, onClose }) => {
                           viewBox="0 0 17 13"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="mr-2">
+                          className="mr-2"
+                        >
                           <path
                             fillRule="evenodd"
                             clipRule="evenodd"
@@ -364,7 +375,7 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               <label className="inline-flex items-center">
                 <input
                   type="radio"
-                  className="form-radio h-5 w-5 accent-[#767575] bg-[#767575]"
+                  className="form-radio h-5 w-5 accent-[#767575] bg-[#767575] cursor-pointer"
                   name="termsAccepted"
                 />
                 <span className="ml-2 text-sm">
@@ -373,15 +384,24 @@ const RegisterModalb = ({ isOpen, onClose }) => {
               </label>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-6">
               <button
-                className="bg-white/75 hover:bg-[#767575] text-primary py-1 px-12 border-2 border-primary rounded-3xl focus:outline-none focus:shadow-primary"
-                type="button">
+                className="bg-white/75 hover:text-tertiary hover:border-tertiary text-primary py-1 px-12 border-2 border-primary rounded-3xl focus:outline-none cursor-pointer"
+                type="button"
+                onClick={onBack}
+              >
                 Atrás
               </button>
               <button
-                className="bg-primary hover:bg-[#767575] text-white font-semibold py-1 px-12 rounded-3xl"
-                type="submit">
+                className="bg-primary hover:bg-tertiary shadow-lg/20 text-white font-semibold py-1 px-12 rounded-3xl cursor-pointer"
+                type="submit"
+              
+                onClick=
+                {() => {
+                  // … lógica de envío / API …
+                  onFinish();
+                }}
+                >
                 Finalizar
               </button>
             </div>
@@ -395,6 +415,8 @@ const RegisterModalb = ({ isOpen, onClose }) => {
 RegisterModalb.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
+  onFinish: PropTypes.func.isRequired,
 };
 
 export default RegisterModalb;

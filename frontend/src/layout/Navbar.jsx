@@ -1,18 +1,21 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../assets/logo.png";
 import LoginModal from "../components/modals/LoginModal";
 import RegisterModal from "../components/modals/RegisterModal";
 import RegisterModalb from "../components/modals/RegisterModalb";
+import SuccessModalRegister from "../components/modals/SuccessModalRegister";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showRegisterModalb, setShowRegisterModalb] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const navigate = useNavigate();
 
   const handleOpenRegister = () => {
     setShowLoginModal(false);
@@ -22,6 +25,22 @@ const Navbar = () => {
   const handleNextRegister = () => {
     setShowRegisterModal(false);
     setShowRegisterModalb(true);
+  };
+
+  const handleBackToRegister = () => {
+    setShowRegisterModalb(false);
+    setShowRegisterModal(true);
+  };
+
+  const handleFinishRegistration = () => {
+    setShowRegisterModalb(false);
+    setShowSuccess(true);
+  };
+
+  const handleIngresar = () => {
+    setShowSuccess(false);
+    // redirige al login o al dashboard:
+    navigate("/");
   };
 
   return (
@@ -118,7 +137,11 @@ const Navbar = () => {
       <RegisterModalb
         isOpen={showRegisterModalb}
         onClose={() => setShowRegisterModalb(false)}
+        onBack={handleBackToRegister}
+        onFinish={handleFinishRegistration}
       />
+
+      <SuccessModalRegister isOpen={showSuccess} onIngresar={handleIngresar} />
     </header>
   );
 };

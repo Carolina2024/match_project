@@ -270,7 +270,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                     value={formData.homeType}
                     onChange={handleChange}
                     onClick={() => setSelected(opcion)}
-                    className={`px-4 py-2 rounded-3xl border-1 ${
+                    className={`px-4 py-2 rounded-3xl border-1 cursor-pointer ${
                       selected === opcion
                         ? "bg-[#767575] text-white"
                         : "border-primary text-[#AAAAAA] bg-white/75"
@@ -302,7 +302,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       value="true"
                       checked={formData.allowsPets === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575] bg-white/75 w-4 h-4 border-2"
+                      className="accent-[#767575] bg-white/75 w-4 h-4 border-2 cursor-pointer"
                     />{" "}
                   </label>
                   <label
@@ -316,7 +316,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       value="false"
                       checked={formData.allowsPets === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575] bg-white/75 w-4 h-4 border-2"
+                      className="accent-[#767575] bg-white/75 w-4 h-4 border-2 cursor-pointer"
                     />{" "}
                   </label>
                 </div>
@@ -338,7 +338,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="hasPets"
                       checked={formData.hasPets === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575] w-4 h-4 border-2"
+                      className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
@@ -349,7 +349,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="hasPets"
                       checked={formData.hasPets === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575] rounded-3xl px-2 py-1 gap-10 w-4 h-4 border-2"
+                      className="accent-[#767575] rounded-3xl px-2 py-1 gap-10 w-4 h-4 border-2 cursor-pointer"
                     />
                   </label>
                 </div>
@@ -369,7 +369,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isVaccinated"
                       checked={formData.isVaccinated === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575] w-4 h-4 border-2"
+                      className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
@@ -380,7 +380,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isVaccinated"
                       checked={formData.isVaccinated === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575] w-4 h-4 border-2"
+                      className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                     />
                   </label>
                 </div>
@@ -400,7 +400,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isSterilized"
                       checked={formData.isSterilized === "true"}
                       onChange={handleChange}
-                      className="accent-[#767575] w-4 h-4 border-2"
+                      className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
@@ -411,7 +411,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
                       name="isSterilized"
                       checked={formData.isSterilized === "false"}
                       onChange={handleChange}
-                      className="accent-[#767575] w-4 h-4 border-2"
+                      className="accent-[#767575] w-4 h-4 border-2 cursor-pointer"
                     />
                   </label>
                 </div>
@@ -463,7 +463,7 @@ const RegisterModal = ({ isOpen, onClose, onNext }) => {
               <button
                 type="button"
                 onClick={onNext}
-                className="bg-primary hover:bg-gray-500 text-white font-bold mb-6 py-2 px-16 rounded-3xl shadow-lg/20 cursor-pointer transition duration-300 ease-in-out"
+                className="bg-primary hover:bg-tertiary text-white font-bold mb-6 py-2 px-16 rounded-3xl shadow-lg/20 cursor-pointer transition duration-300 ease-in-out"
               >
                 Siguiente
               </button>

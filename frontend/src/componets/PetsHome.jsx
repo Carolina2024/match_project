@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
-import { getCompatiblePets } from "../api/PetsUser"; //
+import { getCompatiblePets } from "../api/PetsUser";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+
 function PetsHome() {
   const [seleccionada, setSeleccionada] = useState(null);
   const [mascotas, setMascotas] = useState([]);
@@ -22,18 +26,18 @@ function PetsHome() {
   }, []);
 
   return (
-    <div className="mx-auto p-2.5 h-full">
+    <div className="mx-auto p-2.5">
       {!seleccionada ? (
         // 🐾 Mostrar todas las mascotas
         <>
-          <h2 className="text-xl font-semibold mb-4">
-            Estos son tus compañeros ideales
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-1">
+          <h1 className="text-3xl font-semibold mb-4 text-center text-primary">
+            Tus mascotas compatibles
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-1 h-full">
             {mascotas.map((mascota) => (
               <div
                 key={mascota.id}
-                className="p-4 items-center text-center h-screen"
+                className="p-4 items-center text-center"
               >
                 <img
                   src={mascota.photoUrls[0]}
@@ -68,11 +72,40 @@ function PetsHome() {
           </button>
           <div className="flex">
             <div className="left flex flex-col justify-center items-center text-center">
-              <img
+              {seleccionada?.photoUrls?.length > 1 ? (
+                <Carousel
+                  autoPlay={true}
+                  infiniteLoop
+                  showThumbs={false}
+                  showStatus={false}
+                  showArrows={false}
+                  className="w-full max-w-md mx-auto"
+                >
+                  {seleccionada.photoUrls.slice(0, 3).map((url, i) => (
+                    <div key={i}>
+                      <img
+                        src={url}
+                        alt={`Imagen ${i + 1}`}
+                        className="object-cover w-full h-80 rounded-md"
+                      />
+                    </div>
+                  ))}
+                </Carousel>
+              ) : (
+                <div className="w-full max-w-md mx-auto">
+                  <img
+                    src={seleccionada.photoUrls[0]}
+                    alt={seleccionada.name}
+                    className="object-cover w-full h-80 rounded-md"
+                  />
+                </div>
+              )}
+
+              {/* <img
                 src={seleccionada.photoUrls[0]}
                 alt={seleccionada.name}
                 className="w-120 h-80 object-cover mb-4 bg-contain p-10"
-              />
+              /> */}
               <h2 className="text-2xl font-bold mb-2">{seleccionada.nombre}</h2>
               <div className="mt-2 items-center text-center w-full flex flex-col justify-center">
                 <div className="flex flex-wrap gap-2 items-center h-fit justify-center w-8/12">

@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import { createPet } from "../api/petService";
+
 
 const initialFormState = {
   name: "",
@@ -16,42 +20,41 @@ const initialFormState = {
   traits: [],
   delivery: [],
   story: "",
-  photoUrls: [null, null, null],
+  photos: [null],// no es url
 };
 
 const enumOptions = {
   species: ["Perro", "Gato"],
-  age: ["Cachorro", "Adulto", "Senior"],
+  age: ["Cachorro", "Joven", "Adulto", "Adulto Mayor"],
   sex: ["Macho", "Hembra"],
-  energy: ["Alto", "Medio", "Bajo"],
-  size: ["Pequeño", "Mediano", "Grande"],
-  status: ["Disponible", "En Proceso", "Adoptada"],
+  energy: ["Muy Activo", "Moderado", "Tranquilo"],
+  size: ["Pequeño", "Mediano", "Grande", "Extra Grande"],
+  status: ["Disponible", "En Proceso", "Adoptado"],
   traits: [
     "Cariñoso", "Independiente", "Juguetón", "Protector",
-    "Amigable con niños", "Amigable con mascotas",
-    "Amigable con otras personas", "Me gusta pasear",
-    "Me gustan espacios abiertos"
+    "Amigable con niños", "Amigable con otras mascotas", "Me gusta pasear"
+
   ],
   delivery: ["Desparasitado", "Con chip", "Vacuando", "Esterilizado"]
 };
 
-const Pets = ({ setActiveView, addPet }) => {
+const Pets = ({ setActiveView, addPet}) => {
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm({ defaultValues: initialFormState });
 
   const traits = watch("traits");
   const delivery = watch("delivery");
-  const photoUrls = watch("photoUrls");
+  const photos = watch("photos");
 
-  useEffect(() => {
-    reset(initialFormState);
-  }, [reset]);
+  // useEffect(() => {
+  //   reset(initialFormState);
+  // }, [reset]);
 
   const toggleCheckbox = (field, value) => {
     const current = watch(field);
@@ -62,21 +65,55 @@ const Pets = ({ setActiveView, addPet }) => {
   };
 
   const handleFileChange = (index, file) => {
-    const updated = [...photoUrls];
+    const updated = [...photos];
     updated[index] = file;
-    setValue("photoUrls", updated);
+    setValue("photos", updated);
   };
 
-  const onSubmit = (data) => {
-    const newPet = {
-      id: Date.now(),
-      ...data,
-    };
-
-    console.log("🐾 Nueva mascota enviada:", newPet);
-    addPet(newPet);
-    setActiveView("MASCOTAS");
+  const onSubmit = async (data) => {
+    try {
+      // data.photos = data.photos;
+      // const formData = new FormData();
+  
+      // ... tus formData.append(...) existentes
+  
+      const newPet = await createPet(data);
+      addPet(newPet); // ⬅️ Aquí actualizas la tabla directamåente
+  
+      Swal.fire({
+        toast: true,
+        position: "bottom-end",
+        icon: "success",
+        title: "Mascota agregada",
+        text: `${data.name} ha sido registrada correctamente.`,
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        background: "#e6f9e6",
+        color: "#2e7d32",
+      });
+  
+      setActiveView("MASCOTAS");
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        toast: true,
+        position: "bottom-end",
+        icon: "error",
+        title: "Error al guardar",
+        text: "No se pudo registrar la mascota.",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        background: "#ffeaea",
+        color: "#b00020",
+      });
+    }
   };
+  
+
+
+
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -232,7 +269,7 @@ useEffect(() => {
         <div>
           <p className="text-sm font-semibold mb-2">Agregar 3 fotos:</p>
           <div className="grid grid-cols-3 gap-4">
-            {photoUrls.map((_, index) => (
+            {photos.map((_, index) => (
               <label key={index} className="border p-4 text-center rounded cursor-pointer hover:bg-gray-100">
                 Subir foto
                 <input
@@ -264,6 +301,7 @@ useEffect(() => {
     </div>
   );
 };
+
 
 Pets.propTypes = {
   setActiveView: PropTypes.func.isRequired,

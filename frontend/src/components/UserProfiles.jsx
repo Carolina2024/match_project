@@ -1,41 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
+import { fetchUsers } from "../api/adopterApi";
 // componets/UserProfiles.jsx
 const UserProfiles = () => {
-  const users = [
-    {
-      id: 1,
-      fullname: "Vanessa Montero",
-      email: "vane@example.com",
-      identityDocument: "20000000-0",
-      estado: "Activo",
-      address: "calle 1",
-    },
-    {
-      id: 2,
-      fullname: "Carlos Riquelme",
-      email: "admin@example.com",
-      identityDocument: "20000000-1",
-      estado: "Inactivo",
-      address: "calle 2",
-    },
-    {
-      id: 3,
-      fullname: "Francisca Merino",
-      email: "fca@example.com",
-      identityDocument: "20000000-2",
-      estado: "Activo",
-      address: "calle 3",
-    },
-  ];
+  const [users, setUsers] = useState([]);
+  const [estadoFiltro, setEstadoFiltro] = useState("");
+
+  useEffect(() => {
+    fetchUsers().then(setUsers);
+  }, []);
 
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.ceil(users.length / itemsPerPage);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Busca usuarios por nombre o correo
+  const filteredUsers = users.filter((user) => {
+    const term = searchTerm.toLowerCase();
+
+    const matchesSearch =
+      searchTerm === "" ||
+      user.fullname.toLowerCase().includes(term) ||
+      user.email.toLowerCase().includes(term);
+
+    // filtro por estado
+    const matchesEstado = estadoFiltro === "" || user.estado === estadoFiltro;
+
+    return matchesSearch && matchesEstado;
+  });
+
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentusers = users.slice(startIndex, endIndex);
+  const currentusers = filteredUsers.slice(startIndex, endIndex);
 
   const goToPage = (page) => setCurrentPage(page);
   const goToPrevious = () => currentPage > 1 && setCurrentPage(currentPage - 1);
@@ -52,6 +50,11 @@ const UserProfiles = () => {
             <input
               type="text"
               placeholder="Buscar"
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reinicia a la primera página cuando se filtra
+              }}
               className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#767575CC] rounded-[10px]
                  font-raleway font-normal text-[14px] leading-[1] focus:outline-none"
             />
@@ -62,7 +65,14 @@ const UserProfiles = () => {
       {/* FILTRO */}
       <div className="flex items-center space-x-3 mb-4">
         <span className="font-raleway text-[16px]">Filtrar por:</span>
-        <select className="w-[125px] h-[44px] border border-[#767575CC] rounded-[10px] px-2 text-sm focus:outline-none">
+        <select
+          value={estadoFiltro}
+          onChange={(e) => {
+            setEstadoFiltro(e.target.value);
+            setCurrentPage(1); // Reinicia paginación cuando cambia filtro
+          }}
+          className="w-[125px] h-[44px] border border-[#767575CC] rounded-[10px] px-2 text-sm focus:outline-none"
+        >
           <option>Estado</option>
           <option>Activo</option>
           <option>Inactivo</option>
@@ -94,7 +104,7 @@ const UserProfiles = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {currentusers.map((user) => (
             <tr
               key={user.id}
               className="border-b border-[#76757599] text-sm text-left bg-white"

@@ -59,7 +59,7 @@ export class AuthService {
     return {
       message: 'Usuario registrado exitosamente',
       token: this.getJwtToken(payload),
-      id: newUser.id
+      id: newUser.id,
     };
   }
 
@@ -91,55 +91,63 @@ export class AuthService {
     };
     const token = await this.jwtService.signAsync(payload);
 
-    return { message: 'Se ha iniciado sesión exitosamente', token, id: user.id };
+    return {
+      message: 'Se ha iniciado sesión exitosamente',
+      token,
+      id: user.id,
+    };
   }
 
   private getJwtToken(payload: JwtPayload) {
     return this.jwtService.sign(payload);
   }
 
-  async recoverPassword(email: string): Promise<{ message: string,token: string }> {
+  async recoverPassword(email: string): Promise<{ message: string }> {
     const user = await this.usersService.findByEmail(email);
     if (!user) throw new NotFoundException('Usuario no encontrado');
+    if (!user.isActive) throw new NotFoundException('Usuario no encontrado');
 
-    const ttlMinutes = this.configService.get<number>('RECOVERY_CODE_TTL_MINUTES', 15);
+    const ttlMinutes = this.configService.get<number>(
+      'RECOVERY_CODE_TTL_MINUTES',
+      15,
+    );
 
-  const token = this.jwtService.sign(
-    {
-      sub: user.id,
-      purpose: 'password_recovery',            
-    },
-    {
-      expiresIn: `${ttlMinutes}m`,
-    },
-  );
+    const token = this.jwtService.sign(
+      {
+        sub: user.id,
+        purpose: 'password_recovery',
+      },
+      {
+        expiresIn: `${ttlMinutes}m`,
+      },
+    );
 
-  await this.mailService.sendRecoveryCode(user.email,token);
+    await this.mailService.sendRecoveryCode(user.email, token);
 
-  return {
-    message: 'Código de recuperación enviado al correo electrónico',
-    token,
-  };
-    
+    return {
+      message: 'Código de recuperación enviado al correo electrónico',
+    };
   }
 
-  async resetPassword(token: string, newPassword: string):Promise<{ message: string }> {
-    let payload: { sub: string; purpose: string; otp: string  };
+  async resetPassword(
+    token: string,
+    newPassword: string,
+  ): Promise<{ message: string }> {
+    let payload: { sub: string; purpose: string; otp: string };
     try {
       payload = this.jwtService.verify(token);
     } catch (err) {
-      throw new BadRequestException('Token inválido o expirado');
+      throw new UnauthorizedException('Token inválido o expirado');
     }
-  
+
     if (payload.purpose !== 'password_recovery') {
-      throw new BadRequestException('Token no válidos para recuperación');
+      throw new UnauthorizedException('Token no válidos para recuperación');
     }
-  
+
     const user = await this.usersService.findOneById(payload.sub);
     user.password = await bcrypt.hash(newPassword, 10);
     await this.usersService.updatePassword(user.id, user.password);
-  
+
     return { message: 'Contraseña actualizada exitosamente' };
   }
-
 }

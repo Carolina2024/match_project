@@ -29,13 +29,13 @@ const enumOptions = {
   sex: ["Macho", "Hembra"],
   energy: ["Muy Activo", "Moderado", "Tranquilo"],
   size: ["Pequeño", "Mediano", "Grande", "Extra Grande"],
-  status: ["Disponible", "En Proceso", "Adoptado"],
+  status: ["Disponible", "En proceso", "Adoptada"],
   traits: [
     "Cariñoso", "Independiente", "Juguetón", "Protector",
     "Amigable con niños", "Amigable con otras mascotas", "Me gusta pasear"
 
   ],
-  delivery: ["Desparasitado", "Con chip", "Vacuando", "Esterilizado"]
+  delivery: ["Desparasitado", "Con chip", "Vacunando", "Esterilizado"]
 };
 
 const Pets = ({ setActiveView, addPet}) => {

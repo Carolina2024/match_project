@@ -3,8 +3,15 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {jwtDecode} from "jwt-decode";
 import Swal from "sweetalert2";
+import { FaUser } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 
-const AdminNavbar = ({ sectionTitle = "Panel de administración", userRole = "Admin" }) => {
+
+const AdminNavbar = ({
+  sectionTitle = "Panel de administración",
+  userRole = "Admin",
+}) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("Usuario");
@@ -18,11 +25,14 @@ const AdminNavbar = ({ sectionTitle = "Panel de administración", userRole = "Ad
         const decoded = jwtDecode(token);
         const userId = decoded.id;
 
-        const res = await fetch(`https://match-project.onrender.com/api/users/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await fetch(
+          `https://match-project.onrender.com/api/users/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (!res.ok) throw new Error("Error al obtener usuario");
         const data = await res.json();
@@ -63,27 +73,37 @@ const AdminNavbar = ({ sectionTitle = "Panel de administración", userRole = "Ad
       <div className="relative">
         <button
           onClick={() => setOpen(!open)}
-          className="bg-white border px-4 py-2 rounded shadow-sm text-sm font-medium hover:bg-gray-50"
+          className="bg-white border px-6 py-2 rounded-full shadow-sm text-sm font-medium hover:bg-gray-50 flex items-center"
         >
-          {userName} <span className="text-gray-500 text-xs">({userRole})</span>
+          <div className="flex flex-col items-start leading-tight">
+            <span className="text-sm text-gray-800 font-bold">{userName}</span>
+            <span className="text-xs text-gray-500">{userRole}</span>
+          </div>
+          <FaChevronDown
+            className={`text-sm text-gray-500 ml-2 transform ${
+              open ? "rotate-180" : ""
+            }`}
+          />
         </button>
 
         {open && (
           <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
             <button
-              className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              className="flex items-center w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
               onClick={() => {
                 setOpen(false);
-                navigate("/perfil");
+                navigate("/Admin");
               }}
             >
-              Mi perfil
+              <FaUser className="mr-2 text-gray-500" />
+              <span>Mi perfil</span>
             </button>
             <button
-              className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+              className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
               onClick={handleLogout}
             >
-              Cerrar sesión
+              <FaSignOutAlt className="mr-2" />
+              <span>Cerrar sesión</span>
             </button>
           </div>
         )}

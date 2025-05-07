@@ -173,4 +173,11 @@ export class UsersService {
       },
     });
   }
+  async updatePassword(id: string, newHashedPassword: string): Promise<void> {
+    const result=await this.userRepository.update(id, { password: newHashedPassword });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+  }
+
 }

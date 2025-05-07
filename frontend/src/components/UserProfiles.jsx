@@ -1,44 +1,37 @@
 import { useEffect, useState } from "react";
 import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
-import { fetchUsers } from "../api/adopterApi";
-// componets/UserProfiles.jsx
+import { fetchUsersget } from "../api/adopterApi";
+
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
-  const [estadoFiltro, setEstadoFiltro] = useState("");
+
+  /* useEffect(() => {
+    fetchUsersget().then(setUsers);
+  }, []); */
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    fetchUsers().then(setUsers);
-  }, []);
+      const fetchUsers = async () => {
+        try {
+          const response = await fetchUsersget(currentPage);
+          console.log("Usuarios recibidos:", response.items);
+          setUsers(response.items || []);
+          setTotalPages(response.totalPages || 1);
+        } catch (error) {
+          console.error("Error al cargar usuarios:", error.message);
+        }
+      };
 
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+      fetchUsers();
+    }, [currentPage]); // Actualiza cuando cambie la página
 
-  const [searchTerm, setSearchTerm] = useState("");
-
-  // Busca usuarios por nombre o correo
-  const filteredUsers = users.filter((user) => {
-    const term = searchTerm.toLowerCase();
-
-    const matchesSearch =
-      searchTerm === "" ||
-      user.fullname.toLowerCase().includes(term) ||
-      user.email.toLowerCase().includes(term);
-
-    // filtro por estado
-    const matchesEstado = estadoFiltro === "" || user.estado === estadoFiltro;
-
-    return matchesSearch && matchesEstado;
-  });
-
-  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentusers = filteredUsers.slice(startIndex, endIndex);
-
-  const goToPage = (page) => setCurrentPage(page);
-  const goToPrevious = () => currentPage > 1 && setCurrentPage(currentPage - 1);
-  const goToNext = () =>
-    currentPage < totalPages && setCurrentPage(currentPage + 1);
+    const handlePageChange = (page) => {
+      if (page >= 1 && page <= totalPages) {
+        setCurrentPage(page);
+      }
+    };
 
   return (
     <div className="p-8 bg-white border border-gray-400 rounded-lg">
@@ -46,7 +39,7 @@ const UserProfiles = () => {
       <div className=" mb-6">
         {/* Buscador */}
         <div>
-          <div className="relative w-[410px]">
+          {/* <div className="relative w-[410px]">
             <input
               type="text"
               placeholder="Buscar"
@@ -59,13 +52,13 @@ const UserProfiles = () => {
                  font-raleway font-normal text-[14px] leading-[1] focus:outline-none"
             />
             <FaSearch className="absolute left-3 top-2.5 text-gray-300 w-6 h-6" />
-          </div>
+          </div> */}
         </div>
       </div>
       {/* FILTRO */}
       <div className="flex items-center space-x-3 mb-4">
         <span className="font-raleway text-[16px]">Filtrar por:</span>
-        <select
+       {/*  <select
           value={estadoFiltro}
           onChange={(e) => {
             setEstadoFiltro(e.target.value);
@@ -76,7 +69,7 @@ const UserProfiles = () => {
           <option>Estado</option>
           <option>Activo</option>
           <option>Inactivo</option>
-        </select>
+        </select> */}
       </div>
 
       {/* Tabla de solicitudes */}
@@ -104,7 +97,7 @@ const UserProfiles = () => {
           </tr>
         </thead>
         <tbody>
-          {currentusers.map((user) => (
+          {users.map((user) => (
             <tr
               key={user.id}
               className="border-b border-[#76757599] text-sm text-left bg-white"
@@ -136,51 +129,48 @@ const UserProfiles = () => {
           ))}
         </tbody>
       </table>
+
       {/* Paginación */}
-      <div className="flex justify-between items-center mt-6 text-sm text-gray-700">
-        <span>
-          Mostrando {Math.min(endIndex, users.length)} de {users.length}{" "}
-          mascotas
-        </span>
-        <div className="flex items-center space-x-2">
+      <div className="flex justify-between items-center mt-6">
+        <div className="text-sm text-gray-500">
+          Mostrando {users.length} de {users.length} usuarios
+        </div>
+
+        <div className="flex items-center gap-2">
           <button
-            onClick={goToPrevious}
+            onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-3 py-1 border rounded ${
-              currentPage === 1
-                ? "text-gray-400 border-gray-300 cursor-not-allowed"
-                : "text-black border-gray-500"
-            }`}
+            className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Anterior
           </button>
 
-          {/* Números de página */}
-          {[...Array(totalPages)].map((_, index) => {
-            const page = index + 1;
-            return (
-              <button
-                key={page}
-                onClick={() => goToPage(page)}
-                className={`px-3 py-1 rounded border text-sm ${
-                  currentPage === page
-                    ? "bg-[#595146] text-white border-[#595146]"
-                    : "text-black border-gray-400 hover:bg-gray-100"
-                }`}
-              >
-                {page}
-              </button>
-            );
-          })}
+          {/* Botones de página (solo si hay más de 1) */}
+          <div className="flex gap-1">
+            {totalPages > 1 &&
+              Array.from({ length: totalPages }, (_, index) => {
+                const page = index + 1;
+                const isActive = currentPage === page;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-8 h-8 rounded border text-sm font-medium ${
+                      currentPage === page
+                        ? "bg-[#595146] text-white border-[#595146]" // Activo: fondo café, texto blanco
+                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100" // Inactivo: fondo blanco, texto café
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+          </div>
 
           <button
-            onClick={goToNext}
+            onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-3 py-1 border rounded ${
-              currentPage === totalPages
-                ? "text-gray-400 border-gray-300 cursor-not-allowed"
-                : "text-black border-gray-500"
-            }`}
+            className="px-3 py-2 bg-white0 rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Siguiente
           </button>

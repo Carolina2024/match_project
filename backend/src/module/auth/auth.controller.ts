@@ -1,5 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterDto } from './dtos/register.dto';
+import {RecoverPasswordDto } from './dtos/recover-password.dto';
 import { AuthService } from './auth.service';
 import {
   ApiBadRequestResponse,
@@ -11,6 +12,9 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { LoginDto } from './dtos/login.dto';
+import { ResetPasswordDto } from './dtos/reset-password.dto';
+
+
 
 @Controller('auth')
 export class AuthController {
@@ -111,4 +115,22 @@ export class AuthController {
   async login(@Body() loginDto: LoginDto) {
     return await this.authService.login(loginDto);
   }
+
+  @Post('recover-password')
+  @HttpCode(HttpStatus.OK)
+  async recoverPassword(
+    @Body() dto: RecoverPasswordDto,
+  ): Promise<{ message: string }> {
+    return this.authService.recoverPassword(dto.email);
+  }
+
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Resetear contraseña con código' })
+  @ApiOkResponse({ description: 'Contraseña actualizada exitosamente' })
+  @ApiBadRequestResponse({ description: 'codigo inválido o expirado' })
+  async resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPassword(dto.token, dto.newPassword);
+  }
+  
 }

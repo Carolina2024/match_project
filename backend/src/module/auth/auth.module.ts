@@ -12,12 +12,14 @@ import { AdoptersService } from '../adopters/adopters.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Users } from '../users/entities/users.entity';
 import { Adopters } from '../adopters/entities/adopters.entity';
+import { MailModule } from '../mail/mail.module';
 
 @Module({
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, UsersService, AdoptersService],
   imports: [
     ConfigModule,
+    MailModule,
     TypeOrmModule.forFeature([Users, Adopters]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({

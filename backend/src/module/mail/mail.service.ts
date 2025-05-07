@@ -13,7 +13,7 @@ export class MailService {
     this.transporter = nodemailer.createTransport({
       host: this.configService.get<string>('MAIL_HOST'),
       port: this.configService.get<number>('MAIL_PORT'),
-      secure: false, // true para puerto 465, false para otros
+      secure: false, 
       auth: {
         user: this.configService.get<string>('MAIL_USER'),
         pass: this.configService.get<string>('MAIL_PASSWORD'),
@@ -30,7 +30,6 @@ export class MailService {
     });
   }
 
-  /** Renderiza la plantilla Handlebars y envía */
   private renderAndSend<T>(
     templateName: string,
     to: string,
@@ -44,7 +43,7 @@ export class MailService {
     return this.sendMail(to, subject, html);
   }
 
-    /** 1) Código de recuperación */
+
     async sendRecoveryCode(email: string, token: string) {
         return this.renderAndSend(
           'recovery-code',

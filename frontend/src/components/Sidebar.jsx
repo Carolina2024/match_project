@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   FaFileAlt,
   FaUserFriends,
@@ -16,7 +17,10 @@ const Sidebar = ({ onSelect, activeView }) => {
   ];
 
   return (
-    <div className="w-64 h-full bg-[#f5f5f5] p-6 border-r border-gray-300">
+<div className="w-64 h-screen fixed top-0 left-0 bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-[4px_0_12px_rgba(0,0,0,0.1)]">
+  {/* contenido del sidebar */}
+
+
       {/* LOGO Y NOMBRE */}
       <div className="flex items-center gap-3 mb-6">
         <img
@@ -54,3 +58,9 @@ const Sidebar = ({ onSelect, activeView }) => {
 };
 
 export default Sidebar;
+
+
+Sidebar.propTypes = {
+  activeView: PropTypes.string.isRequired, // o `.string` si no es obligatoria
+  onSelect: PropTypes.func, // si también pasas esta función
+};

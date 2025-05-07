@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { FaPen, FaRegSave, FaTrash } from "react-icons/fa";
+import { FaPen, FaTrash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 
 

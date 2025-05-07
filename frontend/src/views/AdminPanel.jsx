@@ -107,7 +107,6 @@ import { getAllPets } from "../api/petService";
 import Sidebar from "../components/Sidebar";
 import { useOutletContext } from "react-router-dom";
 
-
 const AdminPanel = () => {
   const { activeView, setActiveView } = useOutletContext();
   const [pets, setPets] = useState([]);
@@ -144,9 +143,9 @@ const AdminPanel = () => {
 
   const renderView = () => {
     switch (activeView) {
-      case "INICIO":
+      case "Dashboard":
         return <AdminHome />;
-      case "MASCOTAS":
+      case "Mascotas":
         return (
           <PetList
             pets={pets}
@@ -156,9 +155,9 @@ const AdminPanel = () => {
             handleDeletePet={handleDeletePet}
           />
         );
-      case "SOLICITUDES DE ADOPCIÓN":
+      case "Solicitudes":
         return <AdoptionApllication />;
-      case "USUARIOS":
+      case "Adoptantes":
         return <UserProfiles />;
       case "editPet":
       case "createPet":
@@ -180,10 +179,12 @@ const AdminPanel = () => {
     <div className="flex h-screen">
       {/* Sidebar */}
       <Sidebar onSelect={setActiveView} activeView={activeView} />
-  
+
       {/* Contenido principal */}
-      <div className="flex-1 overflow-y-auto p-6">
-        {renderView()}
+      <div className="flex-1 overflow-y-auto">
+
+        {/* Vista seleccionada */}
+        <div className="p-6">{renderView()}</div>
       </div>
     </div>
   );

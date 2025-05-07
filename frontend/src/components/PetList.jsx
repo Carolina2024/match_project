@@ -37,9 +37,9 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
 
   const getStatusBadge = (status) => {
     const statusStyles = {
-      "Disponible": "bg-green-100 text-green-700",
-      "En proceso": "bg-yellow-100 text-yellow-700",
-      "Adoptada": "bg-gray-100 text-gray-700",
+      Disponible: "bg-green-500 text-white",
+      "En proceso": "bg-orange-500 text-white",
+      Adoptada: "bg-[#b26b3f] text-white",
     };
     return <span className={`px-2 py-1 rounded text-sm font-medium ${statusStyles[status] || "bg-gray-100 text-gray-600"}`}>{status}</span>;
   };
@@ -58,7 +58,7 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
       <div className="overflow-x-auto bg-white shadow rounded-xl">
         <table className="w-full table-auto border-collapse">
           <thead>
-            <tr className="bg-gray-100 text-gray-700 text-sm">
+            <tr className="bg-white text-gray-700 text-sm">
               <th className="px-4 py-3 text-left">Mascota</th>
               <th className="px-4 py-3 text-left">Fecha Ingreso</th>
               <th className="px-4 py-3 text-left">Especie</th>
@@ -73,11 +73,11 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
             {pets.map((pet) => (
               <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
                 <td className="px-4 py-2 flex items-center gap-2">
-                  <img
+                  {/*  <img
                     src={pet.photoUrls?.[0] || "https://via.placeholder.com/64"}
                     alt={pet.name}
                     className="w-10 h-10 object-cover rounded-full"
-                  />
+                  /> */}
                   <span className="font-medium text-gray-700">{pet.name}</span>
                 </td>
                 <td className="px-4 py-2">{pet.admissionDate}</td>
@@ -98,14 +98,14 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
                     <button
                       onClick={() => handleEdit(pet)}
                       title="Editar"
-                      className="hover:text-blue-600"
+                      className="text-green-600 hover:text-blue-600"
                     >
                       <FaPen />
                     </button>
                     <button
                       onClick={() => handleDeletePet(pet.id || pet._id)}
                       title="Eliminar"
-                      className="hover:text-red-600"
+                      className="text-red-600 hover:text-red-600"
                     >
                       <FaTrash />
                     </button>
@@ -118,22 +118,50 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
       </div>
 
       {/* Paginación */}
-      <div className="flex justify-center mt-6">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded-l-lg hover:bg-gray-400 disabled:opacity-50"
-        >
-          Anterior
-        </button>
-        <span className="px-4 py-2">{`Página ${currentPage} de ${totalPages}`}</span>
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded-r-lg hover:bg-gray-400 disabled:opacity-50"
-        >
-          Siguiente
-        </button>
+      <div className="flex justify-between items-center mt-6">
+        <div className="text-sm text-gray-500">
+          Mostrando {pets.length} de {pets.length} mascotas
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+          >
+            Anterior
+          </button>
+
+          {/* Botones de página (solo si hay más de 1) */}
+          <div className="flex gap-1">
+            {totalPages > 1 &&
+              Array.from({ length: totalPages }, (_, index) => {
+                const page = index + 1;
+                const isActive = currentPage === page;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-8 h-8 rounded border text-sm font-medium ${
+                      currentPage === page
+                        ? "bg-[#595146] text-white border-[#595146]" // Activo: fondo café, texto blanco
+                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100" // Inactivo: fondo blanco, texto café
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+          </div>
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-2 bg-white0 rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import CuidadosMascota from "./views/CuidadosMascota";
 import Nosotros from "./views/Nosotros";
 import Contacto from "./views/Contacto";
 import PrivateRoute from "./components/PrivateRoute";
+import PetElection from "./components/PetElection";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route element={<Contacto />} path="/Contacto" />
           <Route element={<Adoptar />} path="/Adoptar" />
           <Route element={<PetsHome />} path="/Mascotas" />
+          <Route path="/pet-election" element={<PetElection />} />
         </Route>
 
         {/* Ruta protegida para admin */}

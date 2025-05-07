@@ -1,12 +1,38 @@
 import PropTypes from "prop-types";
 import { FaPen, FaTrash } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { getAllPets } from "../api/petService";
 
 
-const PetList = ({ pets, setActiveView, setEditingPet, handleSavePet, handleDeletePet }) => {
+const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet }) => {
   const handleEdit = (pet) => {
     setEditingPet(pet);
     setActiveView("editPet");
+  };
+  const [pets, setPets] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      try {
+        const response = await getAllPets(currentPage);
+        console.log("Mascotas recibidas:", response.items);
+        setPets(response.items || []);
+        setTotalPages(response.totalPages || 1);
+      } catch (error) {
+        console.error("Error al cargar mascotas:", error.message);
+      }
+    };
+
+    fetchPets();
+  }, [currentPage]); // Actualiza cuando cambie la página
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const getStatusBadge = (status) => {
@@ -89,6 +115,25 @@ const PetList = ({ pets, setActiveView, setEditingPet, handleSavePet, handleDele
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Paginación */}
+      <div className="flex justify-center mt-6">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 rounded-l-lg hover:bg-gray-400 disabled:opacity-50"
+        >
+          Anterior
+        </button>
+        <span className="px-4 py-2">{`Página ${currentPage} de ${totalPages}`}</span>
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 rounded-r-lg hover:bg-gray-400 disabled:opacity-50"
+        >
+          Siguiente
+        </button>
       </div>
     </div>
   );

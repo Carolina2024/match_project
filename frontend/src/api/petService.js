@@ -1,9 +1,10 @@
 const BASE_URL = "https://match-project.onrender.com/api/pets";
+const BASE_URL2 = "https://match-project.onrender.com/api/pets/complete";
 
 /**
  * Obtener todas las mascotas
  */
-export const getAllPets = async () => {
+/* export const getAllPets = async (page = 1, limit = 10) => {
   const token = localStorage.getItem("token");
 
   const res = await fetch(BASE_URL, {
@@ -14,7 +15,27 @@ export const getAllPets = async () => {
 
   if (!res.ok) throw new Error("Error al obtener mascotas");
   return res.json();
+}; */
+
+export const getAllPets = async (page = 1, limit = 10) => {
+  const token = localStorage.getItem("token");
+
+  // Agregar parámetros de paginación en la query string
+  const queryParams = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  const res = await fetch(`${BASE_URL2}?${queryParams}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Error al obtener mascotas");
+  return res.json();
 };
+
 
 /**
  * Crear una nueva mascota

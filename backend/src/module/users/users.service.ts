@@ -71,7 +71,7 @@ export class UsersService {
   }
   async findOneById(id: string): Promise<Users> {
     const user = await this.userRepository.findOne({
-      where: { id },
+      where: { id, isActive: true },
       relations: ['adopter'],
       select: {
         id: true,
@@ -84,6 +84,7 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
+
     return user;
   }
 
@@ -92,8 +93,8 @@ export class UsersService {
       where: { id },
       relations: ['adopter'],
     });
-    if (!user){
-      throw new NotFoundException(`Usuario con id ${id} no encontrado`)
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
     if (!user.isActive)
       throw new BadRequestException('El usuario ya está eliminado');

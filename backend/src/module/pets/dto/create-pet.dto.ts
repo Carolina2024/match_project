@@ -4,11 +4,10 @@ import {
   IsDate,
   IsEnum,
   IsNumber,
-  IsNumberString,
   IsString,
-  IsUrl,
   Matches,
   Max,
+  MaxDate,
   Min,
 } from 'class-validator';
 import {
@@ -87,7 +86,7 @@ export class CreatePetDto {
     return valor;
   })
   @IsNumber({}, { message: 'El peso debe ser un número' })
-  @Min(0, { message: 'El peso no puede ser negativo' })
+  @Min(0.5, { message: 'El peso no puede ser menor a 0.5 kg' })
   @Max(100, { message: 'El peso no puede ser mayor a 100 kg' })
   kg: number;
 
@@ -180,6 +179,10 @@ export class CreatePetDto {
 
   @ApiProperty({ description: 'Fecha de admisión', example: '2023-01-15' })
   @IsDate({ message: 'La fecha de admisión debe ser una fecha válida' })
+  @Type(() => Date)
+  @MaxDate(() => new Date(), {
+    message: `La fecha de admisión de la mascota no puede ser posterior a la fecha actual`,
+  })
   @Type(() => Date)
   admissionDate: Date;
 

@@ -1,18 +1,26 @@
 import PropTypes from "prop-types";
-import { FaPen, FaTrash } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
+import { FaPen, FaTrash, FaEye } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { getAllPets } from "../api/petService";
+import PetDetailsModal from "./modals/PetDetailsModal";
 
+const PetList = ({ setActiveView, setEditingPet, handleDeletePet }) => {
+  const [pets, setPets] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPet, setSelectedPet] = useState(null);
+
   const handleEdit = (pet) => {
     setEditingPet(pet);
     setActiveView("editPet");
   };
-  const [pets, setPets] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+
+  const handleViewPet = (pet) => {
+    setSelectedPet(pet);
+    setModalOpen(true);
+  };
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -22,12 +30,13 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
         setPets(response.items || []);
         setTotalPages(response.totalPages || 1);
       } catch (error) {
+
         console.error("Error al cargar mascotas:", error.message);
       }
     };
 
     fetchPets();
-  }, [currentPage]); // Actualiza cuando cambie la página
+  }, [currentPage, pets]);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -38,10 +47,12 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
   const getStatusBadge = (status) => {
     const statusStyles = {
       Disponible: "bg-green-500 text-white",
-      "En proceso": "bg-orange-500 text-white",
+      "En Proceso": "bg-orange-500 text-white",
       Adoptada: "bg-[#b26b3f] text-white",
     };
-    return <span className={`px-2 py-1 rounded text-sm font-medium ${statusStyles[status] || "bg-gray-100 text-gray-600"}`}>{status}</span>;
+    return (
+      <span className={`px-2 py-1 rounded text-sm font-medium ${statusStyles[status] || "bg-gray-100 text-gray-600"}`}>{status}</span>
+    );
   };
 
   return (
@@ -72,12 +83,7 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
           <tbody>
             {pets.map((pet) => (
               <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2 flex items-center gap-2">
-                  {/*  <img
-                    src={pet.photoUrls?.[0] || "https://via.placeholder.com/64"}
-                    alt={pet.name}
-                    className="w-10 h-10 object-cover rounded-full"
-                  /> */}
+                <td className="px-4 py-2">
                   <span className="font-medium text-gray-700">{pet.name}</span>
                 </td>
                 <td className="px-4 py-2">{pet.admissionDate}</td>
@@ -89,7 +95,7 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
                 <td className="px-4 py-2">
                   <div className="flex gap-2 text-gray-600 text-lg">
                     <button
-                      onClick={() => handleSavePet(pet.id || pet._id)}
+                      onClick={() => handleViewPet(pet)}
                       title="Visualizar"
                       className="hover:text-green-600"
                     >
@@ -117,7 +123,15 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
         </table>
       </div>
 
-      {/* Paginación */}
+      {selectedPet && (
+  <PetDetailsModal
+    isOpen={modalOpen}
+    onClose={() => setModalOpen(false)}
+    pet={selectedPet}
+  />
+)}
+
+
       <div className="flex justify-between items-center mt-6">
         <div className="text-sm text-gray-500">
           Mostrando {pets.length} de {pets.length} mascotas
@@ -132,20 +146,18 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
             Anterior
           </button>
 
-          {/* Botones de página (solo si hay más de 1) */}
           <div className="flex gap-1">
             {totalPages > 1 &&
               Array.from({ length: totalPages }, (_, index) => {
                 const page = index + 1;
-                const isActive = currentPage === page;
                 return (
                   <button
                     key={page}
                     onClick={() => handlePageChange(page)}
                     className={`w-8 h-8 rounded border text-sm font-medium ${
                       currentPage === page
-                        ? "bg-[#595146] text-white border-[#595146]" // Activo: fondo café, texto blanco
-                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100" // Inactivo: fondo blanco, texto café
+                        ? "bg-[#595146] text-white border-[#595146]"
+                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
                     }`}
                   >
                     {page}
@@ -157,7 +169,7 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-2 bg-white0 rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+            className="px-3 py-2 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Siguiente
           </button>
@@ -168,25 +180,6 @@ const PetList = ({ setActiveView, setEditingPet, handleSavePet, handleDeletePet 
 };
 
 PetList.propTypes = {
-  pets: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      name: PropTypes.string.isRequired,
-      age: PropTypes.string,
-      sex: PropTypes.string,
-      species: PropTypes.string,
-      breed: PropTypes.string,
-      size: PropTypes.string,
-      energy: PropTypes.string,
-      status: PropTypes.string,
-      admissionDate: PropTypes.string,
-      kg: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      traits: PropTypes.arrayOf(PropTypes.string),
-      delivery: PropTypes.arrayOf(PropTypes.string),
-      story: PropTypes.string,
-      photoUrls: PropTypes.arrayOf(PropTypes.string),
-    })
-  ).isRequired,
   setActiveView: PropTypes.func.isRequired,
   setEditingPet: PropTypes.func.isRequired,
   handleSavePet: PropTypes.func.isRequired,

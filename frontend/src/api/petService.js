@@ -62,8 +62,10 @@ export const createPet = async (petData) => {
   formData.append("status", petData.status || "");
 
   // Traits (array)
+  formData.append("delivery", petData.delivery.join(","));
 
 formData.append("traits", petData.traits.join(",") );
+
   // (petData.traits || []).forEach((trait) => {
   //   formData.append("traits", trait);
   // });

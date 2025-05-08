@@ -55,7 +55,7 @@ export class UsersService {
         email: true,
         fullname: true,
         id: true,
-        isActive: false,
+        isActive: true,
         role: true,
         adopter: true,
       },
@@ -71,19 +71,20 @@ export class UsersService {
   }
   async findOneById(id: string): Promise<Users> {
     const user = await this.userRepository.findOne({
-      where: { id },
+      where: { id, isActive: true },
       relations: ['adopter'],
       select: {
         id: true,
         fullname: true,
         email: true,
         role: true,
-        isActive: false,
+        isActive: true,
       },
     });
     if (!user) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
+
     return user;
   }
 
@@ -92,8 +93,8 @@ export class UsersService {
       where: { id },
       relations: ['adopter'],
     });
-    if (!user){
-      throw new NotFoundException(`Usuario con id ${id} no encontrado`)
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
     if (!user.isActive)
       throw new BadRequestException('El usuario ya está eliminado');
@@ -169,8 +170,15 @@ export class UsersService {
         fullname: true,
         email: true,
         role: true,
-        isActive: false,
+        isActive: true,
       },
     });
   }
+  async updatePassword(id: string, newHashedPassword: string): Promise<void> {
+    const result=await this.userRepository.update(id, { password: newHashedPassword });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+  }
+
 }

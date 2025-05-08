@@ -1,81 +1,123 @@
 import { useEffect, useState } from "react";
 import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
-import { fetchUsers } from "../api/adopterApi";
-// componets/UserProfiles.jsx
+import { fetchUsersget } from "../api/adopterApi";
+import UserModalDelete from "./modals/UserModalDelete";
+import { deleteUser } from "../api/deleteUser";
+
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
-  const [estadoFiltro, setEstadoFiltro] = useState("");
 
-  useEffect(() => {
-    fetchUsers().then(setUsers);
-  }, []);
-
-  const itemsPerPage = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+  /* useEffect(() => {
+    fetchUsersget().then(setUsers);
+  }, []); */
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [estadoFiltro, setEstadoFiltro] = useState("Todos");
 
-  // Busca usuarios por nombre o correo
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showMessage, setShowMessage] = useState(false);
+  const [deletedUserName, setDeletedUserName] = useState(""); // Estado para el nombre del usuario eliminado
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetchUsersget(currentPage);
+        console.log("Usuarios recibidos:", response.items);
+        setUsers(response.items || []);
+        setTotalPages(response.totalPages || 1);
+      } catch (error) {
+        console.error("Error al cargar usuarios:", error.message);
+      }
+    };
+
+    fetchUsers();
+  }, [currentPage]); // Actualiza cuando cambie la página
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  // Filtrar usuarios por nombre o email (insensible a mayúsculas)
+  /* const filteredUsers = users.filter((user) =>
+    `${user.fullname} ${user.email}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  ); */
+
+  // Filter users by name/email and status
   const filteredUsers = users.filter((user) => {
-    const term = searchTerm.toLowerCase();
-
-    const matchesSearch =
-      searchTerm === "" ||
-      user.fullname.toLowerCase().includes(term) ||
-      user.email.toLowerCase().includes(term);
-
-    // filtro por estado
-    const matchesEstado = estadoFiltro === "" || user.estado === estadoFiltro;
+    const matchesSearch = `${user.fullname} ${user.email}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesEstado =
+      estadoFiltro === "Todos" || user.estado === estadoFiltro;
 
     return matchesSearch && matchesEstado;
   });
 
-  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentusers = filteredUsers.slice(startIndex, endIndex);
+  //PARA DELETE USER
+  const handleOpenModal = (user) => {
+    setSelectedUser(user);
+    setModalOpen(true);
+  };
 
-  const goToPage = (page) => setCurrentPage(page);
-  const goToPrevious = () => currentPage > 1 && setCurrentPage(currentPage - 1);
-  const goToNext = () =>
-    currentPage < totalPages && setCurrentPage(currentPage + 1);
+  const handleCloseModal = () => {
+    setSelectedUser(null);
+    setModalOpen(false);
+  };
+
+  const handleDeleteUser = async () => {
+    if (!selectedUser) return;
+    try {
+      await deleteUser(selectedUser.id);
+      setUsers((prev) =>
+        prev.map((u) =>
+          u.id === selectedUser.id
+            ? { ...u, isActive: false, estado: "Inactivo" }
+            : u
+        )
+      );
+      setDeletedUserName(selectedUser.fullname); // Actualiza el nombre del usuario eliminado
+      setShowMessage(true); // ✅ Mostrar el mensaje
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error.message);
+    } finally {
+      handleCloseModal();
+    }
+  };
 
   return (
     <div className="p-8 bg-white border border-gray-400 rounded-lg">
-      {/* Buscador y Filtro */}
-      <div className=" mb-6">
-        {/* Buscador */}
-        <div>
-          <div className="relative w-[410px]">
-            <input
-              type="text"
-              placeholder="Buscar"
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setCurrentPage(1); // Reinicia a la primera página cuando se filtra
-              }}
-              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#767575CC] rounded-[10px]
-                 font-raleway font-normal text-[14px] leading-[1] focus:outline-none"
-            />
-            <FaSearch className="absolute left-3 top-2.5 text-gray-300 w-6 h-6" />
-          </div>
+      {/* Buscador */}
+      <div className="flex items-center gap-2 mb-6">
+        <div className="relative w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Buscar.."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          />
+          <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
       </div>
-      {/* FILTRO */}
+
+      {/* Filtro de Estado */}
       <div className="flex items-center space-x-3 mb-4">
         <span className="font-raleway text-[16px]">Filtrar por:</span>
         <select
           value={estadoFiltro}
-          onChange={(e) => {
-            setEstadoFiltro(e.target.value);
-            setCurrentPage(1); // Reinicia paginación cuando cambia filtro
-          }}
-          className="w-[125px] h-[44px] border border-[#767575CC] rounded-[10px] px-2 text-sm focus:outline-none"
+          onChange={(e) => setEstadoFiltro(e.target.value)}
+          className="border border-gray-300 rounded-lg px-3 py-3 focus:outline-none"
         >
-          <option>Estado</option>
-          <option>Activo</option>
-          <option>Inactivo</option>
+          <option value="Todos">Estado</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
         </select>
       </div>
 
@@ -104,7 +146,7 @@ const UserProfiles = () => {
           </tr>
         </thead>
         <tbody>
-          {currentusers.map((user) => (
+          {filteredUsers.map((user) => (
             <tr
               key={user.id}
               className="border-b border-[#76757599] text-sm text-left bg-white"
@@ -124,10 +166,16 @@ const UserProfiles = () => {
               <td className="px-4 py-3">{user.address}</td>
               <td className="px-4 py-3 text-center">
                 <div className="flex justify-center items-center space-x-4">
-                  <button className="text-gray-600 hover:text-black">
+                  {/*  <button
+                    className="text-gray-600 hover:text-black"
+                    onClick={() => handleOpenModal(user)}
+                  >
                     <FaEye />
-                  </button>
-                  <button className="text-red-500 hover:text-red-700">
+                  </button> */}
+                  <button
+                    className="text-red-500 hover:text-red-700"
+                    onClick={() => handleOpenModal(user)} // Aquí pasamos el usuario seleccionado
+                  >
                     <FaTrash />
                   </button>
                 </div>
@@ -136,56 +184,75 @@ const UserProfiles = () => {
           ))}
         </tbody>
       </table>
+
       {/* Paginación */}
-      <div className="flex justify-between items-center mt-6 text-sm text-gray-700">
-        <span>
-          Mostrando {Math.min(endIndex, users.length)} de {users.length}{" "}
-          mascotas
-        </span>
-        <div className="flex items-center space-x-2">
+      <div className="flex justify-between items-center mt-6">
+        <div className="text-sm text-gray-500">
+          Mostrando {users.length} de {users.length} usuarios
+        </div>
+
+        <div className="flex items-center gap-2">
           <button
-            onClick={goToPrevious}
+            onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className={`px-3 py-1 border rounded ${
-              currentPage === 1
-                ? "text-gray-400 border-gray-300 cursor-not-allowed"
-                : "text-black border-gray-500"
-            }`}
+            className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Anterior
           </button>
 
-          {/* Números de página */}
-          {[...Array(totalPages)].map((_, index) => {
-            const page = index + 1;
-            return (
-              <button
-                key={page}
-                onClick={() => goToPage(page)}
-                className={`px-3 py-1 rounded border text-sm ${
-                  currentPage === page
-                    ? "bg-[#595146] text-white border-[#595146]"
-                    : "text-black border-gray-400 hover:bg-gray-100"
-                }`}
-              >
-                {page}
-              </button>
-            );
-          })}
+          {/* Botones de página (solo si hay más de 1) */}
+          <div className="flex gap-1">
+            {totalPages > 1 &&
+              Array.from({ length: totalPages }, (_, index) => {
+                const page = index + 1;
+                const isActive = currentPage === page;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => handlePageChange(page)}
+                    className={`w-8 h-8 rounded border text-sm font-medium ${
+                      currentPage === page
+                        ? "bg-[#595146] text-white border-[#595146]" // Activo: fondo café, texto blanco
+                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100" // Inactivo: fondo blanco, texto café
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+          </div>
 
           <button
-            onClick={goToNext}
+            onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className={`px-3 py-1 border rounded ${
-              currentPage === totalPages
-                ? "text-gray-400 border-gray-300 cursor-not-allowed"
-                : "text-black border-gray-500"
-            }`}
+            className="px-3 py-2 bg-white0 rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Siguiente
           </button>
         </div>
       </div>
+
+      {/* ✅ MENSAJE DE ELIMINACIÓN */}
+      {showMessage && (
+        <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
+          <span className="block font-bold">Adoptante eliminado</span>
+          <span>{deletedUserName} ha sido eliminado del registro.</span>
+          <button
+            onClick={() => setShowMessage(false)}
+            className="absolute top-0 right-0 px-2 py-1 text-red-700 hover:text-red-900 text-lg"
+          >
+            &times;
+          </button>
+        </div>
+      )}
+
+      {/* Modal de eliminación */}
+      <UserModalDelete
+        isOpen={modalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleDeleteUser}
+        user={selectedUser}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { RegisterDto } from './dtos/register.dto';
+import { RecoverPasswordDto } from './dtos/recover-password.dto';
 import { AuthService } from './auth.service';
 import {
   ApiBadRequestResponse,
@@ -11,6 +12,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { LoginDto } from './dtos/login.dto';
+import { ResetPasswordDto } from './dtos/reset-password.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -110,5 +112,57 @@ export class AuthController {
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     return await this.authService.login(loginDto);
+  }
+
+  @ApiOperation({
+    summary: 'Recuperar contraseña',
+    description:
+      'Permite que los usuarios que olvidaron su contraseña puedan recibir un enlace en su correo electrónico para crear una nueva contraseña',
+  })
+  @ApiOkResponse({
+    description: 'La contraseña del usuario es actualizada exitosamente',
+    example: {
+      message: 'Código de recuperación enviado al correo electrónico',
+    },
+  })
+  @ApiNotFoundResponse({
+    description: 'No se encuentra un usuario con el correo ingresado',
+    example: {
+      message: 'Usuario no encontrado',
+      error: 'Not Found',
+      statusCode: 404,
+    },
+  })
+  @Post('recover-password')
+  @HttpCode(HttpStatus.OK)
+  async recoverPassword(
+    @Body() dto: RecoverPasswordDto,
+  ): Promise<{ message: string }> {
+    return this.authService.recoverPassword(dto.email);
+  }
+
+  @ApiOperation({
+    summary: 'Crear nueva contraseña',
+    description:
+      'Permite que los usuarios que olvidaron su contraseña puedan crear una nueva contraseña con el token de validación que reciben en el correo',
+  })
+  @ApiOkResponse({
+    description: 'La contraseña del usuario es actualizada exitosamente',
+    example: {
+      message: 'Contraseña actualizada exitosamente',
+    },
+  })
+  @ApiUnauthorizedResponse({
+    description: 'El token del usuario es inválido o ha expirado',
+    example: {
+      message: 'Token inválido o expirado',
+      error: 'Unauthorized',
+      statusCode: 401,
+    },
+  })
+  @Post('reset-password')
+  @HttpCode(HttpStatus.OK)
+  async resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPassword(dto.token, dto.newPassword);
   }
 }

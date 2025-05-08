@@ -1,43 +1,43 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PublicLayout from "./components/PublicLayout";
 import Home from "./views/Home";
 import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
-import Navbar from "./layout/Navbar";
-import Footer from "./layout/Footer";
 import PetsHome from "./components/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
 import Nosotros from "./views/Nosotros";
 import Contacto from "./views/Contacto";
 import PrivateRoute from "./components/PrivateRoute";
+import PublicLayout from "./layout/PublicLayout";
+import AdminLayout from "./layout/AdminLayout";
 import PetElection from "./components/PetElection";
 
 function App() {
   return (
     <Router>
-      <Navbar />
       <Routes>
+        {/* Rutas públicas */}
         <Route element={<PublicLayout />}>
-          <Route element={<Home />} path="/" />
-          <Route element={<Nosotros />} path="/Nosotros" />
-          <Route element={<CuidadosMascota />} path="/CuidadosMascota" />
-          <Route element={<Contacto />} path="/Contacto" />
-          <Route element={<Adoptar />} path="/Adoptar" />
-          <Route element={<PetsHome />} path="/Mascotas" />
+          <Route path="/" element={<Home />} />
+          <Route path="/Nosotros" element={<Nosotros />} />
+          <Route path="/CuidadosMascota" element={<CuidadosMascota />} />
+          <Route path="/Contacto" element={<Contacto />} />
+          <Route path="/Adoptar" element={<Adoptar />} />
+          <Route path="/Mascotas" element={<PetsHome />} />
           <Route path="/pet-election" element={<PetElection />} />
         </Route>
 
-        {/* Ruta protegida para admin */}
+        {/* Rutas privadas */}
         <Route
           path="/Admin"
           element={
             <PrivateRoute>
-              <AdminPanel />
+              <AdminLayout />
             </PrivateRoute>
           }
-        />
+        >
+          <Route index element={<AdminPanel />} />
+        </Route>
       </Routes>
-      <Footer />
     </Router>
   );
 }

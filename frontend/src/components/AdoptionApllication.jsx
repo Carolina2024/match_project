@@ -25,14 +25,10 @@ const AdoptionApllication = () => {
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">
-      {/* Barra superior tipo nav */}
-      <div className="bg-gray-200 py-4 px-10 shadow-sm">
-        <h1 className="text-xl font-bold text-black">Solicitudes de adoptantes</h1>
-      </div>
 
-      {/* Contenedor blanco */}
+
       <div className="bg-white m-10 p-6 rounded-xl shadow-md border border-gray-300">
-        {/* Filtros y búsqueda */}
+
         <div className="flex flex-col gap-4 mb-8">
           <div className="relative w-64">
             <input
@@ -58,7 +54,7 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-        {/* Grid de cards */}
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {solicitudesFiltradas.map((sol) => (
             <div

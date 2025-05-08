@@ -266,37 +266,44 @@ export class PetService {
     return pet;
   }
 
-  async update(id: string, updatePetDto: UpdatePetDto, files: Express.Multer.File[]): Promise<Pet> {
+  async update(
+    id: string,
+    updatePetDto: UpdatePetDto,
+    files: Express.Multer.File[],
+  ): Promise<Pet> {
 
-     if (files.length > 3) {
-      throw new BadRequestException('No se pueden subir más de 3 imágenes');
+    if (files) {
+      if (files.length > 3) {
+        throw new BadRequestException('No se pueden subir más de 3 imágenes');
+      }
+
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      for (const file of files) {
+        if (!allowedTypes.includes(file.mimetype)) {
+          throw new BadRequestException(
+            'Solo se permiten imágenes JPG/JPEG/PNG',
+          );
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          throw new BadRequestException('La imagen debe pesar menos de 5MB');
+        }
+      }
     }
 
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
-    for (const file of files) {
-      if (!allowedTypes.includes(file.mimetype)) {
-        throw new BadRequestException('Solo se permiten imágenes JPG/JPEG/PNG');
-      }
-      if(file.size > 5*1024*1024){
-        throw new BadRequestException('La imagen debe pesar menos de 5MB');
-      }
-    }
     let newPhotoUrls: string[] = [];
 
     // Subir y transformar imágenes en Cloudinary
-    if (files.length > 0) {
+    if (files?.length > 0) {
       newPhotoUrls = await Promise.all(
-        files.map((file) =>
-          this.filesService.uploadImageToCloudinary(file),
-        ),
+        files.map((file) => this.filesService.uploadImageToCloudinary(file)),
       );
     }
-    // Combinar imágenes subidas y URLs recibidas 
+    // Combinar imágenes subidas y URLs recibidas
     const finalPhotoUrls = [
       ...(updatePetDto.photoUrls || []),
       ...newPhotoUrls,
     ].slice(0, 3); // limitar a máximo 3
-  
+
     await this.petRepository.update(id, {
       ...updatePetDto,
       photoUrls: finalPhotoUrls,

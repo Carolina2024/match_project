@@ -35,7 +35,7 @@ const enumOptions = {
     "Amigable con niños", "Amigable con otras mascotas", "Me gusta pasear"
 
   ],
-  delivery: ["Desparasitado", "Con chip", "Vacunando", "Esterilizado"]
+  delivery: ["Desparasitado", "Con chip", "Vacunado", "Esterilizado"]
 };
 
 const Pets = ({ setActiveView, addPet}) => {

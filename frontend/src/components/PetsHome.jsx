@@ -3,10 +3,12 @@ import { getCompatiblePets } from "../api/PetsUser";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useNavigate } from "react-router-dom";
 
 function PetsHome() {
   const [seleccionada, setSeleccionada] = useState(null);
   const [mascotas, setMascotas] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMascotas = async (userId) => {
@@ -33,10 +35,7 @@ function PetsHome() {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-1 h-full">
             {mascotas.map((mascota) => (
-              <div
-                key={mascota.id}
-                className="p-4 items-center text-center"
-              >
+              <div key={mascota.id} className="p-4 items-center text-center">
                 <img
                   src={mascota.photoUrls[0]}
                   alt={mascota.name}
@@ -190,7 +189,17 @@ function PetsHome() {
                   </h3>
                   <div className="flex flex-col justify-between h-full">
                     <p className="text-xs">{seleccionada.admissionDate}</p>
-                    <button className="flex text-center justify-center cursor-pointer items-center gap-1 bg-white border border-primary text-primary rounded-md px-5 py-2 hover:bg-orange-100">
+                    <button
+                      className="flex text-center justify-center cursor-pointer items-center gap-1 bg-white border border-primary text-primary rounded-md px-5 py-2 hover:bg-orange-100"
+                      onClick={() =>
+                        navigate("/pet-election", {
+                          state: {
+                            nombre: seleccionada.name,
+                            foto: seleccionada.photoUrls[0],
+                          },
+                        })
+                      }
+                    >
                       Match
                       <FaHeart className="ml-1" />
                     </button>

@@ -194,12 +194,5 @@ export class CreatePetDto {
   })
   status: PetStatus;
 
-  // @ApiProperty({
-  //  description: 'URLs de las fotos de la mascota',
-  //   isArray: true,
-  //   example: ['https://example.com/pet1.jpg', 'https://example.com/pet2.jpg']
-  // })
-  // @IsArray({ message: 'Las URLs de fotos deben ser un arreglo' })
-  // @IsUrl({}, { each: true, message: 'Cada URL de foto debe tener un formato válido' })
-  // photoUrls: string[];
+
 }

@@ -32,8 +32,8 @@ export class PetService {
       throw new BadRequestException('Debe subir al menos una imagen');
     }
 
-    if (files.length > 5) {
-      throw new BadRequestException('No se pueden subir más de 5 imágenes');
+    if (files.length > 3) {
+      throw new BadRequestException('No se pueden subir más de 3 imágenes');
     }
 
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
@@ -236,10 +236,42 @@ export class PetService {
     return pet;
   }
 
-  async update(id: string, updatePetDto: UpdatePetDto): Promise<Pet> {
-    const pet = await this.findOne(id);
-    Object.assign(pet, updatePetDto);
-    return await this.petRepository.save(pet);
+  async update(id: string, updatePetDto: UpdatePetDto, files: Express.Multer.File[]): Promise<Pet> {
+
+     if (files.length > 3) {
+      throw new BadRequestException('No se pueden subir más de 3 imágenes');
+    }
+
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    for (const file of files) {
+      if (!allowedTypes.includes(file.mimetype)) {
+        throw new BadRequestException('Solo se permiten imágenes JPG/JPEG/PNG');
+      }
+      if(file.size > 5*1024*1024){
+        throw new BadRequestException('La imagen debe pesar menos de 5MB');
+      }
+    }
+    let newPhotoUrls: string[] = [];
+
+    // Subir y transformar imágenes en Cloudinary
+    if (files.length > 0) {
+      newPhotoUrls = await Promise.all(
+        files.map((file) =>
+          this.filesService.uploadImageToCloudinary(file),
+        ),
+      );
+    }
+    // Combinar imágenes subidas y URLs recibidas 
+    const finalPhotoUrls = [
+      ...(updatePetDto.photoUrls || []),
+      ...newPhotoUrls,
+    ].slice(0, 3); // limitar a máximo 3
+  
+    await this.petRepository.update(id, {
+      ...updatePetDto,
+      photoUrls: finalPhotoUrls,
+    });
+    return await this.findOne(id);
   }
 
   async remove(id: string): Promise<{ message: string }> {

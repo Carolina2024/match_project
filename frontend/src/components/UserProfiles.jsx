@@ -9,67 +9,78 @@ const UserProfiles = () => {
     fetchUsersget().then(setUsers);
   }, []); */
 
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [estadoFiltro, setEstadoFiltro] = useState("Todos");
 
   useEffect(() => {
-      const fetchUsers = async () => {
-        try {
-          const response = await fetchUsersget(currentPage);
-          console.log("Usuarios recibidos:", response.items);
-          setUsers(response.items || []);
-          setTotalPages(response.totalPages || 1);
-        } catch (error) {
-          console.error("Error al cargar usuarios:", error.message);
-        }
-      };
-
-      fetchUsers();
-    }, [currentPage]); // Actualiza cuando cambie la página
-
-    const handlePageChange = (page) => {
-      if (page >= 1 && page <= totalPages) {
-        setCurrentPage(page);
+    const fetchUsers = async () => {
+      try {
+        const response = await fetchUsersget(currentPage);
+        console.log("Usuarios recibidos:", response.items);
+        setUsers(response.items || []);
+        setTotalPages(response.totalPages || 1);
+      } catch (error) {
+        console.error("Error al cargar usuarios:", error.message);
       }
     };
 
+    fetchUsers();
+  }, [currentPage]); // Actualiza cuando cambie la página
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
+  // Filtrar usuarios por nombre o email (insensible a mayúsculas)
+  /* const filteredUsers = users.filter((user) =>
+    `${user.fullname} ${user.email}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  ); */
+
+  // Filter users by name/email and status
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch = `${user.fullname} ${user.email}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesEstado =
+      estadoFiltro === "Todos" || user.estado === estadoFiltro;
+
+    return matchesSearch && matchesEstado;
+  });
+
   return (
     <div className="p-8 bg-white border border-gray-400 rounded-lg">
-      {/* Buscador y Filtro */}
-      <div className=" mb-6">
-        {/* Buscador */}
-        <div>
-          {/* <div className="relative w-[410px]">
-            <input
-              type="text"
-              placeholder="Buscar"
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setCurrentPage(1); // Reinicia a la primera página cuando se filtra
-              }}
-              className="w-full pl-10 pr-4 py-2 h-[44px] border border-[#767575CC] rounded-[10px]
-                 font-raleway font-normal text-[14px] leading-[1] focus:outline-none"
-            />
-            <FaSearch className="absolute left-3 top-2.5 text-gray-300 w-6 h-6" />
-          </div> */}
+      {/* Buscador */}
+      <div className="flex items-center gap-2 mb-6">
+        <div className="relative w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Buscar.."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          />
+          <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
       </div>
-      {/* FILTRO */}
+
+      {/* Filtro de Estado */}
       <div className="flex items-center space-x-3 mb-4">
         <span className="font-raleway text-[16px]">Filtrar por:</span>
-       {/*  <select
+        <select
           value={estadoFiltro}
-          onChange={(e) => {
-            setEstadoFiltro(e.target.value);
-            setCurrentPage(1); // Reinicia paginación cuando cambia filtro
-          }}
-          className="w-[125px] h-[44px] border border-[#767575CC] rounded-[10px] px-2 text-sm focus:outline-none"
+          onChange={(e) => setEstadoFiltro(e.target.value)}
+          className="border border-gray-300 rounded-lg px-3 py-3 focus:outline-none"
         >
-          <option>Estado</option>
-          <option>Activo</option>
-          <option>Inactivo</option>
-        </select> */}
+          <option value="Todos">Estado</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
       </div>
 
       {/* Tabla de solicitudes */}
@@ -97,7 +108,7 @@ const UserProfiles = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {filteredUsers.map((user) => (
             <tr
               key={user.id}
               className="border-b border-[#76757599] text-sm text-left bg-white"

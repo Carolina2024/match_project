@@ -1,6 +1,6 @@
 const API_URL = "https://match-project.onrender.com/api/users";
 
-export const fetchUsersget = async (page = 1, limit = 10 ) => {
+export const fetchUsersget = async (page = 1, limit = 10) => {
   try {
     const token = localStorage.getItem("token");
     console.log(token);
@@ -33,16 +33,15 @@ export const fetchUsersget = async (page = 1, limit = 10 ) => {
       address: user.adopter?.address || "N/A",
     }));
 
-   return {
-     items: users,
-     totalPages: data.totalPages || 1, // 👈 asegúrate que tu backend esté enviando esto
-   };
-
+    return {
+      items: users,
+      totalPages: data.totalPages || 1, // 👈 asegúrate que tu backend esté enviando esto
+    };
   } catch (error) {
     console.error("Error al cargar los usuarios:", error);
-     return {
-       items: [],
-       totalPages: 1,
-     };
+    return {
+      items: [],
+      totalPages: 1,
+    };
   }
 };

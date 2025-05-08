@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
 import { fetchUsersget } from "../api/adopterApi";
+import UserModalDelete from "./modals/UserModalDelete";
+import { deleteUser } from "../api/deleteUser";
 
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
@@ -13,6 +15,11 @@ const UserProfiles = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [estadoFiltro, setEstadoFiltro] = useState("Todos");
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showMessage, setShowMessage] = useState(false);
+  const [deletedUserName, setDeletedUserName] = useState(""); // Estado para el nombre del usuario eliminado
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -52,6 +59,37 @@ const UserProfiles = () => {
 
     return matchesSearch && matchesEstado;
   });
+
+  //PARA DELETE USER
+  const handleOpenModal = (user) => {
+    setSelectedUser(user);
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedUser(null);
+    setModalOpen(false);
+  };
+
+  const handleDeleteUser = async () => {
+    if (!selectedUser) return;
+    try {
+      await deleteUser(selectedUser.id);
+      setUsers((prev) =>
+        prev.map((u) =>
+          u.id === selectedUser.id
+            ? { ...u, isActive: false, estado: "Inactivo" }
+            : u
+        )
+      );
+      setDeletedUserName(selectedUser.fullname); // Actualiza el nombre del usuario eliminado
+      setShowMessage(true); // ✅ Mostrar el mensaje
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error.message);
+    } finally {
+      handleCloseModal();
+    }
+  };
 
   return (
     <div className="p-8 bg-white border border-gray-400 rounded-lg">
@@ -128,10 +166,16 @@ const UserProfiles = () => {
               <td className="px-4 py-3">{user.address}</td>
               <td className="px-4 py-3 text-center">
                 <div className="flex justify-center items-center space-x-4">
-                  <button className="text-gray-600 hover:text-black">
+                  {/*  <button
+                    className="text-gray-600 hover:text-black"
+                    onClick={() => handleOpenModal(user)}
+                  >
                     <FaEye />
-                  </button>
-                  <button className="text-red-500 hover:text-red-700">
+                  </button> */}
+                  <button
+                    className="text-red-500 hover:text-red-700"
+                    onClick={() => handleOpenModal(user)} // Aquí pasamos el usuario seleccionado
+                  >
                     <FaTrash />
                   </button>
                 </div>
@@ -187,6 +231,28 @@ const UserProfiles = () => {
           </button>
         </div>
       </div>
+
+      {/* ✅ MENSAJE DE ELIMINACIÓN */}
+      {showMessage && (
+        <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
+          <span className="block font-bold">Adoptante eliminado</span>
+          <span>{deletedUserName} ha sido eliminado del registro.</span>
+          <button
+            onClick={() => setShowMessage(false)}
+            className="absolute top-0 right-0 px-2 py-1 text-red-700 hover:text-red-900 text-lg"
+          >
+            &times;
+          </button>
+        </div>
+      )}
+
+      {/* Modal de eliminación */}
+      <UserModalDelete
+        isOpen={modalOpen}
+        onClose={handleCloseModal}
+        onConfirm={handleDeleteUser}
+        user={selectedUser}
+      />
     </div>
   );
 };

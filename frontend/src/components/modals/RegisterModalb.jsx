@@ -13,7 +13,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     isResponsibleAdoption: "",
     energy: "",
     character: [],
-    compatibility: "",
+    compatibility: [], // ← de string a array
   });
   const [errores, setErrores] = useState({});
 
@@ -28,8 +28,8 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     if (!formData.energy) nuevosErrores.energy = "Selecciona una energía.";
     if (formData.character.length === 0)
       nuevosErrores.character = "Selecciona al menos un carácter.";
-    if (!formData.compatibility)
-      nuevosErrores.compatibility = "Selecciona una preferencia.";
+    if (!formData.compatibility.length === 0)
+      nuevosErrores.compatibility = "Selecciona al menos una preferencia.";
 
     setErrores(nuevosErrores);
     return Object.keys(nuevosErrores).length === 0;
@@ -56,8 +56,17 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     }));
   };
 
-  const handleCompatibilitySelect = (opcion) => {
+  /* const handleCompatibilitySelect = (opcion) => {
     setFormData((prev) => ({ ...prev, compatibility: opcion }));
+  }; */
+
+  const toggleCompatibility = (opcion) => {
+    setFormData((prev) => ({
+      ...prev,
+      compatibility: prev.compatibility.includes(opcion)
+        ? prev.compatibility.filter((item) => item !== opcion)
+        : [...prev.compatibility, opcion],
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -279,9 +288,9 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                 <button
                   key={opcion}
                   type="button"
-                  onClick={() => handleCompatibilitySelect(opcion)}
+                  onClick={() => toggleCompatibility(opcion)}
                   className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
-                    formData.compatibility === opcion
+                    formData.compatibility.includes(opcion)
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
                   }`}

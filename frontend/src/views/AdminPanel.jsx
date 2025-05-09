@@ -160,6 +160,15 @@ const AdminPanel = () => {
       case "Adoptantes":
         return <UserProfiles />;
       case "editPet":
+        return (
+          <Pets
+            setActiveView={setActiveView}
+            setPets={setPets}
+            editingPet={activeView === "editPet" ? editingPet : null}
+            handleSavePet={handleSavePet}
+            addPet={addPet}
+          />
+        );
       case "createPet":
         return (
           <Pets

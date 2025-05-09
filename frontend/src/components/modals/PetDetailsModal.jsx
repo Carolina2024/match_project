@@ -16,18 +16,22 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
         </button>
 
         {/* Encabezado */}
-        <h2 className="text-xl font-bold mb-1 text-gray-800">Información de la mascota</h2>
+        <h2 className="text-xl font-bold mb-1 text-gray-800 ">Información de la mascota</h2>
         <p className="text-sm text-gray-500 mb-4">Fecha del ingreso: {pet?.admissionDate}</p>
 
-        {pet?.photoUrls?.[0] && (
-        <div className="mb-4 flex justify-rigth">
-            <img
-            src={pet.photoUrls[0]}
-            alt={`Foto de ${pet.name}`}
-            className="w-32 h-32 object-cover rounded-[10px] shadow "
-            />
-        </div>
+        {(pet?.photoUrls || pet?.photos)?.length > 0 && (
+          <div className="flex flex-wrap gap-4 mb-4">
+            {(pet.photoUrls || pet.photos).map((url, i) => (
+              <img
+                key={i}
+                src={url}
+                alt={`Foto de ${pet.name}`}
+                className="w-24 h-24 object-cover rounded shadow"
+              />
+            ))}
+          </div>
         )}
+
 
 
         {/* Imágenes */}
@@ -115,14 +119,14 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           <h3 className="font-semibold mb-1 text-gray-700">Entrega de mascota</h3>
           <div className="flex flex-wrap gap-2">
           {pet?.delivery && pet.delivery.length > 0 ? (
-  pet.delivery.map((item, i) => (
-    <span key={i} className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
-      {item}
-    </span>
-  ))
-) : (
-  <p className="text-sm text-gray-500">No se registraron datos de entrega.</p>
-)}
+                pet.delivery.map((item, i) => (
+                  <span key={i} className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
+                    {item}
+                  </span>
+                ))
+              ) : (
+                <p className="text-sm text-gray-500">No se registraron datos de entrega.</p>
+              )}
 
 
           </div>

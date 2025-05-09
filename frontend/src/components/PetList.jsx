@@ -13,6 +13,7 @@ const PetList = ({ setActiveView, setEditingPet, handleDeletePet }) => {
   const [selectedPet, setSelectedPet] = useState(null);
 
   const handleEdit = (pet) => {
+    console.log({pet})
     setEditingPet(pet);
     setActiveView("editPet");
   };

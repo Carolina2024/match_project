@@ -3,25 +3,9 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
-import { createPet } from "../api/petService";
+import { createPet, updatePet } from "../api/petService";
 
 
-const initialFormState = {
-  name: "",
-  admissionDate: "",
-  species: "",
-  breed: "",
-  age: "",
-  sex: "",
-  energy: "",
-  kg: "",
-  size: "",
-  status: "",
-  traits: [],
-  delivery: [],
-  story: "",
-  photos: [null],// no es url
-};
 
 const enumOptions = {
   species: ["Perro", "Gato"],
@@ -38,7 +22,39 @@ const enumOptions = {
   delivery: ["Desparasitado", "Con chip", "Vacunado", "Esterilizado"]
 };
 
-const Pets = ({ setActiveView, addPet}) => {
+const Pets = ({ setActiveView, addPet, editingPet}) => {
+ const deliveryArray = []
+  if (editingPet) {
+   
+    if (editingPet.isVaccinated) deliveryArray.push("Vacunado")
+    if (editingPet.isSterilized) deliveryArray.push("Esterilizado")
+    if (editingPet.isDewormed) deliveryArray.push("Desparasitado")
+    if (editingPet.hasMicrochip) deliveryArray.push("Con chip")
+      
+    
+  }
+
+
+  const initialFormState = {
+    name: editingPet ? editingPet.name :"",
+    admissionDate: editingPet ? editingPet.admissionDate : "",
+    species: editingPet ? editingPet.species : "",
+    breed: editingPet ? editingPet.breed : "",
+    age: editingPet ? editingPet.age : "",
+    sex: editingPet ? editingPet.sex : "",
+    energy: editingPet ? editingPet.energy : "",
+    kg: editingPet ? editingPet.kg : "",
+    size: editingPet ? editingPet.size : "",
+    status: editingPet ? editingPet.status : "",
+    traits: editingPet ? editingPet.traits : [],
+    delivery: editingPet ? deliveryArray : [],
+    story: editingPet ? editingPet.story : "",
+    photos: [null],// no es url
+    photoUrls: editingPet ? editingPet.photoUrls : [], 
+  };
+  
+
+  console.log(editingPet)
   const {
     register,
     handleSubmit,
@@ -51,6 +67,7 @@ const Pets = ({ setActiveView, addPet}) => {
   const traits = watch("traits");
   const delivery = watch("delivery");
   const photos = watch("photos");
+  const photoUrls = watch("photoUrls")
 
   // useEffect(() => {
   //   reset(initialFormState);
@@ -76,22 +93,38 @@ const Pets = ({ setActiveView, addPet}) => {
       // const formData = new FormData();
   
       // ... tus formData.append(...) existentes
-  
-      const newPet = await createPet(data);
-      addPet(newPet); // ⬅️ Aquí actualizas la tabla directamåente
-  
-      Swal.fire({
-        toast: true,
-        position: "bottom-end",
-        icon: "success",
-        title: "Mascota agregada",
-        text: `${data.name} ha sido registrada correctamente.`,
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        background: "#e6f9e6",
-        color: "#2e7d32",
-      });
+  if ( editingPet ) {
+     await updatePet(editingPet.id, data)
+     Swal.fire({
+      toast: true,
+      position: "bottom-end",
+      icon: "success",
+      title: "Mascota Actualizada",
+      text: `${data.name} ha sido actualizada correctamente.`,
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      background: "#e6f9e6",
+      color: "#2e7d32",
+    });
+  }else{
+    const newPet = await createPet(data);
+    addPet(newPet); // ⬅️ Aquí actualizas la tabla directamåente
+
+    Swal.fire({
+      toast: true,
+      position: "bottom-end",
+      icon: "success",
+      title: "Mascota agregada",
+      text: `${data.name} ha sido registrada correctamente.`,
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      background: "#e6f9e6",
+      color: "#2e7d32",
+    });
+  }
+
   
       setActiveView("MASCOTAS");
     } catch (error) {
@@ -111,7 +144,13 @@ const Pets = ({ setActiveView, addPet}) => {
     }
   };
   
+  const handleDeletePhoto = (url) => {
+    console.log(photoUrls)
+    console.log(url)
 
+    const newPhotoUrls = photoUrls.filter(photo => photo != url)
+    setValue("photoUrls", newPhotoUrls)
+  }
 
 
 
@@ -129,8 +168,8 @@ useEffect(() => {
       <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setActiveView('MASCOTAS')} />
       <div className={`relative w-full max-w-lg bg-white h-full shadow-xl z-50 p-8 overflow-y-auto rounded-xl transform transition-transform duration-700 ease-in-out ${isVisible ? 'translate-x-0' : 'translate-x-full'}`}>
   
-      <h2 className="text-center text-2xl font-bold mb-4">Nueva Mascota</h2>
-      <p className="text-center text-sm mb-6">Completa el formulario para agregar una mascota al refugio.</p>
+      <h2 className="text-center text-2xl font-bold mb-4" >{ editingPet ? "Editar Mascota" : "Nueva Mascota"}</h2>
+      <p className="text-center text-sm mb-6">{editingPet ? "Completa el formulario para actualizar los datos de esta mascota" : "Completa el formulario para agregar una mascota al refugio."}</p>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="grid grid-cols-2 gap-4">
       <div className="flex flex-col">
@@ -280,6 +319,15 @@ useEffect(() => {
                 />
               </label>
             ))}
+            {photoUrls.map((url) => (
+              <div key={url}>
+                <button type="button"
+                  onClick={() => handleDeletePhoto(url)}
+                >Borrar Imagen</button>
+                 <img src={url} alt="" />
+              </div>
+             
+            ))}
           </div>
         </div>
 
@@ -306,6 +354,7 @@ useEffect(() => {
 Pets.propTypes = {
   setActiveView: PropTypes.func.isRequired,
   addPet: PropTypes.func.isRequired,
+  editingPet: PropTypes.object.isRequired,
 };
 
 export default Pets;

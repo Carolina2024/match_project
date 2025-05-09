@@ -18,6 +18,9 @@ export class Adopters {
   birthDate: string;
 
   @Column()
+  phoneNumber: string;
+
+  @Column()
   identityDocument: string;
 
   @Column()

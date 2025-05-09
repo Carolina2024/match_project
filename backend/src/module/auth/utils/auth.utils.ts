@@ -5,6 +5,7 @@ import { Adopters } from 'src/module/adopters/entities/adopters.entity';
 export function mapAdopter(registerDto: RegisterDto, user: Users): Adopters {
   const {
     birthDate,
+    phoneNumber,
     identityDocument,
     address,
     allowsPets,
@@ -26,6 +27,7 @@ export function mapAdopter(registerDto: RegisterDto, user: Users): Adopters {
 
   return {
     birthDate,
+    phoneNumber,
     identityDocument,
     address,
     allowsPets,

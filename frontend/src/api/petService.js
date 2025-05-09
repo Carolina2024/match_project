@@ -121,16 +121,59 @@ export const deletePet = async (id) => {
 /**
  * Actualizar mascota por ID
  */
-export const updatePet = async (id, data) => {
+export const updatePet = async (id, petData) => {
+  console.log({petData})
+  const formData = new FormData();
+
+  formData.append("name", petData.name || "");
+  formData.append("size", petData.size || "");
+  formData.append("sex", petData.sex || "");
+  formData.append("age", petData.age || "");
+  formData.append("species", petData.species || "");
+  formData.append("energy", petData.energy || "");
+  formData.append("breed", petData.breed || "");
+  formData.append("kg", petData.kg || "");
+  formData.append("isVaccinated", petData.delivery.includes("Vacunado") || false);
+  formData.append("isSterilized", petData.delivery.includes("Esterilizado") || false);
+  formData.append("isDewormed", petData.delivery.includes("Desparacitado")  || false);
+  formData.append("hasMicrochip", petData.delivery.includes("Con chip")  || false);
+  formData.append("story", petData.story || "");
+  formData.append("admissionDate", petData.admissionDate || "");
+  formData.append("status", petData.status || "");
+
+  // Traits (array)
+  // formData.append("delivery", petData.delivery.join(","));
+
+formData.append("traits", petData.traits.join(",") );
+
+if( petData.photoUrls.length > 0  ) {
+  formData.append("photoUrls", petData.photoUrls.join(",") );
+}
+
+
+  // (petData.traits || []).forEach((trait) => {
+  //   formData.append("traits", trait);
+  // });
+
+  // Imágenes (array de Files)
+
+  (petData.photos || []).forEach((file) => {
+    if (file instanceof File) {
+      formData.append("photos", file);
+    }
+  });
+
+  
+  console.log(formData)
   const token = localStorage.getItem("token");
 
   const res = await fetch(`${BASE_URL}/${id}`, {
-    method: "PUT",
+    method: "PATCH",
     headers: {
-      "Content-Type": "application/json",
+      
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: formData,
   });
 
   if (!res.ok) {

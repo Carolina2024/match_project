@@ -32,11 +32,23 @@ export class CreateAdopterDto {
   birthDate: string;
 
   @ApiProperty({
+    description: 'Número de teléfono del Adoptante',
+    example: '+56123456789',
+    type: 'string',
+  })
+  @Matches(/^(\+56)\d{9}$/, {
+    message:
+      'Ingrese un número de teléfono válido en Chile siguiendo el siguiente formato: +56123456789',
+  })
+  @IsNotEmpty({ message: 'El número de teléfono es requerido' })
+  phoneNumber: string;
+
+  @ApiProperty({
     description: 'Documento de Identidad del adoptante',
     example: '12345678-9',
     type: 'string',
   })
-  @Matches(/^([1-9]|[1-9]\d|[1-9]\d{2})((\.\d{3})*|(\d{3})*)\-(\d|k|K)$/, {
+  @Matches(/^([1-9]|[1-9]\d|[1-9]\d{2})((\.\d{3})*|(\d{3})*)-(\d|k|K)$/, {
     message:
       'Ingrese un Documento de Identidad válido en Chile siguiendo el siguiente formato: 12345678-9',
   })

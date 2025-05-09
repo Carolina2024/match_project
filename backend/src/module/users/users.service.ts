@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   BadRequestException,
   ConflictException,
@@ -143,7 +145,7 @@ export class UsersService {
       }
     }
 
-    if (user.role === 'adoptante' && user.adopter?.id && adopterdto) {
+    if (user.role === UserRole.ADOPTERS && user.adopter?.id && adopterdto) {
       if (
         adopterdto.identityDocument &&
         user.adopter.identityDocument !== adopterdto.identityDocument
@@ -175,10 +177,11 @@ export class UsersService {
     });
   }
   async updatePassword(id: string, newHashedPassword: string): Promise<void> {
-    const result=await this.userRepository.update(id, { password: newHashedPassword });
+    const result = await this.userRepository.update(id, {
+      password: newHashedPassword,
+    });
     if (result.affected === 0) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
   }
-
 }

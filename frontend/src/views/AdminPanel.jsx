@@ -111,6 +111,7 @@ const AdminPanel = () => {
   const { activeView, setActiveView } = useOutletContext();
   const [pets, setPets] = useState([]);
   const [editingPet, setEditingPet] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -190,8 +191,11 @@ const AdminPanel = () => {
       <Sidebar onSelect={setActiveView} activeView={activeView} />
 
       {/* Contenido principal */}
-      <div className="flex-1 overflow-y-auto">
-
+      <div
+        className={`flex-1 overflow-y-auto transition-all duration-300 ${
+          isVisible ? "ml-64" : "ml-0"
+        }`}
+      >
         {/* Vista seleccionada */}
         <div className="p-6">{renderView()}</div>
       </div>

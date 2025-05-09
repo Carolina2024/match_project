@@ -114,7 +114,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
   return (
     <div className="mb-6">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row  justify-between items-center mb-4">
         {/* Buscador */}
         <div className="relative w-full max-w-md">
           <input
@@ -129,17 +129,17 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         <button
           onClick={() => setActiveView("createPet")}
-          className="bg-[#f4a470] text-white px-4 py-2 rounded hover:bg-[#e78b52] transition-colors duration-300 cursor-pointer"
+          className="mt-4 sm:mt-0 bg-[#f4a470] text-white px-4 py-2 rounded hover:bg-[#e78b52] transition-colors duration-300 cursor-pointer"
         >
           + Nueva mascota
         </button>
       </div>
 
-      <div className="flex gap-4 mb-7">
+      <div className="flex flex-wrap gap-4 mb-7">
         <span className="font-raleway text-[16px]">Filtrar por:</span>
         {/* Filtro 1 */}
         <select
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none"
+          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none w-full sm:w-auto"
           value={filterSpecies}
           onChange={(e) => setFilterSpecies(e.target.value)}
         >
@@ -150,7 +150,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         {/* Filtro 2 */}
         <select
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none"
+          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none w-full sm:w-auto"
           value={filterSize}
           onChange={(e) => setFilterSize(e.target.value)}
         >
@@ -162,7 +162,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         {/* Filtro 3 */}
         <select
-          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none"
+          className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none w-full sm:w-auto"
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
         >
@@ -236,8 +236,8 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         />
       )}
 
-      <div className="flex justify-between items-center mt-6">
-        <div className="text-sm text-gray-500">
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-6">
+        <div className="text-sm text-gray-500 mb-4 sm:mb-0">
           Mostrando {pets.length} de {pets.length} mascotas
         </div>
 

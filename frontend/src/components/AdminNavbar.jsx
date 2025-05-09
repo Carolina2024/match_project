@@ -87,22 +87,22 @@ const AdminNavbar = ({
         </button>
 
         {open && (
-          <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded shadow-lg z-50">
+          <div className="absolute right-0 mt-2 w-full w-40 bg-white border shadow-lg border-gray-200 rounded shadow z-50 text-xs">
             <button
-              className="flex items-center w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+              className="flex items-center w-full text-left px-2 py-1 text-sm hover:bg-gray-100"
               onClick={() => {
                 setOpen(false);
                 navigate("/Admin");
               }}
             >
-              <FaUser className="mr-2 text-gray-500" />
+              <FaUser className="mr-1 text-gray-500 text-sm" />
               <span>Mi perfil</span>
             </button>
             <button
-              className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+              className="flex items-center w-full text-left px-4 py-2 text-sm py-1 text-red-600 hover:bg-gray-100"
               onClick={handleLogout}
             >
-              <FaSignOutAlt className="mr-2" />
+              <FaSignOutAlt className="mr-1 text-sm" />
               <span>Cerrar sesión</span>
             </button>
           </div>

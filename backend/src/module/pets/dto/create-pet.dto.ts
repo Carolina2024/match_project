@@ -4,11 +4,10 @@ import {
   IsDate,
   IsEnum,
   IsNumber,
-  IsNumberString,
   IsString,
-  IsUrl,
   Matches,
   Max,
+  MaxDate,
   Min,
 } from 'class-validator';
 import {
@@ -34,7 +33,7 @@ export class CreatePetDto {
     enum: PetSize,
     example: PetSize.MEDIUM,
   })
-  @IsEnum(PetSize, { message: 'El tamaño debe ser un valor válido' })
+  @IsEnum(PetSize, { message: `El tamaño debe ser un valor válido: ${Object.values(PetSize).join(", ")}` })
   size: PetSize;
 
   @ApiProperty({
@@ -42,7 +41,7 @@ export class CreatePetDto {
     enum: PetSex,
     example: PetSex.MALE,
   })
-  @IsEnum(PetSex, { message: 'El sexo debe ser un valor válido' })
+  @IsEnum(PetSex, { message: `El sexo debe ser un valor válido: ${Object.values(PetSex).join(", ")}` })
   sex: PetSex;
 
   @ApiProperty({
@@ -50,7 +49,7 @@ export class CreatePetDto {
     enum: PetAge,
     example: PetAge.YOUNG,
   })
-  @IsEnum(PetAge, { message: 'La edad debe ser un valor válido' })
+  @IsEnum(PetAge, { message: `La edad debe ser un valor válido: ${Object.values(PetAge).join(", ")}` })
   age: PetAge;
 
   @ApiProperty({
@@ -58,7 +57,7 @@ export class CreatePetDto {
     enum: PetSpecies,
     example: PetSpecies.DOG,
   })
-  @IsEnum(PetSpecies, { message: 'La especie debe ser un valor válido' })
+  @IsEnum(PetSpecies, { message: `La especie debe ser un valor válido: ${Object.values(PetSpecies).join(", ")}` })
   species: PetSpecies;
 
   @ApiProperty({
@@ -67,7 +66,7 @@ export class CreatePetDto {
     example: PetEnergy.MODERATE,
   })
   @IsEnum(PetEnergy, {
-    message: 'El nivel de energía debe ser un valor válido',
+    message: `El nivel de energía debe ser un valor válido: ${Object.values(PetEnergy).join(", ")}`,
   })
   energy: PetEnergy;
 
@@ -87,7 +86,7 @@ export class CreatePetDto {
     return valor;
   })
   @IsNumber({}, { message: 'El peso debe ser un número' })
-  @Min(0, { message: 'El peso no puede ser negativo' })
+  @Min(0.5, { message: 'El peso no puede ser menor a 0.5 kg' })
   @Max(100, { message: 'El peso no puede ser mayor a 100 kg' })
   kg: number;
 
@@ -174,12 +173,16 @@ export class CreatePetDto {
   @IsArray({ message: 'Los rasgos deben ser un arreglo' })
   @IsEnum(PetTrait, {
     each: true,
-    message: 'Cada rasgo debe ser un valor válido',
+    message: `Cada rasgo debe ser un valor válido: ${Object.values(PetTrait).join(", ")}`,
   })
   traits: PetTrait[];
 
   @ApiProperty({ description: 'Fecha de admisión', example: '2023-01-15' })
   @IsDate({ message: 'La fecha de admisión debe ser una fecha válida' })
+  @Type(() => Date)
+  @MaxDate(() => new Date(), {
+    message: `La fecha de admisión de la mascota no puede ser posterior a la fecha actual`,
+  })
   @Type(() => Date)
   admissionDate: Date;
 
@@ -190,16 +193,9 @@ export class CreatePetDto {
   })
   @IsEnum(PetStatus, {
     message:
-      'El esta en el que se encuentra la msacota debe ser un valor válido',
+      `El estado en el que se encuentra la mascota debe ser un valor válido: ${Object.values(PetStatus).join(", ")}`,
   })
   status: PetStatus;
 
-  // @ApiProperty({
-  //  description: 'URLs de las fotos de la mascota',
-  //   isArray: true,
-  //   example: ['https://example.com/pet1.jpg', 'https://example.com/pet2.jpg']
-  // })
-  // @IsArray({ message: 'Las URLs de fotos deben ser un arreglo' })
-  // @IsUrl({}, { each: true, message: 'Cada URL de foto debe tener un formato válido' })
-  // photoUrls: string[];
+
 }

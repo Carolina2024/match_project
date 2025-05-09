@@ -9,6 +9,7 @@ import Contacto from "./views/Contacto";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicLayout from "./layout/PublicLayout";
 import AdminLayout from "./layout/AdminLayout";
+import PetElection from "./components/PetElection";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Adoptar" element={<Adoptar />} />
           <Route path="/Mascotas" element={<PetsHome />} />
+          <Route path="/pet-election" element={<PetElection />} />
         </Route>
 
         {/* Rutas privadas */}

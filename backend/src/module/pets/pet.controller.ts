@@ -42,8 +42,10 @@ import {
   PetTrait,
 } from 'src/common/enums/pet.enum';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { ApiExtraModels } from '@nestjs/swagger';
 
 @ApiTags('Mascotas')
+@ApiExtraModels(UpdatePetDto)
 @Controller('pets')
 export class PetController {
   constructor(private readonly petService: PetService) {}
@@ -200,7 +202,7 @@ export class PetController {
       statusCode: 400,
     },
   })
-  @Auth(UserRole.ADMIN)
+ @Auth(UserRole.ADMIN)
   create(
     @UploadedFiles() files: Express.Multer.File[],
     @Body() createPetDto: CreatePetDto,
@@ -752,12 +754,173 @@ export class PetController {
   })
   @Auth(UserRole.ADMIN)
   @Patch(':id')
+  @UseInterceptors(FilesInterceptor('photos'))
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({
+    summary: 'Actualizar una nueva mascota',
+    description: 'Actualizar unregistro de mascota en el sistema',
+  })
+  @ApiBody({
+    description: 'Datos de la mascota a actualizar',
+    schema: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Firulais',
+          description: 'Nombre de la mascota',
+        },
+        size: {
+          type: 'string',
+          enum: Object.values(PetSize),
+          example: PetSize.MEDIUM,
+          description: 'Tamaño de la mascota',
+        },
+        sex: {
+          type: 'string',
+          enum: Object.values(PetSex),
+          example: PetSex.MALE,
+          description: 'Sexo de la mascota',
+        },
+        age: {
+          type: 'string',
+          enum: Object.values(PetAge),
+          example: PetAge.YOUNG,
+          description: 'Edad de la mascota',
+        },
+        species: {
+          type: 'string',
+          enum: Object.values(PetSpecies),
+          example: PetSpecies.DOG,
+          description: 'Especie de la mascota',
+        },
+        energy: {
+          type: 'string',
+          enum: Object.values(PetEnergy),
+          example: PetEnergy.MODERATE,
+          description: 'Nivel de energía de la mascota',
+        },
+        breed: {
+          type: 'string',
+          example: 'Labrador',
+          description: 'Raza de la mascota',
+        },
+        kg: {
+          type: 'number',
+          example: 15.5,
+          description: 'Peso en Kilogramos de la mascota',
+        },
+        isVaccinated: {
+          type: 'boolean',
+          example: true,
+          description: '¿La mascota está vacunada?',
+        },
+        isSterilized: {
+          type: 'boolean',
+          example: true,
+          description: '¿La mascota está estirilizada?',
+        },
+        isDewormed: {
+          type: 'boolean',
+          example: true,
+          description: '¿La mascota está desparasitada?',
+        },
+        hasMicrochip: {
+          type: 'boolean',
+          example: false,
+          description: '¿La mascota tiene un microchip?',
+        },
+        story: {
+          type: 'string',
+          example: 'Fue rescatado de la calle hace 2 meses.',
+          description: 'Historia de la mascota',
+        },
+        traits: {
+          type: 'array',
+          items: { type: 'string', enum: Object.values(PetTrait) },
+          example: [PetTrait.AFFECTIONATE, PetTrait.CHILD_FRIENDLY],
+          description: 'Rasgos de la personalidad de la mascota',
+        },
+        admissionDate: {
+          type: 'string',
+          format: 'date',
+          example: '2023-01-15',
+          description: 'Fecha de rescate de la mascota',
+        },
+        status: {
+          type: 'string',
+          enum: Object.values(PetStatus),
+          example: PetStatus.AVAILABLE,
+          description: 'Estado de disponibilidad de la mascota',
+        },
+
+        photos: {
+          type: 'array',
+          items: {
+            type: 'string',
+            format: 'binary',
+          },
+          description: 'Imágenes de la mascota',
+        },
+        photoUrls: {
+          type: 'array',
+          items: { type: 'string' },
+          example: ["https://example.com/una-foto.jpg"],
+          description: 'URLs de las fotos de la mascota',
+        }
+      },
+    },
+  })
+  @ApiCreatedResponse({
+    description: 'La mascota ha sido actualizada exitosamente',
+    type: Pet,
+    example: {
+      id: '083c7750-63e8-4a2c-a1f1-bd8c8fbc9cea',
+      name: 'Firulais',
+      size: 'Mediano',
+      sex: 'Macho',
+      age: 'Joven',
+      species: 'Perro',
+      energy: 'Moderado',
+      breed: 'Labrador',
+      kg: 15.5,
+      isVaccinated: true,
+      isSterilized: true,
+      isDewormed: true,
+      hasMicrochip: true,
+      story: 'Fue rescatado de la calle hace 2 meses.',
+      traits: ['Cariñoso', 'Amigable con niños'],
+      admissionDate: '2023-01-15T00:00:00.000Z',
+      photoUrls: [
+        'https://res.cloudinary.com/asdfabh/image/upload/v1746324642/pets/exwybso4iyqxkv5xsezh.jpg',
+      ],
+      status: 'Disponible',
+      isActive: true,
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'Datos de entrada inválidos',
+    example: {
+      message: [
+        'El nombre debe ser una cadena de texto',
+        'El tamaño debe ser un valor válido',
+        'La fecha de nacimiento debe ser una fecha válida',
+      ],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+  })
   @HttpCode(HttpStatus.OK)
-  update(
+  async update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updatePetDto: UpdatePetDto,
+    @UploadedFiles() files: Express.Multer.File[],
   ) {
-    return this.petService.update(id, updatePetDto);
+    try{
+      return await this.petService.update(id, updatePetDto, files);
+    } catch (error) {
+      throw new BadRequestException('Error al actualizar la mascota ' + error);
+    }
   }
 
   @ApiOperation({

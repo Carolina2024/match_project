@@ -7,10 +7,6 @@ import { deleteUser } from "../api/deleteUser";
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
 
-  /* useEffect(() => {
-    fetchUsersget().then(setUsers);
-  }, []); */
-
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -19,7 +15,7 @@ const UserProfiles = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
-  const [deletedUserName, setDeletedUserName] = useState(""); // Estado para el nombre del usuario eliminado
+  const [deletedUserName, setDeletedUserName] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,13 +37,6 @@ const UserProfiles = () => {
       setCurrentPage(page);
     }
   };
-
-  // Filtrar usuarios por nombre o email (insensible a mayúsculas)
-  /* const filteredUsers = users.filter((user) =>
-    `${user.fullname} ${user.email}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  ); */
 
   // Filter users by name/email and status
   const filteredUsers = users.filter((user) => {

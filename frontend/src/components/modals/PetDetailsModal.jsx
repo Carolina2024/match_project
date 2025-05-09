@@ -17,8 +17,12 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
 
         {/* Encabezado */}
 
-        <h2 className="text-xl font-bold mb-1 text-gray-800 ">Información de la mascota</h2>
-        <p className="text-sm text-gray-500 mb-4">Fecha del ingreso: {pet?.admissionDate}</p>
+        <h2 className="text-xl font-bold mb-1 text-gray-800 ">
+          Información de la mascota
+        </h2>
+        <p className="text-sm text-gray-500 mb-4">
+          Fecha del ingreso: {pet?.admissionDate}
+        </p>
 
         {(pet?.photoUrls || pet?.photos)?.length > 0 && (
           <div className="flex flex-wrap gap-4 mb-4">
@@ -33,9 +37,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
         )}
 
-
-
-
+        {/* 
         <h2 className="text-xl font-bold mb-1 text-gray-800">
           Información de la mascota
         </h2>
@@ -51,8 +53,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
               className="w-32 h-32 object-cover rounded-[10px] shadow "
             />
           </div>
-        )}
-
+        )} */}
 
         {/* Imágenes */}
         <div className="flex gap-4 mb-4">
@@ -96,9 +97,16 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
             <span className="text-ls text-black-500 font-semibold">Edad</span>
             <span className="text-sm text-gray-800">{pet?.age}</span>
           </div>
+
           <div className="flex flex-col">
             <span className="text-ls text-black-500 font-semibold">Sexo</span>
             <span className="text-sm text-gray-800">{pet?.sex}</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-ls text-black-500 font-semibold">
+              Nivel actividad
+            </span>
+            <span className="text-sm text-gray-800">{pet?.energy}</span>
           </div>
           <div className="flex flex-col">
             <span className="text-ls text-black-500 font-semibold">Peso</span>
@@ -107,12 +115,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           <div className="flex flex-col">
             <span className="text-ls text-black-500 font-semibold">Tamaño</span>
             <span className="text-sm text-gray-800">{pet?.size}</span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-ls text-black-500 font-semibold">
-              Actividad
-            </span>
-            <span className="text-sm text-gray-800">{pet?.energy}</span>
           </div>
         </div>
 
@@ -176,22 +178,22 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </h3>
           <div className="flex flex-wrap gap-2">
             {pet?.isVaccinated && (
-              <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
                 Vacunado
               </span>
             )}
             {pet?.isSterilized && (
-              <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
                 Esterilizado
               </span>
             )}
             {pet?.isDewormed && (
-              <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
                 Desparasitado
               </span>
             )}
             {pet?.hasMicrochip && (
-              <span className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
                 Con microchip
               </span>
             )}

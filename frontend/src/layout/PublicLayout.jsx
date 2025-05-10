@@ -2,7 +2,6 @@ import Navbar from "../layout/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 
-
 function PublicLayout() {
   return (
     <>

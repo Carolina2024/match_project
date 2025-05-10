@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
-
 
 const AdminNavbar = ({
   sectionTitle = "Panel de administración",
@@ -39,7 +38,7 @@ const AdminNavbar = ({
         const data = await res.json();
         console.log("Usuario:", data);
 
-        setUserName(data.fullname || data.email); // Ajusta según lo que te devuelva
+        setUserName(data.fullname || data.email);
       } catch (error) {
         console.error("Error obteniendo nombre:", error.message);
       }

@@ -57,7 +57,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    // El formData y el homeType seleccionado
+
     onNext({ ...formData, homeType: selected });
   };
 
@@ -223,7 +223,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 </div>
               </div>
 
-               <div>
+              <div>
                 <label htmlFor="phoneNumber" className="block font-medium mb-2">
                   Teléfono*
                 </label>
@@ -254,7 +254,10 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
 
               <div>
-                <label htmlFor="address" className="block font-medium mt-8 mb-2">
+                <label
+                  htmlFor="address"
+                  className="block font-medium mt-8 mb-2"
+                >
                   Dirección y comuna en la que vive
                 </label>
                 <input

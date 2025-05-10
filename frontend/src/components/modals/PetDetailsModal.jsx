@@ -1,21 +1,17 @@
 import PropTypes from "prop-types";
 
-
 const PetDetailsModal = ({ isOpen, onClose, pet }) => {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm px-4 overflow-auto">
       <div className="bg-white rounded-xl p-6 max-w-4xl w-full relative shadow-lg">
-        {/* Botón cerrar */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-600 hover:text-black text-4xl"
         >
           &times;
         </button>
-
-        {/* Encabezado */}
 
         <h2 className="text-xl font-bold mb-1 text-gray-800 ">
           Información de la mascota
@@ -37,25 +33,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
         )}
 
-        {/* 
-        <h2 className="text-xl font-bold mb-1 text-gray-800">
-          Información de la mascota
-        </h2>
-        <p className="text-sm text-gray-500 mb-4">
-          Fecha del ingreso: {pet?.admissionDate}
-        </p>
-
-        {pet?.photoUrls?.[0] && (
-          <div className="mb-4 flex justify-rigth">
-            <img
-              src={pet.photoUrls[0]}
-              alt={`Foto de ${pet.name}`}
-              className="w-32 h-32 object-cover rounded-[10px] shadow "
-            />
-          </div>
-        )} */}
-
-        {/* Imágenes */}
         <div className="flex gap-4 mb-4">
           {pet?.photos?.map((url, i) => (
             <img
@@ -67,7 +44,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           ))}
         </div>
 
-        {/* Historia */}
         <div className="mb-4">
           <h3 className="font-semibold mb-1 text-gray-700">
             Historia de la mascota
@@ -75,7 +51,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           <p className="text-sm text-gray-600">{pet?.story}</p>
         </div>
 
-        {/* Datos básicos */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 mt-4">
           <div className="flex flex-col">
             <span className="text-ls text-black-500 font-semibold">
@@ -118,7 +93,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
         </div>
 
-        {/* Estado + Rasgos lado a lado */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
           <div>
             <h3 className="font-semibold text-gray-700 mb-1">Estado</h3>
@@ -154,24 +128,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
         </div>
 
-        {/* Condiciones de entrega */}
-        {/*  <div className="mt-6">
-          <h3 className="font-semibold mb-1 text-gray-700">Entrega de mascota</h3>
-          <div className="flex flex-wrap gap-2">
-          {pet?.delivery && pet.delivery.length > 0 ? (
-                pet.delivery.map((item, i) => (
-                  <span key={i} className="bg-gray-800 text-white px-3 py-1 rounded-full text-xs">
-                    {item}
-                  </span>
-                ))
-              ) : (
-                <p className="text-sm text-gray-500">No se registraron datos de entrega.</p>
-              )}
-
-
-          </div>
-        </div> */}
-        {/* Condiciones de entrega */}
         <div className="mt-6">
           <h3 className="font-semibold mb-1 text-gray-700">
             Entrega de mascota

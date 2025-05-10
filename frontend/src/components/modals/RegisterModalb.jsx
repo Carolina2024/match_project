@@ -13,7 +13,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     isResponsibleAdoption: "",
     energy: "",
     character: [],
-    compatibility: [], // ← de string a array
+    compatibility: [],
   });
   const [errores, setErrores] = useState({});
 
@@ -55,10 +55,6 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
         : [...prev.character, opcion],
     }));
   };
-
-  /* const handleCompatibilitySelect = (opcion) => {
-    setFormData((prev) => ({ ...prev, compatibility: opcion }));
-  }; */
 
   const toggleCompatibility = (opcion) => {
     setFormData((prev) => ({

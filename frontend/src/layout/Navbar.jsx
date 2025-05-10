@@ -8,14 +8,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Estados para los modales
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
 
   return (
     <header className="bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 flex items-center justify-between">
-      {/* Logo */}
       <div className="flex items-center space-x-2">
         <img
           src={logo}
@@ -24,7 +22,6 @@ const Navbar = () => {
         />
       </div>
 
-      {/* Botón hamburguesa móvil */}
       <button
         className="md:hidden text-primary focus:outline-none cursor-pointer"
         onClick={toggleMenu}
@@ -32,7 +29,6 @@ const Navbar = () => {
         {menuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Navegación Desktop */}
       <nav className="hidden md:flex items-center space-x-6 text-lg font-normal text-black font-primary gap-8">
         <Link to="/" className="hover:text-primary transition">
           Inicio
@@ -54,7 +50,6 @@ const Navbar = () => {
         </Link>
       </nav>
 
-      {/* Botón sesión Desktop */}
       <div className="hidden md:block">
         <button
           onClick={() => setLoginOpen(true)}
@@ -64,7 +59,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Menú Mobile */}
       {menuOpen && (
         <div className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
           <Link to="/" className="hover:text-primary transition">
@@ -91,7 +85,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Llamado al componente y los modales */}
       <AuthModalsController
         isLoginOpen={isLoginOpen}
         setLoginOpen={setLoginOpen}

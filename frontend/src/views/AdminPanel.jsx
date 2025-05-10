@@ -1,5 +1,4 @@
-
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PetList from "../components/PetList";
 import UserProfiles from "../components/UserProfiles";
 import AdoptionApllication from "../components/AdoptionApllication";
@@ -52,11 +51,8 @@ const AdminPanel = () => {
     setPets((prev) => [...prev, newPet]);
   };
 
-
   const renderView = () => {
     switch (activeView) {
-     /*  case "Dashboard":
-        return <AdminHome />; */
       case "Mascotas":
         return (
           <PetList
@@ -96,11 +92,8 @@ const AdminPanel = () => {
     }
   };
 
-
-
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
       <Sidebar
         onSelect={setActiveView}
         activeView={activeView}
@@ -108,13 +101,11 @@ const AdminPanel = () => {
         setIsVisible={setIsSidebarVisible}
       />
 
-    {/* Navbar fijo */}
-    <AdminNavbar
+      <AdminNavbar
         sectionTitle={currentTitle}
         isSidebarVisible={isSidebarVisible}
       />
 
-      {/* Contenido principal */}
       <div
         className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-40"
         style={{ left: isSidebarVisible ? "180px" : "0px" }}

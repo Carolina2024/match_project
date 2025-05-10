@@ -102,7 +102,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
         confirmButtonColor: "#FAAB75",
       }).then((result) => {
         if (result.isConfirmed) {
-          onClose(); // Cerrar el modal al hacer clic en "Aceptar"
+          onClose();
           if (role === "admin") {
             navigate("/Admin");
           } else {
@@ -134,14 +134,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
             <X />
           </button>
 
-          {/* FORMULARIO */}
           <div className="max-w-lg p-12 flex flex-col justify-center">
             <h2 className="text-lg font-bold mb-6 mx-0 text-center font-secundary text-black">
               Inicio Sesión a Patas Pirque
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-3">
-              {/* Email */}
               <div className="relative">
                 {error && (
                   <div className="bg-red-100 text-red-600 p-2 rounded">
@@ -150,7 +148,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
                 )}
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
                   <i className="fas fa-user" />
-                  {/* SVG de usuario */}
+
                   <svg
                     width="14"
                     height="14"
@@ -178,11 +176,10 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
                 )}
               </div>
 
-              {/* Contraseña */}
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
                   <i className="fas fa-lock" />
-                  {/* SVG de llave */}
+
                   <svg
                     width="20"
                     height="12"
@@ -205,7 +202,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full pl-10 pr-10 text-lg font-medium bg-white  text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
                 />
-                {/* OJITO */}
+
                 <span
                   onClick={() => setShowPassword((prev) => !prev)}
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary cursor-pointer"
@@ -282,10 +279,8 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
             </p>
           </div>
 
-          {/* IMAGEN */}
           <div className="w-auto flex justify-center items-center">
             <div className="flex flex-col  ">
-              {/* SVG de fondo */}
               <svg
                 width="208"
                 height="247"
@@ -333,7 +328,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
                 className=" md:w-50 w-32 h-auto drop-shadow-xl rounded-full absolute top-0 md:left-97 left-70 right-0 bottom-0 m-auto"
               />
 
-              {/* SVG de fondo */}
               <svg
                 width="288"
                 height="226"
@@ -386,5 +380,3 @@ LoginModal.propTypes = {
 };
 
 export default LoginModal;
-
-

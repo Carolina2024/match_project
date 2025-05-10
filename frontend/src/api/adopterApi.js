@@ -5,7 +5,6 @@ export const fetchUsersget = async (page = 1, limit = 10) => {
     const token = localStorage.getItem("token");
     console.log(token);
 
-    // Agregar parámetros de paginación en la query string
     const queryParams = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
@@ -22,7 +21,7 @@ export const fetchUsersget = async (page = 1, limit = 10) => {
     }
 
     const data = await response.json();
-    console.log("Respuesta de la API:", data); // 👈 Agregado objeto de usuarios
+    console.log("Respuesta de la API:", data);
 
     const users = data.items.map((user) => ({
       id: user.id,
@@ -35,7 +34,7 @@ export const fetchUsersget = async (page = 1, limit = 10) => {
 
     return {
       items: users,
-      totalPages: data.totalPages || 1, // 👈 asegúrate que tu backend esté enviando esto
+      totalPages: data.totalPages || 1,
     };
   } catch (error) {
     console.error("Error al cargar los usuarios:", error);

@@ -6,10 +6,11 @@ import { UsersController } from './users.controller';
 import { AdoptersService } from '../adopters/adopters.service';
 import { Adopters } from '../adopters/entities/adopters.entity';
 import { AuthModule } from '../auth/auth.module';
+import { Match } from '../matches/entities/match.entity';
 
 @Module({
   providers: [UsersService, AdoptersService],
-  imports: [TypeOrmModule.forFeature([Users, Adopters]), AuthModule],
+  imports: [TypeOrmModule.forFeature([Users, Adopters, Match]), AuthModule],
   controllers: [UsersController],
   exports: [UsersService],
 })

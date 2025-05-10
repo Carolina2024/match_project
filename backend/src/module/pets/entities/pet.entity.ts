@@ -27,7 +27,7 @@ import {
   Max,
   Min,
 } from 'class-validator';
-import { Match } from 'src/module/matchs/entities/match.entity';
+import { Match } from 'src/module/matches/entities/match.entity';
 
 @Entity('pets')
 export class Pet {
@@ -151,6 +151,6 @@ export class Pet {
   })
   updated_at: Date;
 
-  @OneToMany(() => Match, match => match.pet)
+  @OneToMany(() => Match, (match) => match.pet)
   matches: Match[];
 }

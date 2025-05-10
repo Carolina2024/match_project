@@ -1,9 +1,16 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Users } from '../../users/entities/users.entity';
 import { Pet } from '../../pets/entities/pet.entity';
 import { MatchStatus } from '../../../common/enums/match-status.enum';
 
-@Entity('matchs')
+@Entity('matches')
 export class Match {
   @PrimaryGeneratedColumn('uuid')
   id: string;

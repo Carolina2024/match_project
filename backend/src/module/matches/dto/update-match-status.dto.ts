@@ -9,8 +9,8 @@ export class UpdateMatchStatusDto {
     example: MatchStatus.EN_PROCESO,
   })
   @IsNotEmpty({ message: 'El estado es requerido' })
-  @IsEnum(MatchStatus, { 
-    message: `El estado debe ser un valor válido: ${Object.values(MatchStatus).join(", ")}` 
+  @IsEnum(MatchStatus, {
+    message: `El estado debe ser un valor válido: ${Object.values(MatchStatus).join(', ')}`,
   })
   status: MatchStatus;
 }

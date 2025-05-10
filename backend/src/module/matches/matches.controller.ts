@@ -1,33 +1,37 @@
-import { Body, Controller, Get, Param, ParseUUIDPipe, Patch, Post, UseGuards } from '@nestjs/common';
-import { MatchsService } from './matchs.service';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
 import { UpdateMatchStatusDto } from './dto/update-match-status.dto';
 import { GetUser } from '../auth/decorators/get-user.decorator';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { UserRole } from '../../common/enums/userRole.enum';
-import { 
-  ApiBearerAuth, 
-  ApiOperation, 
-  ApiResponse, 
-  ApiTags, 
-  ApiCreatedResponse, 
-  ApiOkResponse, 
-  ApiBadRequestResponse, 
+import {
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiBadRequestResponse,
   ApiNotFoundResponse,
   ApiParam,
-  ApiBody
+  ApiBody,
 } from '@nestjs/swagger';
 import { Match } from './entities/match.entity';
 import { MatchStatus } from '../../common/enums/match-status.enum';
 
 @ApiTags('Solicitudes de Adopción')
-@Controller('matchs')
-export class MatchsController {
-  constructor(private readonly matchsService: MatchsService) {}
+@Controller('matches')
+export class MatchesController {
+  constructor(private readonly matchsService: MatchesService) {}
 
-  @Post()
-  @Auth(UserRole.ADOPTERS)
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Crear una solicitud de adopción',
     description: 'Crea una nueva solicitud de adopción para una mascota',
@@ -56,16 +60,19 @@ export class MatchsController {
       statusCode: 400,
     },
   })
-  create(@GetUser('id') userId: string, @Body() createMatchDto: CreateMatchDto) {
+  @Post()
+  @Auth(UserRole.ADOPTERS)
+  create(
+    @GetUser('id') userId: string,
+    @Body() createMatchDto: CreateMatchDto,
+  ) {
     return this.matchsService.create(userId, createMatchDto);
   }
 
-  @Get()
-  @Auth(UserRole.ADMIN)
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Obtener todas las solicitudes de adopción',
-    description: 'Retorna todas las solicitudes de adopción (solo para administradores)',
+    description:
+      'Retorna todas las solicitudes de adopción (solo para administradores)',
   })
   @ApiOkResponse({
     description: 'Lista de solicitudes obtenida exitosamente',
@@ -107,16 +114,16 @@ export class MatchsController {
       },
     ],
   })
+  @Get()
+  @Auth(UserRole.ADMIN)
   findAll() {
     return this.matchsService.findAll();
   }
 
-  @Get('user')
-  @Auth(UserRole.ADOPTERS)
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Obtener solicitudes del usuario actual',
-    description: 'Retorna todas las solicitudes de adopción del usuario autenticado',
+    description:
+      'Retorna todas las solicitudes de adopción del usuario autenticado',
   })
   @ApiOkResponse({
     description: 'Lista de solicitudes del usuario obtenida exitosamente',
@@ -148,13 +155,12 @@ export class MatchsController {
       },
     ],
   })
+  @Get('user')
+  @Auth(UserRole.ADOPTERS)
   findByUser(@GetUser('id') userId: string) {
     return this.matchsService.findByUser(userId);
   }
 
-  @Get(':id')
-  @Auth(UserRole.ADMIN, UserRole.ADOPTERS)
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Obtener una solicitud por ID',
     description: 'Retorna una solicitud de adopción específica por su ID',
@@ -194,21 +200,22 @@ export class MatchsController {
   @ApiNotFoundResponse({
     description: 'No se ha encontrado una solicitud con el ID indicado',
     example: {
-      message: 'Solicitud con ID 639dcdc7-a635-48d4-a641-2c74d0878cbd no encontrada',
+      message:
+        'Solicitud con ID 639dcdc7-a635-48d4-a641-2c74d0878cbd no encontrada',
       error: 'Not Found',
       statusCode: 404,
     },
   })
+  @Get(':id')
+  @Auth(UserRole.ADMIN, UserRole.ADOPTERS)
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.matchsService.findOne(id);
   }
 
-  @Patch(':id/status')
-  @Auth(UserRole.ADMIN)
-  @ApiBearerAuth()
   @ApiOperation({
     summary: 'Actualizar el estado de una solicitud',
-    description: 'Actualiza el estado de una solicitud de adopción (solo para administradores)',
+    description:
+      'Actualiza el estado de una solicitud de adopción (solo para administradores)',
   })
   @ApiResponse({
     status: 200,
@@ -218,7 +225,8 @@ export class MatchsController {
     status: 400,
     description: 'Transición de estado no válida',
     example: {
-      message: 'No se puede cambiar el estado de Por revisar a Aprobado. Solo se permite cambiar a En proceso',
+      message:
+        'No se puede cambiar el estado de Por revisar a Aprobado. Solo se permite cambiar a En proceso',
       error: 'Bad Request',
       statusCode: 400,
     },
@@ -226,11 +234,14 @@ export class MatchsController {
   @ApiNotFoundResponse({
     description: 'No se ha encontrado una solicitud con el ID indicado',
     example: {
-      message: 'Solicitud con ID 639dcdc7-a635-48d4-a641-2c74d0878cbd no encontrada',
+      message:
+        'Solicitud con ID 639dcdc7-a635-48d4-a641-2c74d0878cbd no encontrada',
       error: 'Not Found',
       statusCode: 404,
     },
   })
+  @Patch(':id/status')
+  @Auth(UserRole.ADMIN)
   updateStatus(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateMatchStatusDto: UpdateMatchStatusDto,

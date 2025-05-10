@@ -6,8 +6,8 @@ import { AuthModule } from './module/auth/auth.module';
 import { UsersModule } from './module/users/users.module';
 import { AdoptersModule } from './module/adopters/adopters.module';
 import { PetModule } from './module/pets/pet.module';
-import { FilesModule } from './module/files/files.module's;
-import { MatchsModule } from './module/matchs/matchs.module';
+import { FilesModule } from './module/files/files.module';
+import { MatchesModule } from './module/matches/matches.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { MatchsModule } from './module/matchs/matchs.module';
     AdoptersModule,
     PetModule,
     FilesModule,
-    MatchsModule
+    MatchesModule,
   ],
 })
 export class AppModule {}

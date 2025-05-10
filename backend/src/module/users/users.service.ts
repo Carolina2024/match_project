@@ -16,8 +16,7 @@ import { AdoptersService } from '../adopters/adopters.service';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { PetService } from '../pets/pet.service';
-import { Match } from '../matchs/entities/match.entity';
+import { Match } from '../matches/entities/match.entity';
 import { MatchStatus } from 'src/common/enums/match-status.enum';
 
 @Injectable()
@@ -26,7 +25,7 @@ export class UsersService {
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
     private readonly adoptersService: AdoptersService,
-    private readonly petService: PetService,
+
     @InjectRepository(Match)
     private readonly matchRepository: Repository<Match>,
   ) {}
@@ -194,23 +193,21 @@ export class UsersService {
   }
   async findUserPets(userId: string) {
     const user = await this.findOneById(userId);
-    
+
     if (!user) {
       throw new NotFoundException(`Usuario con id ${userId} no encontrado`);
     }
-    
+
     const matches = await this.matchRepository.find({
-      where: { 
+      where: {
         userId: userId,
-        status: MatchStatus.APROBADO
+        status: MatchStatus.APROBADO,
       },
-      relations: ['pet']
+      relations: ['pet'],
     });
-    
-    const pets = matches.map(match => match.pet);
-    
+
+    const pets = matches.map((match) => match.pet);
+
     return pets;
   }
 }
-
-

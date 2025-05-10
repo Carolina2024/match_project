@@ -64,22 +64,22 @@ const Navbar = () => {
             <ChevronDown size={16} className="ml-1 stroke-primary" />
           </div>
           {isNosotrosOpen && (
-            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col z-50">
+            <div className="absolute top-full text-center left-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col z-50">
               <Link
                 to="/Nosotros#historia"
-                className="px-4 py-2 text-sm hover:bg-gray-100 transition w-full text-left"
+                className="px-4 py-2 text-sm font-normal font-tertiary hover:text-primary transition w-full"
               >
                 Historia del refugio
               </Link>
               <Link
                 to="/Nosotros#proposito"
-                className="px-4 py-2 text-sm hover:bg-gray-100 transition w-full text-left"
+                className="px-4 py-2 text-sm font-normal font-tertiary  hover:text-primary transition w-full"
               >
                 Nuestro propósito
               </Link>
               <Link
                 to="/Nosotros#colaborar"
-                className="px-4 py-2 text-sm hover:bg-gray-100 transition w-full text-left"
+                className="px-4 py-2 text-sm font-normal font-tertiary  hover:text-primary transition w-full"
               >
                 Cómo colaborar
               </Link>

@@ -3,6 +3,10 @@ import image2 from "../assets/image2.png";
 import image3 from "../assets/image3.png";
 import image4 from "../assets/image4.png";
 import image5 from "../assets/image5.png";
+import image6 from "../assets/image6.png";
+import image7 from "../assets/image7.png";
+import image8 from "../assets/image8.png";
+import image9 from "../assets/image9.png";
 import slider1 from "../assets/slider1.png";
 import slider2 from "../assets/slider2.png";
 import slider3 from "../assets/slider3.png";
@@ -11,6 +15,26 @@ import image from "../assets/image.png";
 const Home = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const sliders = [slider1, slider2, slider3];
+  const slides = [
+    {
+      img: sliders[0],
+      quote:
+        "“Nunca pensé que un perro podía cambiar tanto mi vida. Rocky me hace compañía, me escucha sin decir nada, y siempre está ahí. Adoptarlo fue la mejor decisión. Ahora tengo un amigo que me espera todos los días con la cola moviéndose como loco.”",
+      author: "Mateo Perez",
+    },
+    {
+      img: sliders[1],
+      quote:
+        "“Nos daba miedo cómo iba a reaccionar Luna con Tomi, pero desde el primer día fue puro amor. Juegan, se cuidan y hasta duermen juntos. Adoptar fue como sumar una hermana peluda a la familia. No sé cómo vivíamos sin ella.”",
+      author: "Leonardo Gomez",
+    },
+    {
+      img: sliders[2],
+      quote:
+        "“Teníamos miedo de cómo iba a reaccionar Toby con un gato en casa, pero fue todo lo contrario. Se hicieron amigos desde el primer día. Ver a nuestros hijos jugando con los dos nos derrite el corazón. Adoptar a Mía nos completó como familia.”",
+      author: "Sandra Lopez",
+    },
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -21,7 +45,7 @@ const Home = () => {
   }, [sliders.length]);
 
   return (
-    <section className="w-full flex flex-col justify-center items-center">
+    <section className="w-full flex flex-col justify-center items-center -mt-20">
       <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex flex-raw items-center md:ml-10">
         <svg
           width="1030"
@@ -63,26 +87,30 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary md:mb-10 text-center md:mt-16 mt-0">
+
+      <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary text-center md:mt-16 mt-0">
         Conoce a quienes esperan un hogar
       </h2>
+      <hr className="w-3/5 border-t-1 border-primary mx-auto mt-4 md:mb-10" />
 
       <section className="py-10 px-4 flex justify-center w-full">
-        <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-6xl">
-          {[image2, image3, image4, image5].map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Perrito ${index + 1}`}
-              className="w-42 h-42 md:w-54 md:h-54 object-cover hover:scale-105 transition"
-            />
-          ))}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-5xl">
+          {[image2, image3, image4, image5, image6, image7, image8, image9].map(
+            (image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`Perrito ${index + 1}`}
+                className="w-38 h-38 md:w-50 md:h-50 object-cover hover:scale-105 transition"
+              />
+            )
+          )}
         </div>
       </section>
 
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
-          Adopta una mascota en
+          Encuentra a tu mascota ideal
         </h2>
         <h2 className="text-primary font-extrabold text-2xl font-tertiary">
           3 simples pasos
@@ -113,7 +141,7 @@ const Home = () => {
 
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
-            <div className="absolute -top-5 bg-primary text-[#2E256F] font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
+            <div className="absolute -top-5 bg-primary text-white font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               1
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
@@ -146,13 +174,13 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
+            <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Completar el formulario de registro en unos minutos
             </p>
           </div>
 
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
-            <div className="absolute -top-5 bg-primary font-tertiary text-[#2E256F] w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
+            <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               2
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
@@ -185,14 +213,14 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
+            <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Describir tu hogar y tus preferencias para que Patas Pirque pueda
               encontrar tu mascota ideal
             </p>
           </div>
 
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
-            <div className="absolute -top-5 bg-primary font-tertiary text-[#2E256F] w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
+            <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               3
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
@@ -213,66 +241,55 @@ const Home = () => {
                 />
               </svg>
             </div>
-            <p className="mt-4 text-sm text-[#0C0C0C] font-tertiary font-normal">
+            <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Encontrar a tu Match
             </p>
           </div>
         </div>
       </section>
 
-      <section className="w-full px-4 flex flex-col justify-center items-center">
-        <div className="py-10 text-center mt-12 w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-primary mb-28 px-4 md:px-20 text-center ">
+      <section className="w-full px-4 flex flex-col justify-center items-center -mt-8">
+        <div className="py-10 text-center w-full">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary px-4 md:px-20 text-center ">
             Historias de adopción
           </h2>
+          <hr className="w-3/5 border-t-1 border-primary mx-auto md:mt-4 mt-2 mb-8 md:mb-10" />
 
-          <div className="max-w-4xl mx-auto mb-6 px-4 ">
-            <img
-              src={sliders[activeSlide]}
-              alt={`Slide ${activeSlide + 1}`}
-              className="shadow-lg w-full h-auto object-cover rounded-4xl"
-            />
+          {/* Slider */}
+          <div className="max-w-4xl mx-auto mb-12 px-4">
+            {/* Contenedor del slide */}
+            <div className="relative overflow-hidden rounded-4xl shadow-lg">
+              {/* Imagen */}
+              <img
+                src={slides[activeSlide].img}
+                alt={`Slide ${activeSlide + 1}`}
+                className="w-full h-64 md:h-110 object-cover"
+              />
 
-            <div className="flex justify-center space-x-3 -mt-8 mb-28">
-              {sliders.map((_, i) => (
+              {/* Overlay del testimonio */}
+              <div className="absolute bottom-0 left-0 md:max-w-4xl  bg-[#59514680] p-4 md:py-3 px-4 md:mx-10 md:h-auto h-38 mx-4 my-5 md:my-6 text-left rounded-2xl text-white">
+                <p className="font-semibold md:text-2xl text-lg">
+                  {slides[activeSlide].author}
+                </p>
+                <p className="italic mt-2 text-xs md:text-base leading-relaxed">
+                  {slides[activeSlide].quote}
+                </p>
+              </div>
+            </div>
+
+            {/* Indicadores de slider */}
+            <div className="flex justify-center space-x-3 mt-10">
+              {slides.map((_, i) => (
                 <button
                   key={i}
-                  className={`w-2 h-2 rounded-full ${
-                    activeSlide === i ? "bg-white" : "bg-white"
-                  }`}
+                  className={`
+            w-3 h-3 rounded-full
+            ${activeSlide === i ? "bg-primary" : "bg-tertiary"}
+            transition
+          `}
                   onClick={() => setActiveSlide(i)}
                 />
               ))}
-            </div>
-          </div>
-
-          <div className="max-w-4xl mx-auto space-y-10 mt-32 text-sm md:text-xl text-black font-extralight px-4">
-            <div className="text-left">
-              <p className="italic">
-                “Nunca pensé que un perro podía cambiar tanto mi vida. Rocky me
-                hace compañía, me escucha sin decir nada, y siempre está ahí.
-                Adoptarlo fue la mejor decisión. Ahora tengo un amigo que me
-                espera todos los días con la cola moviéndose como loco.”
-              </p>
-              <p className="mt-5 font-semibold text-right">Mateo Perez</p>
-            </div>
-            <div className="text-left">
-              <p className="italic">
-                “Nos daba miedo cómo iba a reaccionar Luna con Tomi, pero desde
-                el primer día fue puro amor. Juegan, se cuidan y hasta duermen
-                juntos. Adoptar fue como sumar una hermana peluda a la familia.
-                No sé cómo vivíamos sin ella.”
-              </p>
-              <p className="mt-5 font-semibold text-right">Leonardo Gomez</p>
-            </div>
-            <div className="text-left">
-              <p className="italic">
-                “Teníamos miedo de cómo iba a reaccionar Toby con un gato en
-                casa, pero fue todo lo contrario. Se hicieron amigos desde el
-                primer día. Ver a nuestros hijos jugando con los dos nos derrite
-                el corazón. Adoptar a Mía nos completó como familia.”
-              </p>
-              <p className="mt-5 font-semibold text-right">Sandra Lopez</p>
             </div>
           </div>
         </div>

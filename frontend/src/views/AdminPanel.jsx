@@ -116,7 +116,7 @@ const AdminPanel = () => {
 
       {/* Contenido principal */}
       <div
-        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-30"
+        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-40"
         style={{ left: isSidebarVisible ? "180px" : "0px" }}
       >
         <div className="p-6">{renderView()}</div>

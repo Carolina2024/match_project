@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -35,7 +34,7 @@ export class AuthService {
     }
 
     const existingAdopter = await this.adoptersService.findByIdentityDocument(
-      registerDto.identityDocument as string,
+      registerDto.identityDocument,
     );
 
     if (existingAdopter) {
@@ -59,7 +58,10 @@ export class AuthService {
     return {
       message: 'Usuario registrado exitosamente',
       token: this.getJwtToken(payload),
-      id: newUser.id,
+      user: {
+        id: newUser.id,
+        fullname: newUser.fullname,
+      },
     };
   }
 
@@ -94,7 +96,10 @@ export class AuthService {
     return {
       message: 'Se ha iniciado sesión exitosamente',
       token,
-      id: user.id,
+      user: {
+        id: user.id,
+        fullname: user.fullname,
+      },
     };
   }
 

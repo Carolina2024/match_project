@@ -64,7 +64,7 @@ export class UsersService {
         email: true,
         fullname: true,
         id: true,
-        isActive: false,
+        isActive: true,
         role: true,
         adopter: true,
       },

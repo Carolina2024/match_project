@@ -15,8 +15,8 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     birthDate: "",
     email: "",
     password: "",
+    phoneNumber: "",
     run: "",
-    phoneNumber:"",
     address: "",
     allowsPets: "",
     hasPets: "",
@@ -57,7 +57,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    // El formData y el homeType seleccionado
+
     onNext({ ...formData, homeType: selected });
   };
 
@@ -223,13 +223,13 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 </div>
               </div>
 
-               <div>
+              <div>
                 <label htmlFor="phoneNumber" className="block font-medium mb-2">
                   Teléfono*
                 </label>
                 <input
                   name="phoneNumber"
-                  type="number"
+                  type="text"
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
@@ -254,7 +254,10 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
 
               <div>
-                <label htmlFor="address" className="block font-medium mt-8 mb-2">
+                <label
+                  htmlFor="address"
+                  className="block font-medium mt-8 mb-2"
+                >
                   Dirección y comuna en la que vive
                 </label>
                 <input

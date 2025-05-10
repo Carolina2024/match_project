@@ -30,7 +30,6 @@ const AuthModalsController = ({
     const first = stepOneData;
     const second = secondData;
 
-    // Validación del RUT
     const rutValido = /^\d{7,8}-[0-9kK]$/;
     if (!rutValido.test(first.run)) {
       setServerError(
@@ -44,6 +43,7 @@ const AuthModalsController = ({
       birthDate: first.birthDate,
       email: first.email,
       password: first.password,
+      phoneNumber: first.phoneNumber,
       identityDocument: first.run,
       address: first.address,
       homeType: normalizeHomeType(first.homeType),

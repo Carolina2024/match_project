@@ -25,7 +25,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   const [deletedPetName, setDeletedPetName] = useState("");
 
   const handleEdit = (pet) => {
-    console.log({pet})
+    console.log({ pet });
     setEditingPet(pet);
     setActiveView("editPet");
   };
@@ -43,7 +43,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         setPets(response.items || []);
         setTotalPages(response.totalPages || 1);
       } catch (error) {
-
         console.error("Error al cargar mascotas:", error.message);
       }
     };
@@ -63,8 +62,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
       .includes(searchTerm.toLowerCase());
     const matchesEspecie =
       filterSpecies === "Todos" || pet.species === filterSpecies;
-    const matchesTamanio =
-      filterSize === "Todos" || pet.size === filterSize;
+    const matchesTamanio = filterSize === "Todos" || pet.size === filterSize;
     const matchesEstado =
       filterStatus === "Todos" || pet.status === filterStatus;
     return matchesSearch && matchesEspecie && matchesTamanio && matchesEstado;
@@ -77,11 +75,16 @@ const PetList = ({ setActiveView, setEditingPet }) => {
       Adoptada: "bg-[#b26b3f] text-white",
     };
     return (
-      <span className={`px-2 py-1 rounded text-sm font-medium ${statusStyles[status] || "bg-gray-100 text-gray-600"}`}>{status}</span>
+      <span
+        className={`px-2 py-1 rounded text-sm font-medium ${
+          statusStyles[status] || "bg-gray-100 text-gray-600"
+        }`}
+      >
+        {status}
+      </span>
     );
   };
 
-//PARA DELETE USER
   const handleOpenModal = (pet) => {
     setSelectedPett(pet);
     setModalOpenn(true);
@@ -103,8 +106,8 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             : u
         )
       );
-      setDeletedPetName(selectedPett.name); // Actualiza el nombre del usuario eliminado
-      setShowMessage(true); // ✅ Mostrar el mensaje
+      setDeletedPetName(selectedPett.name);
+      setShowMessage(true);
     } catch (error) {
       console.error("Error al eliminar la mascota:", error.message);
     } finally {
@@ -115,7 +118,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   return (
     <div className="mb-6">
       <div className="flex flex-col sm:flex-row  justify-between items-center mb-4">
-        {/* Buscador */}
         <div className="relative w-full max-w-md">
           <input
             type="text"
@@ -137,7 +139,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
       <div className="flex flex-wrap gap-4 mb-7">
         <span className="font-raleway text-[16px]">Filtrar por:</span>
-        {/* Filtro 1 */}
+
         <select
           className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none w-full sm:w-auto"
           value={filterSpecies}
@@ -148,7 +150,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <option value="Gato">Gato</option>
         </select>
 
-        {/* Filtro 2 */}
         <select
           className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none w-full sm:w-auto"
           value={filterSize}
@@ -160,7 +161,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <option value="Grande">Grande</option>
         </select>
 
-        {/* Filtro 3 */}
         <select
           className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none w-full sm:w-auto"
           value={filterStatus}
@@ -216,7 +216,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     </button>
                     <button
                       className="text-red-500 hover:text-red-700"
-                      onClick={() => handleOpenModal(pet)} // Aquí pasamos el usuario seleccionado
+                      onClick={() => handleOpenModal(pet)}
                     >
                       <FaTrash />
                     </button>
@@ -280,7 +280,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         </div>
       </div>
 
-      {/* ✅ MENSAJE DE ELIMINACIÓN */}
       {showMessage && (
         <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
           <span className="block font-bold">Mascota eliminada</span>
@@ -294,7 +293,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         </div>
       )}
 
-      {/* Modal de eliminación */}
       <PetModalDelete
         isOpen={modalOpenn}
         onClose={handleCloseModal}

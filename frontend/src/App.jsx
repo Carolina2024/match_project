@@ -15,7 +15,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Rutas públicas */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/Nosotros" element={<Nosotros />} />
@@ -26,7 +25,6 @@ function App() {
           <Route path="/pet-election" element={<PetElection />} />
         </Route>
 
-        {/* Rutas privadas */}
         <Route
           path="/Admin"
           element={

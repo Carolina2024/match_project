@@ -8,22 +8,17 @@ const Contacto = () => {
 
   return (
     <section className="max-w-3xl mx-auto flex flex-col items-center pb-22 pt-16 px-4 mt-14 bg-[#F9F9F9] rounded-4xl">
-      {/* Título */}
       <h2 className="text-primary text-3xl md:text-4xl font-bold font-secundary mb-8">
         Contacto
       </h2>
 
-      {/* Card del formulario */}
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-lg/20 p-8">
-        {/* Encabezado */}
         <div className="flex items-center gap-4 mb-6 text-primary font-semibold font-secundary">
           <FaPaw className="text-2xl" />
           <span>¡Escríbenos!</span>
         </div>
 
-        {/* Formulario */}
         <form className="space-y-5">
-          {/* Nombre */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Nombre
@@ -35,7 +30,6 @@ const Contacto = () => {
             />
           </div>
 
-          {/* Email */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Email
@@ -47,7 +41,6 @@ const Contacto = () => {
             />
           </div>
 
-          {/* Teléfono */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Número de teléfono
@@ -88,7 +81,6 @@ const Contacto = () => {
             />
           </div>
 
-          {/* Mensaje */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Mensaje
@@ -100,7 +92,6 @@ const Contacto = () => {
             ></textarea>
           </div>
 
-          {/* Botón enviar */}
           <div className="text-right">
             <button
               type="submit"

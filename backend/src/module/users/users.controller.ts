@@ -27,6 +27,8 @@ import { Auth } from '../auth/decorators/auth.decorator';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { OwnerOrAdminGuard } from '../auth/guards/owner-or-admin.guard';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { GetUser } from '../auth/decorators/get-user.decorator';
+import { Pet } from '../pets/entities/pet.entity';
 
 @Controller('users')
 export class UsersController {
@@ -275,5 +277,31 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.remove(id);
+  }
+
+  @ApiOperation({
+    summary: 'Obtener mascotas de un usuario',
+    description: 'Retorna todas las mascotas asociadas al usuario especificado',
+  })
+  @ApiOkResponse({
+    description: 'Lista de mascotas del usuario obtenida exitosamente',
+    type: [Pet],
+    example: [
+      {
+        id: '497fe8df-f6d9-438d-9c33-437d7a46d318',
+        name: 'Duke',
+        species: 'Perro',
+        breed: 'Labrador',
+        age: 'Adulto',
+        photoUrls: ['https://example.com/dog13.jpg'],
+        status: 'Adoptado'
+      }
+    ],
+  })
+  @Auth(UserRole.ADOPTERS)
+  @UseGuards(AuthGuard(), OwnerOrAdminGuard)
+  @Get(':id/pets')
+  getUserPets(@Param('id', ParseUUIDPipe) userId: string) {
+    return this.usersService.findUserPets(userId);
   }
 }

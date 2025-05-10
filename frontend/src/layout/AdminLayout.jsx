@@ -10,7 +10,6 @@ function AdminLayout() {
       <div className="pl-64 w-full flex flex-col">
         <AdminNavbar sectionTitle={activeView} />
         <main className="p-6 flex-1">
-          {/* Le pasamos setActiveView al hijo para que lo controle */}
           <Outlet context={{ activeView, setActiveView }} />
         </main>
       </div>

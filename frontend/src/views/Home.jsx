@@ -22,9 +22,7 @@ const Home = () => {
 
   return (
     <section className="w-full flex flex-col justify-center items-center">
-      {/* Hero */}
       <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex flex-raw items-center md:ml-10">
-        {/* SVG de fondo */}
         <svg
           width="1030"
           height="745"
@@ -41,7 +39,6 @@ const Home = () => {
           />
         </svg>
 
-        {/* Imagen del perro alineada al borde derecho, centrada verticalmente */}
         <div className="absolute inset-y-0 right-0 flex items-center">
           <img
             src={image}
@@ -50,7 +47,6 @@ const Home = () => {
           />
         </div>
 
-        {/* Texto alineado al centro vertical y separado del borde izquierdo */}
         <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
           <div>
             <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
@@ -60,7 +56,7 @@ const Home = () => {
               <br />
               <span className="text-primary">mascota</span>
             </h2>
-            {/* Botón */}
+
             <button className="bg-white text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition cursor-pointer">
               Regístrate para Adoptar
             </button>
@@ -70,7 +66,7 @@ const Home = () => {
       <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary md:mb-10 text-center md:mt-16 mt-0">
         Conoce a quienes esperan un hogar
       </h2>
-      {/* Mini galería */}
+
       <section className="py-10 px-4 flex justify-center w-full">
         <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-6xl">
           {[image2, image3, image4, image5].map((image, index) => (
@@ -84,7 +80,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Pasos */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
           Adopta una mascota en
@@ -93,7 +88,6 @@ const Home = () => {
           3 simples pasos
         </h2>
 
-        {/* Líneas curvas SVG entre los pasos */}
         <div className="absolute top-50 left-0 right-0 flex justify-center">
           <svg
             width="650"
@@ -117,9 +111,7 @@ const Home = () => {
           </svg>
         </div>
 
-        {/* Contenedores de pasos */}
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
-          {/* Paso 1 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-[#2E256F] font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               1
@@ -159,7 +151,6 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Paso 2 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-[#2E256F] w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               2
@@ -200,7 +191,6 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Paso 3 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-[#2E256F] w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               3
@@ -230,14 +220,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Historias de adopción */}
       <section className="w-full px-4 flex flex-col justify-center items-center">
         <div className="py-10 text-center mt-12 w-full">
           <h2 className="text-2xl md:text-4xl font-bold text-primary mb-28 px-4 md:px-20 text-center ">
             Historias de adopción
           </h2>
 
-          {/* Slider funcional automático */}
           <div className="max-w-4xl mx-auto mb-6 px-4 ">
             <img
               src={sliders[activeSlide]}
@@ -258,7 +246,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Testimonios */}
           <div className="max-w-4xl mx-auto space-y-10 mt-32 text-sm md:text-xl text-black font-extralight px-4">
             <div className="text-left">
               <p className="italic">

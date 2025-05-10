@@ -62,9 +62,7 @@ const CuidadosMascota = () => {
           />
         </svg>
       </div>
-      {/* SECCIÓN 1 */}
       <div className="flex flex-col md:flex-row items-center gap-46">
-        {/* Imagen izquierda */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
           <img
             src={paso1}
@@ -73,7 +71,6 @@ const CuidadosMascota = () => {
           />
         </div>
 
-        {/* Texto derecha */}
         <div className="md:w-3/4 md:-translate-y-10">
           <div className="flex items-center mb-4">
             <h2 className="text-3xl font-bold text-primary">
@@ -103,9 +100,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* SECCIÓN 2 */}
       <div className="flex flex-col md:flex-row-reverse items-center gap-60 -mt-24">
-        {/* Imagen derecha */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
             src={paso2}
@@ -114,7 +109,6 @@ const CuidadosMascota = () => {
           />
         </div>
 
-        {/* Texto izquierda */}
         <div className="md:w-2/4 md:-translate-y-10">
           <div className="flex items-center mb-4">
             <h2 className="text-3xl font-bold text-primary">
@@ -138,9 +132,8 @@ const CuidadosMascota = () => {
           </ul>
         </div>
       </div>
-      {/* SECCIÓN 3 */}
+
       <div className="flex flex-col md:flex-row items-center gap-46 -mt-10">
-        {/* Imagen izquierda */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
             src={paso3}
@@ -149,7 +142,6 @@ const CuidadosMascota = () => {
           />
         </div>
 
-        {/* Texto derecha */}
         <div className="md:w-3/4 md:-translate-y-10">
           <div className="flex items-center mb-4">
             <h2 className="text-3xl font-bold text-primary">
@@ -175,9 +167,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* SECCIÓN 4 */}
       <div className="flex flex-col md:flex-row-reverse items-center gap-60 -mt-24">
-        {/* Imagen derecha */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
             src={paso4}
@@ -186,7 +176,6 @@ const CuidadosMascota = () => {
           />
         </div>
 
-        {/* Texto izquierda */}
         <div className="md:w-2/4 md:-translate-y-10">
           <div className="flex items-center mb-4">
             <h2 className="text-3xl font-bold text-primary">Salud</h2>
@@ -206,9 +195,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* SECCIÓN 5 */}
       <div className="flex flex-col md:flex-row items-center gap-46 -mt-20">
-        {/* Imagen izquierda */}
         <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
           <img
             src={paso5}
@@ -217,7 +204,6 @@ const CuidadosMascota = () => {
           />
         </div>
 
-        {/* Texto derecha */}
         <div className="md:w-3/4 md:-translate-y-10">
           <div className="flex items-center mb-4">
             <h2 className="text-3xl font-bold text-primary">Amor y respeto</h2>

@@ -6,12 +6,11 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
   const estado = solicitud.status;
   const fecha = new Date(solicitud.applicationDate).toLocaleDateString("es-ES");
 
-
   const renderBotones = () => {
     const botones = [];
     const tamañoClase =
       estado === "En proceso" ? "text-lg px-8 py-3" : "text-sm px-6 py-2";
-  
+
     if (estado === "Por revisar") {
       botones.push(
         <button
@@ -23,7 +22,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         </button>
       );
     }
-  
+
     if (estado === "Por revisar" || estado === "En proceso") {
       botones.push(
         <button
@@ -44,22 +43,23 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         </button>
       );
     }
-  
+
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-[15px] mt-6">
         {botones}
       </div>
     );
   };
-  
 
   const getEstadoClase = (estado) => {
-    return {
-      "Por revisar": "bg-gray-400",
-      "En proceso": "bg-orange-400",
-      Aprobado: "bg-green-500",
-      Rechazado: "bg-red-500",
-    }[estado] || "bg-gray-300";
+    return (
+      {
+        "Por revisar": "bg-gray-400",
+        "En proceso": "bg-orange-400",
+        Aprobado: "bg-green-500",
+        Rechazado: "bg-red-500",
+      }[estado] || "bg-gray-300"
+    );
   };
 
   return (
@@ -130,8 +130,8 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
               {solicitud.user.email}
             </p>
             <p>
-              <span className="text-gray-600">Dirección y comuna:</span>{" "}
-              Lorem ipsum dolor sit amet consectetur.
+              <span className="text-gray-600">Dirección y comuna:</span> Lorem
+              ipsum dolor sit amet consectetur.
             </p>
           </div>
         </div>

@@ -5,15 +5,12 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="bg-[#F9F9F9] text-black mt-24 font-tertiary">
-      {/* Frase superior */}
       <div className="text-center text-primary font-semibold italic text-2xl pt-6 pb-2">
         Un hogar para cada patita
       </div>
       <hr className="border-t border-1 border-primary mx-14 mb-6" />
 
-      {/* Contenido principal */}
       <div className="flex flex-col md:flex-row justify-between items-center px-8 md:px-40 pt-4 pb-10 text-sm md:text-base gap-8">
-        {/* Menú principal */}
         <div className="text-center text-xl md:text-left font-primary">
           <h3 className="font-bold mb-3 text-black">Menú principal</h3>
           <ul className="space-y-2 font-medium flex flex-col">
@@ -24,7 +21,6 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Logo */}
         <div className="flex flex-col items-center justify-center gap-8">
           <img
             src={logo}
@@ -32,7 +28,6 @@ const Footer = () => {
             className="w-46 h-46 rounded-full"
           />
           <div className="flex space-x-5 text-2xl cursor-pointer">
-            {/* TikTok */}
             <svg
               width="28"
               height="31"
@@ -48,7 +43,7 @@ const Footer = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            {/* Facebook */}
+
             <svg
               width="18"
               height="31"
@@ -65,7 +60,6 @@ const Footer = () => {
               />
             </svg>
 
-            {/* Instagram */}
             <svg
               width="31"
               height="31"
@@ -91,7 +85,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Contacto */}
         <div className="text-center md:text-left">
           <h3 className="font-bold text-primary text-xl mb-1 font-primary">
             Contáctanos
@@ -105,7 +98,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Barra inferior */}
       <div className="bg-primary text-black flex justify-center items-center px-8 py-6 rounded-t-4xl">
         <span className="text-base font-medium text-center font-tertiary">
           &copy;2025 Pataspirque.cl

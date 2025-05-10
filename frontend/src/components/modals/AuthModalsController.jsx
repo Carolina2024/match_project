@@ -30,7 +30,6 @@ const AuthModalsController = ({
     const first = stepOneData;
     const second = secondData;
 
-    // Validación del RUT
     const rutValido = /^\d{7,8}-[0-9kK]$/;
     if (!rutValido.test(first.run)) {
       setServerError(

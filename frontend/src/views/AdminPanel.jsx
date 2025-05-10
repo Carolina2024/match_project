@@ -144,8 +144,8 @@ const AdminPanel = () => {
 
   const renderView = () => {
     switch (activeView) {
-      case "Dashboard":
-        return <AdminHome />;
+     /*  case "Dashboard":
+        return <AdminHome />; */
       case "Mascotas":
         return (
           <PetList

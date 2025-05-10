@@ -44,6 +44,7 @@ const AuthModalsController = ({
       birthDate: first.birthDate,
       email: first.email,
       password: first.password,
+      phoneNumber: first.phoneNumber,
       identityDocument: first.run,
       address: first.address,
       homeType: normalizeHomeType(first.homeType),

@@ -12,11 +12,11 @@ const Sidebar = ({ onSelect, activeView }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const items = [
-    { label: "Dashboard", icon: <FaThLarge /> },
+   /*  { label: "Dashboard", icon: <FaThLarge /> }, */
     { label: "Mascotas", icon: <FaPaw /> },
     { label: "Solicitudes", icon: <FaFileAlt /> },
     { label: "Adoptantes", icon: <FaUserFriends /> },
-    { label: "Actualizar perfil", icon: <FaUserEdit /> },
+    /* { label: "Actualizar perfil", icon: <FaUserEdit /> }, */
   ];
 
   return (

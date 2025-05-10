@@ -8,11 +8,10 @@ import {
   FaPaw,
 } from "react-icons/fa";
 
-const Sidebar = ({ onSelect, activeView }) => {
-  const [isVisible, setIsVisible] = useState(true);
+const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
 
   const items = [
-   /*  { label: "Dashboard", icon: <FaThLarge /> }, */
+    /*  { label: "Dashboard", icon: <FaThLarge /> }, */
     { label: "Mascotas", icon: <FaPaw /> },
     { label: "Solicitudes", icon: <FaFileAlt /> },
     { label: "Adoptantes", icon: <FaUserFriends /> },
@@ -21,7 +20,6 @@ const Sidebar = ({ onSelect, activeView }) => {
 
   return (
     <>
-
       {/* Botón para mostrar el sidebar en pantallas pequeñas */}
       {!isVisible && (
         <button
@@ -34,7 +32,7 @@ const Sidebar = ({ onSelect, activeView }) => {
 
       {/* SIDEBAR */}
       <div
-        className={`fixed top-0 left-0 h-screen w-60 bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-lg transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-[180px] bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-lg transition-transform duration-300 ${
           isVisible ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -90,5 +88,7 @@ export default Sidebar;
 
 Sidebar.propTypes = {
   activeView: PropTypes.string.isRequired, // o `.string` si no es obligatoria
-  onSelect: PropTypes.func, // si también pasas esta función
+  onSelect: PropTypes.func,
+  isVisible: PropTypes.bool.isRequired,
+  setIsVisible: PropTypes.func.isRequired, // si también pasas esta función
 };

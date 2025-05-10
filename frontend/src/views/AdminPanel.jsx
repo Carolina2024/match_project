@@ -7,12 +7,21 @@ import Pets from "../components/Pets";
 import { getAllPets } from "../api/petService";
 import Sidebar from "../components/Sidebar";
 import { useOutletContext } from "react-router-dom";
+import AdminNavbar from "../components/AdminNavbar";
 
 const AdminPanel = () => {
   const { activeView, setActiveView } = useOutletContext();
   const [pets, setPets] = useState([]);
   const [editingPet, setEditingPet] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+
+  const viewTitles = {
+    Mascotas: "Gestiona las mascotas",
+    Solicitudes: "Solicitudes de adoptantes",
+    Adoptantes: "Registros de adoptantes",
+  };
+
+  const currentTitle = viewTitles[activeView] || "Panel de administración";
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -42,6 +51,7 @@ const AdminPanel = () => {
   const addPet = (newPet) => {
     setPets((prev) => [...prev, newPet]);
   };
+
 
   const renderView = () => {
     switch (activeView) {
@@ -86,18 +96,29 @@ const AdminPanel = () => {
     }
   };
 
+
+
   return (
     <div className="flex h-screen">
       {/* Sidebar */}
-      <Sidebar onSelect={setActiveView} activeView={activeView} />
+      <Sidebar
+        onSelect={setActiveView}
+        activeView={activeView}
+        isVisible={isSidebarVisible}
+        setIsVisible={setIsSidebarVisible}
+      />
+
+    {/* Navbar fijo */}
+    <AdminNavbar
+        sectionTitle={currentTitle}
+        isSidebarVisible={isSidebarVisible}
+      />
 
       {/* Contenido principal */}
       <div
-        className={`flex-1 overflow-y-auto transition-all duration-300 ${
-          isVisible ? "ml-64" : "ml-0"
-        }`}
+        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-30"
+        style={{ left: isSidebarVisible ? "180px" : "0px" }}
       >
-        {/* Vista seleccionada */}
         <div className="p-6">{renderView()}</div>
       </div>
     </div>

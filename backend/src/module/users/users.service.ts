@@ -16,6 +16,8 @@ import { AdoptersService } from '../adopters/adopters.service';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { Match } from '../matches/entities/match.entity';
+import { MatchStatus } from 'src/common/enums/match-status.enum';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +25,9 @@ export class UsersService {
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
     private readonly adoptersService: AdoptersService,
+
+    @InjectRepository(Match)
+    private readonly matchRepository: Repository<Match>,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<Users> {
@@ -185,5 +190,24 @@ export class UsersService {
     if (result.affected === 0) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
+  }
+  async findUserPets(userId: string) {
+    const user = await this.findOneById(userId);
+
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${userId} no encontrado`);
+    }
+
+    const matches = await this.matchRepository.find({
+      where: {
+        userId: userId,
+        status: MatchStatus.APROBADO,
+      },
+      relations: ['pet'],
+    });
+
+    const pets = matches.map((match) => match.pet);
+
+    return pets;
   }
 }

@@ -36,14 +36,16 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.userRepository.findOne({
+      where: { email, isActive: true },
+    });
     return user;
   }
 
   async findAll(query: QueryUsersDto): Promise<PaginationInterface<Users>> {
     const { page = 1, limit = 10, ...filters } = query;
 
-    const where: any = { role: 'adoptante' };
+    const where: any = { role: UserRole.ADOPTERS, isActive: true };
     if (filters.fullname) where.fullname = Like(`%${filters.fullname}%`);
     if (filters.email) where.email = Like(`%${filters.email}%`);
 
@@ -57,7 +59,7 @@ export class UsersService {
         email: true,
         fullname: true,
         id: true,
-        isActive: true,
+        isActive: false,
         role: true,
         adopter: true,
       },
@@ -80,7 +82,7 @@ export class UsersService {
         fullname: true,
         email: true,
         role: true,
-        isActive: true,
+        isActive: false,
       },
     });
     if (!user) {
@@ -99,7 +101,7 @@ export class UsersService {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
     if (!user.isActive)
-      throw new BadRequestException('El usuario ya está eliminado');
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
 
     if (user.role === UserRole.ADMIN)
       throw new BadRequestException(
@@ -115,7 +117,7 @@ export class UsersService {
 
   async updateUserById(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({
-      where: { id },
+      where: { id, isActive: true },
       relations: ['adopter'],
     });
     if (!user) {
@@ -172,7 +174,7 @@ export class UsersService {
         fullname: true,
         email: true,
         role: true,
-        isActive: true,
+        isActive: false,
       },
     });
   }

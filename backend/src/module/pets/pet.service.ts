@@ -236,32 +236,29 @@ export class PetService {
   async findOne(id: string): Promise<Pet> {
     const pet = await this.petRepository.findOne({
       where: { id, isActive: true },
-      // select: {
-      //   id: true,
-      //   name: true,
-      //   size: true,
-      //   birthDate: true,
-      //   sex: true,
-      //   age: true,
-      //   species: true,
-      //   energy: true,
-      //   breed: true,
-      //   kg: true,
-      //   isVaccinated: true,
-      //   isSterilized: true,
-      //   isDewormed: true,
-      //   hasMicrochip: true,
-      //   story: true,
-      //   traits: true,
-      //   admissionDate: true,
-      //   photoUrls: true,
-      //   status: true,
-      // },
+      select: {
+        id: true,
+        name: true,
+        size: true,
+        sex: true,
+        age: true,
+        species: true,
+        energy: true,
+        breed: true,
+        kg: true,
+        isVaccinated: true,
+        isSterilized: true,
+        isDewormed: true,
+        hasMicrochip: true,
+        story: true,
+        traits: true,
+        admissionDate: true,
+        photoUrls: true,
+        status: true,
+      },
     });
     if (!pet) {
-      throw new NotFoundException(
-        `Mascota con ID ${id} no encontrada o no está activa`,
-      );
+      throw new NotFoundException(`Mascota con ID ${id} no encontrada`);
     }
     return pet;
   }
@@ -271,7 +268,6 @@ export class PetService {
     updatePetDto: UpdatePetDto,
     files: Express.Multer.File[],
   ): Promise<Pet> {
-
     if (files) {
       if (files.length > 3) {
         throw new BadRequestException('No se pueden subir más de 3 imágenes');
@@ -312,10 +308,13 @@ export class PetService {
   }
 
   async remove(id: string): Promise<{ message: string }> {
-    const result = await this.petRepository.update(id, { isActive: false });
-    if (result.affected === 0) {
+    const pet = await this.petRepository.findOne({
+      where: { id, isActive: true },
+    });
+    if (!pet) {
       throw new NotFoundException(`Mascota con ID ${id} no encontrada`);
     }
+    await this.petRepository.update(id, { isActive: false });
     return { message: `Mascota con ID ${id} eliminada exitosamente` };
   }
 
@@ -336,7 +335,7 @@ export class PetService {
 
     // Primero obtenemos la información del adoptante
     const user = await this.userRepository.findOne({
-      where: { id: userId },
+      where: { id: userId, isActive: true },
       relations: ['adopter'],
     });
 

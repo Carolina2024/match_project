@@ -67,6 +67,7 @@ export class UsersService {
         isActive: true,
         role: true,
         adopter: true,
+        createdAt: true,
       },
     });
 
@@ -88,6 +89,7 @@ export class UsersService {
         email: true,
         role: true,
         isActive: false,
+        createdAt: true,
       },
     });
     if (!user) {

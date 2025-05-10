@@ -16,6 +16,8 @@ import { AdoptersService } from '../adopters/adopters.service';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { Match } from '../matches/entities/match.entity';
+import { MatchStatus } from 'src/common/enums/match-status.enum';
 
 @Injectable()
 export class UsersService {
@@ -23,6 +25,9 @@ export class UsersService {
     @InjectRepository(Users)
     private readonly userRepository: Repository<Users>,
     private readonly adoptersService: AdoptersService,
+
+    @InjectRepository(Match)
+    private readonly matchRepository: Repository<Match>,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<Users> {
@@ -36,14 +41,16 @@ export class UsersService {
   }
 
   async findByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.userRepository.findOne({
+      where: { email, isActive: true },
+    });
     return user;
   }
 
   async findAll(query: QueryUsersDto): Promise<PaginationInterface<Users>> {
     const { page = 1, limit = 10, ...filters } = query;
 
-    const where: any = { role: 'adoptante' };
+    const where: any = { role: UserRole.ADOPTERS, isActive: true };
     if (filters.fullname) where.fullname = Like(`%${filters.fullname}%`);
     if (filters.email) where.email = Like(`%${filters.email}%`);
 
@@ -57,7 +64,7 @@ export class UsersService {
         email: true,
         fullname: true,
         id: true,
-        isActive: true,
+        isActive: false,
         role: true,
         adopter: true,
       },
@@ -80,7 +87,7 @@ export class UsersService {
         fullname: true,
         email: true,
         role: true,
-        isActive: true,
+        isActive: false,
       },
     });
     if (!user) {
@@ -99,7 +106,7 @@ export class UsersService {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
     if (!user.isActive)
-      throw new BadRequestException('El usuario ya está eliminado');
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
 
     if (user.role === UserRole.ADMIN)
       throw new BadRequestException(
@@ -115,7 +122,7 @@ export class UsersService {
 
   async updateUserById(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({
-      where: { id },
+      where: { id, isActive: true },
       relations: ['adopter'],
     });
     if (!user) {
@@ -172,7 +179,7 @@ export class UsersService {
         fullname: true,
         email: true,
         role: true,
-        isActive: true,
+        isActive: false,
       },
     });
   }
@@ -183,5 +190,24 @@ export class UsersService {
     if (result.affected === 0) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
+  }
+  async findUserPets(userId: string) {
+    const user = await this.findOneById(userId);
+
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${userId} no encontrado`);
+    }
+
+    const matches = await this.matchRepository.find({
+      where: {
+        userId: userId,
+        status: MatchStatus.APROBADO,
+      },
+      relations: ['pet'],
+    });
+
+    const pets = matches.map((match) => match.pet);
+
+    return pets;
   }
 }

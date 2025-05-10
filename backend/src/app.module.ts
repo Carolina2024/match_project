@@ -7,6 +7,7 @@ import { UsersModule } from './module/users/users.module';
 import { AdoptersModule } from './module/adopters/adopters.module';
 import { PetModule } from './module/pets/pet.module';
 import { FilesModule } from './module/files/files.module';
+import { MatchesModule } from './module/matches/matches.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { FilesModule } from './module/files/files.module';
     UsersModule,
     AdoptersModule,
     PetModule,
-    FilesModule
+    FilesModule,
+    MatchesModule,
   ],
 })
 export class AppModule {}

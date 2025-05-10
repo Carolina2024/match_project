@@ -15,8 +15,8 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     birthDate: "",
     email: "",
     password: "",
+    phoneNumber: "",
     run: "",
-    phoneNumber:"",
     address: "",
     allowsPets: "",
     hasPets: "",
@@ -229,7 +229,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 </label>
                 <input
                   name="phoneNumber"
-                  type="number"
+                  type="text"
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"

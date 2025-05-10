@@ -3,8 +3,8 @@ import { useState } from "react";
 import {
   FaFileAlt,
   FaUserFriends,
-  FaUserEdit,
-  FaThLarge,
+  // FaUserEdit,
+  // FaThLarge,
   FaPaw,
 } from "react-icons/fa";
 

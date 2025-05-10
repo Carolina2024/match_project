@@ -1,6 +1,7 @@
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { Adopters } from 'src/module/adopters/entities/adopters.entity';
-import { Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Match } from 'src/module/matchs/entities/match.entity';
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class Users {
@@ -28,6 +29,6 @@ export class Users {
   @OneToOne(() => Adopters , adopter => adopter.user)
   adopter?: Adopters
 
-  // @OneToOne(() => Admins , admin => admin.user)
-  // admin?: Admins
+  @OneToMany(() => Match, match => match.user)
+  matches: Match[];
 }

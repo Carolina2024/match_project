@@ -69,7 +69,7 @@ const AdminNavbar = ({
 
   return (
     <div
-      className={`bg-[#F7F7F7] h-[90px] fixed top-0 right-0 z-30 px-2 flex justify-between items-center border-b border-gray-200 transition-all duration-300 ${
+      className={`bg-[#F7F7F7] h-[70px] fixed top-0 right-0 z-30 mt-2 px-2 flex justify-between items-center border-b border-gray-200 transition-all duration-300 ${
         isSidebarVisible ? "left-[180px]" : "left-50"
       }`}
     >

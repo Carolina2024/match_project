@@ -96,13 +96,13 @@ const Navbar = () => {
               <div className="absolute top-full left-0 mt-2 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
                   to="/#seguimiento"
-                  className="px-4 py-2 text-sm hover:text-primary transition"
+                  className="px-4 py-2 text-sm font-tertiary font-normal hover:text-primary transition"
                 >
                   Seguimiento de tu match
                 </Link>
                 <Link
                   to="/#historias"
-                  className="px-4 py-2 text-sm hover:text-primary transition"
+                  className="px-4 py-2 text-sm font-tertiary font-normal hover:text-primary transition"
                 >
                   Historias de adopción
                 </Link>
@@ -130,19 +130,19 @@ const Navbar = () => {
             <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
               <Link
                 to="/Nosotros#historia"
-                className="px-4 py-2 text-sm hover:text-primary transition"
+                className="px-4 py-2 text-sm font-tertiary font-normal hover:text-primary transition"
               >
                 Historia del refugio
               </Link>
               <Link
                 to="/Nosotros#proposito"
-                className="px-4 py-2 text-sm hover:text-primary transition"
+                className="px-4 py-2 text-sm font-tertiary font-normal hover:text-primary transition"
               >
                 Nuestro propósito
               </Link>
               <Link
                 to="/Nosotros#colaborar"
-                className="px-4 py-2 text-sm hover:text-primary transition"
+                className="px-4 py-2 text-sm font-tertiary font-normal hover:text-primary transition"
               >
                 Cómo colaborar
               </Link>
@@ -169,22 +169,22 @@ const Navbar = () => {
             onMouseEnter={handleMouseEnterUser}
             onMouseLeave={handleMouseLeaveUser}
           >
-            <button className="flex items-center border border-primary px-4 py-2 rounded-full hover:bg-orange-50 transition">
+            <button className="flex items-center font-bold border border-primary px-4 py-2 rounded-full hover:bg-orange-50 transition">
               <User size={20} className="mr-2 stroke-primary" />
               <span>{user.fullname}</span>
-              <ChevronDown size={16} className="ml-2 stroke-primary" />
+              <ChevronDown size={16} className="ml-2 stroke-[#767575] cursor-pointer" />
             </button>
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col z-50">
+              <div className="absolute right-0 mt-2 w-48 text-center bg-white rounded-lg shadow-lg flex flex-col z-50">
                 <Link
                   to="/profile"
-                  className="px-4 py-2 text-sm hover:bg-gray-100 transition"
+                  className="px-4 py-2 text-sm font-tertiary font-normal hover:text-primary transition cursor-pointer"
                 >
                   Actualizar información
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 transition"
+                  className="w-full font-tertiary font-normal px-4 py-2 text-sm hover:text-primary transition cursor-pointer"
                 >
                   Cerrar sesión
                 </button>
@@ -194,7 +194,7 @@ const Navbar = () => {
         ) : (
           <button
             onClick={() => setLoginOpen(true)}
-            className="ml-4 border border-primary px-4 py-2 rounded-full font-bold hover:bg-orange-100 transition"
+            className="ml-4 border border-primary cursor-pointer px-4 py-2 rounded-full font-bold hover:bg-orange-100 transition"
           >
             Iniciar sesión
           </button>

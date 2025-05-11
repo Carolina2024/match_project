@@ -15,6 +15,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     birthDate: "",
     email: "",
     password: "",
+    phoneNumber: "",
     run: "",
     address: "",
     allowsPets: "",
@@ -37,6 +38,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       newErrors.email = "Correo inválido";
     if (!formData.password) newErrors.password = "Contraseña requerida";
+    if (!formData.phoneNumber) newErrors.phoneNumber = "Telefono requerido";
     if (!formData.run) newErrors.run = "Documento requerido";
     if (!selected) newErrors.homeType = "Seleccione una opción";
     if (!formData.allowsPets) newErrors.allowsPets = "Seleccione una opción";
@@ -55,7 +57,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!validate()) return;
-    // El formData y el homeType seleccionado
+
     onNext({ ...formData, homeType: selected });
   };
 
@@ -222,6 +224,22 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
 
               <div>
+                <label htmlFor="phoneNumber" className="block font-medium mb-2">
+                  Teléfono*
+                </label>
+                <input
+                  name="phoneNumber"
+                  type="text"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
+                />
+                {errors.phoneNumber && (
+                  <p className="text-red-500">{errors.phoneNumber}</p>
+                )}
+              </div>
+
+              <div>
                 <label htmlFor="run" className="block font-medium mb-2">
                   Documento de identidad*
                 </label>
@@ -236,7 +254,10 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
 
               <div>
-                <label htmlFor="address" className="block font-medium mb-2">
+                <label
+                  htmlFor="address"
+                  className="block font-medium mt-8 mb-2"
+                >
                   Dirección y comuna en la que vive
                 </label>
                 <input

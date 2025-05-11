@@ -3,6 +3,7 @@ import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
 import { fetchUsersget } from "../api/adopterApi";
 import UserModalDelete from "./modals/UserModalDelete";
 import { deleteUser } from "../api/deleteUser";
+import AdopterModalDetail from "./modals/AdopterModalDetail";
 
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
@@ -14,8 +15,11 @@ const UserProfiles = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUserDetail, setSelectedUserDetail] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
   const [deletedUserName, setDeletedUserName] = useState("");
+
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -30,7 +34,7 @@ const UserProfiles = () => {
     };
 
     fetchUsers();
-  }, [currentPage]); // Actualiza cuando cambie la página
+  }, [currentPage]);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -38,7 +42,6 @@ const UserProfiles = () => {
     }
   };
 
-  // Filter users by name/email and status
   const filteredUsers = users.filter((user) => {
     const matchesSearch = `${user.fullname} ${user.email}`
       .toLowerCase()
@@ -49,7 +52,6 @@ const UserProfiles = () => {
     return matchesSearch && matchesEstado;
   });
 
-  //PARA DELETE USER
   const handleOpenModal = (user) => {
     setSelectedUser(user);
     setModalOpen(true);
@@ -71,8 +73,8 @@ const UserProfiles = () => {
             : u
         )
       );
-      setDeletedUserName(selectedUser.fullname); // Actualiza el nombre del usuario eliminado
-      setShowMessage(true); // ✅ Mostrar el mensaje
+      setDeletedUserName(selectedUser.fullname);
+      setShowMessage(true);
     } catch (error) {
       console.error("Error al eliminar usuario:", error.message);
     } finally {
@@ -80,10 +82,19 @@ const UserProfiles = () => {
     }
   };
 
+  const handleOpenDetail = (user) => {
+    setSelectedUserDetail(user);
+    setIsDetailOpen(true);
+  };
+
+  const handleCloseDetail = () => {
+    setIsDetailOpen(false);
+    setSelectedUserDetail(null);
+  };
+
   return (
-    <div className="p-8 bg-white border border-gray-400 rounded-lg">
-      {/* Buscador */}
-      <div className="flex items-center gap-2 mb-6">
+    <div className="p-4 md:p-8 bg-white border border-gray-400 rounded-lg overflow-x-auto">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
         <div className="relative w-full max-w-md">
           <input
             type="text"
@@ -94,93 +105,92 @@ const UserProfiles = () => {
           />
           <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
+
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <span className="font-raleway text-[16px]">Filtrar por:</span>
+          <select
+            value={estadoFiltro}
+            onChange={(e) => setEstadoFiltro(e.target.value)}
+            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none"
+          >
+            <option value="Todos">Estado</option>
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+        </div>
       </div>
 
-      {/* Filtro de Estado */}
-      <div className="flex items-center space-x-3 mb-4">
-        <span className="font-raleway text-[16px]">Filtrar por:</span>
-        <select
-          value={estadoFiltro}
-          onChange={(e) => setEstadoFiltro(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-3 focus:outline-none"
-        >
-          <option value="Todos">Estado</option>
-          <option value="Activo">Activo</option>
-          <option value="Inactivo">Inactivo</option>
-        </select>
-      </div>
-
-      {/* Tabla de solicitudes */}
-      <table className="w-full border-collapse">
-        <thead>
-          <tr className="bg-white text-black border-b border-[#76757599]">
-            <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates'] w-[68px]">
-              Nombre
-            </th>
-            <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
-              Correo
-            </th>
-            <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
-              Documento
-            </th>
-            <th className="px-4 py-2 text-center font-semibold text-[16px] font-['Montserrat Alternates']">
-              Estado
-            </th>
-            <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
-              Dirección y comuna
-            </th>
-            <th className="px-4 py-2 text-center font-semibold text-[16px] font-['Montserrat Alternates']">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers.map((user) => (
-            <tr
-              key={user.id}
-              className="border-b border-[#76757599] text-sm text-left bg-white"
-            >
-              <td className="px-4 py-3">{user.fullname}</td>
-              <td className="px-4 py-3">{user.email}</td>
-              <td className="px-4 py-3">{user.identityDocument}</td>
-              <td className="px-4 py-3 text-center">
-                <span
-                  className={`px-3 py-1 rounded-full text-white text-xs font-medium ${
-                    user.estado === "Activo" ? "bg-[#50C878]" : "bg-gray-400"
-                  }`}
-                >
-                  {user.estado}
-                </span>
-              </td>
-              <td className="px-4 py-3">{user.address}</td>
-              <td className="px-4 py-3 text-center">
-                <div className="flex justify-center items-center space-x-4">
-                  {/*  <button
-                    className="text-gray-600 hover:text-black"
-                    onClick={() => handleOpenModal(user)}
-                  >
-                    <FaEye />
-                  </button> */}
-                  <button
-                    className="text-red-500 hover:text-red-700"
-                    onClick={() => handleOpenModal(user)} // Aquí pasamos el usuario seleccionado
-                  >
-                    <FaTrash />
-                  </button>
-                </div>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse text-sm">
+          <thead>
+            <tr className="bg-white text-black border-b border-[#76757599]">
+              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates'] w-[68px]">
+                Nombre
+              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
+                Correo
+              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
+                Documento
+              </th>
+              <th className="px-4 py-2 text-center font-semibold text-[16px] font-['Montserrat Alternates']">
+                Estado
+              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
+                Dirección y comuna
+              </th>
+              <th className="px-4 py-2 text-center font-semibold text-[16px] font-['Montserrat Alternates']">
+                Acciones
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredUsers.map((user) => (
+              <tr
+                key={user.id}
+                className="border-b border-[#76757599] text-sm text-left bg-white"
+              >
+                <td className="px-4 py-3">{user.fullname}</td>
+                <td className="px-4 py-3">{user.email}</td>
+                <td className="px-4 py-3">{user.identityDocument}</td>
+                <td className="px-4 py-3 text-center">
+                  <span
+                    className={`px-3 py-1 rounded-full text-white text-xs font-medium ${
+                      user.estado === "Activo" ? "bg-[#50C878]" : "bg-gray-400"
+                    }`}
+                  >
+                    {user.estado}
+                  </span>
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap">{user.address}</td>
+                <td className="px-4 py-3 text-center">
+                  <div className="flex justify-center items-center space-x-4">
+                    <button
+                      className="text-gray-600 hover:text-black"
+                      onClick={() => handleOpenDetail(user)}
+                    >
+                      <FaEye />
+                    </button>
+                    <button
+                      className="text-red-500 hover:text-red-700"
+                      onClick={() => handleOpenModal(user)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Paginación */}
-      <div className="flex justify-between items-center mt-6">
+      <div className="flex flex-col md:flex-row justify-between items-center mt-6 gap-4">
         <div className="text-sm text-gray-500">
           Mostrando {users.length} de {users.length} usuarios
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
@@ -189,7 +199,6 @@ const UserProfiles = () => {
             Anterior
           </button>
 
-          {/* Botones de página (solo si hay más de 1) */}
           <div className="flex gap-1">
             {totalPages > 1 &&
               Array.from({ length: totalPages }, (_, index) => {
@@ -201,8 +210,8 @@ const UserProfiles = () => {
                     onClick={() => handlePageChange(page)}
                     className={`w-8 h-8 rounded border text-sm font-medium ${
                       currentPage === page
-                        ? "bg-[#595146] text-white border-[#595146]" // Activo: fondo café, texto blanco
-                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100" // Inactivo: fondo blanco, texto café
+                        ? "bg-[#595146] text-white border-[#595146]"
+                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
                     }`}
                   >
                     {page}
@@ -221,7 +230,6 @@ const UserProfiles = () => {
         </div>
       </div>
 
-      {/* ✅ MENSAJE DE ELIMINACIÓN */}
       {showMessage && (
         <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
           <span className="block font-bold">Adoptante eliminado</span>
@@ -235,12 +243,17 @@ const UserProfiles = () => {
         </div>
       )}
 
-      {/* Modal de eliminación */}
       <UserModalDelete
         isOpen={modalOpen}
         onClose={handleCloseModal}
         onConfirm={handleDeleteUser}
         user={selectedUser}
+      />
+
+      <AdopterModalDetail
+        open={isDetailOpen}
+        onClose={handleCloseDetail}
+        adopter={selectedUserDetail}
       />
     </div>
   );

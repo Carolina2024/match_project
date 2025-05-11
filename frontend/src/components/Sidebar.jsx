@@ -1,28 +1,16 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import {
-  FaFileAlt,
-  FaUserFriends,
-  FaUserEdit,
-  FaThLarge,
-  FaPaw,
-} from "react-icons/fa";
+import { FaFileAlt, FaUserFriends, FaPaw } from "react-icons/fa";
 
-const Sidebar = ({ onSelect, activeView }) => {
-  const [isVisible, setIsVisible] = useState(true);
-
+const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [
-    { label: "Dashboard", icon: <FaThLarge /> },
     { label: "Mascotas", icon: <FaPaw /> },
     { label: "Solicitudes", icon: <FaFileAlt /> },
     { label: "Adoptantes", icon: <FaUserFriends /> },
-    { label: "Actualizar perfil", icon: <FaUserEdit /> },
   ];
 
   return (
     <>
-
-      {/* Botón para mostrar el sidebar en pantallas pequeñas */}
       {!isVisible && (
         <button
           onClick={() => setIsVisible(true)}
@@ -32,13 +20,11 @@ const Sidebar = ({ onSelect, activeView }) => {
         </button>
       )}
 
-      {/* SIDEBAR */}
       <div
-        className={`fixed top-0 left-0 h-screen w-60 bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-lg transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-screen w-[180px] bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-lg transition-transform duration-300 ${
           isVisible ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Botón para ocultar el sidebar */}
         <button
           onClick={() => setIsVisible(false)}
           className="self-end mb-4 text-gray-600 hover:text-gray-900 text-xl font-bold"
@@ -46,7 +32,6 @@ const Sidebar = ({ onSelect, activeView }) => {
           {"<<"}
         </button>
 
-        {/* LOGO Y NOMBRE */}
         <div className="flex items-center gap-3 mb-6">
           <img
             src="src/assets/logo.png"
@@ -61,7 +46,6 @@ const Sidebar = ({ onSelect, activeView }) => {
           </div>
         </div>
 
-        {/* MENÚ DE NAVEGACIÓN */}
         <nav className="space-y-4">
           {items.map((item) => (
             <button
@@ -74,7 +58,6 @@ const Sidebar = ({ onSelect, activeView }) => {
                   : "text-gray-700 hover:bg-orange-100"
               }`}
             >
-              {/* Iconos con color gris */}
               <span className="text-gray-500">{item.icon}</span>
               {item.label}
             </button>
@@ -87,8 +70,9 @@ const Sidebar = ({ onSelect, activeView }) => {
 
 export default Sidebar;
 
-
 Sidebar.propTypes = {
-  activeView: PropTypes.string.isRequired, // o `.string` si no es obligatoria
-  onSelect: PropTypes.func, // si también pasas esta función
+  activeView: PropTypes.string.isRequired,
+  onSelect: PropTypes.func,
+  isVisible: PropTypes.bool.isRequired,
+  setIsVisible: PropTypes.func.isRequired,
 };

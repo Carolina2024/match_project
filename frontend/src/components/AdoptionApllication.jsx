@@ -1,42 +1,74 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSearch, FaHeart, FaRegEdit } from "react-icons/fa";
 import { BsCalendar2 } from "react-icons/bs";
+import { getAllMatches } from "../api/matchService";
+import MatchDetailModal from "./modals/MatchDetailModal";
 
 const AdoptionApllication = () => {
   const [filtro, setFiltro] = useState("Todos");
   const [busqueda, setBusqueda] = useState("");
+  const [solicitudEditando, setSolicitudEditando] = useState(null);
 
-  const solicitudes = [
-    { id: 1, adoptante: "Carlos Riquelme", mascota: "Firulais", fecha: "2025-04-15", estado: "Pendiente" },
-    { id: 2, adoptante: "María López", mascota: "Michi", fecha: "2025-04-10", estado: "Aprobado" },
-    { id: 3, adoptante: "Pedro Gómez", mascota: "Rex", fecha: "2025-03-28", estado: "Aprobado" },
-    { id: 4, adoptante: "Ana Ruiz", mascota: "Chileno", fecha: "2025-04-01", estado: "Rechazado" },
-    { id: 5, adoptante: "Lucía Torres", mascota: "Pelusa", fecha: "2025-03-20", estado: "Pendiente" },
-  ];
+  const [solicitudes, setSolicitudes] = useState([]);
 
-  const statusColors = {
-    Pendiente: "bg-gray-300 text-black",
-    Aprobado: "bg-green-200 text-green-700",
-    Rechazado: "bg-red-200 text-red-700",
+  useEffect(() => {
+    const fetchSolicitudes = async () => {
+      try {
+        const data = await getAllMatches();
+        console.log("Total de solicitudes:", data.length);
+        console.log("Solicitudes cargadas:", data);
+        setSolicitudes(data.items || data);
+      } catch (error) {
+        console.error("Error al obtener solicitudes:", error.message);
+      }
+    };
+
+    fetchSolicitudes();
+  }, []);
+  const solicitudesFiltradas = solicitudes.filter((s) => {
+    const coincideEstado = filtro === "Todos" || s.status === filtro;
+    const coincideBusqueda = s.pet?.name
+      .toLowerCase()
+      .includes(busqueda.toLowerCase());
+    return coincideEstado && coincideBusqueda;
+  });
+  const handleStatusUpdate = async (matchId, nuevoEstado) => {
+    try {
+      const res = await fetch(
+        `https://match-project.onrender.com/api/matches/${matchId}/status`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ status: nuevoEstado }),
+        }
+      );
+
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message || "Error al actualizar estado");
+      }
+
+      const updatedMatch = await res.json();
+
+      setSolicitudes((prev) =>
+        prev.map((s) => (s.id === matchId ? updatedMatch : s))
+      );
+
+      setSolicitudEditando(null);
+    } catch (error) {
+      console.error("Error actualizando estado:", error.message);
+      alert("Ocurrió un error al actualizar el estado.");
+    }
   };
-
-  /* const solicitudesFiltradas = filtro === "Todos"
-    ? solicitudes
-    : solicitudes.filter((s) => s.estado === filtro); */
-
-    const solicitudesFiltradas = solicitudes.filter((s) => {
-      const coincideEstado = filtro === "Todos" || s.estado === filtro;
-      const coincideBusqueda = s.mascota
-        .toLowerCase()
-        .includes(busqueda.toLowerCase());
-      return coincideEstado && coincideBusqueda;
-    });
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">
-      <div className="bg-white m-10 p-6 rounded-xl shadow-md border border-gray-300">
+      <div className="bg-white m-4 md:m-10 p-6 rounded-xl shadow-md border border-gray-300">
         <div className="flex flex-col gap-4 mb-8">
-          <div className="relative w-64">
+          <div className="relative w-full sm:w-64">
             <input
               type="text"
               placeholder="Buscar..."
@@ -52,10 +84,11 @@ const AdoptionApllication = () => {
             <select
               value={filtro}
               onChange={(e) => setFiltro(e.target.value)}
-              className="border border-gray-300 px-3 py-2 rounded focus:outline-none w-64"
+              className="border border-gray-300 px-3 py-2 rounded focus:outline-none w-full sm:w-64"
             >
               <option value="Todos">Estado</option>
-              <option value="Pendiente">Pendiente</option>
+              <option value="Por revisar">Por revisar</option>
+              <option value="En proceso">En proceso</option>
               <option value="Aprobado">Aprobado</option>
               <option value="Rechazado">Rechazado</option>
             </select>
@@ -66,42 +99,68 @@ const AdoptionApllication = () => {
           {solicitudesFiltradas.map((sol) => (
             <div
               key={sol.id}
-              className="w-52 h-56 bg-white border rounded-xl shadow-[9px_9px_2px_rgba(0,0,0,0.5)] p-4 flex flex-col justify-between"
+              className="w-full sm:w-52 md:w-64 lg:w-72 h-auto bg-white border rounded-xl shadow-[9px_9px_2px_rgba(0,0,0,0.5)] p-4 flex flex-col justify-between"
             >
               <div className="text-center space-y-2">
-                <h3 className="text-lg font-semibold">{sol.mascota}</h3>
+                <h3 className="text-lg font-semibold">{sol.pet.name}</h3>
+
                 <FaHeart
                   className={`mx-auto ${
-                    sol.estado === "Rechazado"
+                    sol.status === "Rechazado"
                       ? "text-gray-400"
-                      : "text-red-500"
+                      : "text-orange-500"
                   }`}
                 />
-                <p className="font-medium">{sol.adoptante}</p>
+
+                <p className="font-medium">{sol.user.fullname}</p>
+
                 <div className="flex items-center justify-center text-sm text-gray-600 gap-1">
                   <BsCalendar2 />
-                  <span>{sol.fecha}</span>
+                  <span>
+                    {new Date(sol.applicationDate).toLocaleDateString("es-ES")}
+                  </span>
                 </div>
               </div>
+
               <div className="flex justify-center items-center mt-2 px-1">
                 <span
-                  className={`text-sm px-2 py-1 rounded-full ${
-                    statusColors[sol.estado]
+                  className={`text-sm px-3 py-1 rounded-full font-medium ${
+                    sol.status === "Por revisar"
+                      ? "bg-gray-300 text-gray-600"
+                      : sol.status === "En proceso"
+                      ? "bg-orange-300 text-orange-500"
+                      : sol.status === "Aprobado"
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
                   }`}
                 >
-                  {sol.estado}
+                  {sol.status}
                 </span>
-                {sol.estado === "Pendiente" && (
-                  <FaRegEdit className="ml-2 text-gray-600 cursor-pointer hover:text-black" />
+
+                {(sol.status === "Por revisar" ||
+                  sol.status === "En proceso") && (
+                  <FaRegEdit
+                    className="ml-2 text-gray-600 cursor-pointer hover:text-black"
+                    title="Ver detalles de la solicitud"
+                    onClick={() => setSolicitudEditando(sol)}
+                  />
                 )}
               </div>
             </div>
           ))}
         </div>
+        {solicitudEditando && (
+          <MatchDetailModal
+            solicitud={solicitudEditando}
+            onClose={() => setSolicitudEditando(null)}
+            onStatusChange={(nuevoEstado) =>
+              handleStatusUpdate(solicitudEditando.id, nuevoEstado)
+            }
+          />
+        )}
       </div>
     </div>
   );
 };
 
 export default AdoptionApllication;
-

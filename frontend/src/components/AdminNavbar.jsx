@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import { FaUser } from "react-icons/fa";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 
-
 const AdminNavbar = ({
   sectionTitle = "Panel de administración",
   userRole = "Admin",
+  isSidebarVisible,
 }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -38,7 +38,7 @@ const AdminNavbar = ({
         const data = await res.json();
         console.log("Usuario:", data);
 
-        setUserName(data.fullname || data.email); // Ajusta según lo que te devuelva
+        setUserName(data.fullname || data.email);
       } catch (error) {
         console.error("Error obteniendo nombre:", error.message);
       }
@@ -67,7 +67,11 @@ const AdminNavbar = ({
   };
 
   return (
-    <div className="bg-[#F7F7F7] w-full py-3 px-6 flex justify-between items-center border-b border-gray-200">
+    <div
+      className={`bg-[#F7F7F7] h-[70px] fixed top-0 right-0 z-30 mt-2 px-2 flex justify-between items-center border-b border-gray-200 transition-all duration-300 ${
+        isSidebarVisible ? "left-[180px]" : "left-50"
+      }`}
+    >
       <h2 className="text-lg font-semibold text-gray-700">{sectionTitle}</h2>
 
       <div className="relative">
@@ -115,6 +119,7 @@ const AdminNavbar = ({
 AdminNavbar.propTypes = {
   sectionTitle: PropTypes.string,
   userRole: PropTypes.string,
+  isSidebarVisible: PropTypes.bool.isRequired,
 };
 
 export default AdminNavbar;

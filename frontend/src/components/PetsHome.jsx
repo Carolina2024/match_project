@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getCompatiblePets } from "../api/PetsUser";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
 import { Carousel } from "react-responsive-carousel";
@@ -47,7 +47,6 @@ function PetsHome() {
   return (
     <div className="mx-auto">
       {!seleccionada ? (
-        // 🐾 Mostrar todas las mascotas
         <>
           <h1 className="text-3xl font-semibold mb-4 text-center text-primary">
             Tus mascotas compatibles
@@ -83,7 +82,6 @@ function PetsHome() {
           </div>
         </>
       ) : (
-        // 🧡 Mostrar solo la mascota seleccionada
         <div className="flex flex-col -mt-15">
           <button
             onClick={() => setSeleccionada(null)}
@@ -93,9 +91,7 @@ function PetsHome() {
           </button>
           <div className="flex flex-col sm:gap-10 gap-15">
             <div className="flex flex-col lg:flex-row gap-8">
-              {/* Columna izquierda: Imagen y etiquetas */}
               <div className="left flex flex-col justify-center items-center text-center w-full lg:w-1/2">
-                {/* Carousel o imagen */}
                 {seleccionada?.photoUrls?.length > 1 ? (
                   <Carousel
                     autoPlay={true}
@@ -126,7 +122,7 @@ function PetsHome() {
                 )}
 
                 <h2 className="text-2xl font-bold mt-4">
-                  {seleccionada.nombre}
+                  {seleccionada.name}
                 </h2>
 
                 <div className="mt-2 w-full flex flex-wrap gap-2 justify-center px-4">
@@ -141,9 +137,7 @@ function PetsHome() {
                 </div>
               </div>
 
-              {/* Columna derecha: Info y botones */}
               <div className="flex flex-col gap-6 w-full lg:w-1/2 px-4">
-                {/* Info "¿Cómo soy?" */}
                 <div className="flex flex-col gap-4">
                   <h2 className="text-2xl text-primary font-bold">
                     ¿Cómo soy?
@@ -180,9 +174,7 @@ function PetsHome() {
                   </div>
                 </div>
 
-                {/* Me entregan + Me rescataron */}
                 <div className="flex flex-col md:flex-row md:items-start sm:gap-35 gap-6">
-                  {/* Me entregan */}
                   <div className="flex flex-col gap-2">
                     <h2 className="text-2xl text-primary font-bold">
                       Me entregan
@@ -215,7 +207,6 @@ function PetsHome() {
                     </ul>
                   </div>
 
-                  {/* Me rescataron */}
                   <div className="flex flex-col justify-between h-full gap-2">
                     <div>
                       <h3 className="text-primary font-semibold">

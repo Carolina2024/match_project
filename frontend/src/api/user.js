@@ -17,4 +17,3 @@ export const loginUser = async (data) => {
 
   return res.json();
 };
-

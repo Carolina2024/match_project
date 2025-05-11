@@ -178,7 +178,7 @@ const Home = () => {
           </div>
 
           {/* Segunda sección logueado */}
-          {/* === Ajuste aquí: wrapper de PetsHome === */}
+          {/* Wrapper de PetsHome */}
           <div className="w-full bg-gray-100 mt-22 flex justify-center">
             <div className="w-full md:max-w-5xl px-4">
               <PetsHome />
@@ -340,7 +340,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Historias de adopción (siempre visible) */}
+      {/* Historias de adopción */}
       <section className="w-full px-4 flex flex-col justify-center items-center -mt-8">
         <div className="py-10 text-center w-full">
           <h2 className="text-2xl md:text-4xl font-bold text-primary px-4 md:px-20 text-center">

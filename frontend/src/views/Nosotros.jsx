@@ -24,7 +24,7 @@ const Nosotros = () => {
   }, [hash]);
 
   return (
-    <main className="w-full bg-[#F9F9F9] flex flex-col justify-center items-center rounded-t-[50px] pb-20 ">
+    <main className=" mx-auto max-w-6xl bg-[#F9F9F9] flex flex-col justify-center items-center rounded-t-[50px] pb-20 -mt-8">
       {/* Imagen encabezado */}
       <div className="w-full ">
         <img
@@ -42,7 +42,7 @@ const Nosotros = () => {
         <h2 className="text-3xl pl-14 font-bold text-primary mb-4">
           Nuestra historia
         </h2>
-        <p className="font-medium px-14  text-[#000000]">
+        <p className="font-medium px-14  text-[#000000] md:text-lg">
           Patas Pirque nació en la zona rural de Pirque, Chile, como una
           respuesta al abandono de perros callejeros y la falta de educación
           sobre tenencia responsable. <br /> <br />
@@ -70,22 +70,20 @@ const Nosotros = () => {
         </div>
       </div>
 
-      {/* Contenedor para el texto principal (si es necesario un contenedor separado) */}
+      {/* Contenedor para el texto principal */}
       <div className=" w-full max-w-5xl px-1 py-6">
-        <p className="font-medium text-xl text-[#000000] px-20 py-10 text-justify">
-          “Siempre tuve una conexión especial con los animales. <br />
-          Desde niña rescataba animales, guiada solo por mi instinto y cariño.{" "}
-          <br />
-          Al llegar a Pirque, me encontre con una realidad dura: cientos de
-          animales abandonados y poca ayuda. Fue entonces cuando decidí
-          formalizar lo que siempre había hecho por amor, y nació Patas Pirque.
+        <p className="font-medium md:text-lg text-[#000000] px-20 py-10 text-justify">
+          “Siempre tuve una conexión especial con los animales. Desde niña
+          rescataba animales, guiada solo por mi instinto y cariño. Al llegar a
+          Pirque, me encontre con una realidad dura: cientos de animales
+          abandonados y poca ayuda. Fue entonces cuando decidí formalizar lo que
+          siempre había hecho por amor, y nació Patas Pirque.
           <br />
           <br />
           Primero como un proyecto personal, y con el tiempo, como una fundación
           legalmente constituida, Patas Pirque se convirtió en mi forma de
-          transformar la pena en acción.
-          <br /> Hoy lidero esta causa con fuerza y corazón, y necesito de todos
-          para continuar con esta causa.
+          transformar la pena en acción. Hoy lidero esta causa con fuerza y
+          corazón, y necesito de todos para continuar con esta causa.
           <br />
           <br />
           Todo ayuda a seguir rescatando, sanando y encontrando hogares para
@@ -137,7 +135,7 @@ const Nosotros = () => {
         />
       </div>
       {/* Propósito */}
-      <div className="w-full max-w-6xl px-6 py-8">
+      <div className="w-full max-w-5xl px-6 py-8">
         <div
           id="proposito"
           className="bg-[#F9F9F9] rounded-[30px] md:rounded-[50px] px-6 md:px-24 py-6 border border-primary"
@@ -145,7 +143,7 @@ const Nosotros = () => {
           <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4">
             Nuestro propósito
           </h3>
-          <p className="text-[#000000] font-medium text-xl mb-4">
+          <p className="text-[#000000] font-medium md:text-lg mb-4">
             Patas Pirque ofrece un enfoque único de rescate: no solo rehabilita
             perros, sino que también educa a la comunidad sobre la importancia
             de la tenencia responsable. <br />
@@ -157,7 +155,7 @@ const Nosotros = () => {
       </div>
 
       {/* Misión y Visión */}
-      <div className=" w-full max-w-6xl px-6 py-8">
+      <div className=" w-full max-w-5xl px-4 py-8">
         {" "}
         {/* Contenedor padre */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-[30px] md:rounded-[50px] px-6 md:px-24 py-6">
@@ -180,7 +178,7 @@ const Nosotros = () => {
               </svg>
               <h4 className="text-primary text-3xl font-bold ">Misión</h4>
             </div>
-            <p className="text-xl text-[#000000] font-medium mt-2">
+            <p className="md:text-lg text-[#000000] font-medium mt-2">
               {" "}
               Rescatar, rehabilitar y <br /> reubicar perros en <br /> situación
               de abandono,
@@ -208,7 +206,7 @@ const Nosotros = () => {
               </svg>
               <h4 className="text-primary text-3xl font-bold">Visión</h4>
             </div>
-            <ul className="text-xl font-medium text-[#000000] mt-2 list-disc list-inside">
+            <ul className="md:text-lg font-medium text-[#000000] mt-2 list-disc list-inside leading-[2.1]">
               <li>Amor y respeto por los seres vivos </li>
               <li>Educación como motor de cambio </li>
               <li> Solidaridad y compromiso social </li>
@@ -276,9 +274,15 @@ const Nosotros = () => {
               <p className="text-base text-[#000000] font-normal mb-2">
                 USD 5.26 mensual
               </p>
-              <button className="bg-primary text-white mt-2 rounded-full px-8 py-1 text-xl font-bold ">
-                Únete
-              </button>
+              <a
+                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-primary cursor-pointer text-white mt-2 cursor-pointer rounded-full px-8 py-1 text-xl font-bold hover:scale-105 transition">
+                  Únete
+                </button>
+              </a>
             </div>
 
             {/* Huella Fuerte */}
@@ -296,9 +300,15 @@ const Nosotros = () => {
               <p className="text-base text-[#000000] font-normal mb-2">
                 USD 10.57 mensual
               </p>
-              <button className="bg-primary text-white rounded-full mt-2 px-8 py-1 text-xl font-bold ">
-                Únete
-              </button>
+              <a
+                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-primary cursor-pointer text-white rounded-full mt-2 px-8 py-1 text-xl font-bold hover:scale-105 transition">
+                  Únete
+                </button>
+              </a>
             </div>
 
             {/* Corazón Quiltro */}
@@ -316,9 +326,15 @@ const Nosotros = () => {
               <p className="text-base text-[#000000] font-normal mb-2">
                 USD 21.14 mensual
               </p>
-              <button className="bg-primary text-white rounded-full mt-2 px-8 py-1 text-xl font-bold ">
-                Únete
-              </button>
+              <a
+                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-primary cursor-pointer text-white rounded-full mt-2 px-8 py-1 text-xl font-bold hover:scale-105 transition">
+                  Únete
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -353,9 +369,15 @@ const Nosotros = () => {
               <h4 className="font-semibold text-primary mb-1 text-xl text-center">
                 Gatos Ferales en <br /> Rescate
               </h4>
-              <button className="bg-primary text-white mt-3 rounded-full px-8 py-1 font-bold text-xl">
-                Apoyar
-              </button>
+              <a
+                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-primary cursor-pointer text-white mt-3 rounded-full px-8 py-1 font-bold text-xl hover:scale-105 transition">
+                  Apoyar
+                </button>
+              </a>
             </div>
 
             {/* Donaciones */}
@@ -398,9 +420,15 @@ const Nosotros = () => {
               <h4 className="font-semibold text-primary mb-1 text-xl text-center">
                 Para comida, <br /> medicamentos, etc.
               </h4>
-              <button className="bg-primary text-white mt-3 rounded-full px-8 py-1 font-bold text-xl">
-                Apoyar
-              </button>
+              <a
+                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-primary cursor-pointer text-white mt-3 rounded-full px-8 py-1 font-bold text-xl hover:scale-105 transition">
+                  Apoyar
+                </button>
+              </a>
             </div>
           </div>
         </div>

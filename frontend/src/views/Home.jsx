@@ -14,8 +14,14 @@ import image from "../assets/image.png";
 import imageb from "../assets/imageb.png";
 import { HandHeart } from "lucide-react";
 import PetsHome from "../components/PetsHome";
+import AuthModalsController from "../components/modals/AuthModalsController";
 
 const Home = () => {
+  // Modales
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isRegisterOpen, setRegisterOpen] = useState(false);
+  const [isRegisterbOpen, setRegisterbOpen] = useState(false);
+
   // Slider state
   const [activeSlide, setActiveSlide] = useState(0);
   const sliders = [slider1, slider2, slider3];
@@ -55,10 +61,10 @@ const Home = () => {
 
   return (
     <section className="w-full flex flex-col justify-center items-center -mt-20">
-      {/* Primera y Segunda sección: varían según autenticación */}
+      {/* Secciones sin login */}
       {!loggedIn ? (
         <>
-          {/* Primera sección (invitados) */}
+          {/* Primera sección sin login */}
           <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex items-center md:ml-10">
             <svg
               width="1030"
@@ -91,14 +97,16 @@ const Home = () => {
                   <br />
                   <span className="text-primary">mascota</span>
                 </h2>
-                <button className="bg-white text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition">
+                <button 
+                onClick={() => setRegisterOpen(true)}
+                className="bg-white cursor-pointer text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition">
                   Regístrate para Adoptar
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Segunda sección (invitados) */}
+          {/* Segunda sección sin login */}
           <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary text-center md:mt-16 mt-0">
             Conoce a quienes esperan un hogar
           </h2>
@@ -127,7 +135,7 @@ const Home = () => {
         </>
       ) : (
         <>
-          {/* Primera sección (logueados) */}
+          {/* Primera sección logueados */}
           <div className="relative w-full md:max-w-5xl max-w-lg mt-12 overflow-hidden flex items-center md:ml-10">
             <svg
               width="918"
@@ -149,7 +157,7 @@ const Home = () => {
               <img
                 src={imageb}
                 alt="Perro mirando"
-                className="w-[100px] md:w-[400px] object-cover"
+                className="w-[250px] md:w-[400px] object-cover"
               />
             </div>
 
@@ -167,7 +175,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* — Botón flotante global — */}
+          {/* Botón flotante */}
           <div className="fixed top-38 right-12 z-50">
             <button
               onClick=""
@@ -177,14 +185,17 @@ const Home = () => {
             </button>
           </div>
 
-          {/* Segunda sección (logueados) */}
-          <div className="w-full h-64 bg-gray-100 flex items-center justify-center mt-10">
-            <PetsHome/>
+          {/* Segunda sección logueado */}
+          {/* === Ajuste aquí: wrapper de PetsHome === */}
+          <div className="w-full bg-gray-100 mt-22 flex justify-center">
+            <div className="w-full md:max-w-5xl px-4">
+              <PetsHome />
+            </div>
           </div>
         </>
       )}
 
-      {/* Tercera sección (siempre visible) */}
+      {/* Tercera sección global con o sin logueo */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
           Encuentra a tu mascota ideal
@@ -365,6 +376,15 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* Modales */}
+      <AuthModalsController
+        isLoginOpen={isLoginOpen}
+        setLoginOpen={setLoginOpen}
+        isRegisterOpen={isRegisterOpen}
+        setRegisterOpen={setRegisterOpen}
+        isRegisterbOpen={isRegisterbOpen}
+        setRegisterbOpen={setRegisterbOpen}
+      />
     </section>
   );
 };

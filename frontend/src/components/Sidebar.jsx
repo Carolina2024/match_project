@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { FaFileAlt, FaUserFriends, FaPaw } from "react-icons/fa";
+import logo from "../assets/logo.png";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [
@@ -33,8 +34,9 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
 
         <div className="flex items-center gap-3 mb-6">
           <img
-            src="src/assets/logo.png"
-            alt="Logo"
+           /*  src="src/assets/logo.png" */
+              src={logo}
+            alt="Logo Patas Pirque"
             className="w-[60px] h-[60px] rounded-full"
           />
           <div className="flex items-center gap-2 text-gray-700">

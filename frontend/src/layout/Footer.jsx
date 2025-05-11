@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#F9F9F9] text-black mt-24 font-tertiary">
+    <footer className="bg-[#F9F9F9] text-black font-tertiary">
       <div className="text-center text-primary font-semibold italic text-2xl pt-6 pb-2">
         Un hogar para cada patita
       </div>

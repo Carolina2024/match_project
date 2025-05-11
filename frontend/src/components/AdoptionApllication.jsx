@@ -3,11 +3,14 @@ import { FaSearch, FaHeart, FaRegEdit } from "react-icons/fa";
 import { BsCalendar2 } from "react-icons/bs";
 import { getAllMatches } from "../api/matchService";
 import MatchDetailModal from "./modals/MatchDetailModal";
+import RequestModal from "../components/modals/RequestModal"
 
 const AdoptionApllication = () => {
   const [filtro, setFiltro] = useState("Todos");
   const [busqueda, setBusqueda] = useState("");
   const [solicitudEditando, setSolicitudEditando] = useState(null);
+  const [readingRequest, setReadingRequest] = useState(null);
+
 
   const [solicitudes, setSolicitudes] = useState([]);
 
@@ -95,12 +98,20 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
           {solicitudesFiltradas.map((sol) => (
             <div
-              key={sol.id}
-              className="w-full sm:w-52 md:w-64 lg:w-72 h-auto bg-white border rounded-xl shadow-[9px_9px_2px_rgba(0,0,0,0.5)] p-4 flex flex-col justify-between"
-            >
+  key={sol.id}
+  onClick={() => {
+    if (sol.status === "En proceso" || sol.status === "Rechazado") {
+      setReadingRequest(sol);
+    }
+  }}
+  className="cursor-pointer w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] xl:max-w-[250px] 2xl:max-w-[280px] h-auto bg-white border rounded-xl shadow-[9px_9px_2px_rgba(0,0,0,0.5)] py-4 px-3 flex flex-col justify-between"
+
+
+>
+
               <div className="text-center space-y-2">
                 <h3 className="text-lg font-semibold">{sol.pet.name}</h3>
 
@@ -108,7 +119,7 @@ const AdoptionApllication = () => {
                   className={`mx-auto ${
                     sol.status === "Rechazado"
                       ? "text-gray-400"
-                      : "text-orange-500"
+                      : "text-orange-500" 
                   }`}
                 />
 
@@ -128,10 +139,10 @@ const AdoptionApllication = () => {
                     sol.status === "Por revisar"
                       ? "bg-gray-300 text-gray-600"
                       : sol.status === "En proceso"
-                      ? "bg-orange-300 text-orange-500"
+                      ? "bg-orange-200 text-orange-500"
                       : sol.status === "Aprobado"
-                      ? "bg-green-500 text-white"
-                      : "bg-red-500 text-white"
+                      ? "bg-green-300 text-green-600"
+                      : "bg-red-300 text-red-600"
                   }`}
                 >
                   {sol.status}
@@ -142,7 +153,11 @@ const AdoptionApllication = () => {
                   <FaRegEdit
                     className="ml-2 text-gray-600 cursor-pointer hover:text-black"
                     title="Ver detalles de la solicitud"
-                    onClick={() => setSolicitudEditando(sol)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSolicitudEditando(sol)}
+                    }
+                    
                   />
                 )}
               </div>
@@ -157,7 +172,15 @@ const AdoptionApllication = () => {
               handleStatusUpdate(solicitudEditando.id, nuevoEstado)
             }
           />
+          
         )}
+        {readingRequest && (
+  <RequestModal
+    request={readingRequest}
+    onClose={() => setReadingRequest(null)}
+  />
+)}
+
       </div>
     </div>
   );

@@ -1,6 +1,25 @@
 import PropTypes from "prop-types";
+import { getUserById } from "../../api/userService";
+import { useEffect, useState } from "react";
+
 
 const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
+  const [adopter, setAdopter] = useState(null);
+
+useEffect(() => {
+  const fetchAdopter = async () => {
+    try {
+      const data = await getUserById(solicitud.userId);
+      setAdopter(data.adopter || null);
+    } catch (err) {
+      console.error("Error al obtener adopter:", err.message);
+    }
+  };
+
+  if (solicitud?.userId) {
+    fetchAdopter();
+  }
+}, [solicitud?.userId]);
   if (!solicitud) return null;
 
   const estado = solicitud.status;
@@ -8,27 +27,25 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
 
   const renderBotones = () => {
     const botones = [];
-    const tamañoClase =
-      estado === "En proceso" ? "text-lg px-8 py-3" : "text-sm px-6 py-2";
-
+  
     if (estado === "Por revisar") {
       botones.push(
         <button
           key="En proceso"
           onClick={() => onStatusChange("En proceso")}
-          className={`bg-orange-500 text-white rounded font-semibold shadow-md hover:bg-orange-600 ${tamañoClase}`}
+          className="w-full py-3 text-base font-semibold rounded shadow-md bg-orange-500 text-white hover:bg-orange-600"
         >
           En proceso
         </button>
       );
     }
-
+  
     if (estado === "Por revisar" || estado === "En proceso") {
       botones.push(
         <button
           key="Aprobado"
           onClick={() => onStatusChange("Aprobado")}
-          className={`bg-green-600 text-white rounded font-semibold shadow-md hover:bg-green-700 ${tamañoClase}`}
+          className="w-full py-3 text-base font-semibold rounded shadow-md bg-green-600 text-white hover:bg-green-700"
         >
           Aprobar
         </button>
@@ -37,26 +54,34 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         <button
           key="Rechazado"
           onClick={() => onStatusChange("Rechazado")}
-          className={`bg-red-600 text-white rounded font-semibold shadow-md hover:bg-red-700 ${tamañoClase}`}
+          className="w-full py-3 text-base font-semibold rounded shadow-md bg-red-600 text-white hover:bg-red-700"
         >
           Rechazar
         </button>
       );
     }
-
+  
+    const colClass =
+      botones.length === 3
+        ? "sm:grid-cols-3"
+        : botones.length === 2
+        ? "sm:grid-cols-2"
+        : "sm:grid-cols-1";
+  
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[15px] mt-6">
+      <div className={`grid grid-cols-1 ${colClass} gap-4 mt-6`}>
         {botones}
       </div>
     );
   };
+  
 
   const getEstadoClase = (estado) => {
     return (
       {
         "Por revisar": "bg-gray-400",
-        "En proceso": "bg-orange-400",
-        Aprobado: "bg-green-500",
+        "En proceso": "bg-orange-300",
+        Aprobado: "bg-green-400",
         Rechazado: "bg-red-500",
       }[estado] || "bg-gray-300"
     );
@@ -79,61 +104,68 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
           Información de la solicitud de adopción
         </p>
 
-        <div className="flex justify-between items-center mb-6 text-sm">
-          <div>
-            <p className="text-gray-600 font-semibold">Fecha de la solicitud</p>
-            <p>{fecha}</p>
-          </div>
-          <div>
-            <p className="text-gray-600 font-semibold">Estado</p>
-            <span
-              className={`text-white px-3 py-1 rounded-full font-semibold text-sm ${getEstadoClase(
-                estado
-              )}`}
-            >
-              {estado}
-            </span>
-          </div>
-        </div>
+        <div className="grid grid-cols-2 gap-4 text-sm mb-6">
+  <div className="flex flex-col">
+    <span className="text-gray-600 font-semibold">Fecha de la solicitud:</span>
+    <span>{fecha}</span>
+  </div>
+  <div className="flex flex-col">
+    <span className="text-gray-600 font-semibold">Estado:</span>
+    <span
+      className={`text-white px-3 py-1 rounded-full font-semibold text-sm w-fit ${getEstadoClase(
+        estado
+      )}`}
+    >
+      {estado}
+    </span>
+  </div>
+</div>
+
 
         <div className="bg-orange-50 p-4 rounded mb-4">
-          <p className="text-orange-600 font-bold mb-2">
+          <p className="text-orange-400 mb-2">
             Información de la mascota
           </p>
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <p>
-              <span className="text-gray-600">Mascota:</span>{" "}
-              {solicitud.pet.name}
-            </p>
-            <p>
-              <span className="text-gray-600">ID de mascota:</span>{" "}
-              {solicitud.petId}
-            </p>
-          </div>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+  <div className="flex flex-col">
+    <span className="text-gray-600 font-semibold">Mascota:</span>
+    <span>{solicitud.pet.name}</span>
+  </div>
+  <div className="flex flex-col">
+    <span className="text-gray-600 font-semibold">ID de mascota:</span>
+    <span>{solicitud.petId}</span>
+  </div>
+</div>
+
         </div>
 
         <div className="bg-orange-50 p-4 rounded">
-          <p className="text-orange-600 font-bold mb-2">
+          <p className="text-orange-400  mb-2">
             Información del adoptante
           </p>
-          <div className="grid grid-cols-2 gap-2 text-sm">
-            <p>
-              <span className="text-gray-600">Adoptante:</span>{" "}
-              {solicitud.user.fullname}
-            </p>
-            <p>
-              <span className="text-gray-600">ID de adoptante:</span>{" "}
-              {solicitud.userId}
-            </p>
-            <p>
-              <span className="text-gray-600">Correo:</span>{" "}
-              {solicitud.user.email}
-            </p>
-            <p>
-              <span className="text-gray-600">Dirección y comuna:</span> Lorem
-              ipsum dolor sit amet consectetur.
-            </p>
-          </div>
+          <div className="grid grid-cols-2 gap-4 text-sm">
+  <div className="flex flex-col">
+    <span className="text-gray-600 font-semibold">Adoptante:</span>
+    <span>{solicitud.user.fullname}</span>
+  </div>
+  <div className="flex flex-col">
+              <span className="text-gray-600 font-semibold">ID de adoptante:</span>
+              <span>{solicitud.userId}</span>
+            </div>
+  <div className="flex flex-col">
+              <span className="text-gray-600 font-semibold">Documento de identidad:</span>
+              <span>{adopter?.identityDocument || "No disponible"}</span>
+            </div>
+  <div className="flex flex-col">
+    <span className="text-gray-600 font-semibold">Correo:</span>
+    <span>{solicitud.user.email}</span>
+  </div>
+  <div className="flex flex-col col-span-2">
+    <span className="text-gray-600 font-semibold">Dirección y comuna:</span>
+    <span>Lorem ipsum dolor sit amet consectetur.</span>
+  </div>
+</div>
+
         </div>
 
         {renderBotones()}

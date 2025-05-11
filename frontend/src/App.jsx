@@ -11,6 +11,8 @@ import PublicLayout from "./layout/PublicLayout";
 import AdminLayout from "./layout/AdminLayout";
 import PetElection from "./components/PetElection";
 import UserModalEdit from "./components/modals/UserModalEdit";
+import PasswordReset from "./views/PasswordReset";
+
 
 function App() {
   return (
@@ -24,7 +26,8 @@ function App() {
           <Route path="/Adoptar" element={<Adoptar />} />
           <Route path="/Mascotas" element={<PetsHome />} />
           <Route path="/pet-election" element={<PetElection />} />
-          <Route path="/EditPerfil" element={<UserModalEdit/>} />
+          <Route path="/EditPerfil" element={<UserModalEdit />} />
+          <Route path="/RecoverPassword" element={<PasswordReset />} />
         </Route>
 
         <Route

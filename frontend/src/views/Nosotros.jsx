@@ -279,7 +279,7 @@ const Nosotros = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <button className="bg-primary cursor-pointer text-white mt-2 cursor-pointer rounded-full px-8 py-1 text-xl font-bold hover:scale-105 transition">
+                <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 text-xl font-bold hover:scale-105 transition">
                   Únete
                 </button>
               </a>

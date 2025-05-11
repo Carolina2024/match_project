@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getCompatiblePets } from "../api/PetsUser";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
 import { Carousel } from "react-responsive-carousel";
@@ -12,20 +12,18 @@ function PetsHome() {
   const [showCheckMatch4, setShowCheckMatch4] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchMascotas = async (userId) => {
-      try {
-        const userId = localStorage.getItem("userId");
-        const data = await getCompatiblePets(userId);
-        const pets = data.items;
-        setMascotas(pets);
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-
-    fetchMascotas();
-  }, []);
+const fetchMascotas = async () => {
+  try {
+    const stored = localStorage.getItem("user");
+    const { id: userId } = stored ? JSON.parse(stored) : {};
+    if (!userId) throw new Error("No hay usuario logueado");
+    const { items: pets } = await getCompatiblePets(userId);
+    setMascotas(pets);
+  } catch (error) {
+    console.error(error);
+  }
+};
+fetchMascotas();
 
   const handleMatchClick = () => {
     setShowCheckMatch3(true);
@@ -123,7 +121,7 @@ function PetsHome() {
                 )}
 
                 <h2 className="text-2xl font-bold mt-4">
-                  {seleccionada.nombre}
+                  {seleccionada.name}
                 </h2>
 
                 <div className="mt-2 w-full flex flex-wrap gap-2 justify-center px-4">

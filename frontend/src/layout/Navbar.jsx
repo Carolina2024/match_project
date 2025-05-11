@@ -185,7 +185,7 @@ const Navbar = () => {
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="w-full px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
+                  className="w-full px-4 py-2 cursor-pointer hover:text-primary transition text-sm font-tertiary font-normal"
                 >
                   Cerrar sesión
                 </button>
@@ -195,7 +195,7 @@ const Navbar = () => {
         ) : (
           <button
             onClick={() => setLoginOpen(true)}
-            className="ml-4 border border-primary px-4 py-2 rounded-full font-bold hover:bg-orange-100 transition"
+            className="ml-4 border border-primary cursor-pointer px-4 py-2 rounded-full font-bold hover:bg-orange-100 transition"
           >
             Iniciar sesión
           </button>

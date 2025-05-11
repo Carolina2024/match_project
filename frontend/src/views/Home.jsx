@@ -11,8 +11,12 @@ import slider1 from "../assets/slider1.png";
 import slider2 from "../assets/slider2.png";
 import slider3 from "../assets/slider3.png";
 import image from "../assets/image.png";
+import imageb from "../assets/imageb.png";
+import { HandHeart } from "lucide-react";
+import PetsHome from "../components/PetsHome";
 
 const Home = () => {
+  // Slider state
   const [activeSlide, setActiveSlide] = useState(0);
   const sliders = [slider1, slider2, slider3];
   const slides = [
@@ -36,78 +40,151 @@ const Home = () => {
     },
   ];
 
+  // Auto-play slider
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % sliders.length);
     }, 4000);
-
     return () => clearInterval(interval);
   }, [sliders.length]);
 
+  // Auth flag
+  const stored = localStorage.getItem("user");
+  const user = stored ? JSON.parse(stored) : null;
+  const loggedIn = Boolean(user);
+
   return (
     <section className="w-full flex flex-col justify-center items-center -mt-20">
-      <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex flex-raw items-center md:ml-10">
-        <svg
-          width="1030"
-          height="745"
-          viewBox="0 0 1218 745"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            width="1218"
-            height="745"
-            rx="260"
-            fill="#F4A470"
-            fillOpacity="0.17"
-          />
-        </svg>
+      {/* Primera y Segunda sección: varían según autenticación */}
+      {!loggedIn ? (
+        <>
+          {/* Primera sección (invitados) */}
+          <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex items-center md:ml-10">
+            <svg
+              width="1030"
+              height="745"
+              viewBox="0 0 1218 745"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                width="1218"
+                height="745"
+                rx="260"
+                fill="#F4A470"
+                fillOpacity="0.17"
+              />
+            </svg>
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <img
+                src={image}
+                alt="Perro mirando"
+                className="w-[300px] md:w-[640px] object-cover -mt-10"
+              />
+            </div>
+            <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
+              <div>
+                <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
+                  <span className="text-primary">Matchea</span>
+                  <br />
+                  <span className="text-tertiary">con tu futura</span>
+                  <br />
+                  <span className="text-primary">mascota</span>
+                </h2>
+                <button className="bg-white text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition">
+                  Regístrate para Adoptar
+                </button>
+              </div>
+            </div>
+          </div>
 
-        <div className="absolute inset-y-0 right-0 flex items-center">
-          <img
-            src={image}
-            alt="Perro mirando"
-            className="w-[300px] md:w-[640px] object-cover -mt-10 "
-          />
-        </div>
+          {/* Segunda sección (invitados) */}
+          <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary text-center md:mt-16 mt-0">
+            Conoce a quienes esperan un hogar
+          </h2>
+          <hr className="w-3/5 border-t-1 border-primary mx-auto mt-4 md:mb-10" />
+          <section className="py-10 px-4 flex justify-center w-full">
+            <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-5xl">
+              {[
+                image2,
+                image3,
+                image4,
+                image5,
+                image6,
+                image7,
+                image8,
+                image9,
+              ].map((img, idx) => (
+                <img
+                  key={idx}
+                  src={img}
+                  alt={`Perrito ${idx + 1}`}
+                  className="w-38 h-38 md:w-50 md:h-50 object-cover hover:scale-105 transition"
+                />
+              ))}
+            </div>
+          </section>
+        </>
+      ) : (
+        <>
+          {/* Primera sección (logueados) */}
+          <div className="relative w-full md:max-w-5xl max-w-lg mt-12 overflow-hidden flex items-center md:ml-10">
+            <svg
+              width="918"
+              height="425"
+              viewBox="0 0 918 425"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                width="918"
+                height="425"
+                rx="148.5"
+                fill="#F4A470"
+                fillOpacity="0.17"
+              />
+            </svg>
 
-        <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
-          <div>
-            <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
-              <span className="text-primary">Matchea</span>
-              <br />
-              <span className="text-tertiary">con tu futura</span>
-              <br />
-              <span className="text-primary">mascota</span>
-            </h2>
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <img
+                src={imageb}
+                alt="Perro mirando"
+                className="w-[100px] md:w-[400px] object-cover"
+              />
+            </div>
 
-            <button className="bg-white text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition cursor-pointer">
-              Regístrate para Adoptar
+            <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-30">
+              <div>
+                <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
+                  <span className="text-primary">Tu nuevo</span>
+                  <br />
+                  <span className="text-primary">compañero</span>
+                  <br />
+                  <span className="text-primary">te está</span>
+                  <br />
+                  <span className="text-primary">esperando</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+          {/* — Botón flotante global — */}
+          <div className="fixed top-38 right-12 z-50">
+            <button
+              onClick=""
+              className="bg-primary w-18 cursor-pointer h-18 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition"
+            >
+              <HandHeart size={44} className="stroke-white" />
             </button>
           </div>
-        </div>
-      </div>
 
-      <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary text-center md:mt-16 mt-0">
-        Conoce a quienes esperan un hogar
-      </h2>
-      <hr className="w-3/5 border-t-1 border-primary mx-auto mt-4 md:mb-10" />
+          {/* Segunda sección (logueados) */}
+          <div className="w-full h-64 bg-gray-100 flex items-center justify-center mt-10">
+            <PetsHome/>
+          </div>
+        </>
+      )}
 
-      <section className="py-10 px-4 flex justify-center w-full">
-        <div className="flex flex-wrap justify-center gap-6 md:gap-16 max-w-5xl">
-          {[image2, image3, image4, image5, image6, image7, image8, image9].map(
-            (image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`Perrito ${index + 1}`}
-                className="w-38 h-38 md:w-50 md:h-50 object-cover hover:scale-105 transition"
-              />
-            )
-          )}
-        </div>
-      </section>
-
+      {/* Tercera sección (siempre visible) */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
           Encuentra a tu mascota ideal
@@ -115,7 +192,6 @@ const Home = () => {
         <h2 className="text-primary font-extrabold text-2xl font-tertiary">
           3 simples pasos
         </h2>
-
         <div className="absolute top-50 left-0 right-0 flex justify-center">
           <svg
             width="650"
@@ -138,9 +214,9 @@ const Home = () => {
             />
           </svg>
         </div>
-
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+          {/* Paso 1 */}
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-white font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               1
             </div>
@@ -179,6 +255,7 @@ const Home = () => {
             </p>
           </div>
 
+          {/* Paso 2 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               2
@@ -219,7 +296,8 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25  px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+          {/* Paso 3 */}
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               3
             </div>
@@ -248,26 +326,23 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Historias de adopción (siempre visible) */}
       <section className="w-full px-4 flex flex-col justify-center items-center -mt-8">
         <div className="py-10 text-center w-full">
-          <h2 className="text-2xl md:text-4xl font-bold text-primary px-4 md:px-20 text-center ">
+          <h2 className="text-2xl md:text-4xl font-bold text-primary px-4 md:px-20 text-center">
             Historias de adopción
           </h2>
           <hr className="w-3/5 border-t-1 border-primary mx-auto md:mt-4 mt-2 mb-8 md:mb-10" />
 
           {/* Slider */}
           <div className="max-w-4xl mx-auto mb-12 px-4">
-            {/* Contenedor del slide */}
             <div className="relative overflow-hidden rounded-4xl shadow-lg">
-              {/* Imagen */}
               <img
                 src={slides[activeSlide].img}
                 alt={`Slide ${activeSlide + 1}`}
                 className="w-full h-64 md:h-110 object-cover"
               />
-
-              {/* Overlay del testimonio */}
-              <div className="absolute bottom-0 left-0 md:max-w-4xl  bg-[#59514680] p-4 md:py-3 px-4 md:mx-10 md:h-auto h-38 mx-4 my-5 md:my-6 text-left rounded-2xl text-white">
+              <div className="absolute bottom-0 left-0 md:max-w-4xl bg-[#59514680] p-4 md:py-3 px-4 md:mx-10 md:h-auto h-38 mx-4 my-5 md:my-6 text-left rounded-2xl text-white">
                 <p className="font-semibold md:text-2xl text-lg">
                   {slides[activeSlide].author}
                 </p>
@@ -276,17 +351,13 @@ const Home = () => {
                 </p>
               </div>
             </div>
-
-            {/* Indicadores de slider */}
             <div className="flex justify-center space-x-3 mt-10">
               {slides.map((_, i) => (
                 <button
                   key={i}
-                  className={`
-            w-3 h-3 rounded-full
-            ${activeSlide === i ? "bg-primary" : "bg-tertiary"}
-            transition
-          `}
+                  className={`w-3 h-3 rounded-full transition ${
+                    activeSlide === i ? "bg-primary" : "bg-tertiary"
+                  }`}
                   onClick={() => setActiveSlide(i)}
                 />
               ))}

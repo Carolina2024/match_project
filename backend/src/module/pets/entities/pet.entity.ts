@@ -134,7 +134,7 @@ export class Pet {
   @IsEnum(PetStatus)
   status: PetStatus;
 
-  @Column({ default: true })
+  @Column({ default: true, select: false })
   @IsBoolean()
   isActive: boolean;
 

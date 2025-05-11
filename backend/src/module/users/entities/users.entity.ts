@@ -27,7 +27,7 @@ export class Users {
   @Column({ default: UserRole.ADOPTERS, type: 'enum', enum: UserRole })
   role!: UserRole;
 
-  @Column({ default: true })
+  @Column({ default: true, select: false })
   isActive!: boolean;
 
   @CreateDateColumn()

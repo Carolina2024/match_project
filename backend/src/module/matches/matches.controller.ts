@@ -6,6 +6,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
@@ -23,9 +24,12 @@ import {
   ApiNotFoundResponse,
   ApiParam,
   ApiBody,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { Match } from './entities/match.entity';
 import { MatchStatus } from '../../common/enums/match-status.enum';
+
+import { FilterMatchDto } from './dto/filterMatch.dto';
 
 @ApiTags('Solicitudes de Adopción')
 @Controller('matches')
@@ -77,47 +81,105 @@ export class MatchesController {
   @ApiOkResponse({
     description: 'Lista de solicitudes obtenida exitosamente',
     type: [Match],
-    example: [
-      {
-        id: '083c7750-63e8-4a2c-a1f1-bd8c8fbc9cea',
-        status: 'Por revisar',
-        createdAt: '2023-05-15T10:30:00.000Z',
-        updatedAt: '2023-05-15T10:30:00.000Z',
-        user: {
-          id: '2d00a0bd-03dc-4e2a-8a39-12e54b5cacc5',
-          fullname: 'John Doe',
-          email: 'john@example.com',
+    example: {
+      items: [
+        {
+          id: '1e04ef5f-cd9d-402b-a317-e1de0717e5b5',
+          user: {
+            fullname: 'Adrián Lugo',
+            email: 'adrian@example.com',
+            adopter: {
+              identityDocument: '12341178-9',
+              address:
+                'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
+            },
+          },
+          userId: 'dc5038c3-aa07-4ac9-b2ff-50c2e5b596a5',
+          pet: {
+            id: '22f0f615-8552-4113-a8f0-bd0375083390',
+            name: 'Chloe',
+          },
+          petId: '22f0f615-8552-4113-a8f0-bd0375083390',
+          applicationDate: '2025-05-11T03:46:54.117Z',
+          status: 'Aprobado',
         },
-        pet: {
-          id: '497fe8df-f6d9-438d-9c33-437d7a46d318',
-          name: 'Duke',
-          species: 'Perro',
-          photoUrls: ['https://example.com/dog13.jpg'],
+        {
+          id: '480d0bff-0f14-467b-8251-c20da8653a8a',
+          user: {
+            fullname: 'Nayeli',
+            email: 'nayeli@example.com',
+            adopter: {
+              identityDocument: '87654321-1',
+              address:
+                'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
+            },
+          },
+          userId: '4a8d27b4-90b0-4fb8-bb93-4617241ca19b',
+          pet: {
+            id: 'd2dd1505-d4d6-45e0-967d-2282da6f1102',
+            name: 'Benito',
+          },
+          petId: 'd2dd1505-d4d6-45e0-967d-2282da6f1102',
+          applicationDate: '2025-05-11T03:46:54.117Z',
+          status: 'Por revisar',
         },
-      },
-      {
-        id: 'e1a1ba4b-0bd2-47c2-8be3-86f2b55ea161',
-        status: 'En proceso',
-        createdAt: '2023-05-16T14:20:00.000Z',
-        updatedAt: '2023-05-17T09:15:00.000Z',
-        user: {
-          id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
-          fullname: 'José Gómez',
-          email: 'jose@example.com',
+        {
+          id: 'ddc02439-2631-4491-ad3a-99b8bb7b8052',
+          user: {
+            fullname: 'Camilo Doe',
+            email: 'camilo@example.com',
+            adopter: {
+              identityDocument: '12555678-9',
+              address:
+                'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
+            },
+          },
+          userId: 'ec1f9c31-8cc0-4555-80b2-19784a276393',
+          pet: {
+            id: 'd566f2f2-7e52-49ef-a8a3-55f29fb69633',
+            name: 'Verita',
+          },
+          petId: 'd566f2f2-7e52-49ef-a8a3-55f29fb69633',
+          applicationDate: '2025-05-11T03:46:54.117Z',
+          status: 'En proceso',
         },
-        pet: {
-          id: 'e1a1ba4b-0bd2-47c2-8be3-86f2b55ea161',
-          name: 'Shadow',
-          species: 'Gato',
-          photoUrls: ['https://example.com/cat8.jpg'],
-        },
-      },
-    ],
+      ],
+      total: 3,
+      page: 1,
+      limit: 8,
+      totalPages: 1,
+    },
+  })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description:
+      'Busca por nombre de los adoptantes o por el nombre de la mascota',
+    type: String,
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    description:
+      'Filtra las solicitudes de adopción por el "status" en que se encuentra la solicitud',
+    enum: MatchStatus,
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    description: 'Número de página',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Cantidad de elementos por página',
+    type: Number,
   })
   @Get()
   @Auth(UserRole.ADMIN)
-  findAll() {
-    return this.matchsService.findAll();
+  findAll(@Query() filterMatchDto: FilterMatchDto) {
+    return this.matchsService.findAll(filterMatchDto);
   }
 
   @ApiOperation({
@@ -168,7 +230,6 @@ export class MatchesController {
   @ApiParam({ name: 'id', description: 'ID de la solicitud', type: String })
   @ApiOkResponse({
     description: 'Solicitud encontrada exitosamente',
-    type: Match,
     example: {
       id: '083c7750-63e8-4a2c-a1f1-bd8c8fbc9cea',
       status: 'Por revisar',

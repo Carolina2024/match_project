@@ -11,7 +11,6 @@ const UserProfiles = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [estadoFiltro, setEstadoFiltro] = useState("Todos");
 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -46,10 +45,7 @@ const UserProfiles = () => {
     const matchesSearch = `${user.fullname} ${user.email}`
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-    const matchesEstado =
-      estadoFiltro === "Todos" || user.estado === estadoFiltro;
-
-    return matchesSearch && matchesEstado;
+    return matchesSearch;
   });
 
   const handleOpenModal = (user) => {
@@ -106,18 +102,6 @@ const UserProfiles = () => {
           <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
 
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <span className="font-raleway text-[16px]">Filtrar por:</span>
-          <select
-            value={estadoFiltro}
-            onChange={(e) => setEstadoFiltro(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none"
-          >
-            <option value="Todos">Estado</option>
-            <option value="Activo">Activo</option>
-            <option value="Inactivo">Inactivo</option>
-          </select>
-        </div>
       </div>
 
       <div className="overflow-x-auto">
@@ -132,9 +116,6 @@ const UserProfiles = () => {
               </th>
               <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
                 Documento
-              </th>
-              <th className="px-4 py-2 text-center font-semibold text-[16px] font-['Montserrat Alternates']">
-                Estado
               </th>
               <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
                 Dirección y comuna
@@ -153,15 +134,6 @@ const UserProfiles = () => {
                 <td className="px-4 py-3">{user.fullname}</td>
                 <td className="px-4 py-3">{user.email}</td>
                 <td className="px-4 py-3">{user.identityDocument}</td>
-                <td className="px-4 py-3 text-center">
-                  <span
-                    className={`px-3 py-1 rounded-full text-white text-xs font-medium ${
-                      user.estado === "Activo" ? "bg-[#50C878]" : "bg-gray-400"
-                    }`}
-                  >
-                    {user.estado}
-                  </span>
-                </td>
                 <td className="px-4 py-3 whitespace-nowrap">{user.address}</td>
                 <td className="px-4 py-3 text-center">
                   <div className="flex justify-center items-center space-x-4">
@@ -231,7 +203,7 @@ const UserProfiles = () => {
       </div>
 
       {showMessage && (
-        <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
+        <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 right-10 bottom-10 z-50">
           <span className="block font-bold">Adoptante eliminado</span>
           <span>{deletedUserName} ha sido eliminado del registro.</span>
           <button

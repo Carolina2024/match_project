@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Adopters } from './entities/adopters.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateAdopterDto } from './dtos/create-adopter.dto';
 
 @Injectable()
 export class AdoptersService {
@@ -17,17 +16,25 @@ export class AdoptersService {
   }
 
   async findByIdentityDocument(identityDocument: string) {
-    const adopter = this.adoptersRepository.findOne({ where: { identityDocument } });
+    const adopter = this.adoptersRepository.findOne({
+      where: { identityDocument, user: { isActive: true } },
+      relations: ['user'],
+    });
     return adopter;
   }
 
-  async updateAdopter(id: string, updateAdopterDto: Partial<Adopters>): Promise<Adopters|null> {
-    const adopterUpdated = await this.adoptersRepository.update(id, updateAdopterDto);
-    if (adopterUpdated.affected=== 0) {
+  async updateAdopter(
+    id: string,
+    updateAdopterDto: Partial<Adopters>,
+  ): Promise<Adopters | null> {
+    const adopterUpdated = await this.adoptersRepository.update(
+      id,
+      updateAdopterDto,
+    );
+    if (adopterUpdated.affected === 0) {
       throw new NotFoundException(`Adopter con id ${id} no encontrado`);
-    } 
-    
-   return this.adoptersRepository.findOne({where:{id}});
-    
+    }
+
+    return this.adoptersRepository.findOne({ where: { id } });
   }
 }

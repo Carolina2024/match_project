@@ -20,10 +20,8 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
           ¿Estás seguro de eliminar a {user.fullname}?
         </h2>
         <h3 className="text-center text-gray-600">
-          Esta acción no se puede deshacer. Esta acción eliminara
-        </h3>
-        <h3 className="text-center text-gray-600">
-          permanentemente a {user.fullname}
+          Esta acción no se puede deshacer. Se eliminará permamentemente a{" "}
+          {user.fullname}
         </h3>
         <div className="flex justify-center space-x-4 mt-6">
           <button

@@ -13,10 +13,9 @@ function PetsHome() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMascotas = async (userId) => {
+    const fetchMascotas = async () => {
       try {
-        const userId = localStorage.getItem("userId");
-        const data = await getCompatiblePets(userId);
+        const data = await getCompatiblePets();
         const pets = data.items;
         setMascotas(pets);
       } catch (error) {

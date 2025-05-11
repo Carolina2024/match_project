@@ -22,8 +22,7 @@ function PasswordReset() {
       newErrors.code = "Completa todos los dígitos del código";
     }
     if (newPassword.length < 8) {
-      newErrors.newPassword =
-        "La contraseña debe tener al menos 8 caracteres";
+      newErrors.newPassword = "La contraseña debe tener al menos 8 caracteres";
     }
     if (newPassword !== confirmPassword) {
       newErrors.confirmPassword = "Las contraseñas no coinciden";
@@ -49,7 +48,7 @@ function PasswordReset() {
           <img
             src="src/assets/logo.png"
             alt="Logo Patas Pirque"
-            className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-contain drop-shadow-lg"
+            className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-fill drop-shadow-lg"
           />
         </div>
 
@@ -73,7 +72,7 @@ function PasswordReset() {
                 maxLength="1"
                 value={valor}
                 onChange={(e) => handleCodigoChange(i, e.target.value)}
-                className="w-10 sm:w-12 h-12 sm:h-14 border border-[#76757580] rounded-xl text-center text-lg focus:outline-none focus:border-primary"
+                className="w-10  sm:w-12 h-12 mr-2 sm:h-14 border border-[#76757580] rounded-xl text-center text-lg focus:outline-none focus:border-primary"
               />
             ))}
           </div>
@@ -94,12 +93,12 @@ function PasswordReset() {
             <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
               Nueva contraseña
             </label>
-            <div className="relative w-full sm:w-96 mx-auto">
+            <div className="block relative w-full sm:w-96 mx-auto">
               <input
                 type={showNewPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-white border border-primary rounded-full text-sm focus:outline-none focus:border-2 focus:border-primary"
+                className=" w-full px-8 py-2 bg-white border border-primary rounded-full text-sm focus:outline-none focus:border-2 focus:border-primary"
               />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
@@ -199,13 +198,13 @@ function PasswordReset() {
           <div className="flex flex-col items-center gap-4">
             <button
               type="submit"
-              className="w-full sm:w-auto text-lg px-7 py-2 bg-primary text-white font-bold rounded-full shadow-xl cursor-pointer transition"
+              className=" sm:w-[1/2] w-[1/2] text-lg px-7 py-2 bg-primary text-white font-bold rounded-full shadow-xl cursor-pointer transition"
             >
               Restablecer contraseña
             </button>
             <button
               type="button"
-              className="w-full sm:w-auto px-8 cursor-pointer py-1 border-2 text-lg border-primary text-primary font-bold rounded-full shadow-sm transition"
+              className="sm:w-[1/2] w-[1/2]  px-8 cursor-pointer py-1 border-2 text-lg border-primary text-primary font-bold rounded-full shadow-sm transition"
             >
               Volver atrás
             </button>

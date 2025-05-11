@@ -6,6 +6,7 @@ import {
   ParseUUIDPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { MatchesService } from './matches.service';
 import { CreateMatchDto } from './dto/create-match.dto';
@@ -23,9 +24,12 @@ import {
   ApiNotFoundResponse,
   ApiParam,
   ApiBody,
+  ApiQuery,
 } from '@nestjs/swagger';
 import { Match } from './entities/match.entity';
 import { MatchStatus } from '../../common/enums/match-status.enum';
+
+import { FilterMatchDto } from './dto/filterMatch.dto';
 
 @ApiTags('Solicitudes de Adopción')
 @Controller('matches')
@@ -77,47 +81,84 @@ export class MatchesController {
   @ApiOkResponse({
     description: 'Lista de solicitudes obtenida exitosamente',
     type: [Match],
-    example: [
-      {
-        id: '083c7750-63e8-4a2c-a1f1-bd8c8fbc9cea',
-        status: 'Por revisar',
-        createdAt: '2023-05-15T10:30:00.000Z',
-        updatedAt: '2023-05-15T10:30:00.000Z',
-        user: {
-          id: '2d00a0bd-03dc-4e2a-8a39-12e54b5cacc5',
-          fullname: 'John Doe',
-          email: 'john@example.com',
+    example: {
+      items: [
+        {
+          id: '11111111-aaaa-bbbb-cccc-1234567890ab',
+          user: {
+            fullname: 'Lucía Martínez',
+            email: 'lucia.martinez@example.com',
+            adopter: {
+              identityDocument: '11111111-1',
+              address:
+                'Av. Las Flores 123, Comuna Providencia, Región Metropolitana',
+            },
+          },
+          userId: 'aaaaaaaa-bbbb-cccc-dddd-1234567890ab',
+          pet: {
+            id: '22222222-bbbb-cccc-dddd-0987654321ef',
+            name: 'Luna',
+            size: 'Pequeño',
+            sex: 'Hembra',
+            age: 'Cachorro',
+            species: 'Perro',
+            energy: 'Activo',
+            breed: 'Poodle Toy',
+            kg: '2.50',
+            isVaccinated: true,
+            isSterilized: false,
+            isDewormed: true,
+            hasMicrochip: false,
+            story:
+              'Luna fue rescatada de la calle siendo muy pequeña. Es una perrita muy alegre y sociable que busca un hogar con tiempo para jugar.',
+            traits: ['Cariñosa', 'Juguetona', 'Aprende rápido'],
+            admissionDate: '2024-11-01',
+            photoUrls: [
+              'https://example.com/photos/luna1.jpg',
+              'https://example.com/photos/luna2.jpg',
+            ],
+            status: 'Disponible',
+            isActive: true,
+            created_at: '2025-01-10T10:30:00.000Z',
+            updated_at: '2025-01-15T14:45:00.000Z',
+          },
+          petId: '22222222-bbbb-cccc-dddd-0987654321ef',
+          applicationDate: '2025-01-20T09:15:00.000Z',
+          status: 'En proceso',
         },
-        pet: {
-          id: '497fe8df-f6d9-438d-9c33-437d7a46d318',
-          name: 'Duke',
-          species: 'Perro',
-          photoUrls: ['https://example.com/dog13.jpg'],
-        },
-      },
-      {
-        id: 'e1a1ba4b-0bd2-47c2-8be3-86f2b55ea161',
-        status: 'En proceso',
-        createdAt: '2023-05-16T14:20:00.000Z',
-        updatedAt: '2023-05-17T09:15:00.000Z',
-        user: {
-          id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
-          fullname: 'José Gómez',
-          email: 'jose@example.com',
-        },
-        pet: {
-          id: 'e1a1ba4b-0bd2-47c2-8be3-86f2b55ea161',
-          name: 'Shadow',
-          species: 'Gato',
-          photoUrls: ['https://example.com/cat8.jpg'],
-        },
-      },
-    ],
+      ],
+    },
+  })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description:
+      'Busca por nombre de los adoptantes o por el nombre de la mascota',
+    type: String,
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    description:
+      'Filtra las solicitudes de adopción por el "status" en que se encuentra la solicitud',
+    enum: MatchStatus,
+  })
+  @ApiQuery({
+    name: 'page',
+    required: false,
+    description: 'Número de página',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Cantidad de elementos por página',
+    type: Number,
   })
   @Get()
   @Auth(UserRole.ADMIN)
-  findAll() {
-    return this.matchsService.findAll();
+  findAll(@Query() filterMatchDto: FilterMatchDto) {
+    return this.matchsService.findAll(filterMatchDto);
   }
 
   @ApiOperation({

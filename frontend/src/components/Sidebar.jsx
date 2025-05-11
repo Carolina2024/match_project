@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import { FaFileAlt, FaUserFriends, FaPaw } from "react-icons/fa";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {

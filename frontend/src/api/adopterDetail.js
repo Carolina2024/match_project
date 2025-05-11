@@ -1,4 +1,6 @@
-const API_URL = "https://match-project.onrender.com/api";
+/* const API_URL = "https://match-project.onrender.com/api"; */
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export const getUserById = async (id, token) => {
   try {

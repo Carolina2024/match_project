@@ -168,6 +168,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         >
           <option value="Todos">Estado</option>
           <option value="Disponible">Disponible</option>
+          <option value="En Proceso">En Proceso</option>
           <option value="Adoptado">Adoptado</option>
         </select>
       </div>

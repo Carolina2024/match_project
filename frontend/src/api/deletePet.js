@@ -1,5 +1,9 @@
-const BASE_URL = "https://match-project.onrender.com/api";
+/* const BASE_URL = "https://match-project.onrender.com/api";
+const USERS_URL = `${BASE_URL}/pets`; */
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const USERS_URL = `${BASE_URL}/pets`;
+
 
 export const deletePet = async (id) => {
   const token = localStorage.getItem("token");

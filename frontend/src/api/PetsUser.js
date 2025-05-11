@@ -1,12 +1,15 @@
-const BASE_URL = "https://match-project.onrender.com/api";
-const PETS_URL = `${BASE_URL}/pets`;
+/* const BASE_URL = "https://match-project.onrender.com/api";
+const PETS_URL = `${BASE_URL}/pets`; */
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const PETS_URL = `${API_BASE}/pets`;
 
 
 export const getCompatiblePets = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token")
   console.log(token)
-  console.log(user)  
+  console.log(user)
   const res = await fetch(`${PETS_URL}/users/${user.id}`, {headers:{Authorization: `Bearer ${token}`}});
 
   const data = await res.json();

@@ -18,7 +18,6 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
   ApiBearerAuth,
-  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 import { QueryUsersDto } from './dtos/query-user.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -254,14 +253,6 @@ export class UsersController {
       message: 'La cuenta del usuario ha sido eliminada exitosamente',
     },
   })
-  @ApiBadRequestResponse({
-    description: 'El usuario ya se encuentra eliminado',
-    example: {
-      message: 'El usuario ya está eliminado',
-      error: 'Bad Request',
-      statusCode: 400,
-    },
-  })
   @ApiNotFoundResponse({
     description: 'No se encuentra el usuario con el ID',
     example: {
@@ -276,30 +267,4 @@ export class UsersController {
   remove(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.remove(id);
   }
-
-  // @ApiOperation({
-  //   summary: 'Obtener mascotas de un usuario',
-  //   description: 'Retorna todas las mascotas asociadas al usuario especificado',
-  // })
-  // @ApiOkResponse({
-  //   description: 'Lista de mascotas del usuario obtenida exitosamente',
-  //   type: [Pet],
-  //   example: [
-  //     {
-  //       id: '497fe8df-f6d9-438d-9c33-437d7a46d318',
-  //       name: 'Duke',
-  //       species: 'Perro',
-  //       breed: 'Labrador',
-  //       age: 'Adulto',
-  //       photoUrls: ['https://example.com/dog13.jpg'],
-  //       status: 'Adoptado',
-  //     },
-  //   ],
-  // })
-  // @Auth(UserRole.ADOPTERS)
-  // @UseGuards(AuthGuard(), OwnerOrAdminGuard)
-  // @Get(':id/pets')
-  // getUserPets(@Param('id', ParseUUIDPipe) userId: string) {
-  //   return this.usersService.findUserPets(userId);
-  // }
 }

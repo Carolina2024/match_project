@@ -84,49 +84,70 @@ export class MatchesController {
     example: {
       items: [
         {
-          id: '11111111-aaaa-bbbb-cccc-1234567890ab',
+          id: '1e04ef5f-cd9d-402b-a317-e1de0717e5b5',
           user: {
-            fullname: 'Lucía Martínez',
-            email: 'lucia.martinez@example.com',
+            fullname: 'Adrián Lugo',
+            email: 'adrian@example.com',
             adopter: {
-              identityDocument: '11111111-1',
+              identityDocument: '12341178-9',
               address:
-                'Av. Las Flores 123, Comuna Providencia, Región Metropolitana',
+                'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
             },
           },
-          userId: 'aaaaaaaa-bbbb-cccc-dddd-1234567890ab',
+          userId: 'dc5038c3-aa07-4ac9-b2ff-50c2e5b596a5',
           pet: {
-            id: '22222222-bbbb-cccc-dddd-0987654321ef',
-            name: 'Luna',
-            size: 'Pequeño',
-            sex: 'Hembra',
-            age: 'Cachorro',
-            species: 'Perro',
-            energy: 'Activo',
-            breed: 'Poodle Toy',
-            kg: '2.50',
-            isVaccinated: true,
-            isSterilized: false,
-            isDewormed: true,
-            hasMicrochip: false,
-            story:
-              'Luna fue rescatada de la calle siendo muy pequeña. Es una perrita muy alegre y sociable que busca un hogar con tiempo para jugar.',
-            traits: ['Cariñosa', 'Juguetona', 'Aprende rápido'],
-            admissionDate: '2024-11-01',
-            photoUrls: [
-              'https://example.com/photos/luna1.jpg',
-              'https://example.com/photos/luna2.jpg',
-            ],
-            status: 'Disponible',
-            isActive: true,
-            created_at: '2025-01-10T10:30:00.000Z',
-            updated_at: '2025-01-15T14:45:00.000Z',
+            id: '22f0f615-8552-4113-a8f0-bd0375083390',
+            name: 'Chloe',
           },
-          petId: '22222222-bbbb-cccc-dddd-0987654321ef',
-          applicationDate: '2025-01-20T09:15:00.000Z',
+          petId: '22f0f615-8552-4113-a8f0-bd0375083390',
+          applicationDate: '2025-05-11T03:46:54.117Z',
+          status: 'Aprobado',
+        },
+        {
+          id: '480d0bff-0f14-467b-8251-c20da8653a8a',
+          user: {
+            fullname: 'Nayeli',
+            email: 'nayeli@example.com',
+            adopter: {
+              identityDocument: '87654321-1',
+              address:
+                'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
+            },
+          },
+          userId: '4a8d27b4-90b0-4fb8-bb93-4617241ca19b',
+          pet: {
+            id: 'd2dd1505-d4d6-45e0-967d-2282da6f1102',
+            name: 'Benito',
+          },
+          petId: 'd2dd1505-d4d6-45e0-967d-2282da6f1102',
+          applicationDate: '2025-05-11T03:46:54.117Z',
+          status: 'Por revisar',
+        },
+        {
+          id: 'ddc02439-2631-4491-ad3a-99b8bb7b8052',
+          user: {
+            fullname: 'Camilo Doe',
+            email: 'camilo@example.com',
+            adopter: {
+              identityDocument: '12555678-9',
+              address:
+                'Calle 12, Departamento 4, Comuna San Miguel, Región Metropolitana',
+            },
+          },
+          userId: 'ec1f9c31-8cc0-4555-80b2-19784a276393',
+          pet: {
+            id: 'd566f2f2-7e52-49ef-a8a3-55f29fb69633',
+            name: 'Verita',
+          },
+          petId: 'd566f2f2-7e52-49ef-a8a3-55f29fb69633',
+          applicationDate: '2025-05-11T03:46:54.117Z',
           status: 'En proceso',
         },
       ],
+      total: 3,
+      page: 1,
+      limit: 8,
+      totalPages: 1,
     },
   })
   @ApiQuery({
@@ -209,7 +230,6 @@ export class MatchesController {
   @ApiParam({ name: 'id', description: 'ID de la solicitud', type: String })
   @ApiOkResponse({
     description: 'Solicitud encontrada exitosamente',
-    type: Match,
     example: {
       id: '083c7750-63e8-4a2c-a1f1-bd8c8fbc9cea',
       status: 'Por revisar',

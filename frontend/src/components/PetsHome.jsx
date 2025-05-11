@@ -12,18 +12,19 @@ function PetsHome() {
   const [showCheckMatch4, setShowCheckMatch4] = useState(false);
   const navigate = useNavigate();
 
-const fetchMascotas = async () => {
-  try {
-    const stored = localStorage.getItem("user");
-    const { id: userId } = stored ? JSON.parse(stored) : {};
-    if (!userId) throw new Error("No hay usuario logueado");
-    const { items: pets } = await getCompatiblePets(userId);
-    setMascotas(pets);
-  } catch (error) {
-    console.error(error);
-  }
-};
-fetchMascotas();
+  useEffect(() => {
+    const fetchMascotas = async () => {
+      try {
+        const data = await getCompatiblePets();
+        const pets = data.items;
+        setMascotas(pets);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchMascotas();
+  }, []);
 
   const handleMatchClick = () => {
     setShowCheckMatch3(true);

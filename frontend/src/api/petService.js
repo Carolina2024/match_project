@@ -1,5 +1,9 @@
-const BASE_URL = "https://match-project.onrender.com/api/pets";
-const BASE_URL2 = "https://match-project.onrender.com/api/pets/complete";
+/* const BASE_URL = "https://match-project.onrender.com/api/pets";
+const BASE_URL2 = "https://match-project.onrender.com/api/pets/complete"; */
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = `${API_BASE}/pets`;
+const BASE_URL2 = `${API_BASE}/pets/complete`;
 
 export const getAllPets = async (page = 1, limit = 10) => {
   const token = localStorage.getItem("token");

@@ -11,7 +11,7 @@ const enumOptions = {
   sex: ["Macho", "Hembra"],
   energy: ["Muy Activo", "Moderado", "Tranquilo"],
   size: ["Pequeño", "Mediano", "Grande", "Extra Grande"],
-  status: ["Disponible", "En proceso", "Adoptada"],
+  status: ["Disponible", "En Proceso", "Adoptado"],
   traits: [
     "Cariñoso",
     "Independiente",

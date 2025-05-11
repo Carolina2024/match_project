@@ -99,15 +99,6 @@ export class AuthController {
       statusCode: 404,
     },
   })
-  @ApiConflictResponse({
-    description: 'El usuario ha sido eliminado por un Administrador',
-    example: {
-      message:
-        'Usuario eliminado. Para más información, póngase en contacto con un administrador',
-      error: 'Conflict',
-      statusCode: 409,
-    },
-  })
   @HttpCode(HttpStatus.OK)
   @Post('login')
   async login(@Body() loginDto: LoginDto) {

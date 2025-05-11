@@ -11,6 +11,8 @@ import { UpdateMatchStatusDto } from './dto/update-match-status.dto';
 import { MatchStatus } from '../../common/enums/match-status.enum';
 import { PetService } from '../pets/pet.service';
 import { PetStatus } from '../../common/enums/pet.enum';
+import { FilterMatchDto } from './dto/filterMatch.dto';
+import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
 
 @Injectable()
 export class MatchesService {
@@ -63,35 +65,56 @@ export class MatchesService {
     };
   }
 
-  async findAll(): Promise<Match[]> {
-    return this.matchRepository.find({
-      relations: ['user', 'pet'],
-      select: {
-        user: {
-          fullname: true,
-          email: true,
-        },
-        pet: {
-          admissionDate: true,
-          age: true,
-          breed: true,
-          energy: true,
-          hasMicrochip: true,
-          isDewormed: true,
-          isSterilized: true,
-          isVaccinated: true,
-          kg: true,
-          name: true,
-          photoUrls: true,
-          sex: true,
-          size: true,
-          species: true,
-          status: true,
-          story: true,
-          traits: true,
-        },
-      },
-    });
+  async findAll(
+    filterMatchDto: FilterMatchDto,
+  ): Promise<PaginationInterface<Match>> {
+    const { limit = 8, page = 1, search, status } = filterMatchDto;
+
+    const queryBuilder = this.matchRepository
+      .createQueryBuilder('matches')
+      .leftJoinAndSelect('matches.user', 'users')
+      .leftJoinAndSelect('users.adopter', 'adopters')
+      .leftJoinAndSelect('matches.pet', 'pets');
+
+    if (search) {
+      queryBuilder.where(
+        'LOWER(users.fullname) LIKE :search OR LOWER(pets.name) LIKE :search',
+        { search: `%${search.toLowerCase()}%` },
+      );
+    }
+
+    if (status) {
+      if (search) {
+        queryBuilder.andWhere('matches.status = :status', {
+          status,
+        });
+      } else {
+        queryBuilder.where('matches.status = :status', { status });
+      }
+    }
+
+    const total = await queryBuilder.getCount();
+
+    const items = await queryBuilder
+      .select([
+        'matches',
+        'adopters.identityDocument',
+        'users.fullname',
+        'users.email',
+        'adopters.address',
+        'pets',
+      ])
+      .skip((page - 1) * (limit || 10))
+      .take(limit)
+      .getMany();
+
+    return {
+      items,
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    };
   }
 
   async findByUser(userId: string): Promise<Match[]> {

@@ -21,6 +21,7 @@ import {
 import { AdopterHomeType } from 'src/common/enums/adopterHomeType.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
 import { FilesService } from '../files/files.service';
+import { Match } from '../matches/entities/match.entity';
 
 @Injectable()
 export class PetService {
@@ -30,6 +31,8 @@ export class PetService {
     @InjectRepository(Users)
     private userRepository: Repository<Users>,
     private readonly filesService: FilesService,
+    @InjectRepository(Match)
+    private matchRepository: Repository<Match>,
   ) {}
 
   async create(
@@ -315,6 +318,7 @@ export class PetService {
       throw new NotFoundException(`Mascota con ID ${id} no encontrada`);
     }
     await this.petRepository.update(id, { isActive: false });
+    await this.matchRepository.delete({ petId: pet.id });
     return { message: `Mascota con ID ${id} eliminada exitosamente` };
   }
 

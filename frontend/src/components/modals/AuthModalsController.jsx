@@ -5,6 +5,7 @@ import RegisterModal from "./RegisterModal";
 import RegisterModalb from "./RegisterModalb";
 import SuccessModalRegister from "./SuccessModalRegister";
 import { registerAdopter } from "../../api/authService";
+import PasswordRecovery from "./PasswordRecovery";
 
 const AuthModalsController = ({
   isLoginOpen,
@@ -13,6 +14,8 @@ const AuthModalsController = ({
   setRegisterOpen,
   isRegisterbOpen,
   setRegisterbOpen,
+  isRecoverOpen,
+  setRecoverOpen,
 }) => {
   const [stepOneData, setStepOneData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -85,6 +88,19 @@ const AuthModalsController = ({
           setServerError("");
           setRegisterOpen(true);
         }}
+        onOpenRecovery={() => {
+          setLoginOpen(false);
+          setRecoverOpen(true);
+        }}
+      />
+
+      <PasswordRecovery
+        isOpen={isRecoverOpen}
+        onClose={() => setRecoverOpen(false)}
+        onBack={() => {
+          setRecoverOpen(false);
+          setLoginOpen(true);
+        }}
       />
 
       <RegisterModal
@@ -134,6 +150,8 @@ AuthModalsController.propTypes = {
   setRegisterOpen: PropTypes.func.isRequired,
   isRegisterbOpen: PropTypes.bool.isRequired,
   setRegisterbOpen: PropTypes.func.isRequired,
+  isRecoverOpen: PropTypes.bool.isRequired,
+  setRecoverOpen: PropTypes.func.isRequired,
 };
 
 export default AuthModalsController;

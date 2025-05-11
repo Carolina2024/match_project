@@ -1,12 +1,19 @@
 import { useState } from "react";
+import AuthModalsController from "../components/modals/AuthModalsController";
 
-function PasswordReset() {
+function PasswordReset(isOpen) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Modales
+  const [isLoginOpen, setLoginOpen] = useState(false);
+  const [isRegisterOpen, setRegisterOpen] = useState(false);
+  const [isRegisterbOpen, setRegisterbOpen] = useState(false);
+  const [isRecoverOpen, setRecoverOpen] = useState(false);
 
   const handleCodigoChange = (index, value) => {
     if (/^[0-9]?$/.test(value)) {
@@ -40,6 +47,8 @@ function PasswordReset() {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 py-10 flex justify-center">
       <div className="relative bg-white w-full max-w-md sm:max-w-lg md:max-w-2xl min-h-screen rounded-3xl shadow-xl flex flex-col items-center border border-[#CBCBCB] px-6 sm:px-10 md:px-16 pt-20 pb-10">
@@ -51,7 +60,6 @@ function PasswordReset() {
             className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-fill drop-shadow-lg"
           />
         </div>
-
         <h2 className="text-2xl sm:text-3xl md:text-2xl font-bold mb-2 mt-3 text-center font-secundary text-tertiary">
           Recuperar contraseña
         </h2>
@@ -204,6 +212,7 @@ function PasswordReset() {
             </button>
             <button
               type="button"
+              onClick={() => setRecoverOpen(true)}
               className="sm:w-[1/2] w-[1/2]  px-8 cursor-pointer py-1 border-2 text-lg border-primary text-primary font-bold rounded-full shadow-sm transition"
             >
               Volver atrás
@@ -211,6 +220,17 @@ function PasswordReset() {
           </div>
         </form>
       </div>
+      {/* Modales */}
+      <AuthModalsController
+        isLoginOpen={isLoginOpen}
+        setLoginOpen={setLoginOpen}
+        isRegisterOpen={isRegisterOpen}
+        setRegisterOpen={setRegisterOpen}
+        isRegisterbOpen={isRegisterbOpen}
+        setRegisterbOpen={setRegisterbOpen}
+        isRecoverOpen={isRecoverOpen}
+        setRecoverOpen={setRecoverOpen}
+      />
     </div>
   );
 }

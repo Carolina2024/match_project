@@ -97,9 +97,10 @@ const Home = () => {
                   <br />
                   <span className="text-primary">mascota</span>
                 </h2>
-                <button 
-                onClick={() => setRegisterOpen(true)}
-                className="bg-white cursor-pointer text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition">
+                <button
+                  onClick={() => setRegisterOpen(true)}
+                  className="bg-white cursor-pointer text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition"
+                >
                   Regístrate para Adoptar
                 </button>
               </div>
@@ -175,15 +176,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* Botón flotante */}
-          <div className="fixed top-38 right-12 z-50">
-            <button
-              onClick=""
-              className="bg-primary w-18 cursor-pointer h-18 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition"
-            >
-              <HandHeart size={44} className="stroke-white" />
-            </button>
-          </div>
 
           {/* Segunda sección logueado */}
           {/* === Ajuste aquí: wrapper de PetsHome === */}
@@ -195,6 +187,17 @@ const Home = () => {
         </>
       )}
 
+        {/* Botón flotante */}
+          <a
+          href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+          target="_blank"
+          className="fixed top-38 right-12 z-50">
+            <button
+              className="bg-primary w-18 cursor-pointer h-18 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition"
+            >
+              <HandHeart size={44} className="stroke-white" />
+            </button>
+          </a>
       {/* Tercera sección global con o sin logueo */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">

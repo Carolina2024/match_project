@@ -21,6 +21,7 @@ const Home = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
+  const [isRecoverOpen, setRecoverOpen] = useState(false);
 
   // Slider state
   const [activeSlide, setActiveSlide] = useState(0);
@@ -187,17 +188,16 @@ const Home = () => {
         </>
       )}
 
-        {/* Botón flotante */}
-          <a
-          href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
-          target="_blank"
-          className="fixed top-38 right-12 z-50">
-            <button
-              className="bg-primary w-18 cursor-pointer h-18 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition"
-            >
-              <HandHeart size={44} className="stroke-white" />
-            </button>
-          </a>
+      {/* Botón flotante */}
+      <a
+        href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+        target="_blank"
+        className="fixed top-38 right-12 z-50"
+      >
+        <button className="bg-primary w-18 cursor-pointer h-18 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition">
+          <HandHeart size={44} className="stroke-white" />
+        </button>
+      </a>
       {/* Tercera sección global con o sin logueo */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
@@ -387,6 +387,8 @@ const Home = () => {
         setRegisterOpen={setRegisterOpen}
         isRegisterbOpen={isRegisterbOpen}
         setRegisterbOpen={setRegisterbOpen}
+        isRecoverOpen={isRecoverOpen}
+        setRecoverOpen={setRecoverOpen}
       />
     </section>
   );

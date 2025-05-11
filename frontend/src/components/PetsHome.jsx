@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getCompatiblePets } from "../api/PetsUser";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
 import { Carousel } from "react-responsive-carousel";

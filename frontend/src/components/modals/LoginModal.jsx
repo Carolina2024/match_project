@@ -4,10 +4,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { loginUser } from "../../api/user";
-import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
-const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
+const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -246,12 +245,16 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister }) => {
               </div>
 
               <div className="text-left">
-                <Link
-                  to="#"
-                  className="text-sm text-primary font-semibold hover:underline"
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenRecovery();
+                  }}
+                  className="text-sm text-primary font-semibold hover:underline cursor-pointer"
                 >
                   ¿Olvidaste la contraseña?
-                </Link>
+                </button>
               </div>
 
               <div className="justify-center text-left mt-12">
@@ -377,6 +380,7 @@ LoginModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onOpenRegister: PropTypes.func.isRequired,
+  onOpenRecovery: PropTypes.func.isRequired,
 };
 
 export default LoginModal;

@@ -24,6 +24,7 @@ const Navbar = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
+  const [isRecoverOpen, setRecoverOpen] = useState(false);
 
   // Dropdowns (click-to-toggle)
   const [isInicioOpen, setIsInicioOpen] = useState(false);
@@ -37,28 +38,18 @@ const Navbar = () => {
 
   useEffect(() => {
     function handleClickOutside(e) {
-      if (
-        inicioRef.current &&
-        !inicioRef.current.contains(e.target)
-      ) {
+      if (inicioRef.current && !inicioRef.current.contains(e.target)) {
         setIsInicioOpen(false);
       }
-      if (
-        nosotrosRef.current &&
-        !nosotrosRef.current.contains(e.target)
-      ) {
+      if (nosotrosRef.current && !nosotrosRef.current.contains(e.target)) {
         setIsNosotrosOpen(false);
       }
-      if (
-        userMenuRef.current &&
-        !userMenuRef.current.contains(e.target)
-      ) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
         setIsUserMenuOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -90,7 +81,10 @@ const Navbar = () => {
               className="flex items-center hover:text-primary transition"
             >
               <span>Inicio</span>
-              <ChevronDown size={16} className="ml-1 stroke-[#767575] cursor-pointer" />
+              <ChevronDown
+                size={16}
+                className="ml-1 stroke-[#767575] cursor-pointer"
+              />
             </button>
             {isInicioOpen && (
               <div className="absolute top-full left-0 mt-2 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
@@ -123,7 +117,10 @@ const Navbar = () => {
             className="flex items-center hover:text-primary transition"
           >
             <span>Nosotros</span>
-            <ChevronDown size={16} className="ml-1 stroke-[#767575] cursor-pointer" />
+            <ChevronDown
+              size={16}
+              className="ml-1 stroke-[#767575] cursor-pointer"
+            />
           </button>
           {isNosotrosOpen && (
             <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
@@ -151,10 +148,7 @@ const Navbar = () => {
         <span className="border-r border-2 h-10 border-primary" />
 
         {/* Otras secciones */}
-        <Link
-          to="/CuidadosMascota"
-          className="hover:text-primary transition"
-        >
+        <Link to="/CuidadosMascota" className="hover:text-primary transition">
           Cuidados de tu mascota
         </Link>
         <span className="border-r border-2 h-10 border-primary" />
@@ -173,7 +167,10 @@ const Navbar = () => {
             >
               <User size={20} className="mr-2 stroke-primary" />
               <span>{user.fullname}</span>
-              <ChevronDown size={16} className="ml-2 stroke-[#767575] cursor-pointer" />
+              <ChevronDown
+                size={16}
+                className="ml-2 stroke-[#767575] cursor-pointer"
+              />
             </button>
             {isUserMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
@@ -222,10 +219,16 @@ const Navbar = () => {
               </button>
               {isInicioOpen && (
                 <div className="flex flex-col items-center gap-2 mt-2">
-                  <Link to="/#seguimiento" className="hover:text-primary transition">
+                  <Link
+                    to="/#seguimiento"
+                    className="hover:text-primary transition"
+                  >
                     Seguimiento de tu match
                   </Link>
-                  <Link to="/#historias" className="hover:text-primary transition">
+                  <Link
+                    to="/#historias"
+                    className="hover:text-primary transition"
+                  >
                     Historias de adopción
                   </Link>
                 </div>
@@ -253,13 +256,22 @@ const Navbar = () => {
             </button>
             {isNosotrosOpen && (
               <div className="flex flex-col items-center gap-2 mt-2">
-                <Link to="/Nosotros#historia" className="hover:text-primary transition">
+                <Link
+                  to="/Nosotros#historia"
+                  className="hover:text-primary transition"
+                >
                   Historia del refugio
                 </Link>
-                <Link to="/Nosotros#proposito" className="hover:text-primary transition">
+                <Link
+                  to="/Nosotros#proposito"
+                  className="hover:text-primary transition"
+                >
                   Nuestro propósito
                 </Link>
-                <Link to="/Nosotros#colaborar" className="hover:text-primary transition">
+                <Link
+                  to="/Nosotros#colaborar"
+                  className="hover:text-primary transition"
+                >
                   Cómo colaborar
                 </Link>
               </div>
@@ -293,7 +305,10 @@ const Navbar = () => {
                 </button>
                 {isUserMenuOpen && (
                   <div className="flex flex-col items-center gap-2 mt-2">
-                    <Link to="/profile" className="hover:text-primary transition">
+                    <Link
+                      to="/profile"
+                      className="hover:text-primary transition"
+                    >
                       Actualizar información
                     </Link>
                     <button
@@ -325,6 +340,8 @@ const Navbar = () => {
         setRegisterOpen={setRegisterOpen}
         isRegisterbOpen={isRegisterbOpen}
         setRegisterbOpen={setRegisterbOpen}
+        isRecoverOpen={isRecoverOpen}
+        setRecoverOpen={setRecoverOpen}
       />
     </header>
   );

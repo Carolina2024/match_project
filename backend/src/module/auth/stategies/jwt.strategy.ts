@@ -25,13 +25,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     const user = await this.userService.findByEmail(email);
 
     if (!user) {
-      throw new UnauthorizedException('Token es invalido');
-    }
-
-    if (!user.isActive) {
-      throw new UnauthorizedException(
-        'Usuario eliminado. Para más información, póngase en contacto con un administrador',
-      );
+      throw new UnauthorizedException('Token inválido');
     }
 
     return user;

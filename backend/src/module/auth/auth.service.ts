@@ -71,12 +71,6 @@ export class AuthService {
       throw new NotFoundException('Usuario no encontrado');
     }
 
-    if (!user.isActive) {
-      throw new ConflictException(
-        'Usuario eliminado. Para más información, póngase en contacto con un administrador',
-      );
-    }
-
     const isValidPassword = await bcrypt.compare(
       loginDto.password,
       user.password,

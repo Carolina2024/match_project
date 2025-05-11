@@ -64,7 +64,7 @@ export class UsersService {
         email: true,
         fullname: true,
         id: true,
-        isActive: true,
+        isActive: false,
         role: true,
         adopter: true,
         createdAt: true,
@@ -116,6 +116,8 @@ export class UsersService {
       );
 
     await this.userRepository.update(id, { isActive: false });
+
+    await this.matchRepository.delete({ userId: user.id });
 
     return {
       message: 'La cuenta del usuario ha sido eliminada exitosamente',

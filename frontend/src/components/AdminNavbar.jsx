@@ -92,7 +92,7 @@ const AdminNavbar = ({
         </button>
 
         {open && (
-          <div className="absolute right-0 mt-2 w-full w-40 bg-white border shadow-lg border-gray-200 rounded shadow z-50 text-xs">
+          <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg border-gray-200 rounded z-50 text-xs">
             <button
               className="flex items-center w-full text-left px-2 py-1 text-sm hover:bg-gray-100"
               onClick={() => {

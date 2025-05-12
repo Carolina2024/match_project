@@ -38,7 +38,7 @@ function PetsHome() {
   };
 
   const handleGoToTracking = () => {
-    navigate("/pet-election", {
+    navigate("/seguimiento", {
       state: {
         nombre: seleccionada.name,
         foto: seleccionada.photoUrls[0],
@@ -131,7 +131,7 @@ function PetsHome() {
                   {seleccionada.traits.map((trait, idx) => (
                     <span
                       key={idx}
-                      className="bg-primary text-white px-3 py-1 rounded-full text-sm font-medium"
+                      className="border border-primary text-primary px-3 py-1 rounded-full text-sm font-medium"
                     >
                       {trait}
                     </span>
@@ -217,7 +217,7 @@ function PetsHome() {
                       <p className="text-xs">{seleccionada.admissionDate}</p>
                     </div>
                     <button
-                      className="flex justify-center items-center gap-1 bg-white border border-primary text-primary rounded-md px-5 py-2 hover:bg-orange-100"
+                      className="flex justify-center items-center gap-1 bg-primary border-primary text-white rounded-md px-5 py-2 hover:bg-orange-100"
                       onClick={handleMatchClick}
                     >
                       Match <FaHeart className="ml-1" />

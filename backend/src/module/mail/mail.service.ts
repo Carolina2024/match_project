@@ -44,12 +44,16 @@ export class MailService {
   }
 
 
-    async sendRecoveryCode(email: string, token: string) {
+    async sendRecoveryCode(email: string, resetLink: string, codigo:string, ttlMinutes:number) {
         return this.renderAndSend(
           'recovery-code',
           email,
-          'Código de recuperación de contraseña',
-          { code: token },
+          'Recuperación de contraseña',
+          { 
+            resetLink,
+            codigo,
+            ttlMinutes
+          },
         );
       }
 

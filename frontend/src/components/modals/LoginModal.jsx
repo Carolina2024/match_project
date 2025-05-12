@@ -76,6 +76,11 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
         didOpen: () => {
           Swal.showLoading();
         },
+        customClass: {
+          popup: "p-4 text-sm mt-32", // padding reducido, texto más pequeño, margen arriba
+          title: "text-sm", // tamaño del título más pequeño
+          htmlContainer: "text-xs", // tamaño del texto aún más pequeño
+        },
       });
 
       const data = await loginUser({ email, password });
@@ -95,20 +100,21 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
 
       Swal.fire({
         title: "¡Inicio de sesión exitoso!",
-        text: "Bienvenido/a a Patas Pirque",
+        text: "",
         icon: "success",
-        confirmButtonText: "Aceptar",
-        confirmButtonColor: "#FAAB75",
-      }).then((result) => {
-        if (result.isConfirmed) {
+        showConfirmButton: false,
+        timer: 1000, // se cierra automáticamente en 2 segundos
+        timerProgressBar: true,
+        didClose: () => {
           onClose();
           if (role === "admin") {
             navigate("/Admin");
           } else {
             navigate("/");
           }
-        }
+        },
       });
+
     } catch (err) {
       Swal.close();
       Swal.fire({

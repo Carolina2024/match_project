@@ -1,21 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import logo from "../assets/logo.png";
 import AuthModalsController from "../components/modals/AuthModalsController";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  // Estado de usuario
-  const stored = localStorage.getItem("user");
-  const user = stored ? JSON.parse(stored) : null;
-  const loggedIn = Boolean(user);
-  const navigate = useNavigate();
 
-  // Handlers
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
-  };
+  //Context
+  const { user, isAuthenticated, logout } = useAuth(); 
+
+const navigate = useNavigate();
 
   // Menú móvil
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,6 +47,11 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleLogout = () => {
+  logout();
+  navigate("/");
+};
+
   return (
     <header className="bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 flex items-center justify-between">
       {/* Logo */}
@@ -74,7 +74,7 @@ const Navbar = () => {
       {/* Navegación desktop */}
       <nav className="hidden md:flex items-center gap-8 text-lg font-normal text-black font-primary">
         {/* Inicio */}
-        {loggedIn ? (
+        {isAuthenticated ? (
           <div ref={inicioRef} className="relative">
             <button
               onClick={() => setIsInicioOpen((o) => !o)}
@@ -157,9 +157,9 @@ const Navbar = () => {
         </Link>
       </nav>
 
-      {/* Botón / Menú usuario desktop */}
+      {/* Menú usuario desktop */}
       <div className="hidden md:block">
-        {loggedIn ? (
+        {isAuthenticated ? (
           <div ref={userMenuRef} className="relative inline-block">
             <button
               onClick={() => setIsUserMenuOpen((o) => !o)}
@@ -203,7 +203,7 @@ const Navbar = () => {
       {menuOpen && (
         <div className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
           {/* Inicio móvil */}
-          {loggedIn ? (
+          {isAuthenticated ? (
             <div ref={inicioRef} className="w-full">
               <button
                 onClick={() => setIsInicioOpen((o) => !o)}
@@ -288,7 +288,7 @@ const Navbar = () => {
 
           {/* Usuario móvil */}
           <div ref={userMenuRef} className="w-full">
-            {loggedIn ? (
+            {isAuthenticated ? (
               <>
                 <button
                   onClick={() => setIsUserMenuOpen((o) => !o)}

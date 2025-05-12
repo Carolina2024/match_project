@@ -3,15 +3,16 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import { FaUser } from "react-icons/fa";
-import { FaSignOutAlt } from "react-icons/fa";
-import { FaChevronDown } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 
 const AdminNavbar = ({
   sectionTitle = "Panel de administración",
   userRole = "Admin",
   isSidebarVisible,
 }) => {
+  const { logout } = useAuth(); //context
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("Usuario");
@@ -61,7 +62,7 @@ const AdminNavbar = ({
         Swal.showLoading();
       },
     }).then(() => {
-      localStorage.removeItem("token");
+      logout();
       navigate("/");
     });
   };
@@ -91,7 +92,7 @@ const AdminNavbar = ({
         </button>
 
         {open && (
-          <div className="absolute right-0 mt-2 w-full w-40 bg-white border shadow-lg border-gray-200 rounded shadow z-50 text-xs">
+          <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg border-gray-200 rounded z-50 text-xs">
             <button
               className="flex items-center w-full text-left px-2 py-1 text-sm hover:bg-gray-100"
               onClick={() => {
@@ -103,7 +104,7 @@ const AdminNavbar = ({
               <span>Mi perfil</span>
             </button>
             <button
-              className="flex items-center w-full text-left px-4 py-2 text-sm py-1 text-red-600 hover:bg-gray-100"
+              className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
               onClick={handleLogout}
             >
               <FaSignOutAlt className="mr-1 text-sm" />

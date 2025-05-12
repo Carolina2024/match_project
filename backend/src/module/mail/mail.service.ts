@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
+import { Transporter } from 'nodemailer';
 import { ConfigService } from '@nestjs/config';
 import { readFileSync } from 'fs';
 import { compile } from 'handlebars';
@@ -7,13 +8,13 @@ import { join } from 'path';
 
 @Injectable()
 export class MailService {
-  private transporter: nodemailer.Transporter;
+  private transporter: Transporter;
 
   constructor(private readonly configService: ConfigService) {
     this.transporter = nodemailer.createTransport({
       host: this.configService.get<string>('MAIL_HOST'),
       port: this.configService.get<number>('MAIL_PORT'),
-      secure: false, 
+      secure: false,
       auth: {
         user: this.configService.get<string>('MAIL_USER'),
         pass: this.configService.get<string>('MAIL_PASSWORD'),
@@ -43,19 +44,21 @@ export class MailService {
     return this.sendMail(to, subject, html);
   }
 
-
-    async sendRecoveryCode(email: string, resetLink: string, codigo:string, ttlMinutes:number) {
-        return this.renderAndSend(
-          'recovery-code',
-          email,
-          'Recuperación de contraseña',
-          { 
-            resetLink,
-            codigo,
-            ttlMinutes
-          },
-        );
-      }
-
-
+  async sendRecoveryCode(
+    email: string,
+    resetLink: string,
+    recoveryCode: string,
+    ttlMinutes: number,
+  ) {
+    return this.renderAndSend(
+      'recovery-code',
+      email,
+      'Recuperación de contraseña',
+      {
+        resetLink,
+        recoveryCode,
+        ttlMinutes,
+      },
+    );
+  }
 }

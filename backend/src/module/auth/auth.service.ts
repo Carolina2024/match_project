@@ -102,17 +102,14 @@ export class AuthService {
   }
 
   async recoverPassword(email: string): Promise<{ message: string }> {
-    console.log('recoverPassword llamado con email:', JSON.stringify(email));
     const user = await this.usersService.findByEmail(email);
-    console.log('Usuario buscado:', user);
     if (!user) throw new NotFoundException('Usuario no encontrado');
-    //if (!user.isActive) throw new NotFoundException('Usuario no encontrado');
 
     const ttlMinutes = this.configService.get<number>(
       'RECOVERY_CODE_TTL_MINUTES',
       15,
     );
-    const codigo = Array.from({ length: 6 }, () =>
+    const recoveryCode = Array.from({ length: 6 }, () =>
       Math.floor(Math.random() * 10),
     ).join('');
 
@@ -120,7 +117,7 @@ export class AuthService {
       {
         sub: user.id,
         purpose: 'password_recovery',
-        codigo
+        recoveryCode,
       },
       {
         expiresIn: `${ttlMinutes}m`,
@@ -128,21 +125,26 @@ export class AuthService {
     );
 
     const frontUrl = this.configService.get<string>('FRONTEND_URL');
-    const resetLink = `${frontUrl}/RecoverPassword?token=${encodeURIComponent(
-      token,
-    )}`;
-    await this.mailService.sendRecoveryCode(user.email,resetLink,codigo,ttlMinutes);
+    const resetLink = `${frontUrl}?token=${encodeURIComponent(token)}`;
+    await this.mailService.sendRecoveryCode(
+      user.email,
+      resetLink,
+      recoveryCode,
+      ttlMinutes,
+    );
 
     return {
-      message: 'Te hemos enviado un correo con un enlace y un código para recuperar tu contraseña',
+      message:
+        'Te hemos enviado un correo con un enlace y un código para recuperar tu contraseña',
     };
   }
 
   async resetPassword(
     token: string,
     newPassword: string,
+    recoveryCode: string,
   ): Promise<{ message: string }> {
-    let payload: { sub: string; purpose: string; otp: string };
+    let payload: { sub: string; purpose: string; recoveryCode: string };
     try {
       payload = this.jwtService.verify(token);
     } catch (err) {
@@ -151,9 +153,16 @@ export class AuthService {
     }
 
     if (payload.purpose !== 'password_recovery') {
-      throw new UnauthorizedException('Token no válidos para recuperación');
+      throw new UnauthorizedException(
+        'Token inválido para recuperación de contraseña',
+      );
     }
 
+    if (payload.recoveryCode !== recoveryCode) {
+      throw new UnauthorizedException(
+        'El código de recuperación ingresado es inválido',
+      );
+    }
     const user = await this.usersService.findOneById(payload.sub);
     user.password = await bcrypt.hash(newPassword, 10);
     await this.usersService.updatePassword(user.id, user.password);

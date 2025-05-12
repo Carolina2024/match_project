@@ -101,14 +101,12 @@ export class UsersService {
 
   async remove(id: string): Promise<{ message: string }> {
     const user = await this.userRepository.findOne({
-      where: { id },
+      where: { id, isActive: true },
       relations: ['adopter'],
     });
     if (!user) {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
-    if (!user.isActive)
-      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
 
     if (user.role === UserRole.ADMIN)
       throw new BadRequestException(

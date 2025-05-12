@@ -3,15 +3,16 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import { FaUser } from "react-icons/fa";
-import { FaSignOutAlt } from "react-icons/fa";
-import { FaChevronDown } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 
 const AdminNavbar = ({
   sectionTitle = "Panel de administración",
   userRole = "Admin",
   isSidebarVisible,
 }) => {
+  const { logout } = useAuth(); //context
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("Usuario");
@@ -61,7 +62,7 @@ const AdminNavbar = ({
         Swal.showLoading();
       },
     }).then(() => {
-      localStorage.removeItem("token");
+      logout();
       navigate("/");
     });
   };

@@ -26,7 +26,7 @@ function App() {
           <Route path="/Adoptar" element={<Adoptar />} />
           <Route path="/Mascotas" element={<PetsHome />} />
           <Route path="/seguimiento" element={<PetElection />} />
-          <Route path="/EditPerfil" element={<UserModalEdit />} />
+          <Route path="/editprofile" element={<UserModalEdit />} />
           <Route path="/RecoverPassword" element={<PasswordReset />} />
         </Route>
 

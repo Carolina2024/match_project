@@ -175,7 +175,7 @@ const Navbar = () => {
             {isUserMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
-                  to="/profile"
+                  to="/editprofile"
                   className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
                 >
                   Actualizar información

@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { loginUser } from "../../api/user";
 import logo from "../../assets/logo.png";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -85,10 +87,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
 
       const data = await loginUser({ email, password });
 
-      localStorage.setItem("token", data.token);
-      if (data.user) {
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
+      login(data.user, data.token);
 
       const payload = JSON.parse(atob(data.token.split(".")[1]));
       const role = payload.role || data.user?.role;
@@ -114,7 +113,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
           }
         },
       });
-
     } catch (err) {
       Swal.close();
       Swal.fire({

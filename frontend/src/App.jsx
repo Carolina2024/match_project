@@ -25,7 +25,7 @@ function App() {
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Adoptar" element={<Adoptar />} />
           <Route path="/Mascotas" element={<PetsHome />} />
-          <Route path="/pet-election" element={<PetElection />} />
+          <Route path="/seguimiento" element={<PetElection />} />
           <Route path="/EditPerfil" element={<UserModalEdit />} />
           <Route path="/RecoverPassword" element={<PasswordReset />} />
         </Route>

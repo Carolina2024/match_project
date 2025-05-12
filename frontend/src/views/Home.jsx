@@ -180,7 +180,7 @@ const Home = () => {
 
           {/* Segunda sección logueado */}
           {/* Wrapper de PetsHome */}
-          <div className="w-full bg-gray-100 mt-22 flex justify-center">
+          <div className="w-full mt-22 flex justify-center">
             <div className="w-full md:max-w-5xl px-4">
               <PetsHome />
             </div>

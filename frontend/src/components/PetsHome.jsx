@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getCompatiblePets } from "../api/PetsUser";
+import { createMatch, getCompatiblePets } from "../api/PetsUser";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -30,7 +30,9 @@ function PetsHome() {
     setShowCheckMatch3(true);
   };
 
-  const handleConfirmMatch = () => {
+  const handleConfirmMatch = async (id) => {
+    console.log(id)
+    await createMatch(id)
     setShowCheckMatch3(false);
     setShowCheckMatch4(true);
   };
@@ -45,13 +47,13 @@ function PetsHome() {
   };
 
   return (
-    <div className="mx-auto">
+    <div className="mx-auto bg-transparent">
       {!seleccionada ? (
         <>
           <h1 className="text-3xl font-semibold mb-4 text-center text-primary">
             Tus mascotas compatibles
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-1 h-full">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-1 h-full bg-transparent">
             {mascotas.map((mascota) => (
               <div key={mascota.id} className="p-4 items-center text-center">
                 <img
@@ -247,7 +249,7 @@ function PetsHome() {
             </h1>
             <div className="flex justify-center gap-10">
               <button
-                onClick={handleConfirmMatch}
+                onClick={() => handleConfirmMatch(seleccionada.id)}
                 className="bg-primary text-white font-semibold py-2 px-14 rounded-full cursor-pointer"
               >
                 Sí

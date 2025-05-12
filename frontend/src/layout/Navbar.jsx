@@ -89,7 +89,7 @@ const Navbar = () => {
             {isInicioOpen && (
               <div className="absolute top-full left-0 mt-2 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
-                  to="/#seguimiento"
+                  to="/seguimiento"
                   className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
                 >
                   Seguimiento de tu match

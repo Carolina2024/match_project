@@ -103,7 +103,7 @@ const AdminNavbar = ({
               <span>Mi perfil</span>
             </button>
             <button
-              className="flex items-center w-full text-left px-4 py-2 text-sm py-1 text-red-600 hover:bg-gray-100"
+              className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
               onClick={handleLogout}
             >
               <FaSignOutAlt className="mr-1 text-sm" />

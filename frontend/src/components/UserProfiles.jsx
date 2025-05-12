@@ -21,11 +21,25 @@ const UserProfiles = () => {
 
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const fetchUsers = async () => {
       try {
         const response = await fetchUsersget(currentPage);
         console.log("Usuarios recibidos:", response.items);
+        setUsers(response.items || []);
+        setTotalPages(response.totalPages || 1);
+      } catch (error) {
+        console.error("Error al cargar usuarios:", error.message);
+      }
+    };
+
+    fetchUsers();
+  }, [currentPage]); */
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetchUsersget(currentPage);
         setUsers(response.items || []);
         setTotalPages(response.totalPages || 1);
       } catch (error) {
@@ -59,7 +73,7 @@ const UserProfiles = () => {
     setModalOpen(false);
   };
 
-  const handleDeleteUser = async () => {
+  /* const handleDeleteUser = async () => {
     if (!selectedUser) return;
     try {
       await deleteUser(selectedUser.id);
@@ -77,14 +91,44 @@ const UserProfiles = () => {
     } finally {
       handleCloseModal();
     }
+  }; */
+
+  /* const handleDeleteUser = async () => {
+    if (!selectedUser) return;
+    try {
+      await deleteUser(selectedUser.id);
+      setUsers((prev) => prev.filter((u) => u.id !== selectedUser.id));
+      setDeletedUserName(selectedUser.fullname);
+      setShowMessage(true);
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error.message);
+    } finally {
+      handleCloseModal();
+    }
+  }; */
+
+  const handleDeleteUser = async () => {
+    if (!selectedUser) return;
+    try {
+      await deleteUser(selectedUser.id);
+      // Hacer un fetch de usuarios actualizados para evitar mostrar usuarios eliminados
+      const response = await fetchUsersget(currentPage);
+      setUsers(response.items || []);
+      setDeletedUserName(selectedUser.fullname);
+      setShowMessage(true);
+    } catch (error) {
+      console.error("Error al eliminar usuario:", error.message);
+    } finally {
+      handleCloseModal();
+    }
   };
 
   const handleOpenDetail = async (user) => {
     try {
       const token = localStorage.getItem("token");
       console.log("🔐 TOKEN:", token);
-      const fullUser = await getUserById(user.id, token); 
-      setSelectedUserDetail(fullUser); 
+      const fullUser = await getUserById(user.id, token);
+      setSelectedUserDetail(fullUser);
       setIsDetailOpen(true);
     } catch (error) {
       console.error("Error al obtener los detalles del usuario:", error);
@@ -109,7 +153,6 @@ const UserProfiles = () => {
           />
           <FaSearch className="absolute left-3 top-3 text-gray-400" />
         </div>
-
       </div>
 
       <div className="overflow-x-auto">
@@ -153,7 +196,7 @@ const UserProfiles = () => {
                     </button>
                     <button
                       className="text-red-500 hover:text-red-700"
-                      onClick={() => handleOpenModal(user.id)}
+                      onClick={() => handleOpenModal(user)}
                     >
                       <FaTrash />
                     </button>
@@ -183,7 +226,7 @@ const UserProfiles = () => {
             {totalPages > 1 &&
               Array.from({ length: totalPages }, (_, index) => {
                 const page = index + 1;
-               
+
                 return (
                   <button
                     key={page}

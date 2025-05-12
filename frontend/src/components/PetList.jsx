@@ -95,7 +95,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     setModalOpenn(false);
   };
 
-  const handleDeletePet = async () => {
+  /* const handleDeletePet = async () => {
     if (!selectedPett) return;
     try {
       await deletePet(selectedPett.id);
@@ -113,7 +113,23 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     } finally {
       handleCloseModal();
     }
+  }; */
+
+  const handleDeletePet = async () => {
+    if (!selectedPett) return;
+    try {
+      await deletePet(selectedPett.id);
+      // Elimina la mascota del estado 'pets'
+      setPets((prev) => prev.filter((pet) => pet.id !== selectedPett.id));
+      setDeletedPetName(selectedPett.name);
+      setShowMessage(true);
+    } catch (error) {
+      console.error("Error al eliminar la mascota:", error.message);
+    } finally {
+      handleCloseModal();
+    }
   };
+
 
   return (
     <div className="mb-6">

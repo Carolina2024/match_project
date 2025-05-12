@@ -102,29 +102,39 @@ export class AuthService {
   }
 
   async recoverPassword(email: string): Promise<{ message: string }> {
+    console.log('recoverPassword llamado con email:', JSON.stringify(email));
     const user = await this.usersService.findByEmail(email);
+    console.log('Usuario buscado:', user);
     if (!user) throw new NotFoundException('Usuario no encontrado');
-    if (!user.isActive) throw new NotFoundException('Usuario no encontrado');
+    //if (!user.isActive) throw new NotFoundException('Usuario no encontrado');
 
     const ttlMinutes = this.configService.get<number>(
       'RECOVERY_CODE_TTL_MINUTES',
       15,
     );
+    const codigo = Array.from({ length: 6 }, () =>
+      Math.floor(Math.random() * 10),
+    ).join('');
 
     const token = this.jwtService.sign(
       {
         sub: user.id,
         purpose: 'password_recovery',
+        codigo
       },
       {
         expiresIn: `${ttlMinutes}m`,
       },
     );
 
-    await this.mailService.sendRecoveryCode(user.email, token);
+    const frontUrl = this.configService.get<string>('FRONTEND_URL');
+    const resetLink = `${frontUrl}/RecoverPassword?token=${encodeURIComponent(
+      token,
+    )}`;
+    await this.mailService.sendRecoveryCode(user.email,resetLink,codigo,ttlMinutes);
 
     return {
-      message: 'Código de recuperación enviado al correo electrónico',
+      message: 'Te hemos enviado un correo con un enlace y un código para recuperar tu contraseña',
     };
   }
 

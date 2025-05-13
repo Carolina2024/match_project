@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+   const navigate = useNavigate();
   if (!isOpen) return null;
 
   const isValidEmail = (email) => {
@@ -12,7 +15,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
     return emailRegex.test(email);
   };
 
-  const handleEnviar = (event) => {
+  const handleEnviar = async (event) => {
     event.preventDefault();
     setEmailError("");
 
@@ -25,7 +28,18 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
       setEmailError("Por favor, ingresa un correo electrónico válido.");
       return;
     }
+
+
+    try {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/recover-password`, { email });
+      // Redirigimos al formulario de la validacion del código y los inputs de nueva contraseña
+      localStorage.setItem("email_recovery", email); // Almacenamos email
+      navigate("/RecoverPassword");
+    } catch (error) {
+      setEmailError("Correo no registrado o error al enviar. Intenta nuevamente.");
+    }
   };
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);

@@ -101,6 +101,7 @@ const AuthModalsController = ({
           setRecoverOpen(false);
           setLoginOpen(true);
         }}
+        setLoginOpen={setLoginOpen}
       />
 
       <RegisterModal

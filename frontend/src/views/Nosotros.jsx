@@ -295,7 +295,7 @@ const Nosotros = () => {
                 />
               </div>
               <h4 className="font-bold text-primary text-xl mb-1">
-                Huella Fuerte
+                Huella Firme
               </h4>
               <p className="text-base text-[#000000] font-normal mb-2">
                 10.000 CLP mensual

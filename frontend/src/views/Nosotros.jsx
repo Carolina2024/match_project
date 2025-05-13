@@ -75,7 +75,7 @@ const Nosotros = () => {
         <p className="font-medium md:text-lg text-[#000000] px-20 py-10 text-justify">
           “Siempre tuve una conexión especial con los animales. Desde niña
           rescataba animales, guiada solo por mi instinto y cariño. Al llegar a
-          Pirque, me encontre con una realidad dura: cientos de animales
+          Pirque, me encontré con una realidad dura: cientos de animales
           abandonados y poca ayuda. Fue entonces cuando decidí formalizar lo que
           siempre había hecho por amor, y nació Patas Pirque.
           <br />
@@ -206,7 +206,7 @@ const Nosotros = () => {
               </svg>
               <h4 className="text-primary text-3xl font-bold">Visión</h4>
             </div>
-            <ul className="md:text-lg font-medium text-[#000000] mt-2 list-disc list-inside leading-[2.1]">
+            <ul className="md:text-lg font-medium text-[#000000] mt-2 list-disc list-inside leading-normal">
               <li>Amor y respeto por los seres vivos </li>
               <li>Educación como motor de cambio </li>
               <li> Solidaridad y compromiso social </li>

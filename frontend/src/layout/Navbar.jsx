@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import logo from "../assets/logo.png";
 import AuthModalsController from "../components/modals/AuthModalsController";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-
   //Context
-  const { user, isAuthenticated, logout } = useAuth(); 
+  const { user, isAuthenticated, logout } = useAuth();
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Menú móvil
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,36 +20,17 @@ const navigate = useNavigate();
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
   const [isRecoverOpen, setRecoverOpen] = useState(false);
 
-  // Dropdowns (click-to-toggle)
+  // Dropdowns (click)
   const [isInicioOpen, setIsInicioOpen] = useState(false);
   const [isNosotrosOpen, setIsNosotrosOpen] = useState(false);
+  const nosotrosContainerRef = useRef(null);
+
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
-  // Refs para detectar clic afuera
-  const inicioRef = useRef(null);
-  const nosotrosRef = useRef(null);
-  const userMenuRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (inicioRef.current && !inicioRef.current.contains(e.target)) {
-        setIsInicioOpen(false);
-      }
-      if (nosotrosRef.current && !nosotrosRef.current.contains(e.target)) {
-        setIsNosotrosOpen(false);
-      }
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-        setIsUserMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const handleLogout = () => {
-  logout();
-  navigate("/");
-};
+    logout();
+    navigate("/");
+  };
 
   return (
     <header className="bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 flex items-center justify-between">
@@ -83,7 +63,9 @@ const navigate = useNavigate();
               <span>Inicio</span>
               <ChevronDown
                 size={16}
-                className="ml-1 stroke-[#767575] cursor-pointer"
+                className={`ml-1 stroke-[#767575] cursor-pointer transition-transform ${
+                  isInicioOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
             {isInicioOpen && (
@@ -111,7 +93,11 @@ const navigate = useNavigate();
         <span className="border-r border-2 h-10 border-primary" />
 
         {/* Nosotros */}
-        <div ref={nosotrosRef} className="relative">
+        <div
+          ref={nosotrosContainerRef}
+          onMouseLeave={() => setIsNosotrosOpen(false)}
+          className="relative"
+        >
           <button
             onClick={() => setIsNosotrosOpen((o) => !o)}
             className="flex items-center hover:text-primary transition"
@@ -119,11 +105,13 @@ const navigate = useNavigate();
             <span>Nosotros</span>
             <ChevronDown
               size={16}
-              className="ml-1 stroke-[#767575] cursor-pointer"
+              className={`ml-1 stroke-[#767575] cursor-pointer transition-transform ${
+                isNosotrosOpen ? "rotate-180" : ""
+              }`}
             />
           </button>
           {isNosotrosOpen && (
-            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
+            <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
               <Link
                 to="/Nosotros#historia"
                 className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
@@ -169,7 +157,9 @@ const navigate = useNavigate();
               <span>{user.fullname}</span>
               <ChevronDown
                 size={16}
-                className="ml-2 stroke-[#767575] cursor-pointer"
+                className={`ml-2 stroke-[#767575] cursor-pointer transition-transform ${
+                  isUserMenuOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
             {isUserMenuOpen && (
@@ -212,7 +202,7 @@ const navigate = useNavigate();
                 <span>Inicio</span>
                 <ChevronDown
                   size={16}
-                  className={`ml-1 transition-transform ${
+                  className={`ml-1 cursor-pointer transition-transform ${
                     isInicioOpen ? "rotate-180" : ""
                   }`}
                 />

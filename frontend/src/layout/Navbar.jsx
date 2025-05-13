@@ -1,16 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import logo from "../assets/logo.png";
 import AuthModalsController from "../components/modals/AuthModalsController";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-
   //Context
-  const { user, isAuthenticated, logout } = useAuth(); 
+  const { user, isAuthenticated, logout } = useAuth();
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Menú móvil
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,36 +20,25 @@ const navigate = useNavigate();
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
   const [isRecoverOpen, setRecoverOpen] = useState(false);
 
-  // Dropdowns (click-to-toggle)
+  // Dropdowns (click)
   const [isInicioOpen, setIsInicioOpen] = useState(false);
   const [isNosotrosOpen, setIsNosotrosOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
-  // Refs para detectar clic afuera
-  const inicioRef = useRef(null);
-  const nosotrosRef = useRef(null);
-  const userMenuRef = useRef(null);
+  const inicioContainerRef = useRef(null);
+  const nosotrosContainerRef = useRef(null);
+  const userContainerRef = useRef(null);
+   const menuRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (inicioRef.current && !inicioRef.current.contains(e.target)) {
-        setIsInicioOpen(false);
-      }
-      if (nosotrosRef.current && !nosotrosRef.current.contains(e.target)) {
-        setIsNosotrosOpen(false);
-      }
-      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
-        setIsUserMenuOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+useEffect(() => {
+  // usuario logueado, CIerre de desplegable user
+  setIsUserMenuOpen(false);
+}, [isAuthenticated]);
 
   const handleLogout = () => {
-  logout();
-  navigate("/");
-};
+    logout();
+    navigate("/");
+  };
 
   return (
     <header className="bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 flex items-center justify-between">
@@ -75,19 +63,25 @@ const navigate = useNavigate();
       <nav className="hidden md:flex items-center gap-8 text-lg font-normal text-black font-primary">
         {/* Inicio */}
         {isAuthenticated ? (
-          <div ref={inicioRef} className="relative">
+          <div
+            ref={inicioContainerRef}
+            onMouseLeave={() => setIsInicioOpen(false)}
+            className="relative"
+          >
             <button
               onClick={() => setIsInicioOpen((o) => !o)}
-              className="flex items-center hover:text-primary transition"
+              className="flex items-center hover:text-primary transition cursor-pointer"
             >
               <span>Inicio</span>
               <ChevronDown
                 size={16}
-                className="ml-1 stroke-[#767575] cursor-pointer"
+                className={`ml-1 stroke-[#767575] cursor-pointer transition-transform ${
+                  isInicioOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
             {isInicioOpen && (
-              <div className="absolute top-full left-0 mt-2 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
+              <div className="absolute top-full left-0 mt-0 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
                   to="/seguimiento"
                   className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
@@ -111,19 +105,25 @@ const navigate = useNavigate();
         <span className="border-r border-2 h-10 border-primary" />
 
         {/* Nosotros */}
-        <div ref={nosotrosRef} className="relative">
+        <div
+          ref={nosotrosContainerRef}
+          onMouseLeave={() => setIsNosotrosOpen(false)}
+          className="relative"
+        >
           <button
             onClick={() => setIsNosotrosOpen((o) => !o)}
-            className="flex items-center hover:text-primary transition"
+            className="flex items-center hover:text-primary transition cursor-pointer"
           >
             <span>Nosotros</span>
             <ChevronDown
               size={16}
-              className="ml-1 stroke-[#767575] cursor-pointer"
+              className={`ml-1 stroke-[#767575] cursor-pointer transition-transform ${
+                isNosotrosOpen ? "rotate-180" : ""
+              }`}
             />
           </button>
           {isNosotrosOpen && (
-            <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
+            <div className="absolute top-full left-0 mt-0 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
               <Link
                 to="/Nosotros#historia"
                 className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
@@ -160,7 +160,11 @@ const navigate = useNavigate();
       {/* Menú usuario desktop */}
       <div className="hidden md:block">
         {isAuthenticated ? (
-          <div ref={userMenuRef} className="relative inline-block">
+          <div
+            ref={userContainerRef}
+            onMouseLeave={() => setIsUserMenuOpen(false)}
+            className="relative inline-block"
+          >
             <button
               onClick={() => setIsUserMenuOpen((o) => !o)}
               className="flex items-center font-bold border border-primary px-4 py-2 rounded-full hover:bg-orange-50 transition"
@@ -169,11 +173,13 @@ const navigate = useNavigate();
               <span>{user.fullname}</span>
               <ChevronDown
                 size={16}
-                className="ml-2 stroke-[#767575] cursor-pointer"
+                className={`ml-2 stroke-[#767575] cursor-pointer transition-transform ${
+                  isUserMenuOpen ? "rotate-180" : ""
+                }`}
               />
             </button>
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
+              <div className="absolute right-0 mt-0 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
                   to="/editprofile"
                   className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
@@ -201,18 +207,25 @@ const navigate = useNavigate();
 
       {/* Menú móvil */}
       {menuOpen && (
-        <div className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
+        <div 
+        ref={menuRef}
+        onMouseLeave={() => setMenuOpen(false)}
+        className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
           {/* Inicio móvil */}
           {isAuthenticated ? (
-            <div ref={inicioRef} className="w-full">
+            <div
+              ref={inicioContainerRef}
+              onMouseLeave={() => setIsInicioOpen(false)}
+              className="w-full"
+            >
               <button
                 onClick={() => setIsInicioOpen((o) => !o)}
-                className="w-full flex items-center justify-center hover:text-primary transition"
+                className="w-full flex items-center justify-center hover:text-primary transition cursor-pointer"
               >
                 <span>Inicio</span>
                 <ChevronDown
                   size={16}
-                  className={`ml-1 transition-transform ${
+                  className={`ml-1 cursor-pointer transition-transform ${
                     isInicioOpen ? "rotate-180" : ""
                   }`}
                 />
@@ -241,10 +254,14 @@ const navigate = useNavigate();
           )}
 
           {/* Nosotros móvil */}
-          <div ref={nosotrosRef} className="w-full">
+          <div
+            ref={nosotrosContainerRef}
+            onMouseLeave={() => setIsNosotrosOpen(false)}
+            className="w-full"
+          >
             <button
               onClick={() => setIsNosotrosOpen((o) => !o)}
-              className="w-full flex items-center justify-center hover:text-primary transition"
+              className="w-full flex items-center justify-center hover:text-primary transition cursor-pointer"
             >
               <span>Nosotros</span>
               <ChevronDown
@@ -279,20 +296,24 @@ const navigate = useNavigate();
           </div>
 
           {/* Otras vistas */}
-          <Link to="/CuidadosMascota" className="hover:text-primary transition">
+          <Link to="/CuidadosMascota" className="hover:text-primary transition cursor-pointer">
             Cuidados de tu mascota
           </Link>
-          <Link to="/Contacto" className="hover:text-primary transition">
+          <Link to="/Contacto" className="hover:text-primary transition cursor-pointer">
             Contacto
           </Link>
 
           {/* Usuario móvil */}
-          <div ref={userMenuRef} className="w-full">
+          <div
+            ref={userContainerRef}
+            onMouseLeave={() => setIsUserMenuOpen(false)}
+            className="w-full"
+          >
             {isAuthenticated ? (
               <>
                 <button
                   onClick={() => setIsUserMenuOpen((o) => !o)}
-                  className="w-full flex items-center justify-center hover:text-primary transition"
+                  className="w-full flex items-center justify-center hover:text-primary transition cursor-pointer"
                 >
                   <User size={20} className="mr-2 stroke-primary" />
                   <span>{user.fullname}</span>
@@ -307,13 +328,13 @@ const navigate = useNavigate();
                   <div className="flex flex-col items-center gap-2 mt-2">
                     <Link
                       to="/profile"
-                      className="hover:text-primary transition"
+                      className="hover:text-primary transition cursor-pointer"
                     >
                       Actualizar información
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="hover:text-primary transition"
+                      className="hover:text-primary transition cursor-pointer"
                     >
                       Cerrar sesión
                     </button>

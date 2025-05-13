@@ -1,16 +1,22 @@
 import { useState } from "react";
 import AuthModalsController from "../components/modals/AuthModalsController";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import PropTypes from "prop-types";
 
-function PasswordReset(isOpen) {
+function PasswordReset({ isOpen, setLoginOpen }) {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const token = new URLSearchParams(location.search).get("token");
 
   // Modales
-  const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
   const [isRecoverOpen, setRecoverOpen] = useState(false);
@@ -38,12 +44,26 @@ function PasswordReset(isOpen) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validarFormulario()) {
       const completeCode = code.join("");
-      console.log("Código:", completeCode);
-      console.log("Nueva contraseña:", newPassword);
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}/auth/reset-password`,
+          {
+            token,
+            newPassword,
+            recoveryCode: completeCode,
+          }
+        );
+        localStorage.removeItem("email_recovery");
+        setLoginOpen(true); // Limpieza de modal
+        navigate("/"); // Tuta a Home
+      
+      } catch (error) {
+        setErrors({ code: "Código inválido o token vencido" });
+      }
     }
   };
 
@@ -222,7 +242,6 @@ function PasswordReset(isOpen) {
       </div>
       {/* Modales */}
       <AuthModalsController
-        isLoginOpen={isLoginOpen}
         setLoginOpen={setLoginOpen}
         isRegisterOpen={isRegisterOpen}
         setRegisterOpen={setRegisterOpen}
@@ -234,5 +253,10 @@ function PasswordReset(isOpen) {
     </div>
   );
 }
+
+PasswordReset.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setLoginOpen: PropTypes.func.isRequired,
+};
 
 export default PasswordReset;

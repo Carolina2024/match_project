@@ -2,7 +2,6 @@ import { X } from "lucide-react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { loginUser } from "../../api/user";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../context/AuthContext";
@@ -71,20 +70,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
     }
 
     try {
-      Swal.fire({
-        title: "Iniciando sesión...",
-        text: "Por favor espera un momento",
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-        customClass: {
-          popup: "p-4 text-sm mt-32", // padding reducido, texto más pequeño, margen arriba
-          title: "text-sm", // tamaño del título más pequeño
-          htmlContainer: "text-xs", // tamaño del texto aún más pequeño
-        },
-      });
-
       const data = await loginUser({ email, password });
 
       login(data.user, data.token);
@@ -95,32 +80,16 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
       setErrors({});
       setEmail("");
       setPassword("");
-      Swal.close();
+      setError("");
 
-      Swal.fire({
-        title: "¡Inicio de sesión exitoso!",
-        text: "",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000, // se cierra automáticamente en 2 segundos
-        timerProgressBar: true,
-        didClose: () => {
-          onClose();
-          if (role === "admin") {
-            navigate("/Admin");
-          } else {
-            navigate("/");
-          }
-        },
-      });
+      onClose();
+      if (role === "admin") {
+        navigate("/Admin");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
-      Swal.close();
-      Swal.fire({
-        icon: "error",
-        title: "Credenciales inválidas",
-        text: "El correo o la contraseña son incorrectos. Intenta nuevamente.",
-        confirmButtonColor: "#FAAB75",
-      });
+      setError("Correo o contraseña incorrectos. Intenta nuevamente.");
     }
   };
 

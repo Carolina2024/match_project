@@ -6,10 +6,10 @@ import paso5 from "../assets/cuidados5.jpg";
 
 const CuidadosMascota = () => {
   return (
-    <section className=" px-4 max-w-7xl mx-auto space-y-24 mt-14 bg-[#F9F9F9] pt-20 pb-4 rounded-4xl shadow-md">
-      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-12">
+    <section className=" px-4 max-w-6xl mx-auto space-y-24 -mt-8 bg-[#F9F9F9] pt-10 pb-4 rounded-4xl rounded-b-none shadow-md">
+      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-2">
         <svg
-          width="733"
+          width="633"
           height="1693"
           viewBox="0 0 733 1693"
           fill="none"
@@ -195,8 +195,8 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center gap-46 -mt-20">
-        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
+      <div className="flex flex-col md:flex-row items-center gap-46 -mt-22">
+        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
             src={paso5}
             alt="Niña demostrando amor a su mascota"
@@ -224,6 +224,10 @@ const CuidadosMascota = () => {
             </li>
           </ul>
         </div>
+      </div>
+      <div>
+      <h2 className="text-primary text-center font-bold md:text-3xl text-lg italic mb-0 -mt-8">Para más información te invitamos a</h2>
+      <h2 className="text-primary text-center font-bold md:text-3xl text-lg italic mb-6">seguirnos en nuestras redes</h2>
       </div>
     </section>
   );

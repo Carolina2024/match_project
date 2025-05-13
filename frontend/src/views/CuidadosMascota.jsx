@@ -6,10 +6,10 @@ import paso5 from "../assets/cuidados5.jpg";
 
 const CuidadosMascota = () => {
   return (
-    <section className=" px-4 max-w-7xl mx-auto space-y-24 mt-14 bg-[#F9F9F9] pt-20 pb-4 rounded-4xl shadow-md">
-      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-12">
+    <section className=" px-4 max-w-6xl mx-auto space-y-24 -mt-8 bg-[#F9F9F9] pt-10 pb-4 rounded-4xl rounded-b-none shadow-md">
+      <div className="absolute top-1/2 left-0 right-0 flex justify-center mt-2">
         <svg
-          width="733"
+          width="633"
           height="1693"
           viewBox="0 0 733 1693"
           fill="none"
@@ -85,11 +85,11 @@ const CuidadosMascota = () => {
               <strong className="ml-6">Adoptar es una decisión de vida.</strong>
             </li>
             <li>
-              Espacio y tiempo: asegurate de contar con un lugar seguro y el
+              Espacio y tiempo: asegúrate de contar con un lugar seguro y el
               tiempo necesario para cuidarlo.
             </li>
             <li>
-              Presupuesto mensual: contemplá los gastos en comida, salud,
+              Presupuesto mensual: contempla los gastos en comida, salud,
               higiene y posibles imprevistos.
             </li>
             <li>
@@ -118,11 +118,11 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              Ambiente tranquilo: evitá ruidos fuertes y movimientos bruscos.
+              Ambiente tranquilo: evita ruidos fuertes y movimientos bruscos.
               Necesita adaptarse.
             </li>
             <li>
-              Mostrale su espacio: preparale un rincón con cama, comida, agua y,
+              Múestrale su espacio: prepárale un rincón con cama, comida, agua y,
               en el caso de los gatos, su caja de arena.
             </li>
             <li>
@@ -151,7 +151,7 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              Alimentación adecuada: consultá con un veterinario el mejor
+              Alimentación adecuada: consulta con un veterinario el mejor
               alimento para su edad y tamaño.
             </li>
             <li>Agua fresca siempre disponible.</li>
@@ -183,7 +183,7 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              Visitas al veterinario: llevalo apenas llegue a casa para un
+              Visitas al veterinario: llévalo apenas llegue a casa para un
               chequeo general.
             </li>
             <li>Vacunación y desparasitación al día.</li>
@@ -195,8 +195,8 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center gap-46 -mt-20">
-        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
+      <div className="flex flex-col md:flex-row items-center gap-46 -mt-22">
+        <div className="w-full md:w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
             src={paso5}
             alt="Niña demostrando amor a su mascota"
@@ -211,7 +211,7 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              No humanices, pero sí empatizá: respetá su lenguaje, su espacio y
+              No humanices, pero sí empatiza: respeta su lenguaje, su espacio y
               sus tiempos.
             </li>
             <li>
@@ -219,11 +219,15 @@ const CuidadosMascota = () => {
               herramienta.
             </li>
             <li>
-              Nunca lo abandones: si cambia tu situación, buscá redes de ayuda,
+              Nunca lo abandones: si cambia tu situación, busca redes de ayuda,
               pero no lo dejes solo.
             </li>
           </ul>
         </div>
+      </div>
+      <div>
+      <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-0 -mt-8">Para más información te invitamos a</h2>
+      <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-6">seguirnos en nuestras redes</h2>
       </div>
     </section>
   );

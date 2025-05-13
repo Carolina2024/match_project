@@ -75,7 +75,7 @@ const Nosotros = () => {
         <p className="font-medium md:text-lg text-[#000000] px-20 py-10 text-justify">
           “Siempre tuve una conexión especial con los animales. Desde niña
           rescataba animales, guiada solo por mi instinto y cariño. Al llegar a
-          Pirque, me encontre con una realidad dura: cientos de animales
+          Pirque, me encontré con una realidad dura: cientos de animales
           abandonados y poca ayuda. Fue entonces cuando decidí formalizar lo que
           siempre había hecho por amor, y nació Patas Pirque.
           <br />
@@ -206,7 +206,7 @@ const Nosotros = () => {
               </svg>
               <h4 className="text-primary text-3xl font-bold">Visión</h4>
             </div>
-            <ul className="md:text-lg font-medium text-[#000000] mt-2 list-disc list-inside leading-[2.1]">
+            <ul className="md:text-lg font-medium text-[#000000] mt-2 list-disc list-inside leading-normal">
               <li>Amor y respeto por los seres vivos </li>
               <li>Educación como motor de cambio </li>
               <li> Solidaridad y compromiso social </li>
@@ -272,10 +272,10 @@ const Nosotros = () => {
                 Patita Suave
               </h4>
               <p className="text-base text-[#000000] font-normal mb-2">
-                USD 5.26 mensual
+                5.000 CLP mensual
               </p>
               <a
-                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                href="https://esponsor.com/pataspirque/subscribe/m9nl9mj7lr/join?page=tiers"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -295,13 +295,13 @@ const Nosotros = () => {
                 />
               </div>
               <h4 className="font-bold text-primary text-xl mb-1">
-                Huella Fuerte
+                Huella Firme
               </h4>
               <p className="text-base text-[#000000] font-normal mb-2">
-                USD 10.57 mensual
+                10.000 CLP mensual
               </p>
               <a
-                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                href="https://esponsor.com/pataspirque/subscribe/q6x215pj2y/join?page=tiers"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -324,10 +324,10 @@ const Nosotros = () => {
                 Corazón Quiltro
               </h4>
               <p className="text-base text-[#000000] font-normal mb-2">
-                USD 21.14 mensual
+                20.000 CLP mensual
               </p>
               <a
-                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                href="https://esponsor.com/pataspirque/subscribe/z0pl37zwl5/join?page=tiers"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -370,7 +370,7 @@ const Nosotros = () => {
                 Gatos Ferales en <br /> Rescate
               </h4>
               <a
-                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                href="https://esponsor.com/pataspirque/goals/1CMNAK7jaGRcjuoNfhXPq9/support"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -421,7 +421,7 @@ const Nosotros = () => {
                 Para comida, <br /> medicamentos, etc.
               </h4>
               <a
-                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                href="https://esponsor.com/pataspirque"
                 target="_blank"
                 rel="noopener noreferrer"
               >

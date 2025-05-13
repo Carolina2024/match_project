@@ -92,7 +92,7 @@ const Contacto = () => {
             ></textarea>
           </div>
 
-          <div className="text-right">
+          <div className="text-center">
             <button
               type="submit"
               className="bg-primary text-white font-bold text-base my-2 px-14 py-2 rounded-full hover:bg-tertiary transition cursor-pointer"

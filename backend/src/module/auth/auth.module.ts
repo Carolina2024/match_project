@@ -28,7 +28,7 @@ import { Match } from '../matches/entities/match.entity';
         return {
           secret: configService.get('JWT_SECRET'),
           signOptions: {
-            expiresIn: '15m',
+            expiresIn: '2h',
           },
         };
       },

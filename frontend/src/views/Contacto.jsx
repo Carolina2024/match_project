@@ -1,13 +1,72 @@
 import { useState } from "react";
-import { FaPaw } from "react-icons/fa";
-import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { FaPaw } from "react-icons/fa";
+import emailjs from "emailjs-com";
+import SuccessModalContact from "../components/modals/SuccessModalContact";
 
 const Contacto = () => {
-  const [phone, setPhone] = useState("");
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    telefono: "",
+    mensaje: "",
+  });
+
+  const [errors, setErrors] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!/^[A-Za-z\s]+$/.test(formData.nombre)) {
+      newErrors.nombre = "Solo se permiten letras";
+    }
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Correo inválido";
+    }
+    if (formData.telefono.length < 7) {
+      newErrors.telefono = "Número no válido";
+    }
+    if (!formData.mensaje.trim()) {
+      newErrors.mensaje = "Mensaje requerido";
+    }
+    return newErrors;
+  };
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    setErrors(validationErrors);
+
+    if (Object.keys(validationErrors).length === 0) {
+      const templateParams = {
+        from_name: formData.nombre,
+        reply_to: formData.email,
+        phone: formData.telefono,
+        message: formData.mensaje,
+      };
+
+      //Conexion con .env de EmailJS
+      emailjs
+        .send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          templateParams,
+          import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+        )
+        .then(() => {
+          setShowModal(true);
+          setFormData({ nombre: "", email: "", telefono: "", mensaje: "" });
+        })
+        .catch((err) => console.error("EmailJS Error:", err));
+    }
+  };
 
   return (
-    <section className="max-w-3xl mx-auto flex flex-col items-center pb-22 pt-16 px-4 mt-14 bg-[#F9F9F9] rounded-4xl">
+    <section className="max-w-3xl mx-auto flex flex-col items-center pb-22 pt-16 px-4 -mt-6 mb-16 bg-[#F9F9F9] rounded-4xl">
       <h2 className="text-primary text-3xl md:text-4xl font-bold font-secundary mb-8">
         Contacto
       </h2>
@@ -18,37 +77,54 @@ const Contacto = () => {
           <span>¡Escríbenos!</span>
         </div>
 
-        <form className="space-y-5">
+        <form className="space-y-5" onSubmit={handleSubmit}>
+          {/* Nombre */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Nombre
             </label>
             <input
               type="text"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
               placeholder="Tu nombre"
               className="w-full px-4 py-2 border border-primary rounded-full placeholder-[#CBCBCB] font-medium text-sm outline-none"
             />
+            {errors.nombre && (
+              <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
+            )}
           </div>
 
+          {/* Email */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Email
             </label>
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Tu e-mail"
               className="w-full px-4 py-2 border border-primary rounded-full placeholder-[#CBCBCB] font-medium text-sm outline-none"
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            )}
           </div>
 
+          {/* Teléfono */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Número de teléfono
             </label>
             <PhoneInput
               country={"cl"}
-              value={phone}
-              onChange={(value) => setPhone(value)}
+              value={formData.telefono}
+              onChange={(value) =>
+                setFormData({ ...formData, telefono: value })
+              }
               inputStyle={{
                 width: "100%",
                 height: "40px",
@@ -72,24 +148,31 @@ const Contacto = () => {
                 cursor: "pointer",
               }}
               containerStyle={{ width: "100%" }}
-              dropdownStyle={{
-                borderRadius: "12px",
-                zIndex: 100,
-              }}
+              dropdownStyle={{ borderRadius: "12px", zIndex: 100 }}
               inputClass="placeholder-[#CBCBCB]"
               placeholder="Tu número"
             />
+            {errors.telefono && (
+              <p className="text-red-500 text-sm mt-1">{errors.telefono}</p>
+            )}
           </div>
 
+          {/* Mensaje */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Mensaje
             </label>
             <textarea
+              name="mensaje"
               rows="10"
+              value={formData.mensaje}
+              onChange={handleChange}
               placeholder="Escribe aquí tu mensaje"
               className="w-full px-4 py-2 border border-primary rounded-3xl placeholder-[#CBCBCB] font-medium text-sm outline-none resize-none"
-            ></textarea>
+            />
+            {errors.mensaje && (
+              <p className="text-red-500 text-sm mt-1">{errors.mensaje}</p>
+            )}
           </div>
 
           <div className="text-center">
@@ -102,6 +185,8 @@ const Contacto = () => {
           </div>
         </form>
       </div>
+
+      {showModal && <SuccessModalContact onClose={() => setShowModal(false)} />}
     </section>
   );
 };

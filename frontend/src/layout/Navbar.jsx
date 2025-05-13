@@ -28,6 +28,7 @@ const Navbar = () => {
   const inicioContainerRef = useRef(null);
   const nosotrosContainerRef = useRef(null);
   const userContainerRef = useRef(null);
+   const menuRef = useRef(null);
 
   const handleLogout = () => {
     logout();
@@ -64,7 +65,7 @@ const Navbar = () => {
           >
             <button
               onClick={() => setIsInicioOpen((o) => !o)}
-              className="flex items-center hover:text-primary transition"
+              className="flex items-center hover:text-primary transition cursor-pointer"
             >
               <span>Inicio</span>
               <ChevronDown
@@ -106,7 +107,7 @@ const Navbar = () => {
         >
           <button
             onClick={() => setIsNosotrosOpen((o) => !o)}
-            className="flex items-center hover:text-primary transition"
+            className="flex items-center hover:text-primary transition cursor-pointer"
           >
             <span>Nosotros</span>
             <ChevronDown
@@ -201,7 +202,10 @@ const Navbar = () => {
 
       {/* Menú móvil */}
       {menuOpen && (
-        <div className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
+        <div 
+        ref={menuRef}
+        onMouseLeave={() => setMenuOpen(false)}
+        className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
           {/* Inicio móvil */}
           {isAuthenticated ? (
             <div
@@ -211,7 +215,7 @@ const Navbar = () => {
             >
               <button
                 onClick={() => setIsInicioOpen((o) => !o)}
-                className="w-full flex items-center justify-center hover:text-primary transition"
+                className="w-full flex items-center justify-center hover:text-primary transition cursor-pointer"
               >
                 <span>Inicio</span>
                 <ChevronDown
@@ -252,7 +256,7 @@ const Navbar = () => {
           >
             <button
               onClick={() => setIsNosotrosOpen((o) => !o)}
-              className="w-full flex items-center justify-center hover:text-primary transition"
+              className="w-full flex items-center justify-center hover:text-primary transition cursor-pointer"
             >
               <span>Nosotros</span>
               <ChevronDown
@@ -287,10 +291,10 @@ const Navbar = () => {
           </div>
 
           {/* Otras vistas */}
-          <Link to="/CuidadosMascota" className="hover:text-primary transition">
+          <Link to="/CuidadosMascota" className="hover:text-primary transition cursor-pointer">
             Cuidados de tu mascota
           </Link>
-          <Link to="/Contacto" className="hover:text-primary transition">
+          <Link to="/Contacto" className="hover:text-primary transition cursor-pointer">
             Contacto
           </Link>
 
@@ -304,7 +308,7 @@ const Navbar = () => {
               <>
                 <button
                   onClick={() => setIsUserMenuOpen((o) => !o)}
-                  className="w-full flex items-center justify-center hover:text-primary transition"
+                  className="w-full flex items-center justify-center hover:text-primary transition cursor-pointer"
                 >
                   <User size={20} className="mr-2 stroke-primary" />
                   <span>{user.fullname}</span>
@@ -319,13 +323,13 @@ const Navbar = () => {
                   <div className="flex flex-col items-center gap-2 mt-2">
                     <Link
                       to="/profile"
-                      className="hover:text-primary transition"
+                      className="hover:text-primary transition cursor-pointer"
                     >
                       Actualizar información
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="hover:text-primary transition"
+                      className="hover:text-primary transition cursor-pointer"
                     >
                       Cerrar sesión
                     </button>

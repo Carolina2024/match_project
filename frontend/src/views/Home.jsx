@@ -92,11 +92,13 @@ const Home = () => {
             <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
               <div>
                 <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
-                  <span className="text-primary">Matchea</span>
+                  <span className="text-primary">Tu nuevo</span>
                   <br />
-                  <span className="text-tertiary">con tu futura</span>
+                  <span className="text-tertiary">compañero</span>
                   <br />
-                  <span className="text-primary">mascota</span>
+                  <span className="text-primary">te está</span>
+                  <br />
+                  <span className="text-primary">esperando</span>
                 </h2>
                 <button
                   onClick={() => setRegisterOpen(true)}
@@ -138,7 +140,7 @@ const Home = () => {
       ) : (
         <>
           {/* Primera sección logueados */}
-          <div className="relative w-full md:max-w-5xl max-w-lg mt-12 overflow-hidden flex items-center md:ml-10">
+          <div className="relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis flex items-center md:ml-10">
             <svg
               width="918"
               height="425"
@@ -148,14 +150,14 @@ const Home = () => {
             >
               <rect
                 width="918"
-                height="425"
+                height="400"
                 rx="148.5"
                 fill="#F4A470"
                 fillOpacity="0.17"
               />
             </svg>
 
-            <div className="absolute inset-y-0 right-0 flex items-center">
+            <div className="absolute inset-y-0 -mt-3 right-0 ">
               <img
                 src={imageb}
                 alt="Perro mirando"
@@ -166,18 +168,16 @@ const Home = () => {
             <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-30">
               <div>
                 <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
-                  <span className="text-primary">Tu nuevo</span>
+                  <span className="text-primary">Matchea</span>
                   <br />
-                  <span className="text-primary">compañero</span>
+                  <span className="text-tertiary">con tu futura</span>
                   <br />
-                  <span className="text-primary">te está</span>
-                  <br />
-                  <span className="text-primary">esperando</span>
+                  <span className="text-primary">mascota</span>
                 </h2>
               </div>
             </div>
             {/* Botón flotante */}
-            <section className="w-full flex flex-row-reverse top-0 absolute">
+            <section className="absolute top-0 right-0">
               <a
                 href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
                 target="_blank"

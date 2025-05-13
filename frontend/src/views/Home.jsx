@@ -179,7 +179,7 @@ const Home = () => {
             {/* Botón flotante */}
             <section className="absolute top-0 right-0">
               <a
-                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                href="https://esponsor.com/pataspirque"
                 target="_blank"
               >
                 <button className="bg-primary w-20 cursor-pointer h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90">

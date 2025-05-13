@@ -85,11 +85,11 @@ const CuidadosMascota = () => {
               <strong className="ml-6">Adoptar es una decisión de vida.</strong>
             </li>
             <li>
-              Espacio y tiempo: asegurate de contar con un lugar seguro y el
+              Espacio y tiempo: asegúrate de contar con un lugar seguro y el
               tiempo necesario para cuidarlo.
             </li>
             <li>
-              Presupuesto mensual: contemplá los gastos en comida, salud,
+              Presupuesto mensual: contempla los gastos en comida, salud,
               higiene y posibles imprevistos.
             </li>
             <li>
@@ -118,11 +118,11 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              Ambiente tranquilo: evitá ruidos fuertes y movimientos bruscos.
+              Ambiente tranquilo: evita ruidos fuertes y movimientos bruscos.
               Necesita adaptarse.
             </li>
             <li>
-              Mostrale su espacio: preparale un rincón con cama, comida, agua y,
+              Múestrale su espacio: prepárale un rincón con cama, comida, agua y,
               en el caso de los gatos, su caja de arena.
             </li>
             <li>
@@ -151,7 +151,7 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              Alimentación adecuada: consultá con un veterinario el mejor
+              Alimentación adecuada: consulta con un veterinario el mejor
               alimento para su edad y tamaño.
             </li>
             <li>Agua fresca siempre disponible.</li>
@@ -183,7 +183,7 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              Visitas al veterinario: llevalo apenas llegue a casa para un
+              Visitas al veterinario: llévalo apenas llegue a casa para un
               chequeo general.
             </li>
             <li>Vacunación y desparasitación al día.</li>
@@ -211,7 +211,7 @@ const CuidadosMascota = () => {
 
           <ul className="list-disc list-inside text-base text-black space-y-1">
             <li>
-              No humanices, pero sí empatizá: respetá su lenguaje, su espacio y
+              No humanices, pero sí empatiza: respeta su lenguaje, su espacio y
               sus tiempos.
             </li>
             <li>
@@ -219,7 +219,7 @@ const CuidadosMascota = () => {
               herramienta.
             </li>
             <li>
-              Nunca lo abandones: si cambia tu situación, buscá redes de ayuda,
+              Nunca lo abandones: si cambia tu situación, busca redes de ayuda,
               pero no lo dejes solo.
             </li>
           </ul>

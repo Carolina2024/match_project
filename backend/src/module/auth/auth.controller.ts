@@ -1,4 +1,11 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { RegisterDto } from './dtos/register.dto';
 import { RecoverPasswordDto } from './dtos/recover-password.dto';
 import { AuthService } from './auth.service';
@@ -9,10 +16,12 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiTooManyRequestsResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { LoginDto } from './dtos/login.dto';
 import { ResetPasswordDto } from './dtos/reset-password.dto';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Controller('auth')
 export class AuthController {
@@ -125,6 +134,7 @@ export class AuthController {
     },
   })
   @Post('recover-password')
+  @UseGuards(ThrottlerGuard)
   @HttpCode(HttpStatus.OK)
   async recoverPassword(
     @Body() dto: RecoverPasswordDto,
@@ -149,6 +159,13 @@ export class AuthController {
       message: 'Token inválido o expirado',
       error: 'Unauthorized',
       statusCode: 401,
+    },
+  })
+  @ApiTooManyRequestsResponse({
+    description: 'El usuario hace muchas peticiones al endpoint',
+    example: {
+      statusCode: 429,
+      message: 'ThrottlerException: Too Many Requests',
     },
   })
   @Post('reset-password')

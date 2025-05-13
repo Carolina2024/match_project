@@ -176,6 +176,17 @@ const Home = () => {
                 </h2>
               </div>
             </div>
+            {/* Botón flotante */}
+            <section className="w-full flex flex-row-reverse top-0 absolute">
+              <a
+                href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
+                target="_blank"
+              >
+                <button className="bg-primary w-20 cursor-pointer h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90">
+                  <HandHeart size={44} className="stroke-white" />
+                </button>
+              </a>
+            </section>
           </div>
 
           {/* Segunda sección logueado */}
@@ -188,16 +199,6 @@ const Home = () => {
         </>
       )}
 
-      {/* Botón flotante */}
-      <a
-        href="https://esponsor.com/pataspirque?fbclid=PAQ0xDSwKLc2lleHRuA2FlbQIxMQABp5s4P8VzyeZqEmrJcYPyfumVUt8X01mImBtwn0Ld-Xc2TlpKNbnYMYTJorZd_aem_t-LCy7_p7r8c0QWuLEcVBA"
-        target="_blank"
-        className="fixed top-38 right-12 z-50"
-      >
-        <button className="bg-primary w-18 cursor-pointer h-18 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90 transition">
-          <HandHeart size={44} className="stroke-white" />
-        </button>
-      </a>
       {/* Tercera sección global con o sin logueo */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">

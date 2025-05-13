@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import logo from "../assets/logo.png";
@@ -23,9 +23,11 @@ const Navbar = () => {
   // Dropdowns (click)
   const [isInicioOpen, setIsInicioOpen] = useState(false);
   const [isNosotrosOpen, setIsNosotrosOpen] = useState(false);
-  const nosotrosContainerRef = useRef(null);
-
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  const inicioContainerRef = useRef(null);
+  const nosotrosContainerRef = useRef(null);
+  const userContainerRef = useRef(null);
 
   const handleLogout = () => {
     logout();
@@ -55,7 +57,11 @@ const Navbar = () => {
       <nav className="hidden md:flex items-center gap-8 text-lg font-normal text-black font-primary">
         {/* Inicio */}
         {isAuthenticated ? (
-          <div ref={inicioRef} className="relative">
+          <div
+            ref={inicioContainerRef}
+            onMouseLeave={() => setIsInicioOpen(false)}
+            className="relative"
+          >
             <button
               onClick={() => setIsInicioOpen((o) => !o)}
               className="flex items-center hover:text-primary transition"
@@ -69,7 +75,7 @@ const Navbar = () => {
               />
             </button>
             {isInicioOpen && (
-              <div className="absolute top-full left-0 mt-2 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
+              <div className="absolute top-full left-0 mt-0 w-52 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
                   to="/#seguimiento"
                   className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
@@ -148,7 +154,11 @@ const Navbar = () => {
       {/* Menú usuario desktop */}
       <div className="hidden md:block">
         {isAuthenticated ? (
-          <div ref={userMenuRef} className="relative inline-block">
+          <div
+            ref={userContainerRef}
+            onMouseLeave={() => setIsUserMenuOpen(false)}
+            className="relative inline-block"
+          >
             <button
               onClick={() => setIsUserMenuOpen((o) => !o)}
               className="flex items-center font-bold border border-primary px-4 py-2 rounded-full hover:bg-orange-50 transition"
@@ -163,7 +173,7 @@ const Navbar = () => {
               />
             </button>
             {isUserMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
+              <div className="absolute right-0 mt-0 w-48 bg-white rounded-lg shadow-lg flex flex-col text-center z-50">
                 <Link
                   to="/profile"
                   className="px-4 py-2 hover:text-primary transition text-sm font-tertiary font-normal"
@@ -194,7 +204,11 @@ const Navbar = () => {
         <div className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
           {/* Inicio móvil */}
           {isAuthenticated ? (
-            <div ref={inicioRef} className="w-full">
+            <div
+              ref={inicioContainerRef}
+              onMouseLeave={() => setIsInicioOpen(false)}
+              className="w-full"
+            >
               <button
                 onClick={() => setIsInicioOpen((o) => !o)}
                 className="w-full flex items-center justify-center hover:text-primary transition"
@@ -231,7 +245,11 @@ const Navbar = () => {
           )}
 
           {/* Nosotros móvil */}
-          <div ref={nosotrosRef} className="w-full">
+          <div
+            ref={nosotrosContainerRef}
+            onMouseLeave={() => setIsNosotrosOpen(false)}
+            className="w-full"
+          >
             <button
               onClick={() => setIsNosotrosOpen((o) => !o)}
               className="w-full flex items-center justify-center hover:text-primary transition"
@@ -277,7 +295,11 @@ const Navbar = () => {
           </Link>
 
           {/* Usuario móvil */}
-          <div ref={userMenuRef} className="w-full">
+          <div
+            ref={userContainerRef}
+            onMouseLeave={() => setIsUserMenuOpen(false)}
+            className="w-full"
+          >
             {isAuthenticated ? (
               <>
                 <button

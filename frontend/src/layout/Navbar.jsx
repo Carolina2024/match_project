@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import logo from "../assets/logo.png";
@@ -29,6 +29,11 @@ const Navbar = () => {
   const nosotrosContainerRef = useRef(null);
   const userContainerRef = useRef(null);
    const menuRef = useRef(null);
+
+useEffect(() => {
+  // usuario logueado, CIerre de desplegable user
+  setIsUserMenuOpen(false);
+}, [isAuthenticated]);
 
   const handleLogout = () => {
     logout();

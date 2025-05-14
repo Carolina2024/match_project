@@ -9,33 +9,65 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
     { label: "Adoptantes", icon: <FaUserFriends /> },
   ];
 
+  const sidebarStyles = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "230px",
+    backgroundColor: "var(--color-fourth)",
+    padding: "16px",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
+    transform: isVisible ? "translateX(0)" : "translateX(-100%)",
+    transition: "transform 0.3s ease",
+    zIndex: 20,
+  };
+
+  const overlayStyles = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backdropFilter: "blur(2px)",
+    zIndex: 10,
+  };
+
+  const closeButtonStyles = {
+    position: "absolute",
+    top: "16px",
+    right: "16px",
+    fontSize: "24px",
+    color: "#444",
+    cursor: "pointer",
+    color: "orange",
+  };
+
   return (
     <>
-      {!isVisible && (
-        <button
-          onClick={() => setIsVisible(true)}
-          className="fixed top-4 left-4 z-30 p-2 bg-[var(--color-fourth)] rounded-full shadow-md text-xl font-bold"
-        >
-          {">>"}
-        </button>
+      {/* Overlay modal solo visible en móvil cuando sidebar está activo */}
+      {isVisible && (
+        <div
+          onClick={() => setIsVisible(false)} // Oculta el sidebar al hacer clic en el overlay
+          style={overlayStyles}
+          className="md:hidden"
+        ></div>
       )}
-
-      <div
-        className={`fixed top-0 left-0 h-screen w-[180px] bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-lg transition-transform duration-300 ${
-          isVisible ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
+      <div style={sidebarStyles}>
         <button
           onClick={() => setIsVisible(false)}
-          className="self-end mb-4 text-gray-600 hover:text-gray-900 text-xl font-bold"
+          style={closeButtonStyles}
+          className="md:hidden"
         >
-          {"<<"}
+          x
         </button>
 
         <div className="flex items-center gap-3 mb-6">
           <img
-           /*  src="src/assets/logo.png" */
-              src={logo}
+            src={logo}
             alt="Logo Patas Pirque"
             className="w-[60px] h-[60px] rounded-full"
           />

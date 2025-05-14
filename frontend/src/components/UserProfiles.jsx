@@ -21,21 +21,6 @@ const UserProfiles = () => {
 
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
-  /* useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetchUsersget(currentPage);
-        console.log("Usuarios recibidos:", response.items);
-        setUsers(response.items || []);
-        setTotalPages(response.totalPages || 1);
-      } catch (error) {
-        console.error("Error al cargar usuarios:", error.message);
-      }
-    };
-
-    fetchUsers();
-  }, [currentPage]); */
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -73,45 +58,10 @@ const UserProfiles = () => {
     setModalOpen(false);
   };
 
-  /* const handleDeleteUser = async () => {
-    if (!selectedUser) return;
-    try {
-      await deleteUser(selectedUser.id);
-      setUsers((prev) =>
-        prev.map((u) =>
-          u.id === selectedUser.id
-            ? { ...u, isActive: false, estado: "Inactivo" }
-            : u
-        )
-      );
-      setDeletedUserName(selectedUser.fullname);
-      setShowMessage(true);
-    } catch (error) {
-      console.error("Error al eliminar usuario:", error.message);
-    } finally {
-      handleCloseModal();
-    }
-  }; */
-
-  /* const handleDeleteUser = async () => {
-    if (!selectedUser) return;
-    try {
-      await deleteUser(selectedUser.id);
-      setUsers((prev) => prev.filter((u) => u.id !== selectedUser.id));
-      setDeletedUserName(selectedUser.fullname);
-      setShowMessage(true);
-    } catch (error) {
-      console.error("Error al eliminar usuario:", error.message);
-    } finally {
-      handleCloseModal();
-    }
-  }; */
-
   const handleDeleteUser = async () => {
     if (!selectedUser) return;
     try {
       await deleteUser(selectedUser.id);
-      // Hacer un fetch de usuarios actualizados para evitar mostrar usuarios eliminados
       const response = await fetchUsersget(currentPage);
       setUsers(response.items || []);
       setDeletedUserName(selectedUser.fullname);

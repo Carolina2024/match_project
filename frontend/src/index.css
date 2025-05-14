@@ -11,6 +11,13 @@
   --color-secundary: #f6f6ed;
   --color-tertiary: #595146;
   --color-fourth: #efefef;
+  --color-five: rgba(53, 163, 2, 0.25);  /*green-bg*/
+  --color-green-text: #35A302;/*green-text*/
+  --color-gray-icon: #6C6C6C;/*gray-icon*/
+  --color-bg-orange-process: #FF802C40; /*orange bg en proceso*/
+  --color-text-orange-process: #FF802C; /*orange text en proceso*/
+  --color-bg-gray-adoptada: #6C6C6C40;
+  
 }
 @layer base {
   html {
@@ -19,4 +26,36 @@
   body {
     background-color: var(--color-secundary);
   }
+
+}
+
+.bg-disponible {
+  background-color: var( --color-five);
+}
+
+.color-text-disponible {
+  color: var(--color-green-text);
+}
+
+.color-icon-grey {
+  color: var(--color-gray-icon);
+}
+
+.color-bg-orange {
+  background-color: var(--color-bg-orange-process);
+}
+
+.color-text-process {
+  color: var(--color-text-orange-process);
+}
+
+.color-bg-gray {
+  background-color: var(--color-bg-gray-adoptada);
+}
+
+.font-primary {
+  font-family: var(--font-primary);
+}
+.font-secundary {
+  font-family: var(--font-secundary);
 }

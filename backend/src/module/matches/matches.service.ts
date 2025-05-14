@@ -224,13 +224,7 @@ export class MatchesService {
     currentStatus: MatchStatus,
     newStatus: MatchStatus,
   ): void {
-    if (currentStatus === MatchStatus.POR_REVISAR) {
-      if (newStatus !== MatchStatus.EN_PROCESO) {
-        throw new BadRequestException(
-          `No se puede cambiar el estado de ${MatchStatus.POR_REVISAR} a ${newStatus}. Solo se permite cambiar a ${MatchStatus.EN_PROCESO}`,
-        );
-      }
-    } else if (currentStatus === MatchStatus.EN_PROCESO) {
+    if (currentStatus === MatchStatus.EN_PROCESO) {
       if (
         newStatus !== MatchStatus.APROBADO &&
         newStatus !== MatchStatus.RECHAZADO

@@ -19,6 +19,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
       fetchAdopter();
     }
   }, [solicitud?.userId]);
+
   if (!solicitud) return null;
 
   const estado = solicitud.status;
@@ -32,9 +33,33 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         <button
           key="En proceso"
           onClick={() => onStatusChange("En proceso")}
-          className="w-full py-3 text-base font-semibold rounded shadow-md bg-orange-500 text-white hover:bg-orange-600"
+          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-[#FF802C] text-white hover:bg-orange-600 cursor-pointer"
         >
           En proceso
+        </button>
+      );
+
+      botones.push(
+        <button
+          key="Aprobar-Revisar"
+          onClick={() => onStatusChange("Aprobado")}
+          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+        >
+          Aprobar
+        </button>
+      );
+    }
+
+
+    if (estado === "En proceso") {
+
+      botones.push(
+        <button
+          key="Aprobar-Proceso"
+          onClick={() => onStatusChange("Aprobado")}
+          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-transparent color-text-disponible cursor-pointer border-[1px] border-[var(--color-green-text)]"
+        >
+          Aprobar
         </button>
       );
     }
@@ -42,18 +67,9 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
     if (estado === "Por revisar" || estado === "En proceso") {
       botones.push(
         <button
-          key="Aprobado"
-          onClick={() => onStatusChange("Aprobado")}
-          className="w-full py-3 text-base font-semibold rounded shadow-md bg-green-600 text-white hover:bg-green-700"
-        >
-          Aprobar
-        </button>
-      );
-      botones.push(
-        <button
           key="Rechazado"
           onClick={() => onStatusChange("Rechazado")}
-          className="w-full py-3 text-base font-semibold rounded shadow-md bg-red-600 text-white hover:bg-red-700"
+          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-transparent text-[#595146] cursor-pointer border-[1px] border-[#595146]"
         >
           Rechazar
         </button>
@@ -75,10 +91,10 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
   const getEstadoClase = (estado) => {
     return (
       {
-        "Por revisar": "bg-gray-400",
+        "Por revisar": "color-bg-gray text-gray-500 ",
         "En proceso": "bg-orange-300",
         Aprobado: "bg-green-400",
-        Rechazado: "bg-red-500",
+        Rechazado: "bg-red-slowly",
       }[estado] || "bg-gray-300"
     );
   };
@@ -88,7 +104,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
       <div className="bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black text-4xl "
+          className="absolute top-4 right-4 text-gray-500 hover:text-black text-4xl"
         >
           &times;
         </button>
@@ -102,15 +118,17 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
 
         <div className="grid grid-cols-2 gap-4 text-sm mb-6">
           <div className="flex flex-col">
-            <span className="text-gray-600 font-semibold">
-              Fecha de la solicitud:
-            </span>
+
+            <span className="text-gray-600 font-semibold">Fecha de la solicitud:</span>
+
             <span>{fecha}</span>
           </div>
           <div className="flex flex-col">
             <span className="text-gray-600 font-semibold">Estado:</span>
             <span
-              className={`text-white px-3 py-1 rounded-full font-semibold text-sm w-fit ${getEstadoClase(
+<
+              className={`px-3 py-1 rounded-[10px] font-semibold text-sm w-fit ${getEstadoClase(
+
                 estado
               )}`}
             >
@@ -127,31 +145,31 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
               <span>{solicitud.pet.name}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">
-                ID de mascota:
-              </span>
+
+              <span className="text-gray-600 font-semibold">ID de mascota:</span>
+
               <span>{solicitud.petId}</span>
             </div>
           </div>
         </div>
 
         <div className="bg-orange-50 p-4 rounded">
-          <p className="text-orange-400  mb-2">Información del adoptante</p>
+
+          <p className="text-orange-400 mb-2">Información del adoptante</p>
+
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">Adoptante:</span>
               <span>{solicitud.user.fullname}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">
-                ID de adoptante:
-              </span>
+
+              <span className="text-gray-600 font-semibold">ID de adoptante:</span>
               <span>{solicitud.userId}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">
-                Documento de identidad:
-              </span>
+              <span className="text-gray-600 font-semibold">Documento de identidad:</span>
+
               <span>{adopter?.identityDocument || "No disponible"}</span>
             </div>
             <div className="flex flex-col">
@@ -159,9 +177,9 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
               <span>{solicitud.user.email}</span>
             </div>
             <div className="flex flex-col col-span-2">
-              <span className="text-gray-600 font-semibold">
-                Dirección y comuna:
-              </span>
+
+              <span className="text-gray-600 font-semibold">Dirección y comuna:</span>
+
               <span>Lorem ipsum dolor sit amet consectetur.</span>
             </div>
           </div>

@@ -202,7 +202,9 @@ export class MatchesService {
     const match = await this.findOne(id);
     this.validateStatusTransition(match.status, updateMatchStatusDto.status);
     if (updateMatchStatusDto.status === MatchStatus.APROBADO) {
-      await this.petRepository.update(id, { status: PetStatus.ADOPTED });
+      await this.petRepository.update(match.petId, {
+        status: PetStatus.ADOPTED,
+      });
       await this.matchRepository.update(
         {
           petId: match.petId,

@@ -1,12 +1,17 @@
 import PropTypes from "prop-types";
-import { FaFileAlt, FaUserFriends, FaPaw } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
+import { LuFileCheck } from "react-icons/lu";
+
+import { PiPawPrint } from "react-icons/pi";
+
 import logo from "../assets/logo.png";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [
-    { label: "Mascotas", icon: <FaPaw /> },
-    { label: "Solicitudes", icon: <FaFileAlt /> },
-    { label: "Adoptantes", icon: <FaUserFriends /> },
+
+    { label: "Mascotas", icon: <PiPawPrint />},
+    { label: "Solicitudes", icon: <LuFileCheck />},
+    { label: "Adoptantes", icon: <FiUsers />},
   ];
 
   const sidebarStyles = {
@@ -68,12 +73,12 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
           <img
             src={logo}
             alt="Logo Patas Pirque"
-            className="w-[60px] h-[60px] rounded-full"
+            className="w-[70px] h-[70px] rounded-full "
           />
           <div className="flex items-center gap-2 text-gray-700">
-            <div className="leading-tight text-left">
-              <p className="text-md font-bold text-gray-700">Patas</p>
-              <p className="text-sm font-bold text-gray-700">Pirque</p>
+            <div className="leading-tight text-left font-secundary">
+              <p className="text-xl font-bold text-gray-700">Patas</p>
+              <p className="text-xl font-bold text-gray-700">Pirque</p>
             </div>
           </div>
         </div>
@@ -83,14 +88,14 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
             <button
               key={item.label}
               onClick={() => onSelect(item.label)}
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
+              className={`flex items-center gap-3 px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
               ${
                 activeView === item.label
                   ? "bg-[#FAAA75] text-gray-700 border-t border-l border-r border-[#595146] border-b-[3px] border-b-[#595146]"
                   : "text-gray-700 hover:bg-orange-100"
               }`}
             >
-              <span className="text-gray-500">{item.icon}</span>
+              <span className="text-gray-600">{item.icon}</span>
               {item.label}
             </button>
           ))}

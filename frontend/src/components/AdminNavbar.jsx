@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import {  FaSignOutAlt, FaChevronDown } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -74,6 +74,7 @@ const AdminNavbar = ({
       }
       h-auto`}
     >
+
       <div className="flex justify-between items-center h-[70px]">
         <div className="flex items-center gap-4">
           <button
@@ -130,6 +131,7 @@ const AdminNavbar = ({
             </div>
           )}
         </div>
+
       </div>
 
       <h2

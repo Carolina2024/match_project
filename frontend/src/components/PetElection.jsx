@@ -11,7 +11,6 @@ const steps = [
 
 function PetElection() {
   const location = useLocation();
-  // const { nombre, foto } = location.state || {};
   const [matchs, setMatchs] = useState({ name: "", foto: [], status: "" });
   const [activeStep, setActiveStep] = useState(1);
 
@@ -108,7 +107,9 @@ function PetElection() {
 
       <div className="flex flex-col gap-1.5 justify-center text-center pt-7 pb-7">
         <p>Pronto nos contactaremos para darte los próximos detalles</p>
-        <b className="text-tertiary">¡Gracias por querer darle un hogar a {matchs.name}!</b>
+        <b className="text-tertiary">
+          ¡Gracias por querer darle un hogar a {matchs.name}!
+        </b>
       </div>
     </div>
   );

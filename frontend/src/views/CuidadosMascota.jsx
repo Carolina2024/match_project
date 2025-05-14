@@ -122,8 +122,8 @@ const CuidadosMascota = () => {
               Necesita adaptarse.
             </li>
             <li>
-              Múestrale su espacio: prepárale un rincón con cama, comida, agua y,
-              en el caso de los gatos, su caja de arena.
+              Múestrale su espacio: prepárale un rincón con cama, comida, agua
+              y, en el caso de los gatos, su caja de arena.
             </li>
             <li>
               Paciencia: puede mostrarse asustado o tímido. Dale tiempo, amor y
@@ -226,8 +226,12 @@ const CuidadosMascota = () => {
         </div>
       </div>
       <div>
-      <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-0 -mt-8">Para más información te invitamos a</h2>
-      <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-6">seguirnos en nuestras redes</h2>
+        <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-0 -mt-8">
+          Para más información te invitamos a
+        </h2>
+        <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-6">
+          seguirnos en nuestras redes
+        </h2>
       </div>
     </section>
   );

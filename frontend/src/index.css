@@ -11,6 +11,7 @@
   --color-secundary: #f6f6ed;
   --color-tertiary: #595146;
   --color-fourth: #efefef;
+
   --color-five: rgba(53, 163, 2, 0.25);  /*green-bg*/
   --color-green-text: #35A302;/*green-text*/
   --color-gray-icon: #6C6C6C;/*gray-icon*/
@@ -20,6 +21,7 @@
   --color-bg-red-rechazado: #E9171740;
 
   
+
 }
 @layer base {
   html {
@@ -28,14 +30,13 @@
   body {
     background-color: var(--color-secundary);
   }
-
 }
 
 .bg-red-slowly {
   background-color: var( --color-bg-red-rechazado);
 }
 .bg-disponible {
-  background-color: var( --color-five);
+  background-color: var(--color-five);
 }
 
 .color-text-disponible {

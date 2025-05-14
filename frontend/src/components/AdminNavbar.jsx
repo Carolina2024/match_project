@@ -68,59 +68,81 @@ const AdminNavbar = ({
 
   return (
     <div
-      className={`bg-[#F7F7F7] h-[70px] fixed top-0 right-0 z-0 mt-2 px-2 flex justify-between items-center border-b border-gray-200 transition-all duration-300 ${
+      className={`bg-[#F7F7F7] fixed top-0 z-0 px-4 py-1 border-b md:border-b border-b-0 border-gray-200 transition-all duration-300
+      ${
         isSidebarVisible ? "left-[180px] w-[calc(100%-180px)]" : "left-0 w-full"
-      }`}
+      }
+      h-auto`}
     >
-      <div className="flex items-center gap-4">
-        <button
-          onClick={() => setSidebarVisible(true)}
-          className={`md:hidden w-12 h-12 bg-white rounded-full shadow flex justify-center items-center hover:bg-gray-100 transition mr-auto ${
-            isSidebarVisible ? "left-[-1000%]" : ""
-          }`}
-        >
-          <div className="flex flex-col items-center justify-between h-6 w-6">
-            <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
-            <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
-            <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
-          </div>
-        </button>
 
-        {/*   <h2 className="text-lg font-semibold text-gray-700">{sectionTitle}</h2> */}
-      </div>
-
-      {/*  <h2 className="text-lg font-semibold text-gray-700">{sectionTitle}</h2> */}
-
-      <div className="relative ">
-        <button
-          onClick={() => setOpen(!open)}
-          className="bg-white border px-6 py-2 rounded-full shadow-[0_8px_0_0_#4E473E] text-sm font-medium hover:bg-gray-50 flex items-center"
-
-        >
-          <div className="flex flex-col items-start leading-tight ">
-            <span className="text-sm text-gray-800 font-bold">{userName}</span>
-            <span className="text-xs text-gray-500">{userRole}</span>
-          </div>
-          <FaChevronDown
-            className={`text-sm text-gray-500 ml-2 transform ${
-              open ? "rotate-180" : ""
+      <div className="flex justify-between items-center h-[70px]">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setSidebarVisible(true)}
+            className={`md:hidden w-12 h-12 bg-white rounded-full shadow flex justify-center items-center hover:bg-gray-100 transition mr-auto ${
+              isSidebarVisible ? "left-[-1000%]" : ""
             }`}
-          />
-        </button>
+          >
+            <div className="flex flex-col items-center justify-between h-6 w-6">
+              <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
+              <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
+              <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
+            </div>
+          </button>
+        </div>
 
-        {open && (
-          <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg border-gray-200 rounded z-50 text-xs">
+        <div className="">
+          <button
+            onClick={() => setOpen(!open)}
+            className="bg-white border px-4 rounded-full shadow-sm text-sm font-medium hover:bg-gray-50 flex items-center"
+          >
+            <div className="flex flex-col items-start leading-tight">
+              <span className="text-sm text-gray-800 font-bold">
+                {userName}
+              </span>
+              <span className="text-xs text-gray-500">{userRole}</span>
+            </div>
+            <FaChevronDown
+              className={`text-sm text-gray-500 ml-2 transform ${
+                open ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
-            <button
-              className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-              onClick={handleLogout}
-            >
-              <FaSignOutAlt className="mr-1 text-sm" />
-              <span>Cerrar sesión</span>
-            </button>
-          </div>
-        )}
+          {open && (
+            <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg border-gray-200 rounded z-50 text-xs">
+              <button
+                className="flex items-center w-full text-left px-2 py-1 text-sm hover:bg-gray-100"
+                onClick={() => {
+                  setOpen(false);
+                  navigate("/Admin");
+                }}
+              >
+                <FaUser className="mr-1 text-gray-500 text-sm" />
+                <span>Mi perfil</span>
+              </button>
+              <button
+                className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+                onClick={handleLogout}
+              >
+                <FaSignOutAlt className="mr-1 text-sm" />
+                <span>Cerrar sesión</span>
+              </button>
+            </div>
+          )}
+        </div>
+
       </div>
+
+      <h2
+        className={`text-lg font-semibold text-gray-700 ${
+          isSidebarVisible ? "hidden md:block" : ""
+        } sm-ml-0  md:ml-20
+    mt-[10px] md:mt-[-70px] md:py-5
+          `}
+      >
+        {sectionTitle}
+      </h2>
     </div>
   );
 };

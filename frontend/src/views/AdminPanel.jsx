@@ -21,7 +21,7 @@ const AdminPanel = () => {
     Adoptantes: "Registros de adoptantes",
   };
 
-  const currentTitle = viewTitles[activeView] || "Panel de administración";
+  const currentTitle = viewTitles[activeView];
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -113,7 +113,7 @@ const AdminPanel = () => {
       />
 
       <div
-        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-40"
+        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-30"
         style={{ left: isSidebarVisible ? "250px" : "0px" }}
       >
         <div className="p-6">{renderView()}</div>

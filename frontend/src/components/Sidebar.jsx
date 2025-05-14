@@ -64,7 +64,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
         <button
           onClick={() => setIsVisible(false)}
           style={closeButtonStyles}
-          className="md:hidden"
+          className="block md:hidden"
         >
           x
         </button>

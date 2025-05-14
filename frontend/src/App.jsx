@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
-import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
 import PetsHome from "./components/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
@@ -13,7 +12,6 @@ import PetElection from "./components/PetElection";
 import UserModalEdit from "./components/modals/UserModalEdit";
 import PasswordReset from "./views/PasswordReset";
 
-
 function App() {
   return (
     <Router>
@@ -23,7 +21,6 @@ function App() {
           <Route path="/Nosotros" element={<Nosotros />} />
           <Route path="/CuidadosMascota" element={<CuidadosMascota />} />
           <Route path="/Contacto" element={<Contacto />} />
-          <Route path="/Adoptar" element={<Adoptar />} />
           <Route path="/Mascotas" element={<PetsHome />} />
           <Route path="/seguimiento" element={<PetElection />} />
           <Route path="/editprofile" element={<UserModalEdit />} />

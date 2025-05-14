@@ -116,7 +116,9 @@ const AdoptionApllication = () => {
                   setReadingRequest(sol);
                 }
               }}
+
               className="cursor-pointer w-[240px] h-[214px] bg-white border rounded-[20px] shadow-[5px_5px_0px_0px_rgba(118,117,117,1)] p-5 flex flex-col justify-between gap-5"
+
             >
               <div className="text-center space-y-2">
                 <h3 className="text-lg font-semibold">{sol.pet.name}</h3>
@@ -124,8 +126,10 @@ const AdoptionApllication = () => {
                 <FaHeart
                   className={`mx-auto ${
                     sol.status === "Rechazado"
+
                       ? "text-gray-500"
                       : "text-orange-400"
+
                   }`}
                 />
 
@@ -187,6 +191,7 @@ const AdoptionApllication = () => {
           />
         )}
 
+
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4">
           <div className="text-sm text-gray-500 mb-4 sm:mb-0">
             Mostrando {solicitudesPaginadas.length} de {solicitudesFiltradas.length} solicitudes
@@ -229,6 +234,7 @@ const AdoptionApllication = () => {
             </button>
           </div>
         </div>
+
       </div>
     </div>
   );

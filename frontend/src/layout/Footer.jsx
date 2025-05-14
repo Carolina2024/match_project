@@ -15,7 +15,7 @@ const Footer = () => {
           <h3 className="font-bold mb-3 text-black">Menú principal</h3>
           <ul className="space-y-2 font-medium flex flex-col">
             <Link to="/">Inicio</Link>
-            <Link to="/Nosotros">Nosotros</Link>
+            <Link to="/Nosotros#historia">Nosotros</Link>
             <Link to="/CuidadosMascota">Cuidados de tu mascota</Link>
             <Link to="/Contacto">Contacto</Link>
           </ul>

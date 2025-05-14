@@ -66,7 +66,8 @@ export class CreateAdopterDto {
     message: 'La dirección de residencia debe ser una cadena de texto',
   })
   @Matches(/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ0-9\s,.#-]+$/, {
-    message: 'La dirección solo puede contener letras, números, espacios, comas, puntos, # y guiones',
+    message:
+      'La dirección solo puede contener letras, números, espacios, comas, puntos, # y guiones',
   })
   address: string;
 

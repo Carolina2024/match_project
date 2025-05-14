@@ -77,20 +77,17 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] flex items-start justify-center pt-16 pb-8 px-4 overflow-y-auto">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]"
-      >
+        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
         <div className="flex justify-end">
           <button
             type="button"
             className="text-[#595146] focus:outline-none cursor-pointer"
-            onClick={onClose}
-          >
+            onClick={onClose}>
             <svg
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
+              stroke="currentColor">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -101,27 +98,28 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
           </button>
         </div>
 
-        <div className="text-center mb-6 mt-1 px-20">
+        <div className="text-center mb-6 mt-1 px-6 sm:px-10 md:px-20">
           <img
             src={logo}
             alt="Logo Patas Pirque"
-            className="mx-auto mb-7 h-36 w-auto rounded-full"
+            className="mx-auto mb-5 h-24 w-24 sm:h-36 sm:w-auto rounded-full"
           />
-          <div className="text-black justify-center text-center text-xl mt-1 mb-4 mx-16">
-            Queremos saber&nbsp;
+          <div className="text-black justify-center text-center text-base sm:text-xl mt-1 mb-4 mx-2 sm:mx-10 md:mx-16">
+            Queremos saber
             <strong>
+              {" "}
               qué tipo de compañero estás buscando y qué te motiva a adoptar.
-            </strong>
-            &nbsp; Así podemos asegurarnos de que haya una buena conexión entre
+            </strong>{" "}
+            Así podemos asegurarnos de que haya una buena conexión entre
             ustedes.
           </div>
-          <h2 className="text-3xl font-bold text-primary mt-1 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-bold text-primary mt-1 mb-4">
             Crear Cuenta
           </h2>
           <div className="flex justify-center items-center space-x-4 mb-6">
-            <div className="w-5 h-5 rounded-full border border-[#1C1B1F]" />
+            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border border-[#1C1B1F]" />
             <div className="border-t border-[#1C1B1F] w-6" />
-            <div className="w-5 h-5 rounded-full bg-primary" />
+            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-primary" />
           </div>
         </div>
 
@@ -232,8 +230,11 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
           </div>
 
           <div className="mb-4">
+            <label className="block mb-2">
+              ¿Qué tipo de mascota estás buscando?*
+            </label>
             <label className="block font-semibold mb-1">Energía</label>
-            <div className="flex space-x-2 mb-3">
+            <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:space-x-2 ">
               {opcionesEnergia.map((energy) => (
                 <button
                   key={energy}
@@ -243,8 +244,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                     formData.energy === energy
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
-                  }`}
-                >
+                  }`}>
                   {energy}
                 </button>
               ))}
@@ -256,7 +256,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
 
           <div className="mb-2">
             <label className="block font-semibold mb-1">Carácter</label>
-            <div className="flex flex-wrap gap-2 mb-3">
+            <div className="flex flex-wrap gap-2">
               {opcionesCaracter.map((opcion) => (
                 <button
                   key={opcion}
@@ -266,8 +266,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                     formData.character.includes(opcion)
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
-                  }`}
-                >
+                  }`}>
                   {opcion}
                 </button>
               ))}
@@ -279,7 +278,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
 
           <div className="mb-2">
             <label className="block font-semibold mb-1">Compatibilidad</label>
-            <div className="flex space-x-2 mb-3">
+            <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:space-x-2 mb-3">
               {opcionesPreferencia.map((opcion) => (
                 <button
                   key={opcion}
@@ -289,8 +288,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                     formData.compatibility.includes(opcion)
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
-                  }`}
-                >
+                  }`}>
                   {opcion}
                 </button>
               ))}
@@ -321,14 +319,17 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
             <button
               type="button"
               onClick={onBack}
-              className="bg-white/75 hover:text-tertiary hover:border-tertiary text-primary py-1 px-12 border-2 border-primary rounded-3xl focus:outline-none cursor-pointer"
-            >
+              className="bg-white/75 text-primary border-2 border-primary rounded-3xl focus:outline-none cursor-pointer 
+               px-6 py-1 text-sm sm:px-12 sm:text-base 
+               hover:text-tertiary hover:border-tertiary">
               Atrás
             </button>
+
             <button
               type="submit"
-              className="bg-primary hover:bg-tertiary shadow-lg/20 text-white font-semibold py-1 px-12 rounded-3xl cursor-pointer"
-            >
+              className="bg-primary text-white font-semibold rounded-3xl cursor-pointer 
+               px-6 py-1 text-sm sm:px-12 sm:text-base 
+               hover:bg-tertiary shadow-lg/20">
               Finalizar
             </button>
           </div>

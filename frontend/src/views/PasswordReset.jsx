@@ -1,10 +1,9 @@
 import { useState } from "react";
-import AuthModalsController from "../components/modals/AuthModalsController";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import PropTypes from "prop-types";
+import logo from "../assets/logo.png";
 
-function PasswordReset({ isOpen, setLoginOpen }) {
+function PasswordReset() {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -15,11 +14,6 @@ function PasswordReset({ isOpen, setLoginOpen }) {
   const location = useLocation();
 
   const token = new URLSearchParams(location.search).get("token");
-
-  // Modales
-  const [isRegisterOpen, setRegisterOpen] = useState(false);
-  const [isRegisterbOpen, setRegisterbOpen] = useState(false);
-  const [isRecoverOpen, setRecoverOpen] = useState(false);
 
   const handleCodigoChange = (index, value) => {
     if (/^[0-9]?$/.test(value)) {
@@ -58,8 +52,7 @@ function PasswordReset({ isOpen, setLoginOpen }) {
           }
         );
         localStorage.removeItem("email_recovery");
-        setLoginOpen(true); // Limpieza de modal
-        navigate("/"); // Tuta a Home
+        navigate("/?openLogin=true"); // Ruta
       
       } catch (error) {
         setErrors({ code: "Código inválido o token vencido" });
@@ -67,7 +60,6 @@ function PasswordReset({ isOpen, setLoginOpen }) {
     }
   };
 
-  if (!isOpen) return null;
 
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 py-10 flex justify-center">
@@ -75,7 +67,7 @@ function PasswordReset({ isOpen, setLoginOpen }) {
         {/* Logo flotante */}
         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
           <img
-            src="src/assets/logo.png"
+            src={logo}
             alt="Logo Patas Pirque"
             className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-fill drop-shadow-lg"
           />
@@ -232,7 +224,7 @@ function PasswordReset({ isOpen, setLoginOpen }) {
             </button>
             <button
               type="button"
-              onClick={() => setRecoverOpen(true)}
+              onClick={() => navigate("/?openRecovery=true")}
               className="sm:w-[1/2] w-[1/2]  px-8 cursor-pointer py-1 border-2 text-lg border-primary text-primary font-bold rounded-full shadow-sm transition"
             >
               Volver atrás
@@ -240,23 +232,9 @@ function PasswordReset({ isOpen, setLoginOpen }) {
           </div>
         </form>
       </div>
-      {/* Modales */}
-      <AuthModalsController
-        setLoginOpen={setLoginOpen}
-        isRegisterOpen={isRegisterOpen}
-        setRegisterOpen={setRegisterOpen}
-        isRegisterbOpen={isRegisterbOpen}
-        setRegisterbOpen={setRegisterbOpen}
-        isRecoverOpen={isRecoverOpen}
-        setRecoverOpen={setRecoverOpen}
-      />
     </div>
   );
 }
 
-PasswordReset.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  setLoginOpen: PropTypes.func.isRequired,
-};
 
 export default PasswordReset;

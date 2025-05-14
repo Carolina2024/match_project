@@ -2,12 +2,11 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
-const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
+const PasswordRecovery = ({ isOpen, onClose, onBack,onSuccess }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-   const navigate = useNavigate();
   if (!isOpen) return null;
 
   const isValidEmail = (email) => {
@@ -34,7 +33,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
       await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/recover-password`, { email });
       // Redirigimos al formulario de la validacion del código y los inputs de nueva contraseña
       localStorage.setItem("email_recovery", email); // Almacenamos email
-      navigate("/RecoverPassword");
+      onSuccess();
     } catch (error) {
       setEmailError("Correo no registrado o error al enviar. Intenta nuevamente.");
     }
@@ -50,9 +49,9 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
       <div className="relative bg-secundary p-16 rounded-3xl shadow-lg w-full md:max-w-lg max-w-sm text-center">
         <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
           <img
-            src="src/assets/logo.png"
+            src={logo}
             alt="Logo Patas Pirque"
-            className="w-30 h-30   rounded-full"
+            className="w-30 h-30 rounded-full"
           />
         </div>
         <button
@@ -111,6 +110,7 @@ PasswordRecovery.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
 };
 
 export default PasswordRecovery;

@@ -106,6 +106,7 @@ export class MatchesService {
       ])
       .skip((page - 1) * (limit || 10))
       .take(limit)
+      .orderBy('matches.applicationDate', 'DESC')
       .getMany();
 
     return {
@@ -117,8 +118,8 @@ export class MatchesService {
     };
   }
 
-  async findByUser(userId: string): Promise<Match[]> {
-    return this.matchRepository.find({
+  async findByUser(userId: string): Promise<Match> {
+    const pet = await this.matchRepository.findOne({
       where: { userId },
       relations: ['pet'],
       select: {
@@ -142,7 +143,14 @@ export class MatchesService {
           traits: true,
         },
       },
+      order: { applicationDate: 'DESC' },
     });
+    if (!pet) {
+      throw new NotFoundException(
+        'El usuario no posee ninguna solicitud de adopción',
+      );
+    }
+    return pet;
   }
 
   async findOne(id: string): Promise<Match> {

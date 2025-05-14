@@ -15,6 +15,21 @@ const AdminPanel = () => {
   const [editingPet, setEditingPet] = useState(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarVisible(true);
+      }
+    };
+  
+    window.addEventListener("resize", handleResize);
+  
+    handleResize();
+  
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
+
   const viewTitles = {
     Mascotas: "Gestiona las mascotas",
     Solicitudes: "Solicitudes de adoptantes",
@@ -91,8 +106,7 @@ const AdminPanel = () => {
           />
         );
       default:
-      /* return <div className="p-6">Vista no implementada</div>; */
-      navigate("/Admin");
+      navigate("/Mascota");
       return null;
     }
   };

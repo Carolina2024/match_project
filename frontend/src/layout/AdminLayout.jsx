@@ -3,7 +3,7 @@ import AdminNavbar from "../components/AdminNavbar";
 import { Outlet } from "react-router-dom";
 
 function AdminLayout() {
-  const [activeView, setActiveView] = useState("INICIO");
+  const [activeView, setActiveView] = useState("Mascotas");
 
   return (
     <div className="min-h-screen bg-[#FAFAFA]">

@@ -9,12 +9,6 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
       ></div>
 
       <div className="relative bg-white p-6 rounded-lg shadow-lg w-full sm:w-[500px] mx-4 z-20">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl font-bold"
-        >
-          X
-        </button>
 
         <h2 className="text-lg font-semibold mb-4 text-center">
           ¿Estás seguro de eliminar a {pet.name}?

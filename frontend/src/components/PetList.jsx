@@ -30,7 +30,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   
 
   const handleEdit = (pet) => {
-    console.log({ pet });
     setEditingPet(pet);
     setActiveView("editPet");
   };

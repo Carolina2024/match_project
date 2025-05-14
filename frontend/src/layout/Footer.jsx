@@ -109,7 +109,7 @@ const Footer = () => {
 
       <div className="bg-primary text-black flex justify-center items-center px-8 py-6 rounded-t-4xl">
         <span className="text-base font-medium text-center font-tertiary">
-          &copy;2025 Pataspirque.cl
+          &copy;2025 pataspirque.cl
         </span>
       </div>
     </footer>

@@ -155,7 +155,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     <div className="fixed inset-0 z-50 flex justify-end">
       <div
         className="fixed inset-0 bg-black/30 backdrop-blur-sm"
-        onClick={() => setActiveView("MASCOTAS")}
+        onClick={() => setActiveView("Mascotas")}
       />
     
       
@@ -166,7 +166,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         
               >
                 <button
-          onClick={() => setActiveView("MASCOTAS")}
+          onClick={() => setActiveView("Mascotas")}
           className="absolute top-4 right-4 text-gray-500 hover:text-black text-3xl font-bold z-50"
         >
           x
@@ -447,7 +447,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
   <div className="grid grid-cols-2 gap-4">
     <button
       type="button"
-      onClick={() => setActiveView("MASCOTAS")}
+      onClick={() => setActiveView("Mascotas")}
       className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer font-semibold"
     >
       Cancelar

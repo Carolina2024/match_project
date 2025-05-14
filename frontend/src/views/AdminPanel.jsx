@@ -91,8 +91,7 @@ const AdminPanel = () => {
           />
         );
       default:
-      /* return <div className="p-6">Vista no implementada</div>; */
-      navigate("/Admin");
+      navigate("/Mascota");
       return null;
     }
   };

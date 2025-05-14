@@ -271,7 +271,7 @@ export class PetService {
     updatePetDto: UpdatePetDto,
     files: Express.Multer.File[],
   ): Promise<Pet> {
-    if (files) {
+    if (files?.length) {
       if (files.length > 3) {
         throw new BadRequestException('No se pueden subir más de 3 imágenes');
       }
@@ -297,11 +297,31 @@ export class PetService {
         files.map((file) => this.filesService.uploadImageToCloudinary(file)),
       );
     }
+    if (
+      updatePetDto.photoUrls !== undefined &&
+      !Array.isArray(updatePetDto.photoUrls)
+    ) {
+      throw new BadRequestException('photoUrls debe ser un array');
+    }
+
+    const existingPet = await this.findOne(id);
+    let photoUrlsFromDto: string[] = [];
+
+    if (Array.isArray(updatePetDto.photoUrls)) {
+      photoUrlsFromDto = updatePetDto.photoUrls.filter(
+        (url): url is string => typeof url === 'string',
+      );
+    } else if (!files?.length) {
+      // Si no se enviaron nuevas fotos ni archivos, mantenemos las actuales
+      photoUrlsFromDto = existingPet.photoUrls;
+    }
     // Combinar imágenes subidas y URLs recibidas
-    const finalPhotoUrls = [
-      ...(updatePetDto.photoUrls || []),
-      ...newPhotoUrls,
-    ].slice(0, 3); // limitar a máximo 3
+    const finalPhotoUrls = [...photoUrlsFromDto, ...newPhotoUrls].slice(0, 3); // limitar a máximo 3
+    if (finalPhotoUrls.length === 0) {
+      throw new BadRequestException(
+        'La mascota debe tener al menos una imagen',
+      );
+    }
 
     await this.petRepository.update(id, {
       ...updatePetDto,

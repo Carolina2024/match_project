@@ -1,11 +1,10 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { Transporter } from 'nodemailer';
 import { ConfigService } from '@nestjs/config';
 import { readFileSync } from 'fs';
 import { compile } from 'handlebars';
 import { join } from 'path';
-import { ContactMessageDto } from './dto/contact-message.dto';
 
 @Injectable()
 export class MailService {
@@ -60,21 +59,6 @@ export class MailService {
         recoveryCode,
         ttlMinutes,
       },
-    );
-  }
-
-  async sendContactMessage(contactMessageDto: ContactMessageDto) {
-    const email = this.configService.get<string>('MAIL_CONTACT_RECEIVER');
-    if (!email) {
-      throw new InternalServerErrorException(
-        'Ha ocurrido un error para obtener el correo electrónico para contacto',
-      );
-    }
-    return this.renderAndSend(
-      'contact',
-      email,
-      `Contacto: ${contactMessageDto.name}`,
-      contactMessageDto,
     );
   }
 }

@@ -15,6 +15,7 @@ import imageb from "../assets/imageb.png";
 import { HandHeart } from "lucide-react";
 import PetsHome from "../components/PetsHome";
 import AuthModalsController from "../components/modals/AuthModalsController";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
   // Modales
@@ -22,6 +23,29 @@ const Home = () => {
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
   const [isRecoverOpen, setRecoverOpen] = useState(false);
+
+  //Params URL
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+
+    if (params.get("openLogin") === "true") {
+      setLoginOpen(true);
+    }
+
+    if (params.get("openRecovery") === "true") {
+      setRecoverOpen(true);
+    }
+
+    // Limpiando parámetros de URL despues de abrir el modal
+    if (params.has("openLogin") || params.has("openRecovery")) {
+      params.delete("openLogin");
+      params.delete("openRecovery");
+      navigate(location.pathname, { replace: true });
+    }
+  }, [location, navigate]);
 
   // Slider state
   const [activeSlide, setActiveSlide] = useState(0);
@@ -178,10 +202,7 @@ const Home = () => {
             </div>
             {/* Botón flotante */}
             <section className="absolute top-0 right-0">
-              <a
-                href="https://esponsor.com/pataspirque"
-                target="_blank"
-              >
+              <a href="https://esponsor.com/pataspirque" target="_blank">
                 <button className="bg-primary w-20 cursor-pointer h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90">
                   <HandHeart size={44} className="stroke-white" />
                 </button>

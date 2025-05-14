@@ -1,9 +1,10 @@
+
 import { useEffect, useState } from "react";
 import { FaSearch, FaHeart, FaRegEdit } from "react-icons/fa";
 import { BsCalendar2 } from "react-icons/bs";
 import { getAllMatches } from "../api/matchService";
 import MatchDetailModal from "./modals/MatchDetailModal";
-import RequestModal from "../components/modals/RequestModal"
+import RequestModal from "../components/modals/RequestModal";
 
 const AdoptionApllication = () => {
   const [filtro, setFiltro] = useState("Todos");
@@ -11,15 +12,29 @@ const AdoptionApllication = () => {
   const [solicitudEditando, setSolicitudEditando] = useState(null);
   const [readingRequest, setReadingRequest] = useState(null);
 
-
   const [solicitudes, setSolicitudes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(8);
+
+  const solicitudesFiltradas = solicitudes.filter((s) => {
+    const coincideEstado = filtro === "Todos" || s.status === filtro;
+    const coincideBusqueda = s.pet?.name
+      .toLowerCase()
+      .includes(busqueda.toLowerCase());
+    return coincideEstado && coincideBusqueda;
+  });
+
+  const totalPages = Math.ceil(solicitudesFiltradas.length / itemsPerPage);
+
+  const solicitudesPaginadas = solicitudesFiltradas.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
         const data = await getAllMatches();
-        console.log("Total de solicitudes:", data.length);
-        console.log("Solicitudes cargadas:", data);
         setSolicitudes(data.items || data);
       } catch (error) {
         console.error("Error al obtener solicitudes:", error.message);
@@ -28,13 +43,7 @@ const AdoptionApllication = () => {
 
     fetchSolicitudes();
   }, []);
-  const solicitudesFiltradas = solicitudes.filter((s) => {
-    const coincideEstado = filtro === "Todos" || s.status === filtro;
-    const coincideBusqueda = s.pet?.name
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
-    return coincideEstado && coincideBusqueda;
-  });
+
   const handleStatusUpdate = async (matchId, nuevoEstado) => {
     try {
       const res = await fetch(
@@ -69,7 +78,7 @@ const AdoptionApllication = () => {
 
   return (
     <div className="bg-[#FAF9F6] min-h-screen">
-      <div className="bg-white m-4 md:m-10 p-6 rounded-xl shadow-md border border-gray-300">
+      <div className="bg-white m-4 md:m-10 p-6 rounded-[20px] shadow-[1px_3px_6px_rgba(0,0,0,0.4)] border border-gray-300">
         <div className="flex flex-col gap-4 mb-8">
           <div className="relative w-full sm:w-64">
             <input
@@ -99,27 +108,24 @@ const AdoptionApllication = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-          {solicitudesFiltradas.map((sol) => (
+          {solicitudesPaginadas.map((sol) => (
             <div
-  key={sol.id}
-  onClick={() => {
-    if (sol.status === "En proceso" || sol.status === "Rechazado") {
-      setReadingRequest(sol);
-    }
-  }}
-  className="cursor-pointer w-full max-w-[180px] sm:max-w-[200px] md:max-w-[220px] xl:max-w-[250px] 2xl:max-w-[280px] h-auto bg-white border rounded-xl shadow-[9px_9px_2px_rgba(0,0,0,0.5)] py-4 px-3 flex flex-col justify-between"
-
-
->
-
+              key={sol.id}
+              onClick={() => {
+                if (sol.status === "En proceso" || sol.status === "Rechazado") {
+                  setReadingRequest(sol);
+                }
+              }}
+              className="cursor-pointer w-[240px] h-[214px] bg-white border rounded-[20px] shadow-[5px_5px_0px_0px_rgba(118,117,117,1)] p-5 flex flex-col justify-between gap-5"
+            >
               <div className="text-center space-y-2">
                 <h3 className="text-lg font-semibold">{sol.pet.name}</h3>
 
                 <FaHeart
                   className={`mx-auto ${
                     sol.status === "Rechazado"
-                      ? "text-gray-400"
-                      : "text-orange-500" 
+                      ? "text-gray-500"
+                      : "text-orange-400"
                   }`}
                 />
 
@@ -135,13 +141,13 @@ const AdoptionApllication = () => {
 
               <div className="flex justify-center items-center mt-2 px-1">
                 <span
-                  className={`text-sm px-3 py-1 rounded-full font-medium ${
+                  className={`text-sm px-3 py-1 rounded-[10px] font-medium ${
                     sol.status === "Por revisar"
                       ? "bg-gray-300 text-gray-600"
                       : sol.status === "En proceso"
-                      ? "bg-orange-200 text-orange-500"
+                      ? "color-bg-orange color-text-process"
                       : sol.status === "Aprobado"
-                      ? "bg-green-300 text-green-600"
+                      ? "bg-disponible  color-text-disponible"
                       : "bg-red-300 text-red-600"
                   }`}
                 >
@@ -155,15 +161,15 @@ const AdoptionApllication = () => {
                     title="Ver detalles de la solicitud"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSolicitudEditando(sol)}
-                    }
-                    
+                      setSolicitudEditando(sol);
+                    }}
                   />
                 )}
               </div>
             </div>
           ))}
         </div>
+
         {solicitudEditando && (
           <MatchDetailModal
             solicitud={solicitudEditando}
@@ -172,15 +178,57 @@ const AdoptionApllication = () => {
               handleStatusUpdate(solicitudEditando.id, nuevoEstado)
             }
           />
-          
         )}
-        {readingRequest && (
-  <RequestModal
-    request={readingRequest}
-    onClose={() => setReadingRequest(null)}
-  />
-)}
 
+        {readingRequest && (
+          <RequestModal
+            request={readingRequest}
+            onClose={() => setReadingRequest(null)}
+          />
+        )}
+
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4">
+          <div className="text-sm text-gray-500 mb-4 sm:mb-0">
+            Mostrando {solicitudesPaginadas.length} de {solicitudesFiltradas.length} solicitudes
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+            >
+              Anterior
+            </button>
+
+            <div className="flex gap-1">
+              {Array.from({ length: totalPages }, (_, index) => {
+                const page = index + 1;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-8 h-8 rounded border text-sm font-medium ${
+                      currentPage === page
+                        ? "bg-[#595146] text-white border-[#595146]"
+                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                );
+              })}
+            </div>
+
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className="px-3 py-2 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+            >
+              Siguiente
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

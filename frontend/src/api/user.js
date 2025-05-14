@@ -1,7 +1,4 @@
-/* const BASE_URL = "https://match-project.onrender.com/api";
-const AUTH_URL = `${BASE_URL}/auth`; */
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL; // Usando la variable de entorno para la base URL
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const AUTH_URL = `${API_BASE}/auth`;
 
 export const loginUser = async (data) => {

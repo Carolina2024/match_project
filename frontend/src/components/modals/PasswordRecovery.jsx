@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import logo from "../../assets/logo.png";
 
-const PasswordRecovery = ({ isOpen, onClose, onBack,onSuccess }) => {
+const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   if (!isOpen) return null;
@@ -28,17 +28,20 @@ const PasswordRecovery = ({ isOpen, onClose, onBack,onSuccess }) => {
       return;
     }
 
-
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/recover-password`, { email });
-      // Redirigimos al formulario de la validacion del código y los inputs de nueva contraseña
-      localStorage.setItem("email_recovery", email); // Almacenamos email
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/recover-password`,
+        { email }
+      );
+
+      localStorage.setItem("email_recovery", email);
       onSuccess();
     } catch (error) {
-      setEmailError("Correo no registrado o error al enviar. Intenta nuevamente.");
+      setEmailError(
+        "Correo no registrado o error al enviar. Intenta nuevamente."
+      );
     }
   };
-
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);

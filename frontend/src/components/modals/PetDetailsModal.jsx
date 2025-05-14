@@ -92,8 +92,8 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
                   : pet?.status === "En Proceso"
                   ? "color-bg-orange color-text-process"
                   : pet?.status === "Adoptada"
-                  ?  "color-bg-gray text-[#6C6C6C]"
-                  :  "color-bg-gray text-[#6C6C6C]"
+                  ? "color-bg-gray text-[#6C6C6C]"
+                  : "color-bg-gray text-[#6C6C6C]"
               }`}
             >
               {pet?.status}

@@ -31,8 +31,8 @@ function PetsHome() {
   };
 
   const handleConfirmMatch = async (id) => {
-    console.log(id)
-    await createMatch(id)
+    console.log(id);
+    await createMatch(id);
     setShowCheckMatch3(false);
     setShowCheckMatch4(true);
   };
@@ -123,9 +123,7 @@ function PetsHome() {
                   </div>
                 )}
 
-                <h2 className="text-2xl font-bold mt-4">
-                  {seleccionada.name}
-                </h2>
+                <h2 className="text-2xl font-bold mt-4">{seleccionada.name}</h2>
 
                 <div className="mt-2 w-full flex flex-wrap gap-2 justify-center px-4">
                   {seleccionada.traits.map((trait, idx) => (

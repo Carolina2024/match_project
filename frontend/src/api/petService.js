@@ -1,6 +1,3 @@
-/* const BASE_URL = "https://match-project.onrender.com/api/pets";
-const BASE_URL2 = "https://match-project.onrender.com/api/pets/complete"; */
-
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const BASE_URL = `${API_BASE}/pets`;
 const BASE_URL2 = `${API_BASE}/pets/complete`;
@@ -25,7 +22,7 @@ export const getAllPets = async (page = 1, limit = 10) => {
 
 /**
  *
- * @param {Object} petData - Datos de la mascota
+ * @param {Object} petData
  */
 export const createPet = async (petData) => {
   console.log({ petData });
@@ -46,8 +43,6 @@ export const createPet = async (petData) => {
   formData.append("story", petData.story || "");
   formData.append("admissionDate", petData.admissionDate || "");
   formData.append("status", petData.status || "");
-
-  /* formData.append("delivery", petData.delivery.join(",")); */
 
   formData.append(
     "isVaccinated",

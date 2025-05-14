@@ -41,7 +41,6 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
     top: "16px",
     right: "16px",
     fontSize: "24px",
-    color: "#444",
     cursor: "pointer",
     color: "orange",
   };

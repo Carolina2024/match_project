@@ -202,8 +202,8 @@ export class PetController {
       statusCode: 400,
     },
   })
- @Auth(UserRole.ADMIN)
-  create(
+  @Auth(UserRole.ADMIN)
+  async create(
     @UploadedFiles() files: Express.Multer.File[],
     @Body() createPetDto: CreatePetDto,
   ) {
@@ -865,9 +865,9 @@ export class PetController {
         photoUrls: {
           type: 'array',
           items: { type: 'string' },
-          example: ["https://example.com/una-foto.jpg"],
+          example: ['https://example.com/una-foto.jpg'],
           description: 'URLs de las fotos de la mascota',
-        }
+        },
       },
     },
   })
@@ -916,7 +916,7 @@ export class PetController {
     @Body() updatePetDto: UpdatePetDto,
     @UploadedFiles() files: Express.Multer.File[],
   ) {
-    try{
+    try {
       return await this.petService.update(id, updatePetDto, files);
     } catch (error) {
       throw new BadRequestException('Error al actualizar la mascota ' + error);

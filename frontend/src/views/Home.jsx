@@ -18,13 +18,11 @@ import AuthModalsController from "../components/modals/AuthModalsController";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
-  // Modales
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
   const [isRecoverOpen, setRecoverOpen] = useState(false);
 
-  //Params URL
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -39,7 +37,6 @@ const Home = () => {
       setRecoverOpen(true);
     }
 
-    // Limpiando parámetros de URL despues de abrir el modal
     if (params.has("openLogin") || params.has("openRecovery")) {
       params.delete("openLogin");
       params.delete("openRecovery");
@@ -47,7 +44,6 @@ const Home = () => {
     }
   }, [location, navigate]);
 
-  // Slider state
   const [activeSlide, setActiveSlide] = useState(0);
   const sliders = [slider1, slider2, slider3];
   const slides = [
@@ -71,7 +67,6 @@ const Home = () => {
     },
   ];
 
-  // Auto-play slider
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % sliders.length);
@@ -79,17 +74,14 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [sliders.length]);
 
-  // Auth flag
   const stored = localStorage.getItem("user");
   const user = stored ? JSON.parse(stored) : null;
   const loggedIn = Boolean(user);
 
   return (
     <section className="w-full flex flex-col justify-center items-center -mt-20">
-      {/* Secciones sin login */}
       {!loggedIn ? (
         <>
-          {/* Primera sección sin login */}
           <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex items-center md:ml-10">
             <svg
               width="1030"
@@ -134,7 +126,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Segunda sección sin login */}
           <h2 className="text-2xl md:text-4xl font-bold font-secundary text-primary text-center md:mt-16 mt-0">
             Conoce a quienes esperan un hogar
           </h2>
@@ -163,7 +154,6 @@ const Home = () => {
         </>
       ) : (
         <>
-          {/* Primera sección logueados */}
           <div className="relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis flex items-center md:ml-10">
             <svg
               width="918"
@@ -200,7 +190,7 @@ const Home = () => {
                 </h2>
               </div>
             </div>
-            {/* Botón flotante */}
+
             <section className="absolute top-0 right-0">
               <a href="https://esponsor.com/pataspirque" target="_blank">
                 <button className="bg-primary w-20 cursor-pointer h-20 rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90">
@@ -210,8 +200,6 @@ const Home = () => {
             </section>
           </div>
 
-          {/* Segunda sección logueado */}
-          {/* Wrapper de PetsHome */}
           <div className="w-full mt-22 flex justify-center">
             <div className="w-full md:max-w-5xl px-4">
               <PetsHome />
@@ -220,7 +208,6 @@ const Home = () => {
         </>
       )}
 
-      {/* Tercera sección global con o sin logueo */}
       <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
           Encuentra a tu mascota ideal
@@ -251,7 +238,6 @@ const Home = () => {
           </svg>
         </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
-          {/* Paso 1 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-white font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               1
@@ -291,7 +277,6 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Paso 2 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               2
@@ -332,7 +317,6 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Paso 3 */}
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               3
@@ -362,7 +346,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Historias de adopción */}
       <section className="w-full px-4 flex flex-col justify-center items-center -mt-8">
         <div className="py-10 text-center w-full">
           <h2 className="text-2xl md:text-4xl font-bold text-primary px-4 md:px-20 text-center">
@@ -370,7 +353,6 @@ const Home = () => {
           </h2>
           <hr className="w-3/5 border-t-1 border-primary mx-auto md:mt-4 mt-2 mb-8 md:mb-10" />
 
-          {/* Slider */}
           <div className="max-w-4xl mx-auto mb-12 px-4">
             <div className="relative overflow-hidden rounded-4xl shadow-lg">
               <img
@@ -401,7 +383,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Modales */}
+
       <AuthModalsController
         isLoginOpen={isLoginOpen}
         setLoginOpen={setLoginOpen}

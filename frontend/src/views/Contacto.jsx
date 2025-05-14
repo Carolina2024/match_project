@@ -49,7 +49,6 @@ const Contacto = () => {
         message: formData.mensaje,
       };
 
-      //Conexion con .env de EmailJS
       emailjs
         .send(
           import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -78,7 +77,6 @@ const Contacto = () => {
         </div>
 
         <form className="space-y-5" onSubmit={handleSubmit}>
-          {/* Nombre */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Nombre
@@ -96,7 +94,6 @@ const Contacto = () => {
             )}
           </div>
 
-          {/* Email */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Email
@@ -114,7 +111,6 @@ const Contacto = () => {
             )}
           </div>
 
-          {/* Teléfono */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Número de teléfono
@@ -157,7 +153,6 @@ const Contacto = () => {
             )}
           </div>
 
-          {/* Mensaje */}
           <div>
             <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
               Mensaje

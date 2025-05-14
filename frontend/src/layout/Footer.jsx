@@ -28,7 +28,6 @@ const Footer = () => {
             className="w-46 h-46 rounded-full"
           />
           <div className="flex space-x-5 text-2xl cursor-pointer">
-            {/* TikTok */}
             <a href="https://www.tiktok.com/@pataspirque_" target="_blank">
               <svg
                 width="28"
@@ -47,7 +46,6 @@ const Footer = () => {
               </svg>
             </a>
 
-            {/* Facebook */}
             <a
               href="https://www.facebook.com/p/Patas-Pirque-61550508151197/"
               target="_blank"
@@ -69,7 +67,6 @@ const Footer = () => {
               </svg>
             </a>
 
-            {/* Instagram */}
             <a href="https://www.instagram.com/pataspirque/" target="_blank">
               <svg
                 width="31"

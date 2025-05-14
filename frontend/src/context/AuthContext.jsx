@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const AuthContext = createContext();
 
-// Proveedor
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
@@ -16,14 +15,12 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  // Funcionalidad Login
   const login = (userData, token) => {
     localStorage.setItem("user", JSON.stringify(userData));
     localStorage.setItem("token", token);
     setUser(userData);
   };
 
-  // Estado de la sesión
   const isAuthenticated = !!user;
 
   return (
@@ -37,5 +34,4 @@ AuthProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-// Hook para el contexto
 export const useAuth = () => useContext(AuthContext);

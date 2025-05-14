@@ -1,5 +1,4 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-/* const API_URL = "https://match-project.onrender.com/api/users"; */
 const API_URL = `${BASE_URL}/users`;
 
 export const fetchUsersget = async (page = 1, limit = 10) => {

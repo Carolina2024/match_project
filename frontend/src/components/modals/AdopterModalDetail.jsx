@@ -1,15 +1,9 @@
-
 import PropTypes from "prop-types";
 
 const AdopterModalDetail = ({ open, onClose, adopter }) => {
   if (!open || !adopter) return null;
 
-  const {
-    adopter: adopterDetails = {},
-    fullname,
-    email,
-    createdAt,
-  } = adopter;
+  const { adopter: adopterDetails = {}, fullname, email, createdAt } = adopter;
 
   const {
     birthDate,
@@ -49,58 +43,81 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
 
         <h2 className="text-2xl font-bold mb-1">Registro del adoptante</h2>
         <p className="text-gray-500 text-sm mb-6">
-          Fecha del registro: {createdAt ? new Date(createdAt).toLocaleDateString("es-CL") : "No disponible"}
+          Fecha del registro:{" "}
+          {createdAt
+            ? new Date(createdAt).toLocaleDateString("es-CL")
+            : "No disponible"}
         </p>
 
         <div className="grid grid-cols-2 gap-10 text-sm text-gray-800">
           {/* Columna izquierda */}
           <div className="space-y-8 border-r border-gray-300 pr-6">
             <div className="border-b border-gray-300 pb-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Información personal</h3>
+              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+                Información personal
+              </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-gray-500 text-xs mb-1">Nombre completo</p>
                   <p>{fullname}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">Fecha de nacimiento</p>
-                  <p>{birthDate ? new Date(birthDate).toLocaleDateString("es-CL") : "No disponible"}</p>
+                  <p className="text-gray-500 text-xs mb-1">
+                    Fecha de nacimiento
+                  </p>
+                  <p>
+                    {birthDate
+                      ? new Date(birthDate).toLocaleDateString("es-CL")
+                      : "No disponible"}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">Correo electrónico</p>
+                  <p className="text-gray-500 text-xs mb-1">
+                    Correo electrónico
+                  </p>
                   <p>{email}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">Documento de identidad</p>
+                  <p className="text-gray-500 text-xs mb-1">
+                    Documento de identidad
+                  </p>
                   <p>{identityDocument || "No disponible"}</p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-gray-500 text-xs mb-1">Dirección y comuna</p>
+                  <p className="text-gray-500 text-xs mb-1">
+                    Dirección y comuna
+                  </p>
                   <p>{address || "No disponible"}</p>
                 </div>
               </div>
             </div>
 
             <div className="border-b border-gray-300 pb-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Experiencia con mascotas</h3>
+              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+                Experiencia con mascotas
+              </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Ha tenido mascotas antes?</p>
+
+                  <p className="text-gray-500 text-xs mb-1">¿Tienes o has tenido mascotas antes?</p>
+
                   <p>{hadPets ? "Sí" : "No"}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Vacunadas?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Están o estuvieron vacunadas?</p>
                   <p>{hadPetsVaccinated ? "Sí" : "No"}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Castradas?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Están o estuvieron castrados?</p>
                   <p>{hadPetsCastrated ? "Sí" : "No"}</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Preferencias</h3>
+              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+                Preferencias
+              </h3>
               <div className="text-gray-500 text-xs mb-1">Energía</div>
               {userPreferenceEnergy && (
                 <span className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mb-2">
@@ -145,39 +162,50 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
             </div>
           </div>
 
-         
           <div className="space-y-8 pl-6">
             <div className="border-b border-gray-300 pb-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Información de vivienda</h3>
+              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+                Información de vivienda
+              </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">Espacio disponible</p>
+                  <p className="text-gray-500 text-xs mb-1">
+                    Espacio disponible
+                  </p>
                   <p>{homeType || "No especificado"}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Permite mascotas?</p>
+
+                  <p className="text-gray-500 text-xs mb-1">¿El edificio/condominio permite mascotas?</p>
+
                   <p>{allowsPets ? "Sí" : "No"}</p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-gray-500 text-xs mb-1">¿Horas solo?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Cuantas horas al dia estaria sola la mascota?</p>
                   <p>{hoursAlone || "No especificado"}</p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Responsabilidad</h3>
+              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+                Responsabilidad
+              </h3>
               <div className="space-y-2">
-                <p className="text-gray-500 text-xs mb-1">¿Qué harías si la mascota rompe algo?</p>
+                <p className="text-gray-500 text-xs mb-1">
+                  ¿Qué harías si la mascota rompe algo?
+                </p>
                 <p className="italic">{petDestroy || "No especificado"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">¿Veterinario?</p>
+                <p className="text-gray-500 text-xs mb-1">¿Estas dispuesto a llevarlo al veterinario?</p>
                 <p>{preparedToVisitVeterinarian ? "Sí" : "No"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">¿Visitas de seguimiento?</p>
+
+                <p className="text-gray-500 text-xs mb-1">¿Estas dispuesto a recibir visitas de seguimiento?</p>
                 <p>{allowsVisit ? "Sí" : "No"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">¿Compromiso responsable?</p>
+                <p className="text-gray-500 text-xs mb-1">¿Estas dispuesto a firmar un compromiso de adopción responsable?</p>
+
                 <p>{isResponsibleAdoption ? "Sí" : "No"}</p>
               </div>
             </div>

@@ -14,10 +14,10 @@ export function IsAdult(validationOptions?: ValidationOptions) {
 
           const birthdate = parseISO(value);
           const age = differenceInYears(new Date(), birthdate);
-          return age >= 18;
+          return age >= 18 && age <= 100 ;
         },
         defaultMessage(): string {
-          return 'Debes tener al menos 18 años para poder registrarte';
+          return 'Debes tener al menos entre 18 años y 100 años para poder registrarte';
         },
       },
     });

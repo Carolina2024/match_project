@@ -126,7 +126,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
           <div className="flex flex-col">
             <span className="text-gray-600 font-semibold">Estado:</span>
             <span
-<
+
               className={`px-3 py-1 rounded-[10px] font-semibold text-sm w-fit ${getEstadoClase(
 
                 estado

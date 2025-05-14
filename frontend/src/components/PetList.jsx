@@ -224,8 +224,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                       title="Visualizar"
                       className="hover:text-gray-500"
                     >
-                     <FiEye />
-
+                      <FiEye />
                     </button>
                     <button
                       onClick={() => handleEdit(pet)}
@@ -247,40 +246,9 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           </tbody>
         </table>
 
-
-      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6 cursor-pointer">
-        <div className="text-sm text-gray-500 mb-4 sm:mb-0">
-          Mostrando {pets.length} de {pets.length} mascotas
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
-          >
-            Anterior
-          </button>
-
-          <div className="flex gap-1">
-            {totalPages > 1 &&
-              Array.from({ length: totalPages }, (_, index) => {
-                const page = index + 1;
-                return (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`w-8 h-8 rounded border text-sm font-medium ${
-                      currentPage === page
-                        ? "bg-[#595146] text-white border-[#595146]"
-                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                );
-              })}
-
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6 cursor-pointer">
+          <div className="text-sm text-gray-500 mb-4 sm:mb-0">
+            Mostrando {pets.length} de {pets.length} mascotas
           </div>
 
           <div className="flex items-center gap-2">
@@ -320,39 +288,39 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               Siguiente
             </button>
           </div>
+
+          {showMessage && (
+            <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
+              <span className="block font-bold">Mascota eliminada</span>
+              <span>{deletedPetName} ha sido eliminado del registro.</span>
+              <button
+                onClick={() => setShowMessage(false)}
+                className="absolute top-0 right-0 px-2 py-1 text-red-700 hover:text-red-900 text-lg"
+              >
+                &times;
+              </button>
+            </div>
+          )}
         </div>
 
-        {showMessage && (
-          <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
-            <span className="block font-bold">Mascota eliminada</span>
-            <span>{deletedPetName} ha sido eliminado del registro.</span>
-            <button
-              onClick={() => setShowMessage(false)}
-              className="absolute top-0 right-0 px-2 py-1 text-red-700 hover:text-red-900 text-lg"
-            >
-              &times;
-            </button>
-          </div>
+        {selectedPet && (
+          <PetDetailsModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            pet={selectedPet}
+          />
         )}
-      </div>
 
-      {selectedPet && (
-        <PetDetailsModal
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          pet={selectedPet}
+        <PetModalDelete
+          isOpen={modalOpenn}
+          onClose={handleCloseModal}
+          onConfirm={handleDeletePet}
+          pet={selectedPett}
         />
-      )}
-
-      <PetModalDelete
-        isOpen={modalOpenn}
-        onClose={handleCloseModal}
-        onConfirm={handleDeletePet}
-        pet={selectedPett}
-      />
+      </div>
     </div>
   );
-};
+}
 
 PetList.propTypes = {
   setActiveView: PropTypes.func.isRequired,

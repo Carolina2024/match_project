@@ -13,6 +13,7 @@ import { PetService } from '../pets/pet.service';
 import { PetStatus } from '../../common/enums/pet.enum';
 import { FilterMatchDto } from './dto/filterMatch.dto';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
+import { Pet } from '../pets/entities/pet.entity';
 
 @Injectable()
 export class MatchesService {
@@ -20,6 +21,9 @@ export class MatchesService {
     @InjectRepository(Match)
     private matchRepository: Repository<Match>,
     private petService: PetService,
+
+    @InjectRepository(Pet)
+    private petRepository: Repository<Pet>,
   ) {}
 
   async create(
@@ -198,11 +202,7 @@ export class MatchesService {
     const match = await this.findOne(id);
     this.validateStatusTransition(match.status, updateMatchStatusDto.status);
     if (updateMatchStatusDto.status === MatchStatus.APROBADO) {
-      await this.petService.update(
-        match.petId,
-        { status: PetStatus.ADOPTED },
-        [],
-      );
+      await this.petRepository.update(id, { status: PetStatus.ADOPTED });
       await this.matchRepository.update(
         {
           petId: match.petId,

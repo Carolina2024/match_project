@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { FiEye } from "react-icons/fi";
-import {  FaSearch, FaRegEdit } from "react-icons/fa";
+import { FaSearch, FaRegEdit } from "react-icons/fa";
 import { PiTrashBold } from "react-icons/pi";
-
+import CustomSelect from "./CustomSelect";
 import { useState, useEffect } from "react";
 import { getAllPets } from "../api/petService";
 import PetDetailsModal from "./modals/PetDetailsModal";
@@ -27,8 +27,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   const [showMessage, setShowMessage] = useState(false);
   const [deletedPetName, setDeletedPetName] = useState("");
 
-  
-
   const handleEdit = (pet) => {
     setEditingPet(pet);
     setActiveView("editPet");
@@ -43,7 +41,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     const fetchPets = async () => {
       try {
         const response = await getAllPets(currentPage);
-        console.log("Mascotas recibidas:", response.items);
         setPets(response.items || []);
         setTotalPages(response.totalPages || 1);
       } catch (error) {
@@ -61,25 +58,21 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   };
 
   const filteredPets = pets.filter((pet) => {
-    const matchesSearch = `${pet.name} ${pet.breed}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesEspecie =
-      filterSpecies === "Todos" || pet.species === filterSpecies;
-    const matchesTamanio = filterSize === "Todos" || pet.size === filterSize;
-    const matchesEstado =
-      filterStatus === "Todos" ||
-      pet.status.toLowerCase() === filterStatus.toLowerCase();
+    const matchesSearch = `${pet.name} ${pet.breed}`.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSpecies = filterSpecies === "Todos" || pet.species === filterSpecies;
+    const matchesSize = filterSize === "Todos" || pet.size === filterSize;
+    const matchesStatus = filterStatus === "Todos" || pet.status.toLowerCase() === filterStatus.toLowerCase();
 
-    return matchesSearch && matchesEspecie && matchesTamanio && matchesEstado;
+    return matchesSearch && matchesSpecies && matchesSize && matchesStatus;
   });
 
   const getStatusBadge = (status) => {
     const statusStyles = {
-      Disponible: "bg-disponible  color-text-disponible",
+      Disponible: "bg-disponible color-text-disponible",
       "En Proceso": "color-bg-orange color-text-process",
       Adoptado: "color-bg-gray text-[#6C6C6C]",
     };
+
     return (
       <span
         className={`px-2 py-1 rounded text-sm font-medium font-primary ${
@@ -119,10 +112,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     <div className="min-h-screen">
       <div className="overflow-x-auto bg-white md:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] md:rounded-xl p-6">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
-          <div
-            className="relative w-full
-          sm:w-[500px] md:w-[350px]"
-          >
+          <div className="relative w-full sm:w-[500px] md:w-[350px]">
             <input
               type="text"
               placeholder="Buscar"
@@ -136,7 +126,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="[box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-white px-4 py-2 [border-radius:10px] hover:bg-[#e78b52] transition-colors duration-300 cursor-pointer"
+            className="[box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300"
           >
             + Nueva mascota
           </button>
@@ -144,48 +134,29 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         <div className="mb-4">
           <div className="mb-2">
-            <span
-              className="font-raleway text-[16px]"
-              style={{ color: "#595146" }}
-            >
+            <span className="font-raleway text-[17px] font-semibold text-[#595146]">
               Filtrar por:
             </span>
           </div>
-          <div
-            className="flex flex-wrap  gap-1 font-raleway text-[16px]"
-            style={{ color: "#767575" }}
-          >
-            <select
-              className="border border-gray-300 rounded-lg px-1 py-2 focus:outline-none w-[90px]"
-              value={filterSpecies}
-              onChange={(e) => setFilterSpecies(e.target.value)}
-            >
-              <option value="Todos">Especie</option>
-              <option value="Perro">Perro</option>
-              <option value="Gato">Gato</option>
-            </select>
-
-            <select
-              className="border border-gray-300 rounded-lg px-1 py-2 focus:outline-none w-[90px]"
-              value={filterSize}
-              onChange={(e) => setFilterSize(e.target.value)}
-            >
-              <option value="Todos">Tamaño</option>
-              <option value="Pequeño">Pequeño</option>
-              <option value="Mediano">Mediano</option>
-              <option value="Grande">Grande</option>
-            </select>
-
-            <select
-              className="border border-gray-300 rounded-lg px-1 py-2 focus:outline-none w-[90px]"
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-            >
-              <option value="Todos">Estado</option>
-              <option value="Disponible">Disponible</option>
-              <option value="En Proceso">En Proceso</option>
-              <option value="Adoptado">Adoptado</option>
-            </select>
+          <div className="flex flex-wrap gap-2 font-raleway text-[16px] text-[#767575]">
+            <CustomSelect
+              label="Especie"
+              options={["Todos", "Perro", "Gato"]}
+              selected={filterSpecies}
+              onChange={setFilterSpecies}
+            />
+            <CustomSelect
+              label="Tamaño"
+              options={["Todos", "Pequeño", "Mediano", "Grande"]}
+              selected={filterSize}
+              onChange={setFilterSize}
+            />
+            <CustomSelect
+              label="Estado"
+              options={["Todos", "Disponible", "En Proceso", "Adoptado"]}
+              selected={filterStatus}
+              onChange={setFilterStatus}
+            />
           </div>
         </div>
 
@@ -205,37 +176,22 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <tbody className="font-secundary">
             {filteredPets.map((pet) => (
               <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2 font-secundary">
-                  <span className="font-medium  text-gray-700">{pet.name}</span>
-                </td>
-                <td className="px-4 py-2 font-secundary">
-                  {pet.admissionDate}
-                </td>
+                <td className="px-4 py-2 font-secundary font-medium text-gray-700">{pet.name}</td>
+                <td className="px-4 py-2">{pet.admissionDate}</td>
                 <td className="px-4 py-2">{pet.species}</td>
                 <td className="px-4 py-2">{pet.breed}</td>
                 <td className="px-4 py-2">{getStatusBadge(pet.status)}</td>
-                <td className="px-4 py-2 font-secundary">{pet.sex}</td>
+                <td className="px-4 py-2">{pet.sex}</td>
                 <td className="px-4 py-2">{pet.size}</td>
                 <td className="px-4 py-2">
                   <div className="flex gap-2 text-gray-600 text-lg">
-                    <button
-                      onClick={() => handleViewPet(pet)}
-                      title="Visualizar"
-                      className="hover:text-gray-500"
-                    >
+                    <button onClick={() => handleViewPet(pet)} title="Visualizar" className="hover:text-gray-500">
                       <FiEye />
                     </button>
-                    <button
-                      onClick={() => handleEdit(pet)}
-                      title="Editar"
-                      className="--color-gray-icon hover:text-gray-500 font-bold cursor-pointer"
-                    >
+                    <button onClick={() => handleEdit(pet)} title="Editar" className="hover:text-gray-500 font-bold">
                       <FaRegEdit />
                     </button>
-                    <button
-                      className="text-red-500 hover:text-red-700 font-bold cursor-pointer"
-                      onClick={() => handleOpenModal(pet)}
-                    >
+                    <button onClick={() => handleOpenModal(pet)} title="Eliminar" className="text-red-500 hover:text-red-700 font-bold">
                       <PiTrashBold />
                     </button>
                   </div>
@@ -245,11 +201,10 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           </tbody>
         </table>
 
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6 cursor-pointer">
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6">
           <div className="text-sm text-gray-500 mb-4 sm:mb-0">
             Mostrando {pets.length} de {pets.length} mascotas
           </div>
-
           <div className="flex items-center gap-2">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -258,7 +213,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             >
               Anterior
             </button>
-
             <div className="flex gap-1">
               {totalPages > 1 &&
                 Array.from({ length: totalPages }, (_, index) => {
@@ -278,7 +232,6 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                   );
                 })}
             </div>
-
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
@@ -287,45 +240,30 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               Siguiente
             </button>
           </div>
-
-          {showMessage && (
-            <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 absolute right-0 top-190">
-              <span className="block font-bold">Mascota eliminada</span>
-              <span>{deletedPetName} ha sido eliminado del registro.</span>
-              <button
-                onClick={() => setShowMessage(false)}
-                className="absolute top-0 right-0 px-2 py-1 text-red-700 hover:text-red-900 text-lg"
-              >
-                &times;
-              </button>
-            </div>
-          )}
         </div>
 
-        {selectedPet && (
-          <PetDetailsModal
-            isOpen={modalOpen}
-            onClose={() => setModalOpen(false)}
-            pet={selectedPet}
-          />
+        {showMessage && (
+          <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded w-1/4 right-4 top-[100px] shadow-md">
+            <span className="block font-bold">Mascota eliminada</span>
+            <span>{deletedPetName} ha sido eliminado del registro.</span>
+            <button onClick={() => setShowMessage(false)} className="absolute top-1 right-2 text-xl font-bold">
+              &times;
+            </button>
+          </div>
         )}
 
-        <PetModalDelete
-          isOpen={modalOpenn}
-          onClose={handleCloseModal}
-          onConfirm={handleDeletePet}
-          pet={selectedPett}
-        />
+        {selectedPet && (
+          <PetDetailsModal isOpen={modalOpen} onClose={() => setModalOpen(false)} pet={selectedPet} />
+        )}
+        <PetModalDelete isOpen={modalOpenn} onClose={handleCloseModal} onConfirm={handleDeletePet} pet={selectedPett} />
       </div>
     </div>
   );
-}
+};
 
 PetList.propTypes = {
   setActiveView: PropTypes.func.isRequired,
   setEditingPet: PropTypes.func.isRequired,
-  handleSavePet: PropTypes.func.isRequired,
-  handleDeletePet: PropTypes.func.isRequired,
 };
 
 export default PetList;

@@ -41,7 +41,6 @@ if (estado === "Por revisar") {
   );
 }
 
-// Botón Aprobar
 if (estado === "Por revisar" || estado === "En proceso") {
   botones.push(
     <button
@@ -58,7 +57,6 @@ if (estado === "Por revisar" || estado === "En proceso") {
   );
 }
 
-// Botón Rechazar
 if (estado === "Por revisar" || estado === "En proceso") {
   botones.push(
     <button

@@ -33,17 +33,6 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
         )}
 
-        <div className="flex gap-4 mb-4">
-          {pet?.photos?.map((url, i) => (
-            <img
-              key={i}
-              src={url}
-              alt="Mascota"
-              className="w-24 h-24 rounded object-cover"
-            />
-          ))}
-        </div>
-
         <div className="mb-4">
           <h3 className="font-semibold mb-1 text-gray-700">
             Historia de la mascota
@@ -97,14 +86,14 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           <div>
             <h3 className="font-semibold text-gray-700 mb-1">Estado</h3>
             <span
-              className={`inline-block text-xs font-semibold px-3 py-1 rounded-full ${
+              className={`inline-block text-xs font-semibold px-3 py-1 rounded-lg ${
                 pet?.status === "Disponible"
-                  ? "bg-green-500 text-white"
+                  ? "bg-disponible color-text-disponible"
                   : pet?.status === "En Proceso"
-                  ? "bg-orange-500 text-white"
+                  ? "color-bg-orange color-text-process"
                   : pet?.status === "Adoptada"
-                  ? "bg-gray-400 text-white"
-                  : "bg-gray-100 text-gray-600"
+                  ?  "color-bg-gray text-[#6C6C6C]"
+                  :  "color-bg-gray text-[#6C6C6C]"
               }`}
             >
               {pet?.status}
@@ -119,7 +108,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
               {pet?.traits?.map((trait, i) => (
                 <span
                   key={i}
-                  className="bg-orange-200 text-orange-800 px-3 py-1 rounded-full text-xs"
+                  className="bg-[#FF9855] text-white px-3 py-1 rounded-lg text-xs"
                 >
                   {trait}
                 </span>
@@ -134,22 +123,22 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </h3>
           <div className="flex flex-wrap gap-2">
             {pet?.isVaccinated && (
-              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-[#595146] text-white px-3 py-1 rounded-lg text-xs">
                 Vacunado
               </span>
             )}
             {pet?.isSterilized && (
-              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-[#595146] text-white px-3 py-1 rounded-lg text-xs">
                 Esterilizado
               </span>
             )}
             {pet?.isDewormed && (
-              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-[#595146] text-white px-3 py-1 rounded-lg text-xs">
                 Desparasitado
               </span>
             )}
             {pet?.hasMicrochip && (
-              <span className="bg-amber-800 text-white px-3 py-1 rounded-full text-xs">
+              <span className="bg-[#595146] text-white px-3 py-1 rounded-lg text-xs">
                 Con microchip
               </span>
             )}

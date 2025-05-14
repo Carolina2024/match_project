@@ -17,7 +17,7 @@ export const getUserById = async (id, token) => {
 
     const data = await response.json();
 
-    console.log("Respuesta completa de la API:", data);
+    // console.log("Respuesta completa de la API:", data);
 
     const formatted = {
       id: data.id,
@@ -48,12 +48,12 @@ export const getUserById = async (id, token) => {
       }
     };
     
-    console.log(JSON.stringify(formatted, null, 2));
-    console.log("Detalles del adoptante:", data);
-    console.log(
-      "Detalles del adoptante formateados:",
-      JSON.stringify(formatted, null, 2)
-    );
+    // console.log(JSON.stringify(formatted, null, 2));
+    // console.log("Detalles del adoptante:", data);
+    // console.log(
+    //   "Detalles del adoptante formateados:",
+    //   JSON.stringify(formatted, null, 2)
+    // );
     return formatted;
   } catch (error) {
     console.error("Error al obtener el adoptante:", error);

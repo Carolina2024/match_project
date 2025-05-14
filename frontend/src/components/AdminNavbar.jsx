@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import { FaSignOutAlt, FaChevronDown, FaUser } from "react-icons/fa";
+import { FaSignOutAlt, FaChevronDown } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
+
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const AdminNavbar = ({
@@ -14,10 +15,21 @@ const AdminNavbar = ({
   setSidebarVisible,
 }) => {
   const { logout } = useAuth();
-
   const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const [userName, setUserName] = useState("Usuario");
+  const dropdownRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -68,13 +80,10 @@ const AdminNavbar = ({
 
   return (
     <div
-      className={`bg-[#F7F7F7] fixed top-0 z-0 px-4 py-1 border-b md:border-b border-b-0 border-gray-200 transition-all duration-300
-      ${
+      className={`bg-[#F7F7F7] fixed top-0 z-0 px-4 py-1 border-b md:border-b border-b-0 border-gray-200 transition-all duration-300 ${
         isSidebarVisible ? "left-[180px] w-[calc(100%-180px)]" : "left-0 w-full"
-      }
-      h-auto`}
+      } h-auto`}
     >
-
       <div className="flex justify-between items-center h-[70px]">
         <div className="flex items-center gap-4">
           <button
@@ -91,55 +100,42 @@ const AdminNavbar = ({
           </button>
         </div>
 
-        <div className="">
+        <div ref={dropdownRef} className="relative cursor-pointer">
           <button
             onClick={() => setOpen(!open)}
-            className="bg-white border px-4 rounded-full shadow-sm text-sm font-medium hover:bg-gray-50 flex items-center"
+            className="bg-white border px-4 rounded-full text-sm font-medium flex items-center
+                       shadow-[0_5px_0_0_#5A534A] hover:bg-gray-50"
           >
             <div className="flex flex-col items-start leading-tight">
-              <span className="text-sm text-gray-800 font-bold">
-                {userName}
-              </span>
-              <span className="text-xs text-gray-500">{userRole}</span>
+              <span className="text-sm text-[#4B443B] font-bold">{userName}</span>
+              <span className="text-xs text-gray-400">{userRole}</span>
             </div>
             <FaChevronDown
-              className={`text-sm text-gray-500 ml-2 transform ${
-                open ? "rotate-180" : ""
-              }`}
+              className={`text-sm ml-2 text-[#4B443B] transform ${open ? "rotate-180" : ""}`}
             />
           </button>
 
           {open && (
-            <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg border-gray-200 rounded z-50 text-xs">
-              <button
-                className="flex items-center w-full text-left px-2 py-1 text-sm hover:bg-gray-100"
-                onClick={() => {
-                  setOpen(false);
-                  navigate("/Admin");
-                }}
-              >
-                <FaUser className="mr-1 text-gray-500 text-sm" />
-                <span>Mi perfil</span>
-              </button>
-              <button
-                className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
-                onClick={handleLogout}
-              >
-                <FaSignOutAlt className="mr-1 text-sm" />
-                <span>Cerrar sesión</span>
-              </button>
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg z-50 text-sm">
+              <div className="px-4 py-2 text-gray-500 font-medium">Mi cuenta</div>
+              <div className="border-t border-gray-200">
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center w-full px-4 py-2 text-red-500 hover:bg-red-50 font-medium"
+                >
+                  <FaSignOutAlt className="mr-2" />
+                  Cerrar sesión
+                </button>
+              </div>
             </div>
           )}
         </div>
-
       </div>
 
       <h2
         className={`text-lg font-semibold text-gray-700 ${
           isSidebarVisible ? "hidden md:block" : ""
-        } sm-ml-0  md:ml-20
-    mt-[10px] md:mt-[-70px] md:py-5
-          `}
+        } sm-ml-0 md:ml-20 mt-[10px] md:mt-[-70px] md:py-5`}
       >
         {sectionTitle}
       </h2>
@@ -151,7 +147,6 @@ AdminNavbar.propTypes = {
   sectionTitle: PropTypes.string,
   userRole: PropTypes.string,
   isSidebarVisible: PropTypes.bool.isRequired,
-
   setSidebarVisible: PropTypes.func.isRequired,
 };
 

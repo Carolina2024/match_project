@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { X } from "lucide-react";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 
 const RecoveryConfirmationModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;

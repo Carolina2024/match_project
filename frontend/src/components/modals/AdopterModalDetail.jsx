@@ -85,15 +85,15 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
               <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">Experiencia con mascotas</h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Ha tenido mascotas antes?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Tienes o has tenido mascotas antes?</p>
                   <p>{hadPets ? "Sí" : "No"}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Vacunadas?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Están o estuvieron vacunadas?</p>
                   <p>{hadPetsVaccinated ? "Sí" : "No"}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Castradas?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Están o estuvieron castrados?</p>
                   <p>{hadPetsCastrated ? "Sí" : "No"}</p>
                 </div>
               </div>
@@ -155,11 +155,11 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                   <p>{homeType || "No especificado"}</p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">¿Permite mascotas?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿El edificio/condominio permite mascotas?</p>
                   <p>{allowsPets ? "Sí" : "No"}</p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-gray-500 text-xs mb-1">¿Horas solo?</p>
+                  <p className="text-gray-500 text-xs mb-1">¿Cuantas horas al dia estaria sola la mascota?</p>
                   <p>{hoursAlone || "No especificado"}</p>
                 </div>
               </div>
@@ -171,13 +171,13 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                 <p className="text-gray-500 text-xs mb-1">¿Qué harías si la mascota rompe algo?</p>
                 <p className="italic">{petDestroy || "No especificado"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">¿Veterinario?</p>
+                <p className="text-gray-500 text-xs mb-1">¿Estas dispuesto a llevarlo al veterinario?</p>
                 <p>{preparedToVisitVeterinarian ? "Sí" : "No"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">¿Visitas de seguimiento?</p>
+                <p className="text-gray-500 text-xs mb-1">¿Estas dispuesto a recibir visitas de seguimiento?</p>
                 <p>{allowsVisit ? "Sí" : "No"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">¿Compromiso responsable?</p>
+                <p className="text-gray-500 text-xs mb-1">¿Estas dispuesto a firmar un compromiso de adopción responsable?</p>
                 <p>{isResponsibleAdoption ? "Sí" : "No"}</p>
               </div>
             </div>

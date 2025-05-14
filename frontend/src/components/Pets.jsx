@@ -47,7 +47,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     traits: editingPet ? editingPet.traits : [],
     delivery: editingPet ? deliveryArray : [],
     story: editingPet ? editingPet.story : "",
-    photos: [null], // no es url
+    photos: [null], 
     photoUrls: editingPet ? editingPet.photoUrls : [],
   };
 
@@ -72,12 +72,17 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
       : [...current, value];
     setValue(field, updated);
   };
-
   const handleFileChange = (index, file) => {
     const updated = [...photos];
     updated[index] = file;
     setValue("photos", updated);
+  
+
+    const previewUrls = [...photoUrls];
+    previewUrls[index] = URL.createObjectURL(file);
+    setValue("photoUrls", previewUrls);
   };
+  
 
   const onSubmit = async (data) => {
     try {
@@ -415,22 +420,29 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                   />
                 </label>
               ))}
-              {photoUrls.map((url) => (
-                <div key={url}>
-                  <button type="button" onClick={() => handleDeletePhoto(url)}>
-                    Borrar Imagen
-                  </button>
-                  <img src={url} alt="" />
-                </div>
-              ))}
+{photoUrls.map((url) => (
+  <div key={url} className="relative w-full h-32 overflow-hidden rounded">
+    <button
+      type="button"
+      onClick={() => handleDeletePhoto(url)}
+      className="absolute top-1 right-1 bg-white text-gray-700 rounded-full text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white transition cursor-pointer"
+      title="Eliminar imagen"
+    >
+     X
+    </button>
+    <img
+      src={url}
+      alt="Foto"
+      className="w-full h-full object-cover rounded"
+    />
+  </div>
+))}
+
             </div>
           </div>
+        <div>
+      </div>
 
-<div>
-  
-</div>
-
-{/* Botones Fijos */}
 <div className="bg-white pt-4 pb-6 mt-6 border-t border-gray-200 sticky bottom-[-30px]">
   <div className="grid grid-cols-2 gap-4">
     <button
@@ -445,14 +457,9 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
       className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer font-semibold"
     >
       Guardar
-    </button>
-  </div>
-</div>
-
-
-          
-
-
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </div>

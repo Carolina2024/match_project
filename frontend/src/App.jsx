@@ -12,6 +12,7 @@ import AdminLayout from "./layout/AdminLayout";
 import PetElection from "./components/PetElection";
 import UserModalEdit from "./components/modals/UserModalEdit";
 import PasswordReset from "./views/PasswordReset";
+import InfoPet from "./components/infoPet";
 
 
 function App() {
@@ -24,9 +25,9 @@ function App() {
           <Route path="/CuidadosMascota" element={<CuidadosMascota />} />
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Adoptar" element={<Adoptar />} />
-          <Route path="/Mascotas" element={<PetsHome />} />
           <Route path="/seguimiento" element={<PetElection />} />
           <Route path="/editprofile" element={<UserModalEdit />} />
+          <Route path="/infopet" element={<InfoPet />} />
           <Route path="/RecoverPassword" element={<PasswordReset />} />
         </Route>
 

@@ -1,30 +1,31 @@
-import { useLocation } from "react-router-dom";
-import { FiClock } from "react-icons/fi";
+import { FiClock, FiCheck } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { getUserMatchs } from "../api/PetsUser";
 
-const steps = [
-  { id: 1, label: "Solicitud enviada" },
-  { id: 2, label: "Solicitud en proceso" },
-  { id: 3, label: "aprobada" },
-];
-
 function PetElection() {
-  const location = useLocation();
-  // const { nombre, foto } = location.state || {};
   const [matchs, setMatchs] = useState({ name: "", foto: [], status: "" });
   const [activeStep, setActiveStep] = useState(1);
 
-  const handleStepClick = (stepId) => {
-    setActiveStep(stepId);
-  };
+  const steps = [
+    { id: 1, label: "Solicitud enviada" },
+    { id: 2, label: "Solicitud en proceso" },
+    {
+      id: 3,
+      label:
+        matchs.status === "Aprobado"
+          ? "Aprobada"
+          : matchs.status === "Rechazado"
+          ? "Rechazada"
+          : "Estado final",
+    },
+  ];
 
   useEffect(() => {
     async function fetchData() {
       const data = await getUserMatchs();
-      const name = data[0].pet.name;
-      const foto = data[0].pet.photoUrls;
-      const status = data[0].status;
+      const name = data.pet.name;
+      const foto = data.pet.photoUrls;
+      const status = data.status;
 
       setMatchs({ name, foto, status });
 
@@ -37,39 +38,45 @@ function PetElection() {
           stepFromStatus = 2;
           break;
         case "Aprobado":
+        case "Rechazado":
           stepFromStatus = 3;
           break;
-        case "Rechazado":
-          stepFromStatus = 0; // fuera del proceso
-          break;
-        default:
-          stepFromStatus = 1;
       }
 
-      if (status !== "rechazado") {
-        setActiveStep(stepFromStatus);
-      }
+      setActiveStep(stepFromStatus);
     }
 
     fetchData();
-  }, []);
+
+    return () => {
+      if (matchs.status === "Aprobado" || matchs.status === "Rechazado") {
+        localStorage.removeItem(`matchVisto-${matchs.petId}`);
+        setMatchs({ name: "", foto: [], status: "", petId: null });
+      }
+    };
+  }, [matchs.status, matchs.petId]);
 
   return (
-    <div className=" flex flex-col gap-2.5">
-      <h1 className="text-3xl font-bold text-primary mb-4">
-        ¡Que gran eleccion hiciste!
+    <div className="flex flex-col gap-2.5 justify-center items-center h-full">
+      <h1 className="text-3xl font-bold text-primary mb-4 text-center">
+        {matchs.status === "Rechazado"
+          ? "Lamentamos mucho que no se haya podido concretar la adopción..."
+          : "¡Qué gran elección hiciste!"}
       </h1>
       <div className="items-center flex flex-col gap-3">
         <img
-          src={matchs.foto}
+          src={matchs.foto?.[0] || "/fallback.jpg"}
           alt={matchs.name}
           className="w-50 h-50 object-cover rounded-[30%]"
         />
         <b>{matchs.name}</b>
         {matchs.status === "Rechazado" ? (
           <span className="flex items-center gap-2 px-4 py-1 rounded-full bg-red-500 text-white text-sm font-medium shadow-sm">
-            <FiClock className="text-white text-base" />
             Solicitud rechazada
+          </span>
+        ) : matchs.status === "Aprobado" ? (
+          <span className="flex items-center gap-2 px-4 py-1 rounded-full bg-green-600 text-white text-sm font-medium shadow-sm">
+            Solicitud aprobada
           </span>
         ) : (
           <span className="flex items-center gap-2 px-4 py-1 rounded-full bg-primary text-white text-sm font-medium shadow-sm">
@@ -78,38 +85,43 @@ function PetElection() {
           </span>
         )}
       </div>
-      {matchs.status !== "Rechazado" && (
-        <div className="flex justify-center items-center gap-0 py-6">
-          {steps.map((step, index) => (
-            <div key={step.id} className="flex items-center ">
+
+      <div className="flex items-center justify-center px-4 py-4">
+        {steps.map((step, index) => (
+          <div key={step.id} className="flex items-center">
+            {/* Paso con círculo e ícono */}
+            <div className="flex flex-col items-center">
               <div
-                className="flex flex-col items-center cursor-pointer"
-                onClick={() => setActiveStep(step.id)}
+                className={`w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300
+                ${
+                  activeStep >= step.id
+                    ? "bg-primary text-white"
+                    : "border-2 border-primary text-transparent"
+                }`}
               >
-                <div
-                  className={`w-6 h-6 rounded-full mb-1 transition-all duration-300
-            ${
-              activeStep >= step.id
-                ? "bg-primary"
-                : "border-2 border-primary bg-transparent"
-            }`}
-                />
-                <span className="text-sm transition-colors duration-300 text-primary font-bold">
-                  {step.label}
-                </span>
+                {activeStep >= step.id && <FiCheck className="text-sm" />}
               </div>
-              {index < steps.length - 1 && (
-                <div className="w-18 h-px bg-primary mx-2 mb-3" />
-              )}
+              <span className="text-sm text-primary font-bold mt-2 text-center ">
+                {step.label}
+              </span>
             </div>
-          ))}
+
+            {/* Línea conectora */}
+            {index < steps.length - 1 && (
+              <div className="h-0.5 bg-primary mx-4 w-16 sm:w-24 relative top-[-10px]" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      {matchs.status !== "Rechazado" && matchs.status !== "Aprobado" && (
+        <div className="flex flex-col gap-1.5 justify-center text-center pt-7 pb-4">
+          <p>Pronto nos contactaremos para darte los próximos detalles</p>
+          <b className="text-tertiary">
+            ¡Gracias por querer darle un hogar a {matchs.name}!
+          </b>
         </div>
       )}
-
-      <div className="flex flex-col gap-1.5 justify-center text-center pt-7 pb-7">
-        <p>Pronto nos contactaremos para darte los próximos detalles</p>
-        <b className="text-tertiary">¡Gracias por querer darle un hogar a {matchs.name}!</b>
-      </div>
     </div>
   );
 }

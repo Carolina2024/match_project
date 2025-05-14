@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import {  FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import { FaSignOutAlt, FaChevronDown, FaUser } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 

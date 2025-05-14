@@ -1,12 +1,6 @@
-import {
-  IsOptional,
-  IsString,
-  IsBooleanString,
-  IsEnum,
-} from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { UserRole } from 'src/common/enums/userRole.enum';
 
 export class QueryUsersDto {
   @ApiPropertyOptional({ description: 'Número de página' })

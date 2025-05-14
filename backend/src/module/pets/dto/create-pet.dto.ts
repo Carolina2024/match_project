@@ -33,7 +33,9 @@ export class CreatePetDto {
     enum: PetSize,
     example: PetSize.MEDIUM,
   })
-  @IsEnum(PetSize, { message: `El tamaño debe ser un valor válido: ${Object.values(PetSize).join(", ")}` })
+  @IsEnum(PetSize, {
+    message: `El tamaño debe ser un valor válido: ${Object.values(PetSize).join(', ')}`,
+  })
   size: PetSize;
 
   @ApiProperty({
@@ -41,7 +43,9 @@ export class CreatePetDto {
     enum: PetSex,
     example: PetSex.MALE,
   })
-  @IsEnum(PetSex, { message: `El sexo debe ser un valor válido: ${Object.values(PetSex).join(", ")}` })
+  @IsEnum(PetSex, {
+    message: `El sexo debe ser un valor válido: ${Object.values(PetSex).join(', ')}`,
+  })
   sex: PetSex;
 
   @ApiProperty({
@@ -49,7 +53,9 @@ export class CreatePetDto {
     enum: PetAge,
     example: PetAge.YOUNG,
   })
-  @IsEnum(PetAge, { message: `La edad debe ser un valor válido: ${Object.values(PetAge).join(", ")}` })
+  @IsEnum(PetAge, {
+    message: `La edad debe ser un valor válido: ${Object.values(PetAge).join(', ')}`,
+  })
   age: PetAge;
 
   @ApiProperty({
@@ -57,7 +63,9 @@ export class CreatePetDto {
     enum: PetSpecies,
     example: PetSpecies.DOG,
   })
-  @IsEnum(PetSpecies, { message: `La especie debe ser un valor válido: ${Object.values(PetSpecies).join(", ")}` })
+  @IsEnum(PetSpecies, {
+    message: `La especie debe ser un valor válido: ${Object.values(PetSpecies).join(', ')}`,
+  })
   species: PetSpecies;
 
   @ApiProperty({
@@ -66,7 +74,7 @@ export class CreatePetDto {
     example: PetEnergy.MODERATE,
   })
   @IsEnum(PetEnergy, {
-    message: `El nivel de energía debe ser un valor válido: ${Object.values(PetEnergy).join(", ")}`,
+    message: `El nivel de energía debe ser un valor válido: ${Object.values(PetEnergy).join(', ')}`,
   })
   energy: PetEnergy;
 
@@ -167,13 +175,13 @@ export class CreatePetDto {
     items: { enum: Object.values(PetTrait) },
     example: [PetTrait.AFFECTIONATE, PetTrait.PLAYFUL],
   })
-  @Transform(({ value }) =>
+  @Transform(({ value }: { value: string }) =>
     Array.isArray(value) ? value : value.split(',').map((item) => item.trim()),
   )
   @IsArray({ message: 'Los rasgos deben ser un arreglo' })
   @IsEnum(PetTrait, {
     each: true,
-    message: `Cada rasgo debe ser un valor válido: ${Object.values(PetTrait).join(", ")}`,
+    message: `Cada rasgo debe ser un valor válido: ${Object.values(PetTrait).join(', ')}`,
   })
   traits: PetTrait[];
 
@@ -192,10 +200,7 @@ export class CreatePetDto {
     example: PetStatus.ADOPTED,
   })
   @IsEnum(PetStatus, {
-    message:
-      `El estado en el que se encuentra la mascota debe ser un valor válido: ${Object.values(PetStatus).join(", ")}`,
+    message: `El estado en el que se encuentra la mascota debe ser un valor válido: ${Object.values(PetStatus).join(', ')}`,
   })
   status: PetStatus;
-
-
 }

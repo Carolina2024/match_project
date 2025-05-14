@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { FaSearch, FaEye, FaTrash } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { FiEye } from "react-icons/fi";
+import { PiTrashBold } from "react-icons/pi";
 import { fetchUsersget } from "../api/adopterApi";
 import UserModalDelete from "./modals/UserModalDelete";
 import { deleteUser } from "../api/deleteUser";
@@ -8,17 +10,14 @@ import { getUserById } from "../api/adopterDetail";
 
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedUserDetail, setSelectedUserDetail] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
   const [deletedUserName, setDeletedUserName] = useState("");
-
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   useEffect(() => {
@@ -41,12 +40,9 @@ const UserProfiles = () => {
     }
   };
 
-  const filteredUsers = users.filter((user) => {
-    const matchesSearch = `${user.fullname} ${user.email}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    return matchesSearch;
-  });
+  const filteredUsers = users.filter((user) =>
+    `${user.fullname} ${user.email}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleOpenModal = (user) => {
     setSelectedUser(user);
@@ -76,7 +72,6 @@ const UserProfiles = () => {
   const handleOpenDetail = async (user) => {
     try {
       const token = localStorage.getItem("token");
-      console.log("🔐 TOKEN:", token);
       const fullUser = await getUserById(user.id, token);
       setSelectedUserDetail(fullUser);
       setIsDetailOpen(true);
@@ -91,7 +86,7 @@ const UserProfiles = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 bg-white border border-gray-400 rounded-lg overflow-x-auto">
+    <div className="shadow-[0px_0px_10px_rgba(0,0,0,0.2)] rounded-[20px] p-4 md:p-8 bg-white border border-gray-400 overflow-x-auto">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
         <div className="relative w-full max-w-md">
           <input
@@ -106,32 +101,19 @@ const UserProfiles = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
+        <table className="w-full border-collapse text-sm font-secundary">
           <thead>
             <tr className="bg-white text-black border-b border-[#76757599]">
-              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates'] w-[68px]">
-                Nombre
-              </th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
-                Correo
-              </th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
-                Documento
-              </th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px] font-['Montserrat Alternates']">
-                Dirección y comuna
-              </th>
-              <th className="px-4 py-2 text-center font-semibold text-[16px] font-['Montserrat Alternates']">
-                Acciones
-              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">Nombre</th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">Correo</th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">Documento</th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">Dirección y comuna</th>
+              <th className="px-4 py-2 text-center font-semibold text-[16px]">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user) => (
-              <tr
-                key={user.id}
-                className="border-b border-[#76757599] text-sm text-left bg-white"
-              >
+              <tr key={user.id} className="border-b border-[#76757599] bg-white">
                 <td className="px-4 py-3">{user.fullname}</td>
                 <td className="px-4 py-3">{user.email}</td>
                 <td className="px-4 py-3">{user.identityDocument}</td>
@@ -142,13 +124,13 @@ const UserProfiles = () => {
                       className="text-gray-600 hover:text-black"
                       onClick={() => handleOpenDetail(user)}
                     >
-                      <FaEye />
+                      <FiEye />
                     </button>
                     <button
                       className="text-red-500 hover:text-red-700"
                       onClick={() => handleOpenModal(user)}
                     >
-                      <FaTrash />
+                      <PiTrashBold />
                     </button>
                   </div>
                 </td>
@@ -163,40 +145,36 @@ const UserProfiles = () => {
           Mostrando {users.length} de {users.length} usuarios
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+            className="px-3 py-2 bg-white rounded-[10px] border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Anterior
           </button>
 
-          <div className="flex gap-1">
-            {totalPages > 1 &&
-              Array.from({ length: totalPages }, (_, index) => {
-                const page = index + 1;
-
-                return (
-                  <button
-                    key={page}
-                    onClick={() => handlePageChange(page)}
-                    className={`w-8 h-8 rounded border text-sm font-medium ${
-                      currentPage === page
-                        ? "bg-[#595146] text-white border-[#595146]"
-                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                );
-              })}
-          </div>
+          {Array.from({ length: totalPages }, (_, index) => {
+            const page = index + 1;
+            return (
+              <button
+                key={page}
+                onClick={() => handlePageChange(page)}
+                className={`w-8 h-8 rounded border text-sm font-medium ${
+                  currentPage === page
+                    ? "bg-[#595146] text-white border-[#595146]"
+                    : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
+                }`}
+              >
+                {page}
+              </button>
+            );
+          })}
 
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-3 py-2 bg-white0 rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+            className="px-3 py-2 bg-white rounded-[10px] border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
           >
             Siguiente
           </button>

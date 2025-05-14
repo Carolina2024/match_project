@@ -27,77 +27,77 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
 
   const renderBotones = () => {
     const botones = [];
+  
 
-    if (estado === "Por revisar") {
-      botones.push(
-        <button
-          key="En proceso"
-          onClick={() => onStatusChange("En proceso")}
-          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-[#FF802C] text-white hover:bg-orange-600 cursor-pointer"
-        >
-          En proceso
-        </button>
-      );
+if (estado === "Por revisar") {
+  botones.push(
+    <button
+      key="EnProceso"
+      onClick={() => onStatusChange("En proceso")}
+      className="min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md bg-[#FF802C] text-white hover:bg-orange-600 border border-[#FF802C]"
+    >
+      En proceso
+    </button>
+  );
+}
 
-      botones.push(
-        <button
-          key="Aprobar-Revisar"
-          onClick={() => onStatusChange("Aprobado")}
-          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-green-500 text-white hover:bg-green-600 cursor-pointer"
-        >
-          Aprobar
-        </button>
-      );
-    }
+// Botón Aprobar
+if (estado === "Por revisar" || estado === "En proceso") {
+  botones.push(
+    <button
+      key="Aprobar"
+      onClick={() => onStatusChange("Aprobado")}
+      className={`min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md border transition text-center ${
+        estado === "En proceso"
+          ? "bg-[#2E9002] text-white  hover:bg-green-600"
+          : "bg-white text-green-500 border-green-500 hover:bg-green-100"
+      }`}
+    >
+      Aprobar
+    </button>
+  );
+}
 
+// Botón Rechazar
+if (estado === "Por revisar" || estado === "En proceso") {
+  botones.push(
+    <button
+      key="Rechazado"
+      onClick={() => onStatusChange("Rechazado")}
+      className="min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md bg-white text-[#595146] border border-[#595146] hover:bg-gray-100"
+    >
+      Rechazar
+    </button>
+  );
+}
 
-    if (estado === "En proceso") {
-
-      botones.push(
-        <button
-          key="Aprobar-Proceso"
-          onClick={() => onStatusChange("Aprobado")}
-          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-transparent color-text-disponible cursor-pointer border-[1px] border-[var(--color-green-text)]"
-        >
-          Aprobar
-        </button>
-      );
-    }
-
-    if (estado === "Por revisar" || estado === "En proceso") {
-      botones.push(
-        <button
-          key="Rechazado"
-          onClick={() => onStatusChange("Rechazado")}
-          className="w-full py-3 text-base font-semibold rounded-[10px] shadow-md bg-transparent text-[#595146] cursor-pointer border-[1px] border-[#595146]"
-        >
-          Rechazar
-        </button>
-      );
-    }
-
+  
     const colClass =
       botones.length === 3
         ? "sm:grid-cols-3"
         : botones.length === 2
         ? "sm:grid-cols-2"
         : "sm:grid-cols-1";
-
+  
     return (
-      <div className={`grid grid-cols-1 ${colClass} gap-4 mt-6`}>{botones}</div>
+      <div className={`grid grid-cols-1 ${colClass} gap-4 mt-6`}>
+        {botones}
+      </div>
     );
   };
+  
 
   const getEstadoClase = (estado) => {
     return (
       {
-        "Por revisar": "color-bg-gray text-gray-500 ",
-        "En proceso": "bg-orange-300",
-        Aprobado: "bg-green-400",
-        Rechazado: "bg-red-slowly",
-      }[estado] || "bg-gray-300"
+        "Por revisar": "bg-gray-200 text-gray-500",
+        "En proceso": "bg-[#FF802C] text-white",
+        Aprobado: "bg-green-500 text-white",
+        Rechazado: "bg-red-400 text-white",
+      }[estado] || "bg-gray-300 text-white"
     );
   };
+  
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">

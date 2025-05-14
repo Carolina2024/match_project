@@ -17,6 +17,8 @@
   --color-bg-orange-process: #FF802C40; /*orange bg en proceso*/
   --color-text-orange-process: #FF802C; /*orange text en proceso*/
   --color-bg-gray-adoptada: #6C6C6C40;
+  --color-bg-red-rechazado: #E9171740;
+
   
 }
 @layer base {
@@ -29,6 +31,9 @@
 
 }
 
+.bg-red-slowly {
+  background-color: var( --color-bg-red-rechazado);
+}
 .bg-disponible {
   background-color: var( --color-five);
 }

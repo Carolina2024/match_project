@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { FaEye, FaSearch, FaRegEdit } from "react-icons/fa";
+import { FiEye } from "react-icons/fi";
+import {  FaSearch, FaRegEdit } from "react-icons/fa";
 import { PiTrashBold } from "react-icons/pi";
 
 import { useState, useEffect } from "react";
@@ -25,6 +26,8 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   const [selectedPett, setSelectedPett] = useState(null);
   const [showMessage, setShowMessage] = useState(false);
   const [deletedPetName, setDeletedPetName] = useState("");
+
+  
 
   const handleEdit = (pet) => {
     console.log({ pet });
@@ -206,17 +209,18 @@ const matchesEstado =
                       title="Visualizar"
                       className="hover:text-gray-500"
                     >
-                      <FaEye />
+                     <FiEye />
+
                     </button>
                     <button
                       onClick={() => handleEdit(pet)}
                       title="Editar"
-                      className="--color-gray-icon hover:text-gray-500 font-bold"
+                      className="--color-gray-icon hover:text-gray-500 font-bold cursor-pointer"
                     >
                       <FaRegEdit />
                     </button>
                     <button
-                      className="text-red-500 hover:text-red-700 font-bold"
+                      className="text-red-500 hover:text-red-700 font-bold cursor-pointer"
                       onClick={() => handleOpenModal(pet)}
                     >
                       <PiTrashBold />
@@ -227,7 +231,7 @@ const matchesEstado =
             ))}
           </tbody>
         </table>
-        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6">
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6 cursor-pointer">
         <div className="text-sm text-gray-500 mb-4 sm:mb-0">
           Mostrando {pets.length} de {pets.length} mascotas
         </div>

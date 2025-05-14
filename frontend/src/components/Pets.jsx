@@ -57,7 +57,6 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     handleSubmit,
     setValue,
     watch,
-    // reset,
     formState: { errors },
   } = useForm({ defaultValues: initialFormState });
 
@@ -161,6 +160,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         <h2 className="text-center text-2xl font-bold mb-4">
           {editingPet ? "Editar Mascota" : "Nueva Mascota"}
         </h2>
+
         <p className="text-center text-sm mb-6">
           {editingPet
             ? "Completa el formulario para actualizar los datos de esta mascota"

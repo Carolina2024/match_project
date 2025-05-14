@@ -52,19 +52,16 @@ function PasswordReset() {
           }
         );
         localStorage.removeItem("email_recovery");
-        navigate("/?openLogin=true"); // Ruta
-      
+        navigate("/?openLogin=true");
       } catch (error) {
         setErrors({ code: "Código inválido o token vencido" });
       }
     }
   };
 
-
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 py-10 flex justify-center">
       <div className="relative bg-white w-full max-w-md sm:max-w-lg md:max-w-2xl min-h-screen rounded-3xl shadow-xl flex flex-col items-center border border-[#CBCBCB] px-6 sm:px-10 md:px-16 pt-20 pb-10">
-        {/* Logo flotante */}
         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
           <img
             src={logo}
@@ -79,7 +76,6 @@ function PasswordReset() {
           Ingresa tu correo electrónico para restablecer tu contraseña.
         </p>
 
-        {/* Código de recuperación */}
         <div className="mb-6 w-full">
           <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
             Código de recuperación
@@ -106,9 +102,7 @@ function PasswordReset() {
           )}
         </div>
 
-        {/* Formulario de contraseña */}
         <form onSubmit={handleSubmit} className="w-full space-y-6">
-          {/* Nueva contraseña */}
           <div>
             <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
               Nueva contraseña
@@ -161,7 +155,6 @@ function PasswordReset() {
             )}
           </div>
 
-          {/* Confirmar contraseña */}
           <div>
             <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
               Confirmar contraseña
@@ -214,7 +207,6 @@ function PasswordReset() {
             )}
           </div>
 
-          {/* Botones */}
           <div className="flex flex-col items-center gap-4">
             <button
               type="submit"
@@ -235,6 +227,5 @@ function PasswordReset() {
     </div>
   );
 }
-
 
 export default PasswordReset;

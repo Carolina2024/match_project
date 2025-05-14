@@ -14,7 +14,7 @@ const Nosotros = () => {
 
   useEffect(() => {
     if (!hash) return;
-    // Espera un tick para que el DOM renderice
+
     setTimeout(() => {
       const el = document.querySelector(hash);
       if (el) {
@@ -25,7 +25,6 @@ const Nosotros = () => {
 
   return (
     <main className=" mx-auto max-w-6xl bg-[#F9F9F9] flex flex-col justify-center items-center rounded-t-[50px] pb-20 -mt-8">
-      {/* Imagen encabezado */}
       <div className="w-full ">
         <img
           src={nosotros}
@@ -34,7 +33,6 @@ const Nosotros = () => {
         />
       </div>
 
-      {/* Nuestra historia */}
       <div
         id="historia"
         className="w-full max-w-5xl px-8 py-8 md:py-12  border-1 border-primary rounded-[50px] mt-12 mx-auto"
@@ -54,7 +52,6 @@ const Nosotros = () => {
       </div>
 
       <div className="bg-white rounded-lg border-[#DFDFDF] mt-35 border-1 p-5 text-center">
-        {/* Contenedor para la imagen */}
         <div className="relative -mt-25 px-10 mb-4">
           <img
             src={sofia}
@@ -63,14 +60,12 @@ const Nosotros = () => {
           />
         </div>
 
-        {/* Fundadora info */}
         <div>
           <p className="font-bold text-xl text-primary">Sofía Labbé</p>
           <p className="text-base text-[#606060]">Fundadora</p>
         </div>
       </div>
 
-      {/* Contenedor para el texto principal */}
       <div className=" w-full max-w-5xl px-1 py-6">
         <p className="font-medium md:text-lg text-[#000000] px-20 py-10 text-justify">
           “Siempre tuve una conexión especial con los animales. Desde niña
@@ -91,7 +86,6 @@ const Nosotros = () => {
         </p>
       </div>
 
-      {/* Estadísticas y fundadoras */}
       <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 mb-10 sm:mb-14 lg:mb-16">
         <svg
           width="61"
@@ -126,7 +120,6 @@ const Nosotros = () => {
         </span>
       </div>
 
-      {/* Imagen grande */}
       <div className="w-full">
         <img
           src={nosotros2}
@@ -134,7 +127,7 @@ const Nosotros = () => {
           className="w-full h-[250px] md:h-[400px] lg:h-[500px] object-cover rounded-lg"
         />
       </div>
-      {/* Propósito */}
+
       <div className="w-full max-w-5xl px-6 py-8">
         <div
           id="proposito"
@@ -154,13 +147,10 @@ const Nosotros = () => {
         </div>
       </div>
 
-      {/* Misión y Visión */}
       <div className=" w-full max-w-5xl px-4 py-8">
         {" "}
-        {/* Contenedor padre */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-[30px] md:rounded-[50px] px-6 md:px-24 py-6">
           {" "}
-          {/* Caja de Misión */}
           <div className="p-4">
             {" "}
             <div className="flex items-center gap-2">
@@ -188,7 +178,6 @@ const Nosotros = () => {
               a <br /> través de la educación <br /> comunitaria.
             </p>
           </div>
-          {/* Caja de Visión */}
           <div className="p-4">
             {" "}
             <div className="flex items-center gap-2">
@@ -217,14 +206,12 @@ const Nosotros = () => {
         </div>
       </div>
 
-      {/* ¿Cómo ayudarnos? */}
       <div id="colaborar" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold font-secundary text-primary mt-20 text-center mb-8">
           ¿Cómo colaborar?
           <hr className="border-primary mt-4" />
         </h2>
 
-        {/* Suscripciones */}
         <div className="mb-12">
           <h3 className="flex items-center justify-center text-2xl font-bold text-primary mb-4 gap-2">
             <svg
@@ -259,7 +246,6 @@ const Nosotros = () => {
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 mt-12 gap-6">
-            {/* Patita Suave */}
             <div className="rounded-[50px] border-1 border-primary p-6 flex flex-col items-center">
               <div className="w-68 h-52 rounded-[50px] overflow-hidden mb-4 bg-gray-100">
                 <img
@@ -285,7 +271,6 @@ const Nosotros = () => {
               </a>
             </div>
 
-            {/* Huella Fuerte */}
             <div className="rounded-[50px] border-1 border-primary p-6 flex flex-col items-center">
               <div className="w-68 h-52 rounded-[50px] overflow-hidden mb-4 bg-gray-100">
                 <img
@@ -311,7 +296,6 @@ const Nosotros = () => {
               </a>
             </div>
 
-            {/* Corazón Quiltro */}
             <div className="rounded-[50px] border-1 border-primary p-6 flex flex-col items-center">
               <div className="w-68 h-52 rounded-[50px] overflow-hidden mb-4 bg-gray-300">
                 <img
@@ -339,10 +323,8 @@ const Nosotros = () => {
           </div>
         </div>
 
-        {/* Campañas y Donaciones */}
         <div className="flex justify-center mt-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
-            {/* Campañas */}
             <div className="rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-6 flex flex-col items-center">
               <h3 className="text-3xl font-bold text-primary mb-4 flex items-center">
                 <svg
@@ -380,7 +362,6 @@ const Nosotros = () => {
               </a>
             </div>
 
-            {/* Donaciones */}
             <div className="rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-6 flex flex-col items-center">
               <h3 className="text-3xl font-bold text-primary mb-4 flex items-center">
                 <svg

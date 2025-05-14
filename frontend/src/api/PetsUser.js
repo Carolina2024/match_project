@@ -1,6 +1,3 @@
-/* const BASE_URL = "https://match-project.onrender.com/api";
-const PETS_URL = `${BASE_URL}/pets`; */
-
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const PETS_URL = `${API_BASE}/pets`;
 
@@ -28,7 +25,10 @@ export const createMatch = async (idPet) => {
     const token = localStorage.getItem("token");
     const res = await fetch(`${API_BASE}/matches`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({ petId: idPet }),
     });
 

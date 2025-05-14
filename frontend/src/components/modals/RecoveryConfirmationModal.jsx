@@ -8,7 +8,6 @@ const RecoveryConfirmationModal = ({ isOpen, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/50 backdrop-blur-sm">
       <div className="relative bg-white p-10 pt-20 rounded-3xl shadow-lg w-full max-w-md sm:max-w-lg text-center border border-[#CBCBCB]">
-        {/* Logo */}
         <div className="absolute -top-10 left-1/2 transform -translate-x-1/2">
           <img
             src={logo}
@@ -17,7 +16,6 @@ const RecoveryConfirmationModal = ({ isOpen, onClose }) => {
           />
         </div>
 
-        {/* Botón cerrar */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-primary hover:text-tertiary text-2xl"

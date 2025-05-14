@@ -1,6 +1,5 @@
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
-
 export const getUserById = async (id, token) => {
   try {
     const response = await fetch(`${API_URL}/users/${id}`, {
@@ -17,14 +16,12 @@ export const getUserById = async (id, token) => {
 
     const data = await response.json();
 
-    // console.log("Respuesta completa de la API:", data);
-
     const formatted = {
       id: data.id,
       fullname: data.fullname,
       email: data.email,
       role: data.role,
-      createdAt: data.createdAt, 
+      createdAt: data.createdAt,
       adopter: {
         id: data.adopter?.id || data.adopterId || data.id,
         identityDocument: data.adopter?.identityDocument,
@@ -45,15 +42,9 @@ export const getUserById = async (id, token) => {
         userPreferenceDogs: data.adopter?.userPreferenceDogs,
         userPreferenceCats: data.adopter?.userPreferenceCats,
         userPreferenceChildren: data.adopter?.userPreferenceChildren,
-      }
+      },
     };
-    
-    // console.log(JSON.stringify(formatted, null, 2));
-    // console.log("Detalles del adoptante:", data);
-    // console.log(
-    //   "Detalles del adoptante formateados:",
-    //   JSON.stringify(formatted, null, 2)
-    // );
+
     return formatted;
   } catch (error) {
     console.error("Error al obtener el adoptante:", error);

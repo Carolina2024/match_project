@@ -153,11 +153,21 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         className="fixed inset-0 bg-black/30 backdrop-blur-sm"
         onClick={() => setActiveView("MASCOTAS")}
       />
+    
+      
       <div
         className={`relative w-full max-w-lg bg-white h-full shadow-xl z-50 p-8 overflow-y-auto rounded-xl transform transition-transform duration-700 ease-in-out ${
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
-      >
+        
+              >
+                <button
+          onClick={() => setActiveView("MASCOTAS")}
+          className="absolute top-4 right-4 text-gray-500 hover:text-black text-3xl font-bold z-50"
+        >
+          x
+        </button>
+
         <h2 className="text-center text-2xl font-bold mb-4">
           {editingPet ? "Editar Mascota" : "Nueva Mascota"}
         </h2>
@@ -166,7 +176,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             ? "Completa el formulario para actualizar los datos de esta mascota"
             : "Completa el formulario para agregar una mascota al refugio."}
         </p>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="text-sm font-semibold mb-1">Nombre</label>
@@ -416,21 +426,33 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 pt-6">
-            <button
-              type="button"
-              onClick={() => setActiveView("MASCOTAS")}
-              className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
-            >
-              Guardar
-            </button>
-          </div>
+<div>
+  
+</div>
+
+{/* Botones Fijos */}
+<div className="bg-white pt-4 pb-6 mt-6 border-t border-gray-200 sticky bottom-[-30px]">
+  <div className="grid grid-cols-2 gap-4">
+    <button
+      type="button"
+      onClick={() => setActiveView("MASCOTAS")}
+      className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer font-semibold"
+    >
+      Cancelar
+    </button>
+    <button
+      type="submit"
+      className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer font-semibold"
+    >
+      Guardar
+    </button>
+  </div>
+</div>
+
+
+          
+
+
         </form>
       </div>
     </div>

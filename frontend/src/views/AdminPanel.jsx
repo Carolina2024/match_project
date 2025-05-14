@@ -7,6 +7,7 @@ import { getAllPets } from "../api/petService";
 import Sidebar from "../components/Sidebar";
 import { useOutletContext } from "react-router-dom";
 import AdminNavbar from "../components/AdminNavbar";
+import { useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
   const { activeView, setActiveView } = useOutletContext();
@@ -52,6 +53,8 @@ const AdminPanel = () => {
   };
 
   const renderView = () => {
+    const navigate = useNavigate();
+
     switch (activeView) {
       case "Mascotas":
         return (
@@ -88,7 +91,9 @@ const AdminPanel = () => {
           />
         );
       default:
-        return <div className="p-6">Vista no implementada</div>;
+      /* return <div className="p-6">Vista no implementada</div>; */
+      navigate("/Admin");
+      return null;
     }
   };
 
@@ -104,11 +109,12 @@ const AdminPanel = () => {
       <AdminNavbar
         sectionTitle={currentTitle}
         isSidebarVisible={isSidebarVisible}
+        setSidebarVisible={setIsSidebarVisible}
       />
 
       <div
         className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-40"
-        style={{ left: isSidebarVisible ? "180px" : "0px" }}
+        style={{ left: isSidebarVisible ? "250px" : "0px" }}
       >
         <div className="p-6">{renderView()}</div>
       </div>

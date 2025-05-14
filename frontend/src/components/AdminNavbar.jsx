@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
-import { FaUser, FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import {  FaSignOutAlt, FaChevronDown } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -91,12 +91,13 @@ const AdminNavbar = ({
 
       {/*  <h2 className="text-lg font-semibold text-gray-700">{sectionTitle}</h2> */}
 
-      <div className="relative">
+      <div className="relative ">
         <button
           onClick={() => setOpen(!open)}
-          className="bg-white border px-6 py-2 rounded-full shadow-sm text-sm font-medium hover:bg-gray-50 flex items-center"
+          className="bg-white border px-6 py-2 rounded-full shadow-[0_8px_0_0_#4E473E] text-sm font-medium hover:bg-gray-50 flex items-center"
+
         >
-          <div className="flex flex-col items-start leading-tight">
+          <div className="flex flex-col items-start leading-tight ">
             <span className="text-sm text-gray-800 font-bold">{userName}</span>
             <span className="text-xs text-gray-500">{userRole}</span>
           </div>
@@ -109,16 +110,7 @@ const AdminNavbar = ({
 
         {open && (
           <div className="absolute right-0 mt-2 w-40 bg-white border shadow-lg border-gray-200 rounded z-50 text-xs">
-            <button
-              className="flex items-center w-full text-left px-2 py-1 text-sm hover:bg-gray-100"
-              onClick={() => {
-                setOpen(false);
-                navigate("/Admin");
-              }}
-            >
-              <FaUser className="mr-1 text-gray-500 text-sm" />
-              <span>Mi perfil</span>
-            </button>
+
             <button
               className="flex items-center w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
               onClick={handleLogout}

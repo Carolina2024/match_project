@@ -78,7 +78,7 @@ const Contacto = () => {
 
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
+            <label className="block md:text-lg text-base font-normal text-[#0C0C0C] mb-1">
               Nombre
             </label>
             <input
@@ -95,7 +95,7 @@ const Contacto = () => {
           </div>
 
           <div>
-            <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
+            <label className="block md:text-lg text-base font-normal text-[#0C0C0C] mb-1">
               Email
             </label>
             <input
@@ -112,7 +112,7 @@ const Contacto = () => {
           </div>
 
           <div>
-            <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
+            <label className="block md:text-lg text-base font-normal text-[#0C0C0C] mb-1">
               Número de teléfono
             </label>
             <PhoneInput
@@ -154,7 +154,7 @@ const Contacto = () => {
           </div>
 
           <div>
-            <label className="block text-lg font-normal text-[#0C0C0C] mb-1">
+            <label className="block md:text-lg text-base font-normal text-[#0C0C0C] mb-1">
               Mensaje
             </label>
             <textarea

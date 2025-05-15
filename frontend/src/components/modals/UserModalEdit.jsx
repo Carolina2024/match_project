@@ -55,7 +55,7 @@ function UserModalEdit() {
           hadPets: res.adopter.hadPets,
           hadPetsVaccinated: res.adopter.hadPetsVaccinated,
           hadPetsCastrated: res.adopter.hadPetsCastrated,
-          hoursAlone: res.adopter.hoursAlone,
+          hoursAlone: +res.adopter.hoursAlone,
           petDestroy: res.adopter.petDestroy,
           preparedToVisitVeterinarian: res.adopter.preparedToVisitVeterinarian,
           allowsVisit: res.adopter.allowsVisit,
@@ -81,6 +81,10 @@ function UserModalEdit() {
     const id = JSON.parse(localStorage.getItem("user")).id;
     if (data?.password?.length === 0) {
       data.password = undefined;
+    }
+
+    if (data.hoursAlone) {
+      data.hoursAlone = +data.hoursAlone;
     }
 
     try {
@@ -140,10 +144,10 @@ function UserModalEdit() {
               </div>
             </div>
             <div className="flex flex-col gap-5">
-              <div className="flex flex-col">
+              <div className="flex flex-col ">
                 <span className="text-xs ml-3">Fecha de nacimiento</span>
                 <input
-                  className="border rounded-full text-xs p-2 w-70 border-primary outline-none"
+                  className="border rounded-full text-xs p-2 border-primary outline-none w-fit"
                   placeholder="Fecha de nacimiento"
                   type="date"
                   name="birthDate"
@@ -236,7 +240,9 @@ function UserModalEdit() {
                   name="userPreferenceEnergy"
                   render={({ field }) => (
                     <TagOptions
-                      options={["Tranquilo", "Moderado", "Muy activo"]}
+                      options={["Tranquilo", "Moderado", "Muy Activo"]}
+                      onChange={field.onChange}
+                      isSingleSelect={true}
                       {...field}
                     />
                   )}
@@ -415,7 +421,7 @@ const RadioGroup = ({ name, control }, ref) => {
               type="radio"
               value={val}
               checked={checked}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => onChange(e.target.value === "true")}
               className="hidden"
             />
           </label>
@@ -425,13 +431,23 @@ const RadioGroup = ({ name, control }, ref) => {
   );
 };
 
-const TagOptions = ({ options, value, onChange }, ref) => {
+const TagOptions = (
+  { options, value, onChange, isSingleSelect = false },
+  ref
+) => {
   const handleToggle = (option) => {
-    if (value.includes(option)) {
-      onChange(value.filter((item) => item !== option));
+    if (isSingleSelect) {
+      if (value !== option) {
+        onChange(option);
+      }
     } else {
-      onChange([...value, option]);
+      if (value.includes(option)) {
+        onChange(value.filter((item) => item !== option));
+      } else {
+        onChange([...value, option]);
+      }
     }
+    console.log({ value, option });
   };
 
   return (
@@ -445,11 +461,11 @@ const TagOptions = ({ options, value, onChange }, ref) => {
             key={idx}
             onClick={() => handleToggle(opt)}
             className={`flex items-center gap-1 rounded-full px-4 py-1 text-sm border cursor-pointer
-          ${
-            selected
-              ? "bg-gray-300 text-gray-800 border-gray-300"
-              : "border-primary text-primary hover:bg-orange-100"
-          }`}
+            ${
+              selected
+                ? "bg-gray-300 text-gray-800 border-gray-300"
+                : "border-primary text-primary hover:bg-orange-100"
+            }`}
           >
             {selected && (
               <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-gray-500 text-white text-xs">

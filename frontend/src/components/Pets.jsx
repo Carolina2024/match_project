@@ -116,7 +116,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         });
       }
 
-      setActiveView("MASCOTAS");
+      setActiveView("Mascotas");
     } catch (error) {
       console.error(error);
       Swal.fire({

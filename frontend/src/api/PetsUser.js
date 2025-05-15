@@ -35,7 +35,8 @@ export const createMatch = async (idPet) => {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
+    throw error;
   }
 };
 
@@ -48,7 +49,6 @@ export const getUserMatchs = async () => {
   const data = await res.json();
   return data;
 };
-
 
 export const getPetById = async (petId) => {
   const token = localStorage.getItem("token");

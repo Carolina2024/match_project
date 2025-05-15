@@ -41,7 +41,9 @@ const UserProfiles = () => {
   };
 
   const filteredUsers = users.filter((user) =>
-    `${user.fullname} ${user.email}`.toLowerCase().includes(searchTerm.toLowerCase())
+    `${user.fullname} ${user.email}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
   );
 
   const handleOpenModal = (user) => {
@@ -104,16 +106,29 @@ const UserProfiles = () => {
         <table className="w-full border-collapse text-sm font-secundary">
           <thead>
             <tr className="bg-white text-black border-b border-[#76757599]">
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">Nombre</th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">Correo</th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">Documento</th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">Dirección y comuna</th>
-              <th className="px-4 py-2 text-center font-semibold text-[16px]">Acciones</th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">
+                Nombre
+              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">
+                Correo
+              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">
+                Documento
+              </th>
+              <th className="px-4 py-2 text-left font-semibold text-[16px]">
+                Dirección y comuna
+              </th>
+              <th className="px-4 py-2 text-center font-semibold text-[16px]">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody>
             {filteredUsers.map((user) => (
-              <tr key={user.id} className="border-b border-[#76757599] bg-white">
+              <tr
+                key={user.id}
+                className="border-b border-[#76757599] bg-white"
+              >
                 <td className="px-4 py-3">{user.fullname}</td>
                 <td className="px-4 py-3">{user.email}</td>
                 <td className="px-4 py-3">{user.identityDocument}</td>

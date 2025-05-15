@@ -13,8 +13,6 @@ const PrivateRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  console.log("TOKEN:", token);
-
   return children;
 };
 

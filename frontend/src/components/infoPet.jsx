@@ -26,30 +26,6 @@ const InfoPet = () => {
       try {
         const res = await getPetById(id);
         setPet(res);
-        //   const userData = {
-        //     fullname: res.fullname,
-        //     email: res.email,
-        //     password: res.password,
-        //     birthDate: res.adopter.birthDate,
-        //     phoneNumber: res.adopter.phoneNumber,
-        //     identityDocument: res.adopter.identityDocument,
-        //     address: res.adopter.address,
-        //     homeType: res.adopter.homeType,
-        //     allowsPets: res.adopter.allowsPets,
-        //     hadPets: res.adopter.hadPets,
-        //     hadPetsVaccinated: res.adopter.hadPetsVaccinated,
-        //     hadPetsCastrated: res.adopter.hadPetsCastrated,
-        //     hoursAlone: +res.adopter.hoursAlone,
-        //     petDestroy: res.adopter.petDestroy,
-        //     preparedToVisitVeterinarian: res.adopter.preparedToVisitVeterinarian,
-        //     allowsVisit: res.adopter.allowsVisit,
-        //     isResponsibleAdoption: res.adopter.isResponsibleAdoption,
-        //     userPreferenceEnergy: res.adopter.userPreferenceEnergy,
-        //     userPreferenceTraits: res.adopter.userPreferenceTraits,
-        //     userPreferenceDogs: res.adopter.userPreferenceDogs,
-        //     userPreferenceCats: res.adopter.userPreferenceCats,
-        //     userPreferenceChildren: res.adopter.userPreferenceChildren,
-        //   };
       } catch (error) {
         console.error("Error obteniendo nombre:", error.message);
       }
@@ -155,7 +131,6 @@ const InfoPet = () => {
                 </div>
               </div>
 
-              {/* Desktop */}
               <div className="hidden md:flex flex-col md:flex-row md:items-start sm:gap-35 gap-6">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-2xl text-primary font-bold">
@@ -205,7 +180,6 @@ const InfoPet = () => {
                 </div>
               </div>
 
-              {/* Mobile */}
               <div className="flex flex-col gap-3 md:hidden">
                 <div className="flex justify-between w-full">
                   <div className="flex flex-col gap-1">
@@ -263,7 +237,6 @@ const InfoPet = () => {
         </div>
       </div>
 
-      {/* Confirmación match */}
       {showCheckMatch3 && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
           <div className="flex flex-col gap-4 bg-white rounded-2xl shadow-lg p-6 w-96 text-center space-y-4">
@@ -288,7 +261,6 @@ const InfoPet = () => {
         </div>
       )}
 
-      {/* Confirmación enviada */}
       {showCheckMatch4 && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
           <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 w-full max-w-md mx-4 text-center space-y-4">

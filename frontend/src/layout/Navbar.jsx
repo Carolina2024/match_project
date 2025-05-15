@@ -6,21 +6,17 @@ import AuthModalsController from "../components/modals/AuthModalsController";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  //Context
   const { user, isAuthenticated, logout } = useAuth();
 
   const navigate = useNavigate();
 
-  // Menú móvil
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Modales
   const [isLoginOpen, setLoginOpen] = useState(false);
   const [isRegisterOpen, setRegisterOpen] = useState(false);
   const [isRegisterbOpen, setRegisterbOpen] = useState(false);
   const [isRecoverOpen, setRecoverOpen] = useState(false);
 
-  // Dropdowns (click)
   const [isInicioOpen, setIsInicioOpen] = useState(false);
   const [isNosotrosOpen, setIsNosotrosOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -28,12 +24,11 @@ const Navbar = () => {
   const inicioContainerRef = useRef(null);
   const nosotrosContainerRef = useRef(null);
   const userContainerRef = useRef(null);
-   const menuRef = useRef(null);
+  const menuRef = useRef(null);
 
-useEffect(() => {
-  // usuario logueado, CIerre de desplegable user
-  setIsUserMenuOpen(false);
-}, [isAuthenticated]);
+  useEffect(() => {
+    setIsUserMenuOpen(false);
+  }, [isAuthenticated]);
 
   const handleLogout = () => {
     logout();
@@ -42,7 +37,6 @@ useEffect(() => {
 
   return (
     <header className="bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 flex items-center justify-between">
-      {/* Logo */}
       <Link to="/" className="flex items-center space-x-2">
         <img
           src={logo}
@@ -51,7 +45,6 @@ useEffect(() => {
         />
       </Link>
 
-      {/* Botón móvil */}
       <button
         className="md:hidden text-primary focus:outline-none cursor-pointer"
         onClick={() => setMenuOpen((o) => !o)}
@@ -59,9 +52,7 @@ useEffect(() => {
         {menuOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
-      {/* Navegación desktop */}
       <nav className="hidden md:flex items-center gap-8 text-lg font-normal text-black font-primary">
-        {/* Inicio */}
         {isAuthenticated ? (
           <div
             ref={inicioContainerRef}
@@ -104,7 +95,6 @@ useEffect(() => {
         )}
         <span className="border-r border-2 h-10 border-primary" />
 
-        {/* Nosotros */}
         <div
           ref={nosotrosContainerRef}
           onMouseLeave={() => setIsNosotrosOpen(false)}
@@ -147,7 +137,6 @@ useEffect(() => {
         </div>
         <span className="border-r border-2 h-10 border-primary" />
 
-        {/* Otras secciones */}
         <Link to="/CuidadosMascota" className="hover:text-primary transition">
           Cuidados de tu mascota
         </Link>
@@ -157,7 +146,6 @@ useEffect(() => {
         </Link>
       </nav>
 
-      {/* Menú usuario desktop */}
       <div className="hidden md:block">
         {isAuthenticated ? (
           <div
@@ -205,12 +193,12 @@ useEffect(() => {
         )}
       </div>
 
-      {/* Menú móvil */}
       {menuOpen && (
-        <div 
-        ref={menuRef}
-        onMouseLeave={() => setMenuOpen(false)}
-        className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden">
+        <div
+          ref={menuRef}
+          onMouseLeave={() => setMenuOpen(false)}
+          className="absolute top-24 left-6 right-6 bg-white border border-primary rounded-2xl p-6 shadow-md flex flex-col items-center gap-4 z-50 md:hidden"
+        >
           {/* Inicio móvil */}
           {isAuthenticated ? (
             <div
@@ -253,7 +241,6 @@ useEffect(() => {
             </Link>
           )}
 
-          {/* Nosotros móvil */}
           <div
             ref={nosotrosContainerRef}
             onMouseLeave={() => setIsNosotrosOpen(false)}
@@ -295,15 +282,19 @@ useEffect(() => {
             )}
           </div>
 
-          {/* Otras vistas */}
-          <Link to="/CuidadosMascota" className="hover:text-primary transition cursor-pointer">
+          <Link
+            to="/CuidadosMascota"
+            className="hover:text-primary transition cursor-pointer"
+          >
             Cuidados de tu mascota
           </Link>
-          <Link to="/Contacto" className="hover:text-primary transition cursor-pointer">
+          <Link
+            to="/Contacto"
+            className="hover:text-primary transition cursor-pointer"
+          >
             Contacto
           </Link>
 
-          {/* Usuario móvil */}
           <div
             ref={userContainerRef}
             onMouseLeave={() => setIsUserMenuOpen(false)}
@@ -353,7 +344,6 @@ useEffect(() => {
         </div>
       )}
 
-      {/* Modales */}
       <AuthModalsController
         isLoginOpen={isLoginOpen}
         setLoginOpen={setLoginOpen}

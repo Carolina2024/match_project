@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { FaSearch, FaHeart, FaRegEdit } from "react-icons/fa";
 import { BsCalendar2 } from "react-icons/bs";
@@ -44,19 +43,18 @@ const AdoptionApllication = () => {
     fetchSolicitudes();
   }, []);
 
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
   const handleStatusUpdate = async (matchId, nuevoEstado) => {
     try {
-      const res = await fetch(
-        `https://match-project.onrender.com/api/matches/${matchId}/status`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: JSON.stringify({ status: nuevoEstado }),
-        }
-      );
+      const res = await fetch(`${API_BASE}/matches/${matchId}/status`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ status: nuevoEstado }),
+      });
 
       if (!res.ok) {
         const error = await res.json();
@@ -72,13 +70,12 @@ const AdoptionApllication = () => {
       setSolicitudEditando(null);
     } catch (error) {
       console.error("Error actualizando estado:", error.message);
-      alert("Ocurrió un error al actualizar el estado.");
     }
   };
 
   return (
-<div className="bg-white sm:bg-[#FAF9F6] min-h-screen">
-<div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 m-0 p-0">
+    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen">
+      <div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 m-0 p-0">
         <div className="flex flex-col gap-4 mb-8">
           <div className="relative w-full sm:w-64">
             <input
@@ -107,69 +104,64 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
+        <div className="flex justify-center sm:block"></div>
 
-<div className="flex justify-center sm:block">
-
-
-</div>
-
-
-<div className="grid grid-cols-2 gap-15 mr-[36px] ml-[-15px] justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-  {solicitudesPaginadas.map((sol) => (
-    <div
-      key={sol.id}
-      onClick={() => {
-        if (
-          sol.status === "En proceso" ||
-          sol.status === "Rechazado" ||
-          sol.status === "Aprobado"
-        ) {
-          setReadingRequest(sol); 
-        }
-      }}
-      
-      className="cursor-pointer w-[175px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
-      >
-       
+        <div className="grid grid-cols-2 gap-15 mr-[36px] ml-[-15px] justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {solicitudesPaginadas.map((sol) => (
+            <div
+              key={sol.id}
+              onClick={() => {
+                if (
+                  sol.status === "En proceso" ||
+                  sol.status === "Rechazado" ||
+                  sol.status === "Aprobado"
+                ) {
+                  setReadingRequest(sol);
+                }
+              }}
+              className="cursor-pointer w-[175px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
+            >
               <div className="text-center space-y-2">
-              <h3 className="text-sm sm:text-lg font-semibold">{sol.pet.name}</h3>
+                <h3 className="text-sm sm:text-lg font-semibold">
+                  {sol.pet.name}
+                </h3>
 
                 <FaHeart
                   className={` mx-auto text-lg sm:text-xl mx-auto ${
                     sol.status === "Rechazado"
-
                       ? "text-gray-500"
                       : "text-orange-400"
-
                   }`}
                 />
 
- <p className="text-xs sm:text-base font-medium">{sol.user.fullname}</p>
+                <p className="text-xs sm:text-base font-medium">
+                  {sol.user.fullname}
+                </p>
 
                 <div className="flex items-center justify-center text-sm text-gray-600 gap-1">
                   <BsCalendar2 />
                   <span className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium ">
-                  {new Date(sol.applicationDate).toLocaleDateString("es-ES")}
+                    {new Date(sol.applicationDate).toLocaleDateString("es-ES")}
                   </span>
                 </div>
               </div>
 
               <div className="flex justify-center items-center mt-[-8px] px-1 flex-wrap gap-1 w-full">
-              <span
-  className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium text-center max-w-full whitespace-nowrap ${
-    sol.status === "Por revisar"
-      ? "bg-gray-300 text-gray-600"
-      : sol.status === "En proceso"
-      ? "bg-orange-200 text-orange-800"
-      : sol.status === "Aprobado"
-      ? "bg-disponible text-[#35A302]"
-      : sol.status === "Falta subir"
-      ? "bg-yellow-100 text-yellow-800"
-      : "bg-red-300 text-red-600"
-  }`}
- >
-  {sol.status}
- </span>
+                <span
+                  className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium text-center max-w-full whitespace-nowrap ${
+                    sol.status === "Por revisar"
+                      ? "bg-gray-300 text-gray-600"
+                      : sol.status === "En proceso"
+                      ? "bg-orange-200 text-orange-800"
+                      : sol.status === "Aprobado"
+                      ? "bg-disponible text-[#35A302]"
+                      : sol.status === "Falta subir"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-red-300 text-red-600"
+                  }`}
+                >
+                  {sol.status}
+                </span>
                 {(sol.status === "Por revisar" ||
                   sol.status === "En proceso") && (
                   <FaRegEdit
@@ -203,10 +195,10 @@ const AdoptionApllication = () => {
           />
         )}
 
-
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4">
           <div className="text-sm text-gray-500 mb-4 sm:mb-0">
-            Mostrando {solicitudesPaginadas.length} de {solicitudesFiltradas.length} solicitudes
+            Mostrando {solicitudesPaginadas.length} de{" "}
+            {solicitudesFiltradas.length} solicitudes
           </div>
 
           <div className="flex items-center gap-2">
@@ -238,7 +230,9 @@ const AdoptionApllication = () => {
             </div>
 
             <button
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
               disabled={currentPage === totalPages}
               className="px-3 py-2 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
             >
@@ -246,7 +240,6 @@ const AdoptionApllication = () => {
             </button>
           </div>
         </div>
-
       </div>
     </div>
   );

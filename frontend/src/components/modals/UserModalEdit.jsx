@@ -482,7 +482,7 @@ const TagOptions = (
 
 const BooleanToggleTag = ({ label, value, onChange }) => {
   const handleToggle = () => {
-    onChange(!value); // toggle entre true y false
+    onChange(!value);
   };
 
   return (

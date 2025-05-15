@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import logo from "../../assets/logo.png";
 
-const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
+const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   if (!isOpen) return null;
@@ -12,7 +14,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
     return emailRegex.test(email);
   };
 
-  const handleEnviar = (event) => {
+  const handleEnviar = async (event) => {
     event.preventDefault();
     setEmailError("");
 
@@ -25,6 +27,20 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
       setEmailError("Por favor, ingresa un correo electrónico válido.");
       return;
     }
+
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/recover-password`,
+        { email }
+      );
+
+      localStorage.setItem("email_recovery", email);
+      onSuccess();
+    } catch (error) {
+      setEmailError(
+        "Correo no registrado o error al enviar. Intenta nuevamente."
+      );
+    }
   };
 
   const handleEmailChange = (event) => {
@@ -36,9 +52,9 @@ const PasswordRecovery = ({ isOpen, onClose, onBack }) => {
       <div className="relative bg-secundary p-16 rounded-3xl shadow-lg w-full md:max-w-lg max-w-sm text-center">
         <div className="absolute -top-12 left-1/2 transform -translate-x-1/2">
           <img
-            src="src/assets/logo.png"
+            src={logo}
             alt="Logo Patas Pirque"
-            className="w-30 h-30   rounded-full"
+            className="w-30 h-30 rounded-full"
           />
         </div>
         <button
@@ -97,6 +113,7 @@ PasswordRecovery.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func.isRequired,
 };
 
 export default PasswordRecovery;

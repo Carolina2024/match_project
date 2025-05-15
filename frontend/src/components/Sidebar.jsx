@@ -1,48 +1,84 @@
 import PropTypes from "prop-types";
-import { FaFileAlt, FaUserFriends, FaPaw } from "react-icons/fa";
+import { FiUsers } from "react-icons/fi";
+import { LuFileCheck } from "react-icons/lu";
+
+import { PiPawPrint } from "react-icons/pi";
+
 import logo from "../assets/logo.png";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [
-    { label: "Mascotas", icon: <FaPaw /> },
-    { label: "Solicitudes", icon: <FaFileAlt /> },
-    { label: "Adoptantes", icon: <FaUserFriends /> },
+
+    { label: "Mascotas", icon: <PiPawPrint />},
+    { label: "Solicitudes", icon: <LuFileCheck />},
+    { label: "Adoptantes", icon: <FiUsers />},
   ];
+
+  const sidebarStyles = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "230px",
+    backgroundColor: "var(--color-fourth)",
+    padding: "16px",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
+    transform: isVisible ? "translateX(0)" : "translateX(-100%)",
+    transition: "transform 0.3s ease",
+    zIndex: 20,
+  };
+
+  const overlayStyles = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backdropFilter: "blur(2px)",
+    zIndex: 10,
+  };
+
+  const closeButtonStyles = {
+    position: "absolute",
+    top: "16px",
+    right: "16px",
+    fontSize: "24px",
+    cursor: "pointer",
+    color: "orange",
+  };
 
   return (
     <>
-      {!isVisible && (
-        <button
-          onClick={() => setIsVisible(true)}
-          className="fixed top-4 left-4 z-30 p-2 bg-[var(--color-fourth)] rounded-full shadow-md text-xl font-bold"
-        >
-          {">>"}
-        </button>
+      {/* Overlay modal solo visible en móvil cuando sidebar está activo */}
+      {isVisible && (
+        <div
+          onClick={() => setIsVisible(false)} // Oculta el sidebar al hacer clic en el overlay
+          style={overlayStyles}
+          className="md:hidden"
+        ></div>
       )}
-
-      <div
-        className={`fixed top-0 left-0 h-screen w-[180px] bg-[var(--color-fourth)] z-20 p-4 flex flex-col shadow-lg transition-transform duration-300 ${
-          isVisible ? "translate-x-0" : "-translate-x-full"
-        }`}
-      >
+      <div style={sidebarStyles}>
         <button
           onClick={() => setIsVisible(false)}
-          className="self-end mb-4 text-gray-600 hover:text-gray-900 text-xl font-bold"
+          style={closeButtonStyles}
+          className="block md:hidden"
         >
-          {"<<"}
+          x
         </button>
 
         <div className="flex items-center gap-3 mb-6">
           <img
-           /*  src="src/assets/logo.png" */
-              src={logo}
+            src={logo}
             alt="Logo Patas Pirque"
-            className="w-[60px] h-[60px] rounded-full"
+            className="w-[70px] h-[70px] rounded-full "
           />
           <div className="flex items-center gap-2 text-gray-700">
-            <div className="leading-tight text-left">
-              <p className="text-md font-bold text-gray-700">Patas</p>
-              <p className="text-sm font-bold text-gray-700">Pirque</p>
+            <div className="leading-tight text-left font-secundary">
+              <p className="text-xl font-bold text-gray-700">Patas</p>
+              <p className="text-xl font-bold text-gray-700">Pirque</p>
             </div>
           </div>
         </div>
@@ -52,14 +88,14 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
             <button
               key={item.label}
               onClick={() => onSelect(item.label)}
-              className={`flex items-center gap-3 px-4 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
+              className={`flex items-center gap-3 px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
               ${
                 activeView === item.label
                   ? "bg-[#FAAA75] text-gray-700 border-t border-l border-r border-[#595146] border-b-[3px] border-b-[#595146]"
                   : "text-gray-700 hover:bg-orange-100"
               }`}
             >
-              <span className="text-gray-500">{item.icon}</span>
+              <span className="text-gray-600">{item.icon}</span>
               {item.label}
             </button>
           ))}

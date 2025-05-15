@@ -1,19 +1,19 @@
 import { useState } from "react";
-import AuthModalsController from "../components/modals/AuthModalsController";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import logo from "../assets/logo.png";
 
-function PasswordReset(isOpen) {
+function PasswordReset() {
   const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Modales
-  const [isLoginOpen, setLoginOpen] = useState(false);
-  const [isRegisterOpen, setRegisterOpen] = useState(false);
-  const [isRegisterbOpen, setRegisterbOpen] = useState(false);
-  const [isRecoverOpen, setRecoverOpen] = useState(false);
+  const token = new URLSearchParams(location.search).get("token");
 
   const handleCodigoChange = (index, value) => {
     if (/^[0-9]?$/.test(value)) {
@@ -38,24 +38,33 @@ function PasswordReset(isOpen) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validarFormulario()) {
       const completeCode = code.join("");
-      console.log("Código:", completeCode);
-      console.log("Nueva contraseña:", newPassword);
+      try {
+        await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}/auth/reset-password`,
+          {
+            token,
+            newPassword,
+            recoveryCode: completeCode,
+          }
+        );
+        localStorage.removeItem("email_recovery");
+        navigate("/?openLogin=true");
+      } catch (error) {
+        setErrors({ code: "Código inválido o token vencido" });
+      }
     }
   };
-
-  if (!isOpen) return null;
 
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 py-10 flex justify-center">
       <div className="relative bg-white w-full max-w-md sm:max-w-lg md:max-w-2xl min-h-screen rounded-3xl shadow-xl flex flex-col items-center border border-[#CBCBCB] px-6 sm:px-10 md:px-16 pt-20 pb-10">
-        {/* Logo flotante */}
         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
           <img
-            src="src/assets/logo.png"
+            src={logo}
             alt="Logo Patas Pirque"
             className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-fill drop-shadow-lg"
           />
@@ -67,7 +76,6 @@ function PasswordReset(isOpen) {
           Ingresa tu correo electrónico para restablecer tu contraseña.
         </p>
 
-        {/* Código de recuperación */}
         <div className="mb-6 w-full">
           <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
             Código de recuperación
@@ -94,9 +102,7 @@ function PasswordReset(isOpen) {
           )}
         </div>
 
-        {/* Formulario de contraseña */}
         <form onSubmit={handleSubmit} className="w-full space-y-6">
-          {/* Nueva contraseña */}
           <div>
             <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
               Nueva contraseña
@@ -149,7 +155,6 @@ function PasswordReset(isOpen) {
             )}
           </div>
 
-          {/* Confirmar contraseña */}
           <div>
             <label className="block text-base font-semibold mb-2 text-tertiary px-6 sm:px-10 md:px-16">
               Confirmar contraseña
@@ -202,7 +207,6 @@ function PasswordReset(isOpen) {
             )}
           </div>
 
-          {/* Botones */}
           <div className="flex flex-col items-center gap-4">
             <button
               type="submit"
@@ -212,7 +216,7 @@ function PasswordReset(isOpen) {
             </button>
             <button
               type="button"
-              onClick={() => setRecoverOpen(true)}
+              onClick={() => navigate("/?openRecovery=true")}
               className="sm:w-[1/2] w-[1/2]  px-8 cursor-pointer py-1 border-2 text-lg border-primary text-primary font-bold rounded-full shadow-sm transition"
             >
               Volver atrás
@@ -220,17 +224,6 @@ function PasswordReset(isOpen) {
           </div>
         </form>
       </div>
-      {/* Modales */}
-      <AuthModalsController
-        isLoginOpen={isLoginOpen}
-        setLoginOpen={setLoginOpen}
-        isRegisterOpen={isRegisterOpen}
-        setRegisterOpen={setRegisterOpen}
-        isRegisterbOpen={isRegisterbOpen}
-        setRegisterbOpen={setRegisterbOpen}
-        isRecoverOpen={isRecoverOpen}
-        setRecoverOpen={setRecoverOpen}
-      />
     </div>
   );
 }

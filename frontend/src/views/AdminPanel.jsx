@@ -7,6 +7,7 @@ import { getAllPets } from "../api/petService";
 import Sidebar from "../components/Sidebar";
 import { useOutletContext } from "react-router-dom";
 import AdminNavbar from "../components/AdminNavbar";
+import { useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
   const { activeView, setActiveView } = useOutletContext();
@@ -14,13 +15,28 @@ const AdminPanel = () => {
   const [editingPet, setEditingPet] = useState(null);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsSidebarVisible(true);
+      }
+    };
+  
+    window.addEventListener("resize", handleResize);
+  
+    handleResize();
+  
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
+
   const viewTitles = {
     Mascotas: "Gestiona las mascotas",
     Solicitudes: "Solicitudes de adoptantes",
     Adoptantes: "Registros de adoptantes",
   };
 
-  const currentTitle = viewTitles[activeView] || "Panel de administración";
+  const currentTitle = viewTitles[activeView];
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -52,6 +68,8 @@ const AdminPanel = () => {
   };
 
   const renderView = () => {
+    const navigate = useNavigate();
+
     switch (activeView) {
       case "Mascotas":
         return (
@@ -88,7 +106,8 @@ const AdminPanel = () => {
           />
         );
       default:
-        return <div className="p-6">Vista no implementada</div>;
+      navigate("/Mascota");
+      return null;
     }
   };
 
@@ -104,11 +123,12 @@ const AdminPanel = () => {
       <AdminNavbar
         sectionTitle={currentTitle}
         isSidebarVisible={isSidebarVisible}
+        setSidebarVisible={setIsSidebarVisible}
       />
 
       <div
-        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-40"
-        style={{ left: isSidebarVisible ? "180px" : "0px" }}
+        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-30"
+        style={{ left: isSidebarVisible ? "250px" : "0px" }}
       >
         <div className="p-6">{renderView()}</div>
       </div>

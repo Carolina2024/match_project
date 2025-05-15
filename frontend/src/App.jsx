@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
-import Adoptar from "./views/Adoptar";
 import AdminPanel from "./views/AdminPanel";
 import PetsHome from "./components/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";

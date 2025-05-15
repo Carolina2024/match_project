@@ -6,6 +6,7 @@ import RegisterModalb from "./RegisterModalb";
 import SuccessModalRegister from "./SuccessModalRegister";
 import { registerAdopter } from "../../api/authService";
 import PasswordRecovery from "./PasswordRecovery";
+import RecoveryConfirmationModal from "./RecoveryConfirmationModal";
 
 const AuthModalsController = ({
   isLoginOpen,
@@ -19,6 +20,7 @@ const AuthModalsController = ({
 }) => {
   const [stepOneData, setStepOneData] = useState(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showRecoveryConfirm, setShowRecoveryConfirm] = useState(false);
   const [serverError, setServerError] = useState("");
 
   const normalizeHomeType = (ht) => {
@@ -101,6 +103,11 @@ const AuthModalsController = ({
           setRecoverOpen(false);
           setLoginOpen(true);
         }}
+        setLoginOpen={setLoginOpen}
+        onSuccess={() => {
+          setRecoverOpen(false);
+          setShowRecoveryConfirm(true);
+        }}
       />
 
       <RegisterModal
@@ -138,6 +145,11 @@ const AuthModalsController = ({
           setRegisterbOpen(false);
           setLoginOpen(true);
         }}
+      />
+
+      <RecoveryConfirmationModal
+        isOpen={showRecoveryConfirm}
+        onClose={() => setShowRecoveryConfirm(false)}
       />
     </>
   );

@@ -2,7 +2,6 @@ import { X } from "lucide-react";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { loginUser } from "../../api/user";
 import logo from "../../assets/logo.png";
 import { useAuth } from "../../context/AuthContext";
@@ -71,20 +70,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
     }
 
     try {
-      Swal.fire({
-        title: "Iniciando sesión...",
-        text: "Por favor espera un momento",
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-        },
-        customClass: {
-          popup: "p-4 text-sm mt-32", // padding reducido, texto más pequeño, margen arriba
-          title: "text-sm", // tamaño del título más pequeño
-          htmlContainer: "text-xs", // tamaño del texto aún más pequeño
-        },
-      });
-
       const data = await loginUser({ email, password });
 
       login(data.user, data.token);
@@ -95,32 +80,16 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
       setErrors({});
       setEmail("");
       setPassword("");
-      Swal.close();
+      setError("");
 
-      Swal.fire({
-        title: "¡Inicio de sesión exitoso!",
-        text: "",
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1000, // se cierra automáticamente en 2 segundos
-        timerProgressBar: true,
-        didClose: () => {
-          onClose();
-          if (role === "admin") {
-            navigate("/Admin");
-          } else {
-            navigate("/");
-          }
-        },
-      });
+      onClose();
+      if (role === "admin") {
+        navigate("/Admin");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
-      Swal.close();
-      Swal.fire({
-        icon: "error",
-        title: "Credenciales inválidas",
-        text: "El correo o la contraseña son incorrectos. Intenta nuevamente.",
-        confirmButtonColor: "#FAAB75",
-      });
+      setError("Correo o contraseña incorrectos. Intenta nuevamente.");
     }
   };
 
@@ -145,35 +114,39 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
             <form onSubmit={handleSubmit} className="space-y-3">
               <div className="relative">
                 {error && (
-                  <div className="bg-red-100 text-red-600 p-2 rounded">
+                  <div className="bg-red-100 text-red-600 p-2 rounded mb-2">
                     {error}
                   </div>
                 )}
-                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
-                  <i className="fas fa-user" />
 
-                  <svg
-                    width="14"
-                    height="14"
-                    className="absolute top-3 left-4"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M6.99992 1.99992C7.91658 1.99992 8.66658 2.74992 8.66658 3.66659C8.66658 4.58325 7.91658 5.33325 6.99992 5.33325C6.08325 5.33325 5.33325 4.58325 5.33325 3.66659C5.33325 2.74992 6.08325 1.99992 6.99992 1.99992ZM6.99992 10.3333C9.24992 10.3333 11.8333 11.4083 11.9999 11.9999H1.99992C2.19159 11.3999 4.75825 10.3333 6.99992 10.3333ZM6.99992 0.333252C5.15825 0.333252 3.66659 1.82492 3.66659 3.66659C3.66659 5.50825 5.15825 6.99992 6.99992 6.99992C8.84159 6.99992 10.3333 5.50825 10.3333 3.66659C10.3333 1.82492 8.84159 0.333252 6.99992 0.333252ZM6.99992 8.66658C4.77492 8.66658 0.333252 9.78325 0.333252 11.9999V13.6666H13.6666V11.9999C13.6666 9.78325 9.22492 8.66658 6.99992 8.66658Z"
-                      fill="#F4A470"
-                    />
-                  </svg>
-                </span>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={handleChange}
-                  name="email"
-                  className="w-full pl-10 text-lg font-medium bg-white  text-[#767575] pr-4 py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
-                />
+                {/* Contenedor del input e ícono */}
+                <div className="relative">
+                  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
+                    <svg
+                      width="14"
+                      height="14"
+                      className="text-primary"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.99992 1.99992C7.91658 1.99992 8.66658 2.74992 8.66658 3.66659C8.66658 4.58325 7.91658 5.33325 6.99992 5.33325C6.08325 5.33325 5.33325 4.58325 5.33325 3.66659C5.33325 2.74992 6.08325 1.99992 6.99992 1.99992ZM6.99992 10.3333C9.24992 10.3333 11.8333 11.4083 11.9999 11.9999H1.99992C2.19159 11.3999 4.75825 10.3333 6.99992 10.3333ZM6.99992 0.333252C5.15825 0.333252 3.66659 1.82492 3.66659 3.66659C3.66659 5.50825 5.15825 6.99992 6.99992 6.99992C8.84159 6.99992 10.3333 5.50825 10.3333 3.66659C10.3333 1.82492 8.84159 0.333252 6.99992 0.333252ZM6.99992 8.66658C4.77492 8.66658 0.333252 9.78325 0.333252 11.9999V13.6666H13.6666V11.9999C13.6666 9.78325 9.22492 8.66658 6.99992 8.66658Z"
+                        fill="#F4A470"
+                      />
+                    </svg>
+                  </span>
+
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleChange}
+                    name="email"
+                    className="w-full pl-10 text-lg font-medium bg-white text-[#767575] pr-4 py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                </div>
+
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">{errors.email}</p>
                 )}

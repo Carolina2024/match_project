@@ -22,15 +22,19 @@ const RequestModal = ({ request, onClose }) => {
 
   if (!request) return null;
 
-  const formattedDate = new Date(request.applicationDate).toLocaleDateString("en-GB");
+  const formattedDate = new Date(request.applicationDate).toLocaleDateString(
+    "en-GB"
+  );
 
   const getStatusClass = (status) => {
+
     return {
       "Por revisar": "bg-gray-400",
-      "En proceso": "bg-orange-400",
+      "En proceso": "color-bg-orange color-text-process",
       Aprobado: "bg-green-500",
-      Rechazado: "bg-red-500",
+      Rechazado: "bg-red-slowly text-red-600",
     }[status] || "bg-gray-300";
+
   };
 
   return (
@@ -44,7 +48,7 @@ const RequestModal = ({ request, onClose }) => {
         </button>
 
         <h2 className="text-xl font-bold text-center mb-1">
-          Detalles de la solicitud
+          Detalles de la solicitud 
         </h2>
         <p className="text-sm text-center text-gray-500 mb-6">
           Información de la solicitud de adopción
@@ -58,7 +62,7 @@ const RequestModal = ({ request, onClose }) => {
           <div>
             <p className="text-gray-600 font-semibold">Estado</p>
             <span
-              className={`text-white px-3 py-1 rounded-full font-semibold text-sm ${getStatusClass(
+              className={`px-3 py-1 rounded-full font-semibold text-sm ${getStatusClass(
                 request.status
               )}`}
             >
@@ -75,7 +79,9 @@ const RequestModal = ({ request, onClose }) => {
               <span>{request.pet.name}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">ID de mascota:</span>
+              <span className="text-gray-600 font-semibold">
+                ID de mascota:
+              </span>
               <span>{request.petId}</span>
             </div>
           </div>
@@ -89,11 +95,15 @@ const RequestModal = ({ request, onClose }) => {
               <span>{request.user.fullname}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">ID de adoptante:</span>
+              <span className="text-gray-600 font-semibold">
+                ID de adoptante:
+              </span>
               <span>{request.userId}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">Documento de identidad:</span>
+              <span className="text-gray-600 font-semibold">
+                Documento de identidad:
+              </span>
               <span>{adopter?.identityDocument || "No disponible"}</span>
             </div>
             <div className="flex flex-col">
@@ -101,7 +111,9 @@ const RequestModal = ({ request, onClose }) => {
               <span>{request.user.email}</span>
             </div>
             <div className="flex flex-col col-span-2">
-              <span className="text-gray-600 font-semibold">Dirección y comuna:</span>
+              <span className="text-gray-600 font-semibold">
+                Dirección y comuna:
+              </span>
               <span>{adopter?.address || "No disponible"}</span>
             </div>
           </div>

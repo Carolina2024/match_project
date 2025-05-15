@@ -13,6 +13,7 @@ import { PetService } from '../pets/pet.service';
 import { PetStatus } from '../../common/enums/pet.enum';
 import { FilterMatchDto } from './dto/filterMatch.dto';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
+import { Pet } from '../pets/entities/pet.entity';
 
 @Injectable()
 export class MatchesService {
@@ -20,6 +21,9 @@ export class MatchesService {
     @InjectRepository(Match)
     private matchRepository: Repository<Match>,
     private petService: PetService,
+
+    @InjectRepository(Pet)
+    private petRepository: Repository<Pet>,
   ) {}
 
   async create(
@@ -106,6 +110,7 @@ export class MatchesService {
       ])
       .skip((page - 1) * (limit || 10))
       .take(limit)
+      .orderBy('matches.applicationDate', 'DESC')
       .getMany();
 
     return {
@@ -117,8 +122,8 @@ export class MatchesService {
     };
   }
 
-  async findByUser(userId: string): Promise<Match[]> {
-    return this.matchRepository.find({
+  async findByUser(userId: string): Promise<Match> {
+    const pet = await this.matchRepository.findOne({
       where: { userId },
       relations: ['pet'],
       select: {
@@ -142,7 +147,14 @@ export class MatchesService {
           traits: true,
         },
       },
+      order: { applicationDate: 'DESC' },
     });
+    if (!pet) {
+      throw new NotFoundException(
+        'El usuario no posee ninguna solicitud de adopción',
+      );
+    }
+    return pet;
   }
 
   async findOne(id: string): Promise<Match> {
@@ -190,11 +202,9 @@ export class MatchesService {
     const match = await this.findOne(id);
     this.validateStatusTransition(match.status, updateMatchStatusDto.status);
     if (updateMatchStatusDto.status === MatchStatus.APROBADO) {
-      await this.petService.update(
-        match.petId,
-        { status: PetStatus.ADOPTED },
-        [],
-      );
+      await this.petRepository.update(match.petId, {
+        status: PetStatus.ADOPTED,
+      });
       await this.matchRepository.update(
         {
           petId: match.petId,
@@ -216,13 +226,7 @@ export class MatchesService {
     currentStatus: MatchStatus,
     newStatus: MatchStatus,
   ): void {
-    if (currentStatus === MatchStatus.POR_REVISAR) {
-      if (newStatus !== MatchStatus.EN_PROCESO) {
-        throw new BadRequestException(
-          `No se puede cambiar el estado de ${MatchStatus.POR_REVISAR} a ${newStatus}. Solo se permite cambiar a ${MatchStatus.EN_PROCESO}`,
-        );
-      }
-    } else if (currentStatus === MatchStatus.EN_PROCESO) {
+    if (currentStatus === MatchStatus.EN_PROCESO) {
       if (
         newStatus !== MatchStatus.APROBADO &&
         newStatus !== MatchStatus.RECHAZADO

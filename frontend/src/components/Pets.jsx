@@ -47,7 +47,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     traits: editingPet ? editingPet.traits : [],
     delivery: editingPet ? deliveryArray : [],
     story: editingPet ? editingPet.story : "",
-    photos: [null], // no es url
+    photos: [null, null, null], 
     photoUrls: editingPet ? editingPet.photoUrls : [],
   };
 
@@ -57,7 +57,6 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     handleSubmit,
     setValue,
     watch,
-    // reset,
     formState: { errors },
   } = useForm({ defaultValues: initialFormState });
 
@@ -73,12 +72,17 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
       : [...current, value];
     setValue(field, updated);
   };
-
   const handleFileChange = (index, file) => {
     const updated = [...photos];
     updated[index] = file;
     setValue("photos", updated);
+  
+
+    const previewUrls = [...photoUrls];
+    previewUrls[index] = URL.createObjectURL(file);
+    setValue("photoUrls", previewUrls);
   };
+  
 
   const onSubmit = async (data) => {
     try {
@@ -133,12 +137,18 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
   };
 
   const handleDeletePhoto = (url) => {
-    console.log(photoUrls);
-    console.log(url);
-
-    const newPhotoUrls = photoUrls.filter((photo) => photo != url);
-    setValue("photoUrls", newPhotoUrls);
+    const indexToRemove = photoUrls.findIndex((photo) => photo === url);
+    if (indexToRemove !== -1) {
+      const newPhotoUrls = [...photoUrls];
+      const newPhotos = [...photos];
+      newPhotoUrls[indexToRemove] = null;
+      newPhotos[indexToRemove] = null;
+  
+      setValue("photoUrls", newPhotoUrls);
+      setValue("photos", newPhotos);
+    }
   };
+  
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -151,22 +161,33 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     <div className="fixed inset-0 z-50 flex justify-end">
       <div
         className="fixed inset-0 bg-black/30 backdrop-blur-sm"
-        onClick={() => setActiveView("MASCOTAS")}
+        onClick={() => setActiveView("Mascotas")}
       />
+    
+      
       <div
         className={`relative w-full max-w-lg bg-white h-full shadow-xl z-50 p-8 overflow-y-auto rounded-xl transform transition-transform duration-700 ease-in-out ${
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
-      >
+        
+              >
+                <button
+          onClick={() => setActiveView("Mascotas")}
+          className="absolute top-4 right-4 text-gray-500 hover:text-black text-3xl font-bold z-50"
+        >
+          x
+        </button>
+
         <h2 className="text-center text-2xl font-bold mb-4">
           {editingPet ? "Editar Mascota" : "Nueva Mascota"}
         </h2>
+
         <p className="text-center text-sm mb-6">
           {editingPet
             ? "Completa el formulario para actualizar los datos de esta mascota"
             : "Completa el formulario para agregar una mascota al refugio."}
         </p>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
               <label className="text-sm font-semibold mb-1">Nombre</label>
@@ -391,45 +412,65 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           <div>
             <p className="text-sm font-semibold mb-2">Agregar 3 fotos:</p>
             <div className="grid grid-cols-3 gap-4">
-              {photos.map((_, index) => (
-                <label
-                  key={index}
-                  className="border p-4 text-center rounded cursor-pointer hover:bg-gray-100"
-                >
-                  Subir foto
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileChange(index, e.target.files[0])}
-                    className="hidden"
-                  />
-                </label>
-              ))}
-              {photoUrls.map((url) => (
-                <div key={url}>
-                  <button type="button" onClick={() => handleDeletePhoto(url)}>
-                    Borrar Imagen
-                  </button>
-                  <img src={url} alt="" />
-                </div>
-              ))}
+            {photos.map((_, index) => (
+  <label
+    key={index}
+    className="relative border border-gray-300 rounded-2xl cursor-pointer h-32 flex items-center justify-center overflow-hidden hover:bg-gray-100 transition"
+    >
+    {photoUrls[index] ? (
+      <>
+        <img
+          src={photoUrls[index]}
+          alt={`Foto ${index + 1}`}
+          className="w-full h-full object-cover"
+        />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault(); 
+            handleDeletePhoto(photoUrls[index]);
+          }}
+          className="absolute top-1 right-1 bg-white text-gray-700 rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
+          title="Eliminar imagen"
+        >
+          X
+        </button>
+      </>
+    ) : (
+      <span className="text-gray-400">Subir foto</span>
+    )}
+
+    <input
+      type="file"
+      accept="image/*"
+      onChange={(e) => handleFileChange(index, e.target.files[0])}
+      className="hidden"
+    />
+  </label>
+))}
+
+
             </div>
           </div>
+        <div>
+      </div>
 
-          <div className="grid grid-cols-2 gap-4 pt-6">
-            <button
-              type="button"
-              onClick={() => setActiveView("MASCOTAS")}
-              className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
-            >
-              Guardar
-            </button>
+<div className="bg-white pt-4 pb-6 mt-6 border-t border-gray-200 sticky bottom-[-30px]">
+  <div className="grid grid-cols-2 gap-4">
+    <button
+      type="button"
+      onClick={() => setActiveView("Mascotas")}
+      className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer font-semibold"
+    >
+      Cancelar
+    </button>
+    <button
+      type="submit"
+      className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer font-semibold"
+    >
+      Guardar
+              </button>
+            </div>
           </div>
         </form>
       </div>

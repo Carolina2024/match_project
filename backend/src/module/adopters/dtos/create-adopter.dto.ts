@@ -65,6 +65,10 @@ export class CreateAdopterDto {
   @IsString({
     message: 'La dirección de residencia debe ser una cadena de texto',
   })
+  @Matches(/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ0-9\s,.#-]+$/, {
+    message:
+      'La dirección solo puede contener letras, números, espacios, comas, puntos, # y guiones',
+  })
   address: string;
 
   @ApiProperty({
@@ -72,7 +76,9 @@ export class CreateAdopterDto {
     example: AdopterHomeType.BIG_APARTMENT,
     enum: AdopterHomeType,
   })
-  @IsEnum(AdopterHomeType)
+  @IsEnum(AdopterHomeType, {
+    message: `El tipo de vivienda del adoptante debe ser un valor válido: ${Object.values(AdopterHomeType).join(', ')}`,
+  })
   @IsNotEmpty({ message: 'El tipo de vivienda es requerido' })
   homeType: AdopterHomeType;
 
@@ -217,7 +223,7 @@ export class CreateAdopterDto {
     example: PetEnergy.MODERATE,
   })
   @IsEnum(PetEnergy, {
-    message: 'El nivel de energía debe ser un valor válido',
+    message: `El nivel de energía debe ser un valor válido: ${Object.values(PetEnergy).join(', ')}`,
   })
   userPreferenceEnergy: PetEnergy;
 
@@ -231,7 +237,7 @@ export class CreateAdopterDto {
   @IsArray({ message: 'Los rasgos deben ser un arreglo' })
   @IsEnum(PetTrait, {
     each: true,
-    message: 'Cada rasgo debe ser un valor válido',
+    message: `Cada rasgo debe ser un valor válido: ${Object.values(PetTrait).join(', ')}`,
   })
   userPreferenceTraits: PetTrait[];
 

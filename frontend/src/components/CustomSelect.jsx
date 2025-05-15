@@ -17,14 +17,19 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
   }, []);
 
   return (
-    <div ref={ref} className="relative w-[120px] text-sm font-raleway text-[#767575]">
+    <div
+      ref={ref}
+      className="relative w-[120px] text-sm font-raleway text-[#767575]"
+    >
       <button
         onClick={() => setOpen(!open)}
         className="flex justify-between items-center w-full px-4 py-[6px] border border-gray-300 rounded-md bg-white hover:bg-gray-50"
       >
         <span>{selected === "Todos" ? label : selected}</span>
         <FaChevronDown
-          className={`ml-2 transition-transform text-xs ${open ? "rotate-180" : ""}`}
+          className={`ml-2 transition-transform text-xs ${
+            open ? "rotate-180" : ""
+          }`}
         />
       </button>
 
@@ -41,7 +46,9 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
                 className="w-full text-left px-4 py-2 hover:bg-gray-100 flex items-center justify-between"
               >
                 <span>{opt}</span>
-                {selected === opt && <FaCheck className="text-sm text-gray-700" />}
+                {selected === opt && (
+                  <FaCheck className="text-sm text-gray-700" />
+                )}
               </button>
             </div>
           ))}

@@ -77,17 +77,20 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] flex items-start justify-center pt-16 pb-8 px-4 overflow-y-auto">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
+        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]"
+      >
         <div className="flex justify-end">
           <button
             type="button"
             className="text-[#595146] focus:outline-none cursor-pointer"
-            onClick={onClose}>
+            onClick={onClose}
+          >
             <svg
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor">
+              stroke="currentColor"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -244,7 +247,8 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                     formData.energy === energy
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
-                  }`}>
+                  }`}
+                >
                   {energy}
                 </button>
               ))}
@@ -266,7 +270,8 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                     formData.character.includes(opcion)
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
-                  }`}>
+                  }`}
+                >
                   {opcion}
                 </button>
               ))}
@@ -288,7 +293,8 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                     formData.compatibility.includes(opcion)
                       ? "bg-[#767575] text-white"
                       : "border-primary bg-white/75 text-[#595146]"
-                  }`}>
+                  }`}
+                >
                   {opcion}
                 </button>
               ))}
@@ -321,7 +327,8 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
               onClick={onBack}
               className="bg-white/75 text-primary border-2 border-primary rounded-3xl focus:outline-none cursor-pointer 
                px-6 py-1 text-sm sm:px-12 sm:text-base 
-               hover:text-tertiary hover:border-tertiary">
+               hover:text-tertiary hover:border-tertiary"
+            >
               Atrás
             </button>
 
@@ -329,7 +336,8 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
               type="submit"
               className="bg-primary text-white font-semibold rounded-3xl cursor-pointer 
                px-6 py-1 text-sm sm:px-12 sm:text-base 
-               hover:bg-tertiary shadow-lg/20">
+               hover:bg-tertiary shadow-lg/20"
+            >
               Finalizar
             </button>
           </div>

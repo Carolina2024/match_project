@@ -68,7 +68,6 @@ const AuthModalsController = ({
       userPreferenceCats: second.compatibility.includes("gatos"),
     };
 
-    console.log("👉 Payload de registro:", payload);
     try {
       await registerAdopter(payload);
       setShowSuccess(true);

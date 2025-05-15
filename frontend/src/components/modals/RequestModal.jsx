@@ -27,14 +27,14 @@ const RequestModal = ({ request, onClose }) => {
   );
 
   const getStatusClass = (status) => {
-
-    return {
-      "Por revisar": "bg-gray-400",
-      "En proceso": "color-bg-orange color-text-process",
-      Aprobado: "bg-disponible text-[#35A302]",
-      Rechazado: "bg-red-slowly text-red-600",
-    }[status] || "bg-gray-300";
-
+    return (
+      {
+        "Por revisar": "bg-gray-400",
+        "En proceso": "color-bg-orange color-text-process",
+        Aprobado: "bg-disponible text-[#35A302]",
+        Rechazado: "bg-red-slowly text-red-600",
+      }[status] || "bg-gray-300"
+    );
   };
 
   return (
@@ -48,7 +48,7 @@ const RequestModal = ({ request, onClose }) => {
         </button>
 
         <h2 className="text-xl font-bold text-center mb-1">
-          Detalles de la solicitud 
+          Detalles de la solicitud
         </h2>
         <p className="text-sm text-center text-gray-500 mb-6">
           Información de la solicitud de adopción
@@ -60,16 +60,15 @@ const RequestModal = ({ request, onClose }) => {
             <p>{formattedDate}</p>
           </div>
           <div>
-  <p className="text-gray-600 font-semibold mb-1">Estado</p>
-  <span
-    className={`text-xs sm:text-sm px-3 py-[2px] rounded-[10px] font-medium text-center whitespace-nowrap ${getStatusClass(
-      request.status
-    )}`}
-  >
-    {request.status}
-  </span>
-</div>
-
+            <p className="text-gray-600 font-semibold mb-1">Estado</p>
+            <span
+              className={`text-xs sm:text-sm px-3 py-[2px] rounded-[10px] font-medium text-center whitespace-nowrap ${getStatusClass(
+                request.status
+              )}`}
+            >
+              {request.status}
+            </span>
+          </div>
         </div>
 
         <div className="bg-orange-50 p-4 rounded mb-4">

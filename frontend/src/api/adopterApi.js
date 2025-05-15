@@ -4,7 +4,6 @@ const API_URL = `${BASE_URL}/users`;
 export const fetchUsersget = async (page = 1, limit = 10) => {
   try {
     const token = localStorage.getItem("token");
-    console.log(token);
 
     const queryParams = new URLSearchParams({
       page: page.toString(),
@@ -22,7 +21,6 @@ export const fetchUsersget = async (page = 1, limit = 10) => {
     }
 
     const data = await response.json();
-    console.log("Respuesta de la API:", data);
 
     const users = data.items.map((user) => ({
       id: user.id,

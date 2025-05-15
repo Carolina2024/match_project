@@ -30,7 +30,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
             value
           )
         ) {
-          return "Debe tener mínimo 6 caracteres, letras,\nnúmeros y símbolos. Ej: hola123!";
+          return "Debe tener mínimo 6 caracteres, al menos una letra, un número y un símbolo. Ej: hola123!";
         }
         return "";
       default:
@@ -119,7 +119,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   </div>
                 )}
 
-                {/* Contenedor del input e ícono */}
                 <div className="relative">
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
                     <svg

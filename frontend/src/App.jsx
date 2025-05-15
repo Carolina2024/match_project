@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./views/Home";
 import AdminPanel from "./views/AdminPanel";
-import PetsHome from "./components/PetsHome";
 import CuidadosMascota from "./views/CuidadosMascota";
 import Nosotros from "./views/Nosotros";
 import Contacto from "./views/Contacto";
@@ -25,7 +24,6 @@ function App() {
             <Route path="/Nosotros" element={<Nosotros />} />
             <Route path="/CuidadosMascota" element={<CuidadosMascota />} />
             <Route path="/Contacto" element={<Contacto />} />
-            <Route path="/Adoptar" element={<Adoptar />} />
             <Route path="/seguimiento" element={<PetElection />} />
             <Route path="/editprofile" element={<UserModalEdit />} />
             <Route path="/infopet/:id" element={<InfoPet />} />

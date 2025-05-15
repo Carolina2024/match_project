@@ -45,12 +45,10 @@ export const PetProvider = ({ children }) => {
 
   const [mascotas, setMascotas] = useState([]);
   const [userMatches, setUserMatches] = useState([]);
+  const [matchedPet, setMatchedPet] = useState(null);
+  
 
   const location = useLocation();
-
-  const matchedPet = mascotas.find((pet) =>
-    userMatches.includes(String(pet.id))
-  );
 
   useEffect(() => {
     const fetchMascotas = async () => {
@@ -59,6 +57,11 @@ export const PetProvider = ({ children }) => {
       setMascotas(pets);
 
       const matches = await getUserMatchs();
+      if(matches.status === "En proceso" || matches.status === "Por revisar") {
+        setMatchedPet({...matches.pet, id: matches.petId})
+      }
+
+
 
       // 💡 Si el usuario vuelve desde seguimiento y su match fue rechazado
       // const matchRechazado = matches.find((m) => m.status === "Rechazado");

@@ -12,14 +12,13 @@ function PetsHome() {
 
   const navigate = useNavigate();
 
-
   return (
     <div className="mx-auto bg-transparent">
       <h1 className="text-3xl font-semibold mb-4 text-center text-primary">
         {matchedPet ? "Tu match te está esperando" : "Tus mascotas compatibles"}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-1 h-full bg-transparent">
-        {(matchedPet ? [matchedPet] : mascotas).map((mascota) => (
+        {(matchedPet?.photoUrls !== undefined ? [matchedPet] : mascotas).map((mascota) => (
           <div key={mascota.id} className="p-4 items-center text-center">
             <img
               src={mascota.photoUrls[0]}
@@ -36,7 +35,7 @@ function PetsHome() {
               <div className="flex flex-col mt-2">
                 <button
                   onClick={() =>
-                    isMatched(mascota.id)
+                    matchedPet?.photoUrls !== undefined
                       ? navigate("/seguimiento", {
                           state: {
                             nombre: mascota.name,
@@ -47,7 +46,7 @@ function PetsHome() {
                   }
                   className="border border-primary rounded-md cursor-pointer text-sm px-3 py-1 text-white font-semibold bg-primary"
                 >
-                  {isMatched(mascota.id) ? "Ver seguimiento" : "Conóceme"}
+                  {matchedPet?.photoUrls !== undefined ? "Ver seguimiento" : "Conóceme"}
                 </button>
               </div>
             </div>

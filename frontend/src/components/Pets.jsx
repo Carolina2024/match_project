@@ -47,7 +47,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     traits: editingPet ? editingPet.traits : [],
     delivery: editingPet ? deliveryArray : [],
     story: editingPet ? editingPet.story : "",
-    photos: [null], 
+    photos: [null, null, null], 
     photoUrls: editingPet ? editingPet.photoUrls : [],
   };
 
@@ -137,12 +137,18 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
   };
 
   const handleDeletePhoto = (url) => {
-    console.log(photoUrls);
-    console.log(url);
-
-    const newPhotoUrls = photoUrls.filter((photo) => photo != url);
-    setValue("photoUrls", newPhotoUrls);
+    const indexToRemove = photoUrls.findIndex((photo) => photo === url);
+    if (indexToRemove !== -1) {
+      const newPhotoUrls = [...photoUrls];
+      const newPhotos = [...photos];
+      newPhotoUrls[indexToRemove] = null;
+      newPhotos[indexToRemove] = null;
+  
+      setValue("photoUrls", newPhotoUrls);
+      setValue("photos", newPhotos);
+    }
   };
+  
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -406,37 +412,43 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           <div>
             <p className="text-sm font-semibold mb-2">Agregar 3 fotos:</p>
             <div className="grid grid-cols-3 gap-4">
-              {photos.map((_, index) => (
-                <label
-                  key={index}
-                  className="border p-4 text-center rounded cursor-pointer hover:bg-gray-100"
-                >
-                  Subir foto
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => handleFileChange(index, e.target.files[0])}
-                    className="hidden"
-                  />
-                </label>
-              ))}
-{photoUrls.map((url) => (
-  <div key={url} className="relative w-full h-32 overflow-hidden rounded">
-    <button
-      type="button"
-      onClick={() => handleDeletePhoto(url)}
-      className="absolute top-1 right-1 bg-white text-gray-700 rounded-full text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white transition cursor-pointer"
-      title="Eliminar imagen"
+            {photos.map((_, index) => (
+  <label
+    key={index}
+    className="relative border border-gray-300 rounded-2xl cursor-pointer h-32 flex items-center justify-center overflow-hidden hover:bg-gray-100 transition"
     >
-     X
-    </button>
-    <img
-      src={url}
-      alt="Foto"
-      className="w-full h-full object-cover rounded"
+    {photoUrls[index] ? (
+      <>
+        <img
+          src={photoUrls[index]}
+          alt={`Foto ${index + 1}`}
+          className="w-full h-full object-cover"
+        />
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault(); 
+            handleDeletePhoto(photoUrls[index]);
+          }}
+          className="absolute top-1 right-1 bg-white text-gray-700 rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
+          title="Eliminar imagen"
+        >
+          X
+        </button>
+      </>
+    ) : (
+      <span className="text-gray-400">Subir foto</span>
+    )}
+
+    <input
+      type="file"
+      accept="image/*"
+      onChange={(e) => handleFileChange(index, e.target.files[0])}
+      className="hidden"
     />
-  </div>
+  </label>
 ))}
+
 
             </div>
           </div>

@@ -100,11 +100,11 @@ const AdminNavbar = ({
           </button>
         </div>
 
-        <div ref={dropdownRef} className="relative cursor-pointer">
+        <div ref={dropdownRef}>
           <button
             onClick={() => setOpen(!open)}
             className="bg-white border px-4 rounded-full text-sm font-medium flex items-center
-                       shadow-[0_5px_0_0_#5A534A] hover:bg-gray-50"
+                       shadow-[0_5px_0_0_#5A534A] hover:bg-gray-50 cursor-pointer"
           >
             <div className="flex flex-col items-start leading-tight">
               <span className="text-sm text-[#4B443B] font-bold">{userName}</span>
@@ -121,9 +121,9 @@ const AdminNavbar = ({
               <div className="border-t border-gray-200">
                 <button
                   onClick={handleLogout}
-                  className="flex items-center w-full px-4 py-2 text-red-500 hover:bg-red-50 font-medium"
+                  className="flex items-center w-full px-4 py-2 text-red-500 hover:bg-red-50 font-medium cursor-pointer"
                 >
-                  <FaSignOutAlt className="mr-2" />
+                  <FaSignOutAlt className="mr-2"  />
                   Cerrar sesión
                 </button>
               </div>

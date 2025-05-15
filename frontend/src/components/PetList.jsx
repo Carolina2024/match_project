@@ -126,7 +126,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="[box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300"
+            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300"
           >
             + Nueva mascota
           </button>
@@ -144,7 +144,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               options={["Todos", "Perro", "Gato"]}
               selected={filterSpecies}
               onChange={setFilterSpecies}
-            />
+            /> 
             <CustomSelect
               label="Tamaño"
               options={["Todos", "Pequeño", "Mediano", "Grande"]}

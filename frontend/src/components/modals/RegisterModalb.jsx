@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import logo from "../../assets/logo.png";
 
-const opcionesEnergia = ["Tranquilo", "Moderado", "Muy activo"];
+const opcionesEnergia = ["Tranquilo", "Moderado", "Muy Activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
 const opcionesPreferencia = ["Con niños", "Con perros", "Con gatos"];
 

@@ -1,57 +1,17 @@
-import { useEffect, useState } from "react";
-import { createMatch, getCompatiblePets, getUserMatchs } from "../api/PetsUser";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { usePet } from "../context/PetContext";
 
 function PetsHome() {
   const {
-    seleccionada,
-    setSeleccionada,
-    handleMatchClick,
-    handleConfirmMatch,
-    handleGoToTracking,
-    showCheckMatch3,
-    setShowCheckMatch3,
-    showCheckMatch4,
+        matchedPet,
+        isMatched,
+        handleClickConoceme,
+        mascotas,
+
   } = usePet();
 
-  const [mascotas, setMascotas] = useState([]);
-  const [userMatches, setUserMatches] = useState([]);
-
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const matchedPet = mascotas.find((pet) =>
-    userMatches.includes(String(pet.id))
-  );
-
-  useEffect(() => {
-    const fetchMascotas = async () => {
-      const data = await getCompatiblePets();
-      setMascotas(data.items);
-
-      const matches = await getUserMatchs();
-      const isMatchRejected = matches.status === "Rechazado";
-
-      if (isMatchRejected) {
-        setUserMatches([matches.petId]);
-      }
-
-      if (location.state?.desdeSeguimiento && isMatchRejected) {
-        setUserMatches([]);
-        return;
-      }
-    };
-
-    fetchMascotas();
-  }, [location.state]);
-
-  const isMatched = (id) => userMatches.includes(String(id));
-
-  const handleClickConoceme = (mascota) => {
-    setSeleccionada(mascota);
-    navigate("/infopet");
-  };
 
   return (
     <div className="mx-auto bg-transparent">

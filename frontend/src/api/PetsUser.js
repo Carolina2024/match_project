@@ -48,3 +48,22 @@ export const getUserMatchs = async () => {
   const data = await res.json();
   return data;
 };
+
+
+export const getPetById = async (petId) => {
+  const token = localStorage.getItem("token");
+  const res = await fetch(`${PETS_URL}/${petId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(
+      errorData.message || "Error al obtener los datos de la mascota"
+    );
+  }
+
+  return data;
+};

@@ -13,37 +13,41 @@ import PetElection from "./components/PetElection";
 import UserModalEdit from "./components/modals/UserModalEdit";
 import PasswordReset from "./views/PasswordReset";
 import InfoPet from "./components/infoPet";
+import { PetProvider } from "./context/PetContext";
 
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/Nosotros" element={<Nosotros />} />
-          <Route path="/CuidadosMascota" element={<CuidadosMascota />} />
-          <Route path="/Contacto" element={<Contacto />} />
-          <Route path="/Adoptar" element={<Adoptar />} />
-          <Route path="/seguimiento" element={<PetElection />} />
-          <Route path="/editprofile" element={<UserModalEdit />} />
-          <Route path="/infopet" element={<InfoPet />} />
-          <Route path="/RecoverPassword" element={<PasswordReset />} />
-        </Route>
+      <PetProvider>
+        <Routes>
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/Nosotros" element={<Nosotros />} />
+            <Route path="/CuidadosMascota" element={<CuidadosMascota />} />
+            <Route path="/Contacto" element={<Contacto />} />
+            <Route path="/Adoptar" element={<Adoptar />} />
+            <Route path="/seguimiento" element={<PetElection />} />
+            <Route path="/editprofile" element={<UserModalEdit />} />
+            <Route path="/infopet/:id" element={<InfoPet />} />
+            <Route path="/RecoverPassword" element={<PasswordReset />} />
+          </Route>
 
-        <Route
-          path="/Admin"
-          element={
-            <PrivateRoute>
-              <AdminLayout />
-            </PrivateRoute>
-          }
-        >
-          <Route index element={<AdminPanel />} />
-        </Route>
-      </Routes>
+          <Route
+            path="/Admin"
+            element={
+              <PrivateRoute>
+                <AdminLayout />
+              </PrivateRoute>
+            }
+          >
+            <Route index element={<AdminPanel />} />
+          </Route>
+        </Routes>
+      </PetProvider>
     </Router>
   );
 }
+
 
 export default App;

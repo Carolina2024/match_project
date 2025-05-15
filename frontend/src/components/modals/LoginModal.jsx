@@ -13,7 +13,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -69,7 +68,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
       return;
     }
 
-    setLoading(true);
     try {
       const data = await loginUser({ email, password });
 
@@ -91,29 +89,17 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
       }
     } catch (err) {
       setError("Correo o contraseña incorrectos. Intenta nuevamente.");
-    } finally {
-      setLoading(false);
     }
   };
 
   if (!isOpen) return null;
-
-  const handleClose = () => {
-    setEmail("");
-    setPassword("");
-    setError("");
-    setErrors({});
-    setShowPassword(false);
-    setLoading(false);
-    onClose();
-  };
 
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
       <div className="flex items-center justify-center my-14">
         <div className="bg-[#F9F9F9] rounded-2xl shadow-xl w-full md:max-w-4xl max-w-md flex overflow-hidden relative border border-[#CBCBCB]">
           <button
-            onClick={handleClose}
+            onClick={onClose}
             className="absolute top-4 right-4 text-primary hover:text-tertiary text-2xl cursor-pointer"
           >
             <X />

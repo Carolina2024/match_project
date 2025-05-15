@@ -31,7 +31,7 @@ const RequestModal = ({ request, onClose }) => {
     return {
       "Por revisar": "bg-gray-400",
       "En proceso": "color-bg-orange color-text-process",
-      Aprobado: "bg-green-500",
+      Aprobado: "bg-disponible text-[#35A302]",
       Rechazado: "bg-red-slowly text-red-600",
     }[status] || "bg-gray-300";
 
@@ -60,15 +60,16 @@ const RequestModal = ({ request, onClose }) => {
             <p>{formattedDate}</p>
           </div>
           <div>
-            <p className="text-gray-600 font-semibold">Estado</p>
-            <span
-              className={`px-3 py-1 rounded-full font-semibold text-sm ${getStatusClass(
-                request.status
-              )}`}
-            >
-              {request.status}
-            </span>
-          </div>
+  <p className="text-gray-600 font-semibold mb-1">Estado</p>
+  <span
+    className={`text-xs sm:text-sm px-3 py-[2px] rounded-[10px] font-medium text-center whitespace-nowrap ${getStatusClass(
+      request.status
+    )}`}
+  >
+    {request.status}
+  </span>
+</div>
+
         </div>
 
         <div className="bg-orange-50 p-4 rounded mb-4">

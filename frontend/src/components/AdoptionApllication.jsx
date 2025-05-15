@@ -77,8 +77,8 @@ const AdoptionApllication = () => {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen">
-      <div className="bg-white m-4 md:m-10 p-6 rounded-[20px] shadow-[1px_3px_6px_rgba(0,0,0,0.4)] border border-gray-300">
+<div className="bg-white sm:bg-[#FAF9F6] min-h-screen">
+<div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 m-0 p-0">
         <div className="flex flex-col gap-4 mb-8">
           <div className="relative w-full sm:w-64">
             <input
@@ -107,24 +107,35 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
-          {solicitudesPaginadas.map((sol) => (
-            <div
-              key={sol.id}
-              onClick={() => {
-                if (sol.status === "En proceso" || sol.status === "Rechazado") {
-                  setReadingRequest(sol);
-                }
-              }}
 
-              className="cursor-pointer w-[240px] h-[214px] bg-white border rounded-[20px] shadow-[5px_5px_0px_0px_rgba(118,117,117,1)] p-5 flex flex-col justify-between gap-5"
+<div className="flex justify-center sm:block">
 
-            >
+
+</div>
+
+
+<div className="grid grid-cols-2 gap-15 mr-[36px] ml-[-15px] justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  {solicitudesPaginadas.map((sol) => (
+    <div
+      key={sol.id}
+      onClick={() => {
+        if (
+          sol.status === "En proceso" ||
+          sol.status === "Rechazado" ||
+          sol.status === "Aprobado"
+        ) {
+          setReadingRequest(sol); 
+        }
+      }}
+      
+      className="cursor-pointer w-[175px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
+      >
+       
               <div className="text-center space-y-2">
-                <h3 className="text-lg font-semibold">{sol.pet.name}</h3>
+              <h3 className="text-sm sm:text-lg font-semibold">{sol.pet.name}</h3>
 
                 <FaHeart
-                  className={`mx-auto ${
+                  className={` mx-auto text-lg sm:text-xl mx-auto ${
                     sol.status === "Rechazado"
 
                       ? "text-gray-500"
@@ -133,35 +144,36 @@ const AdoptionApllication = () => {
                   }`}
                 />
 
-                <p className="font-medium">{sol.user.fullname}</p>
+ <p className="text-xs sm:text-base font-medium">{sol.user.fullname}</p>
 
                 <div className="flex items-center justify-center text-sm text-gray-600 gap-1">
                   <BsCalendar2 />
-                  <span>
-                    {new Date(sol.applicationDate).toLocaleDateString("es-ES")}
+                  <span className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium ">
+                  {new Date(sol.applicationDate).toLocaleDateString("es-ES")}
                   </span>
                 </div>
               </div>
 
-              <div className="flex justify-center items-center mt-2 px-1">
-                <span
-                  className={`text-sm px-3 py-1 rounded-[10px] font-medium ${
-                    sol.status === "Por revisar"
-                      ? "bg-gray-300 text-gray-600"
-                      : sol.status === "En proceso"
-                      ? "color-bg-orange color-text-process"
-                      : sol.status === "Aprobado"
-                      ? "bg-disponible  color-text-disponible"
-                      : "bg-red-300 text-red-600"
-                  }`}
-                >
-                  {sol.status}
-                </span>
-
+              <div className="flex justify-center items-center mt-[-8px] px-1 flex-wrap gap-1 w-full">
+              <span
+  className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium text-center max-w-full whitespace-nowrap ${
+    sol.status === "Por revisar"
+      ? "bg-gray-300 text-gray-600"
+      : sol.status === "En proceso"
+      ? "bg-orange-200 text-orange-800"
+      : sol.status === "Aprobado"
+      ? "bg-disponible text-[#35A302]"
+      : sol.status === "Falta subir"
+      ? "bg-yellow-100 text-yellow-800"
+      : "bg-red-300 text-red-600"
+  }`}
+ >
+  {sol.status}
+ </span>
                 {(sol.status === "Por revisar" ||
                   sol.status === "En proceso") && (
                   <FaRegEdit
-                    className="ml-2 text-gray-600 cursor-pointer hover:text-black"
+                    className="text-base sm:text-lg  ml-2 text-gray-600 cursor-pointer hover:text-black"
                     title="Ver detalles de la solicitud"
                     onClick={(e) => {
                       e.stopPropagation();

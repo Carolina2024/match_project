@@ -8,10 +8,9 @@ import logo from "../assets/logo.png";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [
-
-    { label: "Mascotas", icon: <PiPawPrint />},
-    { label: "Solicitudes", icon: <LuFileCheck />},
-    { label: "Adoptantes", icon: <FiUsers />},
+    { label: "Mascotas", icon: <PiPawPrint /> },
+    { label: "Solicitudes", icon: <LuFileCheck /> },
+    { label: "Adoptantes", icon: <FiUsers /> },
   ];
 
   const sidebarStyles = {

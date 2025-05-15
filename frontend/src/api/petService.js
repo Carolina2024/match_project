@@ -25,7 +25,6 @@ export const getAllPets = async (page = 1, limit = 10) => {
  * @param {Object} petData
  */
 export const createPet = async (petData) => {
-  console.log({ petData });
   const formData = new FormData();
 
   formData.append("name", petData.name || "");
@@ -70,7 +69,6 @@ export const createPet = async (petData) => {
   });
 
   const token = localStorage.getItem("token");
-  console.log(formData);
 
   const res = await fetch(BASE_URL, {
     method: "POST",
@@ -108,7 +106,6 @@ export const deletePet = async (id) => {
 };
 
 export const updatePet = async (id, petData) => {
-  console.log({ petData });
   const formData = new FormData();
 
   formData.append("name", petData.name || "");
@@ -151,7 +148,6 @@ export const updatePet = async (id, petData) => {
     }
   });
 
-  console.log(formData);
   const token = localStorage.getItem("token");
 
   const res = await fetch(`${BASE_URL}/${id}`, {

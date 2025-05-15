@@ -89,7 +89,6 @@ function PetElection() {
       <div className="flex items-center justify-center px-4 py-4 sm:mr-8 mr-4">
         {steps.map((step, index) => (
           <div key={step.id} className="flex items-center">
-            {/* Paso con círculo e ícono */}
             <div className="flex flex-col items-center">
               <div
                 className={`w-6 h-6 flex items-center justify-center rounded-full transition-all duration-300
@@ -106,7 +105,6 @@ function PetElection() {
               </span>
             </div>
 
-            {/* Línea conectora */}
             {index < steps.length - 1 && (
               <div className="h-0.5 bg-primary mx-auto w-16 sm:w-25 relative top-[-10px]" />
             )}

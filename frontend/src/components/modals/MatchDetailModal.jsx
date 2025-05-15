@@ -27,63 +27,58 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
 
   const renderBotones = () => {
     const botones = [];
-  
 
-if (estado === "Por revisar") {
-  botones.push(
-    <button
-      key="EnProceso"
-      onClick={() => onStatusChange("En proceso")}
-      className="min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md bg-[#FF802C] text-white hover:bg-orange-600 border border-[#FF802C]"
-    >
-      En proceso
-    </button>
-  );
-}
+    if (estado === "Por revisar") {
+      botones.push(
+        <button
+          key="EnProceso"
+          onClick={() => onStatusChange("En proceso")}
+          className="min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md bg-[#FF802C] text-white hover:bg-orange-600 border border-[#FF802C]"
+        >
+          En proceso
+        </button>
+      );
+    }
 
-if (estado === "Por revisar" || estado === "En proceso") {
-  botones.push(
-    <button
-      key="Aprobar"
-      onClick={() => onStatusChange("Aprobado")}
-      className={`min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md border transition text-center ${
-        estado === "En proceso"
-          ? "bg-[#2E9002] text-white  hover:bg-green-600"
-          : "bg-white text-green-500 border-green-500 hover:bg-green-100"
-      }`}
-    >
-      Aprobar
-    </button>
-  );
-}
+    if (estado === "Por revisar" || estado === "En proceso") {
+      botones.push(
+        <button
+          key="Aprobar"
+          onClick={() => onStatusChange("Aprobado")}
+          className={`min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md border transition text-center ${
+            estado === "En proceso"
+              ? "bg-[#2E9002] text-white  hover:bg-green-600"
+              : "bg-white text-green-500 border-green-500 hover:bg-green-100"
+          }`}
+        >
+          Aprobar
+        </button>
+      );
+    }
 
-if (estado === "Por revisar" || estado === "En proceso") {
-  botones.push(
-    <button
-      key="Rechazado"
-      onClick={() => onStatusChange("Rechazado")}
-      className="min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md bg-white text-[#595146] border border-[#595146] hover:bg-gray-100"
-    >
-      Rechazar
-    </button>
-  );
-}
+    if (estado === "Por revisar" || estado === "En proceso") {
+      botones.push(
+        <button
+          key="Rechazado"
+          onClick={() => onStatusChange("Rechazado")}
+          className="min-w-[120px] px-6 py-2 text-base font-semibold rounded-[10px] shadow-md bg-white text-[#595146] border border-[#595146] hover:bg-gray-100"
+        >
+          Rechazar
+        </button>
+      );
+    }
 
-  
     const colClass =
       botones.length === 3
         ? "sm:grid-cols-3"
         : botones.length === 2
         ? "sm:grid-cols-2"
         : "sm:grid-cols-1";
-  
+
     return (
-      <div className={`grid grid-cols-1 ${colClass} gap-4 mt-6`}>
-        {botones}
-      </div>
+      <div className={`grid grid-cols-1 ${colClass} gap-4 mt-6`}>{botones}</div>
     );
   };
-  
 
   const getEstadoClase = (estado) => {
     return (
@@ -95,7 +90,6 @@ if (estado === "Por revisar" || estado === "En proceso") {
       }[estado] || "bg-gray-300 text-white"
     );
   };
-  
 
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 px-4">
@@ -116,17 +110,16 @@ if (estado === "Por revisar" || estado === "En proceso") {
 
         <div className="grid grid-cols-2 gap-4 text-sm mb-6">
           <div className="flex flex-col">
-
-            <span className="text-gray-600 font-semibold">Fecha de la solicitud:</span>
+            <span className="text-gray-600 font-semibold">
+              Fecha de la solicitud:
+            </span>
 
             <span>{fecha}</span>
           </div>
           <div className="flex flex-col">
             <span className="text-gray-600 font-semibold">Estado:</span>
             <span
-
               className={`px-3 py-1 rounded-[10px] font-semibold text-sm w-fit ${getEstadoClase(
-
                 estado
               )}`}
             >
@@ -143,8 +136,9 @@ if (estado === "Por revisar" || estado === "En proceso") {
               <span>{solicitud.pet.name}</span>
             </div>
             <div className="flex flex-col">
-
-              <span className="text-gray-600 font-semibold">ID de mascota:</span>
+              <span className="text-gray-600 font-semibold">
+                ID de mascota:
+              </span>
 
               <span>{solicitud.petId}</span>
             </div>
@@ -152,7 +146,6 @@ if (estado === "Por revisar" || estado === "En proceso") {
         </div>
 
         <div className="bg-orange-50 p-4 rounded">
-
           <p className="text-orange-400 mb-2">Información del adoptante</p>
 
           <div className="grid grid-cols-2 gap-4 text-sm">
@@ -161,12 +154,15 @@ if (estado === "Por revisar" || estado === "En proceso") {
               <span>{solicitud.user.fullname}</span>
             </div>
             <div className="flex flex-col">
-
-              <span className="text-gray-600 font-semibold">ID de adoptante:</span>
+              <span className="text-gray-600 font-semibold">
+                ID de adoptante:
+              </span>
               <span>{solicitud.userId}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-gray-600 font-semibold">Documento de identidad:</span>
+              <span className="text-gray-600 font-semibold">
+                Documento de identidad:
+              </span>
 
               <span>{adopter?.identityDocument || "No disponible"}</span>
             </div>
@@ -175,8 +171,9 @@ if (estado === "Por revisar" || estado === "En proceso") {
               <span>{solicitud.user.email}</span>
             </div>
             <div className="flex flex-col col-span-2">
-
-              <span className="text-gray-600 font-semibold">Dirección y comuna:</span>
+              <span className="text-gray-600 font-semibold">
+                Dirección y comuna:
+              </span>
 
               <span>Lorem ipsum dolor sit amet consectetur.</span>
             </div>

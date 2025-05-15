@@ -9,7 +9,6 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
       ></div>
 
       <div className="relative bg-white p-6 rounded-lg shadow-lg w-full sm:w-[500px] mx-4 z-20">
-
         <h2 className="text-lg font-semibold mb-4 text-center">
           ¿Estás seguro de eliminar a {pet.name}?
         </h2>

@@ -47,7 +47,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     traits: editingPet ? editingPet.traits : [],
     delivery: editingPet ? deliveryArray : [],
     story: editingPet ? editingPet.story : "",
-    photos: [null, null, null], 
+    photos: [null, null, null],
     photoUrls: editingPet ? editingPet.photoUrls : [],
   };
 
@@ -76,13 +76,11 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     const updated = [...photos];
     updated[index] = file;
     setValue("photos", updated);
-  
 
     const previewUrls = [...photoUrls];
     previewUrls[index] = URL.createObjectURL(file);
     setValue("photoUrls", previewUrls);
   };
-  
 
   const onSubmit = async (data) => {
     try {
@@ -143,12 +141,11 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
       const newPhotos = [...photos];
       newPhotoUrls[indexToRemove] = null;
       newPhotos[indexToRemove] = null;
-  
+
       setValue("photoUrls", newPhotoUrls);
       setValue("photos", newPhotos);
     }
   };
-  
 
   const [isVisible, setIsVisible] = useState(false);
 
@@ -163,15 +160,13 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         className="fixed inset-0 bg-black/30 backdrop-blur-sm"
         onClick={() => setActiveView("Mascotas")}
       />
-    
-      
+
       <div
         className={`relative w-full max-w-lg bg-white h-full shadow-xl z-50 p-8 overflow-y-auto rounded-xl transform transition-transform duration-700 ease-in-out ${
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
-        
-              >
-                <button
+      >
+        <button
           onClick={() => setActiveView("Mascotas")}
           className="absolute top-4 right-4 text-gray-500 hover:text-black text-3xl font-bold z-50"
         >
@@ -412,63 +407,60 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           <div>
             <p className="text-sm font-semibold mb-2">Agregar 3 fotos:</p>
             <div className="grid grid-cols-3 gap-4">
-            {photos.map((_, index) => (
-  <label
-    key={index}
-    className="relative border border-gray-300 rounded-2xl cursor-pointer h-32 flex items-center justify-center overflow-hidden hover:bg-gray-100 transition"
-    >
-    {photoUrls[index] ? (
-      <>
-        <img
-          src={photoUrls[index]}
-          alt={`Foto ${index + 1}`}
-          className="w-full h-full object-cover"
-        />
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault(); 
-            handleDeletePhoto(photoUrls[index]);
-          }}
-          className="absolute top-1 right-1 bg-white text-gray-700 rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
-          title="Eliminar imagen"
-        >
-          X
-        </button>
-      </>
-    ) : (
-      <span className="text-gray-400">Subir foto</span>
-    )}
+              {photos.map((_, index) => (
+                <label
+                  key={index}
+                  className="relative border border-gray-300 rounded-2xl cursor-pointer h-32 flex items-center justify-center overflow-hidden hover:bg-gray-100 transition"
+                >
+                  {photoUrls[index] ? (
+                    <>
+                      <img
+                        src={photoUrls[index]}
+                        alt={`Foto ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDeletePhoto(photoUrls[index]);
+                        }}
+                        className="absolute top-1 right-1 bg-white text-gray-700 rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
+                        title="Eliminar imagen"
+                      >
+                        X
+                      </button>
+                    </>
+                  ) : (
+                    <span className="text-gray-400">Subir foto</span>
+                  )}
 
-    <input
-      type="file"
-      accept="image/*"
-      onChange={(e) => handleFileChange(index, e.target.files[0])}
-      className="hidden"
-    />
-  </label>
-))}
-
-
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileChange(index, e.target.files[0])}
+                    className="hidden"
+                  />
+                </label>
+              ))}
             </div>
           </div>
-        <div>
-      </div>
+          <div></div>
 
-<div className="bg-white pt-4 pb-6 mt-6 border-t border-gray-200 sticky bottom-[-30px]">
-  <div className="grid grid-cols-2 gap-4">
-    <button
-      type="button"
-      onClick={() => setActiveView("Mascotas")}
-      className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer font-semibold"
-    >
-      Cancelar
-    </button>
-    <button
-      type="submit"
-      className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer font-semibold"
-    >
-      Guardar
+          <div className="bg-white pt-4 pb-6 mt-6 border-t border-gray-200 sticky bottom-[-30px]">
+            <div className="grid grid-cols-2 gap-4">
+              <button
+                type="button"
+                onClick={() => setActiveView("Mascotas")}
+                className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer font-semibold"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer font-semibold"
+              >
+                Guardar
               </button>
             </div>
           </div>

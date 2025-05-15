@@ -48,7 +48,6 @@ const AdminNavbar = ({
 
         if (!res.ok) throw new Error("Error al obtener usuario");
         const data = await res.json();
-        console.log("Usuario:", data);
 
         setUserName(data.fullname || data.email);
       } catch (error) {
@@ -107,23 +106,29 @@ const AdminNavbar = ({
                        shadow-[0_5px_0_0_#5A534A] hover:bg-gray-50 cursor-pointer"
           >
             <div className="flex flex-col items-start leading-tight">
-              <span className="text-sm text-[#4B443B] font-bold">{userName}</span>
+              <span className="text-sm text-[#4B443B] font-bold">
+                {userName}
+              </span>
               <span className="text-xs text-gray-400">{userRole}</span>
             </div>
             <FaChevronDown
-              className={`text-sm ml-2 text-[#4B443B] transform ${open ? "rotate-180" : ""}`}
+              className={`text-sm ml-2 text-[#4B443B] transform ${
+                open ? "rotate-180" : ""
+              }`}
             />
           </button>
 
           {open && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg z-50 text-sm">
-              <div className="px-4 py-2 text-gray-500 font-medium">Mi cuenta</div>
+              <div className="px-4 py-2 text-gray-500 font-medium">
+                Mi cuenta
+              </div>
               <div className="border-t border-gray-200">
                 <button
                   onClick={handleLogout}
                   className="flex items-center w-full px-4 py-2 text-red-500 hover:bg-red-50 font-medium cursor-pointer"
                 >
-                  <FaSignOutAlt className="mr-2"  />
+                  <FaSignOutAlt className="mr-2" />
                   Cerrar sesión
                 </button>
               </div>

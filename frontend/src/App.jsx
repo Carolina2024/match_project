@@ -13,7 +13,6 @@ import PasswordReset from "./views/PasswordReset";
 import InfoPet from "./components/infoPet";
 import { PetProvider } from "./context/PetContext";
 
-
 function App() {
   return (
     <Router>
@@ -45,6 +44,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;

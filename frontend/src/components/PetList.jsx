@@ -58,10 +58,15 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   };
 
   const filteredPets = pets.filter((pet) => {
-    const matchesSearch = `${pet.name} ${pet.breed}`.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesSpecies = filterSpecies === "Todos" || pet.species === filterSpecies;
+    const matchesSearch = `${pet.name} ${pet.breed}`
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    const matchesSpecies =
+      filterSpecies === "Todos" || pet.species === filterSpecies;
     const matchesSize = filterSize === "Todos" || pet.size === filterSize;
-    const matchesStatus = filterStatus === "Todos" || pet.status.toLowerCase() === filterStatus.toLowerCase();
+    const matchesStatus =
+      filterStatus === "Todos" ||
+      pet.status.toLowerCase() === filterStatus.toLowerCase();
 
     return matchesSearch && matchesSpecies && matchesSize && matchesStatus;
   });
@@ -144,7 +149,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               options={["Todos", "Perro", "Gato"]}
               selected={filterSpecies}
               onChange={setFilterSpecies}
-            /> 
+            />
             <CustomSelect
               label="Tamaño"
               options={["Todos", "Pequeño", "Mediano", "Grande"]}
@@ -176,7 +181,9 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <tbody className="font-secundary">
             {filteredPets.map((pet) => (
               <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2 font-secundary font-medium text-gray-700">{pet.name}</td>
+                <td className="px-4 py-2 font-secundary font-medium text-gray-700">
+                  {pet.name}
+                </td>
                 <td className="px-4 py-2">{pet.admissionDate}</td>
                 <td className="px-4 py-2">{pet.species}</td>
                 <td className="px-4 py-2">{pet.breed}</td>
@@ -185,13 +192,25 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                 <td className="px-4 py-2">{pet.size}</td>
                 <td className="px-4 py-2">
                   <div className="flex gap-2 text-gray-600 text-lg">
-                    <button onClick={() => handleViewPet(pet)} title="Visualizar" className="hover:text-gray-500">
+                    <button
+                      onClick={() => handleViewPet(pet)}
+                      title="Visualizar"
+                      className="hover:text-gray-500"
+                    >
                       <FiEye />
                     </button>
-                    <button onClick={() => handleEdit(pet)} title="Editar" className="hover:text-gray-500 font-bold">
+                    <button
+                      onClick={() => handleEdit(pet)}
+                      title="Editar"
+                      className="hover:text-gray-500 font-bold"
+                    >
                       <FaRegEdit />
                     </button>
-                    <button onClick={() => handleOpenModal(pet)} title="Eliminar" className="text-red-500 hover:text-red-700 font-bold">
+                    <button
+                      onClick={() => handleOpenModal(pet)}
+                      title="Eliminar"
+                      className="text-red-500 hover:text-red-700 font-bold"
+                    >
                       <PiTrashBold />
                     </button>
                   </div>
@@ -246,16 +265,28 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded w-1/4 right-4 top-[100px] shadow-md">
             <span className="block font-bold">Mascota eliminada</span>
             <span>{deletedPetName} ha sido eliminado del registro.</span>
-            <button onClick={() => setShowMessage(false)} className="absolute top-1 right-2 text-xl font-bold">
+            <button
+              onClick={() => setShowMessage(false)}
+              className="absolute top-1 right-2 text-xl font-bold"
+            >
               &times;
             </button>
           </div>
         )}
 
         {selectedPet && (
-          <PetDetailsModal isOpen={modalOpen} onClose={() => setModalOpen(false)} pet={selectedPet} />
+          <PetDetailsModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            pet={selectedPet}
+          />
         )}
-        <PetModalDelete isOpen={modalOpenn} onClose={handleCloseModal} onConfirm={handleDeletePet} pet={selectedPett} />
+        <PetModalDelete
+          isOpen={modalOpenn}
+          onClose={handleCloseModal}
+          onConfirm={handleDeletePet}
+          pet={selectedPett}
+        />
       </div>
     </div>
   );

@@ -9,8 +9,6 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
       ></div>
 
       <div className="relative bg-white p-6 rounded-lg shadow-lg w-[500px] z-20">
-
-
         <h2 className="text-lg font-semibold mb-4 text-center">
           ¿Estás seguro de eliminar a {user.fullname}?
         </h2>

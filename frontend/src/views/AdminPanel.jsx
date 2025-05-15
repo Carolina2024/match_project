@@ -21,14 +21,13 @@ const AdminPanel = () => {
         setIsSidebarVisible(true);
       }
     };
-  
+
     window.addEventListener("resize", handleResize);
-  
+
     handleResize();
-  
+
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
 
   const viewTitles = {
     Mascotas: "Gestiona las mascotas",
@@ -106,8 +105,8 @@ const AdminPanel = () => {
           />
         );
       default:
-      navigate("/Mascota");
-      return null;
+        navigate("/Mascota");
+        return null;
     }
   };
 

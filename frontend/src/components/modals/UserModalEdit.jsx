@@ -76,8 +76,6 @@ function UserModalEdit() {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data);
-
     const id = JSON.parse(localStorage.getItem("user")).id;
     if (data?.password?.length === 0) {
       data.password = undefined;
@@ -89,10 +87,8 @@ function UserModalEdit() {
 
     try {
       await updateUserProfile(id, data);
-      alert("Perfil actualizado con éxito");
     } catch (error) {
-      console.log(error);
-      alert(`Hubo un error al actualizar el perfil: ${error.message}`);
+      console.error("Error updating profile:", error);
     }
   };
 
@@ -447,7 +443,6 @@ const TagOptions = (
         onChange([...value, option]);
       }
     }
-    console.log({ value, option });
   };
 
   return (

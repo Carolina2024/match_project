@@ -25,7 +25,9 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreatePetDto {
   @ApiProperty({ description: 'Nombre de la mascota', example: 'Firulais' })
   @IsString({ message: 'El nombre debe ser una cadena de texto' })
-  @Matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, { message: 'El nombre debe contener solo letras' })
+  @Matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/, {
+    message: 'El nombre debe contener solo letras',
+  })
   name: string;
 
   @ApiProperty({

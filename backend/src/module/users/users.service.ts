@@ -99,7 +99,7 @@ export class UsersService {
     return user;
   }
 
-  async remove(id: string): Promise<{ message: string }> {
+  async removeById(id: string): Promise<{ message: string }> {
     const user = await this.userRepository.findOne({
       where: { id, isActive: true },
       relations: ['adopter'],
@@ -122,7 +122,7 @@ export class UsersService {
     };
   }
 
-  async updateUserById(id: string, updateUserDto: UpdateUserDto) {
+  async updateById(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({
       where: { id, isActive: true },
       relations: ['adopter'],
@@ -185,7 +185,10 @@ export class UsersService {
       },
     });
   }
-  async updatePassword(id: string, newHashedPassword: string): Promise<void> {
+  async updatePasswordById(
+    id: string,
+    newHashedPassword: string,
+  ): Promise<void> {
     const result = await this.userRepository.update(id, {
       password: newHashedPassword,
     });
@@ -193,7 +196,7 @@ export class UsersService {
       throw new NotFoundException(`Usuario con id ${id} no encontrado`);
     }
   }
-  async findUserPets(userId: string) {
+  async findPetsByUserId(userId: string) {
     const user = await this.findOneById(userId);
 
     if (!user) {

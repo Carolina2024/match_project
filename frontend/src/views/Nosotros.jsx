@@ -24,7 +24,7 @@ const Nosotros = () => {
   }, [hash]);
 
   return (
-    <main className=" mx-auto max-w-6xl bg-[#F9F9F9] flex flex-col justify-center items-center rounded-t-[50px] pb-20 -mt-8">
+    <main className=" mx-auto md:max-w-6xl bg-[#F9F9F9] flex flex-col justify-center items-center rounded-t-[50px] pb-20 -mt-8">
       <div className="w-full ">
         <img
           src={nosotros}
@@ -37,10 +37,10 @@ const Nosotros = () => {
         id="historia"
         className="w-full max-w-5xl px-8 py-8 md:py-12  border-1 border-primary rounded-[50px] mt-12 mx-auto"
       >
-        <h2 className="text-3xl pl-14 font-bold text-primary mb-4">
+        <h2 className="md:text-3xl text-2xl pl-14 font-bold text-primary mb-4">
           Nuestra historia
         </h2>
-        <p className="font-medium px-14  text-[#000000] md:text-lg">
+        <p className="font-medium px-14  text-[#000000] md:text-lg text-base">
           Patas Pirque nació en la zona rural de Pirque, Chile, como una
           respuesta al abandono de perros callejeros y la falta de educación
           sobre tenencia responsable. <br /> <br />
@@ -67,7 +67,7 @@ const Nosotros = () => {
       </div>
 
       <div className=" w-full max-w-5xl px-1 py-6">
-        <p className="font-medium md:text-lg text-[#000000] px-20 py-10 text-justify">
+        <p className="font-normal italic md:text-lg text-base text-[#000000] px-20 py-10 text-justify">
           “Siempre tuve una conexión especial con los animales. Desde niña
           rescataba animales, guiada solo por mi instinto y cariño. Al llegar a
           Pirque, me encontré con una realidad dura: cientos de animales
@@ -115,7 +115,7 @@ const Nosotros = () => {
         <span className="text-primary text-2xl sm:text-3xl lg:text-4xl font-bold">
           + 230{" "}
         </span>
-        <span className="text-lg sm:text-xl lg:text-2xl font-bold text-[#595146]">
+        <span className="md:text-lg text-base sm:text-xl lg:text-2xl font-bold text-tertiary">
           perros y gatos rescatados
         </span>
       </div>
@@ -124,7 +124,7 @@ const Nosotros = () => {
         <img
           src={nosotros2}
           alt="Veterinaria y perro"
-          className="w-full h-[250px] md:h-[400px] lg:h-[500px] object-cover rounded-lg"
+          className="w-full h-[250px] md:h-[400px] lg:h-[500px] object-cover md:rounded-lg rounded-3xl"
         />
       </div>
 
@@ -133,10 +133,10 @@ const Nosotros = () => {
           id="proposito"
           className="bg-[#F9F9F9] rounded-[30px] md:rounded-[50px] px-6 md:px-24 py-6 border border-primary"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4">
+          <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4 md:mx-0 mx-8">
             Nuestro propósito
           </h3>
-          <p className="text-[#000000] font-medium md:text-lg mb-4">
+          <p className="text-[#000000] font-medium md:text-lg text-base mx-8 md:mx-0 mb-4">
             Patas Pirque ofrece un enfoque único de rescate: no solo rehabilita
             perros, sino que también educa a la comunidad sobre la importancia
             de la tenencia responsable. <br />
@@ -166,19 +166,18 @@ const Nosotros = () => {
                   fill="#F4A470"
                 />
               </svg>
-              <h4 className="text-primary text-3xl font-bold ">Misión</h4>
+              <h4 className="text-primary md:text-3xl text-2xl font-bold">
+                Misión
+              </h4>
             </div>
-            <p className="md:text-lg text-[#000000] font-medium mt-2">
+            <p className="md:text-lg text-base text-[#000000] font-medium mt-2 md:ml-11">
               {" "}
-              Rescatar, rehabilitar y <br /> reubicar perros en <br /> situación
-              de abandono,
-              <br />
-              fomentando una cultura de
-              <br /> respeto, responsabilidad y <br /> amor hacia los animales,
-              a <br /> través de la educación <br /> comunitaria.
+              Rescatar, rehabilitar y reubicar perros en situación de abandono,
+              fomentando una cultura de respeto, responsabilidad y amor hacia
+              los animales, a través de la educación comunitaria.
             </p>
           </div>
-          <div className="p-4">
+          <div className="p-3">
             {" "}
             <div className="flex items-center gap-2">
               <svg
@@ -193,9 +192,11 @@ const Nosotros = () => {
                   fill="#F4A470"
                 />
               </svg>
-              <h4 className="text-primary text-3xl font-bold">Visión</h4>
+              <h4 className="text-primary md:text-3xl text-2xl font-bold">
+                Visión
+              </h4>
             </div>
-            <ul className="md:text-lg font-medium text-[#000000] mt-2 list-disc list-inside leading-normal">
+            <ul className="md:text-lg tetx-base font-medium text-[#000000] mt-2  md:ml-11 list-disc list-inside leading-normal">
               <li>Amor y respeto por los seres vivos </li>
               <li>Educación como motor de cambio </li>
               <li> Solidaridad y compromiso social </li>
@@ -207,13 +208,13 @@ const Nosotros = () => {
       </div>
 
       <div id="colaborar" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold font-secundary text-primary mt-20 text-center mb-8">
+        <h2 className="md:text-3xl text-2xl font-bold font-secundary text-primary mt-20 text-center mb-8">
           ¿Cómo colaborar?
           <hr className="border-primary mt-4" />
         </h2>
 
         <div className="mb-12">
-          <h3 className="flex items-center justify-center text-2xl font-bold text-primary mb-4 gap-2">
+          <h3 className="flex items-center justify-center md:text-2xl text-xl font-bold text-primary mb-4 gap-2">
             <svg
               width="37"
               height="24"
@@ -245,171 +246,230 @@ const Nosotros = () => {
             Suscripciones
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 mt-12 gap-6">
-            <div className="rounded-[50px] border-1 border-primary p-6 flex flex-col items-center">
-              <div className="w-68 h-52 rounded-[50px] overflow-hidden mb-4 bg-gray-100">
+          <div className="grid grid-cols-1 md:grid-cols-3 mt-12 md:gap-10 gap-6">
+            <div className="md:rounded-[50px] rounded-[30px] border-1 border-primary p-6 flex flex-row md:flex-col items-center md:items-center text-center md:text-center gap-4 md:gap-0">
+              <div className="w-32 h-32 md:w-68 md:h-52 md:rounded-[50px] rounded-[30px] overflow-hidden bg-gray-100">
                 <img
                   src={nosotrosp1}
                   alt="Patita Suave"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h4 className="font-bold text-primary text-xl mb-1">
-                Patita Suave
-              </h4>
-              <p className="text-base text-[#000000] font-normal mb-2">
-                5.000 CLP mensual
-              </p>
-              <a
-                href="https://esponsor.com/pataspirque/subscribe/m9nl9mj7lr/join?page=tiers"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 text-xl font-bold hover:scale-105 transition">
-                  Únete
-                </button>
-              </a>
+              <div className="flex flex-col items-center md:items-center justify-center md:mt-4">
+                <h4 className="font-bold text-primary text-xl mb-1">
+                  Patita Suave
+                </h4>
+                <p className="md:text-base text-lg text-[#000000] md:font-normal font-medium mb-2">
+                  5.000 CLP mensual
+                </p>
+                <a
+                  href="https://esponsor.com/pataspirque/subscribe/m9nl9mj7lr/join?page=tiers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 md:text-xl text-base font-bold hover:scale-105 transition">
+                    Únete
+                  </button>
+                </a>
+              </div>
             </div>
 
-            <div className="rounded-[50px] border-1 border-primary p-6 flex flex-col items-center">
-              <div className="w-68 h-52 rounded-[50px] overflow-hidden mb-4 bg-gray-100">
+            <div className="md:rounded-[50px] rounded-[30px] border-1 border-primary p-6 flex flex-row md:flex-col items-center md:items-center text-center md:text-center gap-4 md:gap-0">
+              <div className="w-32 h-32 md:w-68 md:h-52 md:rounded-[50px] rounded-[30px] overflow-hidden bg-gray-100">
                 <img
                   src={nosotrosp2}
                   alt="Huella Fuerte"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h4 className="font-bold text-primary text-xl mb-1">
-                Huella Firme
-              </h4>
-              <p className="text-base text-[#000000] font-normal mb-2">
-                10.000 CLP mensual
-              </p>
-              <a
-                href="https://esponsor.com/pataspirque/subscribe/q6x215pj2y/join?page=tiers"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="bg-primary cursor-pointer text-white rounded-full mt-2 px-8 py-1 text-xl font-bold hover:scale-105 transition">
-                  Únete
-                </button>
-              </a>
+              <div className="flex flex-col items-center md:items-center justify-center md:mt-4">
+                <h4 className="font-bold text-primary text-xl mb-1">
+                  Huella Firme
+                </h4>
+                <p className="md:text-base text-lg text-[#000000] md:font-normal font-medium mb-2">
+                  10.000 CLP mensual
+                </p>
+                <a
+                  href="https://esponsor.com/pataspirque/subscribe/q6x215pj2y/join?page=tiers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 md:text-xl text-base font-bold hover:scale-105 transition">
+                    Únete
+                  </button>
+                </a>
+              </div>
             </div>
 
-            <div className="rounded-[50px] border-1 border-primary p-6 flex flex-col items-center">
-              <div className="w-68 h-52 rounded-[50px] overflow-hidden mb-4 bg-gray-300">
+            <div className="md:rounded-[50px] rounded-[30px] border-1 border-primary p-6 flex flex-row md:flex-col items-center md:items-center text-center md:text-center gap-4 md:gap-0">
+              <div className="w-32 h-32 md:w-68 md:h-52 md:rounded-[50px] rounded-[30px] overflow-hidden bg-gray-100">
                 <img
                   src={nosotrosp3}
                   alt="Huella Fuerte"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h4 className="font-bold text-primary text-xl mb-1">
-                Corazón Quiltro
-              </h4>
-              <p className="text-base text-[#000000] font-normal mb-2">
-                20.000 CLP mensual
-              </p>
-              <a
-                href="https://esponsor.com/pataspirque/subscribe/z0pl37zwl5/join?page=tiers"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="bg-primary cursor-pointer text-white rounded-full mt-2 px-8 py-1 text-xl font-bold hover:scale-105 transition">
-                  Únete
-                </button>
-              </a>
+              <div className="flex flex-col items-center md:items-center justify-center md:mt-4">
+                <h4 className="font-bold text-primary text-xl mb-1">
+                  Corazón Quiltro
+                </h4>
+                <p className="md:text-base text-lg text-[#000000] md:font-normal font-medium mb-2">
+                  20.000 CLP mensual
+                </p>
+                <a
+                  href="https://esponsor.com/pataspirque/subscribe/z0pl37zwl5/join?page=tiers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 md:text-xl text-base font-bold hover:scale-105 transition">
+                    Únete
+                  </button>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="flex justify-center mt-20">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-14">
-            <div className="rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-6 flex flex-col items-center">
-              <h3 className="text-3xl font-bold text-primary mb-4 flex items-center">
-                <svg
-                  width="30"
-                  height="30"
-                  viewBox="0 0 30 30"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M15 28.7549L13.1875 27.1288C11.0833 25.2317 9.34375 23.5951 7.96875 22.2192C6.59375 20.8433 5 19.608 4.1875 18.5135C3.375 17.419 2.80729 16.4132 2.48438 15.4959C2.16146 14.5786 2 13.6404 2 12.6814C2 10.7218 2.65625 9.08524 3.96875 7.77185C5.28125 6.45846 6.91667 5.80176 8.875 5.80176C9.95833 5.80176 10.9896 6.03108 11.9688 6.48973C12.9479 6.94837 13.7917 7.59465 14.5 8.42855C15.2083 7.59465 16.0521 6.94837 17.0312 6.48973C18.0104 6.03108 19.0417 5.80176 20.125 5.80176C22.0833 5.80176 23.7188 6.45846 25.0312 7.77185C26.3438 9.08524 27 10.7218 27 12.6814C27 13.6404 26.8385 14.5786 26.5156 15.4959C26.1927 16.4132 25.625 17.419 24.8125 18.5135C24 19.608 22.9062 20.8433 21.5312 22.2192C20.1562 23.5951 18.4167 25.2317 16.3125 27.1288L14.5 28.7549ZM14.5 25.3776C16.5 23.5847 18.1458 22.0472 19.4375 20.7651C20.7292 19.483 21.75 18.3676 22.5 17.419C23.25 16.4705 23.7708 15.6262 24.0625 14.8861C24.3542 14.146 -0.729167 9.55431 24.5 12.6814C24.5 11.4306 24.0833 10.3882 23.25 9.55431C22.4167 8.72041 21.375 8.30346 20.125 8.30346C19.1458 8.30346 18.2396 8.57969 17.4062 9.13215C16.5729 9.68461 16 10.3882 15.6875 11.243L20.125 22.2192C19.8125 21.3644 16.3125 23.7337 11.5938 9.13215C41 9.68461 14.5708 27.1288 13.5917 27.1288C12.3417 27.1288 6.58333 8.72041 5.75 9.55431C12.6875 8.93417 17.9062 15.4802 17.9062 16.7311C11.5938 33.8722 4.64583 14.146 4.9375 14.8861C5.22917 15.6262 5.75 16.4705 6.5 17.419C7.25 18.3676 8.27083 19.483 9.5625 20.7651C10.8542 22.0472 12.5 23.5847 14.5 25.3776Z"
-                    fill="#F4A470"
-                  />
-                </svg>
-                Campañas
-              </h3>
-              <div className="w-68 h-50 rounded-[50px] overflow-hidden mb-4 bg-gray-100">
-                <img
-                  src={nosotrosg4}
-                  alt="Gatos Ferales en Rescate"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <h4 className="font-semibold text-primary mb-1 text-xl text-center">
-                Gatos Ferales en <br /> Rescate
-              </h4>
-              <a
-                href="https://esponsor.com/pataspirque/goals/1CMNAK7jaGRcjuoNfhXPq9/support"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="bg-primary cursor-pointer text-white mt-3 rounded-full px-8 py-1 font-bold text-xl hover:scale-105 transition">
-                  Apoyar
-                </button>
-              </a>
-            </div>
-
-            <div className="rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-6 flex flex-col items-center">
-              <h3 className="text-3xl font-bold text-primary mb-4 flex items-center">
-                <svg
-                  className="mr-2 inline-block align-middle"
-                  width="31"
-                  height="31"
-                  viewBox="0 5 31 31"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <mask
-                    id="mask0_1624_3026"
-                    maskUnits="userSpaceOnUse"
-                    x="0"
-                    y="0"
-                    width="30"
-                    height="30"
+          <div className="flex justify-center md:mt-20 mt-7">
+            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-14 gap-6">
+              {/* Card Campañas*/}
+              <div className=" rounded-[30px] md:rounded-[50px] border-1 border-primary p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+                <div className="hidden md:flex items-center justify-center mb-2">
+                  <svg
+                    className="w-6 h-6 mr-2"
+                    viewBox="0 0 30 30"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <rect width="30" height="30" fill="#f4a470" />
-                  </mask>
-                  <g mask="url(#mask0_1624_3026)">
                     <path
-                      d="M20 18.2652L14.8125 13.1993C14.1667 12.5739 13.6198 11.8807 13.1719 11.1197C12.724 10.3588 12.5 9.53012 12.5 8.63367C12.5 7.48706 12.901 6.51243 13.7031 5.7098C14.5052 4.90717 15.4792 4.50586 16.625 4.50586C17.2917 4.50586 17.9167 4.64658 18.5 4.92802C19.0833 5.20946 19.5833 5.58993 20 6.06942C20.4167 5.58993 20.9167 5.20946 21.5 4.92802C22.0833 4.64658 22.7083 4.50586 23.375 4.50586C24.5208 4.50586 25.4948 4.90717 26.2969 5.7098C27.099 6.51243 27.5 7.48706 27.5 8.63367C27.5 9.53012 27.2812 10.3588 26.8438 11.1197C26.4062 11.8807 25.8646 12.5739 25.2188 13.1993L20 18.2652ZM20 14.7628L23.4062 11.4168C23.8021 11.0207 24.1667 10.5986 24.5 10.1503C24.8333 9.70211 25 9.19656 25 8.63367C25 8.17503 24.8438 7.78935 24.5312 7.47663C24.2188 7.16392 23.8333 7.00756 23.375 7.00756C23.0833 7.00756 22.8073 7.06489 22.5469 7.17956C22.2865 7.29422 22.0625 7.46621 21.875 7.69553L20 9.94707L18.125 7.69553C17.9375 7.46621 17.7135 7.29422 17.4531 7.17956C17.1927 7.06489 16.9167 7.00756 16.625 7.00756C16.1667 7.00756 15.7812 7.16392 15.4688 7.47663C15.1562 7.78935 15 8.17503 15 8.63367C15 9.19656 15.1667 9.70211 15.5 10.1503C15.8333 10.5986 16.1979 11.0207 16.5938 11.4168L20 14.7628ZM8.75 25.1449L17.4375 27.5215L24.875 25.2075C24.7708 25.0198 24.6198 24.8583 24.4219 24.7228C24.224 24.5872 24 24.5195 23.75 24.5195H17.4375C16.875 24.5195 16.4271 24.4986 16.0938 24.457C15.7604 24.4153 15.4167 24.3319 15.0625 24.2068L12.1562 23.2374L12.8438 20.7982L15.375 21.6425C15.7292 21.7468 16.1458 21.8302 16.625 21.8927C17.1042 21.9552 17.8125 21.9969 18.75 22.0178C18.75 21.7885 18.6823 21.5696 18.5469 21.3611C18.4115 21.1526 18.25 21.0171 18.0625 20.9546L10.75 18.2652H8.75V25.1449ZM1.25 29.5229V15.7635H10.75C10.8958 15.7635 11.0417 15.7792 11.1875 15.8104C11.3333 15.8417 11.4688 15.8782 11.5938 15.9199L18.9375 18.6405C19.625 18.8907 20.1823 19.3285 20.6094 19.9539C21.0365 20.5793 21.25 21.2673 21.25 22.0178H23.75C24.7917 22.0178 25.6771 22.3618 26.4062 23.0497C27.1354 23.7377 27.5 24.6446 27.5 25.7703V27.0212L17.5 30.1483L8.75 27.7092V29.5229H1.25ZM3.75 27.0212H6.25V18.2652H3.75V27.0212Z"
-                      fill="currentColor"
+                      d="M15 28.7549L13.1875 27.1288C11.0833 25.2317 9.34375 23.5951 7.96875 22.2192C6.59375 20.8433 5 19.608 4.1875 18.5135C3.375 17.419 2.80729 16.4132 2.48438 15.4959C2.16146 14.5786 2 13.6404 2 12.6814C2 10.7218 2.65625 9.08524 3.96875 7.77185C5.28125 6.45846 6.91667 5.80176 8.875 5.80176C9.95833 5.80176 10.9896 6.03108 11.9688 6.48973C12.9479 6.94837 13.7917 7.59465 14.5 8.42855C15.2083 7.59465 16.0521 6.94837 17.0312 6.48973C18.0104 6.03108 19.0417 5.80176 20.125 5.80176C22.0833 5.80176 23.7188 6.45846 25.0312 7.77185C26.3438 9.08524 27 10.7218 27 12.6814C27 13.6404 26.8385 14.5786 26.5156 15.4959C26.1927 16.4132 25.625 17.419 24.8125 18.5135C24 19.608 22.9062 20.8433 21.5312 22.2192C20.1562 23.5951 18.4167 25.2317 16.3125 27.1288L14.5 28.7549Z"
+                      fill="#F4A470"
                     />
-                  </g>
-                </svg>
-                Donaciones
-              </h3>
-              <div className="w-68 h-50 rounded-[50px] overflow-hidden mb-4 bg-gray-100">
-                <img
-                  src={nosotrosp5}
-                  alt="Para comida, medicamentos, etc."
-                  className="w-full h-full object-cover"
-                />
+                  </svg>
+                  <h3 className="text-3xl font-bold text-primary">Campañas</h3>
+                </div>
+
+                <div className="w-32 h-32 md:w-68 md:h-52 rounded-[30px] md:rounded-[50px] overflow-hidden bg-gray-100 flex-shrink-0">
+                  <img
+                    src={nosotrosg4}
+                    alt="Gatos Ferales en Rescate"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="flex-1 flex flex-col justify-center items-center md:items-center md:mt-4 w-full">
+                  <div className="flex md:hidden items-center gap-2 justify-start mb-2">
+                    <svg
+                      className="w-5 h-5"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15 28.7549L13.1875 27.1288C11.0833 25.2317 9.34375 23.5951 7.96875 22.2192C6.59375 20.8433 5 19.608 4.1875 18.5135C3.375 17.419 2.80729 16.4132 2.48438 15.4959C2.16146 14.5786 2 13.6404 2 12.6814C2 10.7218 2.65625 9.08524 3.96875 7.77185C5.28125 6.45846 6.91667 5.80176 8.875 5.80176C9.95833 5.80176 10.9896 6.03108 11.9688 6.48973C12.9479 6.94837 13.7917 7.59465 14.5 8.42855C15.2083 7.59465 16.0521 6.94837 17.0312 6.48973C18.0104 6.03108 19.0417 5.80176 20.125 5.80176C22.0833 5.80176 23.7188 6.45846 25.0312 7.77185C26.3438 9.08524 27 10.7218 27 12.6814C27 13.6404 26.8385 14.5786 26.5156 15.4959C26.1927 16.4132 25.625 17.419 24.8125 18.5135C24 19.608 22.9062 20.8433 21.5312 22.2192C20.1562 23.5951 18.4167 25.2317 16.3125 27.1288L14.5 28.7549Z"
+                        fill="#F4A470"
+                      />
+                    </svg>
+                    <h3 className="text-xl font-bold text-primary">Campañas</h3>
+                  </div>
+
+                  <h4 className="font-semibold text-primary mb-1 text-base md:text-xl leading-snug">
+                    Gatos ferales en <br className="hidden md:block" /> rescate
+                  </h4>
+
+                  <a
+                    href="https://esponsor.com/pataspirque/goals/1CMNAK7jaGRcjuoNfhXPq9/support"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="flex justify-center w-full">
+                      <button className="bg-primary cursor-pointer text-white mt-2 md:mt-3 rounded-full px-6 py-1 font-bold text-base md:text-xl hover:scale-105 transition">
+                        Apoyar
+                      </button>
+                    </div>
+                  </a>
+                </div>
               </div>
-              <h4 className="font-semibold text-primary mb-1 text-xl text-center">
-                Para comida, <br /> medicamentos, etc.
-              </h4>
-              <a
-                href="https://esponsor.com/pataspirque"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="bg-primary cursor-pointer text-white mt-3 rounded-full px-8 py-1 font-bold text-xl hover:scale-105 transition">
-                  Apoyar
-                </button>
-              </a>
+
+              {/* Card Donaciones */}
+              <div className="rounded-[30px] md:rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+                <div className="hidden md:flex items-center justify-center mb-2">
+                  <svg
+                    className="md:mr-2 inline-block align-middle"
+                    width="27"
+                    height="26"
+                    viewBox="0 0 27 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.75 13.75L13.5625 8.6875C12.9167 8.0625 12.3698 7.36979 11.9219 6.60938C11.474 5.84896 11.25 5.02083 11.25 4.125C11.25 2.97917 11.651 2.00521 12.4531 1.20312C13.2552 0.401042 14.2292 0 15.375 0C16.0417 0 16.6667 0.140625 17.25 0.421875C17.8333 0.703125 18.3333 1.08333 18.75 1.5625C19.1667 1.08333 19.6667 0.703125 20.25 0.421875C20.8333 0.140625 21.4583 0 22.125 0C23.2708 0 24.2448 0.401042 25.0469 1.20312C25.849 2.00521 26.25 2.97917 26.25 4.125C26.25 5.02083 26.0312 5.84896 25.5938 6.60938C25.1562 7.36979 24.6146 8.0625 23.9688 8.6875L18.75 13.75ZM18.75 10.25L22.1562 6.90625C22.5521 6.51042 22.9167 6.08854 23.25 5.64063C23.5833 5.19271 23.75 4.6875 23.75 4.125C23.75 3.66667 23.5938 3.28125 23.2812 2.96875C22.9688 2.65625 22.5833 2.5 22.125 2.5C21.8333 2.5 21.5573 2.55729 21.2969 2.67188C21.0365 2.78646 20.8125 2.95833 20.625 3.1875L18.75 5.4375L16.875 3.1875C16.6875 2.95833 16.4635 2.78646 16.2031 2.67188C15.9427 2.55729 15.6667 2.5 15.375 2.5C14.9167 2.5 14.5312 2.65625 14.2188 2.96875C13.9062 3.28125 13.75 3.66667 13.75 4.125C13.75 4.6875 13.9167 5.19271 14.25 5.64063C14.5833 6.08854 14.9479 6.51042 15.3438 6.90625L18.75 10.25ZM7.5 20.625L16.1875 23L23.625 20.6875C23.5208 20.5 23.3698 20.3385 23.1719 20.2031C22.974 20.0677 22.75 20 22.5 20H16.1875C15.625 20 15.1771 19.9792 14.8438 19.9375C14.5104 19.8958 14.1667 19.8125 13.8125 19.6875L10.9062 18.7188L11.5938 16.2812L14.125 17.125C14.4792 17.2292 14.8958 17.3125 15.375 17.375C15.8542 17.4375 16.5625 17.4792 17.5 17.5C17.5 17.2708 17.4323 17.0521 17.2969 16.8438C17.1615 16.6354 17 16.5 16.8125 16.4375L9.5 13.75H7.5V20.625ZM0 25V11.25H9.5C9.64583 11.25 9.79167 11.2656 9.9375 11.2969C10.0833 11.3281 10.2188 11.3646 10.3438 11.4062L17.6875 14.125C18.375 14.375 18.9323 14.8125 19.3594 15.4375C19.7865 16.0625 20 16.75 20 17.5H22.5C23.5417 17.5 24.4271 17.8438 25.1562 18.5312C25.8854 19.2188 26.25 20.125 26.25 21.25V22.5L16.25 25.625L7.5 23.1875V25H0ZM2.5 22.5H5V13.75H2.5V22.5Z"
+                      fill="#F4A470"
+                    />
+                  </svg>
+
+                  <h3 className="text-3xl font-bold text-primary">
+                    Donaciones
+                  </h3>
+                </div>
+
+                <div className="w-32 h-32 md:w-68 md:h-52 rounded-[30px] md:rounded-[50px] overflow-hidden bg-gray-100 flex-shrink-0">
+                  <img
+                    src={nosotrosp5}
+                    alt="Para comida, medicamentos, etc."
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                <div className="flex-1 flex flex-col justify-center items-center md:items-center md:mt-4 w-full">
+                  <div className="flex md:hidden items-center gap-2 justify-start mb-2">
+                    <svg
+                      className="mr-2 inline-block align-middle text-primary"
+                      width="31"
+                      height="31"
+                      viewBox="0 5 31 31"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <mask
+                        id="mask0_1624_3026"
+                        maskUnits="userSpaceOnUse"
+                        x="0"
+                        y="0"
+                        width="30"
+                        height="30"
+                      >
+                        <rect width="30" height="30" fill="#f4a470" />
+                      </mask>
+                      <g mask="url(#mask0_1624_3026)">
+                        <path
+                          d="M20 18.2652L14.8125 13.1993C14.1667 12.5739 13.6198 11.8807 13.1719 11.1197C12.724 10.3588 12.5 9.53012 12.5 8.63367C12.5 7.48706 12.901 6.51243 13.7031 5.7098C14.5052 4.90717 15.4792 4.50586 16.625 4.50586C17.2917 4.50586 17.9167 4.64658 18.5 4.92802C19.0833 5.20946 19.5833 5.58993 20 6.06942C20.4167 5.58993 20.9167 5.20946 21.5 4.92802C22.0833 4.64658 22.7083 4.50586 23.375 4.50586C24.5208 4.50586 25.4948 4.90717 26.2969 5.7098C27.099 6.51243 27.5 7.48706 27.5 8.63367C27.5 9.53012 27.2812 10.3588 26.8438 11.1197C26.4062 11.8807 25.8646 12.5739 25.2188 13.1993L20 18.2652ZM20 14.7628L23.4062 11.4168C23.8021 11.0207 24.1667 10.5986 24.5 10.1503C24.8333 9.70211 25 9.19656 25 8.63367C25 8.17503 24.8438 7.78935 24.5312 7.47663C24.2188 7.16392 23.8333 7.00756 23.375 7.00756C23.0833 7.00756 22.8073 7.06489 22.5469 7.17956C22.2865 7.29422 22.0625 7.46621 21.875 7.69553L20 9.94707L18.125 7.69553C17.9375 7.46621 17.7135 7.29422 17.4531 7.17956C17.1927 7.06489 16.9167 7.00756 16.625 7.00756C16.1667 7.00756 15.7812 7.16392 15.4688 7.47663C15.1562 7.78935 15 8.17503 15 8.63367C15 9.19656 15.1667 9.70211 15.5 10.1503C15.8333 10.5986 16.1979 11.0207 16.5938 11.4168L20 14.7628ZM8.75 25.1449L17.4375 27.5215L24.875 25.2075C24.7708 25.0198 24.6198 24.8583 24.4219 24.7228C24.224 24.5872 24 24.5195 23.75 24.5195H17.4375C16.875 24.5195 16.4271 24.4986 16.0938 24.457C15.7604 24.4153 15.4167 24.3319 15.0625 24.2068L12.1562 23.2374L12.8438 20.7982L15.375 21.6425C15.7292 21.7468 16.1458 21.8302 16.625 21.8927C17.1042 21.9552 17.8125 21.9969 18.75 22.0178C18.75 21.7885 18.6823 21.5696 18.5469 21.3611C18.4115 21.1526 18.25 21.0171 18.0625 20.9546L10.75 18.2652H8.75V25.1449ZM1.25 29.5229V15.7635H10.75C10.8958 15.7635 11.0417 15.7792 11.1875 15.8104C11.3333 15.8417 11.4688 15.8782 11.5938 15.9199L18.9375 18.6405C19.625 18.8907 20.1823 19.3285 20.6094 19.9539C21.0365 20.5793 21.25 21.2673 21.25 22.0178H23.75C24.7917 22.0178 25.6771 22.3618 26.4062 23.0497C27.1354 23.7377 27.5 24.6446 27.5 25.7703V27.0212L17.5 30.1483L8.75 27.7092V29.5229H1.25ZM3.75 27.0212H6.25V18.2652H3.75V27.0212Z"
+                          fill="currentColor"
+                        />
+                      </g>
+                    </svg>
+                    <h3 className="text-xl font-bold text-primary">
+                      Donaciones
+                    </h3>
+                  </div>
+
+                  <h4 className="font-semibold text-tertiary mb-1 text-base md:text-xl text-center leading-snug">
+                    Para comida, <br className="hidden md:block" />{" "}
+                    medicamentos, etc.
+                  </h4>
+
+                  <a
+                    href="https://esponsor.com/pataspirque"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <div className="flex justify-center w-full">
+                      <button className="bg-primary cursor-pointer text-white mt-2 md:mt-3 rounded-full px-6 py-1 font-bold text-base md:text-xl hover:scale-105 transition">
+                        Apoyar
+                      </button>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

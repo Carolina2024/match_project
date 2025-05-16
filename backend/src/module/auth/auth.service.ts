@@ -14,6 +14,7 @@ import { LoginDto } from './dtos/login.dto';
 import * as bcrypt from 'bcrypt';
 import { MailService } from '../mail/mail.service';
 import { ConfigService } from '@nestjs/config';
+import { ResetPasswordDto } from './dtos/reset-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -139,11 +140,11 @@ export class AuthService {
     };
   }
 
-  async resetPassword(
-    token: string,
-    newPassword: string,
-    recoveryCode: string,
-  ): Promise<{ message: string }> {
+  async resetPassword({
+    newPassword,
+    recoveryCode,
+    token,
+  }: ResetPasswordDto): Promise<{ message: string }> {
     let payload: { sub: string; purpose: string; recoveryCode: string };
     try {
       payload = this.jwtService.verify(token);

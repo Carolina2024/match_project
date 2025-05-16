@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import { getUserById, updateUserProfile } from "../../api/editProfileApi";
 import { useForm, Controller, useController } from "react-hook-form";
-import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import SuccessModalEditProfile from "./SuccessModalEditProfile";
+
+import PropTypes from "prop-types";
 
 const initialFormState = {
   fullname: "",
@@ -29,13 +32,14 @@ const initialFormState = {
 };
 
 function UserModalEdit() {
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm({ defaultValues: initialFormState });
+  const { register, handleSubmit, control, reset } = useForm({
+    defaultValues: initialFormState,
+  });
+
+  const { updateUser } = useAuth();
+
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -73,24 +77,29 @@ function UserModalEdit() {
     };
 
     fetchUser();
-  }, []);
+  }, [reset]);
 
-  const onSubmit = async (data) => {
-    const id = JSON.parse(localStorage.getItem("user")).id;
-    if (data?.password?.length === 0) {
-      data.password = undefined;
-    }
+const onSubmit = async (data) => {
+  const id = JSON.parse(localStorage.getItem("user")).id;
 
-    if (data.hoursAlone) {
-      data.hoursAlone = +data.hoursAlone;
-    }
+  if (data?.password?.length === 0) {
+    data.password = undefined;
+  }
 
-    try {
-      await updateUserProfile(id, data);
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+  if (data.hoursAlone) {
+    data.hoursAlone = +data.hoursAlone;
+  }
+
+  try {
+    await updateUserProfile(id, data);
+    const refreshed = await getUserById(id);
+    updateUser(refreshed);
+    setIsSuccessModalOpen(true);
+  } catch (error) {
+    console.error("Error updating profile:", error);
+  }
+};
+
 
   return (
     <div className="max-w-4xl mx-auto mb-10 p-4 bg-white rounded-md flex flex-col gap-5">
@@ -370,16 +379,29 @@ function UserModalEdit() {
         </div>
         <button
           type="submit"
-          className="bg-primary hover:bg-orange-400 cursor-pointer w-fit text-white py-2 px-4 rounded-md md:col-span-2 items-center"
+          className="bg-primary hover:bg-tertiary cursor-pointer w-fit text-white py-2 px-4 rounded-4xl md:col-span-2 items-center"
         >
           Guardar cambios
         </button>
       </form>
+      <SuccessModalEditProfile
+  isOpen={isSuccessModalOpen}
+  onClose={() => setIsSuccessModalOpen(false)}
+  onConfirm={() => {
+    setIsSuccessModalOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+/>
+
     </div>
+    
   );
+
+  
+
 }
 
-const RadioGroup = ({ name, control }, ref) => {
+const RadioGroup = ({ name, control }) => {
   const {
     field: { value, onChange },
   } = useController({ name, control });
@@ -427,10 +449,7 @@ const RadioGroup = ({ name, control }, ref) => {
   );
 };
 
-const TagOptions = (
-  { options, value, onChange, isSingleSelect = false },
-  ref
-) => {
+const TagOptions = ({ options, value, onChange, isSingleSelect = false }) => {
   const handleToggle = (option) => {
     if (isSingleSelect) {
       if (value !== option) {
@@ -501,6 +520,26 @@ const BooleanToggleTag = ({ label, value, onChange }) => {
       </button>
     </div>
   );
+};
+RadioGroup.propTypes = {
+  name: PropTypes.string.isRequired,
+  control: PropTypes.object.isRequired,
+};
+
+TagOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string,
+  ]).isRequired,
+  onChange: PropTypes.func.isRequired,
+  isSingleSelect: PropTypes.bool,
+};
+
+BooleanToggleTag.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default UserModalEdit;

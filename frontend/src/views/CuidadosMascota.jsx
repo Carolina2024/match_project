@@ -63,10 +63,10 @@ const CuidadosMascota = () => {
         </svg>
       </div>
 
-      {/* Paso 1 - VISTA MOBILE */}
+      {/* Paso 1 Mobile */}
       <div className="flex flex-col md:hidden w-full gap-4">
         <div className="flex items-start gap-2">
-          <div className="bg-primary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
+          <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             1
           </div>
           <div className="flex-1">
@@ -75,7 +75,7 @@ const CuidadosMascota = () => {
             </h2>
 
             <div className="flex gap-3">
-              {/* Imagen alineada a la izquierda pero más abajo */}
+              {/* Imagen */}
               <div className="w-24 flex-shrink-0 mt-48">
                 <img
                   src={paso1}
@@ -84,7 +84,7 @@ const CuidadosMascota = () => {
                 />
               </div>
 
-              {/* Texto */}
+              {/* Contenido */}
               <ul className="list-disc list-inside text-sm text-black space-y-1">
                 <li>
                   Compromiso a largo plazo: perros y gatos viven entre 10 y 20
@@ -111,7 +111,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 1 - VISTA DESKTOP */}
+      {/* Paso 1 Desktop */}
       <div className="hidden md:flex w-full items-center gap-10">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
           <img
@@ -147,18 +147,18 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 2 - VISTA MOBILE con estructura alterna */}
-      <div className="flex flex-col md:hidden w-full gap-4">
+      {/* Paso 2 Mobile */}
+      <div className="flex flex-col md:hidden w-full gap-4 -mt-18">
         <div className="flex items-start justify-end gap-2">
           <div className="flex-1">
-            <h2 className="text-primary font-bold text-base text-center ml-6 mb-2">
+            <h2 className="text-primary font-bold text-base text-left mb-2">
               Primeros días en casa
             </h2>
 
-            {/* Contenedor texto + imagen */}
+            {/* Contenido */}
             <div className="flex flex-row-reverse gap-3">
-              {/* Imagen alineada a la derecha pero más abajo */}
-              <div className="w-24 flex-shrink-0 mt-48">
+              {/* Imagen */}
+              <div className="w-24 flex-shrink-0 mt-26">
                 <img
                   src={paso2}
                   alt="Niña acomodando mascota en nuevo hogar"
@@ -166,7 +166,6 @@ const CuidadosMascota = () => {
                 />
               </div>
 
-              {/* Texto a la izquierda */}
               <ul className="list-disc list-inside text-sm text-black space-y-1">
                 <li>
                   Ambiente tranquilo: evita ruidos fuertes y movimientos
@@ -184,14 +183,14 @@ const CuidadosMascota = () => {
             </div>
           </div>
 
-          {/* Número del paso a la derecha */}
-          <div className="bg-primary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
+          {/* Número de Paso */}
+          <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             2
           </div>
         </div>
       </div>
 
-      {/* Paso 2 - VISTA DESKTOP (sin alteración) */}
+      {/* Paso 2 Desktop */}
       <div className="hidden md:flex w-full flex-row-reverse items-center gap-10 -mt-24">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
@@ -221,23 +220,23 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 3 - VISTA MOBILE (posición como Paso 1) */}
-      <div className="flex flex-col md:hidden w-full gap-4">
+      {/* Paso 3 Mobile */}
+      <div className="flex flex-col md:hidden w-full gap-4 -mt-24">
         <div className="flex items-start gap-2">
-          {/* Número del paso */}
-          <div className="bg-primary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
+          {/* Número de paso */}
+          <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             3
           </div>
 
           <div className="flex-1">
-            <h2 className="text-primary font-bold text-base text-center mr-6 mb-2">
+            <h2 className="text-primary font-bold text-base text-right mr-20 mb-2">
               Cuidados básicos diarios
             </h2>
 
-            {/* Contenedor texto + imagen */}
+            {/* Contenido */}
             <div className="flex gap-3">
-              {/* Imagen alineada a la izquierda pero más abajo */}
-              <div className="w-24 flex-shrink-0 mt-48">
+              {/* Imagen */}
+              <div className="w-24 flex-shrink-0 mt-20">
                 <img
                   src={paso3}
                   alt="Persona paseando con mascota"
@@ -245,7 +244,6 @@ const CuidadosMascota = () => {
                 />
               </div>
 
-              {/* Texto */}
               <ul className="list-disc list-inside text-sm text-black space-y-1">
                 <li>
                   Alimentación adecuada: consulta con un veterinario el mejor
@@ -266,7 +264,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 3 - VISTA DESKTOP (sin alterar) */}
+      {/* Paso 3 Desktop */}
       <div className="hidden md:flex w-full items-center gap-10 -mt-10">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
@@ -297,18 +295,18 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 4 - VISTA MOBILE (como Paso 2, invertido) */}
-      <div className="flex flex-col md:hidden w-full gap-4">
+      {/* Paso 4 Mobile */}
+      <div className="flex flex-col md:hidden w-full gap-4 -mt-20">
         <div className="flex items-start justify-end gap-2">
           <div className="flex-1">
-            <h2 className="text-primary font-bold text-base text-center ml-6 mb-2">
+            <h2 className="text-primary font-bold text-base text-left mb-2">
               Salud
             </h2>
 
-            {/* Contenedor texto + imagen */}
+            {/* Contenido */}
             <div className="flex flex-row-reverse gap-3">
-              {/* Imagen alineada a la derecha pero más abajo */}
-              <div className="w-24 flex-shrink-0 mt-48">
+              {/* Imagen */}
+              <div className="w-24 flex-shrink-0 mt-12">
                 <img
                   src={paso4}
                   alt="Veterinario cuidando a mascota"
@@ -316,7 +314,6 @@ const CuidadosMascota = () => {
                 />
               </div>
 
-              {/* Texto */}
               <ul className="list-disc list-inside text-sm text-black space-y-1">
                 <li>
                   Visitas al veterinario: llévalo apenas llegue a casa para un
@@ -331,14 +328,14 @@ const CuidadosMascota = () => {
             </div>
           </div>
 
-          {/* Número del paso a la derecha */}
-          <div className="bg-primary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
+          {/* Número de paso */}
+          <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             4
           </div>
         </div>
       </div>
 
-      {/* Paso 4 - VISTA DESKTOP (sin alteración) */}
+      {/* Paso 4 Desktop */}
       <div className="hidden md:flex w-full flex-row-reverse items-center gap-10 -mt-24">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
@@ -363,23 +360,23 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 5 - VISTA MOBILE (como Paso 1 y 3) */}
-      <div className="flex flex-col md:hidden w-full gap-4">
+      {/* Paso 5 Mobile */}
+      <div className="flex flex-col md:hidden w-full gap-4 -mt-20">
         <div className="flex items-start gap-2">
-          {/* Número */}
-          <div className="bg-primary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
+          {/* Número de Paso */}
+          <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             5
           </div>
 
           <div className="flex-1">
-            <h2 className="text-primary font-bold text-base text-center mr-6 mb-2">
+            <h2 className="text-primary font-bold text-base text-right mr-38 mb-2">
               Amor y respeto
             </h2>
 
-            {/* Contenedor texto + imagen */}
+            {/* Contenido */}
             <div className="flex gap-3">
-              {/* Imagen alineada a la izquierda pero más abajo */}
-              <div className="w-24 flex-shrink-0 mt-48">
+              {/* Imagen */}
+              <div className="w-24 flex-shrink-0 mt-24">
                 <img
                   src={paso5}
                   alt="Niña demostrando amor a su mascota"
@@ -387,7 +384,6 @@ const CuidadosMascota = () => {
                 />
               </div>
 
-              {/* Texto */}
               <ul className="list-disc list-inside text-sm text-black space-y-1">
                 <li>
                   No humanices, pero sí empatiza: respeta su lenguaje, su
@@ -407,7 +403,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 5 - VISTA DESKTOP (sin alterar) */}
+      {/* Paso 5 Desktop */}
       <div className="hidden md:flex w-full items-center gap-10 -mt-22">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
@@ -438,7 +434,7 @@ const CuidadosMascota = () => {
       </div>
 
       <div>
-        <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-0 -mt-40">
+        <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-0 md:-mt-40 -mt-20">
           Para más información te invitamos a
         </h2>
         <h2 className="text-primary text-center font-bold md:text-3xl text-xl italic mb-6">

@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { createPet, updatePet } from "../api/petService";
+import { FiCalendar } from "react-icons/fi";
+
 
 const enumOptions = {
   species: ["Perro", "Gato"],
@@ -89,14 +91,20 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         Swal.fire({
           toast: true,
           position: "bottom-end",
-          icon: "success",
+          icon: "null",
           title: "Mascota Actualizada",
-          text: `${data.name} ha sido actualizada correctamente.`,
+          text: `${data.name} ha sido actualizada exitosamente en el registro.`,
           showConfirmButton: false,
-          timer: 3000,
+          showCloseButton: true,
+          timer: 0,
           timerProgressBar: true,
-          background: "#e6f9e6",
-          color: "#2e7d32",
+          background: "#FFEADD",
+          width: "500px",
+          customClass: {
+            popup: "toast-sm-height",
+            title: "toast-title-color",
+            content: "toast-text-color",
+          },
         });
       } else {
         const newPet = await createPet(data);
@@ -105,14 +113,20 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         Swal.fire({
           toast: true,
           position: "bottom-end",
-          icon: "success",
+          icon: "null",
           title: "Mascota agregada",
-          text: `${data.name} ha sido registrada correctamente.`,
+          text: `${data.name} ha sido agregado exitosamente en el registro.`,
           showConfirmButton: false,
-          timer: 3000,
+          showCloseButton: true,
+          timer: 0,
           timerProgressBar: true,
-          background: "#e6f9e6",
-          color: "#2e7d32",
+          background: "#3FC202",
+          width: "500px",
+          customClass: {
+            popup: "toast-sm-height",
+            title: "custom-title",
+            content: "custom-text",
+          },
         });
       }
 
@@ -168,28 +182,33 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
       >
         <button
           onClick={() => setActiveView("Mascotas")}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black text-3xl font-bold z-50"
+          className="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl font-bold z-50"
         >
           x
         </button>
 
-        <h2 className="text-center text-2xl font-bold mb-4">
-          {editingPet ? "Editar Mascota" : "Nueva Mascota"}
+        <h2 className="text-center Monserrat Alternates text-[20px] text-[#595146] font-bold mb-4">
+          {editingPet ? "Editar Mascota" : "nueva mascota"}
         </h2>
 
-        <p className="text-center text-sm mb-6">
+        <p
+          className="text-center text-sm mb-6 font-raleway text-[14px]"
+          style={{ color: "#767575" }}
+        >
           {editingPet
             ? "Completa el formulario para actualizar los datos de esta mascota"
-            : "Completa el formulario para agregar una mascota al refugio."}
+            : "Completa el formulario para agregar una nueva mascota al refugio."}
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="text-sm font-semibold mb-1">Nombre</label>
+              <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1">
+                Mascota
+              </label>
               <input
                 {...register("name", { required: "El nombre es obligatorio" })}
                 placeholder="Nombre de la mascota"
-                className="border p-2 rounded w-full placeholder-gray-400"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               />
               {errors.name && (
                 <span className="text-red-500 text-sm mt-1">
@@ -199,16 +218,22 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-semibold mb-1">
+              <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1">
                 Fecha de ingreso
               </label>
-              <input
-                type="date"
-                {...register("admissionDate", {
-                  required: "La fecha de ingreso es requerida",
-                })}
-                className="border p-2 rounded w-full"
-              />
+              <div className="relative w-full">
+                <input
+                  type="date"
+                  {...register("admissionDate", {
+                    required: "La fecha de ingreso es requerida",
+                  })}
+                  className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal pr-10"
+                />
+                <FiCalendar
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#767575]"
+                  size={20}
+                />
+              </div>
               {errors.admissionDate && (
                 <span className="text-red-500 text-sm mt-1">
                   {errors.admissionDate.message}
@@ -217,14 +242,16 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-semibold mb-1">Especie</label>
+              <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1">
+                Especie
+              </label>
               <select
                 {...register("species", {
                   required: "La especie es obligatoria",
                 })}
-                className="border p-2 rounded w-full"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               >
-                <option value="">Selecciona especie</option>
+                <option value="">Elegir especie</option>
                 <option value="Perro">Perro</option>
                 <option value="Gato">Gato</option>
               </select>
@@ -236,25 +263,31 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="breed" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="breed"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Raza
               </label>
               <input
                 {...register("breed", { required: true })}
                 id="breed"
                 placeholder="Raza de la mascota"
-                className="border p-2 rounded w-full placeholder:text-gray-400"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               />
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="age" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="age"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Edad
               </label>
               <select
                 {...register("age", { required: true })}
                 id="age"
-                className="border p-2 rounded w-full text-gray-600"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               >
                 <option value="">Elegir edad</option>
                 {enumOptions.age.map((opt) => (
@@ -266,13 +299,16 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="sex" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="sex"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Sexo
               </label>
               <select
                 {...register("sex", { required: true })}
                 id="sex"
-                className="border p-2 rounded w-full text-gray-600"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               >
                 <option value="">Elegir sexo</option>
                 {enumOptions.sex.map((opt) => (
@@ -284,13 +320,16 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="energy" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="energy"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Nivel de actividad
               </label>
               <select
                 {...register("energy", { required: true })}
                 id="energy"
-                className="border p-2 rounded w-full text-gray-600"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               >
                 <option value="">Elegir nivel</option>
                 {enumOptions.energy.map((opt) => (
@@ -302,7 +341,10 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="kg" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="kg"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Peso
               </label>
               <input
@@ -311,18 +353,21 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                 type="number"
                 step="0.1"
                 placeholder="Añadir peso"
-                className="border p-2 rounded w-full placeholder:text-gray-400"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               />
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="size" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="size"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Tamaño
               </label>
               <select
                 {...register("size", { required: true })}
                 id="size"
-                className="border p-2 rounded w-full text-gray-600"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               >
                 <option value="">Elegir tamaño</option>
                 {enumOptions.size.map((opt) => (
@@ -334,13 +379,16 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="status" className="text-sm font-medium mb-1">
+              <label
+                htmlFor="status"
+                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+              >
                 Estado
               </label>
               <select
                 {...register("status", { required: true })}
                 id="status"
-                className="border p-2 rounded w-full text-gray-600"
+                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
               >
                 <option value="">Elegir estado</option>
                 {enumOptions.status.map((opt) => (
@@ -353,14 +401,16 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <p className="text-sm font-semibold mb-2">Rasgos:</p>
+            <p className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2">
+              Rasgos de la mascota:
+            </p>
             <div className="grid grid-cols-2 gap-2">
               {enumOptions.traits.map((trait) => (
                 <button
                   key={trait}
                   type="button"
                   onClick={() => toggleCheckbox("traits", trait)}
-                  className={`w-full text-left px-4 py-2 rounded border ${
+                  className={`w-full text-left px-4 py-2 rounded-lg border font-raleway text-[14px] text-[#767575] font-normal ${
                     traits.includes(trait)
                       ? "bg-black text-white"
                       : "bg-white text-black"
@@ -373,14 +423,16 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <p className="text-sm font-semibold mb-2">Entrega:</p>
+            <p className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2">
+              Entrega de la mascota:
+            </p>
             <div className="grid grid-cols-2 gap-2">
               {enumOptions.delivery.map((item) => (
                 <button
                   key={item}
                   type="button"
                   onClick={() => toggleCheckbox("delivery", item)}
-                  className={`w-full text-left px-4 py-2 rounded border ${
+                  className={`w-full text-left px-4 py-2 rounded-lg border font-raleway text-[14px] text-[#767575] font-normal ${
                     delivery.includes(item)
                       ? "bg-black text-white"
                       : "bg-white text-black"
@@ -393,24 +445,26 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <label className="text-sm font-semibold mb-2 block">
-              Historia:
+            <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2 block">
+              Historia de la mascota:
             </label>
             <textarea
               {...register("story")}
               rows="4"
-              className="border p-2 rounded w-full"
-              placeholder="Escribe la historia de la mascota"
+              className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
+              placeholder="Lorem ipsum dolor sit amet consectetur. Massa fusce pellentesque tincidunt neque laoreet. Aliquet eu nibh sed quisque at vulputate ut ullamcorper morbi. Lorem ipsum dolor sit amet consectetur. Massa fusce pellentesque tincidunt neque laoreet. Aliquet eu nibh sed quisque at vulputate ut ullamcorper morbi."
             ></textarea>
           </div>
 
           <div>
-            <p className="text-sm font-semibold mb-2">Agregar 3 fotos:</p>
+            <p className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2">
+              Agregar 3 fotos de la mascota:
+            </p>
             <div className="grid grid-cols-3 gap-4">
               {photos.map((_, index) => (
                 <label
                   key={index}
-                  className="relative border border-gray-300 rounded-2xl cursor-pointer h-32 flex items-center justify-center overflow-hidden hover:bg-gray-100 transition"
+                  className="text-[12px] relative  border border-gray-300 rounded-2xl cursor-pointer h-24 flex items-center justify-center overflow-hidden hover:bg-gray-100 transition"
                 >
                   {photoUrls[index] ? (
                     <>
@@ -432,7 +486,9 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                       </button>
                     </>
                   ) : (
-                    <span className="text-gray-400">Subir foto</span>
+                    <span className="font-raleway text-[14px] text-[#767575] font-normal">
+                      Subir foto
+                    </span>
                   )}
 
                   <input
@@ -452,13 +508,13 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               <button
                 type="button"
                 onClick={() => setActiveView("Mascotas")}
-                className="px-6 py-2 border bg-[#EFEFEF] rounded hover:bg-gray-300 cursor-pointer font-semibold"
+                className="font-raleway font-bold text-[16px] text-[#595146] px-6 py-2 border-2 bg-[#FFFFFF] rounded-lg hover:bg-gray-300 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 text-white rounded bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer font-semibold"
+                className="font-raleway text-[16px] text-[#767575] px-6 py-2 text-white rounded-lg bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
               >
                 Guardar
               </button>

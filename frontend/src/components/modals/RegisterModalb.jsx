@@ -116,7 +116,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
             Así podemos asegurarnos de que haya una buena conexión entre
             ustedes.
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-primary mt-1 mb-4">
+          <h2 className="md:text-2xl text-xl sm:text-3xl font-bold text-primary mt-1 mb-4">
             Crear Cuenta
           </h2>
           <div className="flex justify-center items-center space-x-4 mb-6">
@@ -126,7 +126,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
           </div>
         </div>
 
-        <div className="px-7 text-xl text-[#000000]">
+        <div className="px-7 md:text-xl text-base text-[#000000]">
           <div className="mb-7">
             <label className="block mb-2">
               ¿Estás dispuesto/a llevarlo al veterinario cuando sea necesario?

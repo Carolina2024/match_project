@@ -37,9 +37,9 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     if (!formData.email) newErrors.email = "Correo requerido";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       newErrors.email = "Correo inválido";
-    if (!formData.password) newErrors.password = "Contraseña requerida";
-    if (!formData.phoneNumber) newErrors.phoneNumber = "Telefono requerido";
-    if (!formData.run) newErrors.run = "Documento requerido";
+    if (!formData.password) newErrors.password = "Campo requerido";
+    if (!formData.phoneNumber) newErrors.phoneNumber = "Campo requerido";
+    if (!formData.run) newErrors.run = "Campo requerido";
     if (!selected) newErrors.homeType = "Seleccione una opción";
     if (!formData.allowsPets) newErrors.allowsPets = "Seleccione una opción";
     if (!formData.hasPets) newErrors.hasPets = "Seleccione una opción";
@@ -61,9 +61,51 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     onNext({ ...formData, homeType: selected });
   };
 
+  const validateField = (name, value) => {
+    switch (name) {
+      case "email":
+        if (!value.trim()) return "El correo es obligatorio";
+        if (!/\S+@\S+\.\S+/.test(value)) return "Correo electrónico inválido";
+        return "";
+
+      case "password":
+        if (!value.trim()) return "La contraseña es obligatoria";
+        if (
+          !/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{6,}$/.test(
+            value
+          )
+        ) {
+          return "Debe tener mínimo 6 caracteres, al menos una letra, un número y un símbolo. Ej: hola123!";
+        }
+        return "";
+
+      case "phoneNumber":
+        if (!value.trim()) return "El número de teléfono es requerido";
+        if (!/^(\+56)\d{9}$/.test(value))
+          return "Ingrese un número de teléfono válido en Chile siguiendo el siguiente formato: +56123456789";
+        return "";
+
+      case "run":
+      case "identityDocument":
+        if (!value.trim()) return "El Documento de Identidad es requerido";
+        if (
+          !/^([1-9]|[1-9]\d|[1-9]\d{2})((\.\d{3})*|(\d{3})*)-(\d|k|K)$/.test(
+            value
+          )
+        )
+          return "Ingrese un Documento de Identidad válido en Chile siguiendo el siguiente formato: 12345678-9";
+        return "";
+
+      default:
+        return "";
+    }
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((fd) => ({ ...fd, [name]: value }));
+    const error = validateField(name, value);
+    setErrors((fe) => ({ ...fe, [name]: error }));
   };
 
   if (!isOpen) return null;

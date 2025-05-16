@@ -14,9 +14,41 @@ const AdoptionApllication = () => {
 
   const [solicitudes, setSolicitudes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(8);
+  const [itemsPerPage] = useState(100);
 
-  const solicitudesFiltradas = solicitudes.filter((s) => {
+const aprobadasPorMascota = new Map();
+
+solicitudes.forEach((s) => {
+  if (s.status === "Aprobado") {
+    const actual = aprobadasPorMascota.get(s.pet.id);
+
+    if (
+      !actual ||
+      new Date(s.applicationDate) > new Date(actual.applicationDate)
+    ) {
+      aprobadasPorMascota.set(s.pet.id, s);
+    }
+  }
+});
+
+const mascotasAprobadas = new Set(aprobadasPorMascota.keys());
+
+const solicitudesValidas = solicitudes.filter((sol) => {
+  if (sol.status === "Aprobado") {
+    const aprobada = aprobadasPorMascota.get(sol.pet.id);
+    return aprobada?.id === sol.id;
+  }
+
+  return !mascotasAprobadas.has(sol.pet.id);
+});
+
+
+
+
+const solicitudesFiltradas = solicitudesValidas.filter((s) => {
+
+    
+
     const coincideEstado = filtro === "Todos" || s.status === filtro;
     const coincideBusqueda = s.pet?.name
       .toLowerCase()

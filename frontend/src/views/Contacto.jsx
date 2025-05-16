@@ -14,6 +14,7 @@ const Contacto = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   const validate = () => {
@@ -22,7 +23,7 @@ const Contacto = () => {
       newErrors.nombre = "Solo se permiten letras";
     }
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = "Correo inválido";
+      newErrors.email = "Correo inválido. Ejemplo: nombre@dominio.com";
     }
     if (formData.telefono.length < 7) {
       newErrors.telefono = "Número no válido";
@@ -33,13 +34,23 @@ const Contacto = () => {
     return newErrors;
   };
 
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched({ ...touched, [name]: true });
+    const validationErrors = validate();
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: validationErrors[name] }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
+    setTouched({ nombre: true, email: true, telefono: true, mensaje: true });
 
     if (Object.keys(validationErrors).length === 0) {
       const templateParams = {
@@ -59,6 +70,7 @@ const Contacto = () => {
         .then(() => {
           setShowModal(true);
           setFormData({ nombre: "", email: "", telefono: "", mensaje: "" });
+          setTouched({});
         })
         .catch((err) => console.error("EmailJS Error:", err));
     }
@@ -86,10 +98,11 @@ const Contacto = () => {
               name="nombre"
               value={formData.nombre}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Tu nombre"
               className="w-full px-4 py-2 border border-primary rounded-full placeholder-[#CBCBCB] font-medium text-sm outline-none"
             />
-            {errors.nombre && (
+            {touched.nombre && errors.nombre && (
               <p className="text-red-500 text-sm mt-1">{errors.nombre}</p>
             )}
           </div>
@@ -103,10 +116,11 @@ const Contacto = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
+              onBlur={handleBlur}
               placeholder="Tu e-mail"
               className="w-full px-4 py-2 border border-primary rounded-full placeholder-[#CBCBCB] font-medium text-sm outline-none"
             />
-            {errors.email && (
+            {touched.email && errors.email && (
               <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             )}
           </div>
@@ -160,11 +174,15 @@ const Contacto = () => {
             <textarea
               name="mensaje"
               rows="10"
+              maxLength={500}
               value={formData.mensaje}
               onChange={handleChange}
               placeholder="Escribe aquí tu mensaje"
               className="w-full px-4 py-2 border border-primary rounded-3xl placeholder-[#CBCBCB] font-medium text-sm outline-none resize-none"
             />
+            <div className="text-right text-xs text-gray-500 mt-1">
+              {formData.mensaje.length}/500 caracteres
+            </div>
             {errors.mensaje && (
               <p className="text-red-500 text-sm mt-1">{errors.mensaje}</p>
             )}

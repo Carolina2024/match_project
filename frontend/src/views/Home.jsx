@@ -26,6 +26,19 @@ const Home = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+
+    setTimeout(() => {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 50);
+  }, [hash]);
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
 
@@ -347,7 +360,7 @@ const Home = () => {
       </section>
 
       <section className="w-full px-4 flex flex-col justify-center items-center -mt-8">
-        <div className="py-10 text-center w-full">
+        <div id="historias" className="py-10 text-center w-full">
           <h2 className="text-2xl md:text-4xl font-bold text-primary px-4 md:px-20 text-center">
             Historias de adopción
           </h2>

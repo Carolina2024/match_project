@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import { getUserById, updateUserProfile } from "../../api/editProfileApi";
 import { useForm, Controller, useController } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
+import SuccessModalEditProfile from "./SuccessModalEditProfile";
+
 import PropTypes from "prop-types";
 
 const initialFormState = {
@@ -35,6 +37,9 @@ function UserModalEdit() {
   });
 
   const { updateUser } = useAuth();
+
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -74,27 +79,27 @@ function UserModalEdit() {
     fetchUser();
   }, [reset]);
 
-  const onSubmit = async (data) => {
-    const id = JSON.parse(localStorage.getItem("user")).id;
-    if (data?.password?.length === 0) {
-      data.password = undefined;
-    }
+const onSubmit = async (data) => {
+  const id = JSON.parse(localStorage.getItem("user")).id;
 
-    if (data.hoursAlone) {
-      data.hoursAlone = +data.hoursAlone;
-    }
+  if (data?.password?.length === 0) {
+    data.password = undefined;
+  }
 
-    try {
-      await updateUserProfile(id, data);
+  if (data.hoursAlone) {
+    data.hoursAlone = +data.hoursAlone;
+  }
 
-      const refreshed = await getUserById(id);
+  try {
+    await updateUserProfile(id, data);
+    const refreshed = await getUserById(id);
+    updateUser(refreshed);
+    setIsSuccessModalOpen(true);
+  } catch (error) {
+    console.error("Error updating profile:", error);
+  }
+};
 
-      // Usa updateUser del contexto
-      updateUser(refreshed);
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
 
   return (
     <div className="max-w-4xl mx-auto mb-10 p-4 bg-white rounded-md flex flex-col gap-5">
@@ -379,8 +384,21 @@ function UserModalEdit() {
           Guardar cambios
         </button>
       </form>
+      <SuccessModalEditProfile
+  isOpen={isSuccessModalOpen}
+  onClose={() => setIsSuccessModalOpen(false)}
+  onConfirm={() => {
+    setIsSuccessModalOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }}
+/>
+
     </div>
+    
   );
+
+  
+
 }
 
 const RadioGroup = ({ name, control }) => {

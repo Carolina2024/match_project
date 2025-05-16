@@ -152,8 +152,14 @@ export class CreateAdopterDto {
   @IsNotEmpty({
     message: 'La cantidad de horas que pasará sola la mascota es requerida',
   })
-  @Min(0, { message: 'La cantidad de horas minimas permitidas es 0' })
-  @Max(23, { message: 'La cantidad de horas maximas permitidas es 23' })
+  @Min(0, {
+    message:
+      'La cantidad mínima de horas que puede pasar sola la mascota es de 0',
+  })
+  @Max(23, {
+    message:
+      'La cantidad máxima de horas que puede pasar sola la mascota es de 23',
+  })
   hoursAlone: number;
 
   @ApiProperty({
@@ -223,7 +229,7 @@ export class CreateAdopterDto {
     example: PetEnergy.MODERATE,
   })
   @IsEnum(PetEnergy, {
-    message: `El nivel de energía debe ser un valor válido: ${Object.values(PetEnergy).join(', ')}`,
+    message: `El nivel de energía de la mascota preferido por el usuario debe ser un valor válido: ${Object.values(PetEnergy).join(', ')}`,
   })
   userPreferenceEnergy: PetEnergy;
 
@@ -234,10 +240,13 @@ export class CreateAdopterDto {
     isArray: true,
     example: [PetTrait.AFFECTIONATE, PetTrait.PLAYFUL],
   })
-  @IsArray({ message: 'Los rasgos deben ser un arreglo' })
+  @IsArray({
+    message:
+      'La preferencia del usuario sobre los rasgos de personalidad de la mascota debe ser un arreglo',
+  })
   @IsEnum(PetTrait, {
     each: true,
-    message: `Cada rasgo debe ser un valor válido: ${Object.values(PetTrait).join(', ')}`,
+    message: `Cada rasgo de personalidad de la mascota debe ser un valor válido: ${Object.values(PetTrait).join(', ')}`,
   })
   userPreferenceTraits: PetTrait[];
 

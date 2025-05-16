@@ -105,6 +105,7 @@ const AdminPanel = () => {
           />
         );
       default:
+
         navigate("/Mascotas");
         return null;
     }

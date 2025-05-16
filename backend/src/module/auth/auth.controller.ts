@@ -37,6 +37,10 @@ export class AuthController {
       message: 'Usuario registrado exitosamente',
       token:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU2ZjIxZDY3LTZkNzMtNGM2YabcdefghiYyMjQ2OWMyNzQzNSIsImVtYWlsIjoianVhbkBleGFtcGxlLmNvbSIsInMyHeartiJhZG9wdGFudGUiLCJpYXQiOjE3NDYxMDc0NTEsImVaguasMTc0NjExNDY1MX0.RxSnt2VA-HK7zjSinJJtCa3jpbLeeJvN_cv6LH6qW00',
+      user: {
+        id: '562f7a0c-abcd-1234-bffb-78385972avds',
+        fullname: 'John Doe',
+      },
     },
   })
   @ApiBadRequestResponse({
@@ -58,7 +62,7 @@ export class AuthController {
   })
   @ApiConflictResponse({
     description:
-      'El correo o el documento de identidad ingresados por el usuario ya se encuentran registrados',
+      'El correo electrónico o el documento de identidad ingresados por el usuario ya se encuentran registrados',
     example: {
       message: 'El correo electrónico ya se encuentra registrado',
       error: 'Conflict',
@@ -81,7 +85,11 @@ export class AuthController {
     example: {
       message: 'Se ha iniciado sesión exitosamente',
       token:
-        'eyJpZCI6ImEwNTIxYTE0LTk0OTItNDZkMy04MWVkLWJiYThjkhNiIsImVtYWlfghfghIjoiam9obkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG9wdGFudGUiLCJpYXQiOjE3NDYwMzk5OTgsImV4cCI6MTc0NjA0NzE5OH0.7N7YNqVzblQ4kK5yy-5MdRiO_zhtur0oou1ar22_CfQ',
+        'eyJpZCI6ImEwNTIxYZE0LTk0OTItNDZkMy04MWVkLWJiYThjkhNiIsImVtYWlfghfghIjoiam9obkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG9wdGFudGUiLCJpYXQiOjE3NDYwMzk5OTgsImV4cCI6MTc0NjA0NzE5OH0.7N7YNqVzblQ4kK5yy-5MdRiO_zhtur0oou1ar22_CfQ',
+      user: {
+        id: '562f7a0c-abcd-1234-bffb-78385972avds',
+        fullname: 'John Doe',
+      },
     },
   })
   @ApiBadRequestResponse({
@@ -170,11 +178,7 @@ export class AuthController {
   })
   @Post('reset-password')
   @HttpCode(HttpStatus.OK)
-  async resetPassword(@Body() dto: ResetPasswordDto) {
-    return this.authService.resetPassword(
-      dto.token,
-      dto.newPassword,
-      dto.recoveryCode,
-    );
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return this.authService.resetPassword(resetPasswordDto);
   }
 }

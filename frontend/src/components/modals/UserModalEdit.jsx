@@ -1,8 +1,9 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getUserById, updateUserProfile } from "../../api/editProfileApi";
 import { useForm, Controller, useController } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import SuccessModalEditProfile from "./SuccessModalEditProfile";
+import ErrorModalEditProfile from "./ErrorModalEditProfile";
 
 import PropTypes from "prop-types";
 
@@ -39,7 +40,8 @@ function UserModalEdit() {
   const { updateUser } = useAuth();
 
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -79,27 +81,28 @@ function UserModalEdit() {
     fetchUser();
   }, [reset]);
 
-const onSubmit = async (data) => {
-  const id = JSON.parse(localStorage.getItem("user")).id;
+  const onSubmit = async (data) => {
+    const id = JSON.parse(localStorage.getItem("user")).id;
 
-  if (data?.password?.length === 0) {
-    data.password = undefined;
-  }
+    if (data?.password?.length === 0) {
+      data.password = undefined;
+    }
 
-  if (data.hoursAlone) {
-    data.hoursAlone = +data.hoursAlone;
-  }
+    if (data.hoursAlone) {
+      data.hoursAlone = +data.hoursAlone;
+    }
 
-  try {
-    await updateUserProfile(id, data);
-    const refreshed = await getUserById(id);
-    updateUser(refreshed);
-    setIsSuccessModalOpen(true);
-  } catch (error) {
-    console.error("Error updating profile:", error);
-  }
-};
-
+    try {
+      await updateUserProfile(id, data);
+      const refreshed = await getUserById(id);
+      updateUser(refreshed);
+      setIsSuccessModalOpen(true);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      setIsErrorModalOpen(true)
+      setErrorMessage(error.message)
+    }
+  };
 
   return (
     <div className="max-w-4xl mx-auto mb-10 p-4 bg-white rounded-md flex flex-col gap-5">
@@ -120,7 +123,7 @@ const onSubmit = async (data) => {
           <div className="flex flex-col sm:flex-row sm:gap-40 gap-3 ">
             <div className="flex flex-col gap-5">
               <div className="flex flex-col">
-                <span className="text-xs ml-3">Nombre y Apellido</span>
+                <span className="text-xs ml-3 font-bold">Nombre y Apellido</span>
                 <input
                   name="fullname"
                   className="border rounded-full text-xs p-2 w-70 border-primary outline-none"
@@ -129,7 +132,7 @@ const onSubmit = async (data) => {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs ml-3">Correo Electrónico</span>
+                <span className="text-xs ml-3 font-bold">Correo Electrónico</span>
                 <input
                   className="border rounded-full text-xs p-2 w-70 border-primary outline-none"
                   placeholder="maria@gmail.com"
@@ -139,7 +142,7 @@ const onSubmit = async (data) => {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs ml-3">Telefono</span>
+                <span className="text-xs ml-3 font-bold">Telefono</span>
                 <input
                   className="border rounded-full text-xs p-2 w-70 items-center border-primary outline-none"
                   placeholder="ch +56 9 12345678"
@@ -150,7 +153,7 @@ const onSubmit = async (data) => {
             </div>
             <div className="flex flex-col gap-5">
               <div className="flex flex-col ">
-                <span className="text-xs ml-3">Fecha de nacimiento</span>
+                <span className="text-xs ml-3 font-bold">Fecha de nacimiento</span>
                 <input
                   className="border rounded-full text-xs p-2 border-primary outline-none w-fit"
                   placeholder="Fecha de nacimiento"
@@ -385,20 +388,24 @@ const onSubmit = async (data) => {
         </button>
       </form>
       <SuccessModalEditProfile
-  isOpen={isSuccessModalOpen}
-  onClose={() => setIsSuccessModalOpen(false)}
-  onConfirm={() => {
-    setIsSuccessModalOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }}
-/>
-
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+        onConfirm={() => {
+          setIsSuccessModalOpen(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+      <ErrorModalEditProfile
+        isOpen={isErrorModalOpen}
+        errorMessage={errorMessage}
+        onClose={() => setIsErrorModalOpen(false)}
+        onConfirm={() => {
+          setIsErrorModalOpen(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
     </div>
-    
   );
-
-  
-
 }
 
 const RadioGroup = ({ name, control }) => {

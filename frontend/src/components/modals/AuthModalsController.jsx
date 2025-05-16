@@ -63,9 +63,9 @@ const AuthModalsController = ({
       isResponsibleAdoption: second.isResponsibleAdoption === "true",
       userPreferenceEnergy: second.energy,
       userPreferenceTraits: second.character,
-      userPreferenceChildren: second.compatibility.includes("niños"),
-      userPreferenceDogs: second.compatibility.includes("perros"),
-      userPreferenceCats: second.compatibility.includes("gatos"),
+      userPreferenceChildren: second.compatibility.includes("Con niños"),
+      userPreferenceDogs: second.compatibility.includes("Con perros"),
+      userPreferenceCats: second.compatibility.includes("Con gatos"),
     };
 
     try {

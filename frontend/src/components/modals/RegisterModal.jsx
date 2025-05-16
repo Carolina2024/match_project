@@ -96,6 +96,13 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
           return "Ingrese un Documento de Identidad válido en Chile siguiendo el siguiente formato: 12345678-9";
         return "";
 
+      case "address":
+        if (!value.trim()) return "La dirección es requerida";
+        if (!/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ,.\-/]*$/.test(value)) {
+          return "La dirección contiene caracteres inválidos";
+        }
+        return "";
+
       default:
         return "";
     }

@@ -141,6 +141,13 @@ export class AuthController {
       statusCode: 404,
     },
   })
+  @ApiTooManyRequestsResponse({
+    description: 'El usuario hace muchas peticiones al endpoint',
+    example: {
+      statusCode: 429,
+      message: 'ThrottlerException: Too Many Requests',
+    },
+  })
   @Post('recover-password')
   @UseGuards(ThrottlerGuard)
   @HttpCode(HttpStatus.OK)
@@ -167,13 +174,6 @@ export class AuthController {
       message: 'Token inválido o expirado',
       error: 'Unauthorized',
       statusCode: 401,
-    },
-  })
-  @ApiTooManyRequestsResponse({
-    description: 'El usuario hace muchas peticiones al endpoint',
-    example: {
-      statusCode: 429,
-      message: 'ThrottlerException: Too Many Requests',
     },
   })
   @Post('reset-password')

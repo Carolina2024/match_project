@@ -18,6 +18,8 @@ import {
   ApiUnauthorizedResponse,
   ApiForbiddenResponse,
   ApiBearerAuth,
+  ApiConflictResponse,
+  ApiBadRequestResponse,
 } from '@nestjs/swagger';
 import { QueryUsersDto } from './dtos/query-user.dto';
 import { AuthGuard } from '@nestjs/passport';
@@ -25,7 +27,6 @@ import { Auth } from '../auth/decorators/auth.decorator';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { OwnerOrAdminGuard } from '../auth/guards/owner-or-admin.guard';
 import { UpdateUserDto } from './dtos/update-user.dto';
-//import { Pet } from '../pets/entities/pet.entity';
 
 @Controller('users')
 export class UsersController {
@@ -34,7 +35,7 @@ export class UsersController {
   @ApiOperation({
     summary: 'Obtener todos los usuarios',
     description:
-      'Retorna un listado de todos los usuarios registrados en la plataforma',
+      'Retorna un listado de todos los usuarios registrados en la plataforma (solo para administradores)',
   })
   @ApiOkResponse({
     description: 'Retorno del listado de usuarios',
@@ -45,6 +46,7 @@ export class UsersController {
           fullname: 'José Gómez',
           email: 'jose@example.com',
           role: 'adoptante',
+          createdAt: '2025-05-16T03:47:02.989Z',
           adopter: {
             id: '4aa3fc42-7b20-4058-a5d6-602e73b99a10',
             identityDocument: '28631246-9',
@@ -73,6 +75,7 @@ export class UsersController {
           fullname: 'John Doe',
           email: 'john@example.com',
           role: 'adoptante',
+          createdAt: '2025-05-16T03:47:02.989Z',
           adopter: {
             id: 'da6c521a-fdb1-429d-8c68-deb8805172e2',
             identityDocument: '12345678-9',
@@ -111,17 +114,19 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Obtener un usuario por su ID',
-    description: 'Retorna los datos del usuario con el ID indicado',
+    description:
+      'Retorna los datos del usuario con el ID indicado (solo para administradores o adoptantes con su propio ID)',
   })
   @ApiOkResponse({
     description: 'Se devuelve el usuario con el ID indicado',
     example: {
-      id: '639dcdc7-a635-48d4-a641-2c74d0878bbd',
+      id: '639dcdc7-abcd-1234-a641-2c74d087fghj',
       fullname: 'José Gómez',
       email: 'jose@example.com',
       role: 'adoptante',
+      createdAt: '2025-05-16T03:47:02.989Z',
       adopter: {
-        id: '4aa3fc42-7b20-4058-a5d6-602e73b99a10',
+        id: '4aa3fc42-4321-4dac-a5d6-602e73b99abc',
         identityDocument: '28631246-9',
         birthDate: '2006-11-18',
         address: 'Calle 15, Urb Caja Grande, Región Metropolitana',
@@ -177,7 +182,8 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Actualizar un usuario por su ID',
-    description: 'Permite actualizar uno o más campos de un usuario por su ID',
+    description:
+      'Permite actualizar uno o más campos de un usuario por su ID (solo para administradores o adoptantes con su propio ID)',
   })
   @ApiOkResponse({
     description: 'Se actualiza el usuario exitosamente',
@@ -209,6 +215,16 @@ export class UsersController {
       },
     },
   })
+  @ApiBadRequestResponse({
+    description: 'El usuario ingresa un dato con un formato inválido',
+    example: {
+      message: [
+        'Ingrese un Documento de Identidad válido en Chile siguiendo el siguiente formato: 12345678-9',
+      ],
+      error: 'Bad Request',
+      statusCode: 400,
+    },
+  })
   @ApiUnauthorizedResponse({
     description: 'El usuario no está autenticado',
     example: {
@@ -233,19 +249,28 @@ export class UsersController {
       statusCode: 404,
     },
   })
+  @ApiConflictResponse({
+    description:
+      'El correo electrónico o el documento de identidad ingresados por el usuario ya se encuentran registrados por otro usuario',
+    example: {
+      message: 'Ya existe un usuario con ese correo',
+      error: 'Conflict',
+      statusCode: 409,
+    },
+  })
   @UseGuards(AuthGuard(), OwnerOrAdminGuard)
   @Patch(':id')
   updateUserById(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
   ) {
-    return this.usersService.updateUserById(id, updateUserDto);
+    return this.usersService.updateById(id, updateUserDto);
   }
 
   @ApiOperation({
     summary: 'Elimina la cuenta del usuario por su ID',
     description:
-      'Retorna un mensaje indicando que la cuenta del usuario se ha eliminado exitosamente',
+      'Retorna un mensaje indicando que la cuenta del usuario se ha eliminado exitosamente (solo para administradores)',
   })
   @ApiOkResponse({
     description: 'Se elimina la cuenta del usuario con el ID',
@@ -265,6 +290,6 @@ export class UsersController {
   @Auth(UserRole.ADMIN)
   @Delete(':id')
   remove(@Param('id', ParseUUIDPipe) id: string) {
-    return this.usersService.remove(id);
+    return this.usersService.removeById(id);
   }
 }

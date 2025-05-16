@@ -379,7 +379,7 @@ const onSubmit = async (data) => {
         </div>
         <button
           type="submit"
-          className="bg-primary hover:bg-orange-400 cursor-pointer w-fit text-white py-2 px-4 rounded-md md:col-span-2 items-center"
+          className="bg-primary hover:bg-tertiary cursor-pointer w-fit text-white py-2 px-4 rounded-4xl md:col-span-2 items-center"
         >
           Guardar cambios
         </button>

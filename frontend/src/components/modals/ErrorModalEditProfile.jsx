@@ -7,7 +7,7 @@ const ErrorModalEditProfile = ({ isOpen, onClose, errorMessage }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
-      <div className="relative bg-white rounded-2xl shadow-lg px-10 py-16 w-full max-w-md  text-center">
+      <div className="relative bg-white rounded-2xl shadow-lg px-10 py-16 w-full max-w-md items-center  text-center">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-tertiary cursor-pointer"
@@ -18,13 +18,6 @@ const ErrorModalEditProfile = ({ isOpen, onClose, errorMessage }) => {
         <h2 className="text-primary text-3xl font-bold mb-10">
           {errorMessage}
         </h2>
-
-        <button
-          onClick={onClose}
-          className="bg-primary hover:bg-tertiary cursor-pointer text-white font-semibold py-2 px-6 rounded-full text-basetransition"
-        >
-          Regresar al formulario
-        </button>
       </div>
     </div>
   );

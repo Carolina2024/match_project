@@ -4,6 +4,10 @@ import { usePet } from "../context/PetContext";
 function PetsHome() {
   const { matchedPet, isMatched, handleClickConoceme, mascotas } = usePet();
 
+  function noHagoNada() {
+
+  }
+
   const navigate = useNavigate();
   if(matchedPet) {
     return 
@@ -34,12 +38,7 @@ function PetsHome() {
                   <button
                     onClick={() =>
                       matchedPet?.photoUrls !== undefined
-                        ? navigate("/seguimiento", {
-                            state: {
-                              nombre: mascota.name,
-                              foto: mascota.photoUrls[0],
-                            },
-                          })
+                        ? noHagoNada()
                         : handleClickConoceme(mascota)
                     }
                     className="border border-primary rounded-md cursor-pointer text-sm px-3 py-1 text-white font-semibold bg-primary"

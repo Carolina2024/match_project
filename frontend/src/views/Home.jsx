@@ -95,13 +95,15 @@ const Home = () => {
     <section className="w-full flex flex-col justify-center items-center -mt-20">
       {!loggedIn ? (
         <>
-          <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden flex items-center md:ml-10">
+          <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden md:flex items-center md:ml-10 bg-transparent">
+            {/* SVG decorativo de fondo */}
             <svg
               width="1030"
               height="745"
               viewBox="0 0 1218 745"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="hidden md:block"
             >
               <rect
                 width="1218"
@@ -111,16 +113,46 @@ const Home = () => {
                 fillOpacity="0.17"
               />
             </svg>
-            <div className="absolute inset-y-0 right-0 flex items-center">
+
+            {/* Mobile */}
+            <div className="block md:hidden w-[400px] mt-10 ml-6 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-4 mb-16">
+              <div className="flex flex-col items-center text-center">
+                <h2 className="text-4xl font-bold font-secundary leading-tight text-shadow-lg/10 text-center md:text-left">
+                  <span className="text-primary">Tu nuevo </span>
+                  <br />
+                  <span className="text-tertiary">compañero </span>
+                  <span className="text-primary">te </span>
+                  <br />
+                  <span className="text-primary">está esperando</span>
+                </h2>
+
+                <button
+                  onClick={() => setRegisterOpen(true)}
+                  className="bg-white text-primary font-bold text-base cursor-pointer px-10 py-2 mt-6 rounded-full shadow-md/30 hover:bg-gray-100 transition"
+                >
+                  Regístrate para Adoptar
+                </button>
+
+                <img
+                  src={image}
+                  alt="Perro mirando"
+                  className="w-[400px] mt-6 object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Desktop */}
+            <div className="hidden md:flex absolute inset-y-0 right-0 items-center">
               <img
                 src={image}
                 alt="Perro mirando"
-                className="w-[300px] md:w-[640px] object-cover -mt-10"
+                className="w-[640px] object-cover -mt-10"
               />
             </div>
-            <div className="absolute inset-y-0 left-0 flex items-center pl-10 md:pl-16">
+
+            <div className="hidden md:flex absolute inset-y-0 left-0 items-center pl-16">
               <div>
-                <h2 className="text-2xl md:text-6xl font-bold md:leading-16 leading-8 font-secundary md:ml-6 -ml-5 md:mb-4 mb-0 text-left text-shadow-lg/10">
+                <h2 className="text-6xl font-bold md:leading-16 font-secundary mb-4 ml-4 text-left text-shadow-lg/10">
                   <span className="text-primary">Tu nuevo</span>
                   <br />
                   <span className="text-tertiary">compañero</span>
@@ -129,9 +161,10 @@ const Home = () => {
                   <br />
                   <span className="text-primary">esperando</span>
                 </h2>
+
                 <button
                   onClick={() => setRegisterOpen(true)}
-                  className="bg-white cursor-pointer text-primary font-bold md:px-14 px-2 py-3 md:ml-6 -ml-5 mt-10 text-sm md:text-2xl rounded-full shadow-md/30 hover:bg-gray-100 transition"
+                  className="bg-white text-primary cursor-pointer mt-8 font-bold text-2xl px-14 py-3 rounded-full shadow-md/30 hover:bg-gray-100 transition"
                 >
                   Regístrate para Adoptar
                 </button>
@@ -221,14 +254,14 @@ const Home = () => {
         </>
       )}
 
-      <section className="py-12 px-4 flex flex-col items-center relative mb-22 mt-18">
+      <section className="py-12 px-4 flex flex-col items-center relative md:mb-22 md:mt-18">
         <h2 className="text-2xl md:text-3xl font-medium text-center text-black mb-2">
           Encuentra a tu mascota ideal
         </h2>
         <h2 className="text-primary font-extrabold text-2xl font-tertiary">
           3 simples pasos
         </h2>
-        <div className="absolute top-50 left-0 right-0 flex justify-center">
+        <div className="hidden absolute top-50 left-0 right-0 md:flex justify-center">
           <svg
             width="650"
             height="104"
@@ -251,7 +284,7 @@ const Home = () => {
           </svg>
         </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center md:w-[300px] w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary text-white font-tertiary w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               1
             </div>
@@ -290,7 +323,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center md:w-[300px] w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               2
             </div>
@@ -330,7 +363,7 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center w-full md:w-[300px] h-[240px] relative">
+          <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center md:w-[300px] w-[300px] h-[240px] relative">
             <div className="absolute -top-5 bg-primary font-tertiary text-white w-12 h-12 flex items-center justify-center rounded-full font-medium text-2xl">
               3
             </div>
@@ -371,7 +404,7 @@ const Home = () => {
               <img
                 src={slides[activeSlide].img}
                 alt={`Slide ${activeSlide + 1}`}
-                className="w-full h-64 md:h-110 object-cover"
+                className="w-full h-110 object-cover"
               />
               <div className="absolute bottom-0 left-0 md:max-w-4xl bg-[#59514680] p-4 md:py-3 px-4 md:mx-10 md:h-auto h-38 mx-4 my-5 md:my-6 text-left rounded-2xl text-white">
                 <p className="font-semibold md:text-2xl text-lg">

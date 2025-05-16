@@ -164,9 +164,7 @@ export class AuthService {
         'El código de recuperación ingresado es inválido',
       );
     }
-    const user = await this.usersService.findOneById(payload.sub);
-    user.password = await bcrypt.hash(newPassword, 10);
-    await this.usersService.updatePasswordById(user.id, user.password);
+    await this.usersService.updatePasswordById(payload.sub, newPassword);
 
     return { message: 'Contraseña actualizada exitosamente' };
   }

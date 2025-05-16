@@ -185,10 +185,22 @@ export class UsersService {
       },
     });
   }
-  async updatePasswordById(
-    id: string,
-    newHashedPassword: string,
-  ): Promise<void> {
+  async updatePasswordById(id: string, newPassword: string): Promise<void> {
+    const user = await this.userRepository.findOne({
+      where: { id },
+      select: { password: true },
+    });
+    if (!user) {
+      throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+    }
+    const isPasswordRepeated = await bcrypt.compare(newPassword, user.password);
+
+    if (isPasswordRepeated) {
+      throw new ConflictException(
+        'Su nueva contraseña debe ser distinta a la actual',
+      );
+    }
+    const newHashedPassword = await bcrypt.hash(newPassword, 10);
     const result = await this.userRepository.update(id, {
       password: newHashedPassword,
     });

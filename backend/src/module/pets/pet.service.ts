@@ -160,6 +160,7 @@ export class PetService {
     const [items, total] = await queryBuilder
       .skip(skip)
       .take(limit)
+      .orderBy('pet.created_at', 'DESC')
       .getManyAndCount();
 
     return {
@@ -225,6 +226,7 @@ export class PetService {
     const [items, total] = await queryBuilder
       .skip(skip)
       .take(limit)
+      .orderBy('pet.created_at', 'DESC')
       .getManyAndCount();
 
     return {

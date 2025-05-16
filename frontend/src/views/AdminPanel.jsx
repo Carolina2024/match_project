@@ -105,7 +105,8 @@ const AdminPanel = () => {
           />
         );
       default:
-        navigate("/Mascota");
+
+        navigate("/Mascotas");
         return null;
     }
   };
@@ -126,10 +127,10 @@ const AdminPanel = () => {
       />
 
       <div
-        className="absolute top-0 right-0 h-full overflow-y-auto transition-all duration-300 mt-30"
-        style={{ left: isSidebarVisible ? "250px" : "0px" }}
+        className="top-0 right-0 h-full transition-all duration-300"
+        style={{ left: isSidebarVisible ? "250px" : "0px",marginTop: "90px" }}
       >
-        <div className="p-6">{renderView()}</div>
+        <div className="p-7">{renderView()}</div>
       </div>
     </div>
   );

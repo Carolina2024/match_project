@@ -4,6 +4,7 @@ import { BsCalendar2 } from "react-icons/bs";
 import { getAllMatches } from "../api/matchService";
 import MatchDetailModal from "./modals/MatchDetailModal";
 import RequestModal from "../components/modals/RequestModal";
+import { RiSearchLine } from "react-icons/ri";
 
 const AdoptionApllication = () => {
   const [filtro, setFiltro] = useState("Todos");
@@ -80,18 +81,21 @@ const AdoptionApllication = () => {
   };
 
   return (
-    <div className="bg-white sm:bg-[#FAF9F6]">
-      <div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 m-0 p-0">
-        <div className="flex flex-col gap-4 mb-8">
-          <div className="relative w-full sm:w-64">
+    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen max-w-full">
+      <div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300">
+        <div className="flex flex-col gap-3 mb-8">
+          <div className="relative w-full sm:w-64 max-w-md">
             <input
               type="text"
               placeholder="Buscar..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full md:w-[420px] pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
-            <FaSearch className="absolute left-3 top-2.5 text-gray-500" />
+            <RiSearchLine
+              className="absolute left-3 top-3 text-gray-400"
+              size={20}
+            />
           </div>
 
           <div className="flex items-center gap-2">
@@ -99,7 +103,7 @@ const AdoptionApllication = () => {
             <select
               value={filtro}
               onChange={(e) => setFiltro(e.target.value)}
-              className="border border-gray-300 px-3 py-2 rounded focus:outline-none w-full sm:w-64"
+              className="md:w-[120px] border border-gray-300 px-3 py-2 rounded focus:outline-none w-full sm:w-64 rounded-lg"
             >
               <option value="Todos">Estado</option>
               <option value="Por revisar">Por revisar</option>
@@ -112,7 +116,7 @@ const AdoptionApllication = () => {
 
         <div className="flex justify-center sm:block"></div>
 
-        <div className="grid grid-cols-2 gap-15 mr-[36px] ml-[-15px] justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="flex flex-wrap  justify-end gap-4 mr-[36px] ml-[-15px] justify-end  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {solicitudes.length > 0 ? (
             solicitudes.map((sol) => (
               <div

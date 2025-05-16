@@ -13,10 +13,10 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           &times;
         </button>
 
-        <h2 className="text-xl font-bold mb-1 text-gray-800 ">
+        <h2 className="text-xl font-bold mb-1 text-gray-800 text-center font-Monserrat Alternates text-[20px] text-[#595146] ">
           Información de la mascota
         </h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-500 mb-4 text-center font-Monserrat Alternates text-[14px] text-[#767575]">
           Fecha del ingreso: {pet?.admissionDate}
         </p>
 
@@ -34,13 +34,13 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
         )}
 
         <div className="mb-4">
-          <h3 className="font-semibold mb-1 text-gray-700">
+          <h3 className="font-semibold mb-1 text-gray-700 font-Raleway text-[16px] text-[#595146]">
             Historia de la mascota
           </h3>
           <p className="text-sm text-gray-600">{pet?.story}</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 mt-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 mt-4 font-Raleway text-[16px] text-[#595146]">
           <div className="flex flex-col">
             <span className="text-ls text-black-500 font-semibold">
               Mascota

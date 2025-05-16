@@ -9,8 +9,8 @@ import { Transform } from 'class-transformer';
 export class UpdatePetDto extends PartialType(CreatePetDto) {
   @ApiProperty({
     description: 'URLs de las fotos de la mascota',
-    isArray: true,
     example: ['https://example.com/pet1.jpg', 'https://example.com/pet2.jpg'],
+    required: false,
   })
   @IsOptional()
   @Transform(({ value }) => {

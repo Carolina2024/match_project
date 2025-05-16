@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import logo from "../assets/logo.png";
@@ -10,16 +10,52 @@ function PasswordReset() {
   const [errors, setErrors] = useState({});
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const inputRefs = useRef([]);
+
   const navigate = useNavigate();
   const location = useLocation();
 
   const token = new URLSearchParams(location.search).get("token");
 
   const handleCodigoChange = (index, value) => {
+    const newCode = [...code];
+
+    // Dígitos completos con copiado y pegado
+    if (value.length === 6 && /^[0-9]+$/.test(value)) {
+      const digits = value.split("").slice(0, 6);
+      setCode(digits);
+      digits.forEach((digit, i) => {
+        if (inputRefs.current[i]) {
+          inputRefs.current[i].value = digit;
+        }
+      });
+      return;
+    }
+
+    // Dígito por dígito
     if (/^[0-9]?$/.test(value)) {
-      const newCode = [...code];
       newCode[index] = value;
       setCode(newCode);
+
+      if (value !== "" && index < 5) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
+
+  const handlePaste = (e) => {
+    e.preventDefault();
+    const paste = e.clipboardData.getData("text").trim();
+
+    if (/^[0-9]{6}$/.test(paste)) {
+      const digits = paste.split("");
+      setCode(digits);
+      digits.forEach((digit, i) => {
+        if (inputRefs.current[i]) {
+          inputRefs.current[i].value = digit;
+        }
+      });
+      inputRefs.current[5]?.focus(); // Enfoca el último input
     }
   };
 
@@ -61,7 +97,7 @@ function PasswordReset() {
 
   return (
     <div className="w-full px-4 sm:px-6 md:px-8 py-10 flex justify-center">
-      <div className="relative bg-white w-full max-w-md sm:max-w-lg md:max-w-2xl min-h-screen rounded-3xl shadow-xl flex flex-col items-center border border-[#CBCBCB] px-6 sm:px-10 md:px-16 pt-20 pb-10">
+      <div className="relative bg-white w-full h-auto max-w-md sm:max-w-lg md:max-w-2xl min-h-screen rounded-3xl shadow-xl flex flex-col items-center border border-[#CBCBCB] px-6 sm:px-10 md:px-16 pt-20 pb-10">
         <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
           <img
             src={logo}
@@ -88,7 +124,14 @@ function PasswordReset() {
                 maxLength="1"
                 value={valor}
                 onChange={(e) => handleCodigoChange(i, e.target.value)}
-                className="w-10  sm:w-12 h-12 mr-2 sm:h-14 border border-[#76757580] rounded-xl text-center text-lg focus:outline-none focus:border-primary"
+                onKeyDown={(e) => {
+                  if (e.key === "Backspace" && !code[i] && i > 0) {
+                    inputRefs.current[i - 1]?.focus();
+                  }
+                }}
+                onPaste={handlePaste}
+                ref={(el) => (inputRefs.current[i] = el)}
+                className="w-10 sm:w-12 h-12 mr-2 sm:h-14 border border-[#76757580] rounded-xl text-center text-lg focus:outline-none focus:border-primary"
               />
             ))}
           </div>

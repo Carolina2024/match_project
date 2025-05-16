@@ -33,7 +33,25 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     const newErrors = {};
     if (!formData.fullName.trim())
       newErrors.fullName = "Nombre y apellido son requeridos";
-    if (!formData.birthDate) newErrors.birthDate = "Fecha requerida";
+
+    if (!formData.birthDate) {
+      newErrors.birthDate = "Fecha requerida";
+    } else {
+      const birthDate = new Date(formData.birthDate);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const hasHadBirthdayThisYear =
+        today.getMonth() > birthDate.getMonth() ||
+        (today.getMonth() === birthDate.getMonth() &&
+          today.getDate() >= birthDate.getDate());
+
+      const realAge = hasHadBirthdayThisYear ? age : age - 1;
+
+      if (realAge < 18) {
+        newErrors.birthDate = "Debes ser mayor de 18 años para registrarte";
+      }
+    }
+
     if (!formData.email) newErrors.email = "Correo requerido";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       newErrors.email = "Correo inválido";
@@ -65,7 +83,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     switch (name) {
       case "email":
         if (!value.trim()) return "El correo es obligatorio";
-        if (!/\S+@\S+\.\S+/.test(value)) return "Correo electrónico inválido";
+        if (!/\S+@\S+\.\S+/.test(value)) return "Correo electrónico inválido Ejemplo: nombre@dominio.com";
         return "";
 
       case "password":
@@ -82,7 +100,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
       case "phoneNumber":
         if (!value.trim()) return "El número de teléfono es requerido";
         if (!/^(\+56)\d{9}$/.test(value))
-          return "Ingrese un número de teléfono válido en Chile siguiendo el siguiente formato: +56123456789";
+          return "Ingrese un número válido en Chile. Ej: +56123456789";
         return "";
 
       case "run":
@@ -93,15 +111,35 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
             value
           )
         )
-          return "Ingrese un Documento de Identidad válido en Chile siguiendo el siguiente formato: 12345678-9";
+          return "Ingrese un Documento válido. Ej: 12345678-9";
         return "";
 
       case "address":
         if (!value.trim()) return "La dirección es requerida";
         if (!/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ0-9\s,.#-]+$/.test(value)) {
-          return "La dirección solo puede contener letras, números, espacios, comas, puntos, # y guiones";
+          return "Sólo letras, números, comas, puntos, # y guiones";
         }
         return "";
+
+case "birthDate": {
+  if (!value.trim()) return "Fecha requerida";
+
+  const birthDate = new Date(value);
+  const today = new Date();
+
+  const age = today.getFullYear() - birthDate.getFullYear();
+  const hasHadBirthdayThisYear =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+
+  const realAge = hasHadBirthdayThisYear ? age : age - 1;
+
+  if (realAge < 18) return "Debes ser mayor de 18 años para registrarte";
+  if (realAge > 75) return "La edad máxima para registrarse es de 75 años";
+
+  return "";
+}
+
 
       default:
         return "";
@@ -110,9 +148,13 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((fd) => ({ ...fd, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
     const error = validateField(name, value);
-    setErrors((fe) => ({ ...fe, [name]: error }));
+    setErrors((prev) => ({ ...prev, [name]: error }));
   };
 
   if (!isOpen) return null;
@@ -158,7 +200,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               Así podemos asegurarnos de que haya una buena conexión entre
               ustedes.
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-primary mt-1 mb-4">
+            <h2 className="md:text-2xl text-xl sm:text-3xl font-bold text-primary mt-1 mb-4">
               Crear Cuenta
             </h2>
             <div className="flex justify-center items-center space-x-4 mb-6">
@@ -169,7 +211,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6 px-7">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 text-xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-20 md:text-xl text-base">
               <div>
                 <label htmlFor="fullName" className="block font-medium mb-2">
                   Nombre y Apellido*
@@ -179,6 +221,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   type="text"
                   value={formData.fullName}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className=" w-full rounded-3xl p-2 bg-white/75 border-primary border-1 focus:outline-none focus:border-primary"
                 />
                 {errors.fullName && (
@@ -196,10 +239,11 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     type="date"
                     value={formData.birthDate}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className=" border border-primary bg-white/75 rounded-3xl p-2 pr-12 text-[#595146] focus:outline-none focus:border-primary appearance-none"
                   />
                   {errors.birthDate && (
-                    <p className="text-red-500">{errors.birthDate}</p>
+                    <p className="text-red-500 text-lg">{errors.birthDate}</p>
                   )}
                 </div>
               </div>
@@ -213,9 +257,10 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className="w-full border-primary bg-white/75 border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
-                {errors.email && <p className="text-red-500">{errors.email}</p>}
+                {errors.email && <p className="text-red-500 text-lg">{errors.email}</p>}
               </div>
 
               <div className="mt-9 sm:mt-0">
@@ -229,6 +274,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     className="w-full border bg-white/75 border-primary rounded-3xl p-2 pr-12 focus:outline-none focus:border-primary"
                   />
                   <span
@@ -267,7 +313,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     )}
                   </span>
                   {errors.password && (
-                    <p className="text-red-500">{errors.password}</p>
+                    <p className="text-red-500 md:text-lg text-base">{errors.password}</p>
                   )}
                 </div>
               </div>
@@ -281,10 +327,11 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   type="text"
                   value={formData.phoneNumber}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-500">{errors.phoneNumber}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.phoneNumber}</p>
                 )}
               </div>
 
@@ -297,9 +344,10 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   type="text"
                   value={formData.run}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary "
                 />
-                {errors.run && <p className="text-red-500">{errors.run}</p>}
+                {errors.run && <p className="text-red-500 md:text-lg text-base">{errors.run}</p>}
               </div>
 
               <div>
@@ -314,15 +362,16 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   type="text"
                   value={formData.address}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
                 {errors.address && (
-                  <p className="text-red-500">{errors.address}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.address}</p>
                 )}
               </div>
             </div>
 
-            <div className="text-xl mb-8">
+            <div className="md:text-xl text-base mb-8">
               <label htmlFor="homeType" className="block font-medium mb-2">
                 ¿Qué espacio tienes disponible para tu nuevo compañero?*
               </label>
@@ -344,11 +393,11 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 ))}
               </div>
               {errors.homeType && (
-                <p className="text-red-500">{errors.homeType}</p>
+                <p className="text-red-500 md:text-lg text-base">{errors.homeType}</p>
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-xl text-[#333333]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:text-xl text-base text-[#333333]">
               <div>
                 <label className="block font-medium mb-2">
                   ¿Tu condominio o edificio permite mascotas?*
@@ -378,7 +427,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   </label>
                 </div>
                 {errors.allowsPets && (
-                  <p className="text-red-500">{errors.allowsPets}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.allowsPets}</p>
                 )}
               </div>
 
@@ -411,7 +460,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   </label>
                 </div>
                 {errors.hasPets && (
-                  <p className="text-red-500">{errors.hasPets}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.hasPets}</p>
                 )}
               </div>
 
@@ -444,7 +493,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   </label>
                 </div>
                 {errors.isVaccinated && (
-                  <p className="text-red-500">{errors.isVaccinated}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.isVaccinated}</p>
                 )}
               </div>
 
@@ -477,12 +526,12 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   </label>
                 </div>
                 {errors.isSterilized && (
-                  <p className="text-red-500">{errors.isSterilized}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.isSterilized}</p>
                 )}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xl text-[#333333]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:text-xl text-base text-[#333333]">
               <div>
                 <label className="block font-medium mb-2">
                   ¿Cuántas horas al día estará sola la mascota?*
@@ -498,7 +547,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   className="w-auto bg-white/75 border-primary px-6 py-1 border-2 rounded-3xl focus:outline-none focus:border-primary"
                 />
                 {errors.hoursAlone && (
-                  <p className="text-red-500">{errors.hoursAlone}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.hoursAlone}</p>
                 )}
               </div>
 
@@ -512,16 +561,17 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   type="text"
                   value={formData.petDestroy}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className="w-full border-2 bg-white/75 border-primary rounded-3xl p-2 h-24 focus:outline-none focus:border-primary"
                 />
                 {errors.petDestroy && (
-                  <p className="text-red-500">{errors.petDestroy}</p>
+                  <p className="text-red-500 md:text-lg text-base">{errors.petDestroy}</p>
                 )}
               </div>
             </div>
 
             {serverError && (
-              <p className="text-red-600 text-center mb-4">{serverError}</p>
+              <p className="text-red-600 text-center mb-4 md:text-lg text-base">{serverError}</p>
             )}
 
             <div className="text-right">

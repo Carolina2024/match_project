@@ -152,8 +152,8 @@ export class CreateAdopterDto {
   @IsNotEmpty({
     message: 'La cantidad de horas que pasará sola la mascota es requerida',
   })
-  @Min(0, { message: 'El valor minimo permitido es 0' })
-  @Max(23, { message: 'El valor maximo permitido es 23' })
+  @Min(0, { message: 'La cantidad de horas minimas permitidas es 0' })
+  @Max(23, { message: 'La cantidad de horas maximas permitidas es 23' })
   hoursAlone: number;
 
   @ApiProperty({

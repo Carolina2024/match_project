@@ -21,7 +21,7 @@ import {
   ApiConflictResponse,
   ApiBadRequestResponse,
 } from '@nestjs/swagger';
-import { QueryUsersDto } from './dtos/query-user.dto';
+import { GetUsersQueryDto } from './dtos/get-users-query.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { UserRole } from 'src/common/enums/userRole.enum';
@@ -107,7 +107,7 @@ export class UsersController {
   })
   @Auth(UserRole.ADMIN)
   @Get()
-  getAllUsers(@Query() query: QueryUsersDto) {
+  getAllUsers(@Query() query: GetUsersQueryDto) {
     return this.usersService.findAll(query);
   }
 

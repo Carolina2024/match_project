@@ -11,7 +11,7 @@ import { Users } from './entities/users.entity';
 import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
-import { QueryUsersDto } from './dtos/query-user.dto';
+import { GetUsersQueryDto } from './dtos/get-users-query.dto';
 import { AdoptersService } from '../adopters/adopters.service';
 import { UserRole } from 'src/common/enums/userRole.enum';
 import { PaginationInterface } from 'src/common/interfaces/pagination.interface';
@@ -47,7 +47,7 @@ export class UsersService {
     return user;
   }
 
-  async findAll(query: QueryUsersDto): Promise<PaginationInterface<Users>> {
+  async findAll(query: GetUsersQueryDto): Promise<PaginationInterface<Users>> {
     const { page = 1, limit = 10, ...filters } = query;
 
     const where: any = { role: UserRole.ADOPTERS, isActive: true };
@@ -168,7 +168,7 @@ export class UsersService {
           );
         }
       }
-      await this.adoptersService.updateAdopter(user.adopter.id, {
+      await this.adoptersService.updateById(user.adopter.id, {
         ...adopterdto,
         id: user.adopter.id,
       });

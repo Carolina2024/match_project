@@ -2,7 +2,7 @@ import { IsOptional, IsString } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 
-export class QueryUsersDto extends PaginationDto {
+export class GetUsersQueryDto extends PaginationDto {
   @ApiPropertyOptional({
     description: 'Buscar por nombre',
     example: 'John Doe',

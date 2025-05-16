@@ -14,6 +14,7 @@ import { LoginDto } from './dtos/login.dto';
 import * as bcrypt from 'bcrypt';
 import { MailService } from '../mail/mail.service';
 import { ConfigService } from '@nestjs/config';
+import { ResetPasswordDto } from './dtos/reset-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -139,11 +140,11 @@ export class AuthService {
     };
   }
 
-  async resetPassword(
-    token: string,
-    newPassword: string,
-    recoveryCode: string,
-  ): Promise<{ message: string }> {
+  async resetPassword({
+    newPassword,
+    recoveryCode,
+    token,
+  }: ResetPasswordDto): Promise<{ message: string }> {
     let payload: { sub: string; purpose: string; recoveryCode: string };
     try {
       payload = this.jwtService.verify(token);
@@ -165,7 +166,7 @@ export class AuthService {
     }
     const user = await this.usersService.findOneById(payload.sub);
     user.password = await bcrypt.hash(newPassword, 10);
-    await this.usersService.updatePassword(user.id, user.password);
+    await this.usersService.updatePasswordById(user.id, user.password);
 
     return { message: 'Contraseña actualizada exitosamente' };
   }

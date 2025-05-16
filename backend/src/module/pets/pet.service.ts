@@ -10,7 +10,7 @@ import { Pet } from './entities/pet.entity';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
 import { PaginationDto } from '../../common/dto/pagination.dto';
-import { PetFilterDto } from './dto/pet-filter.dto';
+import { GetPetsQueryDto } from './dto/get-pets-query.dto';
 import { Users } from '../users/entities/users.entity';
 import {
   PetTrait,
@@ -89,7 +89,7 @@ export class PetService {
 
   async findAll(
     paginationDto: PaginationDto,
-    filterDto?: PetFilterDto,
+    filterDto?: GetPetsQueryDto,
   ): Promise<PaginationInterface<Pet>> {
     const { page = 1, limit = 10 } = paginationDto;
     const skip = (page - 1) * limit;
@@ -144,8 +144,8 @@ export class PetService {
         });
       }
       if (filterDto.status) {
-        queryBuilder.andWhere('pet.status ILIKE :status', {
-          status: `%${filterDto.status}%`,
+        queryBuilder.andWhere('pet.status = :status', {
+          status: `${filterDto.status}`,
         });
       }
 
@@ -173,7 +173,7 @@ export class PetService {
 
   async findAllLimited(
     paginationDto: PaginationDto,
-    filterDto?: PetFilterDto,
+    filterDto?: GetPetsQueryDto,
   ): Promise<PaginationInterface<Partial<Pet>>> {
     const { page = 1, limit = 10 } = paginationDto;
     const skip = (page - 1) * limit;
@@ -209,8 +209,8 @@ export class PetService {
         });
       }
       if (filterDto.status) {
-        queryBuilder.andWhere('pet.status ILIKE :status', {
-          status: `%${filterDto.status}%`,
+        queryBuilder.andWhere('pet.status = :status', {
+          status: `${filterDto.status}`,
         });
       }
 
@@ -266,7 +266,7 @@ export class PetService {
     return pet;
   }
 
-  async update(
+  async updateById(
     id: string,
     updatePetDto: UpdatePetDto,
     files: Express.Multer.File[],
@@ -330,7 +330,7 @@ export class PetService {
     return await this.findOne(id);
   }
 
-  async remove(id: string): Promise<{ message: string }> {
+  async removeById(id: string): Promise<{ message: string }> {
     const pet = await this.petRepository.findOne({
       where: { id, isActive: true },
     });
@@ -342,10 +342,10 @@ export class PetService {
     return { message: `Mascota con ID ${id} eliminada exitosamente` };
   }
 
-  async findCompatiblePets(
+  async findCompatiblePetsByUserId(
     userId: string,
     paginationDto: PaginationDto,
-    filterDto?: PetFilterDto,
+    filterDto?: GetPetsQueryDto,
   ): Promise<{
     items: Pet[];
     total: number;
@@ -357,7 +357,6 @@ export class PetService {
     const { page = 1, limit = 10 } = paginationDto;
     const skip = (page - 1) * limit;
 
-    // Primero obtenemos la información del adoptante
     const user = await this.userRepository.findOne({
       where: { id: userId, isActive: true },
       relations: ['adopter'],
@@ -371,7 +370,7 @@ export class PetService {
 
     const adopter = user.adopter;
 
-    // Si el adoptante no permite mascotas, no mostrar ninguna (esto debería ser validado antes)
+    // Si el adoptante no permite mascotas, no mostrar ninguna
     if (!adopter.allowsPets) {
       throw new ConflictException(
         `El edificio o condominio del adoptante no permite mascotas en su hogar`,
@@ -625,7 +624,6 @@ export class PetService {
       limit: +limit,
       page: +page,
       totalPages: Math.ceil(total / limit),
-      compatibilityScore,
     };
   }
 }

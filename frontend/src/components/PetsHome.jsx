@@ -5,6 +5,9 @@ function PetsHome() {
   const { matchedPet, isMatched, handleClickConoceme, mascotas } = usePet();
 
   const navigate = useNavigate();
+  if(matchedPet) {
+    return 
+  }
 
   return (
     <div className="mx-auto bg-transparent">

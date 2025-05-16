@@ -13,37 +13,42 @@ const AdoptionApllication = () => {
 
   const [solicitudes, setSolicitudes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(10);
-
-  const solicitudesFiltradas = solicitudes.filter((s) => {
-    const coincideEstado = filtro === "Todos" || s.status === filtro;
-    const coincideBusqueda = s.pet?.name
-      .toLowerCase()
-      .includes(busqueda.toLowerCase());
-    return coincideEstado && coincideBusqueda;
-  });
-
-  const totalPages = Math.ceil(solicitudesFiltradas.length / itemsPerPage);
-
-  const solicitudesPaginadas = solicitudesFiltradas.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalSolicitudes, setTotalSolicitudes] = useState(0);
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
-        const data = await getAllMatches();
-        setSolicitudes(data.items || data);
+        const statusParam = filtro === "Todos" ? "" : filtro;
+        const data = await getAllMatches(currentPage, 8, statusParam, busqueda);
+        console.log("Datos recibidos de la API:", data);
+
+        setSolicitudes(data.items);
+        setTotalPages(data.totalPages);
+        setTotalSolicitudes(data.total);
       } catch (error) {
         console.error("Error al obtener solicitudes:", error.message);
       }
     };
 
     fetchSolicitudes();
-  }, []);
+  }, [currentPage, filtro, busqueda]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filtro, busqueda]);
 
   const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+  const mapMatchToSolicitud = (match) => ({
+    id: match.id,
+    adopterName: match.user?.fullname || "N/A",
+    petName: match.pet?.name || "N/A",
+    status: match.status,
+    applicationDate: match.applicationDate,
+    user: match.user,
+    pet: match.pet,
+  });
 
   const handleStatusUpdate = async (matchId, nuevoEstado) => {
     try {
@@ -61,7 +66,8 @@ const AdoptionApllication = () => {
         throw new Error(error.message || "Error al actualizar estado");
       }
 
-      const updatedMatch = await res.json();
+      const updatedMatchRaw = await res.json();
+      const updatedMatch = mapMatchToSolicitud(updatedMatchRaw);
 
       setSolicitudes((prev) =>
         prev.map((s) => (s.id === matchId ? updatedMatch : s))
@@ -107,75 +113,83 @@ const AdoptionApllication = () => {
         <div className="flex justify-center sm:block"></div>
 
         <div className="grid grid-cols-2 gap-15 mr-[36px] ml-[-15px] justify-center  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {solicitudesPaginadas.map((sol) => (
-            <div
-              key={sol.id}
-              onClick={() => {
-                if (
-                  sol.status === "En proceso" ||
-                  sol.status === "Rechazado" ||
-                  sol.status === "Aprobado"
-                ) {
-                  setReadingRequest(sol);
-                }
-              }}
-              className="cursor-pointer w-[175px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
-            >
-              <div className="text-center space-y-2">
-                <h3 className="text-sm sm:text-lg font-semibold">
-                  {sol.pet.name}
-                </h3>
+          {solicitudes.length > 0 ? (
+            solicitudes.map((sol) => (
+              <div
+                key={sol.id}
+                onClick={() => {
+                  if (
+                    sol.status === "En proceso" ||
+                    sol.status === "Rechazado" ||
+                    sol.status === "Aprobado"
+                  ) {
+                    setReadingRequest(sol);
+                  }
+                }}
+                className="cursor-pointer w-[175px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
+              >
+                <div className="text-center space-y-2">
+                  <h3 className="text-sm sm:text-lg font-semibold">
+                    {sol.petName}
+                  </h3>
 
-                <FaHeart
-                  className={` mx-auto text-lg sm:text-xl mx-auto ${
-                    sol.status === "Rechazado"
-                      ? "text-gray-500"
-                      : "text-orange-400"
-                  }`}
-                />
+                  <FaHeart
+                    className={` mx-auto text-lg sm:text-xl mx-auto ${
+                      sol.status === "Rechazado"
+                        ? "text-gray-500"
+                        : "text-orange-400"
+                    }`}
+                  />
 
-                <p className="text-xs sm:text-base font-medium">
-                  {sol.user.fullname}
-                </p>
+                  <p className="text-xs sm:text-base font-medium">
+                    {sol.adopterName}
+                  </p>
 
-                <div className="flex items-center justify-center text-sm text-gray-600 gap-1">
-                  <BsCalendar2 />
-                  <span className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium ">
-                    {new Date(sol.applicationDate).toLocaleDateString("es-ES")}
+                  <div className="flex items-center justify-center text-sm text-gray-600 gap-1">
+                    <BsCalendar2 />
+                    <span className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium ">
+                      {new Date(sol.applicationDate).toLocaleDateString(
+                        "es-ES"
+                      )}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex justify-center items-center mt-[-8px] px-1 flex-wrap gap-1 w-full">
+                  <span
+                    className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium text-center max-w-full whitespace-nowrap ${
+                      sol.status === "Por revisar"
+                        ? "bg-gray-300 text-gray-600"
+                        : sol.status === "En proceso"
+                        ? "bg-orange-200 text-orange-800"
+                        : sol.status === "Aprobado"
+                        ? "bg-disponible text-[#35A302]"
+                        : sol.status === "Falta subir"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : "bg-red-300 text-red-600"
+                    }`}
+                  >
+                    {sol.status}
                   </span>
+                  {(sol.status === "Por revisar" ||
+                    sol.status === "En proceso") && (
+                    <FaRegEdit
+                      className="text-base sm:text-lg  ml-2 text-gray-600 cursor-pointer hover:text-black"
+                      title="Ver detalles de la solicitud"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSolicitudEditando(sol);
+                      }}
+                    />
+                  )}
                 </div>
               </div>
-
-              <div className="flex justify-center items-center mt-[-8px] px-1 flex-wrap gap-1 w-full">
-                <span
-                  className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium text-center max-w-full whitespace-nowrap ${
-                    sol.status === "Por revisar"
-                      ? "bg-gray-300 text-gray-600"
-                      : sol.status === "En proceso"
-                      ? "bg-orange-200 text-orange-800"
-                      : sol.status === "Aprobado"
-                      ? "bg-disponible text-[#35A302]"
-                      : sol.status === "Falta subir"
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-red-300 text-red-600"
-                  }`}
-                >
-                  {sol.status}
-                </span>
-                {(sol.status === "Por revisar" ||
-                  sol.status === "En proceso") && (
-                  <FaRegEdit
-                    className="text-base sm:text-lg  ml-2 text-gray-600 cursor-pointer hover:text-black"
-                    title="Ver detalles de la solicitud"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSolicitudEditando(sol);
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-500">
+              No se encontraron solicitudes
+            </p>
+          )}
         </div>
 
         {solicitudEditando && (
@@ -197,8 +211,7 @@ const AdoptionApllication = () => {
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4">
           <div className="text-sm text-gray-500 mb-4 sm:mb-0">
-            Mostrando {solicitudesPaginadas.length} de{" "}
-            {solicitudesFiltradas.length} solicitudes
+            Mostrando {solicitudes.length} de {totalSolicitudes} solicitudes
           </div>
 
           <div className="flex items-center gap-2">

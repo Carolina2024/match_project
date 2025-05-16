@@ -175,7 +175,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
                 Dirección y comuna:
               </span>
 
-              <span>Lorem ipsum dolor sit amet consectetur.</span>
+              <span>{adopter?.address}</span>
             </div>
           </div>
         </div>

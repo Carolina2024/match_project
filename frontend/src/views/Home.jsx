@@ -202,7 +202,7 @@ const Home = () => {
         <>
           {/* Mobile */}
           <div className="block md:hidden w-[380px] mt-10 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-6 md:mb-16 relative">
-            {/* Botón flotante arriba a la derecha */}
+            {/* Botón flotante */}
             <section className="absolute top-4 right-4 z-10">
               <a
                 href="https://esponsor.com/pataspirque"
@@ -215,10 +215,10 @@ const Home = () => {
               </a>
             </section>
 
-            {/* Contenido centrado */}
+            {/* Contenido */}
             <div className="flex flex-col items-center text-center">
               <h2 className="text-4xl font-bold font-secundary leading-tight text-shadow-lg/10">
-                <span className="text-primary">Matchea </span> <br/>
+                <span className="text-primary">Matchea </span> <br />
                 <span className="text-tertiary">con tu futura </span>
                 <span className="text-primary">mascota</span>
               </h2>
@@ -231,6 +231,7 @@ const Home = () => {
             </div>
           </div>
 
+          {/* Desktop */}
           <div className=" hidden md:flex relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis items-center md:ml-10">
             <svg
               width="918"

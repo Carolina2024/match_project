@@ -128,9 +128,11 @@ export class AuthController {
       'Permite que los usuarios que olvidaron su contraseña puedan recibir un enlace en su correo electrónico para crear una nueva contraseña',
   })
   @ApiOkResponse({
-    description: 'La contraseña del usuario es actualizada exitosamente',
+    description:
+      'Se envía exitosamente a la bandeja de entrada del usuario el código y enlace para recuperar su contraseña',
     example: {
-      message: 'Código de recuperación enviado al correo electrónico',
+      message:
+        'Te hemos enviado un correo con un enlace y un código para recuperar tu contraseña',
     },
   })
   @ApiNotFoundResponse({
@@ -174,6 +176,15 @@ export class AuthController {
       message: 'Token inválido o expirado',
       error: 'Unauthorized',
       statusCode: 401,
+    },
+  })
+  @ApiConflictResponse({
+    description:
+      'El usuario intenta actualizar su contraseña con la misma contraseña',
+    example: {
+      message: 'Su nueva contraseña debe ser distinta a la actual',
+      error: 'Conflict',
+      statusCode: 409,
     },
   })
   @Post('reset-password')

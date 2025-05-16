@@ -8,6 +8,7 @@ import { getAllPets } from "../api/petService";
 import PetDetailsModal from "./modals/PetDetailsModal";
 import PetModalDelete from "./modals/PetModalDelete";
 import { deletePet } from "../api/deletePet";
+import { RiSearchLine } from "react-icons/ri";
 
 const PetList = ({ setActiveView, setEditingPet }) => {
   const [pets, setPets] = useState([]);
@@ -114,8 +115,8 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   };
 
   return (
-    <div className="min-h-screen">
-      <div className="overflow-x-auto bg-white md:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] md:rounded-xl p-6">
+    <div className="min-h-screen mt-8">
+      <div className="max-w-[1200px] mx-auto overflow-x-auto bg-white md:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] md:rounded-xl p-6">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
           <div className="relative w-full sm:w-[500px] md:w-[350px]">
             <input
@@ -126,7 +127,10 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               className="w-full border border-gray-300 rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[16px]"
               style={{ color: "#767575" }}
             />
-            <FaSearch className="absolute left-3 top-3 text-gray-400" />
+            <RiSearchLine
+              className="absolute left-3 top-3 text-gray-400"
+              size={20}
+            />
           </div>
 
           <button
@@ -138,30 +142,31 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         </div>
 
         <div className="mb-4">
-          <div className="mb-2">
-            <span className="font-raleway text-[17px] font-semibold text-[#595146]">
+          <div className="mb-2 flex items-center gap-4 flex-wrap">
+            <span className="font-raleway text-[16px] text-[#595146]">
               Filtrar por:
             </span>
-          </div>
-          <div className="flex flex-wrap gap-2 font-raleway text-[16px] text-[#767575]">
-            <CustomSelect
-              label="Especie"
-              options={["Todos", "Perro", "Gato"]}
-              selected={filterSpecies}
-              onChange={setFilterSpecies}
-            />
-            <CustomSelect
-              label="Tamaño"
-              options={["Todos", "Pequeño", "Mediano", "Grande"]}
-              selected={filterSize}
-              onChange={setFilterSize}
-            />
-            <CustomSelect
-              label="Estado"
-              options={["Todos", "Disponible", "En Proceso", "Adoptado"]}
-              selected={filterStatus}
-              onChange={setFilterStatus}
-            />
+
+            <div className="flex flex-wrap gap-2 font-raleway text-[16px] text-[#767575]">
+              <CustomSelect
+                label="Especie"
+                options={["Todos", "Perro", "Gato"]}
+                selected={filterSpecies}
+                onChange={setFilterSpecies}
+              />
+              <CustomSelect
+                label="Tamaño"
+                options={["Todos", "Grande", "Mediano", "Pequeño"]}
+                selected={filterSize}
+                onChange={setFilterSize}
+              />
+              <CustomSelect
+                label="Estado"
+                options={["Todos", "En Proceso", "Adoptado", "Disponible"]}
+                selected={filterStatus}
+                onChange={setFilterStatus}
+              />
+            </div>
           </div>
         </div>
 
@@ -228,7 +233,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+              className="font-raleway text-[16px] px-4 py-1 bg-white rounded-md border-1 border-[#595146]  hover:bg-gray-400 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -240,9 +245,9 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`w-8 h-8 rounded border text-sm font-medium ${
+                      className={`w-8 h-8 rounded-md border-1 border-[#595146] text-sm font-medium ${
                         currentPage === page
-                          ? "bg-[#595146] text-white border-[#595146]"
+                          ? "bg-[#595146] text-white border-4 border-[#595146] shadow-md"
                           : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
                       }`}
                     >
@@ -254,7 +259,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-3 py-2 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+              className="font-raleway text-[16px] px-4 py-1 bg-white rounded-md border-1 border-[#595146] hover:bg-gray-400 disabled:opacity-50"
             >
               Siguiente
             </button>

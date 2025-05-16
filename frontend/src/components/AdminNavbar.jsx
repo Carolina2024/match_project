@@ -87,14 +87,23 @@ const AdminNavbar = ({
         <div className="flex items-center gap-4">
           <button
             onClick={() => setSidebarVisible(true)}
-            className={`md:hidden w-12 h-12 bg-white rounded-full shadow flex justify-center items-center hover:bg-gray-100 transition mr-auto ${
+            className={`md:hidden w-9 h-9 bg-white rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.35)] flex justify-center items-center hover:bg-gray-100 transition mr-auto ${
               isSidebarVisible ? "left-[-1000%]" : ""
             }`}
           >
-            <div className="flex flex-col items-center justify-between h-6 w-6">
-              <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
-              <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
-              <span className="w-5 h-[2px] bg-orange-500 rounded-sm"></span>
+            <div className="flex flex-col items-center justify-between h-3 w-6">
+              <span
+                className="w-5 h-[2px] rounded-sm"
+                style={{ backgroundColor: "#F9A975" }}
+              ></span>
+              <span
+                className="w-5 h-[2px] rounded-sm"
+                style={{ backgroundColor: "#F9A975" }}
+              ></span>
+              <span
+                className="w-5 h-[2px] rounded-sm"
+                style={{ backgroundColor: "#F9A975" }}
+              ></span>
             </div>
           </button>
         </div>

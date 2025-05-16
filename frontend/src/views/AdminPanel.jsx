@@ -127,10 +127,12 @@ const AdminPanel = () => {
       />
 
       <div
-        className="top-0 right-0 h-full transition-all duration-300"
-        style={{ left: isSidebarVisible ? "250px" : "0px",marginTop: "90px" }}
+        className={`w-full min-h-screen transition-all duration-300 
+    ${isSidebarVisible ? "sm:ml-[0px]" : "sm:ml-0"} 
+    absolute sm:relative top-0 right-0`}
+        style={{ marginTop: "100px" }}
       >
-        <div className="p-7">{renderView()}</div>
+        <div>{renderView()}</div>
       </div>
     </div>
   );

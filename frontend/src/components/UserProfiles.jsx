@@ -88,7 +88,7 @@ const UserProfiles = () => {
   };
 
   return (
-    <div className="shadow-[0px_0px_10px_rgba(0,0,0,0.2)] rounded-[20px] p-4 md:p-8 bg-white border border-gray-400 overflow-x-auto">
+    <div className="shadow-[0px_0px_10px_rgba(0,0,0,0.2)] rounded-[20px] p-4 md:p-8 bg-white border border-gray-400 overflow-x-auto mt-8">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
         <div className="relative w-full max-w-md">
           <input

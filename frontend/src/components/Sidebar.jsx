@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
 import { FiUsers } from "react-icons/fi";
 import { LuFileCheck } from "react-icons/lu";
-
 import { PiPawPrint } from "react-icons/pi";
-
 import logo from "../assets/logo.png";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
@@ -51,10 +49,9 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
 
   return (
     <>
-      {/* Overlay modal solo visible en móvil cuando sidebar está activo */}
       {isVisible && (
         <div
-          onClick={() => setIsVisible(false)} // Oculta el sidebar al hacer clic en el overlay
+          onClick={() => setIsVisible(false)}
           style={overlayStyles}
           className="md:hidden"
         ></div>
@@ -62,7 +59,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
       <div style={sidebarStyles}>
         <button
           onClick={() => setIsVisible(false)}
-          style={closeButtonStyles}
+          style={{ ...closeButtonStyles, marginTop: "10px", fontSize: "33px" }}
           className="block md:hidden"
         >
           x

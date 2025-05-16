@@ -13,7 +13,7 @@ const AdoptionApllication = () => {
 
   const [solicitudes, setSolicitudes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(8);
+  const [itemsPerPage] = useState(10);
 
   const solicitudesFiltradas = solicitudes.filter((s) => {
     const coincideEstado = filtro === "Todos" || s.status === filtro;
@@ -74,7 +74,7 @@ const AdoptionApllication = () => {
   };
 
   return (
-    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen">
+    <div className="bg-white sm:bg-[#FAF9F6]">
       <div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 m-0 p-0">
         <div className="flex flex-col gap-4 mb-8">
           <div className="relative w-full sm:w-64">

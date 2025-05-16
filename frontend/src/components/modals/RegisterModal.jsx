@@ -98,8 +98,8 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
 
       case "address":
         if (!value.trim()) return "La dirección es requerida";
-        if (!/^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ,.\-/]*$/.test(value)) {
-          return "La dirección contiene caracteres inválidos";
+        if (!/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ0-9\s,.#-]+$/.test(value)) {
+          return "La dirección solo puede contener letras, números, espacios, comas, puntos, # y guiones";
         }
         return "";
 

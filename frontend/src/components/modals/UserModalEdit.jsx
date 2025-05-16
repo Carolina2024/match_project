@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { getUserById, updateUserProfile } from "../../api/editProfileApi";
 import { useForm, Controller, useController } from "react-hook-form";
-import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import PropTypes from "prop-types";
 
 const initialFormState = {
   fullname: "",
@@ -29,13 +30,11 @@ const initialFormState = {
 };
 
 function UserModalEdit() {
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm({ defaultValues: initialFormState });
+  const { register, handleSubmit, control, reset } = useForm({
+    defaultValues: initialFormState,
+  });
+
+  const { updateUser } = useAuth();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -73,7 +72,7 @@ function UserModalEdit() {
     };
 
     fetchUser();
-  }, []);
+  }, [reset]);
 
   const onSubmit = async (data) => {
     const id = JSON.parse(localStorage.getItem("user")).id;
@@ -87,6 +86,11 @@ function UserModalEdit() {
 
     try {
       await updateUserProfile(id, data);
+
+      const refreshed = await getUserById(id);
+
+      // Usa updateUser del contexto
+      updateUser(refreshed);
     } catch (error) {
       console.error("Error updating profile:", error);
     }
@@ -379,7 +383,7 @@ function UserModalEdit() {
   );
 }
 
-const RadioGroup = ({ name, control }, ref) => {
+const RadioGroup = ({ name, control }) => {
   const {
     field: { value, onChange },
   } = useController({ name, control });
@@ -427,10 +431,7 @@ const RadioGroup = ({ name, control }, ref) => {
   );
 };
 
-const TagOptions = (
-  { options, value, onChange, isSingleSelect = false },
-  ref
-) => {
+const TagOptions = ({ options, value, onChange, isSingleSelect = false }) => {
   const handleToggle = (option) => {
     if (isSingleSelect) {
       if (value !== option) {
@@ -501,6 +502,26 @@ const BooleanToggleTag = ({ label, value, onChange }) => {
       </button>
     </div>
   );
+};
+RadioGroup.propTypes = {
+  name: PropTypes.string.isRequired,
+  control: PropTypes.object.isRequired,
+};
+
+TagOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.string,
+  ]).isRequired,
+  onChange: PropTypes.func.isRequired,
+  isSingleSelect: PropTypes.bool,
+};
+
+BooleanToggleTag.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default UserModalEdit;

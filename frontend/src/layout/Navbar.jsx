@@ -223,7 +223,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* NAVBAR DESKTOP */}
+      {/* Navbar Desktop */}
       <header className="hidden md:flex bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
           <img
@@ -373,19 +373,17 @@ const Navbar = () => {
             </button>
           )}
         </div>
-
-
       </header>
-              <AuthModalsController
-          isLoginOpen={isLoginOpen}
-          setLoginOpen={setLoginOpen}
-          isRegisterOpen={isRegisterOpen}
-          setRegisterOpen={setRegisterOpen}
-          isRegisterbOpen={isRegisterbOpen}
-          setRegisterbOpen={setRegisterbOpen}
-          isRecoverOpen={isRecoverOpen}
-          setRecoverOpen={setRecoverOpen}
-        />
+      <AuthModalsController
+        isLoginOpen={isLoginOpen}
+        setLoginOpen={setLoginOpen}
+        isRegisterOpen={isRegisterOpen}
+        setRegisterOpen={setRegisterOpen}
+        isRegisterbOpen={isRegisterbOpen}
+        setRegisterbOpen={setRegisterbOpen}
+        isRecoverOpen={isRecoverOpen}
+        setRecoverOpen={setRecoverOpen}
+      />
     </>
   );
 };

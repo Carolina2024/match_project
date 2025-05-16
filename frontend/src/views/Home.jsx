@@ -96,7 +96,7 @@ const Home = () => {
       {!loggedIn ? (
         <>
           <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden md:flex items-center md:ml-10 bg-transparent">
-            {/* SVG decorativo de fondo */}
+            {/* SVG de fondo */}
             <svg
               width="1030"
               height="745"
@@ -200,7 +200,38 @@ const Home = () => {
         </>
       ) : (
         <>
-          <div className="relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis flex items-center md:ml-10">
+          {/* Mobile */}
+          <div className="block md:hidden w-[380px] mt-10 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-6 md:mb-16 relative">
+            {/* Botón flotante arriba a la derecha */}
+            <section className="absolute top-4 right-4 z-10">
+              <a
+                href="https://esponsor.com/pataspirque"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="bg-primary w-15 h-15 cursor-pointer rounded-full flex items-center justify-center shadow-lg hover:bg-primary/90">
+                  <HandHeart size={35} className="stroke-white" />
+                </button>
+              </a>
+            </section>
+
+            {/* Contenido centrado */}
+            <div className="flex flex-col items-center text-center">
+              <h2 className="text-4xl font-bold font-secundary leading-tight text-shadow-lg/10">
+                <span className="text-primary">Matchea </span> <br/>
+                <span className="text-tertiary">con tu futura </span>
+                <span className="text-primary">mascota</span>
+              </h2>
+
+              <img
+                src={imageb}
+                alt="Perrito mirando"
+                className="w-[300px] mt-6 object-cover rounded-[50px]"
+              />
+            </div>
+          </div>
+
+          <div className=" hidden md:flex relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis items-center md:ml-10">
             <svg
               width="918"
               height="425"

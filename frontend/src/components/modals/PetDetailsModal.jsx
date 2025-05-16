@@ -82,7 +82,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:gap-x-33 mt-6">
           <div>
             <h3 className="font-semibold text-gray-700 mb-1">Estado</h3>
             <span

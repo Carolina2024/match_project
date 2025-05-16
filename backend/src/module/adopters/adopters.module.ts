@@ -7,6 +7,6 @@ import { Match } from '../matches/entities/match.entity';
 @Module({
   providers: [AdoptersService],
   imports: [TypeOrmModule.forFeature([Adopters, Match])],
-  exports: [AdoptersService]
+  exports: [AdoptersService],
 })
 export class AdoptersModule {}

@@ -3,22 +3,6 @@ import PropTypes from "prop-types";
 // import { getUserById } from "../../api/userService";
 
 const RequestModal = ({ request, onClose }) => {
-  // const [adopter, setAdopter] = useState(null);
-
-  // useEffect(() => {
-  //   const fetchAdopter = async () => {
-  //     try {
-  //       const data = await getUserById(request.userId);
-  //       setAdopter(data.adopter || null);
-  //     } catch (err) {
-  //       console.error("Error al obtener adopter:", err.message);
-  //     }
-  //   };
-
-  //   if (request?.userId) {
-  //     fetchAdopter();
-  //   }
-  // }, [request?.userId]);
 
   if (!request) return null;
 

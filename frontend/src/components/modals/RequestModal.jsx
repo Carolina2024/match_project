@@ -1,24 +1,24 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { getUserById } from "../../api/userService";
+// import { useEffect, useState } from "react";
+// import { getUserById } from "../../api/userService";
 
 const RequestModal = ({ request, onClose }) => {
-  const [adopter, setAdopter] = useState(null);
+  // const [adopter, setAdopter] = useState(null);
 
-  useEffect(() => {
-    const fetchAdopter = async () => {
-      try {
-        const data = await getUserById(request.userId);
-        setAdopter(data.adopter || null);
-      } catch (err) {
-        console.error("Error al obtener adopter:", err.message);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchAdopter = async () => {
+  //     try {
+  //       const data = await getUserById(request.userId);
+  //       setAdopter(data.adopter || null);
+  //     } catch (err) {
+  //       console.error("Error al obtener adopter:", err.message);
+  //     }
+  //   };
 
-    if (request?.userId) {
-      fetchAdopter();
-    }
-  }, [request?.userId]);
+  //   if (request?.userId) {
+  //     fetchAdopter();
+  //   }
+  // }, [request?.userId]);
 
   if (!request) return null;
 
@@ -82,7 +82,7 @@ const RequestModal = ({ request, onClose }) => {
               <span className="text-gray-600 font-semibold">
                 ID de mascota:
               </span>
-              <span>{request.petId}</span>
+              <span>{request.pet.id}</span>
             </div>
           </div>
         </div>
@@ -98,13 +98,13 @@ const RequestModal = ({ request, onClose }) => {
               <span className="text-gray-600 font-semibold">
                 ID de adoptante:
               </span>
-              <span>{request.userId}</span>
+              <span>{request.user.id}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">
                 Documento de identidad:
               </span>
-              <span>{adopter?.identityDocument || "No disponible"}</span>
+              <span>{request.user.adopter.identityDocument || "No disponible"}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">Correo:</span>
@@ -114,7 +114,7 @@ const RequestModal = ({ request, onClose }) => {
               <span className="text-gray-600 font-semibold">
                 Dirección y comuna:
               </span>
-              <span>{adopter?.address || "No disponible"}</span>
+              <span>{request.user.adopter.address || "No disponible"}</span>
             </div>
           </div>
         </div>

@@ -215,7 +215,7 @@ const AdoptionApllication = () => {
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4">
           <div className="text-sm text-gray-500 mb-4 sm:mb-0">
-            Mostrando {solicitudes.length} de {totalSolicitudes} solicitudes
+            Mostrando {solicitudes.length} de {solicitudes.length} solicitudes
           </div>
 
           <div className="flex items-center gap-2">

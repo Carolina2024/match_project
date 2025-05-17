@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaSearch, FaHeart, FaRegEdit } from "react-icons/fa";
+import { FaHeart, FaRegEdit } from "react-icons/fa";
 import { BsCalendar2 } from "react-icons/bs";
 import { getAllMatches } from "../api/matchService";
 import MatchDetailModal from "./modals/MatchDetailModal";

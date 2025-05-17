@@ -30,7 +30,6 @@ export const fetchUsersget = async (page = 1, limit = 10) => {
       estado: user.isActive ? "Activo" : "Inactivo",
       address: user.adopter?.address || "N/A",
     }));
-
     return {
       items: users,
       totalPages: data.totalPages || 1,

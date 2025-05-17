@@ -1,24 +1,7 @@
 import PropTypes from "prop-types";
-import { getUserById } from "../../api/userService";
-import { useEffect, useState } from "react";
+
 
 const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
-  const [adopter, setAdopter] = useState(null);
-
-  useEffect(() => {
-    const fetchAdopter = async () => {
-      try {
-        const data = await getUserById(solicitud.userId);
-        setAdopter(data.adopter || null);
-      } catch (err) {
-        console.error("Error al obtener adopter:", err.message);
-      }
-    };
-
-    if (solicitud?.userId) {
-      fetchAdopter();
-    }
-  }, [solicitud?.userId]);
 
   if (!solicitud) return null;
 
@@ -140,7 +123,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
                 ID de mascota:
               </span>
 
-              <span>{solicitud.petId}</span>
+              <span>{solicitud.pet.id}</span>
             </div>
           </div>
         </div>
@@ -157,14 +140,14 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
               <span className="text-gray-600 font-semibold">
                 ID de adoptante:
               </span>
-              <span>{solicitud.userId}</span>
+              <span>{solicitud.user.id}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">
                 Documento de identidad:
               </span>
 
-              <span>{adopter?.identityDocument || "No disponible"}</span>
+              <span>{solicitud.user.adopter.identityDocument || "No disponible"}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">Correo:</span>
@@ -175,7 +158,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
                 Dirección y comuna:
               </span>
 
-              <span>{adopter?.address}</span>
+              <span>{solicitud.user.adopter.address}</span>
             </div>
           </div>
         </div>
@@ -190,6 +173,7 @@ MatchDetailModal.propTypes = {
   solicitud: PropTypes.object,
   onClose: PropTypes.func,
   onStatusChange: PropTypes.func,
+  
 };
 
 export default MatchDetailModal;

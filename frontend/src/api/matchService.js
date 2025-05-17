@@ -35,7 +35,7 @@ export const getAllMatches = async (
     }
 
     const data = await response.json();
-
+console.log(data)
     const matches = data.items.map((match) => ({
       id: match.id,
       adopterName: match.user?.fullname || "N/A",
@@ -44,6 +44,7 @@ export const getAllMatches = async (
       applicationDate: match.applicationDate,
       user: match.user,
       pet: match.pet,
+      
     }));
 
     return {

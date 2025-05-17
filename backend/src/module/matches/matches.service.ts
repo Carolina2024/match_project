@@ -105,6 +105,7 @@ export class MatchesService {
         'adopters.identityDocument',
         'users.fullname',
         'users.email',
+        'users.id',
         'adopters.address',
         'pets',
       ])

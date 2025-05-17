@@ -147,7 +147,9 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
                 Documento de identidad:
               </span>
 
-              <span>{solicitud.user.adopter.identityDocument || "No disponible"}</span>
+              <span>
+                {solicitud.user?.adopter?.identityDocument || "No disponible"}
+              </span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">Correo:</span>
@@ -158,7 +160,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
                 Dirección y comuna:
               </span>
 
-              <span>{solicitud.user.adopter.address}</span>
+              <span>{solicitud.user?.adopter?.address || "No disponible"}</span>
             </div>
           </div>
         </div>

@@ -22,7 +22,6 @@ const AdoptionApllication = () => {
       try {
         const statusParam = filtro === "Todos" ? "" : filtro;
         const data = await getAllMatches(currentPage, 8, statusParam, busqueda);
-        console.log("Datos recibidos de la API:", data);
 
         setSolicitudes(data.items);
         setTotalPages(data.totalPages);

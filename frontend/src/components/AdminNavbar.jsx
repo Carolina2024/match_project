@@ -60,21 +60,8 @@ const AdminNavbar = ({
 
   const handleLogout = () => {
     setOpen(false);
-
-    Swal.fire({
-      title: "¡Hasta pronto!",
-      text: "Has cerrado sesión exitosamente.",
-      icon: "success",
-      timer: 1200,
-      showConfirmButton: false,
-      timerProgressBar: true,
-      didOpen: () => {
-        Swal.showLoading();
-      },
-    }).then(() => {
-      logout();
-      navigate("/");
-    });
+    logout();
+    navigate("/");
   };
 
   return (

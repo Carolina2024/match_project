@@ -195,7 +195,7 @@ const InfoPet = () => {
                     </p>
                   </div>
                   <button
-                    className="flex justify-center font-bold text-xl items-center gap-1 bg-primary border-primary text-white rounded-4xl mx-auto px-10 py-2 cursor-pointer"
+                    className="flex justify-center font-bold animate-heartbeat text-xl items-center gap-1 bg-primary border-primary text-white rounded-4xl mx-auto px-10 py-2 cursor-pointer"
                     onClick={handleMatchClick}
                   >
                     Match <FaHeart className="ml-1 text-base" />
@@ -242,19 +242,17 @@ const InfoPet = () => {
                   </div>
                 </div>
 
-                <div className="animate-heartbeat">
                   <button
                     className="self-center bg-primary text-white flex items-center gap-1 px-4 py-2 rounded-md"
                     onClick={handleMatchClick}
                   >
                     Match <FaHeart className="ml-1" />
                   </button>
-                </div>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2.5 mb-10 px-10 ">
+          <div className="flex flex-col gap-2.5 mb-10 px-10">
             <h2 className="text-3xl font-bold text-primary mb-5">
               Mi historia
             </h2>

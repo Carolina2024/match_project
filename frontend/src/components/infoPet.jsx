@@ -39,12 +39,12 @@ const InfoPet = () => {
 
   return (
     <>
-      <div className="flex flex-col -mt-15">
+      <div className="flex flex-col md:-mt-15 -mt-10">
         <button
           onClick={() => {
             navigate("/");
           }}
-          className="mb-4 ml-24 bg-white font-bold text-base rounded-full shadow-md text-primary px-7 py-2 transition cursor-pointer w-fit "
+          className="mb-4 md:ml-24 bg-white font-bold text-base rounded-full shadow-md text-primary px-7 py-2 transition cursor-pointer w-fit "
         >
           <svg
             className="inline mr-2"
@@ -99,13 +99,15 @@ const InfoPet = () => {
                 </div>
               )}
 
-              <h2 className="text-2xl font-normal mt-3 mb-1">{pet.name}</h2>
+              <h2 className="md:text-2xl text-base font-normal md:mt-3 mt-6 mb-1">
+                {pet.name}
+              </h2>
 
-              <div className="mt-2 w-full flex flex-wrap gap-4 justify-center px-4">
+              <div className="md:mt-2 mt-4 w-full flex flex-wrap gap-4 justify-center px-4">
                 {pet.traits.map((trait, idx) => (
                   <span
                     key={idx}
-                    className="border-3 border-primary text-primary px-5 py-1 rounded-full text-xl font-bold"
+                    className="border-3 border-primary text-primary px-5 py-1 rounded-full md:text-xl text-sm font-bold"
                   >
                     {trait}
                   </span>
@@ -115,38 +117,48 @@ const InfoPet = () => {
 
             <div className="flex flex-col gap-6 w-full lg:w-1/2 px-4">
               <div className="flex flex-col gap-4">
-                <h2 className="text-3xl text-primary font-bold">¿Cómo soy?</h2>
+                <h2 className="md:text-3xl text-base text-primary font-bold">
+                  ¿Cómo soy?
+                </h2>
                 <div className="grid grid-cols-2 gap-y-2 text-left">
                   <div>
-                    <p className="text-xl font-normal">{pet.species}</p>
+                    <p className="md:text-xl text-sm font-normal">
+                      {pet.species}
+                    </p>
                     <p className="text-sm text-[#767575] font-normal">
                       Especie
                     </p>
                   </div>
                   <div>
-                    <p className="text-xl font-normal">{pet.breed}</p>
+                    <p className="md:text-xl text-sm font-normal">
+                      {pet.breed}
+                    </p>
                     <p className="text-sm text-[#767575] font-normal">Raza</p>
                   </div>
                   <div>
-                    <p className="text-xl font-normal">{pet.size}</p>
+                    <p className="md:text-xl text-sm font-normal">{pet.size}</p>
                     <p className="text-sm text-[#767575] font-normal">Tamaño</p>
                   </div>
                   <div>
-                    <p className="text-xl font-normal">{pet.energy}</p>
+                    <p className="md:text-xl text-sm font-normal">
+                      {pet.energy}
+                    </p>
                     <p className="text-sm text-[#767575] font-normal">
                       Nivel actividad
                     </p>
                   </div>
                   <div>
-                    <p className="text-xl font-normal">{pet.age}</p>
+                    <p className="md:text-xl text-sm font-normal">{pet.age}</p>
                     <p className="text-sm text-[#767575] font-normal">Edad</p>
                   </div>
                   <div>
-                    <p className="text-xl font-normal">{pet.kg} kg</p>
+                    <p className="md:text-xl text-sm font-normal">
+                      {pet.kg} kg
+                    </p>
                     <p className="text-sm text-[#767575] font-normal">Peso</p>
                   </div>
                   <div>
-                    <p className="text-xl font-normal">{pet.sex}</p>
+                    <p className="md:text-xl text-sm font-normal">{pet.sex}</p>
                     <p className="text-sm text-[#767575] font-normal">Sexo</p>
                   </div>
                 </div>
@@ -154,30 +166,30 @@ const InfoPet = () => {
 
               <div className="hidden md:flex flex-col md:flex-row md:items-start sm:gap-35 gap-6">
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-3xl text-primary font-bold">
+                  <h2 className="md:text-3xl text-base text-primary font-bold">
                     Me entregan
                   </h2>
                   <ul>
                     {pet.isVaccinated && (
-                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                      <li className="flex gap-5 items-center md:text-xl text-sm font-normal mb-2">
                         <MdCheckCircleOutline className="text-[#8AC345]" />
                         Vacunado
                       </li>
                     )}
                     {pet.isSterilized && (
-                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                      <li className="flex gap-5 items-center md:text-xl text-sm font-normal mb-2">
                         <MdCheckCircleOutline className="text-[#8AC345]" />
                         Esterilizado
                       </li>
                     )}
                     {pet.isDewormed && (
-                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                      <li className="flex gap-5 items-center md:text-xl text-sm font-normal mb-2">
                         <MdCheckCircleOutline className="text-[#8AC345]" />
                         Desparasitado
                       </li>
                     )}
                     {pet.hasMicrochip && (
-                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                      <li className="flex gap-5 items-center md:text-xl text-sm font-normal mb-2">
                         <MdCheckCircleOutline className="text-[#8AC345]" />
                         Con microchip
                       </li>
@@ -242,22 +254,24 @@ const InfoPet = () => {
                   </div>
                 </div>
 
-                  <button
-                    className="self-center bg-primary text-white flex items-center gap-1 px-4 py-2 rounded-md"
-                    onClick={handleMatchClick}
-                  >
-                    Match <FaHeart className="ml-1" />
-                  </button>
+                <button
+                  className="flex justify-center font-bold animate-heartbeat md:text-xl text-base items-center gap-1 bg-primary border-primary text-white rounded-4xl mx-auto md:px-10 px-8 py-2 cursor-pointer"
+                  onClick={handleMatchClick}
+                >
+                  Match <FaHeart className="ml-1" />
+                </button>
               </div>
             </div>
           </div>
 
           <div className="flex flex-col gap-2.5 mb-10 px-10">
-            <h2 className="text-3xl font-bold text-primary mb-5">
+            <h2 className="md:text-3xl text-base font-bold text-primary mb-5">
               Mi historia
             </h2>
             <div className="bg-white p-5 rounded-2xl">
-              <p className="font-normal text-xl font-secundary">{pet.story}</p>
+              <p className="font-normal md:text-xl text-sm font-secundary">
+                {pet.story}
+              </p>
             </div>
           </div>
         </div>

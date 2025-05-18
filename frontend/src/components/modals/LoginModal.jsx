@@ -100,7 +100,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
         <div className="bg-[#F9F9F9] rounded-2xl shadow-xl w-full md:max-w-4xl max-w-md flex overflow-hidden relative border border-[#CBCBCB]">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-primary hover:text-tertiary text-2xl cursor-pointer"
+            className="absolute top-4 right-4 text-tertiary text-2xl cursor-pointer"
           >
             <X />
           </button>

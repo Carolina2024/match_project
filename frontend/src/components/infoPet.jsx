@@ -1,5 +1,5 @@
 import { usePet } from "../context/PetContext";
-import { FaHeart} from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 import { MdCheckCircleOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
@@ -216,7 +216,8 @@ const InfoPet = () => {
                       )}
                       {pet.hasMicrochip && (
                         <li className="flex items-center gap-1">
-                          <MdCheckCircleOutline className="text-[#8AC345] mb-2" /> Con chip
+                          <MdCheckCircleOutline className="text-[#8AC345] mb-2" />{" "}
+                          Con chip
                         </li>
                       )}
                       {pet.isVaccinated && (
@@ -241,18 +242,22 @@ const InfoPet = () => {
                   </div>
                 </div>
 
-                <button
-                  className="self-center bg-primary text-white flex items-center gap-1 px-4 py-2 rounded-md"
-                  onClick={handleMatchClick}
-                >
-                  Match <FaHeart className="ml-1" />
-                </button>
+                <div className="animate-heartbeat">
+                  <button
+                    className="self-center bg-primary text-white flex items-center gap-1 px-4 py-2 rounded-md"
+                    onClick={handleMatchClick}
+                  >
+                    Match <FaHeart className="ml-1" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-2.5 mb-10 px-10">
-            <h2 className="text-3xl font-bold text-primary mb-5">Mi historia</h2>
+          <div className="flex flex-col gap-2.5 mb-10 px-10 ">
+            <h2 className="text-3xl font-bold text-primary mb-5">
+              Mi historia
+            </h2>
             <div className="bg-white p-5 rounded-2xl">
               <p className="font-normal text-xl font-secundary">{pet.story}</p>
             </div>

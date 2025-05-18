@@ -1,5 +1,6 @@
 import { usePet } from "../context/PetContext";
-import { FaCheckCircle, FaHeart } from "react-icons/fa";
+import { FaHeart} from "react-icons/fa";
+import { MdCheckCircleOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import { useEffect, useState } from "react";
@@ -43,8 +44,24 @@ const InfoPet = () => {
           onClick={() => {
             navigate("/");
           }}
-          className="mb-4 bg-white font-semibold rounded-full shadow-md text-primary hover:bg-orange-100 px-6 py-2 transition cursor-pointer w-fit "
+          className="mb-4 ml-24 bg-white font-bold text-base rounded-full shadow-md text-primary px-7 py-2 transition cursor-pointer w-fit "
         >
+          <svg
+            className="inline mr-2"
+            width="20"
+            height="11"
+            viewBox="0 0 20 11"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1 5.5H19M5 9.5L1 5.5L5 9.5ZM1 5.5L5 1.5L1 5.5Z"
+              stroke="#FAAA75"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
           Volver
         </button>
 
@@ -82,13 +99,13 @@ const InfoPet = () => {
                 </div>
               )}
 
-              <h2 className="text-2xl font-bold mt-4">{pet.name}</h2>
+              <h2 className="text-2xl font-normal mt-3 mb-1">{pet.name}</h2>
 
-              <div className="mt-2 w-full flex flex-wrap gap-2 justify-center px-4">
+              <div className="mt-2 w-full flex flex-wrap gap-4 justify-center px-4">
                 {pet.traits.map((trait, idx) => (
                   <span
                     key={idx}
-                    className="border border-primary text-primary px-3 py-1 rounded-full text-sm font-medium"
+                    className="border-3 border-primary text-primary px-5 py-1 rounded-full text-xl font-bold"
                   >
                     {trait}
                   </span>
@@ -98,66 +115,70 @@ const InfoPet = () => {
 
             <div className="flex flex-col gap-6 w-full lg:w-1/2 px-4">
               <div className="flex flex-col gap-4">
-                <h2 className="text-2xl text-primary font-bold">¿Cómo soy?</h2>
+                <h2 className="text-3xl text-primary font-bold">¿Cómo soy?</h2>
                 <div className="grid grid-cols-2 gap-y-2 text-left">
                   <div>
-                    <p className="text-lg">{pet.species}</p>
-                    <p className="text-xs text-gray-500">Especie</p>
+                    <p className="text-xl font-normal">{pet.species}</p>
+                    <p className="text-sm text-[#767575] font-normal">
+                      Especie
+                    </p>
                   </div>
                   <div>
-                    <p className="text-lg">{pet.breed}</p>
-                    <p className="text-xs text-gray-500">Raza</p>
+                    <p className="text-xl font-normal">{pet.breed}</p>
+                    <p className="text-sm text-[#767575] font-normal">Raza</p>
                   </div>
                   <div>
-                    <p className="text-lg">{pet.size}</p>
-                    <p className="text-xs text-gray-500">Tamaño</p>
+                    <p className="text-xl font-normal">{pet.size}</p>
+                    <p className="text-sm text-[#767575] font-normal">Tamaño</p>
                   </div>
                   <div>
-                    <p className="text-lg">{pet.energy}</p>
-                    <p className="text-xs text-gray-500">Nivel actividad</p>
+                    <p className="text-xl font-normal">{pet.energy}</p>
+                    <p className="text-sm text-[#767575] font-normal">
+                      Nivel actividad
+                    </p>
                   </div>
                   <div>
-                    <p className="text-lg">{pet.age}</p>
-                    <p className="text-xs text-gray-500">Edad</p>
+                    <p className="text-xl font-normal">{pet.age}</p>
+                    <p className="text-sm text-[#767575] font-normal">Edad</p>
                   </div>
                   <div>
-                    <p className="text-lg">{pet.kg} kg</p>
-                    <p className="text-xs text-gray-500">Peso</p>
+                    <p className="text-xl font-normal">{pet.kg} kg</p>
+                    <p className="text-sm text-[#767575] font-normal">Peso</p>
                   </div>
                   <div>
-                    <p className="text-lg">{pet.sex}</p>
-                    <p className="text-xs text-gray-500">Sexo</p>
+                    <p className="text-xl font-normal">{pet.sex}</p>
+                    <p className="text-sm text-[#767575] font-normal">Sexo</p>
                   </div>
                 </div>
               </div>
 
               <div className="hidden md:flex flex-col md:flex-row md:items-start sm:gap-35 gap-6">
                 <div className="flex flex-col gap-2">
-                  <h2 className="text-2xl text-primary font-bold">
+                  <h2 className="text-3xl text-primary font-bold">
                     Me entregan
                   </h2>
                   <ul>
                     {pet.isVaccinated && (
-                      <li className="flex gap-2 items-center">
-                        <FaCheckCircle className="text-[#8AC345]" />
+                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                        <MdCheckCircleOutline className="text-[#8AC345]" />
                         Vacunado
                       </li>
                     )}
                     {pet.isSterilized && (
-                      <li className="flex gap-2 items-center">
-                        <FaCheckCircle className="text-[#8AC345]" />
+                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                        <MdCheckCircleOutline className="text-[#8AC345]" />
                         Esterilizado
                       </li>
                     )}
                     {pet.isDewormed && (
-                      <li className="flex gap-2 items-center">
-                        <FaCheckCircle className="text-[#8AC345]" />
+                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                        <MdCheckCircleOutline className="text-[#8AC345]" />
                         Desparasitado
                       </li>
                     )}
                     {pet.hasMicrochip && (
-                      <li className="flex gap-2 items-center">
-                        <FaCheckCircle className="text-[#8AC345]" />
+                      <li className="flex gap-5 items-center text-xl font-normal mb-2">
+                        <MdCheckCircleOutline className="text-[#8AC345]" />
                         Con microchip
                       </li>
                     )}
@@ -166,16 +187,18 @@ const InfoPet = () => {
 
                 <div className="flex flex-col justify-between h-full gap-2">
                   <div>
-                    <h3 className="text-primary font-semibold">
+                    <h3 className="text-primary font-bold text-xl mb-6">
                       Me rescataron el día
                     </h3>
-                    <p className="text-xs">{pet.admissionDate}</p>
+                    <p className="text-base text-[#222222] font-normal">
+                      {pet.admissionDate.split("-").reverse().join("/")}
+                    </p>
                   </div>
                   <button
-                    className="flex justify-center items-center gap-1 bg-primary border-primary text-white rounded-md px-5 py-2 cursor-pointer"
+                    className="flex justify-center font-bold text-xl items-center gap-1 bg-primary border-primary text-white rounded-4xl mx-auto px-10 py-2 cursor-pointer"
                     onClick={handleMatchClick}
                   >
-                    Match <FaHeart className="ml-1" />
+                    Match <FaHeart className="ml-1 text-base" />
                   </button>
                 </div>
               </div>
@@ -184,27 +207,27 @@ const InfoPet = () => {
                 <div className="flex justify-between w-full">
                   <div className="flex flex-col gap-1">
                     <h2 className="text-primary font-semibold">Me entregan</h2>
-                    <ul className="text-sm">
+                    <ul className="text-sm leading-9">
                       {pet.isDewormed && (
                         <li className="flex items-center gap-1">
-                          <FaCheckCircle className="text-[#8AC345]" />
+                          <MdCheckCircleOutline className="text-[#8AC345] mb-2" />
                           Desparasitado
                         </li>
                       )}
                       {pet.hasMicrochip && (
                         <li className="flex items-center gap-1">
-                          <FaCheckCircle className="text-[#8AC345]" /> Con chip
+                          <MdCheckCircleOutline className="text-[#8AC345] mb-2" /> Con chip
                         </li>
                       )}
                       {pet.isVaccinated && (
                         <li className="flex items-center gap-1">
-                          <FaCheckCircle className="text-[#8AC345]" />
+                          <MdCheckCircleOutline className="text-[#8AC345] mb-2" />
                           Vacunado
                         </li>
                       )}
                       {pet.isSterilized && (
                         <li className="flex items-center gap-1">
-                          <FaCheckCircle className="text-[#8AC345]" />
+                          <MdCheckCircleOutline className="text-[#8AC345] mb-2" />
                           Esterilizado
                         </li>
                       )}
@@ -228,10 +251,10 @@ const InfoPet = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-2.5">
-            <h2 className="text-2xl font-semibold text-primary">Mi historia</h2>
-            <div className="bg-white p-5 rounded-md">
-              <p>{pet.story}</p>
+          <div className="flex flex-col gap-2.5 mb-10 px-10">
+            <h2 className="text-3xl font-bold text-primary mb-5">Mi historia</h2>
+            <div className="bg-white p-5 rounded-2xl">
+              <p className="font-normal text-xl font-secundary">{pet.story}</p>
             </div>
           </div>
         </div>

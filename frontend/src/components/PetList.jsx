@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { FiEye } from "react-icons/fi";
-import { FaSearch, FaRegEdit } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 import { PiTrashBold } from "react-icons/pi";
 import CustomSelect from "./CustomSelect";
 import { useState, useEffect } from "react";

@@ -101,26 +101,42 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 @layer utilities {
-  @keyframes heartbeat {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    14% {
-      transform: scale(1.05);
-    }
-    28% {
-      transform: scale(1);
-    }
-    42% {
-      transform: scale(1.05);
-    }
-    70% {
-      transform: scale(1);
-    }
+  .pulse-ring-button {
+    position: relative;
+    z-index: 1;
   }
 
-  .animate-heartbeat {
-    animation: heartbeat 1.5s ease-in-out infinite;
+  .pulse-ring-button::before,
+  .pulse-ring-button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 110%;
+    height: 130%;
+    transform: translate(-50%, -50%) scale(1.2);
+    border-radius: 9999px;
+    border: 1px solid #f4a470;
+    opacity: 0.4;
+    z-index: -1;
+    animation: pulse-ring 1s ease-out infinite;
+  }
+
+  .pulse-ring-button::after {
+    animation-delay: 1.5s;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 2;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.16);
+      opacity: 0;
+    }
   }
 }
+
+
+

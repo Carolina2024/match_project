@@ -207,7 +207,7 @@ const InfoPet = () => {
                     </p>
                   </div>
                   <button
-                    className="flex justify-center font-bold animate-heartbeat text-xl items-center gap-1 bg-primary border-primary text-white rounded-4xl mx-auto px-10 py-2 cursor-pointer"
+                    className="flex justify-center font-bold pulse-ring-button text-xl items-center gap-1 bg-primary text-white rounded-4xl mx-auto px-10 py-2 cursor-pointer"
                     onClick={handleMatchClick}
                   >
                     Match <FaHeart className="ml-1 text-base" />
@@ -255,7 +255,7 @@ const InfoPet = () => {
                 </div>
 
                 <button
-                  className="flex justify-center font-bold animate-heartbeat md:text-xl text-base items-center gap-1 bg-primary border-primary text-white rounded-4xl mx-auto md:px-10 px-8 py-2 cursor-pointer"
+                  className="flex justify-center font-bold pulse-ring-button md:text-xl text-base items-center gap-1 bg-primary border-primary border-2 text-white rounded-4xl mx-auto md:px-10 px-8 py-2 cursor-pointer"
                   onClick={handleMatchClick}
                 >
                   Match <FaHeart className="ml-1" />

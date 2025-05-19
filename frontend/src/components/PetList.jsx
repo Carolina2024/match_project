@@ -19,9 +19,9 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   const [selectedPet, setSelectedPet] = useState(null);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterSpecies, setFilterSpecies] = useState("Todos");
-  const [filterSize, setFilterSize] = useState("Todos");
-  const [filterStatus, setFilterStatus] = useState("Todos");
+  const [filterSpecies, setFilterSpecies] = useState("Especie");
+  const [filterSize, setFilterSize] = useState("Tamaño");
+  const [filterStatus, setFilterStatus] = useState("Estado");
 
   const [modalOpenn, setModalOpenn] = useState(false);
   const [selectedPett, setSelectedPett] = useState(null);
@@ -47,7 +47,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           currentPage,
           10,
           searchTerm,
-          filterSpecies,
+          filterSpecies || null,
           filterSize,
           filterStatus
         );
@@ -145,19 +145,19 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <div className="flex flex-wrap gap-2 font-raleway text-[16px] text-[#767575]">
               <CustomSelect
                 label="Especie"
-                options={["Todos", "Perro", "Gato"]}
+                options={["Especie", "Perro", "Gato"]}
                 selected={filterSpecies}
                 onChange={setFilterSpecies}
               />
               <CustomSelect
                 label="Tamaño"
-                options={["Todos", "Grande", "Mediano", "Pequeño"]}
+                options={["Tamaño", "Grande", "Mediano", "Pequeño"]}
                 selected={filterSize}
                 onChange={setFilterSize}
               />
               <CustomSelect
                 label="Estado"
-                options={["Todos", "En Proceso", "Adoptado", "Disponible"]}
+                options={["Estado", "En Proceso", "Adoptado", "Disponible"]}
                 selected={filterStatus}
                 onChange={setFilterStatus}
               />

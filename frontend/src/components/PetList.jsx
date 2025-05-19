@@ -267,9 +267,13 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         </div>
 
         {showMessage && (
-          <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded w-1/4 right-4 top-[100px] shadow-md">
-            <span className="block font-bold">Mascota eliminada</span>
-            <span>{deletedPetName} ha sido eliminado del registro.</span>
+          <div className="fixed bg-[rgba(255,77,77,0.25)] border border-red-400 px-4 py-2 rounded w-1/4 right-4 top-[100px] shadow-md">
+            <span className="block text-[#FF4D4D] text-[16px] font-semibold font-['Inter']">
+              Mascota eliminada
+            </span>
+            <span className="text-[#767575] text-[14px] font-normal font-['Inter']">
+              {deletedPetName} ha sido eliminado del registro.
+            </span>
             <button
               onClick={() => setShowMessage(false)}
               className="absolute top-1 right-2 text-xl font-bold"

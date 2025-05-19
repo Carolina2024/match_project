@@ -1,7 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const API_URL = `${BASE_URL}/users`;
 
-export const fetchUsersget = async (page = 1, limit = 10) => {
+export const fetchUsersget = async (page = 1, limit = 10, search = "") => {
   try {
     const token = localStorage.getItem("token");
 
@@ -9,6 +9,10 @@ export const fetchUsersget = async (page = 1, limit = 10) => {
       page: page.toString(),
       limit: limit.toString(),
     });
+
+    if (search) {
+      queryParams.append("email", search);
+    }
 
     const response = await fetch(`${API_URL}?${queryParams}`, {
       headers: {

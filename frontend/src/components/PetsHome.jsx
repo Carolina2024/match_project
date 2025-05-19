@@ -1,9 +1,9 @@
 import { usePet } from "../context/PetContext";
 
 function PetsHome() {
-  const { matchedPet, handleClickConoceme, mascotas } = usePet();
+  const { matchedPet, handleClickMeet, mascotas } = usePet();
 
-  function noHagoNada() {}
+  function doNothing() {}
 
   return (
     <div className="mx-auto bg-transparent">
@@ -32,8 +32,8 @@ function PetsHome() {
                 <button
                   onClick={() =>
                     matchedPet?.photoUrls !== undefined
-                      ? noHagoNada()
-                      : handleClickConoceme(mascota)
+                      ? doNothing()
+                      : handleClickMeet(mascota)
                   }
                   className="border border-primary rounded-4xl shadow-lg cursor-pointer md:text-xl text-base px-6 py-2 text-white font-bold bg-primary hover:scale-105 transition"
                 >

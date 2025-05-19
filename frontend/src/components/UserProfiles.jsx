@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import { PiTrashBold } from "react-icons/pi";
 import { fetchUsersget } from "../api/adopterApi";
@@ -7,6 +6,7 @@ import UserModalDelete from "./modals/UserModalDelete";
 import { deleteUser } from "../api/deleteUser";
 import AdopterModalDetail from "./modals/AdopterModalDetail";
 import { getUserById } from "../api/adopterDetail";
+import { RiSearchLine } from "react-icons/ri";
 
 const UserProfiles = () => {
   const [users, setUsers] = useState([]);
@@ -92,7 +92,10 @@ const UserProfiles = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
-          <FaSearch className="absolute left-3 top-3 text-gray-400" />
+          <RiSearchLine
+            className="absolute left-3 top-3 text-gray-400"
+            size={20}
+          />
         </div>
       </div>
 

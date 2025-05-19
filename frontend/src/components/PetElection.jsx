@@ -59,7 +59,7 @@ function PetElection() {
 
   return (
     <div className="flex flex-col gap-2.5 justify-center items-center h-full -mt-12">
-      <h1 className="text-4xl font-bold text-primary mb-6 text-center">
+      <h1 className="md:text-4xl text-lg font-bold text-primary md:mb-6 mb-2 text-center font-secundary">
         {matchs.status === "Rechazado"
           ? "Lamentamos mucho que no se haya podido concretar la adopción..."
           : "¡Qué gran elección hiciste!"}
@@ -68,9 +68,9 @@ function PetElection() {
         <img
           src={matchs.foto?.[0] || "/fallback.jpg"}
           alt={matchs.name}
-          className="w-55 h-55 object-cover rounded-[30%]"
+          className="md:w-55 md:h-55 w-50 h-50 object-cover md:rounded-[30%] rounded-full"
         />
-        <b className="font-bold text-2xl">{matchs.name}</b>
+        <b className="font-bold md:text-2xl text-base">{matchs.name}</b>
         {matchs.status === "Rechazado" ? (
           <span className="flex items-center gap-2 px-4 py-1 rounded-full bg-red-500 text-white text-sm font-medium shadow-sm">
             Solicitud rechazada
@@ -80,8 +80,8 @@ function PetElection() {
             Solicitud aprobada
           </span>
         ) : (
-          <span className="flex items-center gap-1 px-6 py-2 rounded-full bg-primary text-white text-xl font-bold shadow-sm mb-5">
-            <MdOutlineAlarm className="text-white text-2xl font-bold" />
+          <span className="flex items-center gap-1 px-6 py-2 rounded-full bg-primary text-white md:text-xl text-sm font-bold shadow-sm mb-5">
+            <MdOutlineAlarm className="text-white md:text-2xl text-sm font-bold" />
             Proceso de adopción en curso
           </span>
         )}
@@ -92,7 +92,7 @@ function PetElection() {
           <div key={step.id} className="flex items-center">
             <div className="flex flex-col items-center">
               <div
-                className={`w-7 h-7 flex items-center justify-center mb-2 rounded-full transition-all duration-300
+                className={`md:w-7 md:h-7 w-6 h-6 flex items-center justify-center mb-2 rounded-full transition-all duration-300
                 ${
                   activeStep >= step.id
                     ? "bg-primary text-white"
@@ -101,21 +101,23 @@ function PetElection() {
               >
                 {activeStep >= step.id && <FiCheck className="text-sm" />}
               </div>
-              <span className="text-xl text-primary font-bold mt-2 text-center ">
+              <span className="md:text-xl text-sm text-primary font-bold mt-2 text-center ">
                 {step.label}
               </span>
             </div>
 
             {index < steps.length - 1 && (
-              <div className="h-0.25 bg-primary mx-auto w-16 sm:w-25 relative top-[-10px]" />
+              <div className="h-0.25 bg-primary mx-auto w-16 sm:w-25 relative top-[-20px]" />
             )}
           </div>
         ))}
       </div>
 
       {matchs.status !== "Rechazado" && matchs.status !== "Aprobado" && (
-        <div className="flex flex-col gap-1.5 justify-center text-center pt-7 pb-4 mt-2 italic text-2xl text-tertiary mb-8">
-          <p className="font-semibold">Pronto nos contactaremos para contarte los próximos pasos.</p>
+        <div className="flex flex-col gap-1.5 justify-center text-center pt-7 pb-4 mt-2 italic md:text-2xl text-sm md:mx-0 mx-14 text-tertiary mb-8">
+          <p className="font-semibold">
+            Pronto nos contactaremos para contarte los próximos pasos.
+          </p>
           <b className="font-extrabold">
             ¡Gracias por querer darle un hogar a {matchs.name}!
           </b>

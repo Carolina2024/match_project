@@ -13,6 +13,8 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   const [error, setError] = useState("");
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -61,10 +63,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      setIsLoading(false);
       return;
     }
 
@@ -82,6 +86,8 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
       setError("");
 
       onClose();
+      setIsLoading(false);
+
       if (role === "admin") {
         navigate("/Admin");
       } else {
@@ -89,6 +95,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
       }
     } catch (err) {
       setError("Correo o contraseña incorrectos. Intenta nuevamente.");
+      setIsLoading(false);
     }
   };
 
@@ -100,6 +107,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
         <div className="bg-[#F9F9F9] rounded-2xl shadow-xl w-full md:max-w-4xl max-w-md flex overflow-hidden relative border border-[#CBCBCB]">
           <button
             onClick={onClose}
+            disabled={isLoading}
             className="absolute top-4 right-4 text-tertiary text-2xl cursor-pointer"
           >
             <X />
@@ -141,6 +149,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                     value={email}
                     onChange={handleChange}
                     name="email"
+                    disabled={isLoading}
                     className="w-full pl-10 text-lg font-medium bg-white text-[#767575] pr-4 py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
                   />
                 </div>
@@ -174,6 +183,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   value={password}
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
                   className="w-full pl-10 pr-10 text-lg font-medium bg-white  text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
                 />
 
@@ -235,9 +245,32 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
               <div className="justify-center text-left mt-12">
                 <button
                   type="submit"
+                  disabled={isLoading}
                   className="px-14 bg-primary shadow-lg/20 text-white py-2 cursor-pointer font-bold text-lg rounded-3xl hover:bg-orange-300 transition-colors"
                 >
-                  Ingresar
+                  {isLoading && (
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                      ></path>
+                    </svg>
+                  )}
+                  {isLoading ? "Cargando..." : "Ingresar"}
                 </button>
               </div>
             </form>

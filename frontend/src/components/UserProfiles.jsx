@@ -197,12 +197,16 @@ const UserProfiles = () => {
       </div>
 
       {showMessage && (
-        <div className="fixed bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 w-1/4 right-10 bottom-10 z-50">
-          <span className="block font-bold">Adoptante eliminado</span>
-          <span>{deletedUserName} ha sido eliminado del registro.</span>
+        <div className="fixed bg-[#FFE2E2] border border-[rgba(255,77,77,0.25)] text-red-700 px-4 py-2 rounded mb-4 w-1/4 right-10 bottom-10 z-50">
+          <span className="block text-[#FF4D4D] text-[16px] font-semibold font-['Inter']">
+            Adoptante eliminado
+          </span>
+          <span className="text-[14px] font-normal text-[#767575cc] font-['Inter']">
+            {deletedUserName} ha sido eliminado del registro.
+          </span>
           <button
             onClick={() => setShowMessage(false)}
-            className="absolute top-0 right-0 px-2 py-1 text-red-700 hover:text-red-900 text-lg"
+            className="absolute top-0 right-0 px-2 py-1 text-[rgba(89,81,70,0.5)] hover:text-[rgba(89,81,70,0.8)] text-2xl"
           >
             &times;
           </button>

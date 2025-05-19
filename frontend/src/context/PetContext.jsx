@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { createMatch, getCompatiblePets, getUserMatchs } from "../api/PetsUser";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const PetContext = createContext();
 
@@ -9,29 +10,34 @@ export const PetProvider = ({ children }) => {
   const [showCheckMatch3, setShowCheckMatch3] = useState(false);
   const [showCheckMatch4, setShowCheckMatch4] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleMatchClick = () => {
     setShowCheckMatch3(true);
   };
 
   const handleConfirmMatch = async (id) => {
-    await createMatch(id);
-    setShowCheckMatch3(false);
-    setShowCheckMatch4(true);
+    try {
+      await createMatch(id);
+      setShowCheckMatch3(false);
+      setShowCheckMatch4(true);
 
-    const data = await getCompatiblePets();
-    setMascotas(data.items);
+      const data = await getCompatiblePets();
+      setMascotas(data.items);
 
-    const matches = await getUserMatchs();
-    const matchedPetIds = matches
-      .filter(
-        (m) =>
-          m.status === "Por revisar" ||
-          m.status === "En proceso" ||
-          m.status === "Aprobada"
-      )
-      .map((m) => m.petId);
-    setUserMatches(matchedPetIds);
+      const matches = await getUserMatchs();
+      const matchedPetIds = matches
+        .filter(
+          (m) =>
+            m.status === "Por revisar" ||
+            m.status === "En proceso" ||
+            m.status === "Aprobada"
+        )
+        .map((m) => m.petId);
+      setUserMatches(matchedPetIds);
+    } catch (error) {
+      console.error("Error en handleConfirmMatch:", error);
+    }
   };
 
   const handleGoToTracking = () => {
@@ -51,24 +57,41 @@ export const PetProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchMascotas = async () => {
-      const data = await getCompatiblePets();
-      const pets = data.items;
-      setMascotas(pets);
-
-      const matches = await getUserMatchs();
-      if (matches.status === "En proceso" || matches.status === "Por revisar") {
-        setMatchedPet({ ...matches.pet, id: matches.petId });
+      if (!user?.id) {
+        setMascotas([]);
+        setUserMatches([]);
+        setMatchedPet(null);
+        return;
       }
 
-      const isMatchRejected = (matches.status = "Rechazado");
+      try {
+        const data = await getCompatiblePets();
+        const pets = data.items;
+        setMascotas(pets);
 
-      if (isMatchRejected) {
+        const matches = await getUserMatchs();
+        if (
+          matches.status === "En proceso" ||
+          matches.status === "Por revisar"
+        ) {
+          setMatchedPet({ ...matches.pet, id: matches.petId });
+        }
+
+        const isMatchRejected = (matches.status = "Rechazado");
+
+        if (isMatchRejected) {
+          setUserMatches([]);
+        }
+      } catch (error) {
+        console.error("Error al cargar mascotas y matches:", error);
+        setMascotas([]);
         setUserMatches([]);
+        setMatchedPet(null);
       }
     };
 
     fetchMascotas();
-  }, [location.state]);
+  }, [user]);
 
   const isMatched = (id) => userMatches.includes(String(id));
 

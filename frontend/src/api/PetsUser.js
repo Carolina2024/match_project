@@ -4,11 +4,14 @@ const PETS_URL = `${API_BASE}/pets`;
 export const getCompatiblePets = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
+
+  if (!user || !user.id || !token) {
+    throw new Error("Usuario o token no disponible");
+  }
+
   const res = await fetch(`${PETS_URL}/users/${user.id}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-
-  const data = await res.json();
 
   if (!res.ok) {
     const errorData = await res.json();
@@ -16,6 +19,8 @@ export const getCompatiblePets = async () => {
       errorData.message || "Error al obtener mascotas compatibles"
     );
   }
+
+  const data = await res.json();
 
   return data;
 };

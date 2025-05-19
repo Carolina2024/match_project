@@ -1,6 +1,12 @@
 const API_URL = import.meta.env.VITE_API_BASE_URL;
 
-export const getUserById = async (id, token) => {
+export const getUserById = async (id) => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    throw new Error("Token no disponible");
+  }
+
   try {
     const response = await fetch(`${API_URL}/users/${id}`, {
       method: "GET",
@@ -11,7 +17,8 @@ export const getUserById = async (id, token) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
+      const errorData = await response.json();
+      throw new Error(errorData.message || `Error ${response.status}`);
     }
 
     const data = await response.json();
@@ -52,8 +59,4 @@ export const getUserById = async (id, token) => {
   }
 };
 
-const userId = "895e3aa4-2ddf-4910-a4a9-8872812bb53c";
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjM1MTlhOWRkLTFhZWQtNGI4ZC1hZGMyLWJiMTNmZTYzODRlOSIsImVtYWlsIjoiYWRtaW5AdGVzdC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDY5NDMyMTgsImV4cCI6MTc0Njk1MDQxOH0.tWqNunqspZjVtqShakKWPiTUpvpLc7ZdVMB2FkJI4aM";
 
-getUserById(userId, token);

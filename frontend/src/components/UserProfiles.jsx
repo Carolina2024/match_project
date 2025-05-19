@@ -23,7 +23,7 @@ const UserProfiles = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetchUsersget(currentPage);
+        const response = await fetchUsersget(currentPage, 10, searchTerm);
         setUsers(response.items || []);
         setTotalPages(response.totalPages || 1);
       } catch (error) {
@@ -32,19 +32,13 @@ const UserProfiles = () => {
     };
 
     fetchUsers();
-  }, [currentPage]);
+  }, [currentPage, searchTerm]);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
-
-  const filteredUsers = users.filter((user) =>
-    `${user.fullname} ${user.email}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
 
   const handleOpenModal = (user) => {
     setSelectedUser(user);
@@ -124,7 +118,7 @@ const UserProfiles = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map((user) => (
+            {users.map((user) => (
               <tr
                 key={user.id}
                 className="border-b border-[#76757599] bg-white"

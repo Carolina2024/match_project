@@ -28,6 +28,8 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   const [showMessage, setShowMessage] = useState(false);
   const [deletedPetName, setDeletedPetName] = useState("");
 
+  const filteredPets = pets;
+
   const handleEdit = (pet) => {
     setEditingPet(pet);
     setActiveView("editPet");
@@ -41,7 +43,14 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   useEffect(() => {
     const fetchPets = async () => {
       try {
-        const response = await getAllPets(currentPage);
+        const response = await getAllPets(
+          currentPage,
+          10,
+          searchTerm,
+          filterSpecies,
+          filterSize,
+          filterStatus
+        );
         setPets(response.items || []);
         setTotalPages(response.totalPages || 1);
       } catch (error) {
@@ -50,27 +59,13 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     };
 
     fetchPets();
-  }, [currentPage]);
+  }, [currentPage, searchTerm, filterSpecies, filterSize, filterStatus]);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
-
-  const filteredPets = pets.filter((pet) => {
-    const matchesSearch = `${pet.name} ${pet.breed}`
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-    const matchesSpecies =
-      filterSpecies === "Todos" || pet.species === filterSpecies;
-    const matchesSize = filterSize === "Todos" || pet.size === filterSize;
-    const matchesStatus =
-      filterStatus === "Todos" ||
-      pet.status.toLowerCase() === filterStatus.toLowerCase();
-
-    return matchesSearch && matchesSpecies && matchesSize && matchesStatus;
-  });
 
   const getStatusBadge = (status) => {
     const statusStyles = {

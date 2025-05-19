@@ -2,13 +2,25 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const BASE_URL = `${API_BASE}/pets`;
 const BASE_URL2 = `${API_BASE}/pets/complete`;
 
-export const getAllPets = async (page = 1, limit = 10) => {
+export const getAllPets = async (
+  page = 1,
+  limit = 10,
+  search = "",
+  species = "",
+  size = "",
+  status = ""
+) => {
   const token = localStorage.getItem("token");
 
   const queryParams = new URLSearchParams({
     page: page.toString(),
     limit: limit.toString(),
   });
+
+  if (search) queryParams.append("search", search);
+  if (species && species !== "Todos") queryParams.append("species", species);
+  if (size && size !== "Todos") queryParams.append("size", size);
+  if (status && status !== "Todos") queryParams.append("status", status);
 
   const res = await fetch(`${BASE_URL2}?${queryParams}`, {
     headers: {

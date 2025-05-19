@@ -95,7 +95,7 @@ export const PetProvider = ({ children }) => {
 
   const isMatched = (id) => userMatches.includes(String(id));
 
-  const handleClickConoceme = (mascota) => {
+  const handleClickMeet = (mascota) => {
     setSeleccionada(mascota);
     navigate(`infopet/${mascota.id}`);
   };
@@ -113,7 +113,7 @@ export const PetProvider = ({ children }) => {
         showCheckMatch4,
         matchedPet,
         isMatched,
-        handleClickConoceme,
+        handleClickMeet,
         mascotas,
         setMascotas,
       }}

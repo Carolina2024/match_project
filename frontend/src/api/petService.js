@@ -18,9 +18,9 @@ export const getAllPets = async (
   });
 
   if (search) queryParams.append("search", search);
-  if (species && species !== "Todos") queryParams.append("species", species);
-  if (size && size !== "Todos") queryParams.append("size", size);
-  if (status && status !== "Todos") queryParams.append("status", status);
+  if (species && species !== "Especie") queryParams.append("species", species);
+  if (size && size !== "Tamaño") queryParams.append("size", size);
+  if (status && status !== "Estado") queryParams.append("status", status);
 
   const res = await fetch(`${BASE_URL2}?${queryParams}`, {
     headers: {

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
   if (!isOpen || !user) return null;
 
@@ -33,6 +35,15 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
       </div>
     </div>
   );
+};
+
+UserModalDelete.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    fullname: PropTypes.string.isRequired,
+  }),
 };
 
 export default UserModalDelete;

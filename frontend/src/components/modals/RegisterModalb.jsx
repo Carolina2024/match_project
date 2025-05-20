@@ -28,7 +28,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     if (!formData.energy) nuevosErrores.energy = "Selecciona una energía.";
     if (formData.character.length === 0)
       nuevosErrores.character = "Selecciona al menos un carácter.";
-    if (!formData.compatibility.length === 0)
+    if (formData.compatibility.length === 0)
       nuevosErrores.compatibility = "Selecciona al menos una preferencia.";
 
     setErrores(nuevosErrores);

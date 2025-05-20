@@ -40,7 +40,7 @@ const AdminNavbar = ({
         const decoded = jwtDecode(token);
         const userId = decoded.id;
 
-        const res = await fetch(`${BASE_URL}/api/users/${userId}`, {
+        const res = await fetch(`${BASE_URL}/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

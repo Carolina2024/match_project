@@ -66,7 +66,7 @@ const RequestModal = ({ request, onClose }) => {
               <span className="text-gray-600 font-semibold">
                 ID de mascota:
               </span>
-              <span>{request.pet.id}</span>
+              <span>{request.pet?.id}</span>
             </div>
           </div>
         </div>
@@ -82,13 +82,13 @@ const RequestModal = ({ request, onClose }) => {
               <span className="text-gray-600 font-semibold">
                 ID de adoptante:
               </span>
-              <span>{request.user.id}</span>
+              <span>{request.user?.id}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">
                 Documento de identidad:
               </span>
-              <span>{request.user.adopter.identityDocument || "No disponible"}</span>
+              <span>{request.user?.adopter?.identityDocument || "No disponible"}</span>
             </div>
             <div className="flex flex-col">
               <span className="text-gray-600 font-semibold">Correo:</span>
@@ -98,7 +98,7 @@ const RequestModal = ({ request, onClose }) => {
               <span className="text-gray-600 font-semibold">
                 Dirección y comuna:
               </span>
-              <span>{request.user.adopter.address || "No disponible"}</span>
+              <span>{request.user?.adopter?.address || "No disponible"}</span>
             </div>
           </div>
         </div>

@@ -170,7 +170,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
   return (
     <div className="fixed inset-0 z-50 flex justify-end">
       <div
-        className="fixed inset-0 bg-black/30 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/30 backdrop-blur-[2px]"
         onClick={() => setActiveView("Mascotas")}
       />
 

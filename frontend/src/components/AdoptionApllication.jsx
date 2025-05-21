@@ -102,7 +102,7 @@ const AdoptionApllication = () => {
             <select
               value={filtro}
               onChange={(e) => setFiltro(e.target.value)}
-              className="md:w-[120px] border border-gray-300 px-3 py-2 rounded focus:outline-none w-full sm:w-64 rounded-lg"
+              className="md:w-[140px] border border-gray-300 px-3 py-2 rounded focus:outline-none w-full sm:w-64 rounded-lg"
             >
               <option value="Todos">Estado</option>
               <option value="Por revisar">Por revisar</option>
@@ -113,9 +113,9 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-        <div className="flex justify-center sm:block"></div>
+        <div className=""></div>
 
-        <div className="flex flex-wrap  justify-end gap-4 mr-[36px] ml-[-15px] justify-end  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="flex flex-wrap justify-start gap-5 mr-[15px] ml-[15px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {solicitudes.length > 0 ? (
             solicitudes.map((sol) => (
               <div
@@ -129,7 +129,7 @@ const AdoptionApllication = () => {
                     setReadingRequest(sol);
                   }
                 }}
-                className="cursor-pointer w-[175px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
+                className="cursor-pointer w-[180px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
               >
                 <div className="text-center space-y-2">
                   <h3 className="text-sm sm:text-lg font-semibold">

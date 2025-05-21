@@ -75,10 +75,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
     try {
       const data = await loginUser({ email, password });
 
-      login(data.user, data.token);
-
       const payload = JSON.parse(atob(data.token.split(".")[1]));
       const role = payload.role || data.user?.role;
+
+      const userWithRole = { ...data.user, role };
+
+      login(userWithRole, data.token);
 
       setErrors({});
       setEmail("");
@@ -248,29 +250,33 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   disabled={isLoading}
                   className="px-14 bg-primary shadow-lg/20 text-white py-2 cursor-pointer font-bold text-lg rounded-3xl hover:bg-orange-300 transition-colors"
                 >
-                  {isLoading && (
-                    <svg
-                      className="animate-spin h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                      ></path>
-                    </svg>
+                  {isLoading ? (
+                    <>
+                      <svg
+                        className="animate-spin h-5 w-5 text-white mr-2"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        />
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                        />
+                      </svg>
+                      Cargando...
+                    </>
+                  ) : (
+                    "Ingresar"
                   )}
-                  {isLoading ? "Cargando..." : "Ingresar"}
                 </button>
               </div>
             </form>

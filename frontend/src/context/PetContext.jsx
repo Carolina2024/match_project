@@ -55,9 +55,24 @@ export const PetProvider = ({ children }) => {
 
   const location = useLocation();
 
+
   useEffect(() => {
     const fetchMascotas = async () => {
-      if (!user?.id) {
+      if (!user || !user.role || !user.id) {
+        setMascotas([]);
+        setUserMatches([]);
+        setMatchedPet(null);
+        return;
+      }
+
+      if (user.role === "admin") {
+        setMascotas([]);
+        setUserMatches([]);
+        setMatchedPet(null);
+        return;
+      }
+
+      if (user.role !== "adoptante") {
         setMascotas([]);
         setUserMatches([]);
         setMatchedPet(null);

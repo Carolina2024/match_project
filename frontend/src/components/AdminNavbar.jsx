@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
-import Swal from "sweetalert2";
 import { FaSignOutAlt, FaChevronDown } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 

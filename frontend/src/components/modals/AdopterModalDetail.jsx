@@ -257,7 +257,7 @@ AdopterModalDetail.propTypes = {
       userPreferenceDogs: PropTypes.bool,
       userPreferenceCats: PropTypes.bool,
       userPreferenceChildren: PropTypes.bool,
-      hoursAlone: PropTypes.string,
+      hoursAlone: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     }),
   }),
 };

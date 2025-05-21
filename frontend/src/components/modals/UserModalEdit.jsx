@@ -4,7 +4,7 @@ import { useForm, Controller, useController } from "react-hook-form";
 import { useAuth } from "../../context/AuthContext";
 import SuccessModalEditProfile from "./SuccessModalEditProfile";
 import ErrorModalEditProfile from "./ErrorModalEditProfile";
-
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 const initialFormState = {
@@ -456,7 +456,7 @@ const RadioGroup = ({ name, control }) => {
   );
 };
 
-const TagOptions = ({ options, value, onChange, isSingleSelect = false }) => {
+const TagOptions = forwardRef(({ options, value, onChange, isSingleSelect = false }, ref) => {
   const handleToggle = (option) => {
     if (isSingleSelect) {
       if (value !== option) {
@@ -499,12 +499,14 @@ const TagOptions = ({ options, value, onChange, isSingleSelect = false }) => {
       })}
     </div>
   );
-};
+});
 
-const BooleanToggleTag = ({ label, value, onChange }) => {
-  const handleToggle = () => {
-    onChange(!value);
-  };
+TagOptions.displayName = "TagOptions";
+
+  const BooleanToggleTag = forwardRef(({ label, value, onChange }, ref) => {
+    const handleToggle = () => {
+      onChange(!value);
+    };
 
   return (
     <div className="flex flex-wrap gap-2 mt-2">
@@ -527,7 +529,10 @@ const BooleanToggleTag = ({ label, value, onChange }) => {
       </button>
     </div>
   );
-};
+  });
+
+BooleanToggleTag.displayName = "BooleanToggleTag";
+
 RadioGroup.propTypes = {
   name: PropTypes.string.isRequired,
   control: PropTypes.object.isRequired,

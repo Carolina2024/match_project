@@ -1,14 +1,38 @@
 import PropTypes from "prop-types";
 import { FiUsers } from "react-icons/fi";
-import { LuFileCheck } from "react-icons/lu";
+import { UilFileCheckAlt } from "@iconscout/react-unicons";
 import { PiPawPrint } from "react-icons/pi";
 import logo from "../assets/logo.png";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [
-    { label: "Mascotas", icon: <PiPawPrint /> },
-    { label: "Solicitudes", icon: <LuFileCheck /> },
-    { label: "Adoptantes", icon: <FiUsers /> },
+    {
+      label: "Mascotas",
+      icon: <PiPawPrint size={24} style={{ height: "22px" }} />,
+      labelStyled: (
+        <span className="font-raleway font-semibold text-[16px] text-[#595146]">
+          Mascotas
+        </span>
+      ),
+    },
+    {
+      label: "Solicitudes",
+      icon: <UilFileCheckAlt size="24" />,
+      labelStyled: (
+        <span className="font-raleway font-semibold text-[16px] text-[#595146]">
+          Solicitudes
+        </span>
+      ),
+    },
+    {
+      label: "Adoptantes",
+      icon: <FiUsers size="24" />,
+      labelStyled: (
+        <span className="font-inter font-medium text-[16px] text-[#595146]">
+          Adoptantes
+        </span>
+      ),
+    },
   ];
 
   const sidebarStyles = {
@@ -16,15 +40,15 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
     top: 0,
     left: 0,
     height: "100%",
-    width: "230px",
+    width: "237px",
     backgroundColor: "var(--color-fourth)",
     padding: "16px",
     display: "flex",
     flexDirection: "column",
     boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
     transform: isVisible ? "translateX(0)" : "translateX(-100%)",
-    transition: "transform 0.3s ease",
-    zIndex: 20,
+    transition: "transform 0.6s ease",
+    zIndex: 30,
   };
 
   const overlayStyles = {
@@ -44,7 +68,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
     right: "16px",
     fontSize: "24px",
     cursor: "pointer",
-    color: "orange",
+    color: "#F9A975",
   };
 
   return (
@@ -59,8 +83,14 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
       <div style={sidebarStyles}>
         <button
           onClick={() => setIsVisible(false)}
-          style={{ ...closeButtonStyles, marginTop: "10px", fontSize: "33px" }}
-          className="block md:hidden"
+          style={{
+            ...closeButtonStyles,
+            marginTop: "2px",
+            marginLeft: "7px",
+            fontSize: "33px",
+            zIndex: 18,
+          }}
+          className="block md:hidden absolute"
         >
           x
         </button>
@@ -69,12 +99,16 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
           <img
             src={logo}
             alt="Logo Patas Pirque"
-            className="w-[70px] h-[70px] rounded-full "
+            className="w-[50px] h-[50px] rounded-full "
           />
           <div className="flex items-center gap-2 text-gray-700">
             <div className="leading-tight text-left font-secundary">
-              <p className="text-xl font-bold text-gray-700">Patas</p>
-              <p className="text-xl font-bold text-gray-700">Pirque</p>
+              <p className="font-montserratAlt font-bold text-[20px] text-[#595146]">
+                Patas
+              </p>
+              <p className="font-montserratAlt font-bold text-[20px] text-[#595146]">
+                Pirque
+              </p>
             </div>
           </div>
         </div>
@@ -91,7 +125,9 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
                   : "text-gray-700 hover:bg-orange-100"
               }`}
             >
-              <span className="text-gray-600">{item.icon}</span>
+              <span className="border-[#595146] flex items-center justify-center">
+                {item.icon}
+              </span>
               {item.label}
             </button>
           ))}

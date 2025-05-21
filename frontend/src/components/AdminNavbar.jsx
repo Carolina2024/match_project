@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 import { FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+
 import { useAuth } from "../context/AuthContext";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -65,16 +67,25 @@ const AdminNavbar = ({
 
   return (
     <div
-      className={`bg-[#F7F7F7] fixed top-0 z-0 px-4 py-1 border-b md:border-b border-b-0 border-gray-200 transition-all duration-300 ${
-        isSidebarVisible ? "left-[180px] w-[calc(100%-180px)]" : "left-0 w-full"
-      } h-auto`}
+      className={`fixed top-0 z-20 px-3 py-1 border-0 md:border-b md:border-gray-200  transition-all duration-300 sm-border-none-important
+        ${
+          isSidebarVisible
+            ? "sm:backdrop-blur-[4px] bg-[#F7F7F7]/70 md:backdrop-blur-none md:bg-[#F7F7F7]"
+            : "bg-[#F7F7F7]"
+        }
+        ${
+          isSidebarVisible
+            ? "left-[187px] w-[calc(100%-27px)]"
+            : "left-0 w-full"
+        }
+      `}
     >
       <div className="flex justify-between items-center h-[70px]">
         <div className="flex items-center gap-4">
           <button
             onClick={() => setSidebarVisible(true)}
             className={`md:hidden w-9 h-9 bg-white rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.35)] flex justify-center items-center hover:bg-gray-100 transition mr-auto ${
-              isSidebarVisible ? "left-[-1000%]" : ""
+              isSidebarVisible ? "left-[-100%]" : ""
             }`}
           >
             <div className="flex flex-col items-center justify-between h-3 w-6">
@@ -97,33 +108,37 @@ const AdminNavbar = ({
         <div ref={dropdownRef}>
           <button
             onClick={() => setOpen(!open)}
-            className="bg-white border px-4 rounded-full text-sm font-medium flex items-center
-                       shadow-[0_5px_0_0_#5A534A] hover:bg-gray-50 cursor-pointer"
+            className="w-[135px] h-[50px] md:absolute top-[15px] md:left-[1100px]  sm:mr-5
+             bg-[#FFFFFF] border border-[#595146] rounded-[20px] px-[3px] py-[4px]
+             text-sm font-medium flex items-center
+             shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer "
           >
-            <div className="flex flex-col items-start leading-tight">
-              <span className="text-sm text-[#4B443B] font-bold">
+            <div className="flex items-center justify-center flex-col text-center ml-2">
+              <span className="text-[16px] font-secundary font-bold text-[#595146]">
                 {userName}
               </span>
-              <span className="text-xs text-gray-400">{userRole}</span>
+              <span className="text-[14px] font-raleway font-medium text-[#767575]">
+                {userRole}
+              </span>
             </div>
             <FaChevronDown
-              className={`text-sm ml-2 text-[#4B443B] transform ${
+              className={`w-[12px] h-[12px] text-sm ml-2 text-[#595146] transform ${
                 open ? "rotate-180" : ""
               }`}
             />
           </button>
 
           {open && (
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg z-50 text-sm">
-              <div className="px-4 py-2 text-gray-500 font-medium">
+            <div className="absolute right-0 md:mt-7 sm:mt-4 w-38 bg-white rounded-xl shadow-lg z-20 text-sm md:mr-60">
+              <div className="px-4 py-2 text-[12px] text-[#767575] font-raleway font-medium">
                 Mi cuenta
               </div>
               <div className="border-t border-gray-200">
                 <button
                   onClick={handleLogout}
-                  className="flex items-center w-full px-4 py-2 text-red-500 hover:bg-red-50 font-medium cursor-pointer"
+                  className="flex items-center w-full px-4 py-2 text-[14px] text-[#FF2D2D] font-raleway font-medium hover:bg-red-50 cursor-pointer"
                 >
-                  <FaSignOutAlt className="mr-2" />
+                  <FiLogOut className="w-[20px] h-[20px] mr-2" />
                   Cerrar sesión
                 </button>
               </div>
@@ -135,7 +150,7 @@ const AdminNavbar = ({
       <h2
         className={`text-lg font-semibold text-gray-700 ${
           isSidebarVisible ? "hidden md:block" : ""
-        } sm-ml-0 md:ml-20 mt-[10px] md:mt-[-70px] md:py-5`}
+        } sm-ml-0 md:ml-20  mt-[10px] md:mt-[-70px] md:py-5`}
       >
         {sectionTitle}
       </h2>

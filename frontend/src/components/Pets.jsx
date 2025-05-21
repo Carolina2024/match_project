@@ -53,7 +53,6 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
     photoUrls: editingPet ? editingPet.photoUrls : [],
   };
 
-  console.log(editingPet);
   const {
     register,
     handleSubmit,
@@ -529,7 +528,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
 Pets.propTypes = {
   setActiveView: PropTypes.func.isRequired,
   addPet: PropTypes.func.isRequired,
-  editingPet: PropTypes.object.isRequired,
+  editingPet: PropTypes.object,
 };
 
 export default Pets;

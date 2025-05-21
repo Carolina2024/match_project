@@ -30,9 +30,21 @@ const AdminPanel = () => {
   }, []);
 
   const viewTitles = {
-    Mascotas: "Gestiona las mascotas",
-    Solicitudes: "Solicitudes de adoptantes",
-    Adoptantes: "Registros de adoptantes",
+    Mascotas: (
+      <span className="font-raleway font-bold text-[20px] text-[#595146] mr-2">
+        Gestiona las mascotas
+      </span>
+    ),
+    Solicitudes: (
+      <span className="font-raleway font-bold text-[20px] text-[#595146]">
+        Solicitudes de adoptantes
+      </span>
+    ),
+    Adoptantes: (
+      <span className="font-raleway font-bold text-[20px] text-[#595146]">
+        Registros de adoptantes
+      </span>
+    ),
   };
 
   const currentTitle = viewTitles[activeView];
@@ -111,7 +123,7 @@ const AdminPanel = () => {
   };
 
   return (
-    <div className="flex h-screen">
+    <div>
       <Sidebar
         onSelect={setActiveView}
         activeView={activeView}
@@ -119,19 +131,26 @@ const AdminPanel = () => {
         setIsVisible={setIsSidebarVisible}
       />
 
-      <AdminNavbar
-        sectionTitle={currentTitle}
-        isSidebarVisible={isSidebarVisible}
-        setSidebarVisible={setIsSidebarVisible}
-      />
+      <div>
+        <div>
+          <AdminNavbar
+            sectionTitle={currentTitle}
+            isSidebarVisible={isSidebarVisible}
+            setSidebarVisible={setIsSidebarVisible}
+          />
+        </div>
 
-      <div
-        className={`w-full min-h-screen transition-all duration-300 
-    ${isSidebarVisible ? "sm:ml-[0px]" : "sm:ml-0"} 
-    absolute sm:relative top-0 right-0`}
-        style={{ marginTop: "100px" }}
-      >
-        <div>{renderView()}</div>
+        <div
+          className={`w-full flex-1 min-h-screen transition-all duration-300
+    ${isSidebarVisible ? "sm:ml-[0px]" : "sm:ml-0"}
+    absolute sm:relative right-0`}
+          style={{
+            top: "90px",
+            height: "calc(100vh - 100px)",
+          }}
+        >
+          <div>{renderView()}</div>
+        </div>
       </div>
     </div>
   );

@@ -9,6 +9,8 @@ import PetDetailsModal from "./modals/PetDetailsModal";
 import PetModalDelete from "./modals/PetModalDelete";
 import { deletePet } from "../api/deletePet";
 import { RiSearchLine } from "react-icons/ri";
+import { UilPlus } from "@iconscout/react-unicons";
+
 
 const PetList = ({ setActiveView, setEditingPet }) => {
   const [pets, setPets] = useState([]);
@@ -69,9 +71,12 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
   const getStatusBadge = (status) => {
     const statusStyles = {
-      Disponible: "bg-disponible color-text-disponible",
-      "En Proceso": "color-bg-orange color-text-process",
-      Adoptado: "color-bg-gray text-[#6C6C6C]",
+      Disponible:
+        "font-raleway font-semibold text-[16px] text-[#35a302] bg-[rgba(53,163,2,0.25)]",
+      "En Proceso":
+        "bg-[rgba(255,128,44,0.25)] font-raleway text-[#FF802C] font-semibold text-[16px]",
+      Adoptado:
+        "bg-[rgba(108,108,108,0.25)] font-raleway text-[#6C6C6C] font-semibold text-[16px]",
     };
 
     return (
@@ -116,29 +121,29 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <div className="relative w-full sm:w-[500px] md:w-[350px]">
             <input
               type="text"
-              placeholder="Buscar"
+              placeholder="Buscar.."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[16px]"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
               style={{ color: "#767575" }}
             />
             <RiSearchLine
-              className="absolute left-3 top-3 text-gray-400"
-              size={20}
+              className="absolute left-3 top-2 text-gray-400"
+              size={24}
             />
           </div>
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300"
+            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-[#FFFFFF] px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
           >
-            + Nueva mascota
+            <UilPlus size={24} /> Nueva mascota
           </button>
         </div>
 
         <div className="mb-4">
           <div className="mb-2 flex items-center gap-4 flex-wrap">
-            <span className="font-raleway text-[16px] text-[#595146]">
+            <span className="font-raleway text-[16px] font-medium text-[#595146]">
               Filtrar por:
             </span>
 
@@ -167,7 +172,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         <table className="w-full table-auto border-collapse">
           <thead>
-            <tr className="bg-white text-gray-700 text-sm font-secundary">
+            <tr className="bg-white text-[#595146] text-sm font-secundary text-[16px]">
               <th className="px-4 py-3 text-left">Mascota</th>
               <th className="px-4 py-3 text-left">Fecha Ingreso</th>
               <th className="px-4 py-3 text-left">Especie</th>
@@ -181,7 +186,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <tbody className="font-secundary">
             {filteredPets.map((pet) => (
               <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2 font-secundary font-medium text-gray-700">
+                <td className="px-4 py-2 font-secundary font-medium text-[#595146] text-[16px]">
                   {pet.name}
                 </td>
                 <td className="px-4 py-2">{pet.admissionDate}</td>
@@ -221,14 +226,17 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         </table>
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 p-6">
-          <div className="text-sm text-gray-500 mb-4 sm:mb-0">
+          <div
+            className="text-sm font-raleway font-semibold text-[14px] mb-4 sm:mb-0"
+            style={{ color: "rgba(118, 117, 117, 0.7)" }}
+          >
             Mostrando {pets.length} de {pets.length} mascotas
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="font-raleway text-[16px] px-4 py-1 bg-white rounded-md border-1 border-[#595146]  hover:bg-gray-400 disabled:opacity-50"
+              className="font-raleway font-normal text-[14px] px-4 py-1 bg-white rounded-md border-1 border-[#595146]  hover:bg-gray-400 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -240,7 +248,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`w-8 h-8 rounded-md border-1 border-[#595146] text-sm font-medium ${
+                      className={`font-raleway font-normal text-[14px] w-8 h-8 rounded-md border-1 border-[#595146] text-sm font-medium ${
                         currentPage === page
                           ? "bg-[#595146] text-white border-4 border-[#595146] shadow-md"
                           : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
@@ -254,7 +262,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="font-raleway text-[16px] px-4 py-1 bg-white rounded-md border-1 border-[#595146] hover:bg-gray-400 disabled:opacity-50"
+              className="font-raleway text-[14px] font-normal px-4 py-1 bg-white rounded-md border-1 border-[#595146] hover:bg-gray-400 disabled:opacity-50"
             >
               Siguiente
             </button>

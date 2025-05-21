@@ -142,3 +142,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
   }
 }
+
+@media (max-width: 767px) {
+  .sm-border-none-important {
+    border: none !important;
+  }
+}

@@ -27,7 +27,7 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
           </button>
           <button
             onClick={onConfirm}
-            className="w-[200px] sm:w-[200px] md:w-[227px] px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            className="w-[200px] sm:w-[200px] md:w-[227px] px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 mt-2"
           >
             Eliminar
           </button>

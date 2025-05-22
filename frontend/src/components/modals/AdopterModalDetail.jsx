@@ -27,13 +27,13 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
   } = adopterDetails;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-2">
+    <div className=" fixed inset-0 flex items-center justify-center z-50 p-5">
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-black/10 backdrop-blur-[4px] z-10"
+        className="absolute inset-0 bg-black/10 backdrop-blur-[2px] z-10"
       ></div>
 
-      <div className="relative bg-white p-8 rounded-xl shadow-xl w-[900px] max-h-[90vh] overflow-y-auto z-20">
+      <div className="relative bg-white p-8 rounded-xl shadow-xl w-[1000px] max-h-[90vh] overflow-y-auto z-20">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-500 hover:text-black text-4xl "
@@ -41,124 +41,158 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
           ×
         </button>
 
-        <h2 className="text-2xl font-bold mb-1">Registro del adoptante</h2>
-        <p className="text-gray-500 text-sm mb-6">
+        <h2 className="font-secundary font-bold text-[20px] text-[#595146] mb-1 text-center sm:text-left">
+          Registro del adoptante
+        </h2>
+        <p className="font-secundary font-medium text-[14px] text-[#767575] text-sm mb-6 text-center sm:text-left">
           Fecha del registro:{" "}
           {createdAt
             ? new Date(createdAt).toLocaleDateString("es-CL")
             : "No disponible"}
         </p>
 
-        <div className="grid grid-cols-2 gap-10 text-sm text-gray-800">
-          <div className="space-y-8 border-r border-gray-300 pr-6">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-[3fr_4fr] gap-4 px-2">
+          <div className="w-full space-y-8 lg:border-r lg:border-gray-300 lg:pr-6">
             <div className="border-b border-gray-300 pb-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+              <h3 className="font-secundary font-semibold text-[16px] text-[#595146] text-sm mb-4">
                 Información personal
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">Nombre completo</p>
-                  <p>{fullname}</p>
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
+                    <span className="block sm:inline">Nombre </span>
+                    <span className="block sm:inline">completo</span>
+                  </p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {fullname}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
-                    Fecha de nacimiento
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 whitespace-nowrap">
+                    <span className="block sm:inline">Fecha de </span>
+                    <span className="block sm:inline"> nacimiento</span>
                   </p>
-                  <p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
                     {birthDate
                       ? new Date(birthDate).toLocaleDateString("es-CL")
                       : "No disponible"}
                   </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
-                    Correo electrónico
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
+                    <span className="block sm:inline">Correo </span>
+                    <span className="block sm:inline">electrónico</span>
                   </p>
-                  <p>{email}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {email}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
-                    Documento de identidad
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] mb-3 whitespace-nowrap">
+                    <span className="block sm:inline">Documento de </span>
+                    <span className="block sm:inline">identidad</span>
                   </p>
-                  <p>{identityDocument || "No disponible"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {identityDocument || "No disponible"}
+                  </p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
                     Dirección y comuna
                   </p>
-                  <p>{address || "No disponible"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {address || "No disponible"}
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="border-b border-gray-300 pb-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+              <h3 className="font-secundary font-semibold text-[16px] text-[#595146]  mb-4">
                 Experiencia con mascotas
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 w-[120px] sm:w-auto">
                     ¿Tienes o has tenido mascotas antes?
                   </p>
 
-                  <p>{hadPets ? "Sí" : "No"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {hadPets ? "Sí" : "No"}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 w-[120px] sm:w-auto">
                     ¿Están o estuvieron vacunadas?
                   </p>
-                  <p>{hadPetsVaccinated ? "Sí" : "No"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {hadPetsVaccinated ? "Sí" : "No"}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 whitespace-nowrap">
                     ¿Están o estuvieron castrados?
                   </p>
-                  <p>{hadPetsCastrated ? "Sí" : "No"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {hadPetsCastrated ? "Sí" : "No"}
+                  </p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
-                Preferencias
+              <h3 className="font-secundary font-semibold text-[16px] text-[#595146]  mb-4">
+                Preferencias de mascotas
               </h3>
-              <div className="text-gray-500 text-xs mb-1">Energía</div>
-              {userPreferenceEnergy && (
-                <span className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mb-2">
-                  {userPreferenceEnergy}
-                </span>
-              )}
-
-              <div className="text-gray-500 text-xs mb-1">Carácter</div>
-              {Array.isArray(userPreferenceTraits)
-                ? userPreferenceTraits.map((trait, i) => (
-                    <span
-                      key={i}
-                      className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mr-2 mb-2"
-                    >
-                      {trait}
-                    </span>
-                  ))
-                : userPreferenceTraits && (
-                    <span className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mb-2">
-                      {userPreferenceTraits}
+              <div className="flex gap-6">
+                <div>
+                  <div className="font-semibold text-[16px] text-[#595146] font-raleway  mb-3">
+                    Energía
+                  </div>
+                  {userPreferenceEnergy && (
+                    <span className="font-raleway font-semibold text-[16px] text-white bg-[#ff9855] rounded-[10px] px-4 py-2 inline-block mb-2">
+                      {userPreferenceEnergy}
                     </span>
                   )}
+                </div>
 
-              <div className="text-gray-500 text-xs mb-1">Compatibilidad</div>
+                <div className="ml-20">
+                  <div className="font-semibold text-[16px] text-[#595146] font-raleway mb-1">
+                    Carácter
+                  </div>
+                  {Array.isArray(userPreferenceTraits)
+                    ? userPreferenceTraits.map((trait, i) => (
+                        <span
+                          key={i}
+                          className="font-raleway font-semibold text-[16px] text-white bg-[#ff9855] rounded-[10px] px-4 py-2 inline-block mb-2 mr-2 mb-3"
+                        >
+                          {trait}
+                        </span>
+                      ))
+                    : userPreferenceTraits && (
+                        <span className="font-raleway font-semibold text-[16px] text-white bg-[#ff9855] rounded-[10px] px-4 py-2 inline-block mb-2 mr-2 mb-3">
+                          {userPreferenceTraits}
+                        </span>
+                      )}
+                </div>
+              </div>
+
+              <div className="font-semibold text-[16px] text-[#595146] font-raleway mb-3">
+                Compatibilidad
+              </div>
               <div className="space-x-2">
                 {userPreferenceChildren && (
-                  <span className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mb-2">
+                  <span className="font-raleway font-semibold text-[16px] text-white bg-[#ff9855] rounded-[10px] px-4 py-2 inline-block mb-2 inline-block">
                     Con niños
                   </span>
                 )}
                 {userPreferenceDogs && (
-                  <span className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mb-2">
+                  <span className="font-raleway font-semibold text-[16px] text-white bg-[#ff9855] rounded-[10px] px-4 py-2 inline-block mb-2 inline-block">
                     Con perros
                   </span>
                 )}
                 {userPreferenceCats && (
-                  <span className="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full inline-block mb-2">
+                  <span className="font-raleway font-semibold text-[16px] text-white bg-[#ff9855] rounded-[10px] px-4 py-2 inline-block mb-2 inline-block">
                     Con gatos
                   </span>
                 )}
@@ -166,60 +200,80 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
             </div>
           </div>
 
-          <div className="space-y-8 pl-6">
-            <div className="border-b border-gray-300 pb-4">
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+          <div className="space-y-5 pl-2">
+            <div className="border-b border-gray-300 pb-2">
+              <h3 className="font-secundary font-semibold text-[16px] text-[#595146] text-sm  mb-4">
                 Información de vivienda
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
                     Espacio disponible
                   </p>
-                  <p>{homeType || "No especificado"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {homeType || "No especificado"}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 w-[179px] sm:w-auto">
                     ¿El edificio/condominio permite mascotas?
                   </p>
 
-                  <p>{allowsPets ? "Sí" : "No"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {allowsPets ? "Sí" : "No"}
+                  </p>
                 </div>
                 <div className="col-span-2">
-                  <p className="text-gray-500 text-xs mb-1">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
                     ¿Cuantas horas al dia estaria sola la mascota?
                   </p>
-                  <p>{hoursAlone || "No especificado"}</p>
+                  <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                    {hoursAlone ? `${hoursAlone} horas` : "No especificado"}
+                  </p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-gray-500 uppercase mb-4">
+              <h3 className="text-sm font-secundary font-semibold text-[16px] text-[#595146] mb-4">
                 Responsabilidad
               </h3>
               <div className="space-y-2">
-                <p className="text-gray-500 text-xs mb-1">
+                <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
                   ¿Qué harías si la mascota rompe algo?
                 </p>
-                <p className="italic">{petDestroy || "No especificado"}</p>
-
-                <p className="text-gray-500 text-xs mb-1">
-                  ¿Estas dispuesto a llevarlo al veterinario?
+                <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                  {petDestroy || "No especificado"}
                 </p>
-                <p>{preparedToVisitVeterinarian ? "Sí" : "No"}</p>
 
-                <p className="text-gray-500 text-xs mb-1">
-                  ¿Estas dispuesto a recibir visitas de seguimiento?
-                </p>
-                <p>{allowsVisit ? "Sí" : "No"}</p>
+                <div className="flex gap-6">
+                  <div className="flex-1">
+                    <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 w-[120px] sm:w-auto">
+                      ¿Estas dispuesto a llevarlo al veterinario?
+                    </p>
+                    <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                      {preparedToVisitVeterinarian ? "Sí" : "No"}
+                    </p>
+                  </div>
 
-                <p className="text-gray-500 text-xs mb-1">
+                  <div className="flex-1">
+                    <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3 w-[125px] sm:w-auto">
+                      ¿Estas dispuesto a recibir visitas de seguimiento?
+                    </p>
+                    <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                      {allowsVisit ? "Sí" : "No"}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="font-raleway font-semibold text-[16px] text-[#595146] text-xs mb-3">
                   ¿Estas dispuesto a firmar un compromiso de adopción
                   responsable?
                 </p>
 
-                <p>{isResponsibleAdoption ? "Sí" : "No"}</p>
+                <p className="font-normal text-[14px] text-[#767575] font-raleway">
+                  {isResponsibleAdoption ? "Sí" : "No"}
+                </p>
               </div>
             </div>
           </div>

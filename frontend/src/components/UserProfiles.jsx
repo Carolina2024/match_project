@@ -82,7 +82,7 @@ const UserProfiles = () => {
   };
 
   return (
-    <div className="shadow-[0px_0px_10px_rgba(0,0,0,0.2)] md:rounded-[20px] border-transparent sm:border-0 p-4 md:p-8 bg-white md:border md:border-gray-400 overflow-x-auto mt-8">
+    <div className="shadow-[0px_0px_10px_rgba(0,0,0,0.2)] md:rounded-[20px] border-transparent sm:border-0 p-4 md:p-8 bg-white md:border md:border-gray-400 overflow-x-auto mt-8 sm:p-5">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
         <div className="relative w-full max-w-md">
           <input
@@ -90,59 +90,57 @@ const UserProfiles = () => {
             placeholder="Buscar.."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="placeholder:font-medium placeholder:text-[14px] text-[#767575] w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
           <RiSearchLine
             className="absolute left-3 top-3 text-gray-400"
-            size={20}
+            size={24}
           />
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm font-secundary">
+        <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="bg-white text-black border-b border-[#76757599]">
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">
-                Nombre
-              </th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">
-                Correo
-              </th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">
-                Documento
-              </th>
-              <th className="px-4 py-2 text-left font-semibold text-[16px]">
-                Dirección y comuna
-              </th>
-              <th className="px-4 py-2 text-center font-semibold text-[16px]">
-                Acciones
-              </th>
+            <tr className="font-secundary font-semibold text-[16px] text-[#595146] bg-white border-b border-[#76757599]">
+              <th className="px-4 py-2 text-left">Nombre</th>
+              <th className="px-4 py-2 text-left">Correo</th>
+              <th className="px-4 py-2 text-left">Documento</th>
+              <th className="px-4 py-2 text-left">Dirección y comuna</th>
+              <th className="px-4 py-2 text-center">Acciones</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr
                 key={user.id}
-                className="border-b border-[#76757599] bg-white"
+                className="font-raleway font-normal text-[16px] text-[#595146] border-b border-[#76757599] bg-white"
               >
-                <td className="px-4 py-3">{user.fullname}</td>
-                <td className="px-4 py-3">{user.email}</td>
-                <td className="px-4 py-3">{user.identityDocument}</td>
-                <td className="px-4 py-3 whitespace-nowrap">{user.address}</td>
+                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3">
+                  {user.fullname}
+                </td>
+                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3">
+                  {user.email}
+                </td>
+                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3">
+                  {user.identityDocument}
+                </td>
+                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3 whitespace-nowrap">
+                  {user.address}
+                </td>
                 <td className="px-4 py-3 text-center">
                   <div className="flex justify-center items-center space-x-4">
                     <button
                       className="text-gray-600 hover:text-black"
                       onClick={() => handleOpenDetail(user)}
                     >
-                      <FiEye />
+                      <FiEye className="text-[20px]" />
                     </button>
                     <button
                       className="text-red-500 hover:text-red-700"
                       onClick={() => handleOpenModal(user)}
                     >
-                      <PiTrashBold />
+                      <PiTrashBold className="text-[20px]" />
                     </button>
                   </div>
                 </td>
@@ -153,43 +151,45 @@ const UserProfiles = () => {
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-6 gap-4">
-        <div className="text-sm text-gray-500">
+        <div className="font-raleway font-normal text-[16px] text-[#767575] text-sm text-gray-500">
           Mostrando {users.length} de {users.length} usuarios
         </div>
 
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className="px-3 py-2 bg-white rounded-[10px] border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
-          >
-            Anterior
-          </button>
+        <div className="px-4 sm:px-0">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] rounded-[10px] hover:bg-gray-400 disabled:opacity-50"
+            >
+              Anterior
+            </button>
 
-          {Array.from({ length: totalPages }, (_, index) => {
-            const page = index + 1;
-            return (
-              <button
-                key={page}
-                onClick={() => handlePageChange(page)}
-                className={`w-8 h-8 rounded border text-sm font-medium ${
-                  currentPage === page
-                    ? "bg-[#595146] text-white border-[#595146]"
-                    : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
-                }`}
-              >
-                {page}
-              </button>
-            );
-          })}
+            {Array.from({ length: totalPages }, (_, index) => {
+              const page = index + 1;
+              return (
+                <button
+                  key={page}
+                  onClick={() => handlePageChange(page)}
+                  className={`w-8 h-8 rounded border text-sm font-medium ${
+                    currentPage === page
+                      ? "bg-[#595146] text-white border-[#595146] rounded-[10px]"
+                      : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100 rounded-[10px]"
+                  }`}
+                >
+                  {page}
+                </button>
+              );
+            })}
 
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className="px-3 py-2 bg-white rounded-[10px] border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
-          >
-            Siguiente
-          </button>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#595146] hover:bg-gray-400 disabled:opacity-50"
+            >
+              Siguiente
+            </button>
+          </div>
         </div>
       </div>
 

@@ -23,7 +23,7 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
     >
       <button
         onClick={() => setOpen(!open)}
-        className="flex justify-between items-center w-full px-4 py-[8px] border rounded-md bg-white hover:bg-gray-50"
+        className="flex justify-between items-center text-left w-full px-4 py-[8px] border rounded-md bg-white hover:bg-gray-50"
         style={{
           borderWidth: "1px",
           borderColor: "rgba(118, 117, 117, 0.5)",

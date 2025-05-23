@@ -12,11 +12,11 @@
   --color-tertiary: #595146;
   --color-fourth: #efefef;
 
-  --color-five: rgba(53, 163, 2, 0.25); /*green-bg*/
-  --color-green-text: #35a302; /*green-text*/
-  --color-gray-icon: #6c6c6c; /*gray-icon*/
-  --color-bg-orange-process: #ff802c40; /*orange bg en proceso*/
-  --color-text-orange-process: #ff802c; /*orange text en proceso*/
+  --color-five: rgba(53, 163, 2, 0.25);
+  --color-green-text: #35a302;
+  --color-gray-icon: #6c6c6c;
+  --color-bg-orange-process: #ff802c40;
+  --color-text-orange-process: #ff802c;
   --color-bg-gray-adoptada: #6c6c6c40;
   --color-bg-red-rechazado: #e9171740;
 }

@@ -63,7 +63,6 @@ const CuidadosMascota = () => {
         </svg>
       </div>
 
-      {/* Paso 1 Mobile */}
       <div className="flex flex-col md:hidden w-full gap-4">
         <div className="flex items-start gap-2">
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
@@ -75,7 +74,7 @@ const CuidadosMascota = () => {
             </h2>
 
             <div className="flex gap-3">
-              {/* Imagen */}
+
               <div className="w-24 flex-shrink-0 mt-48">
                 <img
                   src={paso1}
@@ -84,7 +83,6 @@ const CuidadosMascota = () => {
                 />
               </div>
 
-              {/* Contenido */}
               <ul className="list-disc list-inside text-sm text-black space-y-1">
                 <li>
                   Compromiso a largo plazo: perros y gatos viven entre 10 y 20
@@ -111,7 +109,6 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 1 Desktop */}
       <div className="hidden md:flex w-full items-center gap-10">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-32">
           <img
@@ -147,7 +144,6 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 2 Mobile */}
       <div className="flex flex-col md:hidden w-full gap-4 -mt-18">
         <div className="flex items-start justify-end gap-2">
           <div className="flex-1">
@@ -155,9 +151,8 @@ const CuidadosMascota = () => {
               Primeros días en casa
             </h2>
 
-            {/* Contenido */}
             <div className="flex flex-row-reverse gap-3">
-              {/* Imagen */}
+
               <div className="w-24 flex-shrink-0 mt-26">
                 <img
                   src={paso2}
@@ -183,14 +178,12 @@ const CuidadosMascota = () => {
             </div>
           </div>
 
-          {/* Número de Paso */}
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             2
           </div>
         </div>
       </div>
 
-      {/* Paso 2 Desktop */}
       <div className="hidden md:flex w-full flex-row-reverse items-center gap-10 -mt-24">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
@@ -220,10 +213,9 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 3 Mobile */}
       <div className="flex flex-col md:hidden w-full gap-4 -mt-24">
         <div className="flex items-start gap-2">
-          {/* Número de paso */}
+
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             3
           </div>
@@ -233,9 +225,9 @@ const CuidadosMascota = () => {
               Cuidados básicos diarios
             </h2>
 
-            {/* Contenido */}
+
             <div className="flex gap-3">
-              {/* Imagen */}
+
               <div className="w-24 flex-shrink-0 mt-20">
                 <img
                   src={paso3}
@@ -264,7 +256,6 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 3 Desktop */}
       <div className="hidden md:flex w-full items-center gap-10 -mt-10">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img
@@ -295,7 +286,6 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 4 Mobile */}
       <div className="flex flex-col md:hidden w-full gap-4 -mt-20">
         <div className="flex items-start justify-end gap-2">
           <div className="flex-1">
@@ -303,9 +293,8 @@ const CuidadosMascota = () => {
               Salud
             </h2>
 
-            {/* Contenido */}
             <div className="flex flex-row-reverse gap-3">
-              {/* Imagen */}
+
               <div className="w-24 flex-shrink-0 mt-12">
                 <img
                   src={paso4}
@@ -328,14 +317,12 @@ const CuidadosMascota = () => {
             </div>
           </div>
 
-          {/* Número de paso */}
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             4
           </div>
         </div>
       </div>
 
-      {/* Paso 4 Desktop */}
       <div className="hidden md:flex w-full flex-row-reverse items-center gap-10 -mt-24">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl mt-2">
           <img
@@ -360,10 +347,9 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 5 Mobile */}
       <div className="flex flex-col md:hidden w-full gap-4 -mt-20">
         <div className="flex items-start gap-2">
-          {/* Número de Paso */}
+
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             5
           </div>
@@ -373,9 +359,8 @@ const CuidadosMascota = () => {
               Amor y respeto
             </h2>
 
-            {/* Contenido */}
             <div className="flex gap-3">
-              {/* Imagen */}
+
               <div className="w-24 flex-shrink-0 mt-24">
                 <img
                   src={paso5}
@@ -403,7 +388,7 @@ const CuidadosMascota = () => {
         </div>
       </div>
 
-      {/* Paso 5 Desktop */}
+
       <div className="hidden md:flex w-full items-center gap-10 -mt-22">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">
           <img

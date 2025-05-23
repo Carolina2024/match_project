@@ -331,7 +331,7 @@ const Nosotros = () => {
 
           <div className="flex justify-center md:mt-20 mt-7">
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-14 gap-6">
-              {/* Card Campañas*/}
+
               <div className=" rounded-[30px] md:rounded-[50px] border-1 border-primary p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
                 <div className="hidden md:flex items-center justify-center mb-2">
                   <svg
@@ -390,7 +390,6 @@ const Nosotros = () => {
                 </div>
               </div>
 
-              {/* Card Donaciones */}
               <div className="rounded-[30px] md:rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
                 <div className="hidden md:flex items-center justify-center mb-2">
                   <svg

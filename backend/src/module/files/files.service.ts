@@ -17,7 +17,7 @@ export class FilesService {
           transformation: [
             { width: 350, height: 350, crop: 'fill' },
             { quality: 'auto' },
-            { fetch_format: 'auto' },
+            { fetch_format: 'webp' },
           ],
           ...options,
         },

@@ -53,7 +53,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* MOBILE HEADER */}
       <div className="flex md:hidden justify-between items-center px-4 py-2">
         <Link to="/">
           <img
@@ -70,7 +69,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Menu Mobile */}
       {menuOpen && (
         <div
           ref={menuRef}
@@ -223,7 +221,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Navbar Desktop */}
       <header className="hidden md:flex bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
           <img

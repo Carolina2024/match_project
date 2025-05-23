@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { FaHeart, FaRegEdit } from "react-icons/fa";
-import { BsCalendar2 } from "react-icons/bs";
 import { getAllMatches } from "../api/matchService";
 import MatchDetailModal from "./modals/MatchDetailModal";
 import RequestModal from "../components/modals/RequestModal";
 import { RiSearchLine } from "react-icons/ri";
+import CustomSelect from "./CustomSelect";
+import { FiCalendar } from "react-icons/fi";
+import { UilEdit } from "@iconscout/react-unicons";
+
 
 const AdoptionApllication = () => {
-  const [filtro, setFiltro] = useState("Todos");
+  const [filtro, setFiltro] = useState("Estado");
   const [busqueda, setBusqueda] = useState("");
   const [solicitudEditando, setSolicitudEditando] = useState(null);
   const [readingRequest, setReadingRequest] = useState(null);
@@ -20,7 +23,8 @@ const AdoptionApllication = () => {
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
-        const statusParam = filtro === "Todos" ? "" : filtro;
+        const statusParam = (filtro === "Todos" || filtro === "Estado") ? "" : filtro;
+
         const data = await getAllMatches(currentPage, 8, statusParam, busqueda);
 
         setSolicitudes(data.items);
@@ -80,43 +84,53 @@ const AdoptionApllication = () => {
   };
 
   return (
-    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen max-w-full">
-      <div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300">
+
+    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen mt-8">
+      <div className="bg-transparent sm:bg-white sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 w-full">
+
         <div className="flex flex-col gap-3 mb-8">
-          <div className="relative w-full sm:w-64 max-w-md">
+          <div className="relative w-full">
             <input
               type="text"
               placeholder="Buscar..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full md:w-[420px] pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full sm:w-[410px] font-raleway font-medium text-[14px] text-[#767575] w-full md:w-[420px] pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+              style={{
+                borderWidth: "1px",
+                borderColor: "rgba(118,117,117,0.8)",
+              }}
             />
             <RiSearchLine
-              className="absolute left-3 top-3 text-gray-400"
-              size={20}
+              className="absolute left-3 top-2 text-gray-400"
+              size={24}
             />
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-gray-700 font-medium">Filtrar por:</label>
-            <select
-              value={filtro}
-              onChange={(e) => setFiltro(e.target.value)}
-              className="md:w-[140px] border border-gray-300 px-3 py-2 rounded focus:outline-none w-full sm:w-64 rounded-lg"
-            >
-              <option value="Todos">Estado</option>
-              <option value="Por revisar">Por revisar</option>
-              <option value="En proceso">En proceso</option>
-              <option value="Aprobado">Aprobado</option>
-              <option value="Rechazado">Rechazado</option>
-            </select>
+            <label className="font-raleway font-medium text-[16px] text-[#595146]">
+              Filtrar por:
+            </label>
+            <CustomSelect
+              label="Estado"
+              options={[
+                "Estado",
+                "Por revisar",
+                "En proceso",
+                "Aprobado",
+                "Rechazado",
+              ]}
+              selected={filtro}
+              onChange={setFiltro}
+            />
           </div>
         </div>
 
-        <div className=""></div>
 
         <div className="flex flex-wrap justify-start gap-5 mr-[15px] ml-[15px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {solicitudes.length > 0 ? (
+
+    
             solicitudes.map((sol) => (
               <div
                 key={sol.id}
@@ -129,28 +143,31 @@ const AdoptionApllication = () => {
                     setReadingRequest(sol);
                   }
                 }}
-                className="cursor-pointer w-[180px] h-[156px] sm:w-[240px] sm:h-[214px] bg-white border border-[0.73px] sm:rounded-[20px] rounded-[14.56px] p-[14.56px] sm:p-5 flex flex-col justify-between gap-[14.56px] sm:gap-5 shadow-[5px_5px_0px_0px_rgba(118,117,117,1)]"
+                className="cursor-pointer w-[180px] h-[156px] bg-[#FFFFFF] border border-[#767575] rounded-[14.56px] p-[14.56px] flex flex-col justify-between gap-[14.56px] shadow-[5px_5px_0px_0px_#767575] md:w-[240px] md:h-[214px] md:rounded-[20px] md:p-5 md:gap-[20px]"
               >
                 <div className="text-center space-y-2">
-                  <h3 className="text-sm sm:text-lg font-semibold">
+                  <h3 className="font-raleway font-semibold text-[16px] text-[#595146]">
                     {sol.petName}
                   </h3>
 
                   <FaHeart
-                    className={` mx-auto text-lg sm:text-xl mx-auto ${
-                      sol.status === "Rechazado"
-                        ? "text-gray-500"
-                        : "text-orange-400"
-                    }`}
+                    className="mx-auto"
+                    style={{
+                      width: "20.9px",
+                      height: "18.23px",
+                      color: sol.status === "Rechazado" ? "#767575" : "#ffa04c",
+                      top: "3px",
+                      left: "1.55px",
+                    }}
                   />
 
-                  <p className="text-xs sm:text-base font-medium">
+                  <p className="font-raleway font-semibold text-[16px] text-[#595146]">
                     {sol.adopterName}
                   </p>
 
-                  <div className="flex items-center justify-center text-sm text-gray-600 gap-1">
-                    <BsCalendar2 />
-                    <span className="text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium ">
+                  <div className="flex items-center justify-center">
+                    <FiCalendar className="w-[15px] h-[15px] text-[#767575] top-[3.33px] left-[2.5px] " />
+                    <span className="font-secundary font-semibold text-[14px] text-[#767575cc]  px-2 sm:px-3 py-1 rounded-[10px]">
                       {new Date(sol.applicationDate).toLocaleDateString(
                         "es-ES"
                       )}
@@ -160,7 +177,7 @@ const AdoptionApllication = () => {
 
                 <div className="flex justify-center items-center mt-[-8px] px-1 flex-wrap gap-1 w-full">
                   <span
-                    className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-[10px] font-medium text-center max-w-full whitespace-nowrap ${
+                    className={`font-raleway font-semibold text-[16px] w-[100px] h-[29px] rounded-[10px] px-[10px] py-[5px] gap-[10px] text-xs text-center max-w-full whitespace-nowrap ${
                       sol.status === "Por revisar"
                         ? "bg-gray-300 text-gray-600"
                         : sol.status === "En proceso"
@@ -176,8 +193,9 @@ const AdoptionApllication = () => {
                   </span>
                   {(sol.status === "Por revisar" ||
                     sol.status === "En proceso") && (
-                    <FaRegEdit
-                      className="text-base sm:text-lg  ml-2 text-gray-600 cursor-pointer hover:text-black"
+                    <UilEdit
+                      className="ml-[2px] text-[#595146] text-base sm:text-lg  cursor-pointer hover:text-black"
+                      size="20"
                       title="Ver detalles de la solicitud"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -213,7 +231,7 @@ const AdoptionApllication = () => {
         )}
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-6 px-4">
-          <div className="text-sm text-gray-500 mb-4 sm:mb-0">
+          <div className="text-[14px] font-raleway font-semibold text-[#767575]/80 mb-4 sm:mb-0">
             Mostrando {solicitudes.length} de {solicitudes.length} solicitudes
           </div>
 
@@ -221,7 +239,7 @@ const AdoptionApllication = () => {
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="px-3 py-2 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+              className="w-[89px] h-[36px] px-[10px] py-[10px] text-center flex items-center justify-center gap-[10px] rounded-[10px] border border-[#767575]/80 text-[14px] font-raleway font-medium text-[#767575]/80 bg-white hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -233,10 +251,10 @@ const AdoptionApllication = () => {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`w-8 h-8 rounded border text-sm font-medium ${
+                    className={`w-[37px] h-[36px] rounded-[10px] px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center  rounded border ${
                       currentPage === page
                         ? "bg-[#595146] text-white border-[#595146]"
-                        : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
+                        : "bg-white text-[#595146] border-[#595146] hover:bg-gray-100"
                     }`}
                   >
                     {page}
@@ -250,7 +268,7 @@ const AdoptionApllication = () => {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="px-3 py-2 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-400 disabled:opacity-50"
+              className="w-[89px] h-[36px] px-[10px] py-[10px] text-center flex items-center justify-center gap-[10px] rounded-[10px] border border-[#595146] text-[14px] font-raleway font-medium text-[#595146] bg-white hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

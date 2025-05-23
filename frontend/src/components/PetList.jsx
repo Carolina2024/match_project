@@ -124,8 +124,11 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               placeholder="Buscar.."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
-              style={{ color: "#767575" }}
+              className="w-full sm:w-[410px] border border-gray-300 rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
+              style={{
+                borderWidth: "1px",
+                borderColor: "rgba(118,117,117,0.8)",
+              }}
             />
             <RiSearchLine
               className="absolute left-3 top-2 text-gray-400"
@@ -236,7 +239,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="font-raleway font-normal text-[14px] px-4 py-1 bg-white rounded-md border-1 border-[#595146]  hover:bg-gray-400 disabled:opacity-50"
+              className="font-raleway font-normal text-[14px] px-4 py-1 bg-white rounded-md border-1 border-[#595146]  hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -262,7 +265,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="font-raleway text-[14px] font-normal px-4 py-1 bg-white rounded-md border-1 border-[#595146] hover:bg-gray-400 disabled:opacity-50"
+              className="font-raleway text-[14px] font-normal px-4 py-1 bg-white rounded-md border-1 border-[#595146] hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

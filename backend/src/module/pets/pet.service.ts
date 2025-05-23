@@ -9,7 +9,6 @@ import { Repository } from 'typeorm';
 import { Pet } from './entities/pet.entity';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { UpdatePetDto } from './dto/update-pet.dto';
-import { PaginationDto } from '../../common/dto/pagination.dto';
 import { GetPetsQueryDto } from './dto/get-pets-query.dto';
 import { Users } from '../users/entities/users.entity';
 import {
@@ -88,71 +87,51 @@ export class PetService {
   }
 
   async findAll(
-    paginationDto: PaginationDto,
-    filterDto?: GetPetsQueryDto,
+    queryParams: GetPetsQueryDto,
   ): Promise<PaginationInterface<Pet>> {
-    const { page = 1, limit = 10 } = paginationDto;
+    const { page = 1, limit = 10, ...filterParams } = queryParams;
+
     const skip = (page - 1) * limit;
 
     const queryBuilder = this.petRepository
       .createQueryBuilder('pet')
-      .select([
-        'pet.id',
-        'pet.name',
-        'pet.size',
-        'pet.sex',
-        'pet.age',
-        'pet.species',
-        'pet.energy',
-        'pet.breed',
-        'pet.kg',
-        'pet.isVaccinated',
-        'pet.isSterilized',
-        'pet.isDewormed',
-        'pet.hasMicrochip',
-        'pet.story',
-        'pet.traits',
-        'pet.admissionDate',
-        'pet.photoUrls',
-        'pet.status',
-      ])
       .where('pet.isActive = :isActive', { isActive: true });
 
-    if (filterDto) {
-      if (filterDto.species) {
+    if (filterParams) {
+      if (filterParams.species) {
         queryBuilder.andWhere('pet.species = :species', {
-          species: filterDto.species,
+          species: filterParams.species,
         });
       }
-      if (filterDto.size) {
-        queryBuilder.andWhere('pet.size = :size', { size: filterDto.size });
+      if (filterParams.size) {
+        queryBuilder.andWhere('pet.size = :size', { size: filterParams.size });
       }
-      if (filterDto.age) {
-        queryBuilder.andWhere('pet.age = :age', { age: filterDto.age });
+      if (filterParams.age) {
+        queryBuilder.andWhere('pet.age = :age', { age: filterParams.age });
       }
-      if (filterDto.sex) {
-        queryBuilder.andWhere('pet.sex = :sex', { sex: filterDto.sex });
+      if (filterParams.sex) {
+        queryBuilder.andWhere('pet.sex = :sex', { sex: filterParams.sex });
       }
-      if (filterDto.energy) {
+      if (filterParams.energy) {
         queryBuilder.andWhere('pet.energy = :energy', {
-          energy: filterDto.energy,
+          energy: filterParams.energy,
         });
       }
-      if (filterDto.breed) {
+      if (filterParams.breed) {
         queryBuilder.andWhere('pet.breed ILIKE :breed', {
-          breed: `%${filterDto.breed}%`,
+          breed: `%${filterParams.breed}%`,
         });
       }
-      if (filterDto.status) {
+      if (filterParams.status) {
         queryBuilder.andWhere('pet.status = :status', {
-          status: `${filterDto.status}`,
+          status: `${filterParams.status}`,
         });
       }
 
-      if (filterDto.search) {
+      if (filterParams.search) {
         queryBuilder.andWhere(
           '(pet.name ILIKE :search OR pet.breed ILIKE :search OR pet.story ILIKE :search)',
-          { search: `%${filterDto.search}%` },
+          { search: `%${filterParams.search}%` },
         );
       }
     }
@@ -173,10 +152,9 @@ export class PetService {
   }
 
   async findAllLimited(
-    paginationDto: PaginationDto,
-    filterDto?: GetPetsQueryDto,
+    queryParams: GetPetsQueryDto,
   ): Promise<PaginationInterface<Partial<Pet>>> {
-    const { page = 1, limit = 10 } = paginationDto;
+    const { page = 1, limit = 10, ...filterParams } = queryParams;
     const skip = (page - 1) * limit;
 
     const queryBuilder = this.petRepository
@@ -184,41 +162,41 @@ export class PetService {
       .select(['pet.id', 'pet.name', 'pet.photoUrls'])
       .where('pet.isActive = :isActive', { isActive: true });
 
-    if (filterDto) {
-      if (filterDto.species) {
+    if (filterParams) {
+      if (filterParams.species) {
         queryBuilder.andWhere('pet.species = :species', {
-          species: filterDto.species,
+          species: filterParams.species,
         });
       }
-      if (filterDto.size) {
-        queryBuilder.andWhere('pet.size = :size', { size: filterDto.size });
+      if (filterParams.size) {
+        queryBuilder.andWhere('pet.size = :size', { size: filterParams.size });
       }
-      if (filterDto.age) {
-        queryBuilder.andWhere('pet.age = :age', { age: filterDto.age });
+      if (filterParams.age) {
+        queryBuilder.andWhere('pet.age = :age', { age: filterParams.age });
       }
-      if (filterDto.sex) {
-        queryBuilder.andWhere('pet.sex = :sex', { sex: filterDto.sex });
+      if (filterParams.sex) {
+        queryBuilder.andWhere('pet.sex = :sex', { sex: filterParams.sex });
       }
-      if (filterDto.energy) {
+      if (filterParams.energy) {
         queryBuilder.andWhere('pet.energy = :energy', {
-          energy: filterDto.energy,
+          energy: filterParams.energy,
         });
       }
-      if (filterDto.breed) {
+      if (filterParams.breed) {
         queryBuilder.andWhere('pet.breed ILIKE :breed', {
-          breed: `%${filterDto.breed}%`,
+          breed: `%${filterParams.breed}%`,
         });
       }
-      if (filterDto.status) {
+      if (filterParams.status) {
         queryBuilder.andWhere('pet.status = :status', {
-          status: `${filterDto.status}`,
+          status: `${filterParams.status}`,
         });
       }
 
-      if (filterDto.search) {
+      if (filterParams.search) {
         queryBuilder.andWhere(
           '(pet.name ILIKE :search OR pet.breed ILIKE :search)',
-          { search: `%${filterDto.search}%` },
+          { search: `%${filterParams.search}%` },
         );
       }
     }
@@ -241,26 +219,6 @@ export class PetService {
   async findOne(id: string): Promise<Pet> {
     const pet = await this.petRepository.findOne({
       where: { id, isActive: true },
-      select: {
-        id: true,
-        name: true,
-        size: true,
-        sex: true,
-        age: true,
-        species: true,
-        energy: true,
-        breed: true,
-        kg: true,
-        isVaccinated: true,
-        isSterilized: true,
-        isDewormed: true,
-        hasMicrochip: true,
-        story: true,
-        traits: true,
-        admissionDate: true,
-        photoUrls: true,
-        status: true,
-      },
     });
     if (!pet) {
       throw new NotFoundException(`Mascota con ID ${id} no encontrada`);
@@ -343,17 +301,15 @@ export class PetService {
 
   async findCompatiblePetsByUserId(
     userId: string,
-    paginationDto: PaginationDto,
-    filterDto?: GetPetsQueryDto,
+    queryParams: GetPetsQueryDto,
   ): Promise<{
     items: Pet[];
     total: number;
     page: number;
     limit: number;
     totalPages: number;
-    compatibilityScore?: Record<string, number>;
   }> {
-    const { page = 1, limit = 10 } = paginationDto;
+    const { page = 1, limit = 10, ...filterParams } = queryParams;
     const skip = (page - 1) * limit;
 
     const user = await this.userRepository.findOne({
@@ -442,36 +398,36 @@ export class PetService {
       });
     }
 
-    if (filterDto) {
-      if (filterDto.species) {
+    if (filterParams) {
+      if (filterParams.species) {
         queryBuilder.andWhere('pet.species = :species', {
-          species: filterDto.species,
+          species: filterParams.species,
         });
       }
-      if (filterDto.size) {
-        queryBuilder.andWhere('pet.size = :size', { size: filterDto.size });
+      if (filterParams.size) {
+        queryBuilder.andWhere('pet.size = :size', { size: filterParams.size });
       }
-      if (filterDto.age) {
-        queryBuilder.andWhere('pet.age = :age', { age: filterDto.age });
+      if (filterParams.age) {
+        queryBuilder.andWhere('pet.age = :age', { age: filterParams.age });
       }
-      if (filterDto.sex) {
-        queryBuilder.andWhere('pet.sex = :sex', { sex: filterDto.sex });
+      if (filterParams.sex) {
+        queryBuilder.andWhere('pet.sex = :sex', { sex: filterParams.sex });
       }
-      if (filterDto.energy) {
+      if (filterParams.energy) {
         queryBuilder.andWhere('pet.energy = :energy', {
-          energy: filterDto.energy,
+          energy: filterParams.energy,
         });
       }
-      if (filterDto.breed) {
+      if (filterParams.breed) {
         queryBuilder.andWhere('pet.breed ILIKE :breed', {
-          breed: `%${filterDto.breed}%`,
+          breed: `%${filterParams.breed}%`,
         });
       }
 
-      if (filterDto.search) {
+      if (filterParams.search) {
         queryBuilder.andWhere(
           '(pet.name ILIKE :search OR pet.breed ILIKE :search OR pet.story ILIKE :search)',
-          { search: `%${filterDto.search}%` },
+          { search: `%${filterParams.search}%` },
         );
       }
     }

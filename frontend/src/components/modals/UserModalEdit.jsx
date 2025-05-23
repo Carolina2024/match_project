@@ -163,7 +163,7 @@ function UserModalEdit() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs ml-3">Contraseña</span>
+                <span className="text-xs ml-3 font-bold">Contraseña</span>
                 <input
                   className="border rounded-full text-xs p-2 w-70 border-primary outline-none"
                   placeholder="******"
@@ -173,7 +173,7 @@ function UserModalEdit() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-xs ml-3">Documento de identidad</span>
+                <span className="text-xs ml-3 font-bold">Documento de identidad</span>
                 <input
                   className="border rounded-full text-xs p-2 w-70 border-primary outline-none"
                   placeholder="Documento de identidad"

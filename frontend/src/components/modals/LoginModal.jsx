@@ -157,6 +157,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 )}
               </div>
 
+
               <div className="relative pb-1"> 
   <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
     <img src={LockIcon} alt="" className="w-[18px] h-[18px]" />
@@ -166,6 +167,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
     type={showPassword ? "text" : "password"}
     placeholder="Contraseña"
     value={password}
+    autoComplete="none"
     name="password"
     onChange={(e) => setPassword(e.target.value)}
     disabled={isLoading}
@@ -190,7 +192,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   )}
 </div>
 
-
               <div className="text-left">
                 <button
                   type="button"
@@ -213,11 +214,13 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   className="px-14 bg-primary shadow-lg/20 text-white py-2 cursor-pointer font-bold text-lg rounded-3xl hover:bg-orange-300 transition-colors"
                 >
                   {isLoading ? (
-                    <>
-<Spinner />             
-   
-                           Cargando...
-                    </>
+
+                 <div className="flex items-center">
+                      <Spinner />   
+                  
+                      Cargando...
+                    </div>
+
                   ) : (
                     "Ingresar"
                   )}

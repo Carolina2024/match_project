@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useParams } from "react-router-dom";
 import { getPetById } from "../api/PetsUser";
+import backArrow from "../assets/icons/back-arrow.svg";
+
 
 const InfoPet = () => {
   const {
@@ -33,7 +35,7 @@ const InfoPet = () => {
     };
 
     fetchPet();
-  }, []);
+  }, [id]);
 
   if (pet.photoUrls === undefined) return <p>No hay mascota seleccionada.</p>;
 
@@ -46,22 +48,9 @@ const InfoPet = () => {
           }}
           className="mb-4 md:ml-24 bg-white font-bold text-base rounded-full shadow-md text-primary px-7 py-2 transition cursor-pointer w-fit "
         >
-          <svg
-            className="inline mr-2"
-            width="20"
-            height="11"
-            viewBox="0 0 20 11"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M1 5.5H19M5 9.5L1 5.5L5 9.5ZM1 5.5L5 1.5L1 5.5Z"
-              stroke="#FAAA75"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+    <img src={backArrow} alt="" className="inline mr-2 w-[20px] h-[11px]" />
+
+
           Volver
         </button>
 

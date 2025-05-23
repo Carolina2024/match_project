@@ -53,9 +53,6 @@ export const PetProvider = ({ children }) => {
   const [userMatches, setUserMatches] = useState([]);
   const [matchedPet, setMatchedPet] = useState(null);
 
-  const location = useLocation();
-
-
   useEffect(() => {
     const fetchMascotas = async () => {
       if (!user || !user.role || !user.id) {

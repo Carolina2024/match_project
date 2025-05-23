@@ -20,7 +20,6 @@ function PasswordReset() {
   const handleCodigoChange = (index, value) => {
     const newCode = [...code];
 
-    // Dígitos completos con copiado y pegado
     if (value.length === 6 && /^[0-9]+$/.test(value)) {
       const digits = value.split("").slice(0, 6);
       setCode(digits);
@@ -32,7 +31,6 @@ function PasswordReset() {
       return;
     }
 
-    // Dígito por dígito
     if (/^[0-9]?$/.test(value)) {
       newCode[index] = value;
       setCode(newCode);
@@ -55,7 +53,7 @@ function PasswordReset() {
           inputRefs.current[i].value = digit;
         }
       });
-      inputRefs.current[5]?.focus(); // Enfoca el último input
+      inputRefs.current[5]?.focus();
     }
   };
 

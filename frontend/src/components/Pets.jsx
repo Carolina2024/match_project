@@ -186,8 +186,8 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           x
         </button>
 
-        <h2 className="text-center Monserrat Alternates text-[20px] text-[#595146] font-bold mb-4">
-          {editingPet ? "Editar Mascota" : "nueva mascota"}
+        <h2 className="text-center font-secundary text-[20px] text-[#595146] font-bold mb-4">
+          {editingPet ? "Editar mascota" : "nueva mascota"}
         </h2>
 
         <p
@@ -195,7 +195,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           style={{ color: "#767575" }}
         >
           {editingPet
-            ? "Completa el formulario para actualizar los datos de esta mascota"
+            ? "Actualiza los datos de la mascota en el refugio"
             : "Completa el formulario para agregar una nueva mascota al refugio."}
         </p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-6">
@@ -451,7 +451,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               {...register("story")}
               rows="4"
               className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
-              placeholder="Lorem ipsum dolor sit amet consectetur. Massa fusce pellentesque tincidunt neque laoreet. Aliquet eu nibh sed quisque at vulputate ut ullamcorper morbi. Lorem ipsum dolor sit amet consectetur. Massa fusce pellentesque tincidunt neque laoreet. Aliquet eu nibh sed quisque at vulputate ut ullamcorper morbi."
+              placeholder=""
             ></textarea>
           </div>
 
@@ -515,7 +515,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                 type="submit"
                 className="font-raleway text-[16px] text-[#767575] px-6 py-2 text-white rounded-lg bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
               >
-                Guardar
+                {editingPet ? "Editar" : "Guardar"}
               </button>
             </div>
           </div>

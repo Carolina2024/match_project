@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import {
   BadRequestException,
   ConflictException,
@@ -8,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from './entities/users.entity';
-import { Like, Repository } from 'typeorm';
+import { FindOptionsWhere, Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { GetUsersQueryDto } from './dtos/get-users-query.dto';
@@ -50,7 +48,10 @@ export class UsersService {
   async findAll(query: GetUsersQueryDto): Promise<PaginationInterface<Users>> {
     const { page = 1, limit = 10, ...filters } = query;
 
-    const where: any = { role: UserRole.ADOPTERS, isActive: true };
+    const where: FindOptionsWhere<Users> = {
+      role: UserRole.ADOPTERS,
+      isActive: true,
+    };
     if (filters.fullname) where.fullname = Like(`%${filters.fullname}%`);
     if (filters.email) where.email = Like(`%${filters.email}%`);
 

@@ -96,7 +96,7 @@ const Home = () => {
       {!loggedIn ? (
         <>
           <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden md:flex items-center md:ml-10 bg-transparent">
-            {/* SVG de fondo */}
+
             <svg
               width="1030"
               height="745"
@@ -114,7 +114,6 @@ const Home = () => {
               />
             </svg>
 
-            {/* Mobile */}
             <div className="block md:hidden w-[400px] mt-10 ml-6 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-4 mb-16">
               <div className="flex flex-col items-center text-center">
                 <h2 className="text-4xl font-bold font-secundary leading-tight text-shadow-lg/10 text-center md:text-left">
@@ -141,7 +140,6 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Desktop */}
             <div className="hidden md:flex absolute inset-y-0 right-0 items-center">
               <img
                 src={image}
@@ -200,9 +198,8 @@ const Home = () => {
         </>
       ) : (
         <>
-          {/* Mobile */}
           <div className="block md:hidden w-[380px] mt-10 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-6 md:mb-16 relative">
-            {/* Botón flotante */}
+
             <section className="absolute top-4 right-4 z-10">
               <a
                 href="https://esponsor.com/pataspirque"
@@ -215,7 +212,6 @@ const Home = () => {
               </a>
             </section>
 
-            {/* Contenido */}
             <div className="flex flex-col items-center text-center">
               <h2 className="text-4xl font-bold font-secundary leading-tight text-shadow-lg/10">
                 <span className="text-primary">Matchea </span> <br />
@@ -231,7 +227,6 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Desktop */}
           <div className=" hidden md:flex relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis items-center md:ml-10">
             <svg
               width="918"

@@ -1,6 +1,4 @@
 import PropTypes from "prop-types";
-// import { useEffect, useState } from "react";
-// import { getUserById } from "../../api/userService";
 
 const RequestModal = ({ request, onClose }) => {
 

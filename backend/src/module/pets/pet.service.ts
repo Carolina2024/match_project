@@ -293,7 +293,6 @@ export class PetService {
 
     let newPhotoUrls: string[] = [];
 
-    // Subir y transformar imágenes en Cloudinary
     if (files?.length > 0) {
       newPhotoUrls = await Promise.all(
         files.map((file) => this.filesService.uploadImageToCloudinary(file)),
@@ -314,11 +313,9 @@ export class PetService {
         (url): url is string => typeof url === 'string',
       );
     } else if (!files?.length) {
-      // Si no se enviaron nuevas fotos ni archivos, mantenemos las actuales
       photoUrlsFromDto = existingPet.photoUrls;
     }
-    // Combinar imágenes subidas y URLs recibidas
-    const finalPhotoUrls = [...photoUrlsFromDto, ...newPhotoUrls].slice(0, 3); // limitar a máximo 3
+    const finalPhotoUrls = [...photoUrlsFromDto, ...newPhotoUrls].slice(0, 3);
     if (finalPhotoUrls.length === 0) {
       throw new BadRequestException(
         'La mascota debe tener al menos una imagen',
@@ -372,7 +369,6 @@ export class PetService {
 
     const adopter = user.adopter;
 
-    // Si el adoptante no permite mascotas, no mostrar ninguna
     if (!adopter.allowsPets) {
       throw new ConflictException(
         `El edificio o condominio del adoptante no permite mascotas en su hogar`,
@@ -384,25 +380,18 @@ export class PetService {
       .where('pet.isActive = :isActive', { isActive: true })
       .andWhere('pet.status = :status', { status: PetStatus.AVAILABLE });
 
-    // Filtros basados en las características del adoptante
-
-    // ===== FILTROS DE COMPATIBILIDAD CRÍTICOS =====
-
-    // Si el adoptante desea compatibilidad con niños, solo mostrar mascotas amigables con niños
     if (adopter.userPreferenceChildren) {
       queryBuilder.andWhere(':childFriendly = ANY(pet.traits)', {
         childFriendly: PetTrait.CHILD_FRIENDLY,
       });
     }
 
-    // Si el adoptante desea compatibilidad con perros o gatos, solo mostrar mascotas amigables con otras mascotas
     if (adopter.userPreferenceDogs || adopter.userPreferenceCats) {
       queryBuilder.andWhere(':petFriendly = ANY(pet.traits)', {
         petFriendly: PetTrait.PET_FRIENDLY,
       });
     }
 
-    // Si la mascota pasará 4 o más horas sola, mostrar mascotas con energía moderada o tranquila, o independientes
     if (adopter.hoursAlone >= 4) {
       queryBuilder.andWhere(
         '(pet.energy = :moderateEnergy OR pet.energy = :calmEnergy OR :independent = ANY(pet.traits))',
@@ -414,7 +403,6 @@ export class PetService {
       );
     }
 
-    // Si la mascota pasará 8 o más horas sola, solo mostrar mascotas tranquilas o independientes
     if (adopter.hoursAlone >= 8) {
       queryBuilder.andWhere(
         '(pet.energy = :calmEnergy OR :independent = ANY(pet.traits))',
@@ -425,9 +413,6 @@ export class PetService {
       );
     }
 
-    // ===== FILTROS PARA TIPO DE VIVIENDA =====
-
-    // Para departamentos pequeños, limitar el tamaño de las mascotas
     if (adopter.homeType === AdopterHomeType.SMALL_APARTMENT) {
       queryBuilder.andWhere(
         '(pet.size = :smallSize OR pet.size = :mediumSize)',
@@ -438,9 +423,6 @@ export class PetService {
       );
     }
 
-    // ===== FILTROS BASADOS EN EXPERIENCIA DEL ADOPTANTE =====
-
-    // Si el adoptante no ha tenido mascotas antes, sugerir mascotas más fáciles de cuidar
     if (!adopter.hadPets) {
       queryBuilder.andWhere(
         '(:easygoing = ANY(pet.traits) OR :adaptable = ANY(pet.traits))',
@@ -451,9 +433,6 @@ export class PetService {
       );
     }
 
-    // ===== FILTROS BASADOS EN RESPONSABILIDAD DEL ADOPTANTE =====
-
-    // Si el adoptante no tiene veterinario o no lo llevará al veterinario, priorizar mascotas saludables, vacunadas o esterilizadas
     if (!adopter.preparedToVisitVeterinarian) {
       queryBuilder.andWhere('pet.isVaccinated = :isVaccinated', {
         isVaccinated: true,
@@ -463,7 +442,6 @@ export class PetService {
       });
     }
 
-    // Aplicar filtros adicionales si se proporcionan en el DTO
     if (filterDto) {
       if (filterDto.species) {
         queryBuilder.andWhere('pet.species = :species', {
@@ -503,34 +481,28 @@ export class PetService {
       .take(limit)
       .getManyAndCount();
 
-    // Calcular puntuación de compatibilidad para cada mascota
     const compatibilityScore: Record<string, number> = {};
 
     for (const pet of pets) {
       let score = 0;
       const maxScore = 100;
 
-      // Factores de compatibilidad con ponderaciones
-
-      // 1. Compatibilidad con niños (20 puntos)
       if (adopter.userPreferenceChildren) {
         if (pet.traits.includes(PetTrait.CHILD_FRIENDLY)) {
           score += 20;
         }
       } else {
-        score += 20; // Si no hay niños, no es un factor limitante
+        score += 20;
       }
 
-      // 2. Compatibilidad con otras mascotas (15 puntos)
       if (adopter.userPreferenceDogs || adopter.userPreferenceCats) {
         if (pet.traits.includes(PetTrait.PET_FRIENDLY)) {
           score += 15;
         }
       } else {
-        score += 15; // Si no hay otras mascotas, no es un factor limitante
+        score += 15;
       }
 
-      // 3. Compatibilidad con tiempo solo (15 puntos)
       if (adopter.hoursAlone >= 8) {
         if (
           pet.energy === PetEnergy.CALM ||
@@ -547,10 +519,9 @@ export class PetService {
           score += 15;
         }
       } else {
-        score += 15; // Si la mascota no estará sola mucho tiempo, no es un factor limitante
+        score += 15;
       }
 
-      // 4. Compatibilidad con tipo de vivienda (15 puntos)
       if (adopter.homeType === AdopterHomeType.SMALL_APARTMENT) {
         if (pet.size === PetSize.SMALL) {
           score += 15;
@@ -570,10 +541,9 @@ export class PetService {
           score += 10;
         }
       } else {
-        score += 15; // Para casas, cualquier tamaño es adecuado
+        score += 15;
       }
 
-      // 5. Experiencia con mascotas (10 puntos)
       if (adopter.hadPets) {
         score += 10;
       } else {
@@ -587,7 +557,6 @@ export class PetService {
         }
       }
 
-      // 6. Estado de salud y cuidados (10 puntos)
       if (pet.isVaccinated && pet.isDewormed) {
         score += 5;
       }
@@ -595,7 +564,6 @@ export class PetService {
         score += 5;
       }
 
-      // 7. Energía de la mascota vs estilo de vida (15 puntos)
       if (adopter.hoursAlone < 4 && pet.energy === PetEnergy.VERY_ACTIVE) {
         score += 15;
       } else if (
@@ -607,14 +575,12 @@ export class PetService {
       } else if (adopter.hoursAlone >= 8 && pet.energy === PetEnergy.CALM) {
         score += 15;
       } else {
-        score += 7; // Compatibilidad parcial
+        score += 7;
       }
 
-      // Guardar puntuación normalizada (0-100)
       compatibilityScore[pet.id] = Math.min(Math.round(score), maxScore);
     }
 
-    // Ordenar mascotas por puntuación de compatibilidad (de mayor a menor)
     const sortedPets = pets.sort(
       (a, b) =>
         (compatibilityScore[b.id] || 0) - (compatibilityScore[a.id] || 0),

@@ -12,6 +12,5 @@ export const DB_CONFIG: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   autoLoadEntities: true,
   synchronize: true,
-  //dropSchema: ,
-  ssl: true
+  ssl: true,
 };

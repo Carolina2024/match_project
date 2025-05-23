@@ -90,7 +90,11 @@ const UserProfiles = () => {
             placeholder="Buscar.."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="placeholder:font-medium placeholder:text-[14px] text-[#767575] w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full sm:w-[410px] placeholder:font-medium placeholder:text-[14px] text-[#767575] w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            style={{
+              borderWidth: "1px",
+              borderColor: "rgba(118,117,117,0.8)",
+            }}
           />
           <RiSearchLine
             className="absolute left-3 top-3 text-gray-400"
@@ -160,7 +164,7 @@ const UserProfiles = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] rounded-[10px] hover:bg-gray-400 disabled:opacity-50"
+              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] rounded-[10px] hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -185,7 +189,7 @@ const UserProfiles = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#595146] hover:bg-gray-400 disabled:opacity-50"
+              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#595146] hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

@@ -19,11 +19,15 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
   return (
     <div
       ref={ref}
-      className="relative w-[100px] text-sm font-raleway text-[#767575]"
+      className="relative w-[115px] text-sm font-raleway text-[#767575]"
     >
       <button
         onClick={() => setOpen(!open)}
-        className="flex justify-between items-center w-full px-4 py-[8px] border border-gray-300 rounded-md bg-white hover:bg-gray-50"
+        className="flex justify-between items-center w-full px-4 py-[8px] border rounded-md bg-white hover:bg-gray-50"
+        style={{
+          borderWidth: "1px",
+          borderColor: "rgba(118, 117, 117, 0.5)",
+        }}
       >
         <span>{selected === label ? label : selected}</span>
 

@@ -25,7 +25,7 @@ function PetsHome() {
                   {mascota.name}, {mascota.sex}
                 </h3>
                 <p className="font-extrabold md:text-2xl text-lg font-tertiary text-primary">
-                  {mascota.traits[0]}
+                  {(mascota.traits.find(trait => trait.length <= 10))}
                 </p>
               </div>
               <div className="flex flex-col mt-2">

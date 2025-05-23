@@ -183,6 +183,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   type={showPassword ? "text" : "password"}
                   placeholder="Contraseña"
                   value={password}
+                  autoComplete="none"
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
@@ -251,7 +252,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   className="px-14 bg-primary shadow-lg/20 text-white py-2 cursor-pointer font-bold text-lg rounded-3xl hover:bg-orange-300 transition-colors"
                 >
                   {isLoading ? (
-                    <>
+                    <div className="flex items-center">
                       <svg
                         className="animate-spin h-5 w-5 text-white mr-2"
                         xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +274,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                         />
                       </svg>
                       Cargando...
-                    </>
+                    </div>
                   ) : (
                     "Ingresar"
                   )}

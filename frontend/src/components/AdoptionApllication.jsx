@@ -80,7 +80,7 @@ const AdoptionApllication = () => {
   };
 
   return (
-    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen max-w-full">
+<div className="bg-white sm:bg-[#FAF9F6] min-h-screen max-w-screen-xl mx-auto">
       <div className="bg-transparent sm:bg-white sm:m-10 sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300">
         <div className="flex flex-col gap-3 mb-8">
           <div className="relative w-full sm:w-64 max-w-md">
@@ -113,10 +113,10 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-        <div className=""></div>
+        
 
-        <div className="flex flex-wrap justify-start gap-5 mr-[15px] ml-[15px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {solicitudes.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mx-auto px-4 max-w-7xl">
+        {solicitudes.length > 0 ? (
             solicitudes.map((sol) => (
               <div
                 key={sol.id}

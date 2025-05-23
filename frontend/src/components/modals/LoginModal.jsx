@@ -11,7 +11,7 @@ import eyeOpen from "../../assets/icons/eye-open.svg";
 import eyeOff from "../../assets/icons/eye-off.svg";
 import BlurTop from "../../assets/icons/blur-top";
 import BlurBottom from "../../assets/icons/blur-bottom";
-import Spinner from "../../assets/icons/spinner";
+import Spinner from "../../assets/icons/Spinner";
 
 
 const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {

@@ -13,7 +13,6 @@ import BlurTop from "../../assets/icons/blur-top";
 import BlurBottom from "../../assets/icons/blur-bottom";
 import Spinner from "../../assets/icons/Spinner";
 
-
 const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   const { login } = useAuth();
   const [email, setEmail] = useState("");
@@ -136,7 +135,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 )}
 
                 <div className="relative">
-
                   <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
                     <img src={userIcon} className="w-[14px] h-[14px]" alt="" />
                   </span>
@@ -157,40 +155,39 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 )}
               </div>
 
+              <div className="relative pb-1">
+                <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
+                  <img src={LockIcon} alt="" className="w-[18px] h-[18px]" />
+                </span>
 
-              <div className="relative pb-1"> 
-  <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
-    <img src={LockIcon} alt="" className="w-[18px] h-[18px]" />
-  </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Contraseña"
+                  value={password}
+                  autoComplete="none"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                  className="w-full pl-10 pr-10 text-lg font-medium bg-white text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
+                />
 
-  <input
-    type={showPassword ? "text" : "password"}
-    placeholder="Contraseña"
-    value={password}
-    autoComplete="none"
-    name="password"
-    onChange={(e) => setPassword(e.target.value)}
-    disabled={isLoading}
-    className="w-full pl-10 pr-10 text-lg font-medium bg-white text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
-  />
+                <span
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary cursor-pointer"
+                >
+                  <img
+                    src={showPassword ? eyeOpen : eyeOff}
+                    alt="Mostrar contraseña"
+                    className="w-[22px] h-[20px]"
+                  />
+                </span>
 
-  <span
-    onClick={() => setShowPassword((prev) => !prev)}
-    className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary cursor-pointer"
-  >
-    <img
-      src={showPassword ? eyeOpen : eyeOff}
-      alt="Mostrar contraseña"
-      className="w-[22px] h-[20px]"
-    />
-  </span>
-
-  {errors.password && (
-    <p className="absolute left-0 top-full text-red-500 text-sm mt-1">
-      {errors.password}
-    </p>
-  )}
-</div>
+                {errors.password && (
+                  <p className="absolute left-0 top-full text-red-500 text-sm mt-1">
+                    {errors.password}
+                  </p>
+                )}
+              </div>
 
               <div className="text-left">
                 <button
@@ -205,8 +202,6 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 </button>
               </div>
 
-              
-
               <div className="justify-center text-left mt-10">
                 <button
                   type="submit"
@@ -214,13 +209,10 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   className="px-14 bg-primary shadow-lg/20 text-white py-2 cursor-pointer font-bold text-lg rounded-3xl hover:bg-orange-300 transition-colors"
                 >
                   {isLoading ? (
-
-                 <div className="flex items-center">
-                      <Spinner />   
-                  
+                    <div className="flex items-center">
+                      <Spinner />
                       Cargando...
                     </div>
-
                   ) : (
                     "Ingresar"
                   )}
@@ -245,8 +237,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
 
           <div className="w-auto flex justify-center items-center">
             <div className="flex flex-col  ">
-
- <BlurTop />
+              <BlurTop />
 
               <img
                 src={logo}
@@ -254,9 +245,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 className=" md:w-50 w-32 h-auto drop-shadow-xl rounded-full absolute top-0 md:left-97 left-70 right-0 bottom-0 m-auto"
               />
 
-<BlurBottom />
-
-
+              <BlurBottom />
             </div>
           </div>
         </div>

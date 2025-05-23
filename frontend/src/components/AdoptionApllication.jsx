@@ -8,7 +8,6 @@ import CustomSelect from "./CustomSelect";
 import { FiCalendar } from "react-icons/fi";
 import { UilEdit } from "@iconscout/react-unicons";
 
-
 const AdoptionApllication = () => {
   const [filtro, setFiltro] = useState("Estado");
   const [busqueda, setBusqueda] = useState("");
@@ -23,7 +22,8 @@ const AdoptionApllication = () => {
   useEffect(() => {
     const fetchSolicitudes = async () => {
       try {
-        const statusParam = (filtro === "Todos" || filtro === "Estado") ? "" : filtro;
+        const statusParam =
+          filtro === "Todos" || filtro === "Estado" ? "" : filtro;
 
         const data = await getAllMatches(currentPage, 8, statusParam, busqueda);
 
@@ -84,10 +84,8 @@ const AdoptionApllication = () => {
   };
 
   return (
-
     <div className="bg-white sm:bg-[#FAF9F6] min-h-screen mt-8">
       <div className="bg-transparent sm:bg-white sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 w-full">
-
         <div className="flex flex-col gap-3 mb-8">
           <div className="relative w-full">
             <input
@@ -126,11 +124,8 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-
         <div className="flex flex-wrap justify-start gap-5 mr-[15px] ml-[15px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {solicitudes.length > 0 ? (
-
-    
             solicitudes.map((sol) => (
               <div
                 key={sol.id}

@@ -86,7 +86,8 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
     switch (name) {
       case "email":
         if (!value.trim()) return "El correo es obligatorio";
-        if (!/\S+@\S+\.\S+/.test(value)) return "Correo electrónico inválido Ejemplo: nombre@dominio.com";
+        if (!/\S+@\S+\.\S+/.test(value))
+          return "Correo electrónico inválido Ejemplo: nombre@dominio.com";
         return "";
 
       case "password":
@@ -124,25 +125,26 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
         }
         return "";
 
-case "birthDate": {
-  if (!value.trim()) return "Fecha requerida";
+      case "birthDate": {
+        if (!value.trim()) return "Fecha requerida";
 
-  const birthDate = new Date(value);
-  const today = new Date();
+        const birthDate = new Date(value);
+        const today = new Date();
 
-  const age = today.getFullYear() - birthDate.getFullYear();
-  const hasHadBirthdayThisYear =
-    today.getMonth() > birthDate.getMonth() ||
-    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const hasHadBirthdayThisYear =
+          today.getMonth() > birthDate.getMonth() ||
+          (today.getMonth() === birthDate.getMonth() &&
+            today.getDate() >= birthDate.getDate());
 
-  const realAge = hasHadBirthdayThisYear ? age : age - 1;
+        const realAge = hasHadBirthdayThisYear ? age : age - 1;
 
-  if (realAge < 18) return "Debes ser mayor de 18 años para registrarte";
-  if (realAge > 75) return "La edad máxima para registrarse es de 75 años";
+        if (realAge < 18) return "Debes ser mayor de 18 años para registrarte";
+        if (realAge > 75)
+          return "La edad máxima para registrarse es de 75 años";
 
-  return "";
-}
-
+        return "";
+      }
 
       default:
         return "";
@@ -253,7 +255,9 @@ case "birthDate": {
                   onBlur={handleBlur}
                   className="w-full border-primary bg-white/75 border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
-                {errors.email && <p className="text-red-500 text-lg">{errors.email}</p>}
+                {errors.email && (
+                  <p className="text-red-500 text-lg">{errors.email}</p>
+                )}
               </div>
 
               <div className="mt-9 sm:mt-0">
@@ -275,12 +279,14 @@ case "birthDate": {
                     onClick={() => setShowPassword(!showPassword)}
                     className="ml-2 text-primary"
                   >
+
                     <img
                       src={showPassword ? eyeOpen : eyeClose}
                       alt={showPassword ? "Mostrar contraseña" : "Ocultar contraseña"}
                       className="w-[20px] h-[20px]"
                     />
                   </button>
+
                 </div>
 
                 {errors.password && (
@@ -303,7 +309,9 @@ case "birthDate": {
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.phoneNumber}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.phoneNumber}
+                  </p>
                 )}
               </div>
 
@@ -319,7 +327,11 @@ case "birthDate": {
                   onBlur={handleBlur}
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary "
                 />
-                {errors.run && <p className="text-red-500 md:text-lg text-base">{errors.run}</p>}
+                {errors.run && (
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.run}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -338,7 +350,9 @@ case "birthDate": {
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
                 {errors.address && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.address}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.address}
+                  </p>
                 )}
               </div>
             </div>
@@ -365,7 +379,9 @@ case "birthDate": {
                 ))}
               </div>
               {errors.homeType && (
-                <p className="text-red-500 md:text-lg text-base">{errors.homeType}</p>
+                <p className="text-red-500 md:text-lg text-base">
+                  {errors.homeType}
+                </p>
               )}
             </div>
 
@@ -399,7 +415,9 @@ case "birthDate": {
                   </label>
                 </div>
                 {errors.allowsPets && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.allowsPets}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.allowsPets}
+                  </p>
                 )}
               </div>
 
@@ -432,7 +450,9 @@ case "birthDate": {
                   </label>
                 </div>
                 {errors.hasPets && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.hasPets}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.hasPets}
+                  </p>
                 )}
               </div>
 
@@ -465,7 +485,9 @@ case "birthDate": {
                   </label>
                 </div>
                 {errors.isVaccinated && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.isVaccinated}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.isVaccinated}
+                  </p>
                 )}
               </div>
 
@@ -498,7 +520,9 @@ case "birthDate": {
                   </label>
                 </div>
                 {errors.isSterilized && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.isSterilized}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.isSterilized}
+                  </p>
                 )}
               </div>
             </div>
@@ -519,7 +543,9 @@ case "birthDate": {
                   className="w-auto bg-white/75 border-primary px-6 py-1 border-2 rounded-3xl focus:outline-none focus:border-primary"
                 />
                 {errors.hoursAlone && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.hoursAlone}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.hoursAlone}
+                  </p>
                 )}
               </div>
 
@@ -537,13 +563,17 @@ case "birthDate": {
                   className="w-full border-2 bg-white/75 border-primary rounded-3xl p-2 h-24 focus:outline-none focus:border-primary"
                 />
                 {errors.petDestroy && (
-                  <p className="text-red-500 md:text-lg text-base">{errors.petDestroy}</p>
+                  <p className="text-red-500 md:text-lg text-base">
+                    {errors.petDestroy}
+                  </p>
                 )}
               </div>
             </div>
 
             {serverError && (
-              <p className="text-red-600 text-center mb-4 md:text-lg text-base">{serverError}</p>
+              <p className="text-red-600 text-center mb-4 md:text-lg text-base">
+                {serverError}
+              </p>
             )}
 
             <div className="text-right">

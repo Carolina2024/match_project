@@ -1,11 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-import logo from "../../assets/logo.png";
 import OnClose from "../../assets/icons/svg-components/OnClose";
 
 import logo from "../../assets/logo.webp";
-
 
 const opcionesEnergia = ["Tranquilo", "Moderado", "Muy Activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];

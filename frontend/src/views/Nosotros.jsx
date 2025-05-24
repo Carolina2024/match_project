@@ -1,18 +1,18 @@
-import nosotros from "../assets/nosotros.png";
-import sofia from "../assets/sofia.png";
-import nosotros2 from "../assets/nosotros2.png";
-import nosotrosp1 from "../assets/nosotrosp1.png";
-import nosotrosp2 from "../assets/nosotrosp2.png";
-import nosotrosp3 from "../assets/nosotrosp3.png";
-import nosotrosg4 from "../assets/nosotrosg4.png";
-import nosotrosp5 from "../assets/nosotrosp5.png";
+import nosotros from "../assets/nosotros.webp";
+import sofia from "../assets/sofia.webp";
+import nosotros2 from "../assets/nosotros2.webp";
+import nosotrosp1 from "../assets/nosotrosp1.webp";
+import nosotrosp2 from "../assets/nosotrosp2.webp";
+import nosotrosp3 from "../assets/nosotrosp3.webp";
+import nosotrosg4 from "../assets/nosotrosg4.webp";
+import nosotrosp5 from "../assets/nosotrosp5.webp";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import starMedal from "../../src/assets/icons/starMedal.svg"
-import asteriskIcon from "../../src/assets/icons/asteriskIcon.svg"
-import subscriptions from "../../src/assets/icons/subscriptions.svg"
-import subscriptionsHeart from "../../src/assets/icons/subscriptionsHeart.svg"
-import handDonationsIcon from "../../src/assets/icons/handDonationsIcon.svg"
+import starMedal from "../../src/assets/icons/starMedal.svg";
+import asteriskIcon from "../../src/assets/icons/asteriskIcon.svg";
+import subscriptions from "../../src/assets/icons/subscriptions.svg";
+import subscriptionsHeart from "../../src/assets/icons/subscriptionsHeart.svg";
+import handDonationsIcon from "../../src/assets/icons/handDonationsIcon.svg";
 
 const Nosotros = () => {
   const { hash } = useLocation();
@@ -92,9 +92,7 @@ const Nosotros = () => {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 mb-10 sm:mb-14 lg:mb-16">
-
         <img src={starMedal} alt="" />
-
 
         <span className="text-primary text-2xl sm:text-3xl lg:text-4xl font-bold">
           + 230{" "}
@@ -138,7 +136,6 @@ const Nosotros = () => {
           <div className="p-4">
             {" "}
             <div className="flex items-center gap-2">
-
               <img src={asteriskIcon} alt="" />
 
               <h4 className="text-primary md:text-3xl text-2xl font-bold">
@@ -155,8 +152,7 @@ const Nosotros = () => {
           <div className="p-3">
             {" "}
             <div className="flex items-center gap-2">
-
-            <img src={asteriskIcon} alt="" />
+              <img src={asteriskIcon} alt="" />
 
               <h4 className="text-primary md:text-3xl text-2xl font-bold">
                 Visión
@@ -181,9 +177,7 @@ const Nosotros = () => {
 
         <div className="mb-12">
           <h3 className="flex items-center justify-center md:text-2xl text-xl font-bold text-primary mb-4 gap-2">
-
             <img src={subscriptions} alt="" />
-
             Suscripciones
           </h3>
 
@@ -272,11 +266,13 @@ const Nosotros = () => {
 
           <div className="flex justify-center md:mt-20 mt-7">
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-14 gap-6">
-
               <div className=" rounded-[30px] md:rounded-[50px] border-1 border-primary p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
                 <div className="hidden md:flex items-center justify-center mb-2">
-
-                  <img src={subscriptionsHeart} className="w-[25px] mr-1" alt="" />
+                  <img
+                    src={subscriptionsHeart}
+                    className="w-[25px] mr-1"
+                    alt=""
+                  />
 
                   <h3 className="text-3xl font-bold text-primary">Campañas</h3>
                 </div>
@@ -291,8 +287,11 @@ const Nosotros = () => {
 
                 <div className="flex-1 flex flex-col justify-center items-center md:items-center md:mt-4 w-full">
                   <div className="flex md:hidden items-center gap-2 justify-start mb-2">
-
-                  <img src={subscriptionsHeart} className="w-[25px] mr-1" alt="" />
+                    <img
+                      src={subscriptionsHeart}
+                      className="w-[25px] mr-1"
+                      alt=""
+                    />
 
                     <h3 className="text-xl font-bold text-primary">Campañas</h3>
                   </div>
@@ -317,8 +316,11 @@ const Nosotros = () => {
 
               <div className="rounded-[30px] md:rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
                 <div className="hidden md:flex items-center justify-center mb-2">
-
-                  <img src={handDonationsIcon} className="w-[35px] mr-1" alt="" />
+                  <img
+                    src={handDonationsIcon}
+                    className="w-[35px] mr-1"
+                    alt=""
+                  />
 
                   <h3 className="text-3xl font-bold text-primary">
                     Donaciones
@@ -335,8 +337,11 @@ const Nosotros = () => {
 
                 <div className="flex-1 flex flex-col justify-center items-center md:items-center md:mt-4 w-full">
                   <div className="flex md:hidden items-center gap-2 justify-start mb-2">
-
-                  <img src={handDonationsIcon} className="w-[35px] mr-1" alt="" />
+                    <img
+                      src={handDonationsIcon}
+                      className="w-[35px] mr-1"
+                      alt=""
+                    />
 
                     <h3 className="text-xl font-bold text-primary">
                       Donaciones

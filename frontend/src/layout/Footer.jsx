@@ -1,5 +1,5 @@
 import { FiMail } from "react-icons/fi";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import { Link } from "react-router-dom";
 import TiktokIcon from "../assets/icons/svg-components/TiktokIcon";
 import FacebookIcon from "../assets/icons/svg-components/FacebookIcon";

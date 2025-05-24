@@ -66,7 +66,7 @@ function PetElection() {
       </h1>
       <div className="items-center flex flex-col gap-5">
         <img
-          src={matchs.foto?.[0] || "/fallback.jpg"}
+          src={matchs.foto?.[0] || "/fallback.webp"}
           alt={matchs.name}
           className="md:w-55 md:h-55 w-50 h-50 object-cover md:rounded-[30%] rounded-full"
         />

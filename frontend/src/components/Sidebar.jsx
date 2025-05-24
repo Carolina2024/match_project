@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { FiUsers } from "react-icons/fi";
 import { UilFileCheckAlt } from "@iconscout/react-unicons";
 import { PiPawPrint } from "react-icons/pi";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 
 const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
   const items = [

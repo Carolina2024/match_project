@@ -1,7 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+
 import logo from "../../assets/logo.png";
 import OnClose from "../../assets/icons/svg-components/OnClose";
+
+import logo from "../../assets/logo.webp";
+
 
 const opcionesEnergia = ["Tranquilo", "Moderado", "Muy Activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
@@ -15,6 +19,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     energy: "",
     character: [],
     compatibility: [],
+    termsAccepted: false,
   });
   const [errores, setErrores] = useState({});
 
@@ -31,6 +36,9 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
       nuevosErrores.character = "Selecciona al menos un carácter.";
     if (formData.compatibility.length === 0)
       nuevosErrores.compatibility = "Selecciona al menos una preferencia.";
+    if (!formData.termsAccepted) {
+      nuevosErrores.termsAccepted = "Debes aceptar los términos y condiciones.";
+    }
 
     setErrores(nuevosErrores);
     return Object.keys(nuevosErrores).length === 0;
@@ -302,14 +310,21 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
           <div className="my-10">
             <label className="inline-flex items-center">
               <input
-                type="radio"
-                className="form-radio h-5 w-5 accent-[#767575] bg-[#767575] cursor-pointer"
+                type="checkbox"
                 name="termsAccepted"
+                checked={formData.termsAccepted}
+                onChange={handleChange}
+                className="form-checkbox md:h-5 md:w-5 h-4 w-4 accent-tertiary cursor-pointer"
               />
-              <span className="ml-2 text-sm">
+              <span className="ml-2 md:text-xl text-base ">
                 Acepto los términos y condiciones
               </span>
             </label>
+            {errores.termsAccepted && (
+              <p className="text-red-600 text-sm mt-1">
+                {errores.termsAccepted}
+              </p>
+            )}
           </div>
 
           <div className="flex items-center justify-between mb-6">

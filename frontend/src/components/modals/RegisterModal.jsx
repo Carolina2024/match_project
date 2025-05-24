@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import logo from "../../assets/logo.png";
-import OnClose from "../../assets/icons/OnClose";
+import OnClose from "../../assets/icons/svg-components/OnClose";
 import eyeOpen from "../../assets/icons/eye-open.svg";
 import eyeClose from "../../assets/icons/eye-close.svg";
 

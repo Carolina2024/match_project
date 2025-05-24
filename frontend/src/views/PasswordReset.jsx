@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 
 function PasswordReset() {
   const [code, setCode] = useState(["", "", "", "", "", ""]);

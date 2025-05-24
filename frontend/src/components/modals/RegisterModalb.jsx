@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 
 const opcionesEnergia = ["Tranquilo", "Moderado", "Muy Activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
@@ -315,9 +315,9 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
           <div className="my-10">
             <label className="inline-flex items-center">
               <input
-                type="checkbox" 
+                type="checkbox"
                 name="termsAccepted"
-                checked={formData.termsAccepted} 
+                checked={formData.termsAccepted}
                 onChange={handleChange}
                 className="form-checkbox md:h-5 md:w-5 h-4 w-4 accent-tertiary cursor-pointer"
               />

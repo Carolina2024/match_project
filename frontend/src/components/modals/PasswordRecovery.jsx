@@ -2,7 +2,7 @@ import { useState } from "react";
 import { X } from "lucide-react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 
 const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
   const [email, setEmail] = useState("");

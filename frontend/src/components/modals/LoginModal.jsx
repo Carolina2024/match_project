@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../api/user";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import { useAuth } from "../../context/AuthContext";
 import userIcon from "../../assets/icons/user-icon.svg";
 import LockIcon from "../../assets/icons/lock-icon.svg";

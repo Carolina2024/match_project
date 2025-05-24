@@ -14,6 +14,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     energy: "",
     character: [],
     compatibility: [],
+    termsAccepted: false,
   });
   const [errores, setErrores] = useState({});
 
@@ -30,6 +31,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
       nuevosErrores.character = "Selecciona al menos un carácter.";
     if (formData.compatibility.length === 0)
       nuevosErrores.compatibility = "Selecciona al menos una preferencia.";
+    
 
     setErrores(nuevosErrores);
     return Object.keys(nuevosErrores).length === 0;

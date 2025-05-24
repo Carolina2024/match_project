@@ -9,9 +9,9 @@ import userIcon from "../../assets/icons/user-icon.svg";
 import LockIcon from "../../assets/icons/lock-icon.svg";
 import eyeOpen from "../../assets/icons/eye-open.svg";
 import eyeOff from "../../assets/icons/eye-off.svg";
-import BlurTop from "../../assets/icons/blur-top";
-import BlurBottom from "../../assets/icons/blur-bottom";
-import Spinner from "../../assets/icons/Spinner";
+import BlurTop from "../../assets/icons/svg-components/blur-top";
+import BlurBottom from "../../assets/icons/svg-components/blur-bottom";
+import Spinner from "../../assets/icons/svg-components/Spinner";
 
 const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   const { login } = useAuth();

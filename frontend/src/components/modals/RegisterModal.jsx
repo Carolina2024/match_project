@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import OnClose from "../../assets/icons/svg-components/OnClose";
 import eyeOpen from "../../assets/icons/eye-open.svg";
 import eyeClose from "../../assets/icons/eye-close.svg";
@@ -174,9 +174,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               onClick={onClose}
               className="text-[#595146] focus:outline-none cursor-pointer"
             >
-              
               <OnClose />
-
             </button>
           </div>
 
@@ -279,14 +277,16 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="ml-2 text-primary"
                   >
-
                     <img
                       src={showPassword ? eyeOpen : eyeClose}
-                      alt={showPassword ? "Mostrar contraseña" : "Ocultar contraseña"}
+                      alt={
+                        showPassword
+                          ? "Mostrar contraseña"
+                          : "Ocultar contraseña"
+                      }
                       className="w-[20px] h-[20px]"
                     />
                   </button>
-
                 </div>
 
                 {errors.password && (

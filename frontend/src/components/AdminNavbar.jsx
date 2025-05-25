@@ -70,8 +70,8 @@ const AdminNavbar = ({
       className={`fixed top-0 z-20 px-3 py-1 border-0 shadow-sm md:border-b md:border-gray-200  transition-all duration-300 sm-border-none-important
         ${
           isSidebarVisible
-            ? "sm:backdrop-blur-[4px] bg-[#F7F7F7]/70 md:backdrop-blur-none md:bg-[#F7F7F7]"
-            : "bg-[#F7F7F7]"
+            ? "sm:backdrop-blur-[4px] bg-[#EFEFEF]/70 md:backdrop-blur-none md:bg-[#EFEFEF]"
+            : "bg-[#EFEFEF]"
         }
         ${
           isSidebarVisible

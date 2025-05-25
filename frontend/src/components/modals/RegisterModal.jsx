@@ -172,7 +172,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
             <button
               type="button"
               onClick={onClose}
-              className="text-[#595146] focus:outline-none cursor-pointer"
+              className="text-tertiary focus:outline-none cursor-pointer"
             >
               <OnClose />
             </button>
@@ -233,7 +233,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     value={formData.birthDate}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className=" border border-primary bg-white/75 rounded-3xl p-2 pr-12 text-[#595146] focus:outline-none focus:border-primary appearance-none"
+                    className=" border border-primary bg-white/75 rounded-3xl p-2 pr-12 text-tertiary focus:outline-none focus:border-primary appearance-none"
                   />
                   {errors.birthDate && (
                     <p className="text-red-500 text-lg">{errors.birthDate}</p>

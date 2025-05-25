@@ -314,7 +314,7 @@ const Nosotros = () => {
                 </div>
               </div>
 
-              <div className="rounded-[30px] md:rounded-[50px] border-1 border-primary bg-[#FFFFFF] p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
+              <div className="rounded-[30px] md:rounded-[50px] border-1 border-primary bg-white p-4 md:p-6 flex flex-row md:flex-col items-center md:items-center text-left md:text-center gap-4 md:gap-0">
                 <div className="hidden md:flex items-center justify-center mb-2">
                   <img
                     src={handDonationsIcon}

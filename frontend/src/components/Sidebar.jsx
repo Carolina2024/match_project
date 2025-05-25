@@ -10,7 +10,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
       label: "Mascotas",
       icon: <PiPawPrint size={24} style={{ height: "22px" }} />,
       labelStyled: (
-        <span className="font-raleway font-semibold text-[16px] text-[#595146]">
+        <span className="font-raleway font-semibold text-[16px] text-tertiary">
           Mascotas
         </span>
       ),
@@ -19,7 +19,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
       label: "Solicitudes",
       icon: <UilFileCheckAlt size="24" />,
       labelStyled: (
-        <span className="font-raleway font-semibold text-[16px] text-[#595146]">
+        <span className="font-raleway font-semibold text-[16px] text-tertiary">
           Solicitudes
         </span>
       ),
@@ -28,7 +28,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
       label: "Adoptantes",
       icon: <FiUsers size="24" />,
       labelStyled: (
-        <span className="font-inter font-medium text-[16px] text-[#595146]">
+        <span className="font-inter font-medium text-[16px] text-tertiary">
           Adoptantes
         </span>
       ),
@@ -101,12 +101,12 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
             alt="Logo Patas Pirque"
             className="w-[50px] h-[50px] rounded-full "
           />
-          <div className="flex items-center gap-2 text-gray-700">
+          <div className="flex items-center gap-2 text-tertiary">
             <div className="leading-tight text-left font-secundary">
-              <p className="font-montserratAlt font-bold text-[20px] text-[#595146]">
+              <p className="font-montserratAlt font-bold text-[20px] text-tertiary">
                 Patas
               </p>
-              <p className="font-montserratAlt font-bold text-[20px] text-[#595146]">
+              <p className="font-montserratAlt font-bold text-[20px] text-tertiary">
                 Pirque
               </p>
             </div>
@@ -121,11 +121,11 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
               className={`flex items-center gap-3 px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
               ${
                 activeView === item.label
-                  ? "bg-[#FAAA75] text-gray-700 border-t border-l border-r border-[#595146] border-b-[3px] border-b-[#595146]"
-                  : "text-gray-700 hover:bg-orange-100"
+                  ? "bg-[#FAAA75] text-tertiary border-t border-l border-r border-tertiary border-b-[3px] border-b-tertiary"
+                  : "text-tertiary hover:bg-orange-100"
               }`}
             >
-              <span className="border-[#595146] flex items-center justify-center">
+              <span className="border-tertiary flex items-center justify-center">
                 {item.icon}
               </span>
               {item.label}

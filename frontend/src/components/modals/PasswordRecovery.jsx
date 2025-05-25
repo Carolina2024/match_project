@@ -64,7 +64,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
           <X />
         </button>
 
-        <h2 className="mt-10 text-2xl font-bold mb-2 font-secundary text-[#595146]">
+        <h2 className="mt-10 text-2xl font-bold mb-2 font-secundary text-tertiary">
           Recuperar contraseña
         </h2>
         <p className="text-base font-medium text-[#767575] mb-10 ">
@@ -72,13 +72,13 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
         </p>
 
         <div>
-          <label className="block text-lg mb-1 font-medium text-left text-[#595146]">
+          <label className="block text-lg mb-1 font-medium text-left text-tertiary">
             Correo electrónico
           </label>
           <input
             type="email"
             placeholder="admin@correo.com"
-            className={`w-full px-4 py-2 bg-[#FFFFFF] text-[#767575] rounded-full border-2 border-primary font-normal outline-none text-lg`}
+            className={`w-full px-4 py-2 bg-white text-[#767575] rounded-full border-2 border-primary font-normal outline-none text-lg`}
             value={email}
             onChange={handleEmailChange}
           />
@@ -98,7 +98,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 cursor-pointer bg-primary md:text-lg text-[#FFFFFF] font-semibold rounded-full shadow-md shadow-[#00000040]"
+              className="flex-1 py-2 cursor-pointer bg-primary md:text-lg text-white font-semibold rounded-full shadow-md shadow-[#00000040]"
             >
               Enviar
             </button>

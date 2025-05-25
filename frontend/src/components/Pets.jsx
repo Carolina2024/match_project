@@ -6,7 +6,6 @@ import "sweetalert2/dist/sweetalert2.min.css";
 import { createPet, updatePet } from "../api/petService";
 import { FiCalendar } from "react-icons/fi";
 
-
 const enumOptions = {
   species: ["Perro", "Gato"],
   age: ["Cachorro", "Joven", "Adulto", "Adulto Mayor"],
@@ -186,7 +185,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           x
         </button>
 
-        <h2 className="text-center font-secundary text-[20px] text-[#595146] font-bold mb-4">
+        <h2 className="text-center font-secundary text-[20px] text-tertiary font-bold mb-4">
           {editingPet ? "Editar mascota" : "nueva mascota"}
         </h2>
 
@@ -201,7 +200,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 pb-6">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col">
-              <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1">
+              <label className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1">
                 Mascota
               </label>
               <input
@@ -217,7 +216,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1">
+              <label className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1">
                 Fecha de ingreso
               </label>
               <div className="relative w-full">
@@ -241,7 +240,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             </div>
 
             <div className="flex flex-col">
-              <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1">
+              <label className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1">
                 Especie
               </label>
               <select
@@ -264,7 +263,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="breed"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Raza
               </label>
@@ -279,7 +278,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="age"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Edad
               </label>
@@ -300,7 +299,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="sex"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Sexo
               </label>
@@ -321,7 +320,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="energy"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Nivel de actividad
               </label>
@@ -342,7 +341,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="kg"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Peso
               </label>
@@ -359,7 +358,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="size"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Tamaño
               </label>
@@ -380,7 +379,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="status"
-                className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-1"
+                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
               >
                 Estado
               </label>
@@ -400,7 +399,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <p className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2">
+            <p className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2">
               Rasgos de la mascota:
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -422,7 +421,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <p className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2">
+            <p className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2">
               Entrega de la mascota:
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -444,7 +443,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <label className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2 block">
+            <label className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2 block">
               Historia de la mascota:
             </label>
             <textarea
@@ -456,7 +455,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           </div>
 
           <div>
-            <p className="text-sm font-raleway text-[16px] text-[#595146] font-medium mb-2">
+            <p className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2">
               Agregar 3 fotos de la mascota:
             </p>
             <div className="grid grid-cols-3 gap-4">
@@ -478,7 +477,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                           e.preventDefault();
                           handleDeletePhoto(photoUrls[index]);
                         }}
-                        className="absolute top-1 right-1 bg-white text-gray-700 rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
+                        className="absolute top-1 right-1 bg-white text-tertiary rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
                         title="Eliminar imagen"
                       >
                         X
@@ -507,13 +506,13 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               <button
                 type="button"
                 onClick={() => setActiveView("Mascotas")}
-                className="font-raleway font-bold text-[16px] text-[#595146] px-6 py-2 border-2 bg-[#FFFFFF] rounded-lg hover:bg-gray-300 cursor-pointer"
+                className="font-raleway font-bold text-[16px] text-tertiary px-6 py-2 border-2 bg-white rounded-lg hover:bg-gray-300 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="font-raleway text-[16px] text-[#767575] px-6 py-2 text-white rounded-lg bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
+                className="font-raleway text-[16px] text-[#767575] px-6 py-2 rounded-lg bg-primary hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
               >
                 {editingPet ? "Editar" : "Guardar"}
               </button>

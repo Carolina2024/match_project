@@ -11,7 +11,6 @@ import { deletePet } from "../api/deletePet";
 import { RiSearchLine } from "react-icons/ri";
 import { UilPlus } from "@iconscout/react-unicons";
 
-
 const PetList = ({ setActiveView, setEditingPet }) => {
   const [pets, setPets] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,7 +81,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     return (
       <span
         className={`px-2 py-1 rounded text-sm font-medium font-primary ${
-          statusStyles[status] || "bg-gray-100 text-gray-600"
+          statusStyles[status] || "bg-gray-100 text-tertiary"
         }`}
       >
         {status}
@@ -138,7 +137,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-[#FFFFFF] px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
+            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
           >
             <UilPlus size={24} /> Nueva mascota
           </button>
@@ -146,7 +145,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         <div className="mb-4">
           <div className="mb-2 flex items-center gap-4 flex-wrap">
-            <span className="font-raleway text-[16px] font-medium text-[#595146]">
+            <span className="font-raleway text-[16px] font-medium text-tertiary">
               Filtrar por:
             </span>
 
@@ -175,7 +174,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
         <table className="w-full table-auto border-collapse">
           <thead>
-            <tr className="bg-white text-[#595146] text-sm font-secundary text-[16px]">
+            <tr className="bg-white text-tertiary text-sm font-secundary text-[16px]">
               <th className="px-4 py-3 text-left">Mascota</th>
               <th className="px-4 py-3 text-left">Fecha Ingreso</th>
               <th className="px-4 py-3 text-left">Especie</th>
@@ -189,7 +188,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           <tbody className="font-secundary">
             {filteredPets.map((pet) => (
               <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2 font-secundary font-medium text-[#595146] text-[16px]">
+                <td className="px-4 py-2 font-secundary font-medium text-tertiary text-[16px]">
                   {pet.name}
                 </td>
                 <td className="px-4 py-2">{pet.admissionDate}</td>
@@ -199,7 +198,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                 <td className="px-4 py-2">{pet.sex}</td>
                 <td className="px-4 py-2">{pet.size}</td>
                 <td className="px-4 py-2">
-                  <div className="flex gap-2 text-gray-600 text-lg">
+                  <div className="flex gap-2 text-tertiary text-lg">
                     <button
                       onClick={() => handleViewPet(pet)}
                       title="Visualizar"
@@ -239,7 +238,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="font-raleway font-normal text-[14px] px-4 py-1 bg-white rounded-md border-1 border-[#595146]  hover:bg-gray-100 disabled:opacity-50"
+              className="font-raleway font-normal text-[14px] px-4 py-1 bg-white rounded-md border-1 border-tertiary  hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -251,9 +250,9 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`font-raleway font-normal text-[14px] w-8 h-8 rounded-md border-1 border-[#595146] text-sm font-medium ${
+                      className={`font-raleway font-normal text-[14px] w-8 h-8 rounded-md border-1 border-tertiary text-sm${
                         currentPage === page
-                          ? "bg-[#595146] text-white border-4 border-[#595146] shadow-md"
+                          ? "bg-tertiary text-white border-4 border-tertiary shadow-md"
                           : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
                       }`}
                     >
@@ -265,7 +264,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="font-raleway text-[14px] font-normal px-4 py-1 bg-white rounded-md border-1 border-[#595146] hover:bg-gray-200 disabled:opacity-50"
+              className="font-raleway text-[14px] font-normal px-4 py-1 bg-white rounded-md border-1 border-tertiary hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

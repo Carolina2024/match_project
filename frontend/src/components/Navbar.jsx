@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronRight, ChevronDown, User } from "lucide-react";
 import logo from "../assets/logo.png";
-import AuthModalsController from "../components/modals/AuthModalsController";
+import AuthModalsController from "./modals/AuthModalsController";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {

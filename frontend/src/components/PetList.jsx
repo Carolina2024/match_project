@@ -138,7 +138,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-[#f4a470] text-[#FFFFFF] px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
+            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-primary text-[#FFFFFF] px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
           >
             <UilPlus size={24} /> Nueva mascota
           </button>
@@ -251,7 +251,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`font-raleway font-normal text-[14px] w-8 h-8 rounded-md border-1 border-[#595146] text-sm font-medium ${
+                      className={`font-raleway font-normal text-[14px] w-8 h-8 rounded-md border-1 border-[#595146] text-sm${
                         currentPage === page
                           ? "bg-[#595146] text-white border-4 border-[#595146] shadow-md"
                           : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"

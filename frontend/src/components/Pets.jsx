@@ -513,7 +513,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               </button>
               <button
                 type="submit"
-                className="font-raleway text-[16px] text-[#767575] px-6 py-2 text-white rounded-lg bg-[#f4a470] hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
+                className="font-raleway text-[16px] text-[#767575] px-6 py-2 rounded-lg bg-primary hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
               >
                 {editingPet ? "Editar" : "Guardar"}
               </button>

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
-import { FaSignOutAlt, FaChevronDown } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 
 import { useAuth } from "../context/AuthContext";
@@ -109,7 +109,7 @@ const AdminNavbar = ({
           <button
             onClick={() => setOpen(!open)}
             className="w-[135px] h-[50px] md:absolute top-[15px] md:left-[1100px]  sm:mr-5
-             bg-[#FFFFFF] border border-[#595146] rounded-[20px] px-[3px] py-[4px]
+             bg-[#FFFFFF] border border-tertiary rounded-[20px] px-[3px] py-[4px]
              text-sm font-medium flex items-center
              shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer "
           >

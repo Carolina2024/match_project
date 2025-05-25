@@ -203,7 +203,7 @@ const Nosotros = () => {
                   rel="noopener noreferrer"
                 >
                   <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 md:text-xl text-base font-bold hover:scale-105 transition">
-                    Únete
+                    Unirme
                   </button>
                 </a>
               </div>
@@ -230,7 +230,7 @@ const Nosotros = () => {
                   rel="noopener noreferrer"
                 >
                   <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 md:text-xl text-base font-bold hover:scale-105 transition">
-                    Únete
+                    Unirme
                   </button>
                 </a>
               </div>
@@ -257,7 +257,7 @@ const Nosotros = () => {
                   rel="noopener noreferrer"
                 >
                   <button className="bg-primary text-white mt-2 cursor-pointer rounded-full px-8 py-1 md:text-xl text-base font-bold hover:scale-105 transition">
-                    Únete
+                    Unirme
                   </button>
                 </a>
               </div>

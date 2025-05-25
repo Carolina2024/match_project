@@ -14,7 +14,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         <button
           key="EnProceso"
           onClick={() => onStatusChange("En proceso")}
-          className="w-full sm:w-auto font-primary w-[146px] h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold text-[#FFFFFF] bg-[#FF802C] drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center cursor-pointer hover:bg-orange-300"
+          className="sm:w-auto font-primary w-[146px] h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold text-white bg-text-orange-process drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center cursor-pointer hover:bg-orange-300"
         >
           En proceso
         </button>
@@ -28,7 +28,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
           onClick={() => onStatusChange("Aprobado")}
           className={`w-full sm:w-auto font-primary  h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center ${
             estado === "En proceso"
-              ? "bg-[#2E9002] text-[#FFFFFF]  hover:bg-green-600 w-[220px]"
+              ? "bg-[#2E9002] text-white  hover:bg-green-600 w-[220px]"
               : "bg-white text-[#329D01] border border-[#329D01]  hover:bg-green-100"
           }`}
         >
@@ -68,7 +68,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         "En proceso": "bg-[#ffa04c40] text-[#FFA04C]",
         Aprobado: "bg-[#329D0140] text-[#35A302]",
         Rechazado: "bg-[#E9171740] text-[#E91717]",
-      }[estado] || "bg-[#6c6c6c] text-[#FFFFFF]"
+      }[estado] || "bg-[#6c6c6c] text-white"
     );
   };
 

@@ -78,7 +78,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
           <input
             type="email"
             placeholder="admin@correo.com"
-            className={`w-full px-4 py-2 bg-[#FFFFFF] text-[#767575] rounded-full border-2 border-primary font-normal outline-none text-lg`}
+            className={`w-full px-4 py-2 bg-white text-[#767575] rounded-full border-2 border-primary font-normal outline-none text-lg`}
             value={email}
             onChange={handleEmailChange}
           />
@@ -98,7 +98,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 cursor-pointer bg-primary md:text-lg text-[#FFFFFF] font-semibold rounded-full shadow-md shadow-[#00000040]"
+              className="flex-1 py-2 cursor-pointer bg-primary md:text-lg text-white font-semibold rounded-full shadow-md shadow-[#00000040]"
             >
               Enviar
             </button>

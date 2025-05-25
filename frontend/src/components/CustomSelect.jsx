@@ -52,7 +52,7 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
               >
                 <span>{opt}</span>
                 {selected === opt && (
-                  <FaCheck className="text-sm text-gray-700" />
+                  <FaCheck className="text-sm text-tertiary" />
                 )}
               </button>
             </div>

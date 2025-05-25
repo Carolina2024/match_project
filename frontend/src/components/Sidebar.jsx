@@ -101,7 +101,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
             alt="Logo Patas Pirque"
             className="w-[50px] h-[50px] rounded-full "
           />
-          <div className="flex items-center gap-2 text-gray-700">
+          <div className="flex items-center gap-2 text-tertiary">
             <div className="leading-tight text-left font-secundary">
               <p className="font-montserratAlt font-bold text-[20px] text-tertiary">
                 Patas
@@ -121,8 +121,8 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
               className={`flex items-center gap-3 px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
               ${
                 activeView === item.label
-                  ? "bg-[#FAAA75] text-gray-700 border-t border-l border-r border-tertiary border-b-[3px] border-b-[#595146]"
-                  : "text-gray-700 hover:bg-orange-100"
+                  ? "bg-[#FAAA75] text-tertiary border-t border-l border-r border-tertiary border-b-[3px] border-b-tertiary"
+                  : "text-tertiary hover:bg-orange-100"
               }`}
             >
               <span className="border-tertiary flex items-center justify-center">

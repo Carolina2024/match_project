@@ -109,7 +109,7 @@ const AdminNavbar = ({
           <button
             onClick={() => setOpen(!open)}
             className="w-[135px] h-[50px] md:absolute top-[15px] md:left-[1100px]  sm:mr-5
-             bg-[#FFFFFF] border border-tertiary rounded-[20px] px-[3px] py-[4px]
+             bg-white border border-tertiary rounded-[20px] px-[3px] py-[4px]
              text-sm font-medium flex items-center
              shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer "
           >
@@ -148,7 +148,7 @@ const AdminNavbar = ({
       </div>
 
       <h2
-        className={`text-lg font-semibold text-gray-700 ${
+        className={`text-lg font-semibold text-tertiary ${
           isSidebarVisible ? "hidden md:block" : ""
         } sm-ml-0 md:ml-20  mt-[10px] md:mt-[-70px] md:py-5`}
       >

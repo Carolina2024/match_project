@@ -27,7 +27,7 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
           </button>
           <button
             onClick={onConfirm}
-            className="font-raleway font-bold text-[16px] text-[#FFFFFF] h-[44px] md:w-[227px] w-[230px] px-2 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            className="font-raleway font-bold text-[16px] text-white h-[44px] md:w-[227px] w-[230px] px-2 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
           >
             Eliminar
           </button>

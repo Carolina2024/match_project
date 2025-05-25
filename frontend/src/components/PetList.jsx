@@ -81,7 +81,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
     return (
       <span
         className={`px-2 py-1 rounded text-sm font-medium font-primary ${
-          statusStyles[status] || "bg-gray-100 text-gray-600"
+          statusStyles[status] || "bg-gray-100 text-tertiary"
         }`}
       >
         {status}
@@ -137,7 +137,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-primary text-[#FFFFFF] px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
+            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
           >
             <UilPlus size={24} /> Nueva mascota
           </button>
@@ -198,7 +198,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                 <td className="px-4 py-2">{pet.sex}</td>
                 <td className="px-4 py-2">{pet.size}</td>
                 <td className="px-4 py-2">
-                  <div className="flex gap-2 text-gray-600 text-lg">
+                  <div className="flex gap-2 text-tertiary text-lg">
                     <button
                       onClick={() => handleViewPet(pet)}
                       title="Visualizar"

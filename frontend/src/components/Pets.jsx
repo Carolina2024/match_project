@@ -477,7 +477,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                           e.preventDefault();
                           handleDeletePhoto(photoUrls[index]);
                         }}
-                        className="absolute top-1 right-1 bg-white text-gray-700 rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
+                        className="absolute top-1 right-1 bg-white text-tertiary rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
                         title="Eliminar imagen"
                       >
                         X
@@ -506,7 +506,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               <button
                 type="button"
                 onClick={() => setActiveView("Mascotas")}
-                className="font-raleway font-bold text-[16px] text-tertiary px-6 py-2 border-2 bg-[#FFFFFF] rounded-lg hover:bg-gray-300 cursor-pointer"
+                className="font-raleway font-bold text-[16px] text-tertiary px-6 py-2 border-2 bg-white rounded-lg hover:bg-gray-300 cursor-pointer"
               >
                 Cancelar
               </button>

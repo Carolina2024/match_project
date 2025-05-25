@@ -135,7 +135,7 @@ const UserProfiles = () => {
                 <td className="px-4 py-3 text-center">
                   <div className="flex justify-center items-center space-x-4">
                     <button
-                      className="text-gray-600 hover:text-black"
+                      className="text-tertiary hover:text-black"
                       onClick={() => handleOpenDetail(user)}
                     >
                       <FiEye className="text-[20px]" />

@@ -12,10 +12,10 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
         <h2 className="text-lg font-bold font-secundary text-[20px] text-tertiary mb-4 text-center">
           ¿Estás seguro de eliminar a {pet.name}?
         </h2>
-        <h3 className="text-center text-gray-600 font-raleway text-[14px] text-[#767575]">
+        <h3 className="text-center font-raleway text-[14px] text-[#767575]">
           Esta acción no se puede deshacer. Esta acción eliminara
         </h3>
-        <h3 className="text-center text-gray-600">
+        <h3 className="text-center text-[#767575]">
           permanentemente a {pet.name} del registro
         </h3>
         <div className="font-raleway text-[16px] text-tertiary font-bold flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-6">

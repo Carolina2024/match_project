@@ -180,7 +180,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
       >
         <button
           onClick={() => setActiveView("Mascotas")}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black text-2xl font-bold z-50"
+          className="absolute top-4 right-4 cursor-pointer text-gray-500 hover:text-black text-2xl font-bold z-50"
         >
           x
         </button>
@@ -365,7 +365,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               <select
                 {...register("size", { required: true })}
                 id="size"
-                className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
+                className="border p-2 rounded-lg w-full font-raleway text-sm text-[#767575] font-normal"
               >
                 <option value="">Elegir tamaño</option>
                 {enumOptions.size.map((opt) => (
@@ -379,7 +379,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
             <div className="flex flex-col">
               <label
                 htmlFor="status"
-                className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-1"
+                className=" font-raleway text-base text-tertiary font-medium mb-1"
               >
                 Estado
               </label>
@@ -410,8 +410,8 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                   onClick={() => toggleCheckbox("traits", trait)}
                   className={`w-full text-left px-4 py-2 rounded-lg border font-raleway text-[14px] text-[#767575] font-normal ${
                     traits.includes(trait)
-                      ? "bg-black text-white"
-                      : "bg-white text-black"
+                      ? "bg-tertiary text-white"
+                      : "bg-white text-[#767575]"
                   }`}
                 >
                   {trait}
@@ -432,8 +432,8 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                   onClick={() => toggleCheckbox("delivery", item)}
                   className={`w-full text-left px-4 py-2 rounded-lg border font-raleway text-[14px] text-[#767575] font-normal ${
                     delivery.includes(item)
-                      ? "bg-black text-white"
-                      : "bg-white text-black"
+                      ? "bg-tertiary text-white"
+                      : "bg-white text-[#767575]"
                   }`}
                 >
                   {item}
@@ -477,7 +477,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                           e.preventDefault();
                           handleDeletePhoto(photoUrls[index]);
                         }}
-                        className="absolute top-1 right-1 bg-white text-tertiary rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-gray-600 hover:text-white"
+                        className="absolute top-1 cursor-pointer right-1 bg-white text-tertiary rounded-[20px] text-sm w-6 h-6 flex items-center justify-center shadow hover:bg-tertiary hover:text-white"
                         title="Eliminar imagen"
                       >
                         X
@@ -506,13 +506,13 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
               <button
                 type="button"
                 onClick={() => setActiveView("Mascotas")}
-                className="font-raleway font-bold text-[16px] text-tertiary px-6 py-2 border-2 bg-white rounded-lg hover:bg-gray-300 cursor-pointer"
+                className="font-raleway font-bold text-[16px] shadow-lg text-tertiary px-6 py-2 border-2 bg-white rounded-lg hover:bg-gray-300 cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
-                className="font-raleway text-[16px] text-[#767575] px-6 py-2 rounded-lg bg-primary hover:bg-orange-500 transition-colors duration-300 cursor-pointer"
+                className="font-raleway text-[16px] shadow-lg text-white font-bold px-6 py-2 rounded-lg bg-primary hover:bg-[#e78b52]  transition-colors duration-300 cursor-pointer"
               >
                 {editingPet ? "Editar" : "Guardar"}
               </button>

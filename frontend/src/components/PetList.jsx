@@ -115,7 +115,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
   return (
     <div className="min-h-screen mt-8">
-      <div className="max-w-[1200px] mx-auto overflow-x-auto bg-white md:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] md:rounded-xl p-6">
+      <div className="max-w-[1200px] mx-auto overflow-x-auto bg-white md:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] sm:border sm:border-gray-300 md:rounded-xl p-6">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
           <div className="relative w-full sm:w-[500px] md:w-[350px]">
             <input
@@ -202,21 +202,21 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       onClick={() => handleViewPet(pet)}
                       title="Visualizar"
-                      className="hover:text-gray-500"
+                      className="hover:text-gray-500 cursor-pointer"
                     >
                       <FiEye />
                     </button>
                     <button
                       onClick={() => handleEdit(pet)}
                       title="Editar"
-                      className="hover:text-gray-500 font-bold"
+                      className="hover:text-gray-500 cursor-pointer font-bold"
                     >
                       <FaRegEdit />
                     </button>
                     <button
                       onClick={() => handleOpenModal(pet)}
                       title="Eliminar"
-                      className="text-red-500 hover:text-red-700 font-bold"
+                      className="text-red-500 cursor-pointer hover:text-red-700 font-bold"
                     >
                       <PiTrashBold />
                     </button>
@@ -238,7 +238,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="font-raleway font-normal text-[14px] px-4 py-1 bg-white rounded-md border-1 border-tertiary  hover:bg-gray-100 disabled:opacity-50"
+              className="font-raleway font-normal cursor-pointer text-[14px] px-4 py-1 bg-white rounded-md border-1 border-tertiary  hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -250,7 +250,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
-                      className={`font-raleway font-normal text-[14px] w-8 h-8 rounded-md border-1 border-tertiary text-sm${
+                      className={`font-raleway font-normal cursor-pointer text-[14px] w-8 h-8 rounded-md border-1 border-tertiary text-sm${
                         currentPage === page
                           ? "bg-tertiary text-white border-4 border-tertiary shadow-md"
                           : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
@@ -264,7 +264,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="font-raleway text-[14px] font-normal px-4 py-1 bg-white rounded-md border-1 border-tertiary hover:bg-gray-200 disabled:opacity-50"
+              className="font-raleway text-[14px] font-normal cursor-pointer px-4 py-1 bg-white rounded-md border-1 border-tertiary hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

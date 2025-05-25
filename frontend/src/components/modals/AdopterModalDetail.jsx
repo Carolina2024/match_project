@@ -36,7 +36,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
       <div className="relative bg-white p-8 rounded-xl shadow-xl w-[1000px] max-h-[90vh] overflow-y-auto z-20">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black text-4xl "
+          className="absolute top-4 right-4 cursor-pointer text-gray-500 hover:text-black text-4xl "
         >
           ×
         </button>

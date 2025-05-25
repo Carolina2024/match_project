@@ -8,7 +8,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
       <div className="sm:ml-auto mt-20 bg-white rounded-xl sm:p-6 p-2 w-full max-w-sm sm:max-w-[200px] md:max-w-lg lg:max-w-4xl relative shadow-lg sm:mt-20">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-tertiary hover:text-black text-4xl"
+          className="absolute top-4 cursor-pointer right-4 text-tertiary hover:text-black text-4xl"
         >
           &times;
         </button>
@@ -27,7 +27,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
                 key={i}
                 src={url}
                 alt={`Foto de ${pet.name}`}
-                className="w-[100px] h-[88px] md:w-[150px] md:h-[120px] object-cover rounded shadow"
+                className="w-[100px] h-[88px] md:w-[150px] md:h-[120px] object-cover rounded-lg shadow"
               />
             ))}
           </div>

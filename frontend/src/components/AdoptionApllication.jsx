@@ -166,7 +166,7 @@ const AdoptionApllication = () => {
 
                 <div className="flex justify-center items-center px-1 flex-wrap gap-1 w-full">
                   <span
-                    className={`font-raleway font-semibold text-[12px] sm:text-[14px] w-[75px] sm:w-[100px] h-[21px] sm:h-[30] rounded-[10px] px-[10px] py-[1px] sm:py-[2px]  text-center max-w-full whitespace-nowrap flex items-center justify-center ${
+                    className={`font-raleway font-semibold text-[12px] sm:text-[14px] w-[75px] sm:w-[100px] h-[21px] sm:h-[40] rounded-[10px] px-[10px] py-[1px] sm:py-[4px]  text-center max-w-full whitespace-nowrap flex items-center justify-center ${
                       sol.status === "Por revisar"
                         ? "bg-[rgba(108,108,108,0.25)] text-[#6C6C6C]"
                         : sol.status === "En proceso"

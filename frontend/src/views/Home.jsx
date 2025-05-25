@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import image2 from "../assets/image2.png";
-import image3 from "../assets/image3.png";
-import image4 from "../assets/image4.png";
-import image5 from "../assets/image5.png";
-import image6 from "../assets/image6.png";
-import image7 from "../assets/image7.png";
-import image8 from "../assets/image8.png";
-import image9 from "../assets/image9.png";
-import slider1 from "../assets/slider1.png";
-import slider2 from "../assets/slider2.png";
-import slider3 from "../assets/slider3.png";
-import image from "../assets/image.png";
-import imageb from "../assets/imageb.png";
+import image2 from "../assets/image2.webp";
+import image3 from "../assets/image3.webp";
+import image4 from "../assets/image4.webp";
+import image5 from "../assets/image5.webp";
+import image6 from "../assets/image6.webp";
+import image7 from "../assets/image7.webp";
+import image8 from "../assets/image8.webp";
+import image9 from "../assets/image9.webp";
+import slider1 from "../assets/slider1.webp";
+import slider2 from "../assets/slider2.webp";
+import slider3 from "../assets/slider3.webp";
+import image from "../assets/image.webp";
+import imageb from "../assets/imageb.webp";
 import { HandHeart } from "lucide-react";
 import PetsHome from "../components/PetsHome";
 import AuthModalsController from "../components/modals/AuthModalsController";
@@ -102,9 +102,7 @@ const Home = () => {
       {!loggedIn ? (
         <>
           <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden md:flex items-center md:ml-10 bg-transparent">
-
-<BackgroundShape />
- 
+            <BackgroundShape />
 
             <div className="block md:hidden w-[400px] mt-10 ml-6 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-4 mb-16">
               <div className="flex flex-col items-center text-center">
@@ -191,7 +189,6 @@ const Home = () => {
       ) : (
         <>
           <div className="block md:hidden w-[380px] mt-10 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-6 md:mb-16 relative">
-
             <section className="absolute top-4 right-4 z-10">
               <a
                 href="https://esponsor.com/pataspirque"
@@ -220,8 +217,7 @@ const Home = () => {
           </div>
 
           <div className=" hidden md:flex relative w-full md:max-w-5xl max-w-lg mt-12 overflow-ellipsis items-center md:ml-10">
-
-<BackgroundUserActive />
+            <BackgroundUserActive />
 
             <div className="absolute inset-y-0 -mt-3 right-0 ">
               <img
@@ -268,9 +264,7 @@ const Home = () => {
           3 simples pasos
         </h2>
         <div className="hidden absolute top-50 left-0 right-0 md:flex justify-center">
-
-<CurvedLine />
-
+          <CurvedLine />
         </div>
         <div className="mt-10 flex flex-col md:flex-row items-center justify-center md:gap-50 gap-14 relative w-full max-w-6xl z-10">
           <div className="rounded-3xl border-[#DFDFDF] border shadow-md/25 px-1 py-6 flex flex-col items-center text-center md:w-[300px] w-[300px] h-[240px] relative">
@@ -278,9 +272,7 @@ const Home = () => {
               1
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
-
-<UserPlusIcon />
-
+              <UserPlusIcon />
             </div>
             <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Completar el formulario de registro en unos minutos
@@ -292,9 +284,7 @@ const Home = () => {
               2
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
-
- <HomePreferenceIcon />
-
+              <HomePreferenceIcon />
             </div>
             <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Describir tu hogar y tus preferencias para que Patas Pirque pueda
@@ -307,9 +297,7 @@ const Home = () => {
               3
             </div>
             <div className="mt-10 flex items-center justify-center h-20">
-
               <FindYourMatch />
-
             </div>
             <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Encontrar a tu Match

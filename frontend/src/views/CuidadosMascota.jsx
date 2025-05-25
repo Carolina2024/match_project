@@ -1,9 +1,11 @@
-import paso1 from "../assets/cuidados1.jpg";
-import paso2 from "../assets/cuidados2.jpg";
-import paso3 from "../assets/cuidados3.jpg";
-import paso4 from "../assets/cuidados4.jpg";
-import paso5 from "../assets/cuidados5.jpg";
+
 import DecorativeLinePath from "../assets/icons/svg-components/DecorativeLinePath";
+import paso1 from "../assets/cuidados1.webp";
+import paso2 from "../assets/cuidados2.webp";
+import paso3 from "../assets/cuidados3.webp";
+import paso4 from "../assets/cuidados4.webp";
+import paso5 from "../assets/cuidados5.webp";
+
 
 const CuidadosMascota = () => {
   return (
@@ -25,7 +27,6 @@ const CuidadosMascota = () => {
             </h2>
 
             <div className="flex gap-3">
-
               <div className="w-24 flex-shrink-0 mt-48">
                 <img
                   src={paso1}
@@ -103,7 +104,6 @@ const CuidadosMascota = () => {
             </h2>
 
             <div className="flex flex-row-reverse gap-3">
-
               <div className="w-24 flex-shrink-0 mt-26">
                 <img
                   src={paso2}
@@ -166,7 +166,6 @@ const CuidadosMascota = () => {
 
       <div className="flex flex-col md:hidden w-full gap-4 -mt-24">
         <div className="flex items-start gap-2">
-
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             3
           </div>
@@ -176,9 +175,7 @@ const CuidadosMascota = () => {
               Cuidados básicos diarios
             </h2>
 
-
             <div className="flex gap-3">
-
               <div className="w-24 flex-shrink-0 mt-20">
                 <img
                   src={paso3}
@@ -245,7 +242,6 @@ const CuidadosMascota = () => {
             </h2>
 
             <div className="flex flex-row-reverse gap-3">
-
               <div className="w-24 flex-shrink-0 mt-12">
                 <img
                   src={paso4}
@@ -300,7 +296,6 @@ const CuidadosMascota = () => {
 
       <div className="flex flex-col md:hidden w-full gap-4 -mt-20">
         <div className="flex items-start gap-2">
-
           <div className="bg-primary font-tertiary text-black w-10 h-10 rounded-full text-lg flex items-center justify-center font-medium mt-1">
             5
           </div>
@@ -311,7 +306,6 @@ const CuidadosMascota = () => {
             </h2>
 
             <div className="flex gap-3">
-
               <div className="w-24 flex-shrink-0 mt-24">
                 <img
                   src={paso5}
@@ -338,7 +332,6 @@ const CuidadosMascota = () => {
           </div>
         </div>
       </div>
-
 
       <div className="hidden md:flex w-full items-center gap-10 -mt-22">
         <div className="w-1/4 flex justify-center overflow-hidden h-64 md:h-72 rounded-xl">

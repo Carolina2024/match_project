@@ -17,7 +17,7 @@ const AdoptionApllication = () => {
   const [solicitudes, setSolicitudes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalSolicitudes, setTotalSolicitudes] = useState(0);
+  const [setTotalSolicitudes] = useState(0);
 
   useEffect(() => {
     const fetchSolicitudes = async () => {
@@ -241,7 +241,7 @@ const AdoptionApllication = () => {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-[37px] h-[36px] rounded-[10px] px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center  rounded border ${
+                      className={`w-[37px] h-[36px] rounded-[10px] px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center border ${
                         currentPage === page
                           ? "bg-[#595146] text-white border-[#595146]"
                           : "bg-white text-[#595146] border-[#595146] hover:bg-gray-100"

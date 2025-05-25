@@ -114,7 +114,7 @@ const AdminNavbar = ({
              shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer "
           >
             <div className="flex items-center justify-center flex-col text-center ml-2">
-              <span className="text-[16px] font-secundary font-bold text-[#595146]">
+              <span className="text-[16px] font-secundary font-bold text-tertiary">
                 {userName}
               </span>
               <span className="text-[14px] font-raleway font-medium text-[#767575]">
@@ -122,7 +122,7 @@ const AdminNavbar = ({
               </span>
             </div>
             <FaChevronDown
-              className={`w-[12px] h-[12px] text-sm ml-2 text-[#595146] transform ${
+              className={`w-[12px] h-[12px] text-sm ml-2 text-tertiary transform ${
                 open ? "rotate-180" : ""
               }`}
             />

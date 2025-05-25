@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
   if (!isOpen || !pet) return null;
 
@@ -35,6 +37,15 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
       </div>
     </div>
   );
+};
+
+PetModalDelete.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  pet: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default PetModalDelete;

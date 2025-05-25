@@ -228,7 +228,7 @@ const AdoptionApllication = () => {
             <button
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className="w-[89px] h-[36px] px-[10px] py-[10px] text-center flex items-center justify-center gap-[10px] rounded-[10px] border border-[#767575]/80 text-[14px] font-raleway font-medium text-[#767575]/80 bg-white hover:bg-gray-100 disabled:opacity-50"
+              className="w-[89px] h-[36px] cursor-pointer px-[10px] py-[10px] text-center flex items-center justify-center gap-[10px] rounded-[10px] border border-[#767575]/80 text-[14px] font-raleway font-medium text-[#767575]/80 bg-white hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -241,7 +241,7 @@ const AdoptionApllication = () => {
                     <button
                       key={page}
                       onClick={() => setCurrentPage(page)}
-                      className={`w-[37px] h-[36px] rounded-[10px] px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center border ${
+                      className={`w-[37px] h-[36px] rounded-[10px] cursor-pointer  px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center border ${
                         currentPage === page
                           ? "bg-tertiary text-white border-tertiary"
                           : "bg-white text-tertiary border-tertiary hover:bg-gray-100"
@@ -259,7 +259,7 @@ const AdoptionApllication = () => {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="w-[89px] h-[36px] px-[10px] py-[10px] text-center flex items-center justify-center rounded-[10px] border border-tertiary text-[14px] font-raleway font-medium text-tertiary bg-white hover:bg-gray-200 disabled:opacity-50"
+              className="w-[89px] h-[36px] px-[10px] cursor-pointer py-[10px] text-center flex items-center justify-center rounded-[10px] border border-tertiary text-[14px] font-raleway font-medium text-tertiary bg-white hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

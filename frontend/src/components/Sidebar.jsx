@@ -103,10 +103,10 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
           />
           <div className="flex items-center gap-2 text-tertiary">
             <div className="leading-tight text-left font-secundary">
-              <p className="font-montserratAlt font-bold text-[20px] text-tertiary">
+              <p className="font-secundary font-bold text-[20px] text-tertiary">
                 Patas
               </p>
-              <p className="font-montserratAlt font-bold text-[20px] text-tertiary">
+              <p className="font-secundary font-bold text-[20px] text-tertiary">
                 Pirque
               </p>
             </div>
@@ -118,7 +118,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
             <button
               key={item.label}
               onClick={() => onSelect(item.label)}
-              className={`flex items-center gap-3 px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
+              className={`flex items-center gap-3 cursor-pointer px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
               ${
                 activeView === item.label
                   ? "bg-[#FAAA75] text-tertiary border-t border-l border-r border-tertiary border-b-[3px] border-b-tertiary"

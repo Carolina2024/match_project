@@ -26,7 +26,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         <button
           key="Aprobar"
           onClick={() => onStatusChange("Aprobado")}
-          className={`w-full sm:w-auto font-primary  h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center ${
+          className={`w-full sm:w-auto font-primary cursor-pointer  h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center ${
             estado === "En proceso"
               ? "bg-[#2E9002] text-white  hover:bg-green-600 w-[220px]"
               : "bg-white text-[#329D01] border border-[#329D01]  hover:bg-green-100"
@@ -42,7 +42,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         <button
           key="Rechazado"
           onClick={() => onStatusChange("Rechazado")}
-          className="w-full sm:w-auto h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold text-tertiary border border-tertiary drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center hover:bg-gray-100"
+          className="w-full sm:w-auto h-[44px] cursor-pointer rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold text-tertiary border border-tertiary drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center hover:bg-gray-100"
         >
           Rechazar
         </button>
@@ -77,7 +77,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
       <div className="bg-white rounded-xl shadow-xl sm:p-7 p-5 relative w-[317px] h-[769px] sm:w-[549px] sm:h-[585px] ">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-black text-4xl"
+          className="absolute top-4 right-4 cursor-pointer text-gray-500 hover:text-black text-4xl"
         >
           &times;
         </button>

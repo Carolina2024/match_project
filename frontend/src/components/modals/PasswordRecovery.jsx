@@ -64,7 +64,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
           <X />
         </button>
 
-        <h2 className="mt-10 text-2xl font-bold mb-2 font-secundary text-[#595146]">
+        <h2 className="mt-10 text-2xl font-bold mb-2 font-secundary text-tertiary">
           Recuperar contraseña
         </h2>
         <p className="text-base font-medium text-[#767575] mb-10 ">
@@ -72,7 +72,7 @@ const PasswordRecovery = ({ isOpen, onClose, onBack, onSuccess }) => {
         </p>
 
         <div>
-          <label className="block text-lg mb-1 font-medium text-left text-[#595146]">
+          <label className="block text-lg mb-1 font-medium text-left text-tertiary">
             Correo electrónico
           </label>
           <input

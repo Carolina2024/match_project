@@ -90,7 +90,7 @@ const UserProfiles = () => {
             placeholder="Buscar.."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full sm:w-[410px] placeholder:font-medium placeholder:text-[14px] text-[#767575] w-full border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            className="w-full sm:w-[410px] placeholder:font-medium placeholder:text-[14px] text-[#767575] border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
             style={{
               borderWidth: "1px",
               borderColor: "rgba(118,117,117,0.8)",
@@ -106,7 +106,7 @@ const UserProfiles = () => {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-sm">
           <thead>
-            <tr className="font-secundary font-semibold text-[16px] text-[#595146] bg-white border-b border-[#76757599]">
+            <tr className="font-secundary font-semibold text-[16px] text-tertiary bg-white border-b border-[#76757599]">
               <th className="px-4 py-2 text-left">Nombre</th>
               <th className="px-4 py-2 text-left">Correo</th>
               <th className="px-4 py-2 text-left">Documento</th>
@@ -118,18 +118,18 @@ const UserProfiles = () => {
             {users.map((user) => (
               <tr
                 key={user.id}
-                className="font-raleway font-normal text-[16px] text-[#595146] border-b border-[#76757599] bg-white"
+                className="font-raleway font-normal text-[16px] text-tertiary border-b border-[#76757599] bg-white"
               >
-                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3">
+                <td className="font-raleway font-normal text-[16px] text-tertiary px-4 py-3">
                   {user.fullname}
                 </td>
-                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3">
+                <td className="font-raleway font-normal text-[16px] text-tertiary px-4 py-3">
                   {user.email}
                 </td>
-                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3">
+                <td className="font-raleway font-normal text-[16px] text-tertiary px-4 py-3">
                   {user.identityDocument}
                 </td>
-                <td className="font-raleway font-normal text-[16px] text-[#595146] px-4 py-3 whitespace-nowrap">
+                <td className="font-raleway font-normal text-[16px] text-tertiary px-4 py-3 whitespace-nowrap">
                   {user.address}
                 </td>
                 <td className="px-4 py-3 text-center">
@@ -155,7 +155,7 @@ const UserProfiles = () => {
       </div>
 
       <div className="flex flex-col md:flex-row justify-between items-center mt-6 gap-4">
-        <div className="font-raleway font-normal text-[16px] text-[#767575] text-sm text-gray-500">
+        <div className="font-raleway font-normal text-[16px] text-[#767575] text-sm">
           Mostrando {users.length} de {users.length} usuarios
         </div>
 
@@ -164,7 +164,7 @@ const UserProfiles = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] rounded-[10px] hover:bg-gray-100 disabled:opacity-50"
+              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -177,7 +177,7 @@ const UserProfiles = () => {
                   onClick={() => handlePageChange(page)}
                   className={`w-8 h-8 rounded border text-sm font-medium ${
                     currentPage === page
-                      ? "bg-[#595146] text-white border-[#595146] rounded-[10px]"
+                      ? "bg-tertiary text-white border-tertiary rounded-[10px]"
                       : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100 rounded-[10px]"
                   }`}
                 >
@@ -189,7 +189,7 @@ const UserProfiles = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#595146] hover:bg-gray-200 disabled:opacity-50"
+              className="h-[36px] p-[10px] sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-tertiary hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

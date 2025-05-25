@@ -13,7 +13,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           &times;
         </button>
 
-        <h2 className="text-xl font-bold mb-1 md:text-left text-center font-secundary text-[20px] text-[#595146] max-w-[250px] sm:max-w-[300px] mx-auto">
+        <h2 className="text-xl font-bold mb-1 md:text-left text-center font-secundary text-[20px] text-tertiary max-w-[250px] sm:max-w-[300px] mx-auto">
           Información de la mascota
         </h2>
         <p className="text-sm font-medium  mb-4 md:text-left text-center font-secundary text-[14px] text-[#767575]">
@@ -34,7 +34,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
         )}
 
         <div className="mb-4">
-          <h3 className="font-semibold mb-1  font-Raleway text-[16px] text-[#595146]">
+          <h3 className="font-semibold mb-1  font-Raleway text-[16px] text-tertiary">
             Historia de la mascota
           </h3>
           <p className="text-sm font-normal font-raleway text-[14px] text-[#767575]">
@@ -42,7 +42,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 mt-4 font-Raleway text-[16px] text-[#595146] font-semibold">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4 mt-4 font-Raleway text-[16px] text-tertiary font-semibold">
           <div className="flex flex-col">
             <span className="text-ls">Mascota</span>
             <span className="text-sm font-raleway font-normal text-[14px] text-[#767575] mt-3">
@@ -113,7 +113,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
           </div>
 
           <div>
-            <h3 className="font-Raleway text-[16px] text-[#595146] font-semibold mb-1 text-left  mt-2">
+            <h3 className="font-Raleway text-[16px] text-tertiary font-semibold mb-1 text-left  mt-2">
               Rasgos de la mascota
             </h3>
             <div className="flex flex-wrap gap-7">
@@ -130,27 +130,27 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
         </div>
 
         <div className="mt-6">
-          <h3 className="font-raleway font-semibold text-[16px] text-[#595146] mb-1">
+          <h3 className="font-raleway font-semibold text-[16px] text-tertiary mb-1">
             Entrega de mascota
           </h3>
           <div className="flex flex-wrap gap-2">
             {pet?.isVaccinated && (
-              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-[#595146] px-3 py-1 rounded-lg text-xs mt-3 mb-2">
+              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-tertiary px-3 py-1 rounded-lg text-xs mt-3 mb-2">
                 Vacunado
               </span>
             )}
             {pet?.isSterilized && (
-              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-[#595146] px-3 py-1 rounded-lg text-xs mt-3 mb-2">
+              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-tertiary px-3 py-1 rounded-lg text-xs mt-3 mb-2">
                 Esterilizado
               </span>
             )}
             {pet?.isDewormed && (
-              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-[#595146] px-3 py-1 rounded-lg text-xs mt-3 mb-2">
+              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-tertiary px-3 py-1 rounded-lg text-xs mt-3 mb-2">
                 Desparasitado
               </span>
             )}
             {pet?.hasMicrochip && (
-              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-[#595146] px-3 py-1 rounded-lg text-xs mt-3 mb-2">
+              <span className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-tertiary px-3 py-1 rounded-lg text-xs mt-3 mb-2">
                 Con microchip
               </span>
             )}

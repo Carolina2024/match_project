@@ -11,7 +11,7 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
       ></div>
 
       <div className="relative bg-white p-6 rounded-lg shadow-lg w-full sm:w-[500px] mx-4 z-20">
-        <h2 className="font-secundary font-bold text-[20px] text-[#595146] text-lg mb-4 text-center">
+        <h2 className="font-secundary font-bold text-[20px] text-tertiary text-lg mb-4 text-center">
           ¿Estás seguro de eliminar a {user.fullname}?
         </h2>
         <h3 className="font-raleway font-medium text-[14px] text-[#767575] text-center">
@@ -21,7 +21,7 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
         <div className="flex flex-col sm:flex-row items-center justify-center mt-6 space-y-4 sm:space-y-0 sm:space-x-3">
           <button
             onClick={onClose}
-            className="font-raleway font-bold text-[16px] text-[#595146] h-[44px] md:w-[227px]  w-[230px] px-2 py-2 bg-white rounded-lg hover:bg-gray-400 border-b-4 border-2 border-gray-400"
+            className="font-raleway font-bold text-[16px] text-tertiary h-[44px] md:w-[227px]  w-[230px] px-2 py-2 bg-white rounded-lg hover:bg-gray-400 border-b-4 border-2 border-gray-400"
           >
             Cancelar
           </button>

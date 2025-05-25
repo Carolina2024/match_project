@@ -102,7 +102,7 @@ const AdoptionApllication = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="font-raleway font-medium text-[16px] text-[#595146] px-3 sm:px-0">
+            <label className="font-raleway font-medium text-[16px] text-tertiary px-3 sm:px-0">
               Filtrar por:
             </label>
             <CustomSelect
@@ -137,7 +137,7 @@ const AdoptionApllication = () => {
                 className="cursor-pointer w-[175px] sm:w-[240px] h-[156px] sm:h-[214px] bg-[#FFFFFF] border border-[#767575] rounded-[15px] sm:rounded-[20px] p-[15px] sm:p-[20px] flex flex-col justify-between  shadow-[5px_5px_0px_0px_#767575]  gap-[15px] sm:gap-[22px]"
               >
                 <div className="text-center space-y-2">
-                  <h3 className="font-raleway font-semibold text-[14px] sm:text-[16px] text-[#595146]">
+                  <h3 className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary">
                     {sol.petName}
                   </h3>
 
@@ -150,7 +150,7 @@ const AdoptionApllication = () => {
                     }}
                   />
 
-                  <p className="font-raleway font-semibold text-[14px] sm:text-[16px] text-[#595146]">
+                  <p className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary">
                     {sol.adopterName}
                   </p>
 
@@ -183,7 +183,7 @@ const AdoptionApllication = () => {
                   {(sol.status === "Por revisar" ||
                     sol.status === "En proceso") && (
                     <UilEdit
-                      className="ml-[2px] text-[#595146] text-base sm:text-lg  cursor-pointer hover:text-black"
+                      className="ml-[2px] text-tertiary text-base sm:text-lg  cursor-pointer hover:text-black"
                       size="20"
                       title="Ver detalles de la solicitud"
                       onClick={(e) => {
@@ -243,8 +243,8 @@ const AdoptionApllication = () => {
                       onClick={() => setCurrentPage(page)}
                       className={`w-[37px] h-[36px] rounded-[10px] px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center border ${
                         currentPage === page
-                          ? "bg-[#595146] text-white border-[#595146]"
-                          : "bg-white text-[#595146] border-[#595146] hover:bg-gray-100"
+                          ? "bg-tertiary text-white border-tertiary"
+                          : "bg-white text-tertiary border-tertiary hover:bg-gray-100"
                       }`}
                     >
                       {page}
@@ -259,7 +259,7 @@ const AdoptionApllication = () => {
                 setCurrentPage((prev) => Math.min(prev + 1, totalPages))
               }
               disabled={currentPage === totalPages}
-              className="w-[89px] h-[36px] px-[10px] py-[10px] text-center flex items-center justify-center rounded-[10px] border border-[#595146] text-[14px] font-raleway font-medium text-[#595146] bg-white hover:bg-gray-200 disabled:opacity-50"
+              className="w-[89px] h-[36px] px-[10px] py-[10px] text-center flex items-center justify-center rounded-[10px] border border-tertiary text-[14px] font-raleway font-medium text-tertiary bg-white hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

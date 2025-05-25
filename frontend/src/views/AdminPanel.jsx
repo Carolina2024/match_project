@@ -31,17 +31,17 @@ const AdminPanel = () => {
 
   const viewTitles = {
     Mascotas: (
-      <span className="font-raleway font-bold text-[20px] text-[#595146] mr-2">
+      <span className="font-raleway font-bold text-[20px] text-tertiary mr-2">
         Gestiona las mascotas
       </span>
     ),
     Solicitudes: (
-      <span className="font-raleway font-bold text-[20px] text-[#595146]">
+      <span className="font-raleway font-bold text-[20px] text-tertiary">
         Solicitudes de adoptantes
       </span>
     ),
     Adoptantes: (
-      <span className="font-raleway font-bold text-[20px] text-[#595146]">
+      <span className="font-raleway font-bold text-[20px] text-tertiary">
         Registros de adoptantes
       </span>
     ),

@@ -42,7 +42,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
         <button
           key="Rechazado"
           onClick={() => onStatusChange("Rechazado")}
-          className="w-full sm:w-auto h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold text-[#595146] border border-[#595146] drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center hover:bg-gray-100"
+          className="w-full sm:w-auto h-[44px] rounded-[10px] p-[5px] gap-[5px] text-[16px] font-bold text-tertiary border border-tertiary drop-shadow-[0_3px_4px_#59514680] flex items-center justify-center hover:bg-gray-100"
         >
           Rechazar
         </button>

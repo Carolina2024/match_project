@@ -89,12 +89,10 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
         <div className="flex justify-end">
           <button
             type="button"
-            className="text-[#595146] focus:outline-none cursor-pointer"
+            className="text-tertiary focus:outline-none cursor-pointer"
             onClick={onClose}
           >
-            
-<OnClose />
-
+            <OnClose />
           </button>
         </div>
 
@@ -243,7 +241,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
                     formData.energy === energy
                       ? "bg-[#767575] text-white"
-                      : "border-primary bg-white/75 text-[#595146]"
+                      : "border-primary bg-white/75 text-tertiary"
                   }`}
                 >
                   {energy}
@@ -266,7 +264,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
                     formData.character.includes(opcion)
                       ? "bg-[#767575] text-white"
-                      : "border-primary bg-white/75 text-[#595146]"
+                      : "border-primary bg-white/75 text-tertiary"
                   }`}
                 >
                   {opcion}
@@ -289,7 +287,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
                     formData.compatibility.includes(opcion)
                       ? "bg-[#767575] text-white"
-                      : "border-primary bg-white/75 text-[#595146]"
+                      : "border-primary bg-white/75 text-tertiary"
                   }`}
                 >
                   {opcion}

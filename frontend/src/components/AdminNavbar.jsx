@@ -79,63 +79,71 @@ const AdminNavbar = ({
         }
       `}
     >
-<div className="relative w-full flex items-center justify-between h-[70px] px-50">
-  <div className="flex-1 flex items-center">
-    <button
-      onClick={() => setSidebarVisible(true)}
-      className={`md:hidden w-9 h-9 bg-white rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.35)] flex justify-center items-center hover:bg-gray-100 transition ${
-        isSidebarVisible ? "left-[-100%]" : ""
-      }`}
-    >
-      <div className="flex flex-col items-center justify-between h-3 w-6">
-        <span className="w-5 h-[2px] rounded-sm" style={{ backgroundColor: "#F9A975" }}></span>
-        <span className="w-5 h-[2px] rounded-sm" style={{ backgroundColor: "#F9A975" }}></span>
-        <span className="w-5 h-[2px] rounded-sm" style={{ backgroundColor: "#F9A975" }}></span>
-      </div>
-    </button>
-  </div>
-
-  <div className="flex-none relative" ref={dropdownRef}>
-    <button
-      onClick={() => setOpen(!open)}
-      className="w-[135px] h-[50px] bg-white border border-tertiary rounded-[20px] px-[3px] py-[4px]
-        text-sm font-medium flex items-center
-        shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer"
-    >
-      <div className="flex items-center justify-center flex-col text-center ml-2">
-        <span className="text-[16px] font-secundary font-bold text-tertiary">
-          {userName}
-        </span>
-        <span className="text-[14px] font-raleway font-medium text-[#767575]">
-          {userRole}
-        </span>
-      </div>
-      <FaChevronDown
-        className={`w-[12px] h-[12px] text-sm ml-2 text-tertiary transform ${
-          open ? "rotate-180" : ""
-        }`}
-      />
-    </button>
-
-    {open && (
-      <div className="absolute top-full right-0 mt-2 w-38 bg-white rounded-xl shadow-lg z-20 text-sm">
-        <div className="px-4 py-2 text-[12px] text-[#767575] font-raleway font-medium">
-          Mi cuenta
-        </div>
-        <div className="border-t border-gray-200">
+      <div className="relative w-full flex items-center justify-between h-[70px] px-4 md:px-50">
+        <div className="md:hidden">
           <button
-            onClick={handleLogout}
-            className="flex items-center w-full px-4 py-2 text-[14px] text-[#FF2D2D] font-raleway font-medium hover:bg-red-50 cursor-pointer"
+            onClick={() => setSidebarVisible(true)}
+            className="w-9 h-9 bg-white rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.35)] flex justify-center items-center hover:bg-gray-100 transition"
           >
-            <FiLogOut className="w-[20px] h-[20px] mr-2" />
-            Cerrar sesión
+            <div className="flex flex-col items-center justify-between h-3 w-6">
+              <span
+                className="w-5 h-[2px] rounded-sm"
+                style={{ backgroundColor: "#F9A975" }}
+              ></span>
+              <span
+                className="w-5 h-[2px] rounded-sm"
+                style={{ backgroundColor: "#F9A975" }}
+              ></span>
+              <span
+                className="w-5 h-[2px] rounded-sm"
+                style={{ backgroundColor: "#F9A975" }}
+              ></span>
+            </div>
           </button>
         </div>
-      </div>
-    )}
-  </div>
-</div>
 
+        <div className="flex-1"></div>
+
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setOpen(!open)}
+            className="w-[135px] h-[50px] bg-white border border-tertiary rounded-[20px] px-[3px] py-[4px]
+        text-sm font-medium flex items-center
+        shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer"
+          >
+            <div className="flex items-center justify-center flex-col text-center ml-2">
+              <span className="text-[16px] font-secundary font-bold text-tertiary">
+                {userName}
+              </span>
+              <span className="text-[14px] font-raleway font-medium text-[#767575]">
+                {userRole}
+              </span>
+            </div>
+            <FaChevronDown
+              className={`w-[12px] h-[12px] text-sm ml-2 text-tertiary transform ${
+                open ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {open && (
+            <div className="absolute top-full right-0 mt-2 w-38 bg-white rounded-xl shadow-lg z-20 text-sm">
+              <div className="px-4 py-2 text-[12px] text-[#767575] font-raleway font-medium">
+                Mi cuenta
+              </div>
+              <div className="border-t border-gray-200">
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center w-full px-4 py-2 text-[14px] text-[#FF2D2D] font-raleway font-medium hover:bg-red-50 cursor-pointer"
+                >
+                  <FiLogOut className="w-[20px] h-[20px] mr-2" />
+                  Cerrar sesión
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
 
       <h2
         className={`text-lg font-semibold text-tertiary ${

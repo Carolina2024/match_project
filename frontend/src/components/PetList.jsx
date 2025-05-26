@@ -250,10 +250,15 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                     <button
                       key={page}
                       onClick={() => handlePageChange(page)}
+                      style={
+                        currentPage === page
+                          ? { backgroundColor: "#595146" }
+                          : {}
+                      }
                       className={`font-raleway font-normal cursor-pointer text-[14px] w-8 h-8 rounded-md border-1 border-tertiary text-sm${
                         currentPage === page
-                          ? "bg-tertiary text-white border-4 border-tertiary shadow-md"
-                          : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100"
+                          ? "bg-[#595146] text-white border-[#b26b3f]"
+                          : "bg-white text-[#b26b3f] border-[#b26b3f] hover:bg-gray-100"
                       }`}
                     >
                       {page}

@@ -288,7 +288,7 @@ const Home = () => {
             </div>
             <p className="mt-4 text-sm text-[#0C0C0C] font-primary font-normal">
               Describir tu hogar y tus preferencias para que Patas Pirque pueda
-              encontrar tu mascota ideal
+              encontrar tus mascotas compatibles
             </p>
           </div>
 

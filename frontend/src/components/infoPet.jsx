@@ -270,7 +270,7 @@ const InfoPet = () => {
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
           <div className="flex flex-col gap-4 bg-white rounded-2xl shadow-lg p-6 w-96 text-center space-y-4">
             <h1 className="text-primary font-bold text-3xl">
-              ¿Estás seguro que quieres hacer match?
+              ¿Estás seguro de que quieres hacer match?
             </h1>
             <div className="flex justify-center gap-10">
               <button

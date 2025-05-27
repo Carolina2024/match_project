@@ -410,7 +410,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                   onClick={() => toggleCheckbox("traits", trait)}
                   className={`w-full text-left px-4 py-2 rounded-lg border font-raleway text-[14px] text-[#767575] font-normal ${
                     traits.includes(trait)
-                      ? "bg-tertiary text-white"
+                      ? "bg-[#FAAA75] text-white"
                       : "bg-white text-[#767575]"
                   }`}
                 >
@@ -432,7 +432,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
                   onClick={() => toggleCheckbox("delivery", item)}
                   className={`w-full text-left px-4 py-2 rounded-lg border font-raleway text-[14px] text-[#767575] font-normal ${
                     delivery.includes(item)
-                      ? "bg-tertiary text-white"
+                      ? "bg-[#FAAA75] text-white"
                       : "bg-white text-[#767575]"
                   }`}
                 >

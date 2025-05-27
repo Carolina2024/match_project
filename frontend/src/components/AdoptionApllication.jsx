@@ -7,6 +7,7 @@ import { RiSearchLine } from "react-icons/ri";
 import CustomSelect from "./CustomSelect";
 import { FiCalendar } from "react-icons/fi";
 import { UilEdit } from "@iconscout/react-unicons";
+import { PiPawPrintFill } from "react-icons/pi";
 
 const AdoptionApllication = () => {
   const [filtro, setFiltro] = useState("Estado");
@@ -136,19 +137,14 @@ const AdoptionApllication = () => {
                 }}
                 className="cursor-pointer w-[175px] sm:w-[240px] h-[156px] sm:h-[214px] bg-white border border-[#767575] rounded-[15px] sm:rounded-[20px] p-[15px] sm:p-[20px] flex flex-col justify-between  shadow-[5px_5px_0px_0px_#767575]  gap-[15px] sm:gap-[22px]"
               >
-                <div className="text-center space-y-2">
+                <div className="text-center space-y-1">
                   <h3 className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary">
                     {sol.petName}
                   </h3>
 
-                  <FaHeart
-                    className="mx-auto w-[15px] sm:w-[21px] h-[13px] sm:h-[18px]"
-                    style={{
-                      color: sol.status === "Rechazado" ? "#767575" : "#ffa04c",
-                      top: "3px",
-                      left: "1.55px",
-                    }}
-                  />
+                  <div className="mx-auto flex items-center justify-center w-[20px] h-[20px] sm:w-[38px] sm:h-[36px] rounded-full bg-[#FAAA75] sm:p-[7px] p:[3] sm:gap-[10px] gap:[5px]">
+                    <PiPawPrintFill className="sm:w-[24px] sm:h-[22px] w-[13.3px] h-[11.93px] text-white" />
+                  </div>
 
                   <p className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary">
                     {sol.adopterName}

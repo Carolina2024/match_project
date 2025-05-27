@@ -40,9 +40,10 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
     top: 0,
     left: 0,
     height: "100%",
-    width: "237px",
+    width: "247px",
     backgroundColor: "var(--color-fourth)",
-    padding: "16px",
+    padding: "20px",
+    paddingTop: "40px",
     display: "flex",
     flexDirection: "column",
     boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
@@ -64,8 +65,8 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
 
   const closeButtonStyles = {
     position: "absolute",
-    top: "16px",
-    right: "16px",
+    top: "32px",
+    right: "30px",
     fontSize: "24px",
     cursor: "pointer",
     color: "#F9A975",
@@ -95,7 +96,7 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
           x
         </button>
 
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-12">
           <img
             src={logo}
             alt="Logo Patas Pirque"

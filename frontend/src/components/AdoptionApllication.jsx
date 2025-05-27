@@ -142,11 +142,11 @@ const AdoptionApllication = () => {
                     {sol.petName}
                   </h3>
 
-                  <div className="mx-auto flex items-center justify-center w-[20px] h-[20px] sm:w-[38px] sm:h-[36px] rounded-full bg-[#FAAA75] sm:p-[7px] p:[3] sm:gap-[10px] gap:[5px]">
-                    <PiPawPrintFill className="sm:w-[24px] sm:h-[22px] w-[13.3px] h-[11.93px] text-white" />
+                  <div className="mx-auto flex items-center justify-center w-[20px] h-[20px] sm:w-[38px] sm:h-[36px] rounded-[50px] bg-[#FAAA75] sm:p-[7px] p:[3] sm:gap-[10px] gap:[5px]">
+                    <PiPawPrintFill className="sm:w-[24px] sm:h-[24px] w-[14px] h-[11.93px] text-white" />
                   </div>
 
-                  <p className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary">
+                  <p className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary mb-1 sm:mb-4">
                     {sol.adopterName}
                   </p>
 
@@ -160,9 +160,9 @@ const AdoptionApllication = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-center items-center px-1 flex-wrap gap-1 w-full">
+                <div className="flex justify-center items-center px-1 flex-wrap gap-2 w-full">
                   <span
-                    className={`font-raleway font-semibold text-[12px] sm:text-[14px] w-[75px] sm:w-[100px] h-[21px] sm:h-[40] rounded-[10px] px-[10px] py-[1px] sm:py-[4px]  text-center max-w-full whitespace-nowrap flex items-center justify-center ${
+                    className={`font-raleway font-semibold text-[12px] sm:text-[14px] w-[75px] sm:w-[96px] h-[21px] sm:h-[29px] rounded-[10px] px-[10px] py-[1px] sm:py-[4px]  text-center max-w-full whitespace-nowrap flex items-center justify-center ${
                       sol.status === "Por revisar"
                         ? "bg-[rgba(108,108,108,0.25)] text-gray-icon"
                         : sol.status === "En proceso"

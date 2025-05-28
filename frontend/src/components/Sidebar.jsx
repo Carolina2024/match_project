@@ -120,11 +120,12 @@ const Sidebar = ({ onSelect, activeView, isVisible, setIsVisible }) => {
               key={item.label}
               onClick={() => onSelect(item.label)}
               className={`flex items-center gap-3 cursor-pointer px-5 py-2 rounded-lg w-full text-left font-medium transition-colors duration-200
-              ${
-                activeView === item.label
-                  ? "bg-[#FAAA75] text-tertiary border-t border-l border-r border-tertiary border-b-[3px] border-b-tertiary"
-                  : "text-tertiary hover:bg-orange-100"
-              }`}
+              px-[20px] py-[10px] gap-[10px]
+                ${
+                  activeView === item.label
+                    ? "bg-[#FAAA75] text-tertiary border-t border-l border-r border-tertiary border-b-[3px] border-b-tertiary"
+                    : "text-tertiary hover:bg-orange-100"
+                }`}
             >
               <span className="border-tertiary flex items-center justify-center">
                 {item.icon}

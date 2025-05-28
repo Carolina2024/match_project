@@ -66,7 +66,7 @@ export const createPet = async (petData) => {
   );
   formData.append(
     "isDewormed",
-    petData.delivery.includes("Desparacitado") || false
+    petData.delivery.includes("Desparasitado") || false
   );
   formData.append(
     "hasMicrochip",
@@ -139,7 +139,7 @@ export const updatePet = async (id, petData) => {
   );
   formData.append(
     "isDewormed",
-    petData.delivery.includes("Desparacitado") || false
+    petData.delivery.includes("Desparasitado") || false
   );
   formData.append(
     "hasMicrochip",

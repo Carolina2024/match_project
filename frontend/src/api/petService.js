@@ -48,10 +48,6 @@ export const createPet = async (petData) => {
   formData.append("energy", petData.energy || "");
   formData.append("breed", petData.breed || "");
   formData.append("kg", petData.kg || "");
-  formData.append("isVaccinated", petData.isVaccinated || false);
-  formData.append("isSterilized", petData.isSterilized || false);
-  formData.append("isDewormed", petData.isDewormed || false);
-  formData.append("hasMicrochip", petData.hasMicrochip || false);
   formData.append("story", petData.story || "");
   formData.append("admissionDate", petData.admissionDate || "");
   formData.append("status", petData.status || "");

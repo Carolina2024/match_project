@@ -186,7 +186,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
         </button>
 
         <h2 className="text-center font-secundary text-[20px] text-tertiary font-bold mb-4">
-          {editingPet ? "Editar mascota" : "nueva mascota"}
+          {editingPet ? "Editar mascota" : "Nueva mascota"}
         </h2>
 
         <p
@@ -400,8 +400,14 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
 
           <div>
             <p className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2">
-              Rasgos de la mascota:
+              Rasgos de la mascota
+              <span
+                style={{ marginLeft: "8px", color: "rgba(89, 81, 70, 0.5)" }}
+              >
+                (Elegir varias opciones)
+              </span>
             </p>
+
             <div className="grid grid-cols-2 gap-2">
               {enumOptions.traits.map((trait) => (
                 <button
@@ -422,7 +428,12 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
 
           <div>
             <p className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2">
-              Entrega de la mascota:
+              Entrega de la mascota
+              <span
+                style={{ marginLeft: "8px", color: "rgba(89, 81, 70, 0.5)" }}
+              >
+                (Elegir varias opciones)
+              </span>
             </p>
             <div className="grid grid-cols-2 gap-2">
               {enumOptions.delivery.map((item) => (
@@ -444,19 +455,19 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
 
           <div>
             <label className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2 block">
-              Historia de la mascota:
+              Historia de la mascota
             </label>
             <textarea
               {...register("story")}
               rows="4"
               className="border p-2 rounded-lg w-full font-raleway text-[14px] text-[#767575] font-normal"
-              placeholder=""
+              placeholder="Thor llegó al refugio en una tarde lluviosa, con la mirada cansada pero el corazón lleno de esperanza. Durante semanas, evitaba el contacto y se escondía en un rincón, pero poco a poco, con cariño y paciencia, fue recuperando la confianza en las personas."
             ></textarea>
           </div>
 
           <div>
             <p className="text-sm font-raleway text-[16px] text-tertiary font-medium mb-2">
-              Agregar 3 fotos de la mascota:
+              Agregar 3 fotos de la mascota
             </p>
             <div className="grid grid-cols-3 gap-4">
               {photos.map((_, index) => (

@@ -24,8 +24,26 @@ function PetsHome() {
                 <h3 className="text-center md:text-2xl text-xl font-normal mt-2 mb-1">
                   {mascota.name}, {mascota.sex}
                 </h3>
-                <p className="font-extrabold md:text-2xl text-lg font-tertiary text-primary">
-                  {(mascota.traits.find(trait => trait.length <= 10))}
+                <p className="font-extrabold md:text-[20px] text-lg font-tertiary whitespace-nowrap text-primary">
+                  {(() => {
+                    let total = 0;
+                    const selected = [];
+
+                    for (const trait of mascota.traits) {
+                      if (
+                        trait.length <= 10 &&
+                        total + trait.length <= 20 &&
+                        selected.length < 2
+                      ) {
+                        selected.push(trait);
+                        total += trait.length;
+                      }
+                    }
+
+                    return selected.length > 0
+                      ? selected.join(", ")
+                      : "Sin traits";
+                  })()}
                 </p>
               </div>
               <div className="flex flex-col mt-2">

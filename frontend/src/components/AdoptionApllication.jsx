@@ -85,7 +85,7 @@ const AdoptionApllication = () => {
   };
 
   return (
-    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen mt-8">
+    <div className="bg-white sm:bg-[#FAF9F6] min-h-screen mt-18 sm:mt-8">
       <div className="bg-transparent sm:bg-white sm:p-6 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300">
         <div className="flex flex-col gap-3 mb-8">
           <div className="relative w-full px-2 sm:px-0">
@@ -94,7 +94,7 @@ const AdoptionApllication = () => {
               placeholder="Buscar..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-[320px] sm:w-[410px] h-[44px] font-raleway pl-[40px] sm:pl-[40px] border border-[#767575]/80 font-medium text-[14px] text-[#767575] pr-[20px] sm:pr-[12px] py-[10px] rounded-[10px] focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-[360px] sm:w-[410px] h-[44px] font-raleway pl-[40px] sm:pl-[40px] border border-[#767575]/80 font-medium text-[14px] text-[#767575] pr-[20px] sm:pr-[12px] py-[10px] rounded-[10px] focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
             <RiSearchLine
               className="absolute left-3 top-2 text-gray-400"
@@ -102,7 +102,7 @@ const AdoptionApllication = () => {
             />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <label className="font-raleway font-medium text-[16px] text-tertiary px-3 sm:px-0">
               Filtrar por:
             </label>
@@ -121,7 +121,7 @@ const AdoptionApllication = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-start gap-5 mr-[15px] ml-[15px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-1">
+        <div className="flex flex-wrap justify-start gap-3 sm:gap-8 mr-[15px] ml-[15px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-1 sm:p-2">
           {solicitudes.length > 0 ? (
             solicitudes.map((sol) => (
               <div
@@ -135,7 +135,7 @@ const AdoptionApllication = () => {
                     setReadingRequest(sol);
                   }
                 }}
-                className="cursor-pointer w-[175px] sm:w-[240px] h-[156px] sm:h-[214px] bg-white border border-[#767575] rounded-[15px] sm:rounded-[20px] p-[15px] sm:p-[20px] flex flex-col justify-between  shadow-[5px_5px_0px_0px_#767575]  gap-[15px] sm:gap-[22px]"
+                className="cursor-pointer w-[174.74px] sm:w-[240px] h-[155.81px] sm:h-[214px] bg-white border border-[#767575] rounded-[15px] sm:rounded-[20px] p-[15px] sm:p-[20px] flex flex-col justify-between  shadow-[5px_5px_0px_0px_#767575]  gap-[15px] sm:gap-[22px]"
               >
                 <div className="text-center space-y-1">
                   <h3 className="font-raleway font-semibold text-[14px] sm:text-[16px] text-tertiary">

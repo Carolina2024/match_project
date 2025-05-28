@@ -114,16 +114,16 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   };
 
   return (
-    <div className="min-h-screen mt-8">
+    <div className="min-h-screen mt-15">
       <div className="max-w-[1200px] mx-auto overflow-x-auto bg-white md:shadow-[0_4px_12px_-2px_rgba(0,0,0,0.35)] sm:border sm:border-gray-300 md:rounded-xl p-6">
         <div className="flex flex-col sm:flex-row justify-between mb-4">
-          <div className="relative w-full sm:w-[500px] md:w-[350px]">
+          <div className="relative w-full w-[500px] sm:w-[360px]">
             <input
               type="text"
               placeholder="Buscar.."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full sm:w-[410px] border border-gray-300 rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
+              className="w-full sm:w-[410px] h-[44px] rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
               style={{
                 borderWidth: "1px",
                 borderColor: "rgba(118,117,117,0.8)",
@@ -137,7 +137,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
 
           <button
             onClick={() => setActiveView("createPet")}
-            className="cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
+            className="h-[44px] cursor-pointer [box-shadow:0_2px_4px_rgba(0,10,0,0.6)] mt-4 sm:mt-0 bg-primary text-white px-4 py-2 rounded-[10px] hover:bg-[#e78b52] transition-colors duration-300 font-raleway font-semibold text-[16px] flex items-center justify-center gap-2"
           >
             <UilPlus size={24} /> Nueva mascota
           </button>
@@ -187,11 +187,17 @@ const PetList = ({ setActiveView, setEditingPet }) => {
           </thead>
           <tbody className="font-secundary">
             {filteredPets.map((pet) => (
-              <tr key={pet.id || pet._id} className="border-t hover:bg-gray-50">
+              <tr
+                key={pet.id || pet._id}
+                className="hover:bg-gray-50"
+                style={{ borderTop: "1px solid rgba(118, 117, 117, 0.6)" }}
+              >
                 <td className="px-4 py-2 font-secundary font-medium text-tertiary text-[16px]">
                   {pet.name}
                 </td>
-                <td className="px-4 py-2">{pet.admissionDate}</td>
+                <td className="px-4 py-2 whitespace-nowrap">
+                  {pet.admissionDate}
+                </td>
                 <td className="px-4 py-2">{pet.species}</td>
                 <td className="px-4 py-2">{pet.breed}</td>
                 <td className="px-4 py-2">{getStatusBadge(pet.status)}</td>
@@ -238,11 +244,11 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="font-raleway font-normal cursor-pointer text-[14px] px-4 py-1 bg-white rounded-md border-1 border-tertiary  hover:bg-gray-100 disabled:opacity-50"
+              className="w-[118px] sm:w-[89px] h-[36px] font-raleway font-normal cursor-pointer text-[14px] px-4 py-1 bg-white rounded-[10px] border-1 border-tertiary  hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
-            <div className="flex gap-1">
+            <div className="flex gap-2">
               {totalPages > 1 &&
                 Array.from({ length: totalPages }, (_, index) => {
                   const page = index + 1;
@@ -255,7 +261,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                           ? { backgroundColor: "#595146" }
                           : {}
                       }
-                      className={`font-raleway font-normal cursor-pointer text-[14px] w-8 h-8 rounded-md border-1 border-tertiary text-sm${
+                      className={`w-[50px] sm:w-[37px] h-[36px] font-raleway font-normal cursor-pointer text-[14px]  rounded-[10px] border-1 border-tertiary text-sm${
                         currentPage === page
                           ? "bg-[#595146] text-white border-[#b26b3f]"
                           : "bg-white text-[#b26b3f] border-[#b26b3f] hover:bg-gray-100"
@@ -269,7 +275,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="font-raleway text-[14px] font-normal cursor-pointer px-4 py-1 bg-white rounded-md border-1 border-tertiary hover:bg-gray-200 disabled:opacity-50"
+              className="w-[118px] sm:w-[89px] h-[36px] font-raleway text-[14px] font-normal cursor-pointer px-4 py-1 bg-white rounded-[10px] border-1 border-tertiary hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

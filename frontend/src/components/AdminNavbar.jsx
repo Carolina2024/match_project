@@ -66,11 +66,11 @@ const AdminNavbar = ({
 
   return (
     <div
-      className={`fixed top-0 z-20 px-3 py-1 border-0 shadow-sm md:border-b md:border-gray-200  transition-all duration-300 sm-border-none-important
+      className={`fixed top-0 z-20 px-3 py-1 shadow-none sm:shadow-sm  border-b-0 sm:border-b sm:border-gray-200  transition-all duration-300
         ${
           isSidebarVisible
             ? "sm:backdrop-blur-[4px] bg-[#EFEFEF]/70 md:backdrop-blur-none md:bg-[#EFEFEF]"
-            : "bg-[#EFEFEF]"
+            : "bg-[#FFFFFF]"
         }
         ${
           isSidebarVisible
@@ -79,7 +79,7 @@ const AdminNavbar = ({
         }
       `}
     >
-      <div className="relative w-full flex items-center justify-between h-[70px] px-4 md:px-50">
+      <div className="relative w-full flex items-center justify-between h-[98px] sm:h-[87px] px-4 md:px-50 top-[10px] md:top-0">
         <div className="md:hidden">
           <button
             onClick={() => setSidebarVisible(true)}
@@ -148,7 +148,7 @@ const AdminNavbar = ({
       <h2
         className={`text-lg font-semibold text-tertiary ${
           isSidebarVisible ? "hidden md:block" : ""
-        } sm-ml-0 md:ml-20  mt-[10px] md:mt-[-70px] md:py-5`}
+        } ml-4 sm:ml-4 md:ml-20  mt-[10px] md:mt-[-70px] md:py-5`}
       >
         {sectionTitle}
       </h2>

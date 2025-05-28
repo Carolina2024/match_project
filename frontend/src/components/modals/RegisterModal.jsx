@@ -370,7 +370,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     onClick={() => setSelected(opcion)}
                     className={`px-4 py-2 rounded-3xl cursor-pointer ${
                       selected === opcion
-                        ? "bg-[#767575] text-white"
+                        ? "bg-[#F4A470] text-white"
                         : "border-primary text-[#AAAAAA] bg-white/75"
                     }`}
                   >

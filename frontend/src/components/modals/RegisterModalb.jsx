@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import OnClose from "../../assets/icons/svg-components/OnClose";
 
 import logo from "../../assets/logo.webp";
+import CheckIcon from "../../assets/icons/svg-components/CheckIcon";
 
 const opcionesEnergia = ["Tranquilo", "Moderado", "Muy Activo"];
 const opcionesCaracter = ["Cariñoso", "Independiente", "Protector", "Juguetón"];
@@ -84,14 +85,12 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] flex items-start justify-center pt-16 pb-8 px-4 overflow-y-auto">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]"
-      >
+        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
         <div className="flex justify-end">
           <button
             type="button"
             className="text-tertiary focus:outline-none cursor-pointer"
-            onClick={onClose}
-          >
+            onClick={onClose}>
             <OnClose />
           </button>
         </div>
@@ -238,12 +237,12 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   key={energy}
                   type="button"
                   onClick={() => handleEnergySelect(energy)}
-                  className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
+                  className={`flex items-center px-10 py-1 rounded-full border-2 justify-center gap-1 cursor-pointer ${
                     formData.energy === energy
-                      ? "bg-[#767575] text-white"
+                      ? "bg-primary text-white border-primary"
                       : "border-primary bg-white/75 text-tertiary"
-                  }`}
-                >
+                  }`}>
+                  {formData.energy.includes(energy) && <CheckIcon />}
                   {energy}
                 </button>
               ))}
@@ -261,12 +260,12 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   key={opcion}
                   type="button"
                   onClick={() => toggleSeleccion(opcion)}
-                  className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
+                  className={`flex items-center px-4 py-1 rounded-full justify-center gap-1 border-2 cursor-pointer ${
                     formData.character.includes(opcion)
-                      ? "bg-[#767575] text-white"
+                      ? "bg-primary text-white border-primary"
                       : "border-primary bg-white/75 text-tertiary"
-                  }`}
-                >
+                  }`}>
+                  {formData.character.includes(opcion) && <CheckIcon />}
                   {opcion}
                 </button>
               ))}
@@ -284,12 +283,13 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   key={opcion}
                   type="button"
                   onClick={() => toggleCompatibility(opcion)}
-                  className={`flex items-center px-4 py-1 rounded-full border-2 cursor-pointer ${
+                  className={`flex items-center justify-center px-4 py-1 rounded-full gap-1 border-2 cursor-pointer ${
                     formData.compatibility.includes(opcion)
-                      ? "bg-[#767575] text-white"
+                      ? "bg-primary text-white border-primary"
                       : "border-primary bg-white/75 text-tertiary"
-                  }`}
-                >
+                  }`}>
+                  {" "}
+                  {formData.compatibility.includes(opcion) && <CheckIcon />}
                   {opcion}
                 </button>
               ))}
@@ -329,8 +329,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
               onClick={onBack}
               className="bg-white/75 text-primary border-2 border-primary rounded-3xl focus:outline-none cursor-pointer 
                px-6 py-1 text-sm sm:px-12 sm:text-base 
-               hover:text-tertiary hover:border-tertiary"
-            >
+               hover:text-tertiary hover:border-tertiary">
               Atrás
             </button>
 
@@ -338,8 +337,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
               type="submit"
               className="bg-primary text-white font-semibold rounded-3xl cursor-pointer 
                px-6 py-1 text-sm sm:px-12 sm:text-base 
-               hover:bg-tertiary shadow-lg/20"
-            >
+               hover:bg-tertiary shadow-lg/20">
               Finalizar
             </button>
           </div>

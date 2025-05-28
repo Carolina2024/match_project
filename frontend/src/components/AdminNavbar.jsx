@@ -66,7 +66,7 @@ const AdminNavbar = ({
 
   return (
     <div
-      className={`fixed top-0 z-20 px-3 py-1 shadow-none sm:shadow-sm  border-b-0 sm:border-b sm:border-gray-200  transition-all duration-300
+      className={`fixed top-0 z-20 px-2 sm:px-3  py-1 shadow-none sm:shadow-sm  border-b-0 sm:border-b sm:border-gray-200  transition-all duration-300
         ${
           isSidebarVisible
             ? "sm:backdrop-blur-[4px] bg-[#EFEFEF]/70 md:backdrop-blur-none md:bg-[#EFEFEF]"
@@ -107,7 +107,7 @@ const AdminNavbar = ({
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setOpen(!open)}
-            className="w-[135px] h-[50px] bg-white border border-tertiary rounded-[20px] px-[3px] py-[4px]
+            className="w-[135px] h-[50px] bg-white border border-tertiary rounded-[20px] px-[3px] sm:px-[3px]  py-[4px]
         text-sm font-medium flex items-center
         shadow-[0_3px_0_0_#595146] hover:bg-gray-50 cursor-pointer"
           >

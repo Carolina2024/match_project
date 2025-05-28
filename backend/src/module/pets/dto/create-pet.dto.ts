@@ -105,14 +105,19 @@ export class CreatePetDto {
     example: true,
   })
   @Transform(({ value }) => {
-    const valor = Boolean(value);
-    if (typeof valor !== 'boolean') {
-      throw new Error('El campo de vacunación debe ser un valor booleano');
+    if (typeof value === 'boolean') {
+      return value;
+    } else {
+      if (typeof value !== 'string') {
+        return null;
+      }
+      if (value !== 'true' && value !== 'false') {
+        return null;
+      }
+      return value === 'true' ? true : false;
     }
-    return valor;
   })
   @IsBoolean({ message: 'El campo de vacunación debe ser un valor booleano' })
-  @Type(() => Boolean)
   isVaccinated: boolean;
 
   @ApiProperty({
@@ -120,11 +125,17 @@ export class CreatePetDto {
     example: true,
   })
   @Transform(({ value }) => {
-    const valor = Boolean(value);
-    if (typeof valor !== 'boolean') {
-      throw new Error('El campo de vacunación debe ser un valor booleano');
+    if (typeof value === 'boolean') {
+      return value;
+    } else {
+      if (typeof value !== 'string') {
+        return null;
+      }
+      if (value !== 'true' && value !== 'false') {
+        return null;
+      }
+      return value === 'true' ? true : false;
     }
-    return valor;
   })
   @IsBoolean({
     message: 'El campo de esterilización debe ser un valor booleano',
@@ -136,11 +147,17 @@ export class CreatePetDto {
     example: true,
   })
   @Transform(({ value }) => {
-    const valor = Boolean(value);
-    if (typeof valor !== 'boolean') {
-      throw new Error('El campo de vacunación debe ser un valor booleano');
+    if (typeof value === 'boolean') {
+      return value;
+    } else {
+      if (typeof value !== 'string') {
+        return null;
+      }
+      if (value !== 'true' && value !== 'false') {
+        return null;
+      }
+      return value === 'true' ? true : false;
     }
-    return valor;
   })
   @IsBoolean({
     message: 'El campo de desparasitación debe ser un valor booleano',
@@ -152,11 +169,17 @@ export class CreatePetDto {
     example: false,
   })
   @Transform(({ value }) => {
-    const valor = Boolean(value);
-    if (typeof valor !== 'boolean') {
-      throw new Error('El campo de vacunación debe ser un valor booleano');
+    if (typeof value === 'boolean') {
+      return value;
+    } else {
+      if (typeof value !== 'string') {
+        return null;
+      }
+      if (value.toLowerCase() !== 'true' && value.toLowerCase() !== 'false') {
+        return null;
+      }
+      return value.toLowerCase() === 'true' ? true : false;
     }
-    return valor;
   })
   @IsBoolean({ message: 'El campo de microchip debe ser un valor booleano' })
   hasMicrochip: boolean;

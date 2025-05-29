@@ -1,22 +1,23 @@
 import PropTypes from "prop-types";
+import { FiX } from "react-icons/fi";
 
 const PetDetailsModal = ({ isOpen, onClose, pet }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50  bg-black/30 backdrop-blur-[2px] md:px-80 sm:px-2 overflow-auto p-8">
-      <div className="sm:ml-auto mt-20 bg-white rounded-xl sm:p-6 p-4 w-full max-w-sm sm:max-w-[200px] md:max-w-lg lg:max-w-4xl relative shadow-lg sm:mt-20">
+    <div className=" fixed inset-0 z-50  bg-black/30 backdrop-blur-[2px] overflow-auto sm:px-70 px-10">
+      <div className="relative sm:w-[992px] w-[317px] min-h-screen sm:h-[748px] mt-20 bg-[#FFFFFF] rounded-[20px] sm:p-6 p-4 shadow-lg sm:mt-20">
         <button
           onClick={onClose}
-          className="absolute top-4 cursor-pointer right-4 text-tertiary hover:text-black text-4xl"
+          className="absolute cursor-pointer text-tertiary hover:text-black   top-8 right-7"
         >
-          &times;
+          <FiX size={24} />
         </button>
-        <div className="mt-8 sm:mt-4 p-4 sm:p-2">
-          <h2 className="text-xl font-bold mb-1 text-center sm:text-left font-secundary text-[20px] text-tertiary max-w-[250px] sm:max-w-[300px] mx-auto sm:mx-0">
+        <div className="mt-7 sm:mt-4 p-4 sm:p-2">
+          <h2 className="text-[20px] font-bold mb-1 text-center sm:text-left font-secundary text-tertiary  mx-auto sm:mx-0">
             Información de la mascota
           </h2>
-          <p className="text-sm font-medium mb-8 sm:mb-4 md:text-left text-center font-secundary text-[14px] text-[#767575]">
+          <p className="font-medium mb-8 sm:mb-4 md:text-left text-center font-secundary text-[14px] text-[#767575]">
             <span className="block md:inline">Fecha del</span>{" "}
             <span className="block md:inline">
               ingreso:{" "}
@@ -31,19 +32,19 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
                   key={i}
                   src={url}
                   alt={`Foto de ${pet.name}`}
-                  className="w-[110px] h-[88px] md:w-[150px] md:h-[120px] object-cover rounded-lg shadow"
+                  className="w-[110px] h-[88px] sm:w-[150px] sm:h-[120px] object-cover rounded-lg shadow"
                 />
               ))}
             </div>
           )}
 
-          <div className="mb-4">
-            <h3 className="font-semibold mb-1  font-Raleway text-[16px] text-tertiary">
+          <div className="mb-5">
+            <h3 className="font-semibold mb-2 sm:mb-1  font-Inter text-[16px] text-tertiary">
               Historia de la mascota
             </h3>
             <p
-              className="text-sm font-normal font-raleway text-[14px] text-[#767575] ml-0 md:ml-2 mt-2 mb-8 sm:mb-4
-              bg-white rounded-[10px] p-4 border w-[255px] h-[169px]
+              className="mt-2 font-normal font-raleway text-[14px] text-[#767575] ml-0 md:ml-2 mt-2 mb-8 sm:mb-4
+              rounded-[10px] p-4 border w-[255px] h-[169px]
       md:bg-transparent md:border-0 md:p-0 md:w-auto md:h-auto
     "
               style={{ borderColor: "rgba(118, 117, 117, 0.8)" }}
@@ -122,15 +123,15 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
               </span>
             </div>
 
-            <div className="text-left md:ml-[-40px] ml-0">
-              <h3 className="font-Raleway text-[16px] text-tertiary font-semibold mb-1 mt-2">
+            <div className="text-left sm:ml-[-40px] ml-0">
+              <h3 className="font-Raleway text-[16px] text-tertiary font-semibold mb-4 sm:mb-1  mt-4 sm:mt-2 ">
                 Rasgos de la mascota
               </h3>
               <div className="flex flex-wrap gap-3 justify-start">
                 {pet?.traits?.map((trait, i) => (
                   <span
                     key={i}
-                    className="font-raleway font-semibold text-[16px] text-white bg-[#FF9855] px-3 py-1 rounded-lg ml-0 md:ml-2 mt-4 mb-5 sm:mb-4"
+                    className="font-raleway font-semibold text-[16px] text-[#FFFFFF] bg-[#FF9855] px-3 py-1 rounded-[10px] ml-0 sm:ml-2 mt-0 sm:mt-4  mb-2 sm:mb-4"
                   >
                     {trait}
                   </span>

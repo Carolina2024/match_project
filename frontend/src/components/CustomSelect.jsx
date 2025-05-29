@@ -17,13 +17,10 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className="relative w-[115px] text-sm font-raleway text-[#767575]"
-    >
+    <div ref={ref} className="relative -ml-0.5 sm:ml-2 text-sm font-raleway text-[#767575]">
       <button
         onClick={() => setOpen(!open)}
-        className="h-[44px] flex justify-between items-center text-left w-full pr-4 pl-2 py-[8px] border border border-[#76757599] rounded-[10px] bg-white hover:bg-gray-50"
+        className="h-[44px] w-[107px] sm:w-[130px] flex justify-between items-center text-left w-full pr-4 pl-2 py-[8px] border border border-[#76757599] rounded-[10px] bg-white hover:bg-gray-50"
         style={{
           borderWidth: "1px",
           borderColor: "rgba(118, 117, 117, 0.5)",
@@ -32,9 +29,9 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
         <span>{selected === label ? label : selected}</span>
 
         <FaChevronDown
-          className={`ml-2 transition-transform text-xs ${
+          className={`ml-2 transition-transform${
             open ? "rotate-180" : ""
-          }`}
+          }relative w-[15px] h-[15px] top-[9px] left-[6px] text-[#767575]`}
         />
       </button>
 
@@ -52,7 +49,7 @@ const CustomSelect = ({ label, options, selected, onChange }) => {
               >
                 <span>{opt}</span>
                 {selected === opt && (
-                  <FaCheck className="text-sm text-tertiary" />
+                  <FaCheck className=" text-tertiary text-[12px] ml-auto flex items-center gap-2" />
                 )}
               </button>
             </div>

@@ -42,7 +42,7 @@ function PetsHome() {
 
                     return selected.length > 0
                       ? selected.join(", ")
-                      : "Sin traits";
+                      : "Amigable";
                   })()}
                 </p>
               </div>

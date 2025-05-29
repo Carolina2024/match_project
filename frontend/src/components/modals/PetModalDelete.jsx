@@ -10,8 +10,8 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
         className="absolute inset-0 bg-white/30 backdrop-blur-[2px] z-10"
       ></div>
 
-      <div className="relative bg-white p-4 sm:p-6 rounded-[20px] shadow-lg w-full sm:w-[539px] w-[317px] h-[304px] sm:h-[232px] mx-4 z-20 p-6 sm:p-6">
-        <h2 className="text-lg font-bold font-secundary text-[20px] text-tertiary mb-2 text-center">
+      <div className="relative bg-[#FFFFFF] p-4 sm:p-6 rounded-[20px] shadow-lg w-full sm:w-[539px] w-[317px] h-[304px] sm:h-[232px] mx-4 z-20 p-6 sm:p-6">
+        <h2 className="font-bold font-secundary text-[20px] text-tertiary mb-2 text-center">
           ¿Estás seguro de eliminar a {pet.name}?
         </h2>
         <h3 className="text-center font-raleway text-[14px] text-[#767575]">
@@ -23,13 +23,13 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
         <div className="font-raleway text-[16px] text-tertiary font-bold flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-6">
           <button
             onClick={onClose}
-            className="w-[227px] sm:w-[227px] px-4 py-2 bg-white rounded-lg hover:bg-gray-400 border-b-4 border-2 border-gray-400 mb-3 sm:mb-0"
+            className="w-[227px] sm:w-[227px] h-[44px] px-4 py-2 bg-[#FFFFFF] rounded-lg hover:bg-gray-400 border-b-4 border-2 border-gray-400 mb-3 sm:mb-0"
           >
             Cancelar
           </button>
           <button
             onClick={onConfirm}
-            className="w-[227px] sm:w-[227px] px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            className="w-[228px] sm:w-[228px] h-[44px] px-4 py-2 bg-[#FF2D2D] text-white rounded-lg hover:bg-red-600"
           >
             Eliminar
           </button>

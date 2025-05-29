@@ -71,11 +71,11 @@ const PetList = ({ setActiveView, setEditingPet }) => {
   const getStatusBadge = (status) => {
     const statusStyles = {
       Disponible:
-        "font-raleway font-semibold text-[16px] text-[#35a302] bg-[rgba(53,163,2,0.25)]",
+        "font-raleway font-semibold text-[16px] text-[#35a302] bg-[rgba(53,163,2,0.25)] rounded-[10px]",
       "En Proceso":
-        "bg-[rgba(255,128,44,0.25)] font-raleway text-[#FF802C] font-semibold text-[16px]",
+        "bg-[rgba(255,128,44,0.25)] font-raleway text-[#FF802C] font-semibold text-[16px] rounded-[10px] whitespace-nowrap",
       Adoptado:
-        "bg-[rgba(108,108,108,0.25)] font-raleway text-[#6C6C6C] font-semibold text-[16px]",
+        "bg-[rgba(108,108,108,0.25)] font-raleway text-[#6C6C6C] font-semibold text-[16px] rounded-[10px]",
     };
 
     return (
@@ -264,7 +264,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
                       className={`w-[50px] sm:w-[37px] h-[36px] font-raleway font-normal cursor-pointer text-[14px]  rounded-[10px] border-1 border-tertiary text-sm${
                         currentPage === page
                           ? "bg-[#595146] text-white border-[#b26b3f]"
-                          : "bg-white text-[#b26b3f] border-[#b26b3f] hover:bg-gray-100"
+                          : "bg-[#FFFFFF] text-[#595146] border-[#595146] hover:bg-gray-100"
                       }`}
                     >
                       {page}

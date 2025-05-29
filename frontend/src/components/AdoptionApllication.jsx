@@ -87,7 +87,7 @@ const AdoptionApllication = () => {
   return (
     <div className="bg-white sm:bg-[#FAF9F6] min-h-screen mt-18 sm:mt-8 mb-2">
       <div className="bg-transparent sm:bg-white sm:p-6 p-0 sm:rounded-[20px] sm:shadow-[1px_3px_6px_rgba(0,0,0,0.4)] sm:border sm:border-gray-300 mt-0 sm:mt-3 ">
-        <div className="flex flex-col gap-3 mb-8">
+        <div className="flex flex-col gap-3 mb-8 sm:ml-[0px] ml-[7px]">
           <div className="relative w-full px-3 sm:px-0">
             <input
               type="text"
@@ -239,7 +239,7 @@ const AdoptionApllication = () => {
                       className={`sm:w-[37px] w-[48px] h-[36px] rounded-[10px] cursor-pointer  px-[10px] py-[10px] text-[14px] font-raleway font-medium flex items-center justify-center border ${
                         currentPage === page
                           ? "bg-tertiary text-white border-tertiary"
-                          : "bg-white text-tertiary border-tertiary hover:bg-gray-100"
+                          : "bg-[#FFFFFF] text-tertiary border-tertiary hover:bg-gray-100"
                       }`}
                     >
                       {page}

@@ -19,11 +19,11 @@ function PetsHome() {
               alt={mascota.name}
               className="md:w-55 md:h-55 mx-auto object-cover bg-contain md:rounded-[80px] rounded-full hover:scale-105 transition mb-2"
             />
-            <div className="flex flex-col gap-3 items-center">
+            <div className="flex flex-col md:gap-3 gap-0.5 items-center">
               <div>
-                <h3 className="text-center md:text-2xl text-xl font-normal mt-2 mb-1">
-                  {mascota.name}, {mascota.sex}
-                </h3>
+                <div className="text-center md:text-2xl md:flex-row flex flex-col text-xl font-normal mt-2 mb-1">
+                  <p>{mascota.name},</p> <p>{mascota.sex}</p>
+                </div>
                 <p className="font-extrabold md:text-[20px] text-lg font-tertiary whitespace-nowrap text-primary">
                   {(() => {
                     let total = 0;

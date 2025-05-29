@@ -84,27 +84,23 @@ const UserProfiles = () => {
   return (
     <div className="shadow-[0px_0px_10px_rgba(0,0,0,0.2)] md:rounded-[20px] border-transparent  p-4 md:p-8 bg-white sm:border sm:border-gray-300 overflow-x-auto mt-8 sm:p-5">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-6">
-        <div className="relative w-full max-w-md">
+        <div className="relative w-full max-w-md mt-7 sm:mt-0 ml-2">
           <input
             type="text"
             placeholder="Buscar.."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full sm:w-[410px] placeholder:font-medium placeholder:text-[14px] text-[#767575] border border-gray-300 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
-            style={{
-              borderWidth: "1px",
-              borderColor: "rgba(118,117,117,0.8)",
-            }}
+            className="w-full sm:w-[410px] w-[360px] h-[44px] border border-[rgba(118,117,117,0.8)] rounded-[10px] placeholder:font-medium placeholder:text-[14px] text-[#767575]  px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400"
           />
           <RiSearchLine
-            className="absolute left-3 top-3 text-gray-400"
+            className="absolute left-3 top-2 text-gray-400"
             size={24}
           />
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
+        <table className="w-full border-collapse text-sm mt-3 sm:mt-5 ">
           <thead>
             <tr className="font-secundary font-semibold text-[16px] text-tertiary bg-white border-b border-[#76757599]">
               <th className="px-4 py-2 text-left">Nombre</th>
@@ -154,9 +150,9 @@ const UserProfiles = () => {
         </table>
       </div>
 
-      <div className="flex flex-col md:flex-row justify-between items-center mt-6 gap-4">
-        <div className="font-raleway font-normal text-[16px] text-[#767575] text-sm">
-          Mostrando {users.length} de {users.length} usuarios
+      <div className="flex flex-col md:flex-row justify-between items-center mt-12 gap-4">
+        <div className="font-raleway font-normal text-[14px] text-[rgba(118,117,117,0.8)]">
+          Mostrando {users.length} de {users.length} adoptantes
         </div>
 
         <div className="px-4 sm:px-0">
@@ -164,7 +160,7 @@ const UserProfiles = () => {
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="h-[36px] p-[10px] cursor-pointer sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] hover:bg-gray-100 disabled:opacity-50"
+              className="w-[114px] sm:w-[89px] h-[36px] p-[10px] cursor-pointer sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[14px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-[#767575cc] hover:bg-gray-100 disabled:opacity-50"
             >
               Anterior
             </button>
@@ -175,10 +171,10 @@ const UserProfiles = () => {
                 <button
                   key={page}
                   onClick={() => handlePageChange(page)}
-                  className={`w-8 h-8 rounded border cursor-pointer text-sm font-medium ${
+                  className={`w-[48px] sm:w-[37px] h-[36px] w-8 h-8 rounded border cursor-pointer text-[14px] font-medium ${
                     currentPage === page
                       ? "bg-tertiary text-white border-tertiary rounded-[10px]"
-                      : "bg-white text-[#b26b3f] border-gray-400 hover:bg-gray-100 rounded-[10px]"
+                      : "bg-[#FFFFFF] text-[#595146] border-[#595146] hover:bg-gray-100 rounded-[10px]"
                   }`}
                 >
                   {page}
@@ -189,7 +185,7 @@ const UserProfiles = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="h-[36px] p-[10px] cursor-pointer sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[16px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-tertiary hover:bg-gray-200 disabled:opacity-50"
+              className="w-[114px] sm:w-[89px] h-[36px] p-[10px] cursor-pointer sm:px-3 sm:py-2 flex items-center justify-center font-raleway font-medium text-[14px] text-[#767575] px-3 py-2 bg-white rounded-[10px] border border-tertiary hover:bg-gray-200 disabled:opacity-50"
             >
               Siguiente
             </button>

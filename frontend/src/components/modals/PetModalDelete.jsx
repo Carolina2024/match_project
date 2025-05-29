@@ -16,20 +16,18 @@ const PetModalDelete = ({ isOpen, onClose, onConfirm, pet }) => {
         </h2>
         <h3 className="text-center font-raleway text-[14px] text-[#767575]">
           Esta acción no se puede deshacer. Esta acción eliminara
-        </h3>
-        <h3 className="text-center text-[#767575]">
           permanentemente a {pet.name} del registro
         </h3>
         <div className="font-raleway text-[16px] text-tertiary font-bold flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-6">
           <button
             onClick={onClose}
-            className="w-[227px] sm:w-[227px] h-[44px] px-4 py-2 bg-[#FFFFFF] rounded-lg hover:bg-gray-400 border-b-4 border-2 border-gray-400 mb-3 sm:mb-0"
+            className="w-[227px] sm:w-[227px] h-[44px] px-4 py-2 bg-[#FFFFFF] rounded-[10px] hover:bg-gray-100 border border-[#595146] shadow-[3px_3px_4px_rgba(89,81,70,0.5)] mb-3 sm:mb-0"
           >
             Cancelar
           </button>
           <button
             onClick={onConfirm}
-            className="w-[228px] sm:w-[228px] h-[44px] px-4 py-2 bg-[#FF2D2D] text-white rounded-lg hover:bg-red-600"
+            className="w-[228px] sm:w-[228px] h-[44px] px-4 py-2 bg-[#FF2D2D] text-[#FFFFFF]  rounded-[10px] hover:bg-red-600"
           >
             Eliminar
           </button>

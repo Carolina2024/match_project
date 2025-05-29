@@ -42,7 +42,7 @@ const AdminPanel = () => {
     ),
     Adoptantes: (
       <span className="font-raleway font-bold text-[20px] text-tertiary">
-        Registros de adoptantes
+        Registro de adoptantes
       </span>
     ),
   };

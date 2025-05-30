@@ -110,20 +110,21 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-5 sm:px-5">
       <div className="flex items-center justify-center my-14">
-        <div className="bg-[#F9F9F9] rounded-2xl shadow-xl w-full md:max-w-4xl max-w-md flex overflow-hidden relative border border-[#CBCBCB]">
+        <div className="w-[293px] sm:w-[751px] h-[480px] sm:h-[531px] bg-[#F9F9F9] rounded-4xl sm:rounded-2xl shadow-xl flex flex-col-reverse md:flex-row overflow-hidden relative border border-[#CBCBCB] sm:py-4 -py-2">
           <button
             onClick={onClose}
             disabled={isLoading}
-            className="absolute top-4 right-4 text-tertiary text-2xl cursor-pointer"
+            className="absolute top-7 right-8 text-tertiary text-2xl cursor-pointer z-10"
           >
             <X />
           </button>
 
-          <div className="max-w-lg p-12 flex flex-col justify-center">
-            <h2 className="text-lg font-bold mb-6 mx-0 text-center font-secundary text-black">
-              Inicio Sesión a Patas Pirque
+          <div className="p-10 flex flex-col justify-center">
+            <h2 className="text-[20px] sm:text-[24px] text-center sm:text-left font-bold  font-secundary text-[#595146] mb-4  ml-0 sm:ml-[12px]">
+              <span className="block w-full">Inicio Sesión</span>
+              <span className="block w-full">a Patas Pirque</span>
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-3">
@@ -146,7 +147,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                     onChange={handleChange}
                     name="email"
                     disabled={isLoading}
-                    className="w-full pl-10 text-lg font-medium bg-white text-[#767575] pr-4 py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
+                    className="sm:w-[288px] w-[218px] sm:h-[40px] h-[30px] pl-10 sm:text-[14px] text-[18px] font-medium bg-[#FFFFFF] placeholder:text-[#767575] pr-4 py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
                   />
                 </div>
 
@@ -168,12 +169,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="w-full pl-10 pr-10 text-lg font-medium bg-white text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="sm:w-[288px] w-[218px] sm:h-[40px] h-[30px] pl-10 pr-10 sm:text-[14px] text-[18px] font-medium bg-[#FFFFFF] placeholder:text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
                 />
 
                 <span
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary cursor-pointer"
+                  className="absolute inset-y-0 right-0 pr-1 sm:pr-2 flex items-center text-primary cursor-pointer"
                 >
                   <img
                     src={showPassword ? eyeOpen : eyeOff}
@@ -196,17 +197,18 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                     onClose();
                     onOpenRecovery();
                   }}
-                  className="text-sm text-primary font-semibold hover:underline cursor-pointer m-3"
+                  className="text-[14px] text-primary font-semibold hover:underline cursor-pointer -mt-4"
                 >
                   ¿Olvidaste la contraseña?
                 </button>
               </div>
 
-              <div className="justify-center text-left mt-10">
+              <div className="justify-center sm:text-left text-center mt-5 sm:mt-7">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="px-14 bg-primary shadow-lg/20 text-white py-2 cursor-pointer font-bold text-lg rounded-3xl hover:bg-orange-300 transition-colors"
+                  className="bg-primary shadow-lg/20 text-[#FFFFFF] py-2 cursor-pointer font-bold text-14px sm:text-[18px] rounded-3xl hover:bg-orange-300 transition-colors
+                  sm:w-[178px] w-[119px]"
                 >
                   {isLoading ? (
                     <div className="flex items-center">
@@ -220,7 +222,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
               </div>
             </form>
 
-            <p className="text-sm text-center font-medium text-[#767575] mt-12">
+            <p className="text-[14px] sm:text-left text-center font-medium text-[#767575] mt-8 sm:mt-24 ">
               ¿Todavía no te registraste?{" "}
               <button
                 type="button"
@@ -228,24 +230,24 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   onClose();
                   onOpenRegister();
                 }}
-                className="text-primary text-sm font-bold hover:underline cursor-pointer"
+                className="text-primary text-[14px] font-bold hover:underline cursor-pointer"
               >
                 Regístrate
               </button>
             </p>
           </div>
 
-          <div className="w-auto flex justify-center items-center">
-            <div className="flex flex-col  ">
-              <BlurTop />
+          <div className="flex justify-center items-center">
+            <div className="flex sm:flex-col items-center relative sm:relative translate-y-[100px] sm:translate-y-0">
+              <BlurTop className="-mr-30 sm:mr-4 sm:mb-4 " />
 
               <img
                 src={logo}
                 alt="Logo Patas Pirque"
-                className=" md:w-50 w-32 h-auto drop-shadow-xl rounded-full absolute top-0 md:left-97 left-70 right-0 bottom-0 m-auto"
+                className="w-[70px] h-[68px] sm:w-[201px] sm:h-[195px] drop-shadow-xl mr-10 sm:mr-20 sm:ml-50 -ml-5 rounded-full translate-y-[0px] sm:-translate-y-35"
               />
 
-              <BlurBottom />
+              <BlurBottom className="sm:block hidden absolute bottom-0 sm:-bottom-4" />
             </div>
           </div>
         </div>

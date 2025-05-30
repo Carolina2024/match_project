@@ -7,7 +7,7 @@ const UserModalDelete = ({ isOpen, onClose, onConfirm, user }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-white/30 backdrop-blur-[2px] z-10"
+        className="absolute inset-0 bg-[#00000026] backdrop-blur-[3px] z-10"
       ></div>
 
       <div className="relative bg-[#FFFFFF] p-6 sm:p-6  rounded-[20px] shadow-lg w-full sm:w-[545px] w-[317px] h-[304px] sm:h-[232px] mx-7 sm:mx-auto z-20">

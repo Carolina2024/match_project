@@ -5,7 +5,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
   if (!isOpen) return null;
 
   return (
-    <div className=" fixed inset-0 z-50  bg-black/30 backdrop-blur-[2px] overflow-auto sm:px-70 px-10">
+    <div className=" fixed inset-0 z-50  bg-[#00000026] backdrop-blur-[3px] overflow-auto sm:px-70 px-10">
       <div className="relative sm:w-[992px] w-[317px] min-h-screen sm:h-[748px] mt-20 bg-[#FFFFFF] rounded-[20px] sm:p-6 p-4 shadow-lg sm:mt-20">
         <button
           onClick={onClose}

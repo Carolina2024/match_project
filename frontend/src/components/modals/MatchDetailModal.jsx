@@ -78,7 +78,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/30 backdrop-blur-[2px] flex items-center justify-center z-50 p-0">
+    <div className="fixed inset-0 bg-[#00000026] backdrop-blur-[3px] flex items-center justify-center z-50 p-0">
       <div className="bg-[#FFFFFF] rounded-[20px] shadow-xl sm:p-7 p-5 relative w-[317px] h-[769px] sm:w-[549px] sm:h-[585px] ">
         <button
           onClick={onClose}

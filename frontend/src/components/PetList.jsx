@@ -123,7 +123,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
               placeholder="Buscar.."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full sm:w-[410px] h-[44px] rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
+              className="w-full sm:w-[410px] h-[44px] rounded-[10px] px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-gray-400 font-raleway text-[14px]"
               style={{
                 borderWidth: "1px",
                 borderColor: "rgba(118,117,117,0.8)",

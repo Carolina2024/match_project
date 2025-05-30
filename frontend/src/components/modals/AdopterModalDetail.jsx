@@ -32,7 +32,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
     <div className=" fixed inset-0 flex items-center justify-center z-50 p-2">
       <div
         onClick={onClose}
-        className="absolute inset-0 bg-black/10 backdrop-blur-[2px] z-10"
+        className="absolute inset-0 bg-[#00000026] backdrop-blur-[3px] z-10"
       ></div>
 
       <div className="relative bg-[#FFFFFF] p-8 rounded-[20px] shadow-xl w-[317px] sm:w-[1000px] max-h-[90vh] overflow-y-auto z-20">

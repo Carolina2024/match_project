@@ -148,3 +148,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none !important;
   }
 }
+
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+

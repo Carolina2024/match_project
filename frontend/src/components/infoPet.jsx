@@ -308,9 +308,12 @@ const InfoPet = () => {
               >
                 Ir a seguimiento de tu match
               </button>
-              <button className="border border-primary text-primary hover:bg-orange-100 font-semibold py-2 px-6 rounded-full transition">
-                Inicio
-              </button>
+                   <button
+                    className="border border-primary text-primary hover:bg-orange-100 font-semibold py-2 px-6 rounded-full transition cursor-pointer"
+                    onClick={() => navigate("/")}
+                  >
+                    Inicio
+                  </button>
             </div>
           </div>
         </div>

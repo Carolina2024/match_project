@@ -283,7 +283,7 @@ const PetList = ({ setActiveView, setEditingPet }) => {
         </div>
 
         {showMessage && (
-          <div className="fixed bg-[rgba(255,77,77,0.25)] border border-red-400 px-4 py-2 rounded w-1/4 right-4 top-[100px] shadow-md">
+          <div className="fixed bg-[#FFE2E2] border border-red-400 px-4 py-2 rounded w-1/4 right-4 top-[100px] shadow-md">
             <span className="block text-[#FF4D4D] text-[16px] font-semibold font-['Inter']">
               Mascota eliminada
             </span>

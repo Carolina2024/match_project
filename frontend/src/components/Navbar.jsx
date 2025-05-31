@@ -54,7 +54,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="flex md:hidden justify-between items-center px-4 py-2">
+      <div className="flex md:hidden justify-between items-center px-4 pb-2 pt-6">
         <Link to="/">
           <img
             src={logo}
@@ -64,7 +64,7 @@ const Navbar = () => {
         </Link>
         <button
           onClick={() => setMenuOpen((o) => !o)}
-          className="fixed top-4 right-4 w-12 h-12 rounded-full bg-white cursor-pointer shadow-md flex items-center justify-center text-primary z-50"
+          className="fixed top-6 right-6 w-12 h-12 rounded-full bg-white cursor-pointer shadow-md flex items-center justify-center text-primary z-50"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

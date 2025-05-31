@@ -203,17 +203,17 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 </button>
               </div>
 
-              <div className="justify-center sm:text-left text-center mt-5 sm:mt-7">
+              <div className="flex justify-center mt-5 sm:mt-7">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-primary shadow-lg/20 text-[#FFFFFF] py-2 cursor-pointer font-bold text-14px sm:text-[18px] rounded-3xl hover:bg-orange-300 transition-colors
+                  className="flex justify-center items-center bg-primary shadow-lg/20 text-[#FFFFFF] py-2 cursor-pointer font-bold text-14px sm:text-[18px] rounded-3xl hover:bg-orange-300 transition-colors
                   sm:w-[178px] w-[119px]"
                 >
                   {isLoading ? (
-                    <div className="flex items-center">
+                    <div className="flex justify-center items-center w-full">
                       <Spinner />
-                      Cargando...
+                      <span className="ml-2">Cargando</span>
                     </div>
                   ) : (
                     "Ingresar"

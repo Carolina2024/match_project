@@ -43,10 +43,10 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
           <FiX size={24} color="#595146" />
         </button>
         <div className="mt-4">
-          <h2 className="font-secundary font-bold text-[20px] text-tertiary mb-1 text-center sm:text-left">
+          <h2 className="font-secundary font-bold text-[20px] text-tertiary mb-1 text-center sm:text-left ml-2">
             Registro del adoptante
           </h2>
-          <p className="font-secundary font-medium text-[14px] text-[#767575] text-sm mb-6 text-center sm:text-left">
+          <p className="font-secundary font-medium text-[14px] text-[#767575] mb-6 text-center sm:text-left ml-2">
             Fecha del registro:{" "}
             {createdAt
               ? new Date(createdAt).toLocaleDateString("es-CL")
@@ -56,12 +56,12 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
           <div className="w-full grid grid-cols-1 lg:grid-cols-[3fr_4fr] gap-4 px-2">
             <div className="w-full space-y-8 lg:border-r lg:border-gray-300 lg:pr-6">
               <div className="border-b border-gray-300 pb-4">
-                <h3 className="font-secundary font-semibold text-[16px] text-tertiary text-sm mb-4">
+                <h3 className="font-secundary font-semibold text-[16px] text-tertiary mb-4">
                   Información personal
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary  mb-3">
                       <span className="block sm:inline">Nombre </span>
                       <span className="block sm:inline">completo</span>
                     </p>
@@ -70,7 +70,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 whitespace-nowrap">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 whitespace-nowrap">
                       <span className="block sm:inline">Fecha de </span>
                       <span className="block sm:inline"> nacimiento</span>
                     </p>
@@ -81,7 +81,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary  mb-3">
                       <span className="block sm:inline">Correo </span>
                       <span className="block sm:inline">electrónico</span>
                     </p>
@@ -99,7 +99,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div className="col-span-2">
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3">
                       Dirección y comuna
                     </p>
                     <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -115,7 +115,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 w-[120px] sm:w-auto">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 w-[120px] sm:w-auto">
                       ¿Tienes o has tenido mascotas antes?
                     </p>
 
@@ -124,7 +124,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 w-[120px] sm:w-auto">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 w-[120px] sm:w-auto">
                       ¿Están o estuvieron vacunadas?
                     </p>
                     <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -132,7 +132,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 whitespace-nowrap">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 whitespace-nowrap">
                       ¿Están o estuvieron castrados?
                     </p>
                     <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -204,12 +204,12 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
 
             <div className="space-y-5 pl-2">
               <div className="border-b border-gray-300 pb-2">
-                <h3 className="font-secundary font-semibold text-[16px] text-tertiary text-sm  mb-4">
+                <h3 className="font-secundary font-semibold text-[16px] text-tertiary  mb-4">
                   Información de vivienda
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary  mb-3">
                       Espacio disponible
                     </p>
                     <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -217,7 +217,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div className="sm:ml-2 -ml-3">
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 w-[179px] sm:w-auto">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 w-[179px] sm:w-auto">
                       ¿El edificio/condominio permite mascotas?
                     </p>
 
@@ -226,7 +226,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </p>
                   </div>
                   <div className="col-span-2">
-                    <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                    <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3">
                       ¿Cuantas horas al dia estaria sola la mascota?
                     </p>
                     <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -241,7 +241,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                   Responsabilidad
                 </h3>
                 <div className="space-y-2">
-                  <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                  <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3">
                     ¿Qué harías si la mascota rompe algo?
                   </p>
                   <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -250,7 +250,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
 
                   <div className="flex gap-6 mb-7 sm:mb-2">
                     <div className="flex-1 ">
-                      <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 w-[120px] sm:w-auto">
+                      <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 w-[120px] sm:w-auto">
                         ¿Estas dispuesto a llevarlo al veterinario?
                       </p>
                       <p className="font-normal text-[14px] text-[#767575] font-raleway">
@@ -259,7 +259,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </div>
 
                     <div className="flex-1">
-                      <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3 w-[125px] sm:w-auto -ml-2 sm:ml-4">
+                      <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3 w-[125px] sm:w-auto -ml-2 sm:ml-4">
                         ¿Estas dispuesto a recibir visitas de seguimiento?
                       </p>
                       <p className="font-normal text-[14px] text-[#767575] font-raleway -ml-2 sm:ml-4">
@@ -268,7 +268,7 @@ const AdopterModalDetail = ({ open, onClose, adopter }) => {
                     </div>
                   </div>
 
-                  <p className="font-raleway font-semibold text-[16px] text-tertiary text-xs mb-3">
+                  <p className="font-raleway font-semibold text-[16px] text-tertiary mb-3">
                     ¿Estas dispuesto a firmar un compromiso de adopción
                     responsable?
                   </p>

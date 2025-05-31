@@ -82,15 +82,17 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] flex items-start justify-center pt-16 pb-8 px-4 overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] flex items-start justify-center pt-16 pb-8  px-4 overflow-y-auto">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
+        className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-3 text-[#333333]"
+      >
         <div className="flex justify-end">
           <button
             type="button"
             className="text-tertiary focus:outline-none cursor-pointer"
-            onClick={onClose}>
+            onClick={onClose}
+          >
             <OnClose />
           </button>
         </div>
@@ -122,13 +124,13 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
 
         <div className="px-7 md:text-xl text-base text-[#000000]">
           <div className="mb-7">
-            <label className="block mb-2">
+            <label className="block mb-2 sm:w-150 w-80">
               ¿Estás dispuesto/a llevarlo al veterinario cuando sea necesario?
               (vacunarlo, desparasitarlo regularmente, castrarlo o esterilizar)?
             </label>
             <div className="flex items-center space-x-4">
               <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                Si
+                <span className="text-[#AAAAAA]">Si</span>
                 <input
                   type="radio"
                   name="hasVeterinarian"
@@ -139,7 +141,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                 />
               </label>
               <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                No
+                <span className="text-[#AAAAAA]">No</span>
                 <input
                   type="radio"
                   name="hasVeterinarian"
@@ -164,7 +166,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
             </label>
             <div className="flex items-center space-x-4">
               <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                Si
+                <span className="text-[#AAAAAA]">Si</span>
                 <input
                   type="radio"
                   name="allowsVisit"
@@ -175,7 +177,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                 />
               </label>
               <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                No
+                <span className="text-[#AAAAAA]">No</span>
                 <input
                   type="radio"
                   name="allowsVisit"
@@ -197,7 +199,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
             </label>
             <div className="flex items-center space-x-4">
               <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                Si
+                <span className="text-[#AAAAAA]">Si</span>
                 <input
                   type="radio"
                   name="isResponsibleAdoption"
@@ -208,7 +210,7 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                 />
               </label>
               <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                No
+                <span className="text-[#AAAAAA]">No</span>
                 <input
                   type="radio"
                   name="isResponsibleAdoption"
@@ -230,18 +232,21 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
             <label className="block mb-2">
               ¿Qué tipo de mascota estás buscando?*
             </label>
-            <label className="block font-semibold mb-1">Energía</label>
-            <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:space-x-2 ">
+            <label className="block font-raleway font-semibold text-black text-[14px] sm:text-[20px] mb-1">
+              Energía
+            </label>
+            <div className="flex flex-wrap gap-1 sm:gap-2 sm:flex-nowrap sm:space-x-2 ">
               {opcionesEnergia.map((energy) => (
                 <button
                   key={energy}
                   type="button"
                   onClick={() => handleEnergySelect(energy)}
-                  className={`flex items-center px-10 py-1 rounded-full border-2 justify-center gap-1 cursor-pointer ${
+                  className={`flex items-center px-2.5 sm:px-4 py-1 text-[12px] sm:text-[20px] rounded-full border-2 justify-center gap-1 cursor-pointer ${
                     formData.energy === energy
                       ? "bg-primary text-white border-primary"
                       : "border-primary bg-white/75 text-tertiary"
-                  }`}>
+                  }`}
+                >
                   {formData.energy.includes(energy) && <CheckIcon />}
                   {energy}
                 </button>
@@ -260,11 +265,12 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                   key={opcion}
                   type="button"
                   onClick={() => toggleSeleccion(opcion)}
-                  className={`flex items-center px-4 py-1 rounded-full justify-center gap-1 border-2 cursor-pointer ${
+                  className={`flex items-center px-4 sm:px-7 py-1 text-[12px] sm:text-[20px] rounded-full justify-center gap-1 border-2 cursor-pointer ${
                     formData.character.includes(opcion)
                       ? "bg-primary text-white border-primary"
                       : "border-primary bg-white/75 text-tertiary"
-                  }`}>
+                  }`}
+                >
                   {formData.character.includes(opcion) && <CheckIcon />}
                   {opcion}
                 </button>
@@ -277,17 +283,18 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
 
           <div className="mb-2">
             <label className="block font-semibold mb-1">Compatibilidad</label>
-            <div className="flex flex-wrap gap-2 sm:flex-nowrap sm:space-x-2 mb-3">
+            <div className="flex flex-nowrap gap-1 sm:gap-2 sm:flex-nowrap sm:space-x-2 mb-3">
               {opcionesPreferencia.map((opcion) => (
                 <button
                   key={opcion}
                   type="button"
                   onClick={() => toggleCompatibility(opcion)}
-                  className={`flex items-center justify-center px-4 py-1 rounded-full gap-1 border-2 cursor-pointer ${
+                  className={` whitespace-nowrap flex items-center text-[12px] sm:text-[20px] justify-center px-3 sm:px-3 py-1 rounded-full gap-1 border-2 cursor-pointer ${
                     formData.compatibility.includes(opcion)
                       ? "bg-primary text-white border-primary"
                       : "border-primary bg-white/75 text-tertiary"
-                  }`}>
+                  }`}
+                >
                   {" "}
                   {formData.compatibility.includes(opcion) && <CheckIcon />}
                   {opcion}
@@ -310,9 +317,9 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
                 name="termsAccepted"
                 checked={formData.termsAccepted}
                 onChange={handleChange}
-                className="form-checkbox md:h-5 md:w-5 h-4 w-4 accent-tertiary cursor-pointer"
+                className="form-checkbox md:h-5 md:w-5 h-4 w-4 accent-gray-500 rounded cursor-pointer"
               />
-              <span className="ml-2 md:text-xl text-base ">
+              <span className="ml-2 text-[12px] sm:text-[20px] text-[#595146] font-raleway font-medium">
                 Acepto los términos y condiciones
               </span>
             </label>
@@ -323,21 +330,23 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
             )}
           </div>
 
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-6 gap-14 sm:gap-6">
             <button
               type="button"
               onClick={onBack}
-              className="bg-white/75 text-primary border-2 border-primary rounded-3xl focus:outline-none cursor-pointer 
+              className="w-[120px] sm:w-[170px] bg-white/75 text-primary font-semibold border-2 border-primary rounded-3xl focus:outline-none cursor-pointer 
                px-6 py-1 text-sm sm:px-12 sm:text-base 
-               hover:text-tertiary hover:border-tertiary">
+               hover:text-tertiary hover:border-tertiary shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]"
+            >
               Atrás
             </button>
 
             <button
               type="submit"
-              className="bg-primary text-white font-semibold rounded-3xl cursor-pointer 
+              className="w-[120px] sm:w-[170px] bg-primary text-white font-semibold rounded-3xl cursor-pointer 
                px-6 py-1 text-sm sm:px-12 sm:text-base 
-               hover:bg-tertiary shadow-lg/20">
+               hover:bg-tertiary shadow-[4px_4px_8px_0_rgba(0,0,0,0.25)]"
+            >
               Finalizar
             </button>
           </div>

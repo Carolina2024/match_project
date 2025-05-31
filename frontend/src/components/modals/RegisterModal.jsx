@@ -4,6 +4,8 @@ import logo from "../../assets/logo.webp";
 import OnClose from "../../assets/icons/svg-components/OnClose";
 import eyeOpen from "../../assets/icons/eye-open.svg";
 import eyeClose from "../../assets/icons/eye-close.svg";
+import { FiCalendar } from "react-icons/fi";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const opciones = [
   "Departamento pequeño/mediano",
@@ -31,6 +33,22 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
   const [errors, setErrors] = useState({});
   const [formVisible] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+
+  const increment = () => {
+    setFormData((prev) => {
+      const value = Number(prev.hoursAlone) || 0;
+      const newValue = Math.min(23, value + 1);
+      return { ...prev, hoursAlone: newValue.toString() };
+    });
+  };
+
+  const decrement = () => {
+    setFormData((prev) => {
+      const value = Number(prev.hoursAlone) || 1;
+      const newValue = Math.max(1, value - 1);
+      return { ...prev, hoursAlone: newValue.toString() };
+    });
+  };
 
   const validate = () => {
     const newErrors = {};
@@ -167,7 +185,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] flex items-start justify-center pt-16 pb-8 px-4 overflow-y-auto">
       {formVisible && (
-        <div className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-6 text-[#333333]">
+        <div className="w-full max-w-5xl bg-white/90 rounded-2xl shadow-2xl p-3 text-[#333333]">
           <div className="flex justify-end">
             <button
               type="button"
@@ -222,27 +240,31 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 )}
               </div>
 
-              <div className="mt-9 sm:mt-0">
+              <div className="mt-7 sm:mt-0">
                 <label htmlFor="birthDate" className="block font-medium mb-2">
                   Fecha de nacimiento*
                 </label>
-                <div className="relative">
+                <div className="relative w-fit">
                   <input
                     name="birthDate"
                     type="date"
                     value={formData.birthDate}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className=" border border-primary bg-white/75 rounded-3xl p-2 pr-12 text-tertiary focus:outline-none focus:border-primary appearance-none"
+                    className=" placeholder-[#AAAAAA] border border-primary bg-white/75 rounded-3xl p-2 pr-10 text-tertiary focus:outline-none focus:border-primary appearance-none"
                   />
+                  <FiCalendar className="absolute right-4 top-1/2 -translate-y-1/2 text-[#F4A470] pointer-events-none" />
                   {errors.birthDate && (
                     <p className="text-red-500 text-lg">{errors.birthDate}</p>
                   )}
                 </div>
               </div>
 
-              <div className="mt-9 sm:mt-0">
-                <label htmlFor="email" className="block font-medium mb-2">
+              <div className="mt-6 sm:mt-0">
+                <label
+                  htmlFor="email"
+                  className="block font-medium mb-2 mt-1 sm:mt-10"
+                >
                   Correo Electrónico*
                 </label>
                 <input
@@ -258,8 +280,11 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 )}
               </div>
 
-              <div className="mt-9 sm:mt-0">
-                <label htmlFor="password" className="block font-medium mb-2">
+              <div className="mt-6 sm:mt-0">
+                <label
+                  htmlFor="password"
+                  className="block font-medium mb-2 mt-1 sm:mt-10"
+                >
                   Contraseña*
                 </label>
                 <div className="flex items-center border border-primary rounded-3xl bg-white/75 px-4 py-2 w-full">
@@ -296,7 +321,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 )}
               </div>
 
-              <div className="mt-9 sm:mt-0">
+              <div className="mt-6 sm:mt-10">
                 <label htmlFor="phoneNumber" className="block font-medium mb-2">
                   Teléfono*
                 </label>
@@ -306,6 +331,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   onBlur={handleBlur}
+                  placeholder="+56 9 1234 5678"
                   className="w-full bg-white/75 border-primary border-1 rounded-3xl p-2 focus:outline-none focus:border-primary"
                 />
                 {errors.phoneNumber && (
@@ -315,7 +341,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 )}
               </div>
 
-              <div className="mt-9 sm:mt-0">
+              <div className="mt-6 sm:mt-10">
                 <label htmlFor="run" className="block font-medium mb-2">
                   Documento de identidad*
                 </label>
@@ -334,7 +360,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 )}
               </div>
 
-              <div>
+              <div className="mt-1 sm:mt-3">
                 <label
                   htmlFor="address"
                   className="block font-medium mt-8 mb-2"
@@ -357,18 +383,18 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
             </div>
 
-            <div className="md:text-xl text-base mb-8">
+            <div className="md:text-xl text-base mb-8 sm:mt-10 mt-4">
               <label htmlFor="homeType" className="block font-medium mb-2">
                 ¿Qué espacio tienes disponible para tu nuevo compañero?*
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
                 {opciones.map((opcion) => (
                   <button
                     name="homeType"
                     key={opcion}
                     type="button"
                     onClick={() => setSelected(opcion)}
-                    className={`px-4 py-2 rounded-3xl cursor-pointer ${
+                    className={`px-4 py-2 rounded-3xl cursor-pointer border border-solid border-[#F4A470] ${
                       selected === opcion
                         ? "bg-[#F4A470] text-white"
                         : "border-primary text-[#AAAAAA] bg-white/75"
@@ -392,7 +418,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 </label>
                 <div className="flex gap-4 mt-1">
                   <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                    Si
+                    <span className="text-[#AAAAAA]">Si</span>
                     <input
                       type="radio"
                       name="allowsPets"
@@ -403,7 +429,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-2 border-primary rounded-3xl px-2 py-1 gap-10">
-                    No
+                    <span className="text-[#AAAAAA]">No</span>
                     <input
                       type="radio"
                       name="allowsPets"
@@ -427,7 +453,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 </label>
                 <div className="flex gap-4 mt-1">
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
-                    Si
+                    <span className="text-[#AAAAAA]">Si</span>
                     <input
                       type="radio"
                       name="hasPets"
@@ -438,7 +464,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
-                    No
+                    <span className="text-[#AAAAAA]">No</span>
                     <input
                       type="radio"
                       name="hasPets"
@@ -457,12 +483,12 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
 
               <div>
-                <label className="block font-medium">
+                <label className="block font-medium sm:mt-4 mt-3">
                   ¿Están o estuvieron vacunadas?
                 </label>
                 <div className="flex gap-4 mt-1 ">
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
-                    Si
+                    <span className="text-[#AAAAAA]">Si</span>
                     <input
                       type="radio"
                       name="isVaccinated"
@@ -473,7 +499,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
-                    No
+                    <span className="text-[#AAAAAA]">No</span>
                     <input
                       type="radio"
                       name="isVaccinated"
@@ -497,7 +523,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 </label>
                 <div className="flex gap-4 mt-1">
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
-                    Si
+                    <span className="text-[#AAAAAA]">Si</span>
                     <input
                       type="radio"
                       name="isSterilized"
@@ -508,7 +534,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     />
                   </label>
                   <label className="flex items-center bg-white/75 border-primary border-2 rounded-3xl px-2 py-1 gap-10">
-                    No
+                    <span className="text-[#AAAAAA]">No</span>
                     <input
                       type="radio"
                       name="isSterilized"
@@ -529,19 +555,38 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:text-xl text-base text-[#333333]">
               <div>
-                <label className="block font-medium mb-2">
+                <label className="block font-medium mb-2 sm:w-70 w-80">
                   ¿Cuántas horas al día estará sola la mascota?*
                 </label>
-                <input
-                  type="number"
-                  min="1"
-                  max="23"
-                  step="1"
-                  name="hoursAlone"
-                  value={formData.hoursAlone}
-                  onChange={handleChange}
-                  className="w-auto bg-white/75 border-primary px-6 py-1 border-2 rounded-3xl focus:outline-none focus:border-primary"
-                />
+
+                <div className="relative w-max">
+                  <input
+                    type="text"
+                    name="hoursAlone"
+                    value={formData.hoursAlone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    readOnly
+                    className="w-28 pr-10 text-center bg-white/75 border-primary px-3 py-2 border-2 rounded-3xl focus:outline-none focus:border-primary"
+                  />
+
+                  <div className="absolute right-1 top-1/2 -translate-y-1/2 flex flex-col justify-center items-center">
+                    <button
+                      type="button"
+                      onClick={increment}
+                      className="mr-2 p-[1px] text-primary bg-transparent border-none focus:outline-none  transition"
+                    >
+                      <FaChevronUp className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={decrement}
+                      className="mr-2 p-[1px] mt-[2px] text-primary bg-transparent border-none focus:outline-none  transition"
+                    >
+                      <FaChevronDown className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
                 {errors.hoursAlone && (
                   <p className="text-red-500 md:text-lg text-base">
                     {errors.hoursAlone}
@@ -550,7 +595,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
               </div>
 
               <div>
-                <label className="block font-medium mb-2">
+                <label className="block font-medium mb-2 sm:w-92 w-80">
                   ¿Qué harías si la mascota rompe algo o tiene problemas de
                   comportamiento?*
                 </label>
@@ -560,7 +605,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   value={formData.petDestroy}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  className="w-full border-2 bg-white/75 border-primary rounded-3xl p-2 h-24 focus:outline-none focus:border-primary"
+                  className="sm:w-100 w-70 sm:h-20 h-30 border-2 bg-white/75 border-primary rounded-3xl p-2 h-24 focus:outline-none focus:border-primary"
                 />
                 {errors.petDestroy && (
                   <p className="text-red-500 md:text-lg text-base">
@@ -579,7 +624,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
             <div className="text-right">
               <button
                 type="submit"
-                className="bg-primary hover:bg-tertiary text-white font-bold mb-6 py-2 px-16 rounded-3xl shadow-lg/20 cursor-pointer transition duration-300 ease-in-out"
+                className="bg-primary hover:bg-tertiary text-white font-bold mb-6 py-2 px-7 sm:px-16 rounded-3xl shadow-lg/20 cursor-pointer transition duration-300 ease-in-out"
               >
                 Siguiente
               </button>

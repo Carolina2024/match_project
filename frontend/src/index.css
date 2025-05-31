@@ -162,3 +162,28 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-password-toggle-button,
+input[type="password"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+
+input[type="password"]::-webkit-text-security {
+  -webkit-text-security: none;
+}
+
+
+input[type="password"]::-ms-reveal {
+  display: none;
+}
+
+input[type="password"]::-webkit-password-toggle-button {
+  display: none;
+}

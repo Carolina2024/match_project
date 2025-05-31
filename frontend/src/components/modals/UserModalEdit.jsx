@@ -404,7 +404,7 @@ function UserModalEdit() {
                     tiene problemas de comportamiento?
                   </label>
                   <textarea
-                    className="border-2 rounded-[30px] border-[#F4A470] text-xs py-2 px-4 w-70 border-primary outline-none text-pretty resize-none h-20
+                    className="border-2 rounded-[30px] text-xs py-2 px-4 border-primary outline-none text-pretty resize-none h-20
                   font-raleway font-medium text-[#AAAAAA] text-[14px] sm:text-[20px] w-[300px] sm:w-[400px]"
                     placeholder="Buscaría entender la causa, tener paciencia y trabajar con refuerzo positivo o ayuda profesional"
                     name="petDestroy"

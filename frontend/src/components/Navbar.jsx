@@ -64,7 +64,7 @@ const Navbar = () => {
         </Link>
         <button
           onClick={() => setMenuOpen((o) => !o)}
-          className="w-12 h-12 rounded-full bg-white cursor-pointer shadow-md flex items-center justify-center text-primary"
+          className="fixed top-4 right-4 w-12 h-12 rounded-full bg-white cursor-pointer shadow-md flex items-center justify-center text-primary z-50"
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

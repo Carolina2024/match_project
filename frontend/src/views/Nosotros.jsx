@@ -177,8 +177,7 @@ const Nosotros = () => {
 
         <div className="mb-12">
           <h3 className="flex items-center justify-center md:text-2xl text-xl font-bold text-primary mb-4 gap-2">
-            <img src={subscriptions} alt="" />
-            Suscripciones
+            <img src={subscriptions} alt="" /> Suscripciones
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 mt-12 md:gap-10 gap-6">

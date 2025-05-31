@@ -32,7 +32,7 @@ const PetDetailsModal = ({ isOpen, onClose, pet }) => {
                   key={i}
                   src={url}
                   alt={`Foto de ${pet.name}`}
-                  className="w-[110px] h-[88px] sm:w-[150px] sm:h-[120px] object-cover rounded-lg shadow"
+                  className="w-[82px] h-[65px] sm:w-[150px] sm:h-[120px] object-cover rounded-lg shadow"
                 />
               ))}
             </div>

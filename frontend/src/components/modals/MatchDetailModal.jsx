@@ -79,7 +79,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
 
   return (
     <div className="fixed inset-0 bg-[#00000026] backdrop-blur-[3px] flex items-center justify-center z-50 p-0">
-      <div className="bg-[#FFFFFF] rounded-[20px] shadow-xl sm:p-7 p-5 relative w-[317px] h-[769px] sm:w-[549px] sm:h-[585px] ">
+      <div className="bg-[#FFFFFF] rounded-[20px] shadow-xl sm:p-7 p-5 relative w-[317px] h-[769px] sm:w-[549px] sm:h-[653px]">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 cursor-pointer text-tertiary hover:text-black"
@@ -87,7 +87,7 @@ const MatchDetailModal = ({ solicitud, onClose, onStatusChange }) => {
           <FiX size={24} />
         </button>
 
-        <div className="p-0">
+        <div className="p-0 sm:mt-5 mt-4">
           <h2 className="font-secundary text-[20px] text-tertiary font-bold text-center mb-1">
             Detalle de la solicitud
           </h2>

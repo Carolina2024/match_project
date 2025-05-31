@@ -3,7 +3,9 @@ import { usePet } from "../context/PetContext";
 function PetsHome() {
   const { matchedPet, handleClickMeet, mascotas } = usePet();
 
-  function doNothing() {}
+
+  console.log("🐾 matchedPet:", matchedPet);
+
 
   return (
     <div className="mx-auto bg-transparent">
@@ -47,16 +49,15 @@ function PetsHome() {
                 </p>
               </div>
               <div className="flex flex-col mt-2">
-                <button
-                  onClick={() =>
-                    matchedPet?.photoUrls !== undefined
-                      ? doNothing()
-                      : handleClickMeet(mascota)
-                  }
-                  className="border border-primary rounded-4xl shadow-lg cursor-pointer md:text-xl text-base px-6 py-2 text-white font-bold bg-primary hover:scale-105 transition"
-                >
-                  Conóceme
-                </button>
+              {(!matchedPet || matchedPet.matchStatus === "Aprobado" || matchedPet.matchStatus === "Rechazado") && (
+  <button
+    onClick={() => handleClickMeet(mascota)}
+    className="border border-primary rounded-4xl shadow-lg cursor-pointer md:text-xl text-base px-6 py-2 text-white font-bold bg-primary hover:scale-105 transition"
+  >
+    Conóceme
+  </button>
+)}
+
               </div>
             </div>
           </div>

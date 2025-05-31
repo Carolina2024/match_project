@@ -3,10 +3,6 @@ import { usePet } from "../context/PetContext";
 function PetsHome() {
   const { matchedPet, handleClickMeet, mascotas } = usePet();
 
-
-  console.log("🐾 matchedPet:", matchedPet);
-
-
   return (
     <div className="mx-auto bg-transparent">
       <h2 className="text-3xl md:text-4xl font-bold font-secundary text-primary text-center mt-0">

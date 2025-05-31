@@ -299,7 +299,7 @@ const InfoPet = () => {
             <p className="text-primary text-lg leading-snug sm:text-lg">
               Tu solicitud se ha enviado <br />
               con éxito a la fundación. <br />
-              Te avisaremos al brevedad sobre tu solicitud
+              Te avisaremos a la brevedad sobre tu solicitud
             </p>
             <div className="flex justify-center sm:flex-row gap-6 mt-6">
               <button

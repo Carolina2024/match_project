@@ -104,7 +104,7 @@ const Home = () => {
           <div className="relative w-full md:max-w-6xl max-w-lg overflow-hidden md:flex items-center md:ml-10 bg-transparent">
             <BackgroundShape />
 
-            <div className="block md:hidden w-[400px] mt-10 ml-6 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-4 mb-16">
+            <div className="block md:hidden w-[400px] mt-10 md:ml-6 bg-[#F6E8D8] rounded-[80px] px-4 pt-10 pb-4 mb-16">
               <div className="flex flex-col items-center text-center">
                 <h2 className="text-4xl font-bold font-secundary leading-tight text-shadow-lg/10 text-center md:text-left">
                   <span className="text-primary">Tu nuevo </span>

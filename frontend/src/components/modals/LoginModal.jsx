@@ -112,7 +112,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-[4px] bg-opacity-20 flex items-center justify-center px-5 sm:px-5">
       <div className="flex items-center justify-center my-14">
-        <div className="w-[293px] sm:w-[751px] h-[480px] sm:h-[531px] bg-[#F9F9F9] rounded-4xl sm:rounded-2xl shadow-xl flex flex-col-reverse md:flex-row overflow-hidden relative border border-[#CBCBCB] sm:py-4 -py-2">
+        <div className="w-[293px] sm:w-[751px] h-[550px] sm:h-[531px] bg-[#F9F9F9] rounded-4xl sm:rounded-2xl shadow-xl flex flex-col-reverse md:flex-row overflow-hidden relative border border-[#CBCBCB] sm:py-4 -py-2">
           <button
             onClick={onClose}
             disabled={isLoading}
@@ -156,7 +156,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 )}
               </div>
 
-              <div className="relative pb-1">
+              <div className="relative pb-1 w-[218px] sm:w-[288px]">
                 <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-primary">
                   <img src={LockIcon} alt="" className="w-[18px] h-[18px]" />
                 </span>
@@ -169,12 +169,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   disabled={isLoading}
-                  className="sm:w-[288px] w-[218px] sm:h-[40px] h-[30px] pl-10 pr-10 sm:text-[14px] text-[18px] font-medium bg-[#FFFFFF] placeholder:text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full sm:h-[40px] h-[30px] pl-10 pr-10 sm:text-[14px] text-[18px] font-medium bg-[#FFFFFF] placeholder:text-[#767575] py-1 border border-primary rounded-3xl focus:outline-none focus:ring-1 focus:ring-primary"
                 />
 
                 <span
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute inset-y-0 right-0 pr-1 sm:pr-2 flex items-center text-primary cursor-pointer"
+                  className="absolute inset-y-0 right-2 flex items-center text-primary cursor-pointer"
                 >
                   <img
                     src={showPassword ? eyeOpen : eyeOff}
@@ -182,13 +182,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                     className="w-[22px] h-[20px]"
                   />
                 </span>
-
-                {errors.password && (
-                  <p className="absolute left-0 top-full text-red-500 text-sm mt-1">
-                    {errors.password}
-                  </p>
-                )}
               </div>
+              {errors.password && (
+                <p className="left-0 top-full text-red-500 text-xs mt-1">
+                  {errors.password}
+                </p>
+              )}
 
               <div className="text-left">
                 <button
@@ -203,7 +202,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
                 </button>
               </div>
 
-              <div className="flex justify-center mt-5 sm:mt-7">
+              <div className="flex sm:justify-start justify-center mt-5 sm:mt-7">
                 <button
                   type="submit"
                   disabled={isLoading}

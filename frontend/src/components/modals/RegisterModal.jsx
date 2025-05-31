@@ -535,7 +535,7 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                 <input
                   type="number"
                   min="1"
-                  max="24"
+                  max="23"
                   step="1"
                   name="hoursAlone"
                   value={formData.hoursAlone}

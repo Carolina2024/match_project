@@ -22,7 +22,7 @@ const RequestModal = ({ request, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-[#00000026] backdrop-blur-[3px] flex items-center justify-center z-50 p-3">
-      <div className="bg-[#FFFFFF] rounded-[20px] shadow-xl sm:p-7 p-5 relative w-[317px] h-[575px] sm:w-[549px] sm:h-[532.66px] ">
+      <div className="bg-[#FFFFFF] rounded-[20px] shadow-xl sm:p-7 p-5 relative w-[317px] h-[630px] sm:w-[549px] sm:h-[572px]">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-tertiary hover:text-black"
@@ -30,15 +30,15 @@ const RequestModal = ({ request, onClose }) => {
           <FiX size={24} />
         </button>
 
-        <div className="p-0">
+        <div className="p-0 sm:mt-5 mt-3">
           <h2 className="font-secundary text-[20px] text-tertiary font-bold text-center mb-1">
             Detalle de la solicitud
           </h2>
-          <p className="font-primary text-[14px] font-medium text-center text-[#767575cc]  mb-1">
+          <p className="font-primary text-[14px] font-medium text-center text-[#767575cc]  mb-2">
             Información de la solicitud de adopción
           </p>
 
-          <div className="grid grid-cols-2 gap-4 text-sm px-2">
+          <div className="grid grid-cols-2 gap-4 text-sm px-2 mb-2">
             <div className="flex flex-col">
               <p className="font-primary text-[16px] font-semibold text-tertiary mb-1">
                 Fecha de la solicitud
@@ -61,7 +61,7 @@ const RequestModal = ({ request, onClose }) => {
             </div>
           </div>
 
-          <div className="rounded-[10px] p-[5px]  gap-[4px] bg-[#FFFBF5] border border-[#7676801F]">
+          <div className="rounded-[10px] p-[5px]  gap-[4px] bg-[#FFFBF5] border border-[#7676801F] mb-2">
             <p className="font-primary text-[16px] font-semibold text-[#faaa75] mb-1">
               Información de la mascota
             </p>

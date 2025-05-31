@@ -37,7 +37,7 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
             value
           )
         ) {
-          return "Debe tener mínimo 6 caracteres, al menos una letra, un número y un símbolo. Ej: hola123!";
+          return "";
         }
         return "";
       default:

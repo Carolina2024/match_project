@@ -92,12 +92,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: #3fc202;
   font-weight: 600;
   font-size: 16px;
+  font-family: "Inter", sans-serif;
 }
 
 .custom-text {
   color: #767575;
   font-weight: 400;
   font-size: 14px;
+  font-family: "Inter", sans-serif;
+  opacity: 0.8;
 }
 
 @layer utilities {

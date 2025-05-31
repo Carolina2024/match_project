@@ -119,7 +119,7 @@ const Pets = ({ setActiveView, addPet, editingPet }) => {
           showCloseButton: true,
           timer: 0,
           timerProgressBar: true,
-          background: "rgba(63, 194, 2, 0.25)",
+          background: "#E8FFDD",
           width: "500px",
           customClass: {
             popup: "toast-sm-height",

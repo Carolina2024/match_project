@@ -238,12 +238,12 @@ const LoginModal = ({ isOpen, onClose, onOpenRegister, onOpenRecovery }) => {
 
           <div className="flex justify-center items-center">
             <div className="flex sm:flex-col items-center relative sm:relative translate-y-[100px] sm:translate-y-0">
-              <BlurTop className="-mr-30 sm:mr-4 sm:mb-4 " />
+              <BlurTop className="-mr-0 sm:mr-4 sm:mb-4 " />
 
               <img
                 src={logo}
                 alt="Logo Patas Pirque"
-                className="w-[70px] h-[68px] sm:w-[201px] sm:h-[195px] drop-shadow-xl mr-10 sm:mr-20 sm:ml-50 -ml-5 rounded-full translate-y-[0px] sm:-translate-y-35"
+                className="w-[70px] h-[68px] sm:w-[201px] sm:h-[195px] drop-shadow-xl mr-28 sm:mr-28 sm:ml-50 -ml-5 rounded-full translate-y-[0px] sm:-translate-y-35"
               />
 
               <BlurBottom className="sm:block hidden absolute bottom-0 sm:-bottom-4" />

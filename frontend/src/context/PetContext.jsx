@@ -43,36 +43,34 @@ export const PetProvider = ({ children }) => {
       await createMatch(id);
       setShowCheckMatch3(false);
       setShowCheckMatch4(true);
-
+  
       const data = await getCompatiblePets();
       setMascotas(data.items);
-
+  
       const result = await getUserMatchs();
       const normalizedMatches = Array.isArray(result) ? result : [result];
-
-      const activeMatch = normalizedMatches.find(
-        (m) => m.status === "En proceso" || m.status === "Por revisar"
+  
+      const matchedPetIds = normalizedMatches.map((m) => m.petId); // 👈 TODOS los IDs
+      setUserMatches(matchedPetIds);
+  
+      const activeMatch = normalizedMatches.find((m) =>
+        ["En proceso", "Por revisar", "Aprobada", "Rechazado"].includes(m.status)
       );
-
+  
       if (activeMatch) {
         setMatchedPet({
           ...activeMatch.pet,
           id: activeMatch.petId,
           matchStatus: activeMatch.status,
         });
+      } else {
+        setMatchedPet(null);
       }
-
-      const matchedPetIds = normalizedMatches
-        .filter((m) =>
-          ["Por revisar", "En proceso", "Aprobada"].includes(m.status)
-        )
-        .map((m) => m.petId);
-
-      setUserMatches(matchedPetIds);
     } catch (error) {
       console.error("Error en handleConfirmMatch:", error);
     }
   };
+  
 
   useEffect(() => {
     const fetchMascotas = async () => {
@@ -82,18 +80,21 @@ export const PetProvider = ({ children }) => {
         setMatchedPet(null);
         return;
       }
-
+  
       try {
         const data = await getCompatiblePets();
         setMascotas(data.items);
-
+  
         const matches = await getUserMatchs();
         const normalizedMatches = Array.isArray(matches) ? matches : [matches];
-
-        const activeMatch = normalizedMatches.find(
-          (m) => m.status === "En proceso" || m.status === "Por revisar"
+  
+        const matchedPetIds = normalizedMatches.map((m) => m.petId); // 👈 sin filtro
+        setUserMatches(matchedPetIds);
+  
+        const activeMatch = normalizedMatches.find((m) =>
+          ["En proceso", "Por revisar", "Aprobada", "Rechazado"].includes(m.status)
         );
-
+  
         if (activeMatch) {
           setMatchedPet({
             ...activeMatch.pet,
@@ -103,14 +104,6 @@ export const PetProvider = ({ children }) => {
         } else {
           setMatchedPet(null);
         }
-
-        const matchedPetIds = normalizedMatches
-          .filter((m) =>
-            ["Por revisar", "En proceso", "Aprobada"].includes(m.status)
-          )
-          .map((m) => m.petId);
-
-        setUserMatches(matchedPetIds);
       } catch (error) {
         console.error("Error al cargar mascotas y matches:", error);
         setMascotas([]);
@@ -118,9 +111,10 @@ export const PetProvider = ({ children }) => {
         setMatchedPet(null);
       }
     };
-
+  
     fetchMascotas();
   }, [user]);
+  
 
   return (
     <PetContext.Provider
@@ -138,6 +132,7 @@ export const PetProvider = ({ children }) => {
         handleClickMeet,
         mascotas,
         setMascotas,
+        userMatches,
       }}
     >
       {children}

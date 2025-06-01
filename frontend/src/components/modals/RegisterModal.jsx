@@ -245,17 +245,21 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                   Fecha de nacimiento*
                 </label>
                 <div className="relative w-fit">
-                  <input
-                    name="birthDate"
-                    type="date"
-                    value={formData.birthDate}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className=" placeholder-[#AAAAAA] border border-primary bg-white/75 rounded-3xl p-2 pr-10 text-tertiary focus:outline-none focus:border-primary appearance-none"
-                  />
-                  <FiCalendar className="absolute right-4 top-1/2 -translate-y-1/2 text-[#F4A470] pointer-events-none" />
+                  <div className="relative flex items-center">
+                    <input
+                      name="birthDate"
+                      type="date"
+                      value={formData.birthDate}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className="placeholder-[#AAAAAA] border border-primary bg-white/75 rounded-3xl p-2 pr-10 text-tertiary focus:outline-none focus:border-primary appearance-none w-full"
+                    />
+                    <FiCalendar className="absolute right-4 text-[#F4A470] pointer-events-none" />
+                  </div>
                   {errors.birthDate && (
-                    <p className="text-red-500 text-lg">{errors.birthDate}</p>
+                    <p className="text-red-500 md:text-lg text-base mt-1">
+                      {errors.birthDate}
+                    </p>
                   )}
                 </div>
               </div>

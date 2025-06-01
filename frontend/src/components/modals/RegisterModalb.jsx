@@ -49,6 +49,14 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+  if (name === "termsAccepted" && checked) {
+    setErrores((prev) => {
+      const nuevosErrores = { ...prev };
+      delete nuevosErrores.termsAccepted;
+      return nuevosErrores;
+    });
+  }
+
   };
 
   const handleEnergySelect = (energy) => {

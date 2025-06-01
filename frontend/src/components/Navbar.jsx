@@ -5,7 +5,7 @@ import logo from "../assets/logo.webp";
 import AuthModalsController from "../components/modals/AuthModalsController";
 
 import { useAuth } from "../context/AuthContext";
-import { usePet } from "../context/PetContext"; // Añadido para usar userMatches
+import { usePet } from "../context/PetContext";
 
 const Navbar = () => {
   const { userMatches } = usePet();
@@ -56,7 +56,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Mobile Header */}
       <div className="flex md:hidden justify-between items-center px-4 pb-2 pt-6">
         <Link to="/">
           <img src={logo} alt="Logo Patas Pirque" className="w-12 h-12 rounded-full" />
@@ -69,7 +68,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div
           ref={menuRef}
@@ -112,7 +110,6 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Nosotros */}
           <div>
             <button
               onClick={() => setIsNosotrosOpen((o) => !o)}
@@ -189,7 +186,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Desktop Header */}
       <header className="hidden md:flex bg-white py-3 px-10 rounded-full shadow-md w-full max-w-7xl mx-auto my-6 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
           <img src={logo} alt="Logo Patas Pirque" className="w-[60px] h-[60px] rounded-full" />
@@ -325,7 +321,6 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* Modales de autenticación */}
       <AuthModalsController
         isLoginOpen={isLoginOpen}
         setLoginOpen={setLoginOpen}

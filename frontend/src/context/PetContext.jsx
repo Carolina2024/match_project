@@ -50,7 +50,7 @@ export const PetProvider = ({ children }) => {
       const result = await getUserMatchs();
       const normalizedMatches = Array.isArray(result) ? result : [result];
   
-      const matchedPetIds = normalizedMatches.map((m) => m.petId); // 👈 TODOS los IDs
+      const matchedPetIds = normalizedMatches.map((m) => m.petId);
       setUserMatches(matchedPetIds);
   
       const activeMatch = normalizedMatches.find((m) =>
@@ -88,7 +88,7 @@ export const PetProvider = ({ children }) => {
         const matches = await getUserMatchs();
         const normalizedMatches = Array.isArray(matches) ? matches : [matches];
   
-        const matchedPetIds = normalizedMatches.map((m) => m.petId); // 👈 sin filtro
+        const matchedPetIds = normalizedMatches.map((m) => m.petId);
         setUserMatches(matchedPetIds);
   
         const activeMatch = normalizedMatches.find((m) =>

@@ -158,6 +158,7 @@ function UserModalEdit() {
                     placeholder="maria@gmail.com"
                     type="email"
                     name="email"
+                    disabled
                     {...register("email")}
                   />
                 </div>
@@ -214,6 +215,7 @@ function UserModalEdit() {
                   font-raleway font-medium text-[#AAAAAA] text-[14px] sm:text-[20px]"
                     placeholder="Documento de identidad"
                     name="identityDocument"
+                    disabled
                     {...register("identityDocument")}
                   />
                 </div>

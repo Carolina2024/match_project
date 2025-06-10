@@ -49,36 +49,68 @@ const RegisterModalb = ({ isOpen, onClose, onBack, onFinish, serverError }) => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
-  if (name === "termsAccepted" && checked) {
+
     setErrores((prev) => {
       const nuevosErrores = { ...prev };
-      delete nuevosErrores.termsAccepted;
+
+      if (
+        ["hasVeterinarian", "allowsVisit", "isResponsibleAdoption"].includes(
+          name
+        )
+      ) {
+        if (value) {
+          delete nuevosErrores[name];
+        }
+      }
+
+      if (name === "termsAccepted" && checked) {
+        delete nuevosErrores.termsAccepted;
+      }
+
       return nuevosErrores;
     });
-  }
-
   };
 
   const handleEnergySelect = (energy) => {
     setFormData((prev) => ({ ...prev, energy }));
+
+    setErrores((prev) => {
+      const nuevosErrores = { ...prev };
+      if (energy) delete nuevosErrores.energy;
+      return nuevosErrores;
+    });
   };
 
   const toggleSeleccion = (opcion) => {
-    setFormData((prev) => ({
-      ...prev,
-      character: prev.character.includes(opcion)
+    setFormData((prev) => {
+      const nuevoCharacter = prev.character.includes(opcion)
         ? prev.character.filter((item) => item !== opcion)
-        : [...prev.character, opcion],
-    }));
+        : [...prev.character, opcion];
+
+      setErrores((prevErr) => {
+        const nuevosErrores = { ...prevErr };
+        if (nuevoCharacter.length > 0) delete nuevosErrores.character;
+        return nuevosErrores;
+      });
+
+      return { ...prev, character: nuevoCharacter };
+    });
   };
 
   const toggleCompatibility = (opcion) => {
-    setFormData((prev) => ({
-      ...prev,
-      compatibility: prev.compatibility.includes(opcion)
+    setFormData((prev) => {
+      const nuevaCompatibilidad = prev.compatibility.includes(opcion)
         ? prev.compatibility.filter((item) => item !== opcion)
-        : [...prev.compatibility, opcion],
-    }));
+        : [...prev.compatibility, opcion];
+
+      setErrores((prevErr) => {
+        const nuevosErrores = { ...prevErr };
+        if (nuevaCompatibilidad.length > 0) delete nuevosErrores.compatibility;
+        return nuevosErrores;
+      });
+
+      return { ...prev, compatibility: nuevaCompatibilidad };
+    });
   };
 
   const handleSubmit = (e) => {

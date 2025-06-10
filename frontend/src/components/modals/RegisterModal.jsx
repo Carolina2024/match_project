@@ -40,6 +40,11 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
       const newValue = Math.min(23, value + 1);
       return { ...prev, hoursAlone: newValue.toString() };
     });
+    setErrors((prevErrors) => {
+      const nuevosErrores = { ...prevErrors };
+      delete nuevosErrores.hoursAlone;
+      return nuevosErrores;
+    });
   };
 
   const decrement = () => {
@@ -47,6 +52,11 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
       const value = Number(prev.hoursAlone) || 1;
       const newValue = Math.max(1, value - 1);
       return { ...prev, hoursAlone: newValue.toString() };
+    });
+    setErrors((prevErrors) => {
+      const nuevosErrores = { ...prevErrors };
+      delete nuevosErrores.hoursAlone;
+      return nuevosErrores;
     });
   };
 
@@ -171,7 +181,28 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setErrors((prevErrors) => {
+      const nuevosErrores = { ...prevErrors };
+
+      if (
+        [
+          "allowsPets",
+          "hasPets",
+          "isVaccinated",
+          "isSterilized",
+          "hoursAlone",
+        ].includes(name)
+      ) {
+        if (value) {
+          delete nuevosErrores[name];
+        }
+      }
+
+      return nuevosErrores;
+    });
   };
 
   const handleBlur = (e) => {
@@ -397,7 +428,14 @@ const RegisterModal = ({ isOpen, onClose, onNext, serverError }) => {
                     name="homeType"
                     key={opcion}
                     type="button"
-                    onClick={() => setSelected(opcion)}
+                    onClick={() => {
+                      setSelected(opcion);
+                      setErrors((prevErrors) => {
+                        const nuevosErrores = { ...prevErrors };
+                        delete nuevosErrores.homeType;
+                        return nuevosErrores;
+                      });
+                    }}
                     className={`px-4 py-2 rounded-3xl cursor-pointer border border-solid border-[#F4A470] ${
                       selected === opcion
                         ? "bg-[#F4A470] text-white"

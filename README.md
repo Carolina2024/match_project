@@ -1,4 +1,4 @@
-# Bienvenidos a Proyecto Patas Pirque
+# Bienvenidos a Proyecto Match project
 
   <p align="center">
     <img src="https://i.imgur.com/mtQDDC9.png" alt="gestION Logo"  style="border-radius: 10px;">
@@ -7,7 +7,7 @@
 
 ## 📄 Descripción
 
-Este repositorio contiene la implementación de una aplicacion Patas Pirque es una plataforma web innovadora que conecta a personas comprometidas con la adopción responsable de animales. Con una interfaz intuitiva y funcionalidades específicas, la aplicación optimiza el proceso de búsqueda, facilitando el acceso a información sobre mascotas rescatadas y rehabilitadas.
+Este repositorio contiene la implementación de una aplicacion Match project es una plataforma web innovadora que conecta a personas comprometidas con la adopción responsable de animales. Con una interfaz intuitiva y funcionalidades específicas, la aplicación optimiza el proceso de búsqueda, facilitando el acceso a información sobre mascotas rescatadas y rehabilitadas.
 
 ## 🎯 Objetivo Principal
 
